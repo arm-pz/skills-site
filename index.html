@@ -46,6 +46,8 @@
   .nav-links a:hover{color:var(--paper)}
   .nav-links .src{color:var(--paper);border:1px solid var(--rule-strong);padding:7px 14px;border-radius:999px;font-size:13.5px;transition:border-color .25s}
   .nav-links .src:hover{border-color:var(--ember)}
+  .star-n{font-family:var(--mono);font-size:12.5px;color:var(--brass);margin-left:10px;padding-left:10px;border-left:1px solid var(--rule-strong);display:none}
+  .star-n.on{display:inline}
 
   /* ---------- hero ---------- */
   .hero{text-align:center;padding:112px 0 96px}
@@ -182,7 +184,7 @@
       <a href="#install">Install</a>
       <a href="#demo">See it work</a>
       <a href="#commands">Commands</a>
-      <a class="src" href="https://github.com/arm-pz/wordsmith" target="_blank" rel="noopener">GitHub</a>
+      <a class="src" href="https://github.com/arm-pz/wordsmith" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor" style="vertical-align:-2px;margin-right:6px" aria-hidden="true"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"></path></svg>Star<span id="star-count" class="star-n"></span></a>
     </div>
   </div>
 </nav>
@@ -355,6 +357,14 @@
 
 <script>
 (function(){
+  /* live GitHub star count */
+  fetch('https://api.github.com/repos/arm-pz/wordsmith').then(function(r){return r.ok?r.json():null;}).then(function(d){
+    if(!d||typeof d.stargazers_count!=='number'||d.stargazers_count<1)return;
+    var el=document.getElementById('star-count');
+    el.textContent=d.stargazers_count.toLocaleString();
+    el.classList.add('on');
+  }).catch(function(){});
+
   /* hero self-edit */
   var h=document.getElementById('hero-h');
   var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
