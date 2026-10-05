@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Wordsmith — Teach your agent to edit</title>
-<meta name="description" content="An open editorial skill for AI agents. 44 commands across 5 disciplines — draft, critique, tighten, adapt, publish — with the author's voice preserved. No API, no keys.">
+<meta name="description" content="An open editorial skill for AI agents. 44 commands across 5 disciplines: build, evaluate, refine, adapt, prepare. The author's voice stays. No API, no keys.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -56,13 +56,15 @@
   h1.hero-h{font-family:var(--serif);font-weight:400;font-size:clamp(38px,6.2vw,74px);line-height:1.08;letter-spacing:-.012em;margin:26px auto 0;max-width:900px}
   .strike-me{
     display:inline-block;overflow:hidden;white-space:nowrap;vertical-align:baseline;
-    max-width:34ch;opacity:1;
+    max-width:min(34ch,52vw);opacity:1;
     background-image:linear-gradient(var(--ember),var(--ember));
     background-repeat:no-repeat;background-position:left 78%;background-size:0% 2.5px;
-    transition:max-width .55s ease .15s,opacity .4s ease .15s,margin-right .55s ease .15s;
+    -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 22px),transparent);
+    mask-image:linear-gradient(90deg,#000 calc(100% - 22px),transparent);
+    transition:max-width .55s ease .15s,opacity .4s ease .15s;
   }
-  h1.struck .strike-me{background-size:100% 2.5px;transition:background-size .65s ease}
-  h1.settled .strike-me{max-width:0;opacity:0;margin-right:0}
+  h1.struck .strike-me{background-size:100% 2.5px;transition:background-size .65s ease,max-width .55s ease .15s,opacity .4s ease .15s}
+  h1.settled .strike-me{max-width:0;opacity:0}
   h1 .final{display:block;margin-top:.15em}
   h1 em{font-style:italic;color:var(--ember)}
   .hero-sub{color:var(--dim);max-width:620px;margin:26px auto 0;font-size:17px}
@@ -95,6 +97,14 @@
   .copy-btn:hover{background:#ff825e}
   .copy-btn:active{transform:scale(.96)}
   .copy-btn.done{background:var(--brass)}
+  .noscript{background:var(--surface);border:1px solid var(--rule);border-radius:14px;padding:22px 26px;margin-top:16px;font-size:14.5px;color:var(--dim)}
+  .noscript p{margin-bottom:10px}
+  .noscript b{color:var(--paper);font-weight:600}
+  .noscript ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+  .noscript li{padding-left:16px;position:relative}
+  .noscript li::before{content:"—";position:absolute;left:0;color:var(--ember)}
+  .noscript .mono{color:var(--paper);font-size:13px}
+  .sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 
   /* ---------- demo / manuscript ---------- */
   .demo-grid{display:grid;grid-template-columns:250px 1fr;gap:36px;align-items:start;margin-top:36px}
@@ -105,8 +115,8 @@
   .chip[aria-selected="true"]{color:var(--paper);border-color:var(--ember)}
   .chip[aria-selected="true"] small{color:var(--ember);opacity:.9}
   .manuscript{background:var(--paper);color:var(--paper-ink);border-radius:14px;padding:34px 36px 28px;font-family:var(--serif);font-size:18.5px;line-height:1.65;box-shadow:0 24px 60px rgba(0,0,0,.45)}
-  .ms-label{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:lowercase;color:#8a8291;margin-bottom:8px}
-  .ms-before s{text-decoration:none;background-image:linear-gradient(#c2402a,#c2402a);background-repeat:no-repeat;background-position:left 68%;background-size:100% 1.8px;color:#8a8291}
+  .ms-label{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:lowercase;color:#6f6878;margin-bottom:8px}
+  .ms-before s{text-decoration:none;background-image:linear-gradient(#c2402a,#c2402a);background-repeat:no-repeat;background-position:left 68%;background-size:100% 1.8px;color:#6f6878}
   .ms-after{margin-top:26px;padding-top:22px;border-top:1px solid rgba(34,29,43,.14)}
   .ms-after .hl{background:rgba(232,180,76,.35);padding:0 2px;border-radius:2px}
   .ms-findings{list-style:none;margin-top:6px}
@@ -115,7 +125,7 @@
   .sev{flex:none;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:lowercase;padding:3px 9px;border-radius:999px}
   .sev.high{background:rgba(194,64,42,.14);color:#a03222}
   .sev.med{background:rgba(176,132,26,.16);color:#8a6414}
-  .ms-foot{margin-top:22px;padding-top:16px;border-top:1px dashed rgba(34,29,43,.25);font-family:var(--mono);font-size:12px;color:#8a8291;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+  .ms-foot{margin-top:22px;padding-top:16px;border-top:1px dashed rgba(34,29,43,.25);font-family:var(--mono);font-size:12px;color:#6f6878;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
   .ms-foot .gain{color:#a03222}
   .demo-panel{display:none}
   .demo-panel.on{display:block}
@@ -196,7 +206,7 @@
       Your agent can <span class="strike-me">produce words at volume, in any tone, at any length,</span> write.
       <span class="final">Teach it to <em>edit</em>.</span>
     </h1>
-    <p class="hero-sub">One install gives your agent <b>44 editorial commands</b> across 5 disciplines — drafting, critique, refinement, adaptation, and publication review — with the author's meaning, hedges, and voice kept intact.</p>
+    <p class="hero-sub">One install gives your agent <b>44 editorial commands</b> across 5 disciplines: build, evaluate, refine, adapt, and prepare. The author's meaning, hedges, and voice stay intact.</p>
     <div class="stats">
       <span><b>44</b> commands</span>
       <span><b>5</b> editorial disciplines</span>
@@ -223,11 +233,23 @@
       <button class="tab" role="tab" aria-selected="false" data-cmd="qoder">Qoder</button>
       <button class="tab" role="tab" aria-selected="false" data-cmd="other">Any other agent</button>
     </div>
-    <p class="cmd-note" id="cmd-note"></p>
+    <p class="cmd-note" id="cmd-note">Detects Claude Code, Cursor, Codex, Qoder and more, then writes the skill into the right folder. Add <b>--dry-run</b> to see the plan first.</p>
     <div class="cmd-card">
-      <code class="cmd-line" id="cmd-line"></code>
+      <code class="cmd-line" id="cmd-line">npx skills add arm-pz/wordsmith</code>
       <button class="copy-btn" id="copy-btn" type="button">Copy</button>
+      <span class="sr-only" id="copy-status" role="status" aria-live="polite"></span>
     </div>
+    <noscript>
+      <div class="noscript">
+        <p><b>JavaScript is off, so the tabs above are inactive.</b> Every install option, copied straight from the repo:</p>
+        <ul>
+          <li><span class="mono">npx skills add arm-pz/wordsmith</span> does it in one command: detects your agent and writes the skill into the right folder. Add <span class="mono">--dry-run</span> to see the plan first.</li>
+          <li><span class="mono">git clone https://github.com/arm-pz/wordsmith</span>, then copy <span class="mono">skills/wordsmith/</span> into <span class="mono">.claude/skills/</span>, <span class="mono">.cursor/skills/</span>, <span class="mono">.agents/skills/</span>, <span class="mono">.qoder/skills/</span>, or wherever your agent loads skills from.</li>
+          <li>Or paste to your agent: "Install the wordsmith skill from github.com/arm-pz/wordsmith into this project's skills directory, then confirm it loads."</li>
+        </ul>
+        <p>Browse the source: <a href="https://github.com/arm-pz/wordsmith" target="_blank" rel="noopener">github.com/arm-pz/wordsmith</a></p>
+      </div>
+    </noscript>
   </div>
 </section>
 
@@ -239,7 +261,7 @@
 
     <div class="demo-grid">
       <div class="chips" role="tablist" aria-label="Examples">
-        <button class="chip" role="tab" aria-selected="true" data-panel="p-tighten">/wordsmith tighten<small>cut 50%, keep the argument</small></button>
+        <button class="chip" role="tab" aria-selected="true" data-panel="p-tighten">/wordsmith tighten<small>halve the words, keep the argument</small></button>
         <button class="chip" role="tab" aria-selected="false" data-panel="p-tone">/wordsmith tone<small>corporate → human</small></button>
         <button class="chip" role="tab" aria-selected="false" data-panel="p-critique">/wordsmith critique<small>ranked findings, no rewrite</small></button>
       </div>
@@ -252,28 +274,28 @@
             <p class="ms-label">after</p>
             <p>We<span class="hl">'ve decided to implement</span> the new onboarding process, which we believe will likely reduce how long it takes new customers to get started.</p>
           </div>
-          <div class="ms-foot"><span>46 → 23 words · <span class="gain">50% shorter</span></span><span>argument, evidence &amp; the hedge ("likely") preserved</span></div>
+          <div class="ms-foot"><span>47 → 23 words · <span class="gain">51% shorter</span></span><span>argument, evidence &amp; the hedge ("likely") preserved</span></div>
         </div>
 
         <div class="manuscript demo-panel" id="p-tone">
           <p class="ms-label">before</p>
           <p class="ms-before">We regret to inform you that your request could not be processed at this time. Please be advised that the matter has been forwarded to the appropriate department for further review.</p>
           <div class="ms-after">
-            <p class="ms-label">after — tone: warm, direct</p>
+            <p class="ms-label">after, tone: warm, direct</p>
             <p>We weren't able to process your request this time. <span class="hl">We've passed it to the right team</span>, and we'll follow up as soon as we know more.</p>
           </div>
           <div class="ms-foot"><span>same facts, same limits</span><span>no invented timelines, no fake enthusiasm</span></div>
         </div>
 
         <div class="manuscript demo-panel" id="p-critique">
-          <p class="ms-label">input — launch post excerpt</p>
+          <p class="ms-label">input: launch post excerpt</p>
           <p>"Nova is the world's most advanced writing tool. Thousands of companies already use it every day to transform their business. In today's fast-paced digital landscape, it is more important than ever to stay ahead."</p>
           <div class="ms-after">
             <p class="ms-label">findings</p>
             <ul class="ms-findings">
-              <li><span class="sev high">high</span><span><b>"world's most advanced", "thousands of companies"</b> — factual claims with no source. Cite or cut; both are load-bearing.</span></li>
-              <li><span class="sev med">med</span><span><b>"transform their business"</b> — vague benefit. Say what actually changes, for whom.</span></li>
-              <li><span class="sev med">med</span><span><b>"In today's fast-paced digital landscape"</b> — stock opener carrying zero information. Delete the clause.</span></li>
+              <li><span class="sev high">high</span><span><b>"world's most advanced", "thousands of companies"</b>: factual claims with no source. Cite or cut; both are load-bearing.</span></li>
+              <li><span class="sev med">med</span><span><b>"transform their business"</b>: vague benefit. Say what actually changes, for whom.</span></li>
+              <li><span class="sev med">med</span><span><b>"In today's fast-paced digital landscape"</b>: stock opener carrying zero information. Delete the clause.</span></li>
             </ul>
           </div>
           <div class="ms-foot"><span>ranked by what costs you readers</span><span>your article stays untouched until you say edit</span></div>
@@ -287,7 +309,7 @@
   <div class="wrap">
     <p class="kicker">the full vocabulary</p>
     <h2>44 commands, 5 disciplines.</h2>
-    <p class="lede">Or skip the commands entirely — describe the job in plain language and the skill routes it.</p>
+    <p class="lede">Or skip the commands. Describe the job in plain language and the skill routes it.</p>
     <div class="cmd-cats">
       <div class="cat">
         <h3>Build <span>7</span></h3>
@@ -381,10 +403,10 @@
     cursor:{say:false,note:'Manual install into <b>.cursor/skills/</b>.',text:'git clone https://github.com/arm-pz/wordsmith && mkdir -p .cursor/skills && cp -r wordsmith/skills/wordsmith .cursor/skills/'},
     codex:{say:false,note:'Manual install into <b>.agents/skills/</b>.',text:'git clone https://github.com/arm-pz/wordsmith && mkdir -p .agents/skills && cp -r wordsmith/skills/wordsmith .agents/skills/'},
     qoder:{say:false,note:'Manual install into <b>.qoder/skills/</b>.',text:'git clone https://github.com/arm-pz/wordsmith && mkdir -p .qoder/skills && cp -r wordsmith/skills/wordsmith .qoder/skills/'},
-    other:{say:false,note:'The skill is plain markdown. Copy <b>skills/wordsmith/</b> wherever your agent loads skills from.',text:'git clone https://github.com/arm-pz/wordsmith && cp -r wordsmith/skills/wordsmith <your-agent>/skills/'}
+    other:{say:false,note:'The skill is plain markdown. Copy <b>skills/wordsmith/</b> wherever your agent loads skills from. Replace <b>your-agent</b> in the command with your agent\'s folder.',text:'git clone https://github.com/arm-pz/wordsmith && cp -r wordsmith/skills/wordsmith your-agent/skills/'}
   };
   var line=document.getElementById('cmd-line'),note=document.getElementById('cmd-note'),
-      btn=document.getElementById('copy-btn'),current='one';
+      btn=document.getElementById('copy-btn'),status=document.getElementById('copy-status'),current='one';
   function show(k){
     current=k;var c=cmds[k];
     line.textContent=c.text;
@@ -396,11 +418,31 @@
     t.addEventListener('click',function(){show(t.dataset.cmd);});
   });
   show('one');
+  function copyOk(){
+    btn.textContent='Copied';btn.classList.add('done');status.textContent='Copied to clipboard.';
+    setTimeout(function(){btn.textContent='Copy';btn.classList.remove('done');},1600);
+  }
+  function copyFail(){
+    var range=document.createRange();range.selectNodeContents(line);
+    var sel=window.getSelection();sel.removeAllRanges();sel.addRange(range);
+    btn.textContent='Select + copy';btn.classList.remove('done');
+    status.textContent='Clipboard unavailable. The command is selected; press Ctrl+C.';
+    setTimeout(function(){btn.textContent='Copy';},2600);
+  }
+  function legacyCopy(text){
+    var ta=document.createElement('textarea');
+    ta.value=text;ta.setAttribute('readonly','');
+    ta.style.position='fixed';ta.style.top='-9999px';
+    document.body.appendChild(ta);ta.select();
+    var ok=false;try{ok=document.execCommand('copy');}catch(e){}
+    document.body.removeChild(ta);
+    if(ok)copyOk();else copyFail();
+  }
   btn.addEventListener('click',function(){
-    navigator.clipboard.writeText(cmds[current].text).then(function(){
-      btn.textContent='Copied';btn.classList.add('done');
-      setTimeout(function(){btn.textContent='Copy';btn.classList.remove('done');},1600);
-    });
+    var text=cmds[current].text;
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(copyOk,function(){legacyCopy(text);});
+    }else{legacyCopy(text);}
   });
 
   /* demo chips */
