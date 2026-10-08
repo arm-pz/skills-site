@@ -240,7 +240,7 @@
       <button class="tab" role="tab" aria-selected="false" data-cmd="qoder">Qoder</button>
       <button class="tab" role="tab" aria-selected="false" data-cmd="other">Any other agent</button>
     </div>
-    <p class="cmd-note" id="cmd-note">Detects Claude Code, Cursor, Codex, Qoder and more, then writes the skill into the right folder. Add <b>--dry-run</b> to see the plan first.</p>
+    <p class="cmd-note" id="cmd-note">Detects Claude Code, Cursor, Codex, Qoder and more, then writes the skill into the right folder. Add <b>-l</b> to see what the repo ships before anything is installed.</p>
     <div class="cmd-card">
       <code class="cmd-line" id="cmd-line">npx skills add arm-pz/web-preflight</code>
       <button class="copy-btn" id="copy-btn" type="button">Copy</button>
@@ -406,7 +406,7 @@
 
   /* install tabs */
   var cmds={
-    one:{say:false,note:'Detects Claude Code, Cursor, Codex, Qoder and more, then writes the skill into the right folder. Add <b>--dry-run</b> to see the plan first.',text:'npx skills add arm-pz/web-preflight'},
+    one:{say:false,note:'Detects Claude Code, Cursor, Codex, Qoder and more, then writes the skill into the right folder. Add <b>-l</b> to see what the repo ships before anything is installed.',text:'npx skills add arm-pz/web-preflight'},
     agent:{say:true,note:'Paste this to your agent. It reads the repo, installs itself, and reports where it put things.',text:'Install the web-preflight skill from github.com/arm-pz/web-preflight into this project’s skills directory, then confirm it loads.'},
     claude:{say:false,note:'Manual install into <b>.claude/skills/web-preflight/</b>. No build step, no dependencies.',text:'git clone https://github.com/arm-pz/web-preflight && mkdir -p .claude/skills/web-preflight && cp -r web-preflight/SKILL.md web-preflight/tests.md web-preflight/examples .claude/skills/web-preflight/'},
     cursor:{say:false,note:'Manual install into <b>.cursor/skills/web-preflight/</b>.',text:'git clone https://github.com/arm-pz/web-preflight && mkdir -p .cursor/skills/web-preflight && cp -r web-preflight/SKILL.md web-preflight/tests.md web-preflight/examples .cursor/skills/web-preflight/'},
