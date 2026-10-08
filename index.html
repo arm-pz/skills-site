@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Caffeinity Skills — Teach your agent a craft</title>
-<meta name="description" content="Open, plain-markdown skills for AI coding agents: wordsmith edits like an editor, recruiter-lens screens like a recruiter, deep-tutor teaches like a professor, do-better runs agent tournaments, keyword-guard wins each query once. One-line install. No API keys.">
+<meta name="description" content="Open, plain-markdown skills for AI coding agents: wordsmith edits like an editor, recruiter-lens screens like a recruiter, deep-tutor teaches like a professor, do-better runs agent tournaments, keyword-guard wins each query once, web-preflight reads a 200 as a signal rather than a leak. One-line install. No API keys.">
 <link rel="canonical" href="https://skills.caffeinity.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Caffeinity Skills">
 <meta property="og:title" content="Caffeinity Skills — Teach your agent a craft">
-<meta property="og:description" content="Open, plain-markdown skills for AI coding agents: wordsmith edits like an editor, recruiter-lens screens like a recruiter, deep-tutor teaches like a professor, do-better runs agent tournaments, keyword-guard wins each query once. One-line install. No API keys.">
+<meta property="og:description" content="Open, plain-markdown skills for AI coding agents: wordsmith edits like an editor, recruiter-lens screens like a recruiter, deep-tutor teaches like a professor, do-better runs agent tournaments, keyword-guard wins each query once, web-preflight reads a 200 as a signal rather than a leak. One-line install. No API keys.">
 <meta property="og:url" content="https://skills.caffeinity.com/">
 <meta name="twitter:card" content="summary">
 <link rel="stylesheet" href="/fonts/fonts.css">
@@ -104,6 +104,7 @@
       <a href="#deep-tutor">Deep Tutor</a>
       <a href="#do-better">Do Better</a>
       <a href="#keyword-guard">Keyword Guard</a>
+      <a href="#web-preflight">Web Preflight</a>
       <a class="src" href="https://github.com/arm-pz" target="_blank" rel="noopener">GitHub</a>
     </div>
   </div>
@@ -113,7 +114,7 @@
   <div class="wrap">
     <p class="eyebrow">open agent skills · <b>one-line install, no API keys</b></p>
     <h1>Give your agent a <em>craft</em>.</h1>
-    <p class="hero-sub">Plain-markdown skills that teach Claude Code, Cursor, Codex, Qoder and any agent that reads a <b>SKILL.md</b> how to edit, screen, teach, compete and rank. Nothing to run, nothing to pay for, nothing to lock in.</p>
+    <p class="hero-sub">Plain-markdown skills that teach Claude Code, Cursor, Codex, Qoder and any agent that reads a <b>SKILL.md</b> how to edit, screen, teach, compete, rank and ship. Nothing to run, nothing to pay for, nothing to lock in.</p>
 
     <div class="skills">
       <div class="skill" id="wordsmith">
@@ -192,6 +193,22 @@
           <div class="sk-links">
             <a class="page" href="keyword-guard/">Full install page →</a>
             <a href="https://github.com/arm-pz/keyword-guard" target="_blank" rel="noopener">Source</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill" id="web-preflight">
+        <div class="sk-id">
+          <a class="sk-name" href="web-preflight/">web-preflight</a>
+          <span class="sk-tag">release</span>
+        </div>
+        <div class="sk-body">
+          <p>Checks a site you own before you ship it, without pretending a status code is a finding. A 200 on /.env that matches the app shell is catch-all routing, a blanket 403 is an unanswered question, and a check that never ran becomes INCONCLUSIVE — never a pass.</p>
+          <p class="sk-stats">4 verdicts · 19 fixed paths · 9 behavioral tests · ~215 lines · 0 API keys</p>
+          <p class="sk-install mono">npx skills add arm-pz/web-preflight</p>
+          <div class="sk-links">
+            <a class="page" href="web-preflight/">Full install page →</a>
+            <a href="https://github.com/arm-pz/web-preflight" target="_blank" rel="noopener">Source</a>
           </div>
         </div>
       </div>
