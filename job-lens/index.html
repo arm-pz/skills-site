@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Job Lens — Teach your agent to write the better version</title>
+<meta name="description" content="An open job-application skill for AI agents. Six production modes: decode the JD and tailor, bullets rewritten as action-task-result-impact, keyword placement map, five summaries, LinkedIn rewrite, 20 interview answers. Nothing invented. No API, no keys.">
+<link rel="canonical" href="https://skills.caffeinity.com/job-lens/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Caffeinity Skills">
+<meta property="og:title" content="Job Lens — Teach your agent to write the better version">
+<meta property="og:description" content="An open job-application skill for AI agents. Six production modes, one hand-off to recruiter-lens for the judging. Real experience, better written, nothing invented. No API, no keys.">
+<meta property="og:url" content="https://skills.caffeinity.com/job-lens/">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="preload" href="/fonts/files/cY9AfjOCX1hbuyalUrK4397yjA.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/files/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+  :root{
+    --ink:#0c0a10;
+    --surface:#15121b;
+    --raised:#1c1824;
+    --paper:#f2eee5;
+    --paper-ink:#221d2b;
+    --dim:#a49dae;
+    --ember:#ff6a3d;
+    --brass:#e8b44c;
+    --rule:rgba(242,238,229,.10);
+    --rule-strong:rgba(242,238,229,.20);
+    --serif:'Newsreader',Georgia,serif;
+    --sans:'Instrument Sans',system-ui,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--ink);color:var(--paper);font-family:var(--sans);font-size:16px;line-height:1.6;
+    background-image:radial-gradient(ellipse 90% 55% at 50% -12%,rgba(255,106,61,.07),transparent);
+  }
+  a{color:inherit;text-decoration:none}
+  :focus-visible{outline:2px solid var(--ember);outline-offset:3px;border-radius:2px}
+  ::selection{background:rgba(255,106,61,.32)}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 28px}
+  .mono{font-family:var(--mono)}
+
+  /* ---------- nav ---------- */
+  .nav{position:sticky;top:0;z-index:50;background:rgba(12,10,16,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule)}
+  .nav .wrap{height:64px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+  .brand{display:flex;align-items:baseline;gap:9px;font-family:var(--serif);font-size:21px;font-weight:500;letter-spacing:.01em}
+  .brand .caret{color:var(--ember);font-family:var(--mono);font-size:17px;transform:translateY(-1px)}
+  .nav-links{display:flex;align-items:center;gap:30px;font-size:14px;color:var(--dim)}
+  .nav-links a{transition:color .25s}
+  .nav-links a:hover{color:var(--paper)}
+  .nav-links .src{color:var(--paper);border:1px solid var(--rule-strong);padding:7px 14px;border-radius:999px;font-size:13.5px;transition:border-color .25s}
+  .nav-links .src:hover{border-color:var(--ember)}
+  .star-n{font-family:var(--mono);font-size:12.5px;color:var(--brass);margin-left:10px;padding-left:10px;border-left:1px solid var(--rule-strong);display:none}
+  .star-n.on{display:inline}
+
+  /* ---------- hero ---------- */
+  .hero{text-align:center;padding:112px 0 96px}
+  .eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;color:var(--dim);text-transform:lowercase}
+  .eyebrow b{color:var(--brass);font-weight:500}
+  h1.hero-h{font-family:var(--serif);font-weight:400;font-size:clamp(38px,6.2vw,74px);line-height:1.08;letter-spacing:-.012em;margin:26px auto 0;max-width:900px}
+  .strike-me{
+    display:inline-block;overflow:hidden;white-space:nowrap;vertical-align:baseline;
+    max-width:min(34ch,52vw);opacity:1;
+    background-image:linear-gradient(var(--ember),var(--ember));
+    background-repeat:no-repeat;background-position:left 78%;background-size:0% 2.5px;
+    -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 22px),transparent);
+    mask-image:linear-gradient(90deg,#000 calc(100% - 22px),transparent);
+    transition:max-width .55s ease .15s,opacity .4s ease .15s;
+  }
+  h1.struck .strike-me{background-size:100% 2.5px;transition:background-size .65s ease,max-width .55s ease .15s,opacity .4s ease .15s}
+  h1.settled .strike-me{max-width:0;opacity:0}
+  h1 .final{display:block;margin-top:.15em}
+  h1 em{font-style:italic;color:var(--ember)}
+  .hero-sub{color:var(--dim);max-width:620px;margin:26px auto 0;font-size:17px}
+  .hero-sub b{color:var(--paper);font-weight:500}
+  .stats{display:flex;justify-content:center;flex-wrap:wrap;gap:0 34px;margin-top:44px;font-family:var(--mono);font-size:13px;color:var(--dim)}
+  .stats span b{color:var(--paper);font-weight:500}
+  .stats span{position:relative;padding:4px 0}
+  .stats span+span::before{content:"·";position:absolute;left:-19px;color:var(--rule-strong)}
+
+  /* ---------- sections ---------- */
+  section{padding:88px 0;border-top:1px solid var(--rule)}
+  .kicker{font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;color:var(--ember);text-transform:lowercase;margin-bottom:14px}
+  h2{font-family:var(--serif);font-weight:400;font-size:clamp(28px,3.8vw,42px);line-height:1.12;letter-spacing:-.01em;margin-bottom:14px}
+  .lede{color:var(--dim);max-width:560px;font-size:16.5px}
+
+  /* ---------- install ---------- */
+  .install-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:34px}
+  .tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+  .tab{font-family:var(--sans);font-size:14px;color:var(--dim);background:transparent;border:1px solid var(--rule-strong);border-radius:999px;padding:8px 18px;cursor:pointer;transition:color .2s,border-color .2s,background .2s}
+  .tab:hover{color:var(--paper)}
+  .tab[aria-selected="true"]{color:var(--ink);background:var(--paper);border-color:var(--paper);font-weight:600}
+  .cmd-card{background:var(--surface);border:1px solid var(--rule);border-radius:14px;padding:26px 26px;display:flex;align-items:center;gap:20px}
+  .cmd-note{font-size:13.5px;color:var(--dim);margin-bottom:14px;min-height:20px}
+  .cmd-note b{color:var(--brass);font-weight:500}
+  .cmd-line{flex:1;font-family:var(--mono);font-size:15px;line-height:1.65;white-space:pre-wrap;word-break:break-word;color:var(--paper)}
+  .cmd-line::before{content:"$ ";color:var(--dim)}
+  .cmd-line.say::before{content:"“ "}
+  .cmd-line.say::after{content:" ”";color:var(--dim)}
+  .copy-btn{flex:none;font-family:var(--sans);font-size:14px;font-weight:600;color:var(--ink);background:var(--ember);border:none;border-radius:999px;padding:10px 22px;cursor:pointer;transition:transform .15s,background .2s}
+  .copy-btn:hover{background:#ff825e}
+  .copy-btn:active{transform:scale(.96)}
+  .copy-btn.done{background:var(--brass)}
+  .noscript{background:var(--surface);border:1px solid var(--rule);border-radius:14px;padding:22px 26px;margin-top:16px;font-size:14.5px;color:var(--dim)}
+  .noscript p{margin-bottom:10px}
+  .noscript b{color:var(--paper);font-weight:600}
+  .noscript ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+  .noscript li{padding-left:16px;position:relative}
+  .noscript li::before{content:"—";position:absolute;left:0;color:var(--ember)}
+  .noscript .mono{color:var(--paper);font-size:13px}
+  .sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+  /* ---------- demo / manuscript ---------- */
+  .demo-grid{display:grid;grid-template-columns:250px 1fr;gap:36px;align-items:start;margin-top:36px}
+  .chips{display:flex;flex-direction:column;gap:10px}
+  .chip{display:block;text-align:left;font-family:var(--sans);font-size:15px;color:var(--dim);background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:13px 16px;cursor:pointer;transition:border-color .2s,color .2s}
+  .chip small{display:block;font-size:12.5px;margin-top:2px;color:var(--dim);opacity:.75}
+  .chip:hover{color:var(--paper)}
+  .chip[aria-selected="true"]{color:var(--paper);border-color:var(--ember)}
+  .chip[aria-selected="true"] small{color:var(--ember);opacity:.9}
+  .manuscript{background:var(--paper);color:var(--paper-ink);border-radius:14px;padding:34px 36px 28px;font-family:var(--serif);font-size:18.5px;line-height:1.65;box-shadow:0 24px 60px rgba(0,0,0,.45)}
+  .ms-label{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:lowercase;color:#6f6878;margin-bottom:8px}
+  .ms-after{margin-top:26px;padding-top:22px;border-top:1px solid rgba(34,29,43,.14)}
+  .ms-after .hl{background:rgba(232,180,76,.35);padding:0 2px;border-radius:2px}
+  .ms-findings{list-style:none;margin-top:6px}
+  .ms-findings li{display:flex;gap:14px;align-items:baseline;padding:12px 0;border-bottom:1px solid rgba(34,29,43,.10);font-family:var(--sans);font-size:15.5px;line-height:1.5}
+  .ms-findings li:last-child{border-bottom:none}
+  .sev{flex:none;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:lowercase;padding:3px 9px;border-radius:999px}
+  .sev.high{background:rgba(194,64,42,.14);color:#a03222}
+  .sev.med{background:rgba(176,132,26,.16);color:#8a6414}
+  .ms-foot{margin-top:22px;padding-top:16px;border-top:1px dashed rgba(34,29,43,.25);font-family:var(--mono);font-size:12px;color:#6f6878;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+  .demo-panel{display:none}
+  .demo-panel.on{display:block}
+
+  /* ---------- modes ---------- */
+  .cmd-cats{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:14px;overflow:hidden;margin-top:36px}
+  .cat{background:var(--surface);padding:26px 28px}
+  .cat.wide{grid-column:1/-1}
+  .cat h3{font-family:var(--serif);font-weight:500;font-size:21px;margin-bottom:2px}
+  .cat h3 span{font-family:var(--mono);font-size:12px;color:var(--ember);margin-left:10px;font-weight:400}
+  .cat .cat-desc{color:var(--dim);font-size:14px;margin-bottom:14px}
+  .cat ul{list-style:none;display:flex;flex-wrap:wrap;gap:6px 8px}
+  .cat li{font-family:var(--mono);font-size:13px;color:var(--paper);background:var(--raised);border:1px solid var(--rule);border-radius:6px;padding:4px 10px}
+
+  /* ---------- principles ---------- */
+  .principles{display:grid;grid-template-columns:repeat(3,1fr);gap:34px;margin-top:40px}
+  .pr h3{font-family:var(--serif);font-weight:500;font-size:21px;margin-bottom:8px}
+  .pr h3::before{content:"∧ ";color:var(--ember);font-family:var(--mono)}
+  .pr p{color:var(--dim);font-size:15px}
+
+  /* ---------- footer CTA ---------- */
+  .foot-cta{text-align:center;padding:104px 0 96px}
+  .foot-cta h2{margin-bottom:10px}
+  .foot-cta p{color:var(--dim);margin-bottom:30px}
+  .big-btn{display:inline-block;font-weight:600;font-size:15.5px;color:var(--ink);background:var(--paper);border-radius:999px;padding:14px 32px;transition:background .2s,transform .15s}
+  .big-btn:hover{background:var(--brass)}
+  .big-btn:active{transform:scale(.97)}
+  .big-btn.alt{background:transparent;color:var(--paper);border:1px solid var(--rule-strong);margin-left:12px}
+  .big-btn.alt:hover{border-color:var(--paper);background:transparent}
+  footer{border-top:1px solid var(--rule);padding:30px 0 40px}
+  footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:12.5px;color:var(--dim)}
+  footer a:hover{color:var(--paper)}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:860px){
+    .demo-grid{grid-template-columns:1fr}
+    .chips{flex-direction:row;flex-wrap:wrap}
+    .chip{flex:1 1 140px}
+    .chip small{display:none}
+    .cmd-cats{grid-template-columns:1fr}
+    .principles{grid-template-columns:1fr;gap:24px}
+    .nav-links{gap:18px}
+    .nav-links a:not(.src){display:none}
+  }
+  @media (max-width:640px){
+    .cmd-card{flex-direction:column;align-items:stretch}
+    .copy-btn{align-self:flex-start}
+    .hero{padding:80px 0 64px}
+    section{padding:64px 0}
+    .manuscript{padding:26px 22px 22px;font-size:17px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{transition:none!important;animation:none!important}
+    html{scroll-behavior:auto}
+    .strike-me{max-width:0;opacity:0;margin-right:0}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="caret">∧</span>job-lens</a>
+    <div class="nav-links">
+      <a href="#install">Install</a>
+      <a href="#demo">See it work</a>
+      <a href="#modes">Modes</a>
+      <a class="src" href="https://github.com/arm-pz/job-lens" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor" style="vertical-align:-2px;margin-right:6px" aria-hidden="true"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"></path></svg>Star<span id="star-count" class="star-n"></span></a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <p class="eyebrow">for coding agents · <b>free, open, no auth</b></p>
+    <h1 class="hero-h" id="hero-h">
+      Your agent will <span class="strike-me">fill any gap with a confident-sounding number,</span> guess.
+      <span class="final">Teach it to <em>write</em>.</span>
+    </h1>
+    <p class="hero-sub">One install gives your agent <b>six production modes</b> plus a hand-off to recruiter-lens: the decoded job description, the tailored resume, bullets rewritten as action-task-result-impact, the keyword map, five summaries, the LinkedIn rewrite and twenty interview answers. All of it from your real experience only.</p>
+    <div class="stats">
+      <span><b>7</b> modes</span>
+      <span><b>6</b> produce · <b>1</b> hands off</span>
+      <span><b>~320</b> lines of instruction</span>
+      <span><b>0</b> API keys</span>
+    </div>
+  </div>
+</header>
+
+<section id="install">
+  <div class="wrap">
+    <div class="install-head">
+      <div>
+        <p class="kicker">install</p>
+        <h2>Copy one line. Get the better version, honestly written.</h2>
+      </div>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Install options">
+      <button class="tab" role="tab" aria-selected="true" data-cmd="one">One command</button>
+      <button class="tab" role="tab" aria-selected="false" data-cmd="agent">Ask your agent</button>
+      <button class="tab" role="tab" aria-selected="false" data-cmd="claude">Claude Code</button>
+      <button class="tab" role="tab" aria-selected="false" data-cmd="cursor">Cursor</button>
+      <button class="tab" role="tab" aria-selected="false" data-cmd="codex">Codex</button>
+      <button class="tab" role="tab" aria-selected="false" data-cmd="qoder">Qoder</button>
+      <button class="tab" role="tab" aria-selected="false" data-cmd="other">Any other agent</button>
+    </div>
+    <p class="cmd-note" id="cmd-note">Detects Claude Code, Cursor, Codex, Qoder and more, then writes the skill into the right folder. Add <b>--dry-run</b> to see the plan first.</p>
+    <div class="cmd-card">
+      <code class="cmd-line" id="cmd-line">npx skills add arm-pz/job-lens --skill job-lens</code>
+      <button class="copy-btn" id="copy-btn" type="button">Copy</button>
+      <span class="sr-only" id="copy-status" role="status" aria-live="polite"></span>
+    </div>
+    <noscript>
+      <div class="noscript">
+        <p><b>JavaScript is off, so the tabs above are inactive.</b> Every install option, copied straight from the repo:</p>
+        <ul>
+          <li><span class="mono">npx skills add arm-pz/job-lens --skill job-lens</span> does it in one command: detects your agent and writes the skill into the right folder. Add <span class="mono">--dry-run</span> to see the plan first.</li>
+          <li><span class="mono">git clone https://github.com/arm-pz/job-lens</span>, then copy <span class="mono">skills/job-lens/</span> into <span class="mono">.claude/skills/</span>, <span class="mono">.cursor/skills/</span>, <span class="mono">.agents/skills/</span>, <span class="mono">.qoder/skills/</span>, or wherever your agent loads skills from.</li>
+          <li>Or paste to your agent: "Install the job-lens skill from github.com/arm-pz/job-lens into this project's skills directory, then confirm it loads."</li>
+        </ul>
+        <p>Browse the source: <a href="https://github.com/arm-pz/job-lens" target="_blank" rel="noopener">github.com/arm-pz/job-lens</a></p>
+      </div>
+    </noscript>
+  </div>
+</section>
+
+<section id="demo">
+  <div class="wrap">
+    <p class="kicker">see it work</p>
+    <h2>The better version, on paper.</h2>
+    <p class="lede">Real shapes of what each mode returns. Pick a mode.</p>
+
+    <div class="demo-grid">
+      <div class="chips" role="tablist" aria-label="Examples">
+        <button class="chip" role="tab" aria-selected="true" data-panel="p-bullets">mode 2 · rewrite bullets<small>action, task, result, impact</small></button>
+        <button class="chip" role="tab" aria-selected="false" data-panel="p-keywords">mode 3 · keyword map<small>honest placement, listed gaps</small></button>
+        <button class="chip" role="tab" aria-selected="false" data-panel="p-handoff">the recruiter-lens split<small>it judges, job-lens writes</small></button>
+      </div>
+
+      <div>
+        <div class="manuscript demo-panel on" id="p-bullets">
+          <p class="ms-label">input: one bullet, as written</p>
+          <p>Responsible for managing a team and improving development processes.</p>
+          <div class="ms-after">
+            <p class="ms-label">the rewrite, in action-task-result-impact shape</p>
+            <p>Rewritten as: <span class="hl">"Led [team size?] engineers through the move to [process], cutting release time by [metric: ?]."</span> The bracketed slots are questions back to you, not guesses.</p>
+            <ul class="ms-findings">
+              <li><span class="sev med">evidence</span><span>The original names duties with no outcome. The rewrite keeps only what the resume supports and marks every open number for you to fill.</span></li>
+            </ul>
+          </div>
+          <div class="ms-foot"><span>numbers come from you</span><span>the original is quoted alongside every rewrite</span></div>
+        </div>
+
+        <div class="manuscript demo-panel" id="p-keywords">
+          <p class="ms-label">input: resume + job description</p>
+          <p>The JD asks for Kubernetes, Terraform and incident response. The resume shows ECS deploys and on-call runbooks, and none of those three words.</p>
+          <div class="ms-after">
+            <p class="ms-label">the placement map</p>
+            <ul class="ms-findings">
+              <li><span class="sev med">place</span><span>"container orchestration" belongs in the ECS line you already have: <span class="hl">"Containerized and deployed services on AWS ECS..."</span> True wording, real experience, screened keyword.</span></li>
+              <li><span class="sev high">gap</span><span>Terraform is not claimed anywhere. It goes on the genuine-gaps list for you to close, never into the resume.</span></li>
+            </ul>
+          </div>
+          <div class="ms-foot"><span>truth before keywords</span><span>missing keywords become a gap list, not filler</span></div>
+        </div>
+
+        <div class="manuscript demo-panel" id="p-handoff">
+          <p class="ms-label">the division of labor</p>
+          <p>job-lens writes; <a href="../recruiter-lens/" style="color:#c2402a">recruiter-lens</a> judges. "Why am I not getting interviews?" is a verdict, so mode 7 routes it straight there. Back here, its findings feed the rewrites, and the finished resume goes back for a final check before you send anything.</p>
+          <div class="ms-after">
+            <p class="ms-label">and if only one is installed</p>
+            <p>Both work standalone. Without recruiter-lens, job-lens runs a lighter check itself and says so; without job-lens, recruiter-lens still judges and offers nothing more.</p>
+          </div>
+          <div class="ms-foot"><span>no verdicts duplicated in the writer</span><span>no rewrites hidden in the judge</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="modes">
+  <div class="wrap">
+    <p class="kicker">the vocabulary</p>
+    <h2>Six ways it writes. One it hands off.</h2>
+    <p class="lede">Or skip the modes. Hand it a resume and a job description and ask for the better version, and it names the mode it picked.</p>
+    <div class="cmd-cats">
+      <div class="cat">
+        <h3>Production <span>6</span></h3>
+        <p class="cat-desc">Finished material, built only from your real experience.</p>
+        <ul><li>decode JD + tailor</li><li>rewrite bullets</li><li>keyword map</li><li>five summaries</li><li>linkedin rewrite</li><li>interview answers</li></ul>
+      </div>
+      <div class="cat">
+        <h3>Judging <span>1</span></h3>
+        <p class="cat-desc">Anything that is a verdict belongs to the recruiter-lens skill. Mode 7 routes there, with a short fallback when it is not installed.</p>
+        <ul><li>judge it (hand-off)</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="principles">
+  <div class="wrap">
+    <p class="kicker">house rules</p>
+    <h2>What the pen never does.</h2>
+    <div class="principles">
+      <div class="pr">
+        <h3>Invent nothing</h3>
+        <p>Employers, titles, dates, tools and numbers come from you. A missing metric becomes a question or a visible [metric: ?] slot, never a guess you have to defend in an interview and a background check.</p>
+      </div>
+      <div class="pr">
+        <h3>Truth before keywords</h3>
+        <p>A JD keyword you cannot honestly claim goes on a gaps list, not into your resume. Placed keywords live inside true sentences; the human who reads after the parser notices stuffing.</p>
+      </div>
+      <div class="pr">
+        <h3>No ATS promises</h3>
+        <p>There is no real ATS here. Material is written to parse and to screen well, and any match estimate is a rubric judgment. For a verdict, the skill hands off to recruiter-lens.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="foot-cta">
+  <div class="wrap">
+    <h2>Stop asking what is wrong. Get the better version.</h2>
+    <p>Free, open, and it runs entirely inside the agent you already use.</p>
+    <a class="big-btn" href="#install">Install job-lens</a>
+    <a class="big-btn alt" href="https://github.com/arm-pz/job-lens" target="_blank" rel="noopener">Read the source</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>job-lens — an open agent skill · <a href="../">all skills</a></span>
+    <span><a href="https://github.com/arm-pz/job-lens" target="_blank" rel="noopener">github.com/arm-pz/job-lens</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* live GitHub star count */
+  fetch('https://api.github.com/repos/arm-pz/job-lens').then(function(r){return r.ok?r.json():null;}).then(function(d){
+    if(!d||typeof d.stargazers_count!=='number'||d.stargazers_count<1)return;
+    var el=document.getElementById('star-count');
+    el.textContent=d.stargazers_count.toLocaleString();
+    el.classList.add('on');
+  }).catch(function(){});
+
+  /* hero self-edit */
+  var h=document.getElementById('hero-h');
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduce){
+    setTimeout(function(){h.classList.add('struck');},900);
+    setTimeout(function(){h.classList.add('settled');},1900);
+  }else{h.classList.add('struck','settled');}
+
+  /* install tabs */
+  var cmds={
+    one:{say:false,note:'Detects Claude Code, Cursor, Codex, Qoder and more, then writes the skill into the right folder. Add <b>--dry-run</b> to see the plan first.',text:'npx skills add arm-pz/job-lens --skill job-lens'},
+    agent:{say:true,note:'Paste this to your agent. It reads the repo, installs itself, and reports where it put things.',text:'Install the job-lens skill from github.com/arm-pz/job-lens into this project’s skills directory, then confirm it loads.'},
+    claude:{say:false,note:'Manual install into <b>.claude/skills/</b>. No build step, no dependencies.',text:'git clone https://github.com/arm-pz/job-lens && mkdir -p .claude/skills && cp -r job-lens/skills/job-lens .claude/skills/'},
+    cursor:{say:false,note:'Manual install into <b>.cursor/skills/</b>.',text:'git clone https://github.com/arm-pz/job-lens && mkdir -p .cursor/skills && cp -r job-lens/skills/job-lens .cursor/skills/'},
+    codex:{say:false,note:'Manual install into <b>.agents/skills/</b>.',text:'git clone https://github.com/arm-pz/job-lens && mkdir -p .agents/skills && cp -r job-lens/skills/job-lens .agents/skills/'},
+    qoder:{say:false,note:'Manual install into <b>.qoder/skills/</b>.',text:'git clone https://github.com/arm-pz/job-lens && mkdir -p .qoder/skills && cp -r job-lens/skills/job-lens .qoder/skills/'},
+    other:{say:false,note:'The skill is plain markdown. Copy <b>skills/job-lens/</b> wherever your agent loads skills from. Replace <b>your-agent</b> in the command with your agent\'s folder.',text:'git clone https://github.com/arm-pz/job-lens && cp -r job-lens/skills/job-lens your-agent/skills/'}
+  };
+  var line=document.getElementById('cmd-line'),note=document.getElementById('cmd-note'),
+      btn=document.getElementById('copy-btn'),status=document.getElementById('copy-status'),current='one';
+  function show(k){
+    current=k;var c=cmds[k];
+    line.textContent=c.text;
+    line.classList.toggle('say',c.say);
+    note.innerHTML=c.note;
+    document.querySelectorAll('.tab').forEach(function(t){t.setAttribute('aria-selected',String(t.dataset.cmd===k));});
+  }
+  document.querySelectorAll('.tab').forEach(function(t){
+    t.addEventListener('click',function(){show(t.dataset.cmd);});
+  });
+  show('one');
+  function copyOk(){
+    btn.textContent='Copied';btn.classList.add('done');status.textContent='Copied to clipboard.';
+    setTimeout(function(){btn.textContent='Copy';btn.classList.remove('done');},1600);
+  }
+  function copyFail(){
+    var range=document.createRange();range.selectNodeContents(line);
+    var sel=window.getSelection();sel.removeAllRanges();sel.addRange(range);
+    btn.textContent='Select + copy';btn.classList.remove('done');
+    status.textContent='Clipboard unavailable. The command is selected; press Ctrl+C.';
+    setTimeout(function(){btn.textContent='Copy';},2600);
+  }
+  function legacyCopy(text){
+    var ta=document.createElement('textarea');
+    ta.value=text;ta.setAttribute('readonly','');
+    ta.style.position='fixed';ta.style.top='-9999px';
+    document.body.appendChild(ta);ta.select();
+    var ok=false;try{ok=document.execCommand('copy');}catch(e){}
+    document.body.removeChild(ta);
+    if(ok)copyOk();else copyFail();
+  }
+  btn.addEventListener('click',function(){
+    var text=cmds[current].text;
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(copyOk,function(){legacyCopy(text);});
+    }else{legacyCopy(text);}
+  });
+
+  /* demo chips */
+  document.querySelectorAll('.chip').forEach(function(c){
+    c.addEventListener('click',function(){
+      document.querySelectorAll('.chip').forEach(function(x){x.setAttribute('aria-selected',String(x===c));});
+      document.querySelectorAll('.demo-panel').forEach(function(p){p.classList.toggle('on',p.id===c.dataset.panel);});
+    });
+  });
+})();
+</script>
+</body>
+</html>
