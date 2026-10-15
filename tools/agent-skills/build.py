@@ -16,8 +16,8 @@ GH = os.environ.get("GH", "gh")  # Windows: point GH at the real gh.exe, not the
 REPOS = {
     "wordsmith": "skills/wordsmith",
     "recruiter-lens": "skills/recruiter-lens",
-    "job-lens": "skills/job-lens",
-    "deep-tutor": "skills/deep-tutor",
+    "applicant-kit": "skills/applicant-kit",
+    "topic-primer": "skills/topic-primer",
     "do-better": "skills/do-better",
     "findable": "skills/findable",
     "keyword-guard": ".",
