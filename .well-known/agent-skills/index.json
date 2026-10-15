@@ -2,11 +2,11 @@
   "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
   "skills": [
     {
-      "name": "deep-tutor",
-      "description": "Agent skill for Claude Code, Cursor and Qoder that teaches any topic you name, from absolute zero to expert depth, in 8 modes: foundation, curriculum, concept chains, adaptive tutor, mental models, pitfalls, examiner, ELI5. One question at a time, honest grading, every term defined, no fabricated facts or resources.",
+      "name": "applicant-kit",
+      "description": "Agent skill that writes the better version of your application material: decoded JD table, action-task-result-impact bullets, honest keyword placement, five resume summaries, a LinkedIn rewrite, 20 interview answers. Only experience you already have; nothing invented. Sibling recruiter-lens does the judging. For Claude Code, Cursor, Codex, Qoder.",
       "type": "archive",
-      "url": "https://skills.caffeinity.com/agent-skills/deep-tutor.tar.gz",
-      "digest": "sha256:e1d7f7c9326acc077580536559444652f28fef150f1f4a29570456a408731156"
+      "url": "https://skills.caffeinity.com/agent-skills/applicant-kit.tar.gz",
+      "digest": "sha256:29e8401b4b574361c1e58f839d4701f9eb6a203543588201722036201bceac75"
     },
     {
       "name": "do-better",
@@ -23,13 +23,6 @@
       "digest": "sha256:c5f6cdb2f515fd0ab289eb9f90fce97f87e0a791a8ee490aff584a004ec21ced"
     },
     {
-      "name": "job-lens",
-      "description": "Agent skill that writes the better version of your application material: decoded JD table, action-task-result-impact bullets, honest keyword placement, five resume summaries, a LinkedIn rewrite, 20 interview answers. Only experience you already have; nothing invented. Sibling recruiter-lens does the judging. For Claude Code, Cursor, Codex, Qoder.",
-      "type": "archive",
-      "url": "https://skills.caffeinity.com/agent-skills/job-lens.tar.gz",
-      "digest": "sha256:78fb4253ad8abcde5416c23f3d263680983a89065f2f51d81e75da919978c513"
-    },
-    {
       "name": "keyword-guard",
       "description": "Agent skill that plans SEO topic clusters and ends keyword cannibalization, so one page wins each query. It maps query ownership before any title, H1 or content change, from Search Console or a sitemap when you lack GSC access. Covers on-page, link-authority and hreflang checks. White-hat, no API keys. Runs in Claude Code, Cursor, Qoder.",
       "type": "archive",
@@ -38,10 +31,17 @@
     },
     {
       "name": "recruiter-lens",
-      "description": "Agent skill that reviews resumes, CVs and LinkedIn profiles the way recruiters screen them: 6-second scan, ATS check, rejection reasons, gaps against a job description, likely interview questions. It never invents a metric. Its sibling job-lens writes the fix. For Claude Code, Cursor, Codex, Qoder.",
+      "description": "Agent skill that reviews resumes, CVs and LinkedIn profiles the way recruiters screen them: 6-second scan, ATS check, rejection reasons, gaps against a job description, likely interview questions. It never invents a metric. Its sibling applicant-kit writes the fix. For Claude Code, Cursor, Codex, Qoder.",
       "type": "archive",
       "url": "https://skills.caffeinity.com/agent-skills/recruiter-lens.tar.gz",
-      "digest": "sha256:da60a9872726ac6c95f0e976aa9993f4906a2eb56d7eca2dee59fc96948bbd73"
+      "digest": "sha256:56bfd0e4ddfccc9ad9d1d9b9305f7f2d438f3aaf35cd19291faf3f0797a275fa"
+    },
+    {
+      "name": "topic-primer",
+      "description": "Agent skill for Claude Code, Cursor and Qoder that teaches any topic you name, from absolute zero to expert depth, in 8 modes: foundation, curriculum, concept chains, adaptive tutor, mental models, pitfalls, examiner, ELI5. One question at a time, honest grading, every term defined, no fabricated facts or resources.",
+      "type": "archive",
+      "url": "https://skills.caffeinity.com/agent-skills/topic-primer.tar.gz",
+      "digest": "sha256:26471a983e00bf7133bc79bad1e1258d879312c93170e4ca0ebf20a1b0b672ca"
     },
     {
       "name": "web-preflight",
