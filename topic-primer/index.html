@@ -57,29 +57,19 @@
   .star-n.on{display:inline}
 
   /* ---------- hero ---------- */
-  .hero{text-align:center;padding:112px 0 96px}
-  .eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;color:var(--dim);text-transform:lowercase}
-  .eyebrow b{color:var(--brass);font-weight:500}
-  h1.hero-h{font-family:var(--serif);font-weight:400;font-size:clamp(38px,6.2vw,74px);line-height:1.08;letter-spacing:-.012em;margin:26px auto 0;max-width:900px}
-  .strike-me{
-    display:inline-block;overflow:hidden;white-space:nowrap;vertical-align:baseline;
-    max-width:min(34ch,52vw);opacity:1;
-    background-image:linear-gradient(var(--ember),var(--ember));
-    background-repeat:no-repeat;background-position:left 78%;background-size:0% 2.5px;
-    -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 22px),transparent);
-    mask-image:linear-gradient(90deg,#000 calc(100% - 22px),transparent);
-    transition:max-width .55s ease .15s,opacity .4s ease .15s;
-  }
-  h1.struck .strike-me{background-size:100% 2.5px;transition:background-size .65s ease,max-width .55s ease .15s,opacity .4s ease .15s}
-  h1.settled .strike-me{max-width:0;opacity:0}
-  h1 .final{display:block;margin-top:.15em}
+  .hero{padding:96px 0 88px}
+  .hero-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:56px;align-items:center}
+  h1.hero-h{font-family:var(--serif);font-weight:400;font-size:clamp(36px,4.4vw,56px);line-height:1.12;letter-spacing:-.012em}
   h1 em{font-style:italic;color:var(--ember)}
-  .hero-sub{color:var(--dim);max-width:620px;margin:26px auto 0;font-size:17px}
+  .hero-sub{color:var(--dim);margin-top:22px;font-size:17px;max-width:560px}
   .hero-sub b{color:var(--paper);font-weight:500}
-  .stats{display:flex;justify-content:center;flex-wrap:wrap;gap:0 34px;margin-top:44px;font-family:var(--mono);font-size:13px;color:var(--dim)}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+  .hero-actions .big-btn.alt{margin-left:0}
+  .stats{display:grid;grid-template-columns:repeat(2,auto);gap:10px 28px;margin-top:28px;font-family:var(--mono);font-size:13px;color:var(--dim)}
   .stats span b{color:var(--paper);font-weight:500}
-  .stats span{position:relative;padding:4px 0}
-  .stats span+span::before{content:"·";position:absolute;left:-19px;color:var(--rule-strong)}
+  .stats span{padding:4px 0}
+  .hero-meta{font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;color:var(--dim);margin-top:12px;text-transform:lowercase}
+  .hero-meta b{color:var(--brass);font-weight:500}
 
   /* ---------- sections ---------- */
   section{padding:88px 0;border-top:1px solid var(--rule)}
@@ -113,30 +103,24 @@
   .noscript .mono{color:var(--paper);font-size:13px}
   .sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 
-  /* ---------- demo / manuscript ---------- */
-  .demo-grid{display:grid;grid-template-columns:250px 1fr;gap:36px;align-items:start;margin-top:36px}
-  .chips{display:flex;flex-direction:column;gap:10px}
-  .chip{display:block;text-align:left;font-family:var(--sans);font-size:15px;color:var(--dim);background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:13px 16px;cursor:pointer;transition:border-color .2s,color .2s}
-  .chip small{display:block;font-size:12.5px;margin-top:2px;color:var(--dim);opacity:.75}
-  .chip:hover{color:var(--paper)}
-  .chip[aria-selected="true"]{color:var(--paper);border-color:var(--ember)}
-  .chip[aria-selected="true"] small{color:var(--ember);opacity:.9}
-  .manuscript{background:var(--paper);color:var(--paper-ink);border-radius:14px;padding:34px 36px 28px;font-family:var(--serif);font-size:18.5px;line-height:1.65;box-shadow:0 24px 60px rgba(0,0,0,.45)}
-  .ms-label{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:lowercase;color:#6f6878;margin-bottom:8px}
-  .ms-before s{text-decoration:none;background-image:linear-gradient(#c2402a,#c2402a);background-repeat:no-repeat;background-position:left 68%;background-size:100% 1.8px;color:#6f6878}
-  .ms-after{margin-top:26px;padding-top:22px;border-top:1px solid rgba(34,29,43,.14)}
-  .ms-after .hl{background:rgba(232,180,76,.35);padding:0 2px;border-radius:2px}
-  .ms-findings{list-style:none;margin-top:6px}
-  .ms-findings li{display:flex;gap:14px;align-items:baseline;padding:12px 0;border-bottom:1px solid rgba(34,29,43,.10);font-family:var(--sans);font-size:15.5px;line-height:1.5}
+  /* ---------- manuscript (hero evidence card) ---------- */
+  .manuscript{background:var(--paper);color:var(--paper-ink);border-radius:14px;padding:30px 34px 24px;font-family:var(--serif);font-size:17px;line-height:1.6;box-shadow:0 24px 60px rgba(0,0,0,.45)}
+  .ms-label{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:lowercase;color:#6f6878;margin-bottom:10px}
+  .ms-before s{text-decoration:line-through;text-decoration-thickness:1.5px;text-decoration-color:#c2402a;color:#6f6878;font-style:italic}
+  .ms-findings{list-style:none;margin-top:14px}
+  .ms-findings li{display:grid;grid-template-columns:118px 1fr;gap:16px;align-items:start;padding:14px 0;border-bottom:1px solid rgba(34,29,43,.10);font-family:var(--sans);font-size:15px;line-height:1.55}
   .ms-findings li:last-child{border-bottom:none}
-  .sev{flex:none;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:lowercase;padding:3px 9px;border-radius:999px}
+  .ms-findings .mono{font-size:13px;background:rgba(34,29,43,.07);padding:1px 6px;border-radius:4px}
+  .sev{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:lowercase;padding:4px 9px;border-radius:999px;text-align:center;justify-self:start;white-space:nowrap}
   .sev.high{background:rgba(194,64,42,.14);color:#a03222}
   .sev.med{background:rgba(176,132,26,.16);color:#8a6414}
   .sev.ok{background:rgba(58,125,82,.15);color:#2f6b45}
-  .ms-foot{margin-top:22px;padding-top:16px;border-top:1px dashed rgba(34,29,43,.25);font-family:var(--mono);font-size:12px;color:#6f6878;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+  .ms-after{margin-top:20px;padding-top:20px;border-top:1px solid rgba(34,29,43,.14)}
+  .ms-after p.hl{display:block;background:rgba(232,180,76,.18);border-radius:8px;padding:14px 18px;font-size:17.5px;line-height:1.55;color:var(--paper-ink)}
+  .ms-after span.hl{background:rgba(232,180,76,.28);border-radius:4px;padding:1px 5px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+  .ms-foot{margin-top:20px;padding-top:14px;border-top:1px dashed rgba(34,29,43,.25);font-family:var(--mono);font-size:11.5px;color:#6f6878;display:flex;flex-direction:column;align-items:flex-start;gap:5px}
+  .ms-foot span::before{content:"— ";color:#c2402a}
   .ms-foot .gain{color:#a03222}
-  .demo-panel{display:none}
-  .demo-panel.on{display:block}
 
   /* ---------- commands ---------- */
   .cmd-cats{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:14px;overflow:hidden;margin-top:36px}
@@ -170,10 +154,7 @@
 
   /* ---------- responsive ---------- */
   @media (max-width:860px){
-    .demo-grid{grid-template-columns:1fr}
-    .chips{flex-direction:row;flex-wrap:wrap}
-    .chip{flex:1 1 140px}
-    .chip small{display:none}
+    .hero-grid{grid-template-columns:1fr;gap:44px}
     .cmd-cats{grid-template-columns:1fr}
     .principles{grid-template-columns:1fr;gap:24px}
     .nav-links{gap:18px}
@@ -182,14 +163,18 @@
   @media (max-width:640px){
     .cmd-card{flex-direction:column;align-items:stretch}
     .copy-btn{align-self:flex-start}
-    .hero{padding:80px 0 64px}
+    .hero{padding:64px 0 56px}
+    h1.hero-h{font-size:clamp(30px,8.6vw,40px)}
+    .hero-sub{font-size:16px}
+    .stats{margin-top:24px;gap:8px 20px}
     section{padding:64px 0}
-    .manuscript{padding:26px 22px 22px;font-size:17px}
+    .manuscript{padding:24px 20px 20px;font-size:16px}
+    .ms-findings li{grid-template-columns:1fr;gap:8px}
+    .ms-after p.hl{font-size:16.5px;padding:12px 14px}
   }
   @media (prefers-reduced-motion:reduce){
     *,*::before,*::after{transition:none!important;animation:none!important}
     html{scroll-behavior:auto}
-    .strike-me{max-width:0;opacity:0;margin-right:0}
   }
 </style>
 <script type="application/ld+json">
@@ -225,7 +210,6 @@
     <a class="brand" href="#top"><span class="caret">∧</span>topic-primer</a>
     <div class="nav-links">
       <a href="#install">Install</a>
-      <a href="#demo">See it work</a>
       <a href="#commands">Modes</a>
       <a class="src" href="https://github.com/arm-pz/topic-primer" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor" style="vertical-align:-2px;margin-right:6px" aria-hidden="true"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"></path></svg>Star<span id="star-count" class="star-n"></span></a>
     </div>
@@ -234,17 +218,33 @@
 
 <header class="hero" id="top">
   <div class="wrap">
-    <p class="eyebrow">for coding agents · <b>free, open, no auth</b></p>
-    <h1 class="hero-h" id="hero-h">
-      Your agent can <span class="strike-me">answer any question with a four-thousand-word wall,</span> lecture.
-      <span class="final">Teach it to <em>teach</em>.</span>
-    </h1>
-    <p class="hero-sub">One install gives your agent <b>8 teaching modes</b>, from absolute-zero foundations to a strict examiner. It asks one question, then waits for you. Every term defined, every grade honest.</p>
-    <div class="stats">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <h1 class="hero-h">Your agent can lecture.<br>Teach it to <em>teach</em>.</h1>
+        <p class="hero-sub">One install gives your agent <b>8 teaching modes</b>, from absolute-zero foundations to a strict examiner. It asks one question, then waits for you. Every term defined, every grade honest.</p>
+        <div class="hero-actions">
+          <a class="big-btn" href="#install">Install topic-primer</a>
+          <a class="big-btn alt" href="https://github.com/arm-pz/topic-primer" target="_blank" rel="noopener">Read the source</a>
+        </div>
+        <div class="stats">
       <span><b>8</b> modes</span>
       <span><b>1</b> rule: ask, then wait</span>
       <span><b>68</b> lines, zero fluff</span>
       <span><b>0</b> API keys</span>
+    </div>
+        <p class="hero-meta">for coding agents · <b>free, open, no auth</b></p>
+      </div>
+      <aside class="hero-card">
+        <div class="manuscript">
+          <p class="ms-label">one turn, mid-lesson · topic: recursion</p>
+          <p>Recursion is a function that solves a problem by first solving a smaller copy of itself, then combining the answers. Think of matryoshka dolls: each doll holds a smaller doll, until the solid one at the center that holds nothing. The most common mistake is forgetting the center: without a base case, the dolls never stop opening.</p>
+          <div class="ms-after">
+            <p class="ms-label">the turn's last line</p>
+            <p class="hl">In your own words: what stops a recursive call from running forever?</p>
+          </div>
+          <div class="ms-foot"><span>the question is the end of the turn</span><span>no self-answers, no batched questions</span></div>
+        </div>
+      </aside>
     </div>
   </div>
 </header>
@@ -283,57 +283,6 @@
         <p>Browse the source: <a href="https://github.com/arm-pz/topic-primer" target="_blank" rel="noopener">github.com/arm-pz/topic-primer</a></p>
       </div>
     </noscript>
-  </div>
-</section>
-
-<section id="demo">
-  <div class="wrap">
-    <p class="kicker">see it work</p>
-    <h2>A lesson, on paper.</h2>
-    <p class="lede">Real shapes of what each mode returns. Pick a mode.</p>
-
-    <div class="demo-grid">
-      <div class="chips" role="tablist" aria-label="Examples">
-        <button class="chip" role="tab" aria-selected="true" data-panel="p-concepts">/topic-primer concepts<small>explain → example → mistake → question</small></button>
-        <button class="chip" role="tab" aria-selected="false" data-panel="p-examiner">/topic-primer examiner<small>three rounds, grades that name the gap</small></button>
-        <button class="chip" role="tab" aria-selected="false" data-panel="p-eli5">/topic-primer eli5<small>no jargon, under four sentences</small></button>
-      </div>
-
-      <div>
-        <div class="manuscript demo-panel on" id="p-concepts">
-          <p class="ms-label">one turn, mid-lesson · topic: recursion</p>
-          <p>Recursion is a function that solves a problem by first solving a smaller copy of itself, then combining the answers. Think of matryoshka dolls: each doll holds a smaller doll, until the solid one at the center that holds nothing. The most common mistake is forgetting the center: without a base case, the dolls never stop opening.</p>
-          <div class="ms-after">
-            <p class="ms-label">the turn's last line</p>
-            <p class="hl">In your own words: what stops a recursive call from running forever?</p>
-          </div>
-          <div class="ms-foot"><span>the question is the end of the turn</span><span>no self-answers, no batched questions</span></div>
-        </div>
-
-        <div class="manuscript demo-panel" id="p-examiner">
-          <p class="ms-label">round 2 · application · hash maps</p>
-          <p class="ms-before">Candidate: "Lookups are O(1) because the array index is computed directly from the key."</p>
-          <div class="ms-after">
-            <p class="ms-label">grading</p>
-            <ul class="ms-findings">
-              <li><span class="sev ok">right</span><span>Direct index computation is the core of the answer. That part holds.</span></li>
-              <li><span class="sev med">gap</span><span>"O(1)" was stated as a fact, not a condition. The missing piece: <span class="hl">worst case is O(n) under collisions</span>. Name it, then answer the variant: what keeps collisions rare?</span></li>
-            </ul>
-          </div>
-          <div class="ms-foot"><span>correct / partial / wrong, with the missing piece named</span><span>final scorecard: strengths, gaps, what to study next</span></div>
-        </div>
-
-        <div class="manuscript demo-panel" id="p-eli5">
-          <p class="ms-label">eli5 · topic: an API</p>
-          <p>An API is like the menu at a restaurant. You don't walk into the kitchen and cook; you point at something on the menu, and the kitchen knows exactly what to bring back. The menu is the deal between you and the kitchen: what you're allowed to ask for, and what comes back.</p>
-          <div class="ms-after">
-            <p class="ms-label">mini-check, then it waits</p>
-            <p class="hl">When you order, who does the actual cooking, you or the kitchen?</p>
-          </div>
-          <div class="ms-foot"><span>everyday objects only, every turn under four sentences</span><span>jargon: zero</span></div>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -409,14 +358,6 @@
     el.classList.add('on');
   }).catch(function(){});
 
-  /* hero self-edit */
-  var h=document.getElementById('hero-h');
-  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(!reduce){
-    setTimeout(function(){h.classList.add('struck');},900);
-    setTimeout(function(){h.classList.add('settled');},1900);
-  }else{h.classList.add('struck','settled');}
-
   /* install tabs */
   var cmds={
     one:{say:false,note:'Detects Claude Code, Cursor, Codex, Qoder and more, then writes the skill into the right folder. Add <b>--dry-run</b> to see the plan first.',text:'npx skills add arm-pz/topic-primer'},
@@ -465,14 +406,6 @@
     if(navigator.clipboard&&navigator.clipboard.writeText){
       navigator.clipboard.writeText(text).then(copyOk,function(){legacyCopy(text);});
     }else{legacyCopy(text);}
-  });
-
-  /* demo chips */
-  document.querySelectorAll('.chip').forEach(function(c){
-    c.addEventListener('click',function(){
-      document.querySelectorAll('.chip').forEach(function(x){x.setAttribute('aria-selected',String(x===c));});
-      document.querySelectorAll('.demo-panel').forEach(function(p){p.classList.toggle('on',p.id===c.dataset.panel);});
-    });
   });
 })();
 </script>
