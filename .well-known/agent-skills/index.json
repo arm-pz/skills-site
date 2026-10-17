@@ -9,6 +9,13 @@
       "digest": "sha256:29e8401b4b574361c1e58f839d4701f9eb6a203543588201722036201bceac75"
     },
     {
+      "name": "crash-test",
+      "description": "Agent skill that crash-tests a decision before you build it. Four fixed roles (Pragmatist, Skeptic, Specialist, Contrarian) draft alone, review each other anonymously, then a chair merges what survives and grounds its claims against your source before adopting. Dissent log included. Optional Operator seat. Zero setup: no server, no keys.",
+      "type": "archive",
+      "url": "https://skills.caffeinity.com/agent-skills/crash-test.tar.gz",
+      "digest": "sha256:7f129236dfef4965112e3a13e2f8c52e5fff038b05d72fa500137712a3aa6f97"
+    },
+    {
       "name": "do-better",
       "description": "Agent skill: a tournament of sub-agents over one task. Every competitor gets the identical task and a different strategy card, then attacks, defends, and a judge scores each match on a written rubric until one champion survives. For when a retry won't fix the answer. Qoder CLI skill, Claude Code plugin. Adapted from Arena (MIT).",
       "type": "archive",
