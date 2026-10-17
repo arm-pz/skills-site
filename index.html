@@ -99,7 +99,7 @@
   "name": "Caffeinity Skills",
   "url": "https://skills.caffeinity.com/",
   "description": "Plain-markdown skills for AI coding agents: wordsmith edits, topic-primer teaches, keyword-guard ranks, web-preflight ships, findable gets found.",
-  "numberOfItems": 8,
+  "numberOfItems": 10,
   "itemListElement": [
     {
       "@type": "ListItem",
@@ -148,6 +148,18 @@
       "position": 8,
       "name": "Web Preflight",
       "url": "https://skills.caffeinity.com/web-preflight/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 9,
+      "name": "crash-test",
+      "url": "https://skills.caffeinity.com/crash-test/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 10,
+      "name": "Pre-Ship Performance Audit",
+      "url": "https://skills.caffeinity.com/pre-ship-performance-audit/"
     }
   ]
 }
@@ -167,6 +179,8 @@
       <a href="#keyword-guard">Keyword Guard</a>
       <a href="#web-preflight">Web Preflight</a>
       <a href="#findable">Findable</a>
+      <a href="#crash-test">Crash Test</a>
+      <a href="#pre-ship-performance-audit">Perf Audit</a>
       <a class="src" href="https://github.com/arm-pz" target="_blank" rel="noopener">GitHub</a>
     </div>
   </div>
@@ -291,6 +305,22 @@
         </div>
       </div>
 
+      <div class="skill" id="crash-test">
+        <div class="sk-id">
+          <a class="sk-name" href="crash-test/">crash-test</a>
+          <span class="sk-tag">decisions</span>
+        </div>
+        <div class="sk-body">
+          <p>Crash-tests a decision before you build it. Four fixed roles draft the same task in separate contexts and attack each other's drafts anonymously; the chair merges what survived on evidence, not votes, keeps a dissent log for what it could not settle, and grounds the winner's claims about your files against the source before adopting them.</p>
+          <p class="sk-stats">4 roles · ~9 calls · 1 opt-in Operator seat · 2 modes · 0 API keys</p>
+          <p class="sk-install mono">npx skills add arm-pz/crash-test --skill crash-test</p>
+          <div class="sk-links">
+            <a class="page" href="crash-test/">Full install page →</a>
+            <a href="https://github.com/arm-pz/crash-test" target="_blank" rel="noopener">Source</a>
+          </div>
+        </div>
+      </div>
+
       <div class="skill" id="findable">
         <div class="sk-id">
           <a class="sk-name" href="findable/">findable</a>
@@ -303,6 +333,22 @@
           <div class="sk-links">
             <a class="page" href="findable/">Full install page →</a>
             <a href="https://github.com/arm-pz/findable" target="_blank" rel="noopener">Source</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill" id="pre-ship-performance-audit">
+        <div class="sk-id">
+          <a class="sk-name" href="pre-ship-performance-audit/">pre-ship-performance-audit</a>
+          <span class="sk-tag">performance</span>
+        </div>
+        <div class="sk-body">
+          <p>Audits and fixes a web app's real-world speed before launch: four read-only subagents sweep twenty known slow-downs across images, bundles, database queries and servers, then the same mobile Lighthouse protocol, three runs per page, proves each fix before and after. Never removes a feature for a score, never invents a baseline, and asks before touching dependencies, the database or the deploy region.</p>
+          <p class="sk-stats">4 subagents · 20 slow-downs · 6 phases · ~120 lines · 0 API keys</p>
+          <p class="sk-install mono">npx skills add arm-pz/pre-ship-performance-audit</p>
+          <div class="sk-links">
+            <a class="page" href="pre-ship-performance-audit/">Full install page →</a>
+            <a href="https://github.com/arm-pz/pre-ship-performance-audit" target="_blank" rel="noopener">Source</a>
           </div>
         </div>
       </div>
