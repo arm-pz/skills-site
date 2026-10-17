@@ -30,6 +30,13 @@
       "digest": "sha256:42b33fe1b1c03c3eb7edc990e6ddd83f9c56a30f8051e207fc17a7e2aaf99276"
     },
     {
+      "name": "pre-ship-performance-audit",
+      "description": "Agent skill that audits and fixes a web app's real-world speed before launch: four read-only subagents check twenty known slow-downs across images, bundles, database queries and servers, then the same mobile Lighthouse run, three times before and after, proves each fix. Never removes a feature for a score, never invents a baseline; asks first before dependency, database or region changes.",
+      "type": "archive",
+      "url": "https://skills.caffeinity.com/agent-skills/pre-ship-performance-audit.tar.gz",
+      "digest": "sha256:ed945ed47dd720be56d5e1c163590d6971511ef94c3a6cde50e57ea2b0ffc8b6"
+    },
+    {
       "name": "recruiter-lens",
       "description": "Agent skill that reviews resumes, CVs and LinkedIn profiles the way recruiters screen them: 6-second scan, ATS check, rejection reasons, gaps against a job description, likely interview questions. It never invents a metric. Its sibling applicant-kit writes the fix. For Claude Code, Cursor, Codex, Qoder.",
       "type": "archive",
