@@ -23,6 +23,8 @@ REPOS = {
     "keyword-guard": ".",
     "web-preflight": ".",
     "application-pilot": "skills/application-pilot",
+    "crash-test": "skills/crash-test",
+    "pre-ship-performance-audit": ".",
     "pre-ship-security-red-team": ".",
     "upstream-check": ".",
 }
@@ -103,6 +105,17 @@ def main():
         print(f"{name:<15} files={len(files):<3} tar={len(blob):>6}B  {digest[7:19]}…")
         for f in sorted(files):
             print(f"                  {f} ({len(files[f])}B)")
+
+    # Skills whose archive exists but whose repo does not (or is not mapped
+    # here) keep their previous index row instead of being silently dropped.
+    prior = os.path.join(OUT, "index.json")
+    if os.path.exists(prior):
+        built = {e["name"] for e in entries}
+        for e in json.load(open(prior, encoding="utf-8"))["skills"]:
+            if e["name"] not in built and os.path.exists(
+                os.path.join(OUT, f"{e['name']}.tar.gz")
+            ):
+                entries.append(e)
 
     index = {"$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
              "skills": sorted(entries, key=lambda e: e["name"])}

@@ -106,7 +106,7 @@
   "name": "Caffeinity Skills",
   "url": "https://skills.caffeinity.com/",
   "description": "Plain-markdown skills for AI coding agents: wordsmith edits, topic-primer teaches, keyword-guard ranks, web-preflight ships, findable gets found.",
-  "numberOfItems": 14,
+  "numberOfItems": 16,
   "itemListElement": [
     {
       "@type": "ListItem",
@@ -141,56 +141,68 @@
     {
       "@type": "ListItem",
       "position": 6,
+      "name": "application-pilot",
+      "url": "https://skills.caffeinity.com/application-pilot/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 7,
       "name": "topic-primer",
       "url": "https://skills.caffeinity.com/topic-primer/"
     },
     {
       "@type": "ListItem",
-      "position": 7,
+      "position": 8,
       "name": "do-better",
       "url": "https://skills.caffeinity.com/do-better/"
     },
     {
       "@type": "ListItem",
-      "position": 8,
+      "position": 9,
       "name": "crash-test",
       "url": "https://skills.caffeinity.com/crash-test/"
     },
     {
       "@type": "ListItem",
-      "position": 9,
+      "position": 10,
       "name": "draft-skill",
       "url": "https://skills.caffeinity.com/draft-skill/"
     },
     {
       "@type": "ListItem",
-      "position": 10,
+      "position": 11,
       "name": "tune-skill",
       "url": "https://skills.caffeinity.com/tune-skill/"
     },
     {
       "@type": "ListItem",
-      "position": 11,
+      "position": 12,
       "name": "prompts-to-skill",
       "url": "https://skills.caffeinity.com/prompts-to-skill/"
     },
     {
       "@type": "ListItem",
-      "position": 12,
+      "position": 13,
       "name": "prompts-to-skill-release",
       "url": "https://skills.caffeinity.com/prompts-to-skill-release/"
     },
     {
       "@type": "ListItem",
-      "position": 13,
+      "position": 14,
       "name": "web-preflight",
       "url": "https://skills.caffeinity.com/web-preflight/"
     },
     {
       "@type": "ListItem",
-      "position": 14,
+      "position": 15,
       "name": "pre-ship-performance-audit",
       "url": "https://skills.caffeinity.com/pre-ship-performance-audit/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 16,
+      "name": "pre-ship-security-red-team",
+      "url": "https://skills.caffeinity.com/pre-ship-security-red-team/"
     }
   ]
 }
@@ -275,7 +287,7 @@
 
     <div class="sk-group" id="career">
       <h2>Career</h2>
-      <span>2 skills · screening · applications</span>
+      <span>3 skills · screening · applications · follow-through</span>
     </div>
 
       <div class="skill" id="recruiter-lens">
@@ -306,6 +318,22 @@
           <div class="sk-links">
             <a class="page" href="applicant-kit/">Full install page →</a>
             <a href="https://github.com/arm-pz/applicant-kit" target="_blank" rel="noopener">Source</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill" id="application-pilot">
+        <div class="sk-id">
+          <a class="sk-name" href="application-pilot/">application-pilot</a>
+          <span class="sk-tag">career</span>
+        </div>
+        <div class="sk-body">
+          <p>Runs the job search around the applications: turns role criteria into a live shortlist, scores each role for fit with evidence, keeps a reviewable tracker with submission and follow-up dates, flags roles that have gone quiet, drafts the follow-up and the interview briefing, and reads the funnel weekly. applicant-kit writes the packet; application-pilot keeps the search alive. It never submits anything, and never claims a status it did not see.</p>
+          <p class="sk-stats">8 modes · 9 ground rules · 5 files · no CLI, no telemetry</p>
+          <p class="sk-install mono">npx skills add arm-pz/application-pilot --skill application-pilot</p>
+          <div class="sk-links">
+            <a class="page" href="application-pilot/">Full install page →</a>
+            <a href="https://github.com/arm-pz/application-pilot" target="_blank" rel="noopener">Source</a>
           </div>
         </div>
       </div>
@@ -434,7 +462,7 @@
 
     <div class="sk-group" id="ship-checks">
       <h2>Ship Checks</h2>
-      <span>2 skills · pre-launch audits</span>
+      <span>3 skills · pre-launch audits</span>
     </div>
 
       <div class="skill" id="web-preflight">
@@ -465,6 +493,22 @@
           <div class="sk-links">
             <a class="page" href="pre-ship-performance-audit/">Full install page →</a>
             <a href="https://github.com/arm-pz/pre-ship-performance-audit" target="_blank" rel="noopener">Source</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill" id="pre-ship-security-red-team">
+        <div class="sk-id">
+          <a class="sk-name" href="pre-ship-security-red-team/">pre-ship-security-red-team</a>
+          <span class="sk-tag">release</span>
+        </div>
+        <div class="sk-body">
+          <p>Red-teams a web app you own before launch, in an isolated local environment. Three parallel read-only subagents run fourteen authorization and abuse checks across three groups (identity and authorization; UI and API bypass; browser, network, cache and AI), each with captured evidence, then the fix is rerun against the same check. A check that cannot fail is falsified first, and findings stay on the record even when the pass clears.</p>
+          <p class="sk-stats">3 subagents · 14 checks · 9 files · local environments only</p>
+          <p class="sk-install mono">npx skills add arm-pz/pre-ship-security-red-team</p>
+          <div class="sk-links">
+            <a class="page" href="pre-ship-security-red-team/">Full install page →</a>
+            <a href="https://github.com/arm-pz/pre-ship-security-red-team" target="_blank" rel="noopener">Source</a>
           </div>
         </div>
       </div>
