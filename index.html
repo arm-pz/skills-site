@@ -352,6 +352,70 @@
           </div>
         </div>
       </div>
+
+      <div class="skill" id="draft-skill">
+        <div class="sk-id">
+          <a class="sk-name" href="draft-skill/">draft-skill</a>
+          <span class="sk-tag">authoring</span>
+        </div>
+        <div class="sk-body">
+          <p>Creates a new agent skill from a plain idea: confirms the purpose before writing anything, checks the installed siblings for overlap, splits scripts from references from assets, writes a description that actually triggers, then validates it with check_skill.py. Written from scratch, so it carries no text from Qoder's built-in skill-creator, which ships without a licence permitting redistribution.</p>
+          <p class="sk-stats">2 files · 112 lines · 8 workflow steps · 0 API keys</p>
+          <p class="sk-install mono">npx skills add arm-pz/draft-skill</p>
+          <div class="sk-links">
+            <a class="page" href="draft-skill/">Full install page →</a>
+            <a href="https://github.com/arm-pz/draft-skill" target="_blank" rel="noopener">Source</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill" id="prompts-to-skill">
+        <div class="sk-id">
+          <a class="sk-name" href="prompts-to-skill/">prompts-to-skill</a>
+          <span class="sk-tag">authoring</span>
+        </div>
+        <div class="sk-body">
+          <p>Turns a list of your own prompts into a finished, tested skill, one skill per prompt: an intent interview, an overlap check against what is already installed, a draft written with draft-skill, trigger test cases that include near-misses, and a tune-skill gate at the end. It needs draft-skill and tune-skill and stops with a clear message if either is missing.</p>
+          <p class="sk-stats">3 files · 141 lines · depends on draft-skill + tune-skill · 0 API keys</p>
+          <p class="sk-install mono">npx skills add arm-pz/prompts-to-skill</p>
+          <div class="sk-links">
+            <a class="page" href="prompts-to-skill/">Full install page →</a>
+            <a href="https://github.com/arm-pz/prompts-to-skill" target="_blank" rel="noopener">Source</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill" id="prompts-to-skill-release">
+        <div class="sk-id">
+          <a class="sk-name" href="prompts-to-skill-release/">prompts-to-skill-release</a>
+          <span class="sk-tag">release</span>
+        </div>
+        <div class="sk-body">
+          <p>Packages a finished skill for release: runs its trigger test cases and records which passed and which did not, sets the version and CHANGELOG, builds the archive, writes the README, and ends with a per-platform install checklist. Failed tests stay in the report instead of being dropped from it.</p>
+          <p class="sk-stats">3 files · 113 lines · 5 release sections · 0 API keys</p>
+          <p class="sk-install mono">npx skills add arm-pz/prompts-to-skill-release</p>
+          <div class="sk-links">
+            <a class="page" href="prompts-to-skill-release/">Full install page →</a>
+            <a href="https://github.com/arm-pz/prompts-to-skill-release" target="_blank" rel="noopener">Source</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill" id="tune-skill">
+        <div class="sk-id">
+          <a class="sk-name" href="tune-skill/">tune-skill</a>
+          <span class="sk-tag">authoring</span>
+        </div>
+        <div class="sk-body">
+          <p>Audits and fine-tunes a skill that already exists: the description that never fires, overlap with installed siblings, stale names and counts, handoff contracts that do not hand off. Ships check_skill.py, a deterministic validator over frontmatter, folder and heading agreement, description length and reference paths that do not exist. Not for creating one from scratch; that is draft-skill.</p>
+          <p class="sk-stats">4 files · 268 lines · 1 validator script · 0 API keys</p>
+          <p class="sk-install mono">npx skills add arm-pz/tune-skill</p>
+          <div class="sk-links">
+            <a class="page" href="tune-skill/">Full install page →</a>
+            <a href="https://github.com/arm-pz/tune-skill" target="_blank" rel="noopener">Source</a>
+          </div>
+        </div>
+      </div>
     </div>
 
     <p class="foot-note">Every skill is open markdown on GitHub. New install pages appear here as each skill earns one. Problems with a skill? <a href="https://github.com/arm-pz" target="_blank" rel="noopener">Open an issue</a>.</p>

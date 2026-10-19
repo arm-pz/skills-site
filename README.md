@@ -19,11 +19,19 @@ Copy the public files into `dist/`, then:
 
     npx wrangler pages deploy dist --project-name <your-project>
 
+A deploy replaces the whole production artifact set, so `dist/` has to hold
+every page, tarball and index you want live — not only the new ones. If `dist/`
+holds a partial tree, the deploy deletes the rest of the site, and a request for
+a removed path still answers HTTP 200 with the hub page instead of a 404.
+Check which tree you are in before deploying: more than one local clone of this
+repo exists, and the last one to upload is what the domain serves.
+
 ## The skills it hosts
 
 wordsmith · recruiter-lens · applicant-kit · topic-primer · do-better ·
 keyword-guard · web-preflight · findable · crash-test ·
-pre-ship-performance-audit — each page links to its source repo under
+pre-ship-performance-audit · draft-skill · prompts-to-skill ·
+prompts-to-skill-release · tune-skill — each page links to its source repo under
 [arm-pz](https://github.com/arm-pz).
 
 ## Related

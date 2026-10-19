@@ -23,6 +23,13 @@
       "digest": "sha256:a16d2716d7616161afacf742c8ef1a0727c9b77c7a08b90b533cb7746222076f"
     },
     {
+      "name": "draft-skill",
+      "description": "Agent skill that creates a new agent skill from a plain idea: confirms the purpose before writing anything, checks the already-installed siblings for overlap, splits the work between scripts, references and assets, writes a description that actually triggers, validates with tune-skill's check_skill.py, then hands off. Contains no text from Qoder's built-in skill-creator, which ships without a licence permitting redistribution.",
+      "type": "archive",
+      "url": "https://skills.caffeinity.com/agent-skills/draft-skill.tar.gz",
+      "digest": "sha256:77c8777eab276c2614cb0062bb8f582d33e29c2d34b3d5b2483aeba0f2830420"
+    },
+    {
       "name": "findable",
       "description": "Agent skill that sets up discovery for a GitHub repo, agent skill, Claude Code plugin or MCP server: audits where you rank today, derives the queries strangers type, drafts About text, topics, README opening, release notes and a site page, lists directories and plans a dated re-check. Never invents stars, rankings or sample output.",
       "type": "archive",
@@ -44,6 +51,20 @@
       "digest": "sha256:62a283781d1c474305673a60f2cab0d9aa2d3e27eb2fa88060ef5df377c4621f"
     },
     {
+      "name": "prompts-to-skill",
+      "description": "Agent skill that turns a list of your own prompts into a finished, tested agent skill, one skill per prompt: interviews for intent, checks what is already installed so the new skill does not duplicate it, drafts with draft-skill, writes trigger test cases including near-misses, then gates the result with tune-skill. Requires draft-skill and tune-skill and stops with a clear message when either is missing. Not the release packaging; that is prompts-to-skill-release.",
+      "type": "archive",
+      "url": "https://skills.caffeinity.com/agent-skills/prompts-to-skill.tar.gz",
+      "digest": "sha256:83b4301c45c3d7666755853be9ee113d3889233a1592cc5cb797dcda0e2ccbde"
+    },
+    {
+      "name": "prompts-to-skill-release",
+      "description": "Agent skill that packages a finished agent skill for release: runs its trigger test cases and records exactly which passed and which did not, sets the version and CHANGELOG, builds the archive, writes the README, and ends with a per-platform install checklist. Failed tests stay visible in the report instead of being dropped from it. Assumes the skill is already authored, by prompts-to-skill or draft-skill.",
+      "type": "archive",
+      "url": "https://skills.caffeinity.com/agent-skills/prompts-to-skill-release.tar.gz",
+      "digest": "sha256:a9e0a7e69c10cde0ad04b8a71800dee9c729cf15f2aacc6ebb81075207f53374"
+    },
+    {
       "name": "recruiter-lens",
       "description": "Agent skill that reviews resumes, CVs and LinkedIn profiles the way recruiters screen them: 6-second scan, ATS check, rejection reasons, gaps against a job description, likely interview questions. It never invents a metric. Its sibling applicant-kit writes the fix. For Claude Code, Cursor, Codex, Qoder.",
       "type": "archive",
@@ -56,6 +77,13 @@
       "type": "archive",
       "url": "https://skills.caffeinity.com/agent-skills/topic-primer.tar.gz",
       "digest": "sha256:51bf1e573fb7c69cfc45bf716c8ffe9ab91fa9bc39670ce1e7816c678f00c66f"
+    },
+    {
+      "name": "tune-skill",
+      "description": "Agent skill that audits and fine-tunes an agent skill that already exists: the description that never fires, overlap with installed siblings, stale names and counts, and handoff contracts that do not hand off. Ships check_skill.py, a deterministic SKILL.md validator covering frontmatter, folder and heading agreement, description length, reference paths that do not exist, and count phrases that go stale. Not for creating a skill from an idea; that is draft-skill.",
+      "type": "archive",
+      "url": "https://skills.caffeinity.com/agent-skills/tune-skill.tar.gz",
+      "digest": "sha256:50c778b1ce202d20da39b15137b811e9a16c6dfbd7155ead931f3d6a1070ff84"
     },
     {
       "name": "upstream-check",

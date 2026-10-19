@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://skills.caffeinity.com/</loc><lastmod>2026-10-13</lastmod></url>
+  <url><loc>https://skills.caffeinity.com/</loc><lastmod>2026-10-19</lastmod></url>
   <url><loc>https://skills.caffeinity.com/wordsmith/</loc><lastmod>2026-10-05</lastmod></url>
   <url><loc>https://skills.caffeinity.com/recruiter-lens/</loc><lastmod>2026-10-05</lastmod></url>
   <url><loc>https://skills.caffeinity.com/applicant-kit/</loc><lastmod>2026-10-13</lastmod></url>
@@ -11,4 +11,8 @@
   <url><loc>https://skills.caffeinity.com/web-preflight/</loc><lastmod>2026-10-08</lastmod></url>
   <url><loc>https://skills.caffeinity.com/crash-test/</loc><lastmod>2026-10-16</lastmod></url>
   <url><loc>https://skills.caffeinity.com/pre-ship-performance-audit/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://skills.caffeinity.com/draft-skill/</loc><lastmod>2026-10-19</lastmod></url>
+  <url><loc>https://skills.caffeinity.com/prompts-to-skill/</loc><lastmod>2026-10-19</lastmod></url>
+  <url><loc>https://skills.caffeinity.com/prompts-to-skill-release/</loc><lastmod>2026-10-19</lastmod></url>
+  <url><loc>https://skills.caffeinity.com/tune-skill/</loc><lastmod>2026-10-19</lastmod></url>
 </urlset>
