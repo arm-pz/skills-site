@@ -22,6 +22,9 @@ REPOS = {
     "findable": "skills/findable",
     "keyword-guard": ".",
     "web-preflight": ".",
+    "application-pilot": "skills/application-pilot",
+    "pre-ship-security-red-team": ".",
+    "upstream-check": ".",
 }
 # Repo scaffolding that is not part of the skill itself; only applies to repos
 # whose skill sits at the repository root.
