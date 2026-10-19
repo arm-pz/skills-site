@@ -44,6 +44,13 @@
       "digest": "sha256:ed945ed47dd720be56d5e1c163590d6971511ef94c3a6cde50e57ea2b0ffc8b6"
     },
     {
+      "name": "publish-release-gate",
+      "description": "Agent skill that publishes a skill through three distribution channels: marketplace plugin, agent discovery protocol, and tarball delivery via Cloudflare Pages custom domain. Use when someone says 'publish to marketplace', 'make discoverable by agents', 'deploy skill site', or after completing a skill update that needs public distribution.",
+      "type": "archive",
+      "url": "https://skills.caffeinity.com/agent-skills/publish-release-gate.tar.gz",
+      "digest": "sha256:e59de0f296ca432a63929f92cdc55f2db0fde0d22594d2b661466cf4d55ba3a0"
+    },
+    {
       "name": "recruiter-lens",
       "description": "Agent skill that reviews resumes, CVs and LinkedIn profiles the way recruiters screen them: 6-second scan, ATS check, rejection reasons, gaps against a job description, likely interview questions. It never invents a metric. Its sibling applicant-kit writes the fix. For Claude Code, Cursor, Codex, Qoder.",
       "type": "archive",
