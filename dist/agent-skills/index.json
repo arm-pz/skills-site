@@ -9,6 +9,13 @@
       "digest": "sha256:29e8401b4b574361c1e58f839d4701f9eb6a203543588201722036201bceac75"
     },
     {
+      "name": "application-pilot",
+      "description": "Runs the job search around the applications: live shortlist from your criteria, rubric-based fit scores with evidence, a reviewable tracker with follow-up dates, aging flags, drafted follow-ups, interview briefings and a weekly funnel read. Never submits, never invents. No CLI, no telemetry, no browser automation.",
+      "type": "archive",
+      "url": "https://skills.caffeinity.com/agent-skills/application-pilot.tar.gz",
+      "digest": "sha256:5ddd486bd6fcc8048c862aac68063362571f86908f3d7e9f0f32984b251eaae2"
+    },
+    {
       "name": "crash-test",
       "description": "Agent skill that crash-tests a decision before you build it. Four fixed roles (Pragmatist, Skeptic, Specialist, Contrarian) draft alone, review each other anonymously, then a chair merges what survives and grounds its claims against your source before adopting. Dissent log included. Optional Operator seat. Zero setup: no server, no keys.",
       "type": "archive",
@@ -21,6 +28,13 @@
       "type": "archive",
       "url": "https://skills.caffeinity.com/agent-skills/do-better.tar.gz",
       "digest": "sha256:90f8bce2713903ad9b2f5ea41db2a7e4ccfadaff980ea8b14892bfaea14dad0d"
+    },
+    {
+      "name": "draft-skill",
+      "description": "Agent skill that creates a new agent skill from a plain idea: confirms the purpose before writing anything, checks the already-installed siblings for overlap, splits the work between scripts, references and assets, writes a description that actually triggers, validates with tune-skill's check_skill.py, then hands off. Contains no text from Qoder's built-in skill-creator, which ships without a licence permitting redistribution.",
+      "type": "archive",
+      "url": "https://skills.caffeinity.com/agent-skills/draft-skill.tar.gz",
+      "digest": "sha256:77c8777eab276c2614cb0062bb8f582d33e29c2d34b3d5b2483aeba0f2830420"
     },
     {
       "name": "findable",
@@ -44,6 +58,34 @@
       "digest": "sha256:ed945ed47dd720be56d5e1c163590d6971511ef94c3a6cde50e57ea2b0ffc8b6"
     },
     {
+      "name": "pre-ship-security-red-team",
+      "description": "Agent skill that red-teams a web app you own before launch: three subagents run 14 authorization and abuse checks (IDOR, role escalation, quota races, open redirects, XSS, SSRF, cache leaks, prompt injection) with captured evidence, then fix and rerun. Local isolated environments only. Claude Code, Cursor, Qoder.",
+      "type": "archive",
+      "url": "https://skills.caffeinity.com/agent-skills/pre-ship-security-red-team.tar.gz",
+      "digest": "sha256:62a283781d1c474305673a60f2cab0d9aa2d3e27eb2fa88060ef5df377c4621f"
+    },
+    {
+      "name": "prompts-to-skill",
+      "description": "Agent skill that turns a list of your own prompts into a finished, tested agent skill, one skill per prompt: interviews for intent, checks what is already installed so the new skill does not duplicate it, drafts with draft-skill, writes trigger test cases including near-misses, then gates the result with tune-skill. Requires draft-skill and tune-skill and stops with a clear message when either is missing. Not the release packaging; that is prompts-to-skill-release.",
+      "type": "archive",
+      "url": "https://skills.caffeinity.com/agent-skills/prompts-to-skill.tar.gz",
+      "digest": "sha256:83b4301c45c3d7666755853be9ee113d3889233a1592cc5cb797dcda0e2ccbde"
+    },
+    {
+      "name": "prompts-to-skill-release",
+      "description": "Agent skill that packages a finished agent skill for release: runs its trigger test cases and records exactly which passed and which did not, sets the version and CHANGELOG, builds the archive, writes the README, and ends with a per-platform install checklist. Failed tests stay visible in the report instead of being dropped from it. Assumes the skill is already authored, by prompts-to-skill or draft-skill.",
+      "type": "archive",
+      "url": "https://skills.caffeinity.com/agent-skills/prompts-to-skill-release.tar.gz",
+      "digest": "sha256:a9e0a7e69c10cde0ad04b8a71800dee9c729cf15f2aacc6ebb81075207f53374"
+    },
+    {
+      "name": "publish-release-gate",
+      "description": "Publishes a skill through three distribution channels: marketplace plugin, agent discovery protocol, and tarball delivery via Cloudflare Pages custom domain.",
+      "type": "archive",
+      "url": "https://skills.caffeinity.com/agent-skills/publish-release-gate.tar.gz",
+      "digest": "sha256:e59de0f296ca432a63929f92cdc55f2db0fde0d22594d2b661466cf4d55ba3a0"
+    },
+    {
       "name": "recruiter-lens",
       "description": "Agent skill that reviews resumes, CVs and LinkedIn profiles the way recruiters screen them: 6-second scan, ATS check, rejection reasons, gaps against a job description, likely interview questions. It never invents a metric. Its sibling applicant-kit writes the fix. For Claude Code, Cursor, Codex, Qoder.",
       "type": "archive",
@@ -51,11 +93,32 @@
       "digest": "sha256:56bfd0e4ddfccc9ad9d1d9b9305f7f2d438f3aaf35cd19291faf3f0797a275fa"
     },
     {
+      "name": "release-gate",
+      "description": "Runs three pre-launch passes (exposure, app-tests, perf) in sequence and returns one release posture — HOLD or ready — with three separate verdicts and one merged finding register.",
+      "type": "archive",
+      "url": "https://skills.caffeinity.com/agent-skills/release-gate.tar.gz",
+      "digest": "sha256:5fc7b96613384bcd40fd3b65f2a6d63b7a287324dd7b797fc3a919bcf0eca50c"
+    },
+    {
       "name": "topic-primer",
       "description": "Agent skill for Claude Code, Cursor and Qoder that teaches any topic you name, from absolute zero to expert depth, in 8 modes: foundation, curriculum, concept chains, adaptive tutor, mental models, pitfalls, examiner, ELI5. One question at a time, honest grading, every term defined, no fabricated facts or resources.",
       "type": "archive",
       "url": "https://skills.caffeinity.com/agent-skills/topic-primer.tar.gz",
       "digest": "sha256:26471a983e00bf7133bc79bad1e1258d879312c93170e4ca0ebf20a1b0b672ca"
+    },
+    {
+      "name": "tune-skill",
+      "description": "Agent skill that audits and fine-tunes an agent skill that already exists: the description that never fires, overlap with installed siblings, stale names and counts, and handoff contracts that do not hand off. Ships check_skill.py, a deterministic SKILL.md validator covering frontmatter, folder and heading agreement, description length, reference paths that do not exist, and count phrases that go stale. Not for creating a skill from an idea; that is draft-skill.",
+      "type": "archive",
+      "url": "https://skills.caffeinity.com/agent-skills/tune-skill.tar.gz",
+      "digest": "sha256:50c778b1ce202d20da39b15137b811e9a16c6dfbd7155ead931f3d6a1070ff84"
+    },
+    {
+      "name": "upstream-check",
+      "description": "Agent skill that finds unpushed local commits and fast-forwards only the safe ones, plus checks published listings against the repos that actually ship a SKILL.md.",
+      "type": "archive",
+      "url": "https://skills.caffeinity.com/agent-skills/upstream-check.tar.gz",
+      "digest": "sha256:947430e1d651b13993d9cf96788cce090c8569d31c804fc4f99c0cc13593a5ce"
     },
     {
       "name": "web-preflight",
