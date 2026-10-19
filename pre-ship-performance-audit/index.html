@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pre-Ship Performance Audit — Speed Is Measured, Not Claimed</title>
+<meta name="description" content="An open agent skill that audits and fixes web app performance before launch: four read-only subagents, twenty known slow-downs, same-condition mobile Lighthouse medians before and after.">
+<link rel="canonical" href="https://skills.caffeinity.com/pre-ship-performance-audit/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Caffeinity Skills">
+<meta property="og:title" content="Pre-Ship Performance Audit — Speed Is Measured, Not Claimed">
+<meta property="og:description" content="An open agent skill that fixes a web app's real-world speed before launch. Four read-only subagents audit twenty known slow-downs across images, bundles, database and servers — then the same mobile Lighthouse run, three times, before and after, proves each fix. Never removes a feature for a score.">
+<meta property="og:url" content="https://skills.caffeinity.com/pre-ship-performance-audit/">
+<meta name="twitter:card" content="summary">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="preload" href="/fonts/files/cY9AfjOCX1hbuyalUrK4397yjA.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/files/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+  :root{
+    --ink:#0c0a10;
+    --surface:#15121b;
+    --raised:#1c1824;
+    --paper:#f2eee5;
+    --paper-ink:#221d2b;
+    --dim:#a49dae;
+    --ember:#ff6a3d;
+    --brass:#e8b44c;
+    --rule:rgba(242,238,229,.10);
+    --rule-strong:rgba(242,238,229,.20);
+    --serif:'Newsreader',Georgia,serif;
+    --sans:'Instrument Sans',system-ui,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--ink);color:var(--paper);font-family:var(--sans);font-size:16px;line-height:1.6;
+    background-image:radial-gradient(ellipse 90% 55% at 50% -12%,rgba(255,106,61,.07),transparent);
+  }
+  a{color:inherit;text-decoration:none}
+  :focus-visible{outline:2px solid var(--ember);outline-offset:3px;border-radius:2px}
+  ::selection{background:rgba(255,106,61,.32)}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 28px}
+  .mono{font-family:var(--mono)}
+
+  /* ---------- nav ---------- */
+  .nav{position:sticky;top:0;z-index:50;background:rgba(12,10,16,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule)}
+  .nav .wrap{height:64px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+  .brand{display:flex;align-items:baseline;gap:9px;font-family:var(--serif);font-size:21px;font-weight:500;letter-spacing:.01em}
+  .brand .caret{color:var(--ember);font-family:var(--mono);font-size:17px;transform:translateY(-1px)}
+  .nav-links{display:flex;align-items:center;gap:30px;font-size:14px;color:var(--dim)}
+  .nav-links a{transition:color .25s}
+  .nav-links a:hover{color:var(--paper)}
+  .nav-links .src{color:var(--paper);border:1px solid var(--rule-strong);padding:7px 14px;border-radius:999px;font-size:13.5px;transition:border-color .25s}
+  .nav-links .src:hover{border-color:var(--ember)}
+  .star-n{font-family:var(--mono);font-size:12.5px;color:var(--brass);margin-left:10px;padding-left:10px;border-left:1px solid var(--rule-strong);display:none}
+  .star-n.on{display:inline}
+
+  /* ---------- hero ---------- */
+  .hero{padding:96px 0 88px}
+  .hero-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:56px;align-items:center}
+  h1.hero-h{font-family:var(--serif);font-weight:400;font-size:clamp(36px,4.4vw,56px);line-height:1.12;letter-spacing:-.012em}
+  h1 em{font-style:italic;color:var(--ember)}
+  .hero-sub{color:var(--dim);margin-top:22px;font-size:17px;max-width:560px}
+  .hero-sub b{color:var(--paper);font-weight:500}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+  .hero-actions .big-btn.alt{margin-left:0}
+  .stats{display:grid;grid-template-columns:repeat(2,auto);gap:10px 28px;margin-top:28px;font-family:var(--mono);font-size:13px;color:var(--dim)}
+  .stats span b{color:var(--paper);font-weight:500}
+  .stats span{padding:4px 0}
+  .hero-meta{font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;color:var(--dim);margin-top:12px;text-transform:lowercase}
+  .hero-meta b{color:var(--brass);font-weight:500}
+
+  /* ---------- sections ---------- */
+  section{padding:88px 0;border-top:1px solid var(--rule)}
+  .kicker{font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;color:var(--ember);text-transform:lowercase;margin-bottom:14px}
+  h2{font-family:var(--serif);font-weight:400;font-size:clamp(28px,3.8vw,42px);line-height:1.12;letter-spacing:-.01em;margin-bottom:14px}
+  .lede{color:var(--dim);max-width:560px;font-size:16.5px}
+
+  /* ---------- install ---------- */
+  .install-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:34px}
+  .tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+  .tab{font-family:var(--sans);font-size:14px;color:var(--dim);background:transparent;border:1px solid var(--rule-strong);border-radius:999px;padding:8px 18px;cursor:pointer;transition:color .2s,border-color .2s,background .2s}
+  .tab:hover{color:var(--paper)}
+  .tab[aria-selected="true"]{color:var(--ink);background:var(--paper);border-color:var(--paper);font-weight:600}
+  .cmd-card{background:var(--surface);border:1px solid var(--rule);border-radius:14px;padding:26px 26px;display:flex;align-items:center;gap:20px}
+  .cmd-note{font-size:13.5px;color:var(--dim);margin-bottom:14px;min-height:20px}
+  .cmd-note b{color:var(--brass);font-weight:500}
+  .cmd-line{flex:1;font-family:var(--mono);font-size:15px;line-height:1.65;white-space:pre-wrap;word-break:break-word;color:var(--paper)}
+  .cmd-line::before{content:"$ ";color:var(--dim)}
+  .cmd-line.say::before{content:"“ "}
+  .cmd-line.say::after{content:" ”";color:var(--dim)}
+  .copy-btn{flex:none;font-family:var(--sans);font-size:14px;font-weight:600;color:var(--ink);background:var(--ember);border:none;border-radius:999px;padding:10px 22px;cursor:pointer;transition:transform .15s,background .2s}
+  .copy-btn:hover{background:#ff825e}
+  .copy-btn:active{transform:scale(.96)}
+  .copy-btn.done{background:var(--brass)}
+  .noscript{background:var(--surface);border:1px solid var(--rule);border-radius:14px;padding:22px 26px;margin-top:16px;font-size:14.5px;color:var(--dim)}
+  .noscript p{margin-bottom:10px}
+  .noscript b{color:var(--paper);font-weight:600}
+  .noscript ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+  .noscript li{padding-left:16px;position:relative}
+  .noscript li::before{content:"—";position:absolute;left:0;color:var(--ember)}
+  .noscript .mono{color:var(--paper);font-size:13px}
+  .sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+  /* ---------- manuscript (hero evidence card) ---------- */
+  .manuscript{background:var(--paper);color:var(--paper-ink);border-radius:14px;padding:30px 34px 24px;font-family:var(--serif);font-size:17px;line-height:1.6;box-shadow:0 24px 60px rgba(0,0,0,.45)}
+  .ms-label{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:lowercase;color:#6f6878;margin-bottom:10px}
+  .ms-before s{text-decoration:line-through;text-decoration-thickness:1.5px;text-decoration-color:#c2402a;color:#6f6878;font-style:italic}
+  .ms-findings{list-style:none;margin-top:14px}
+  .ms-findings li{display:grid;grid-template-columns:118px 1fr;gap:16px;align-items:start;padding:14px 0;border-bottom:1px solid rgba(34,29,43,.10);font-family:var(--sans);font-size:15px;line-height:1.55}
+  .ms-findings li:last-child{border-bottom:none}
+  .ms-findings .mono{font-size:13px;background:rgba(34,29,43,.07);padding:1px 6px;border-radius:4px}
+  .sev{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:lowercase;padding:4px 9px;border-radius:999px;text-align:center;justify-self:start;white-space:nowrap}
+  .sev.high{background:rgba(194,64,42,.14);color:#a03222}
+  .sev.med{background:rgba(176,132,26,.16);color:#8a6414}
+  .sev.ok{background:rgba(58,125,82,.15);color:#2f6b45}
+  .ms-after{margin-top:20px;padding-top:20px;border-top:1px solid rgba(34,29,43,.14)}
+  .ms-after p.hl{display:block;background:rgba(232,180,76,.18);border-radius:8px;padding:14px 18px;font-size:17.5px;line-height:1.55;color:var(--paper-ink)}
+  .ms-after span.hl{background:rgba(232,180,76,.28);border-radius:4px;padding:1px 5px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+  .ms-foot{margin-top:20px;padding-top:14px;border-top:1px dashed rgba(34,29,43,.25);font-family:var(--mono);font-size:11.5px;color:#6f6878;display:flex;flex-direction:column;align-items:flex-start;gap:5px}
+  .ms-foot span::before{content:"— ";color:#c2402a}
+  .ms-foot .gain{color:#a03222}
+
+  /* ---------- commands ---------- */
+  .cmd-cats{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:14px;overflow:hidden;margin-top:36px}
+  .cat{background:var(--surface);padding:26px 28px}
+  .cat.wide{grid-column:1/-1}
+  .cat h3{font-family:var(--serif);font-weight:500;font-size:21px;margin-bottom:2px}
+  .cat h3 span{font-family:var(--mono);font-size:12px;color:var(--ember);margin-left:10px;font-weight:400}
+  .cat .cat-desc{color:var(--dim);font-size:14px;margin-bottom:14px}
+  .cat ul{list-style:none;display:flex;flex-wrap:wrap;gap:6px 8px}
+  .cat li{font-family:var(--mono);font-size:13px;color:var(--paper);background:var(--raised);border:1px solid var(--rule);border-radius:6px;padding:4px 10px}
+
+  /* ---------- principles ---------- */
+  .principles{display:grid;grid-template-columns:repeat(3,1fr);gap:34px;margin-top:40px}
+  .pr h3{font-family:var(--serif);font-weight:500;font-size:21px;margin-bottom:8px}
+  .pr h3::before{content:"∧ ";color:var(--ember);font-family:var(--mono)}
+  .pr p{color:var(--dim);font-size:15px}
+
+  /* ---------- footer CTA ---------- */
+  .foot-cta{text-align:center;padding:104px 0 96px}
+  .foot-cta h2{margin-bottom:10px}
+  .foot-cta p{color:var(--dim);margin-bottom:30px}
+  .big-btn{display:inline-block;font-weight:600;font-size:15.5px;color:var(--ink);background:var(--paper);border-radius:999px;padding:14px 32px;transition:background .2s,transform .15s}
+  .big-btn:hover{background:var(--brass)}
+  .big-btn:active{transform:scale(.97)}
+  .big-btn.alt{background:transparent;color:var(--paper);border:1px solid var(--rule-strong);margin-left:12px}
+  .big-btn.alt:hover{border-color:var(--paper);background:transparent}
+  footer{border-top:1px solid var(--rule);padding:30px 0 40px}
+  footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:12.5px;color:var(--dim)}
+  footer a:hover{color:var(--paper)}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr;gap:44px}
+    .cmd-cats{grid-template-columns:1fr}
+    .principles{grid-template-columns:1fr;gap:24px}
+    .nav-links{gap:18px}
+    .nav-links a:not(.src){display:none}
+  }
+  @media (max-width:640px){
+    .cmd-card{flex-direction:column;align-items:stretch}
+    .copy-btn{align-self:flex-start}
+    .hero{padding:64px 0 56px}
+    h1.hero-h{font-size:clamp(30px,8.6vw,40px)}
+    .hero-sub{font-size:16px}
+    .stats{margin-top:24px;gap:8px 20px}
+    section{padding:64px 0}
+    .manuscript{padding:24px 20px 20px;font-size:16px}
+    .ms-findings li{grid-template-columns:1fr;gap:8px}
+    .ms-after p.hl{font-size:16.5px;padding:12px 14px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{transition:none!important;animation:none!important}
+    html{scroll-behavior:auto}
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Pre-Ship Performance Audit",
+  "alternateName": "pre-ship-performance-audit",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any",
+  "url": "https://skills.caffeinity.com/pre-ship-performance-audit/",
+  "description": "An open agent skill that audits and fixes web app performance before launch: four read-only subagents, twenty known slow-downs, same-condition mobile Lighthouse medians before and after.",
+  "codeRepository": "https://github.com/arm-pz/pre-ship-performance-audit",
+  "downloadUrl": "https://skills.caffeinity.com/agent-skills/pre-ship-performance-audit.tar.gz",
+  "license": "https://spdx.org/licenses/MIT.html",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Caffeinity",
+    "url": "https://caffeinity.com/"
+  }
+}
+</script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="caret">∧</span>pre-ship-performance-audit</a>
+    <div class="nav-links">
+      <a href="#install">Install</a>
+      <a href="#audit">The four groups</a>
+      <a href="#rules">House rules</a>
+      <a class="src" href="https://github.com/arm-pz/pre-ship-performance-audit" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 16 16" fill="currentColor" style="vertical-align:-2px;margin-right:6px" aria-hidden="true"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"></path></svg>Star<span id="star-count" class="star-n"></span></a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <h1 class="hero-h">Clean in code review.<br>Slow on a <em>cheap Android</em> at 4G.</h1>
+        <p class="hero-sub">One install gives your agent a <b>measured pre-launch performance fix</b>: a production-mode baseline, four read-only subagents auditing twenty known slow-downs across images, bundles, database queries and servers, then one fix pass — proved with the same mobile Lighthouse run, three times, before and after.</p>
+        <div class="hero-actions">
+          <a class="big-btn" href="#install">Install pre-ship-performance-audit</a>
+          <a class="big-btn alt" href="https://github.com/arm-pz/pre-ship-performance-audit" target="_blank" rel="noopener">Read the source</a>
+        </div>
+        <div class="stats">
+      <span><b>4</b> read-only subagents</span>
+      <span><b>20</b> audited slow-downs</span>
+      <span><b>3</b> runs per page, median</span>
+      <span><b>0</b> features removed</span>
+    </div>
+        <p class="hero-meta">for coding agents · <b>free, open, no auth</b></p>
+      </div>
+      <aside class="hero-card">
+        <div class="manuscript">
+          <p class="ms-label">illustrative report shape · not a real run</p>
+          <ul class="ms-findings">
+            <li><span class="sev high">p1 · hero</span><span>The LCP image is a full-size PNG shown at 640&nbsp;px, and it is lazy-loaded — the one asset that must never wait. Same file, <span class="mono">next/image</span>, priority: true.</span></li>
+            <li><span class="sev med">p1 · db</span><span>The orders list sorts on a column with no index, and the RLS policy re-evaluates <span class="mono">auth.uid()</span> per row. Query plan first; proposed index and migration drafted for approval, not applied.</span></li>
+          </ul>
+          <div class="ms-after">
+            <p class="ms-label">what goes in the report</p>
+            <p class="hl">Every fix row names its file, its route, and the median that moved — measured under identical conditions, or the comparison is refused.</p>
+          </div>
+          <div class="ms-foot"><span>a best practice is not evidence</span><span>if the production build cannot run, no baseline numbers are invented</span></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</header>
+
+<section id="install">
+  <div class="wrap">
+    <div class="install-head">
+      <div>
+        <p class="kicker">install</p>
+        <h2>Copy one line. Ship with numbers.</h2>
+      </div>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Install options">
+      <button class="tab" role="tab" aria-selected="true" data-cmd="one">One command</button>
+      <button class="tab" role="tab" aria-selected="false" data-cmd="agent">Ask your agent</button>
+      <button class="tab" role="tab" aria-selected="false" data-cmd="claude">Claude Code</button>
+      <button class="tab" role="tab" aria-selected="false" data-cmd="cursor">Cursor</button>
+      <button class="tab" role="tab" aria-selected="false" data-cmd="codex">Codex</button>
+      <button class="tab" role="tab" aria-selected="false" data-cmd="qoder">Qoder</button>
+      <button class="tab" role="tab" aria-selected="false" data-cmd="other">Any other agent</button>
+    </div>
+    <p class="cmd-note" id="cmd-note">Detects Claude Code, Cursor, Codex, Qoder and more, then writes the skill into the right folder. Add <b>-l</b> to see what the repo ships before anything is installed.</p>
+    <div class="cmd-card">
+      <code class="cmd-line" id="cmd-line">npx skills add arm-pz/pre-ship-performance-audit</code>
+      <button class="copy-btn" id="copy-btn" type="button">Copy</button>
+      <span class="sr-only" id="copy-status" role="status" aria-live="polite"></span>
+    </div>
+    <noscript>
+      <div class="noscript">
+        <p><b>JavaScript is off, so the tabs above are inactive.</b> Every install option, copied straight from the repo:</p>
+        <ul>
+          <li><span class="mono">npx skills add arm-pz/pre-ship-performance-audit</span> does it in one command: detects your agent and writes the skill into the right folder. Add <span class="mono">-l</span> to see what the repo ships before anything is installed.</li>
+          <li><span class="mono">git clone https://github.com/arm-pz/pre-ship-performance-audit</span>, then copy <span class="mono">SKILL.md</span> into <span class="mono">.claude/skills/pre-ship-performance-audit/</span>, <span class="mono">.cursor/skills/pre-ship-performance-audit/</span>, <span class="mono">.agents/skills/pre-ship-performance-audit/</span>, <span class="mono">.qoder/skills/pre-ship-performance-audit/</span>, or wherever your agent loads skills from.</li>
+          <li>Or paste to your agent: "Install the pre-ship-performance-audit skill from github.com/arm-pz/pre-ship-performance-audit into this project's skills directory, then confirm it loads."</li>
+        </ul>
+        <p>Browse the source: <a href="https://github.com/arm-pz/pre-ship-performance-audit" target="_blank" rel="noopener">github.com/arm-pz/pre-ship-performance-audit</a></p>
+      </div>
+    </noscript>
+  </div>
+</section>
+
+<section id="audit">
+  <div class="wrap">
+    <p class="kicker">the four groups</p>
+    <h2>One subagent per lane. None of them edits.</h2>
+    <p class="lede">The subagents inspect and report — file, route, evidence, proposed fix. The main agent implements centrally, after the findings are prioritized into a P0–P3 backlog.</p>
+    <div class="cmd-cats">
+      <div class="cat">
+        <h3>Images, fonts, third-party <span>1</span></h3>
+        <p class="cat-desc">The bytes most pages actually drown in.</p>
+        <ul><li>WebP/AVIF at rendered size</li><li>framework image component</li><li>hero prioritized, rest lazy</li><li>self-hosted fonts, one or two</li><li>unused scripts cut, widgets deferred</li></ul>
+      </div>
+      <div class="cat">
+        <h3>Frontend &amp; rendering <span>2</span></h3>
+        <p class="cat-desc">Ship less code, render it earlier.</p>
+        <ul><li>bundle analyzer on big deps</li><li>whole-library imports trimmed</li><li>charts/editors/maps deferred</li><li>homepage data fetched server-side</li><li>AI answers streamed</li><li>skeletons without layout shift</li></ul>
+      </div>
+      <div class="cat">
+        <h3>Database &amp; APIs <span>3 · high effort</span></h3>
+        <p class="cat-desc">The one group that must read query plans, not folklore.</p>
+        <ul><li>indexes for filters, sorts, RLS</li><li>(select auth.uid()) per policy</li><li>N+1 collapsed to one query</li><li>keyset pagination</li><li>public-only shared caches</li><li>heavy work queued</li></ul>
+      </div>
+      <div class="cat">
+        <h3>Server &amp; network <span>4</span></h3>
+        <p class="cat-desc">Where the request actually travels.</p>
+        <ul><li>functions near the database</li><li>static / ISR for calm pages</li><li>sequential calls parallelized</li><li>low-end Android, slow 4G walk</li><li>compression, headers, redirects</li></ul>
+      </div>
+      <div class="cat wide">
+        <h3>The measurement contract <span>all</span></h3>
+        <p class="cat-desc">Before any fix: production build or approved preview, mobile Lighthouse ×3 on the homepage and the slowest pages, medians recorded with exact commands. After: the same URLs, the same configuration, the same device. No comparable conditions, no percentage claim.</p>
+        <ul><li>median of 3, never best-of</li><li>before/after table delivered</li><li>per-fix table with measured impact</li><li>unrun substitutes labeled</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="rules">
+  <div class="wrap">
+    <p class="kicker">house rules</p>
+    <h2>What it refuses to do.</h2>
+    <div class="principles">
+      <div class="pr">
+        <h3>Features are not fuel for a score</h3>
+        <p>The audit fixes slowness by removing waste, never functionality. If a speedup could only come from dropping a feature or a dependency, that is a question for you, with expected benefit and trade-offs written out first.</p>
+      </div>
+      <div class="pr">
+        <h3>No baseline, no claim</h3>
+        <p>If a production build or preview cannot run, the skill says so instead of inventing numbers. Substitutes are labeled. And "this is a best practice" never counts as evidence of your bottleneck — the file, the route and the measurement do.</p>
+      </div>
+      <div class="pr">
+        <h3>Approvals at the blast radius</h3>
+        <p>Removing dependencies, changing deployment regions, or touching database schema, indexes, RLS or settings stops for your go-ahead. And a user-specific response is never pushed into a shared cache — speed without data leaks.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="foot-cta">
+  <div class="wrap">
+    <h2>Ship the fast version, with the numbers to prove it.</h2>
+    <p>Free, open, and it runs entirely inside the agent you already use.</p>
+    <a class="big-btn" href="#install">Install pre-ship-performance-audit</a>
+    <a class="big-btn alt" href="https://github.com/arm-pz/pre-ship-performance-audit" target="_blank" rel="noopener">Read the source</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>pre-ship-performance-audit — an open agent skill · <a href="../">all skills</a></span>
+    <span><a href="https://github.com/arm-pz/pre-ship-performance-audit" target="_blank" rel="noopener">github.com/arm-pz/pre-ship-performance-audit</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* live GitHub star count */
+  fetch('https://api.github.com/repos/arm-pz/pre-ship-performance-audit').then(function(r){return r.ok?r.json():null;}).then(function(d){
+    if(!d||typeof d.stargazers_count!=='number'||d.stargazers_count<1)return;
+    var el=document.getElementById('star-count');
+    el.textContent=d.stargazers_count.toLocaleString();
+    el.classList.add('on');
+  }).catch(function(){});
+
+  /* install tabs */
+  var cmds={
+    one:{say:false,note:'Detects Claude Code, Cursor, Codex, Qoder and more, then writes the skill into the right folder. Add <b>-l</b> to see what the repo ships before anything is installed.',text:'npx skills add arm-pz/pre-ship-performance-audit'},
+    agent:{say:true,note:'Paste this to your agent. It reads the repo, installs itself, and reports where it put things.',text:'Install the pre-ship-performance-audit skill from github.com/arm-pz/pre-ship-performance-audit into this project’s skills directory, then confirm it loads.'},
+    claude:{say:false,note:'Manual install into <b>.claude/skills/pre-ship-performance-audit/</b>. No build step, no dependencies.',text:'git clone https://github.com/arm-pz/pre-ship-performance-audit && mkdir -p .claude/skills/pre-ship-performance-audit && cp pre-ship-performance-audit/SKILL.md .claude/skills/pre-ship-performance-audit/'},
+    cursor:{say:false,note:'Manual install into <b>.cursor/skills/pre-ship-performance-audit/</b>.',text:'git clone https://github.com/arm-pz/pre-ship-performance-audit && mkdir -p .cursor/skills/pre-ship-performance-audit && cp pre-ship-performance-audit/SKILL.md .cursor/skills/pre-ship-performance-audit/'},
+    codex:{say:false,note:'Manual install into <b>.agents/skills/pre-ship-performance-audit/</b>.',text:'git clone https://github.com/arm-pz/pre-ship-performance-audit && mkdir -p .agents/skills/pre-ship-performance-audit && cp pre-ship-performance-audit/SKILL.md .agents/skills/pre-ship-performance-audit/'},
+    qoder:{say:false,note:'Manual install into <b>.qoder/skills/pre-ship-performance-audit/</b>.',text:'git clone https://github.com/arm-pz/pre-ship-performance-audit && mkdir -p .qoder/skills/pre-ship-performance-audit && cp pre-ship-performance-audit/SKILL.md .qoder/skills/pre-ship-performance-audit/'},
+    other:{say:false,note:'The skill is one plain-markdown file: SKILL.md. Copy it into <b>your-agent/skills/pre-ship-performance-audit/</b>. Replace <b>your-agent</b> in the command with your agent\'s folder.',text:'git clone https://github.com/arm-pz/pre-ship-performance-audit && mkdir -p your-agent/skills/pre-ship-performance-audit && cp pre-ship-performance-audit/SKILL.md your-agent/skills/pre-ship-performance-audit/'}
+  };
+  var line=document.getElementById('cmd-line'),note=document.getElementById('cmd-note'),
+      btn=document.getElementById('copy-btn'),status=document.getElementById('copy-status'),current='one';
+  function show(k){
+    current=k;var c=cmds[k];
+    line.textContent=c.text;
+    line.classList.toggle('say',c.say);
+    note.innerHTML=c.note;
+    document.querySelectorAll('.tab').forEach(function(t){t.setAttribute('aria-selected',String(t.dataset.cmd===k));});
+  }
+  document.querySelectorAll('.tab').forEach(function(t){
+    t.addEventListener('click',function(){show(t.dataset.cmd);});
+  });
+  show('one');
+  function copyOk(){
+    btn.textContent='Copied';btn.classList.add('done');status.textContent='Copied to clipboard.';
+    setTimeout(function(){btn.textContent='Copy';btn.classList.remove('done');},1600);
+  }
+  function copyFail(){
+    var range=document.createRange();range.selectNodeContents(line);
+    var sel=window.getSelection();sel.removeAllRanges();sel.addRange(range);
+    btn.textContent='Select + copy';btn.classList.remove('done');
+    status.textContent='Clipboard unavailable. The command is selected; press Ctrl+C.';
+    setTimeout(function(){btn.textContent='Copy';},2600);
+  }
+  function legacyCopy(text){
+    var ta=document.createElement('textarea');
+    ta.value=text;ta.setAttribute('readonly','');
+    ta.style.position='fixed';ta.style.top='-9999px';
+    document.body.appendChild(ta);ta.select();
+    var ok=false;try{ok=document.execCommand('copy');}catch(e){}
+    document.body.removeChild(ta);
+    if(ok)copyOk();else copyFail();
+  }
+  btn.addEventListener('click',function(){
+    var text=cmds[current].text;
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(copyOk,function(){legacyCopy(text);});
+    }else{legacyCopy(text);}
+  });
+})();
+</script>
+</body>
+</html>
