@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Caffeinity Skills — Agent Skill Marketplace</title>
+  <meta name="description" content="Thirteen agent skills for editing, teaching, recruiting, SEO, release orchestration, decision review and multi-agent tournaments. Install via Qoder CLI or Claude Code plugin system.">
+  <style>
+    :root {
+      --bg: #fafafa;
+      --text: #1a1a1a;
+      --accent: #2563eb;
+      --border: #e5e7eb;
+      --card-bg: #ffffff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+    .container { max-width: 72rem; margin: 0 auto; }
+    header { margin-bottom: 3rem; }
+    h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .subtitle { color: #6b7280; font-size: 1.125rem; }
+    .install {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0 2.5rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.875rem;
+    }
+    .install code { display: block; margin-bottom: 0.5rem; }
+    .install code:last-child { margin-bottom: 0; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      padding: 1.25rem;
+      transition: box-shadow 0.15s ease;
+    }
+    .card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+    .card h3 { font-size: 1.125rem; margin-bottom: 0.5rem; }
+    .card p { color: #4b5563; font-size: 0.9375rem; }
+    .card .repo {
+      display: inline-block;
+      margin-top: 0.75rem;
+      color: var(--accent);
+      font-size: 0.8125rem;
+      text-decoration: none;
+    }
+    .card .repo:hover { text-decoration: underline; }
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      color: #6b7280;
+      font-size: 0.875rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Caffeinity Skills</h1>
+      <p class="subtitle">Agent skill marketplace by Abdul Rahman P Z</p>
+      <div class="install">
+        <code>/plugin marketplace add arm-pz/caffeinity-skills</code>
+        <code>/plugin install &lt;skill-name&gt;@caffeinity-skills</code>
+      </div>
+    </header>
+
+    <main>
+      <div class="grid">
+        <article class="card">
+          <h3>wordsmith</h3>
+          <p>Edit, rewrite, critique and proofread while keeping the author's meaning, hedges and voice intact.</p>
+          <a class="repo" href="https://github.com/arm-pz/wordsmith">arm-pz/wordsmith</a>
+        </article>
+
+        <article class="card">
+          <h3>recruiter-lens</h3>
+          <p>Review resumes, CVs and LinkedIn profiles the way recruiters screen them.</p>
+          <a class="repo" href="https://github.com/arm-pz/recruiter-lens">arm-pz/recruiter-lens</a>
+        </article>
+
+        <article class="card">
+          <h3>applicant-kit</h3>
+          <p>Produce tailored job-application material from a resume and JD.</p>
+          <a class="repo" href="https://github.com/arm-pz/applicant-kit">arm-pz/applicant-kit</a>
+        </article>
+
+        <article class="card">
+          <h3>topic-primer</h3>
+          <p>World-class teacher for any topic in eight modes from foundations to exams.</p>
+          <a class="repo" href="https://github.com/arm-pz/topic-primer">arm-pz/topic-primer</a>
+        </article>
+
+        <article class="card">
+          <h3>application-pilot</h3>
+          <p>Coordinate job search: shortlist, fit scoring, tracker, follow-ups, briefings.</p>
+          <a class="repo" href="https://github.com/arm-pz/application-pilot">arm-pz/application-pilot</a>
+        </article>
+
+        <article class="card">
+          <h3>do-better</h3>
+          <p>Single-elimination tournament of sub-agents with different strategy cards.</p>
+          <a class="repo" href="https://github.com/arm-pz/do-better">arm-pz/do-better</a>
+        </article>
+
+        <article class="card">
+          <h3>keyword-guard</h3>
+          <p>Plan topic clusters and eliminate keyword cannibalization.</p>
+          <a class="repo" href="https://github.com/arm-pz/keyword-guard">arm-pz/keyword-guard</a>
+        </article>
+
+        <article class="card">
+          <h3>web-preflight</h3>
+          <p>Check a site you own before shipping for accidental exposure and missing controls.</p>
+          <a class="repo" href="https://github.com/arm-pz/web-preflight">arm-pz/web-preflight</a>
+        </article>
+
+        <article class="card">
+          <h3>findable</h3>
+          <p>Set up discovery for repos, skills, plugins and MCP servers.</p>
+          <a class="repo" href="https://github.com/arm-pz/findable">arm-pz/findable</a>
+        </article>
+
+        <article class="card">
+          <h3>crash-test</h3>
+          <p>Crash-test decisions with four adversarial roles before building.</p>
+          <a class="repo" href="https://github.com/arm-pz/crash-test">arm-pz/crash-test</a>
+        </article>
+
+        <article class="card">
+          <h3>pre-ship-performance-audit</h3>
+          <p>Audit and fix web app performance before launch with four read-only subagents.</p>
+          <a class="repo" href="https://github.com/arm-pz/pre-ship-performance-audit">arm-pz/pre-ship-performance-audit</a>
+        </article>
+
+        <article class="card">
+          <h3>pre-ship-security-red-team</h3>
+          <p>Authorized red-team pass over a web app you own before launch.</p>
+          <a class="repo" href="https://github.com/arm-pz/pre-ship-security-red-team">arm-pz/pre-ship-security-red-team</a>
+        </article>
+
+        <article class="card">
+          <h3>release-gate</h3>
+          <p>Three pre-launch passes (exposure, app-tests, perf) with one deterministic posture: HOLD or ready.</p>
+          <a class="repo" href="https://github.com/arm-pz/release-gate-chair">arm-pz/release-gate-chair</a>
+        </article>
+      </div>
+    </main>
+
+    <footer>
+      <p>Owner: Abdul Rahman P Z (<a href="https://github.com/arm-pz">arm-pz</a>) · 13 skills · <a href="/.well-known/skills.json">skills.json</a></p>
+    </footer>
+  </div>
+</body>
+</html>
