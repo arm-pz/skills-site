@@ -62,6 +62,10 @@
 
   /* ---------- skill rows ---------- */
   .skills{border-top:1px solid var(--rule);margin-top:64px}
+  .sk-group{display:flex;align-items:baseline;gap:14px;padding:46px 0 10px;border-bottom:1px solid var(--rule);scroll-margin-top:84px}
+  .sk-group h2{font-family:var(--serif);font-size:23px;font-weight:500;color:var(--paper);letter-spacing:-.01em;margin:0}
+  .sk-group span{font-family:var(--mono);font-size:12.5px;color:var(--dim);letter-spacing:.04em}
+  .skill{scroll-margin-top:84px}
   .skill{display:grid;grid-template-columns:280px 1fr;gap:32px;padding:40px 0 40px;border-bottom:1px solid var(--rule);align-items:start}
   .skill:hover .sk-name{color:var(--ember)}
   .sk-id{display:flex;flex-direction:column;gap:6px}
@@ -85,7 +89,10 @@
 
   @media (max-width:860px){
     .skill{grid-template-columns:1fr;gap:18px}
-    .nav-links{gap:14px}
+    .nav .wrap{flex-wrap:wrap;height:auto;padding:10px 28px;row-gap:10px}
+    .nav-links{gap:13px;width:100%;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+    .nav-links::-webkit-scrollbar{display:none}
+    .nav-links a{white-space:nowrap}
   }
   @media (prefers-reduced-motion:reduce){
     *,*::before,*::after{transition:none!important;animation:none!important}
@@ -99,66 +106,90 @@
   "name": "Caffeinity Skills",
   "url": "https://skills.caffeinity.com/",
   "description": "Plain-markdown skills for AI coding agents: wordsmith edits, topic-primer teaches, keyword-guard ranks, web-preflight ships, findable gets found.",
-  "numberOfItems": 10,
+  "numberOfItems": 14,
   "itemListElement": [
     {
       "@type": "ListItem",
       "position": 1,
-      "name": "Wordsmith",
+      "name": "wordsmith",
       "url": "https://skills.caffeinity.com/wordsmith/"
     },
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "Recruiter Lens",
-      "url": "https://skills.caffeinity.com/recruiter-lens/"
-    },
-    {
-      "@type": "ListItem",
-      "position": 3,
-      "name": "Applicant Kit",
-      "url": "https://skills.caffeinity.com/applicant-kit/"
-    },
-    {
-      "@type": "ListItem",
-      "position": 4,
-      "name": "Topic Primer",
-      "url": "https://skills.caffeinity.com/topic-primer/"
-    },
-    {
-      "@type": "ListItem",
-      "position": 5,
-      "name": "Do Better",
-      "url": "https://skills.caffeinity.com/do-better/"
-    },
-    {
-      "@type": "ListItem",
-      "position": 6,
-      "name": "Keyword Guard",
+      "name": "keyword-guard",
       "url": "https://skills.caffeinity.com/keyword-guard/"
     },
     {
       "@type": "ListItem",
-      "position": 7,
+      "position": 3,
       "name": "findable",
       "url": "https://skills.caffeinity.com/findable/"
     },
     {
       "@type": "ListItem",
-      "position": 8,
-      "name": "Web Preflight",
-      "url": "https://skills.caffeinity.com/web-preflight/"
+      "position": 4,
+      "name": "recruiter-lens",
+      "url": "https://skills.caffeinity.com/recruiter-lens/"
     },
     {
       "@type": "ListItem",
-      "position": 9,
+      "position": 5,
+      "name": "applicant-kit",
+      "url": "https://skills.caffeinity.com/applicant-kit/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 6,
+      "name": "topic-primer",
+      "url": "https://skills.caffeinity.com/topic-primer/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 7,
+      "name": "do-better",
+      "url": "https://skills.caffeinity.com/do-better/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 8,
       "name": "crash-test",
       "url": "https://skills.caffeinity.com/crash-test/"
     },
     {
       "@type": "ListItem",
+      "position": 9,
+      "name": "draft-skill",
+      "url": "https://skills.caffeinity.com/draft-skill/"
+    },
+    {
+      "@type": "ListItem",
       "position": 10,
-      "name": "Pre-Ship Performance Audit",
+      "name": "tune-skill",
+      "url": "https://skills.caffeinity.com/tune-skill/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 11,
+      "name": "prompts-to-skill",
+      "url": "https://skills.caffeinity.com/prompts-to-skill/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 12,
+      "name": "prompts-to-skill-release",
+      "url": "https://skills.caffeinity.com/prompts-to-skill-release/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 13,
+      "name": "web-preflight",
+      "url": "https://skills.caffeinity.com/web-preflight/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 14,
+      "name": "pre-ship-performance-audit",
       "url": "https://skills.caffeinity.com/pre-ship-performance-audit/"
     }
   ]
@@ -171,16 +202,11 @@
   <div class="wrap">
     <a class="brand" href="/"><span class="caret">∧</span>caffeinity skills</a>
     <div class="nav-links">
-      <a href="#wordsmith">Wordsmith</a>
-      <a href="#recruiter-lens">Recruiter Lens</a>
-      <a href="#applicant-kit">Applicant Kit</a>
-      <a href="#topic-primer">Topic Primer</a>
-      <a href="#do-better">Do Better</a>
-      <a href="#keyword-guard">Keyword Guard</a>
-      <a href="#web-preflight">Web Preflight</a>
-      <a href="#findable">Findable</a>
-      <a href="#crash-test">Crash Test</a>
-      <a href="#pre-ship-performance-audit">Perf Audit</a>
+      <a href="#writing-growth">Writing</a>
+      <a href="#career">Career</a>
+      <a href="#thinking-learning">Thinking</a>
+      <a href="#skill-authoring">Authoring</a>
+      <a href="#ship-checks">Ship Checks</a>
       <a class="src" href="https://github.com/arm-pz" target="_blank" rel="noopener">GitHub</a>
     </div>
   </div>
@@ -193,6 +219,12 @@
     <p class="hero-sub">Plain-markdown skills that teach Claude Code, Cursor, Codex, Qoder and any agent that reads a <b>SKILL.md</b> how to edit, screen, teach, compete, rank and ship. Nothing to run, nothing to pay for, nothing to lock in.</p>
 
     <div class="skills">
+
+    <div class="sk-group" id="writing-growth">
+      <h2>Writing &amp; Growth</h2>
+      <span>3 skills · editorial · seo · discovery</span>
+    </div>
+
       <div class="skill" id="wordsmith">
         <div class="sk-id">
           <a class="sk-name" href="wordsmith/">wordsmith</a>
@@ -208,6 +240,43 @@
           </div>
         </div>
       </div>
+
+      <div class="skill" id="keyword-guard">
+        <div class="sk-id">
+          <a class="sk-name" href="keyword-guard/">keyword-guard</a>
+          <span class="sk-tag">seo</span>
+        </div>
+        <div class="sk-body">
+          <p>Plans topic clusters and kills keyword cannibalization so exactly one page wins each query. The cannibalization audit is a mandatory blocker before any content change — with a sitemap fallback for when you have no Search Console access.</p>
+          <p class="sk-stats">6 phases · 3 reference checklists · ~300 lines · 0 API keys</p>
+          <p class="sk-install mono">npx skills add arm-pz/keyword-guard</p>
+          <div class="sk-links">
+            <a class="page" href="keyword-guard/">Full install page →</a>
+            <a href="https://github.com/arm-pz/keyword-guard" target="_blank" rel="noopener">Source</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill" id="findable">
+        <div class="sk-id">
+          <a class="sk-name" href="findable/">findable</a>
+          <span class="sk-tag">discovery</span>
+        </div>
+        <div class="sk-body">
+          <p>Sets up discovery for a GitHub repo, skill, plugin or MCP server so it gets found by what it does, not only by its name. It audits where you rank today, works out the queries strangers type, then drafts the About text, topics, README opening, release notes, site page and directory plan — real numbers only, and nothing public changes without your go-ahead.</p>
+          <p class="sk-stats">8 workflow steps · 10 kit sections · 4 reference guides · 1 listing validator · 0 API keys</p>
+          <p class="sk-install mono">npx skills add arm-pz/findable --skill findable</p>
+          <div class="sk-links">
+            <a class="page" href="findable/">Full install page →</a>
+            <a href="https://github.com/arm-pz/findable" target="_blank" rel="noopener">Source</a>
+          </div>
+        </div>
+      </div>
+
+    <div class="sk-group" id="career">
+      <h2>Career</h2>
+      <span>2 skills · screening · applications</span>
+    </div>
 
       <div class="skill" id="recruiter-lens">
         <div class="sk-id">
@@ -241,6 +310,11 @@
         </div>
       </div>
 
+    <div class="sk-group" id="thinking-learning">
+      <h2>Thinking &amp; Learning</h2>
+      <span>3 skills · teaching · tournaments · decisions</span>
+    </div>
+
       <div class="skill" id="topic-primer">
         <div class="sk-id">
           <a class="sk-name" href="topic-primer/">topic-primer</a>
@@ -273,38 +347,6 @@
         </div>
       </div>
 
-      <div class="skill" id="keyword-guard">
-        <div class="sk-id">
-          <a class="sk-name" href="keyword-guard/">keyword-guard</a>
-          <span class="sk-tag">seo</span>
-        </div>
-        <div class="sk-body">
-          <p>Plans topic clusters and kills keyword cannibalization so exactly one page wins each query. The cannibalization audit is a mandatory blocker before any content change — with a sitemap fallback for when you have no Search Console access.</p>
-          <p class="sk-stats">6 phases · 3 reference checklists · ~300 lines · 0 API keys</p>
-          <p class="sk-install mono">npx skills add arm-pz/keyword-guard</p>
-          <div class="sk-links">
-            <a class="page" href="keyword-guard/">Full install page →</a>
-            <a href="https://github.com/arm-pz/keyword-guard" target="_blank" rel="noopener">Source</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="skill" id="web-preflight">
-        <div class="sk-id">
-          <a class="sk-name" href="web-preflight/">web-preflight</a>
-          <span class="sk-tag">release</span>
-        </div>
-        <div class="sk-body">
-          <p>Checks a site you own before you ship it, without pretending a status code is a finding. A 200 on /.env that matches the app shell is catch-all routing, a blanket 403 is an unanswered question, and a check that never ran becomes INCONCLUSIVE — never a pass.</p>
-          <p class="sk-stats">4 verdicts · 19 fixed paths · 9 behavioral tests · ~215 lines · 0 API keys</p>
-          <p class="sk-install mono">npx skills add arm-pz/web-preflight</p>
-          <div class="sk-links">
-            <a class="page" href="web-preflight/">Full install page →</a>
-            <a href="https://github.com/arm-pz/web-preflight" target="_blank" rel="noopener">Source</a>
-          </div>
-        </div>
-      </div>
-
       <div class="skill" id="crash-test">
         <div class="sk-id">
           <a class="sk-name" href="crash-test/">crash-test</a>
@@ -321,37 +363,10 @@
         </div>
       </div>
 
-      <div class="skill" id="findable">
-        <div class="sk-id">
-          <a class="sk-name" href="findable/">findable</a>
-          <span class="sk-tag">discovery</span>
-        </div>
-        <div class="sk-body">
-          <p>Sets up discovery for a GitHub repo, skill, plugin or MCP server so it gets found by what it does, not only by its name. It audits where you rank today, works out the queries strangers type, then drafts the About text, topics, README opening, release notes, site page and directory plan — real numbers only, and nothing public changes without your go-ahead.</p>
-          <p class="sk-stats">8 workflow steps · 10 kit sections · 4 reference guides · 1 listing validator · 0 API keys</p>
-          <p class="sk-install mono">npx skills add arm-pz/findable --skill findable</p>
-          <div class="sk-links">
-            <a class="page" href="findable/">Full install page →</a>
-            <a href="https://github.com/arm-pz/findable" target="_blank" rel="noopener">Source</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="skill" id="pre-ship-performance-audit">
-        <div class="sk-id">
-          <a class="sk-name" href="pre-ship-performance-audit/">pre-ship-performance-audit</a>
-          <span class="sk-tag">performance</span>
-        </div>
-        <div class="sk-body">
-          <p>Audits and fixes a web app's real-world speed before launch: four read-only subagents sweep twenty known slow-downs across images, bundles, database queries and servers, then the same mobile Lighthouse protocol, three runs per page, proves each fix before and after. Never removes a feature for a score, never invents a baseline, and asks before touching dependencies, the database or the deploy region.</p>
-          <p class="sk-stats">4 subagents · 20 slow-downs · 6 phases · ~120 lines · 0 API keys</p>
-          <p class="sk-install mono">npx skills add arm-pz/pre-ship-performance-audit</p>
-          <div class="sk-links">
-            <a class="page" href="pre-ship-performance-audit/">Full install page →</a>
-            <a href="https://github.com/arm-pz/pre-ship-performance-audit" target="_blank" rel="noopener">Source</a>
-          </div>
-        </div>
-      </div>
+    <div class="sk-group" id="skill-authoring">
+      <h2>Skill Authoring</h2>
+      <span>4 skills · draft · tune · package</span>
+    </div>
 
       <div class="skill" id="draft-skill">
         <div class="sk-id">
@@ -365,6 +380,22 @@
           <div class="sk-links">
             <a class="page" href="draft-skill/">Full install page →</a>
             <a href="https://github.com/arm-pz/draft-skill" target="_blank" rel="noopener">Source</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill" id="tune-skill">
+        <div class="sk-id">
+          <a class="sk-name" href="tune-skill/">tune-skill</a>
+          <span class="sk-tag">authoring</span>
+        </div>
+        <div class="sk-body">
+          <p>Audits and fine-tunes a skill that already exists: the description that never fires, overlap with installed siblings, stale names and counts, handoff contracts that do not hand off. Ships check_skill.py, a deterministic validator over frontmatter, folder and heading agreement, description length and reference paths that do not exist. Not for creating one from scratch; that is draft-skill.</p>
+          <p class="sk-stats">4 files · 268 lines · 1 validator script · 0 API keys</p>
+          <p class="sk-install mono">npx skills add arm-pz/tune-skill</p>
+          <div class="sk-links">
+            <a class="page" href="tune-skill/">Full install page →</a>
+            <a href="https://github.com/arm-pz/tune-skill" target="_blank" rel="noopener">Source</a>
           </div>
         </div>
       </div>
@@ -401,18 +432,39 @@
         </div>
       </div>
 
-      <div class="skill" id="tune-skill">
+    <div class="sk-group" id="ship-checks">
+      <h2>Ship Checks</h2>
+      <span>2 skills · pre-launch audits</span>
+    </div>
+
+      <div class="skill" id="web-preflight">
         <div class="sk-id">
-          <a class="sk-name" href="tune-skill/">tune-skill</a>
-          <span class="sk-tag">authoring</span>
+          <a class="sk-name" href="web-preflight/">web-preflight</a>
+          <span class="sk-tag">release</span>
         </div>
         <div class="sk-body">
-          <p>Audits and fine-tunes a skill that already exists: the description that never fires, overlap with installed siblings, stale names and counts, handoff contracts that do not hand off. Ships check_skill.py, a deterministic validator over frontmatter, folder and heading agreement, description length and reference paths that do not exist. Not for creating one from scratch; that is draft-skill.</p>
-          <p class="sk-stats">4 files · 268 lines · 1 validator script · 0 API keys</p>
-          <p class="sk-install mono">npx skills add arm-pz/tune-skill</p>
+          <p>Checks a site you own before you ship it, without pretending a status code is a finding. A 200 on /.env that matches the app shell is catch-all routing, a blanket 403 is an unanswered question, and a check that never ran becomes INCONCLUSIVE — never a pass.</p>
+          <p class="sk-stats">4 verdicts · 19 fixed paths · 9 behavioral tests · ~215 lines · 0 API keys</p>
+          <p class="sk-install mono">npx skills add arm-pz/web-preflight</p>
           <div class="sk-links">
-            <a class="page" href="tune-skill/">Full install page →</a>
-            <a href="https://github.com/arm-pz/tune-skill" target="_blank" rel="noopener">Source</a>
+            <a class="page" href="web-preflight/">Full install page →</a>
+            <a href="https://github.com/arm-pz/web-preflight" target="_blank" rel="noopener">Source</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill" id="pre-ship-performance-audit">
+        <div class="sk-id">
+          <a class="sk-name" href="pre-ship-performance-audit/">pre-ship-performance-audit</a>
+          <span class="sk-tag">performance</span>
+        </div>
+        <div class="sk-body">
+          <p>Audits and fixes a web app's real-world speed before launch: four read-only subagents sweep twenty known slow-downs across images, bundles, database queries and servers, then the same mobile Lighthouse protocol, three runs per page, proves each fix before and after. Never removes a feature for a score, never invents a baseline, and asks before touching dependencies, the database or the deploy region.</p>
+          <p class="sk-stats">4 subagents · 20 slow-downs · 6 phases · ~120 lines · 0 API keys</p>
+          <p class="sk-install mono">npx skills add arm-pz/pre-ship-performance-audit</p>
+          <div class="sk-links">
+            <a class="page" href="pre-ship-performance-audit/">Full install page →</a>
+            <a href="https://github.com/arm-pz/pre-ship-performance-audit" target="_blank" rel="noopener">Source</a>
           </div>
         </div>
       </div>
