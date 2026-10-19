@@ -1,0 +1,89 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "applicant-kit",
+      "description": "Agent skill that writes the better version of your application material: decoded JD table, action-task-result-impact bullets, honest keyword placement, five resume summaries, a LinkedIn rewrite, 20 interview answers. Only experience you already have; nothing invented. Sibling recruiter-lens does the judging. For Claude Code, Cursor, Codex, Qoder.",
+      "type": "archive",
+      "url": "https://skills.caffeinity.com/agent-skills/applicant-kit.tar.gz",
+      "digest": "sha256:29e8401b4b574361c1e58f839d4701f9eb6a203543588201722036201bceac75"
+    },
+    {
+      "name": "crash-test",
+      "description": "Agent skill that crash-tests a decision before you build it. Four fixed roles (Pragmatist, Skeptic, Specialist, Contrarian) draft alone, review each other anonymously, then a chair merges what survives and grounds its claims against your source before adopting. Dissent log included. Optional Operator seat. Zero setup: no server, no keys.",
+      "type": "archive",
+      "url": "https://skills.caffeinity.com/agent-skills/crash-test.tar.gz",
+      "digest": "sha256:7f129236dfef4965112e3a13e2f8c52e5fff038b05d72fa500137712a3aa6f97"
+    },
+    {
+      "name": "do-better",
+      "description": "Agent skill: a tournament of sub-agents over one task. Every competitor gets the identical task and a different strategy card, then attacks, defends, and a judge scores each match on a written rubric until one champion survives. For when a retry won't fix the answer. Qoder CLI skill, Claude Code plugin. Adapted from Arena (MIT).",
+      "type": "archive",
+      "url": "https://skills.caffeinity.com/agent-skills/do-better.tar.gz",
+      "digest": "sha256:90f8bce2713903ad9b2f5ea41db2a7e4ccfadaff980ea8b14892bfaea14dad0d"
+    },
+    {
+      "name": "findable",
+      "description": "Agent skill that sets up discovery for a GitHub repo, agent skill, Claude Code plugin or MCP server: audits where you rank today, derives the queries strangers type, drafts About text, topics, README opening, release notes and a site page, lists directories and plans a dated re-check. Never invents stars, rankings or sample output.",
+      "type": "archive",
+      "url": "https://skills.caffeinity.com/agent-skills/findable.tar.gz",
+      "digest": "sha256:c5f6cdb2f515fd0ab289eb9f90fce97f87e0a791a8ee490aff584a004ec21ced"
+    },
+    {
+      "name": "keyword-guard",
+      "description": "Agent skill that plans SEO topic clusters and ends keyword cannibalization, so one page wins each query. It maps query ownership before any title, H1 or content change, from Search Console or a sitemap when you lack GSC access. Covers on-page, link-authority and hreflang checks. White-hat, no API keys. Runs in Claude Code, Cursor, Qoder.",
+      "type": "archive",
+      "url": "https://skills.caffeinity.com/agent-skills/keyword-guard.tar.gz",
+      "digest": "sha256:42b33fe1b1c03c3eb7edc990e6ddd83f9c56a30f8051e207fc17a7e2aaf99276"
+    },
+    {
+      "name": "pre-ship-performance-audit",
+      "description": "Agent skill that audits and fixes a web app's real-world speed before launch: four read-only subagents check twenty known slow-downs across images, bundles, database queries and servers, then the same mobile Lighthouse run, three times before and after, proves each fix. Never removes a feature for a score, never invents a baseline; asks first before dependency, database or region changes.",
+      "type": "archive",
+      "url": "https://skills.caffeinity.com/agent-skills/pre-ship-performance-audit.tar.gz",
+      "digest": "sha256:ed945ed47dd720be56d5e1c163590d6971511ef94c3a6cde50e57ea2b0ffc8b6"
+    },
+    {
+      "name": "publish-release-gate",
+      "description": "Agent skill that publishes a skill through three distribution channels: marketplace plugin, agent discovery protocol, and tarball delivery via Cloudflare Pages custom domain. Use when someone says 'publish to marketplace', 'make discoverable by agents', 'deploy skill site', or after completing a skill update that needs public distribution.",
+      "type": "archive",
+      "url": "https://skills.caffeinity.com/agent-skills/publish-release-gate.tar.gz",
+      "digest": "sha256:e59de0f296ca432a63929f92cdc55f2db0fde0d22594d2b661466cf4d55ba3a0"
+    },
+    {
+      "name": "recruiter-lens",
+      "description": "Agent skill that reviews resumes, CVs and LinkedIn profiles the way recruiters screen them: 6-second scan, ATS check, rejection reasons, gaps against a job description, likely interview questions. It never invents a metric. Its sibling applicant-kit writes the fix. For Claude Code, Cursor, Codex, Qoder.",
+      "type": "archive",
+      "url": "https://skills.caffeinity.com/agent-skills/recruiter-lens.tar.gz",
+      "digest": "sha256:56bfd0e4ddfccc9ad9d1d9b9305f7f2d438f3aaf35cd19291faf3f0797a275fa"
+    },
+    {
+      "name": "topic-primer",
+      "description": "Agent skill for Claude Code, Cursor and Qoder that teaches any topic you name, from absolute zero to expert depth, in 8 modes: foundation, curriculum, concept chains, adaptive tutor, mental models, pitfalls, examiner, ELI5. One question at a time, honest grading, every term defined, no fabricated facts or resources.",
+      "type": "archive",
+      "url": "https://skills.caffeinity.com/agent-skills/topic-primer.tar.gz",
+      "digest": "sha256:26471a983e00bf7133bc79bad1e1258d879312c93170e4ca0ebf20a1b0b672ca"
+    },
+    {
+      "name": "web-preflight",
+      "description": "Agent skill for a pre-launch website check on a site you own: before you deploy, it looks for exposed .env, .git, config and debug files. Status codes are signals, not findings: it tells a real /.env leak from an SPA catch-all 200 or a blanket WAF 403, and marks unrun checks INCONCLUSIVE, never a false pass. No exploitation or port scanning.",
+      "type": "archive",
+      "url": "https://skills.caffeinity.com/agent-skills/web-preflight.tar.gz",
+      "digest": "sha256:5344490a7987e8e171dfe4c3f3e385a27d46958285432798d6cc82aa712fcd39"
+    },
+    {
+      "name": "wordsmith",
+      "description": "Agent skill for Claude Code, Cursor and Qoder that drafts, rewrites, tightens and proofreads text. 44 commands over 5 disciplines: build, evaluate, refine, adapt, prepare. Meaning, facts, hedges and the author's voice carry through; shaky claims get flagged for checking instead of papered over.",
+      "type": "archive",
+      "url": "https://skills.caffeinity.com/agent-skills/wordsmith.tar.gz",
+      "digest": "sha256:b014d05a47855a09696cc2f848ac7528c35a66dcb0551350f943e87dbd4c1da9"
+    },
+    {
+      "name": "release-gate",
+      "description": "Agent skill that runs three pre-launch passes (exposure, app-tests, perf) in sequence and returns one release posture — HOLD or ready — with three separate verdicts and one merged finding register. Deterministic arithmetic over union of findings; a lane that did not run holds the gate. For go/no-go decisions before any production deploy. Qoder CLI skill, Claude Code plugin.",
+      "type": "archive",
+      "url": "https://skills.caffeinity.com/agent-skills/release-gate.tar.gz",
+      "digest": "sha256:5fc7b96613384bcd40fd3b65f2a6d63b7a287324dd7b797fc3a919bcf0eca50c"
+    }
+  ]
+}
