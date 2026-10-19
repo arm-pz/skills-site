@@ -1,1 +1,4 @@
 *.tar.gz binary
+
+dist/** -text
+.well-known/skills.json -text
