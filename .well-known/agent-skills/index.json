@@ -70,6 +70,13 @@
       "type": "archive",
       "url": "https://skills.caffeinity.com/agent-skills/wordsmith.tar.gz",
       "digest": "sha256:b014d05a47855a09696cc2f848ac7528c35a66dcb0551350f943e87dbd4c1da9"
+    },
+    {
+      "name": "release-gate",
+      "description": "Agent skill that runs three pre-launch passes (exposure, app-tests, perf) in sequence and returns one release posture — HOLD or ready — with three separate verdicts and one merged finding register. Deterministic arithmetic over union of findings; a lane that did not run holds the gate. For go/no-go decisions before any production deploy. Qoder CLI skill, Claude Code plugin.",
+      "type": "archive",
+      "url": "https://skills.caffeinity.com/agent-skills/release-gate.tar.gz",
+      "digest": "sha256:5fc7b96613384bcd40fd3b65f2a6d63b7a287324dd7b797fc3a919bcf0eca50c"
     }
   ]
 }
