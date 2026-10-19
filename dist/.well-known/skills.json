@@ -71,6 +71,31 @@
       "name": "release-gate",
       "repo": "arm-pz/release-gate-chair",
       "description": "Three pre-launch passes (exposure, app-tests, perf) with one deterministic posture: HOLD or ready."
+    },
+    {
+      "name": "upstream-check",
+      "repo": "arm-pz/upstream-check",
+      "description": "Check unpushed local commits and compare published listings against the repos that ship a SKILL.md."
+    },
+    {
+      "name": "draft-skill",
+      "repo": "arm-pz/draft-skill",
+      "description": "Create a new agent skill from an idea, with sibling overlap checks and validation."
+    },
+    {
+      "name": "prompts-to-skill",
+      "repo": "arm-pz/prompts-to-skill",
+      "description": "Turn a list of your own prompts into a finished, tested skill, one per prompt."
+    },
+    {
+      "name": "prompts-to-skill-release",
+      "repo": "arm-pz/prompts-to-skill-release",
+      "description": "Package a finished skill for release, keeping failed trigger tests visible."
+    },
+    {
+      "name": "tune-skill",
+      "repo": "arm-pz/tune-skill",
+      "description": "Audit and fine-tune a skill that already exists; ships the check_skill.py validator."
     }
   ]
 }
