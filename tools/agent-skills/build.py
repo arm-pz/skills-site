@@ -26,6 +26,12 @@ REPOS = {
     "crash-test": "skills/crash-test",
     "pre-ship-performance-audit": ".",
     "pre-ship-security-red-team": ".",
+    "findable-polish": ".",
+    "upstream-polish": ".",
+    "keyword-resolver": ".",
+    "seo-polish": ".",
+    "tune-and-polish": ".",
+    "skill-launch": ".",
     "upstream-check": ".",
 }
 # Repo scaffolding that is not part of the skill itself; only applies to repos
