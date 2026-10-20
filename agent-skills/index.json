@@ -31,17 +31,17 @@
     },
     {
       "name": "draft-skill",
-      "description": "Agent skill that creates a new agent skill from a plain idea: confirms the purpose before writing anything, checks the already-installed siblings for overlap, splits the work between scripts, references and assets, writes a description that actually triggers, validates with tune-skill's check_skill.py, then hands off. Contains no text from Qoder's built-in skill-creator, which ships without a licence permitting redistribution.",
+      "description": "Agent skill that creates a new skill from an idea: confirms the purpose before writing, checks installed siblings for overlap, splits scripts/references/assets, writes a description that triggers, validates with check_skill.py. Qoder, Claude Code.",
       "type": "archive",
       "url": "https://skills.caffeinity.com/agent-skills/draft-skill.tar.gz",
-      "digest": "sha256:77c8777eab276c2614cb0062bb8f582d33e29c2d34b3d5b2483aeba0f2830420"
+      "digest": "sha256:fcd8445db42f0fca0af71d756d08c941600628059bf8a5a152ebc30391b7b798"
     },
     {
       "name": "findable",
       "description": "Agent skill that sets up discovery for a GitHub repo, agent skill, Claude Code plugin or MCP server: audits where you rank today, derives the queries strangers type, drafts About text, topics, README opening, release notes and a site page, lists directories and plans a dated re-check. Never invents stars, rankings or sample output.",
       "type": "archive",
       "url": "https://skills.caffeinity.com/agent-skills/findable.tar.gz",
-      "digest": "sha256:c5f6cdb2f515fd0ab289eb9f90fce97f87e0a791a8ee490aff584a004ec21ced"
+      "digest": "sha256:86ad067bf5f8408cc14d654da3862536dfab6edef4ca4f4302d615085d66cf5a"
     },
     {
       "name": "findable-polish",
@@ -59,7 +59,7 @@
     },
     {
       "name": "keyword-resolver",
-      "description": "Resolves keyword cannibalization with Keyword-Guard, then generates alternatives with Wordsmith. Eliminates page competition, assigns query ownership from Search Console/sitemap, de-conflicts mixed-language pages with hreflang, builds cluster maps. Chains keyword-guard â†’ wordsmith. Not for technical SEO diagnosis (use seo-audit).",
+      "description": "Resolves keyword cannibalization with Keyword-Guard, then generates alternatives with Wordsmith. Eliminates page competition, assigns query ownership from Search Console/sitemap, de-conflicts mixed-language pages with hreflang, builds cluster maps. Chains keyword-guard → wordsmith. Not for technical SEO diagnosis (use seo-audit).",
       "type": "archive",
       "url": "https://skills.caffeinity.com/agent-skills/keyword-resolver.tar.gz",
       "digest": "sha256:68038867c13de02e6d7636e6b4ea96162fe613b5a55efdac08da38fe57a7e060"
@@ -80,17 +80,17 @@
     },
     {
       "name": "prompts-to-skill",
-      "description": "Agent skill that turns a list of your own prompts into a finished, tested agent skill, one skill per prompt: interviews for intent, checks what is already installed so the new skill does not duplicate it, drafts with draft-skill, writes trigger test cases including near-misses, then gates the result with tune-skill. Requires draft-skill and tune-skill and stops with a clear message when either is missing. Not the release packaging; that is prompts-to-skill-release.",
+      "description": "Agent skill that turns a list of your own prompts into a finished, tested skill. Intent interview, overlap check against installed skills, draft with draft-skill, trigger test cases, tune-skill gates. Qoder, Claude Code.",
       "type": "archive",
       "url": "https://skills.caffeinity.com/agent-skills/prompts-to-skill.tar.gz",
-      "digest": "sha256:83b4301c45c3d7666755853be9ee113d3889233a1592cc5cb797dcda0e2ccbde"
+      "digest": "sha256:1ea84491f3a1a1fea77fc0f21cef4318833be92d6a5f73eb9224ee9f6054b06e"
     },
     {
       "name": "prompts-to-skill-release",
-      "description": "Agent skill that packages a finished agent skill for release: runs its trigger test cases and records exactly which passed and which did not, sets the version and CHANGELOG, builds the archive, writes the README, and ends with a per-platform install checklist. Failed tests stay visible in the report instead of being dropped from it. Assumes the skill is already authored, by prompts-to-skill or draft-skill.",
+      "description": "Agent skill that packages a finished skill for release: runs its trigger test cases and records what passed, sets the version and CHANGELOG, builds the zip, writes the README, gives a per-platform install checklist. Failed tests stay visible.",
       "type": "archive",
       "url": "https://skills.caffeinity.com/agent-skills/prompts-to-skill-release.tar.gz",
-      "digest": "sha256:a9e0a7e69c10cde0ad04b8a71800dee9c729cf15f2aacc6ebb81075207f53374"
+      "digest": "sha256:cdf48916cf420ef17adbf77e7e1531c97136a1ecafe18f5ff0db6ad3581ef0f1"
     },
     {
       "name": "publish-release-gate",
@@ -108,24 +108,24 @@
     },
     {
       "name": "release-gate",
-      "description": "Runs three pre-launch passes (exposure, app-tests, perf) in sequence and returns one release posture â€” HOLD or ready â€” with three separate verdicts and one merged finding register.",
+      "description": "Runs three pre-launch passes (exposure, app-tests, perf) in sequence and returns one release posture — HOLD or ready — with three separate verdicts and one merged finding register.",
       "type": "archive",
       "url": "https://skills.caffeinity.com/agent-skills/release-gate.tar.gz",
       "digest": "sha256:5fc7b96613384bcd40fd3b65f2a6d63b7a287324dd7b797fc3a919bcf0eca50c"
     },
     {
       "name": "seo-polish",
-      "description": "Audits SEO health with Seo-Audit, then generates optimized alternatives with Wordsmith. Full technical + on-page diagnosis with rewrites for titles, meta descriptions, headings, content gaps, internal linking. Chains seo-audit â†’ wordsmith. Not for keyword cannibalization (use keyword-resolver) or mass pages (use programmatic-seo).",
+      "description": "Audits SEO health with Seo-Audit, then generates optimized alternatives with Wordsmith. Full technical + on-page diagnosis with rewrites for titles, meta descriptions, headings, content gaps, internal linking. Chains seo-audit → wordsmith. Not for keyword cannibalization (use keyword-resolver) or mass pages (use programmatic-seo).",
       "type": "archive",
       "url": "https://skills.caffeinity.com/agent-skills/seo-polish.tar.gz",
       "digest": "sha256:1f9a44bd0596ddcd26c7346ba31cf01e1743b7fbb64b868653199d5d2d516ce6"
     },
     {
       "name": "skill-launch",
-      "description": "Launches a skill end-to-end: drafts with Draft-Skill, validates/tunes with Tune-Skill, audits/polishes discoverability with Findable-Polish. From idea to published â€” triggering, validation, discovery in one pipeline. Chains draft-skill â†’ tune-skill â†’ findable-polish. Not for editing existing skills (use tune-and-polish).",
+      "description": "Launches one new skill from an idea: drafts with Draft-Skill, validates and tunes with Tune-Skill, then audits and polishes discoverability with Findable-Polish. Not for a batch of prompts you already wrote (use prompts-to-skill) or an existing skill (use tune-and-polish).",
       "type": "archive",
       "url": "https://skills.caffeinity.com/agent-skills/skill-launch.tar.gz",
-      "digest": "sha256:380cc906493a574fb564764ff1c91fed3dc5c01683d5c1572601a1a1034f90c0"
+      "digest": "sha256:6d22c8f843d98e333a1ad9b9a7a26a7bf0e187fb12bd3f1190ec001329f81267"
     },
     {
       "name": "topic-primer",
@@ -136,17 +136,17 @@
     },
     {
       "name": "tune-and-polish",
-      "description": "Tunes a skill's triggering and boundaries with Tune-Skill, then polishes its discoverability with Findable-Polish - both halves in one pass, so listing copy is written from the final description. Chains tune-skill -> findable-polish. Not for creating skills (draft-skill), triggering-only (tune-skill) or listing-only (findable-polish).",
+      "description": "Tunes triggers and boundaries with Tune-Skill, then polishes discovery with Findable-Polish — use it only when you want both halves at once. A triggering-only fix belongs to tune-skill, a listing-only one to findable-polish. Not for creating skills (use draft-skill).",
       "type": "archive",
       "url": "https://skills.caffeinity.com/agent-skills/tune-and-polish.tar.gz",
       "digest": "sha256:775eff57ff71cdd800188347e0fa4cfcdab1ed176fcf05fe9ffdf40bb8261d7e"
     },
     {
       "name": "tune-skill",
-      "description": "Agent skill that audits and fine-tunes an agent skill that already exists: the description that never fires, overlap with installed siblings, stale names and counts, and handoff contracts that do not hand off. Ships check_skill.py, a deterministic SKILL.md validator covering frontmatter, folder and heading agreement, description length, reference paths that do not exist, and count phrases that go stale. Not for creating a skill from an idea; that is draft-skill.",
+      "description": "Agent skill that audits and fine-tunes a skill that already exists: triggering descriptions, sibling overlaps, stale names and counts, handoff contracts, minimal evidenced edits. Ships check_skill.py, a deterministic SKILL.md validator. Qoder, Claude Code.",
       "type": "archive",
       "url": "https://skills.caffeinity.com/agent-skills/tune-skill.tar.gz",
-      "digest": "sha256:50c778b1ce202d20da39b15137b811e9a16c6dfbd7155ead931f3d6a1070ff84"
+      "digest": "sha256:b3f34d13b334444313cccf749bafba97349fe6dcb9da7a0c10b884cc6a177144"
     },
     {
       "name": "upstream-check",
@@ -157,7 +157,7 @@
     },
     {
       "name": "upstream-polish",
-      "description": "Audits upstream drift/listing mismatches with Upstream-Check, generates polished fixes with Wordsmith. Reconciles repos with marketplace/site/README, fixes drifted descriptions/topics, cleans boundaries after push. Diagnosis + rewrites. Chains upstream-check â†’ wordsmith. Not for creating skills (use draft-skill).",
+      "description": "Audits upstream drift/listing mismatches with Upstream-Check, generates polished fixes with Wordsmith. Reconciles repos with marketplace/site/README, fixes drifted descriptions/topics, cleans boundaries after push. Diagnosis + rewrites. Chains upstream-check → wordsmith. Not for creating skills (use draft-skill).",
       "type": "archive",
       "url": "https://skills.caffeinity.com/agent-skills/upstream-polish.tar.gz",
       "digest": "sha256:28c327dc26fd3a29383ae0f6c9580cfe3ce6c101d71aba1fcf7faacfa88a1fbb"
