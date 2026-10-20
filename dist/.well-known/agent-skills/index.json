@@ -45,10 +45,10 @@
     },
     {
       "name": "findable-polish",
-      "description": "Audits content for discoverability gaps with Findable, then generates improved alternatives with Wordsmith. Use to improve SEO, search visibility, or findability of repo READMEs, skill pages, landing pages, articles â€” and get both diagnosis and concrete rewrites. Chains findable â†’ wordsmith. Not for tuning SKILL.md triggers (use tune-skill).",
+      "description": "Audits content for discoverability gaps with Findable, then generates improved alternatives with Wordsmith. Use to improve SEO, search visibility, or findability of repo READMEs, skill pages, landing pages, articles — and get both diagnosis and concrete rewrites. Chains findable → wordsmith. Not for tuning SKILL.md triggers (use tune-skill).",
       "type": "archive",
       "url": "https://skills.caffeinity.com/agent-skills/findable-polish.tar.gz",
-      "digest": "sha256:7ae695acf855b4df76e749d00cb10a229fdf9a1909c0289dfefc47aa268ded06"
+      "digest": "sha256:c6d9a3f648f5822a7b273d8568b52b03cb1ec7e7d4555afbc964bf4dfc5e1627"
     },
     {
       "name": "keyword-guard",
@@ -136,10 +136,10 @@
     },
     {
       "name": "tune-and-polish",
-      "description": "Tunes triggers/boundaries with Tune-Skill, then audits/polishes discoverability with Findable-Polish. Fixes non-triggering skills, resolves overlaps, polishes repo/README/site for discovery â€” in one pass. Chains tune-skill â†’ findable-polish. Not for creating skills (use draft-skill).",
+      "description": "Tunes a skill's triggering and boundaries with Tune-Skill, then polishes its discoverability with Findable-Polish - both halves in one pass, so listing copy is written from the final description. Chains tune-skill -> findable-polish. Not for creating skills (draft-skill), triggering-only (tune-skill) or listing-only (findable-polish).",
       "type": "archive",
       "url": "https://skills.caffeinity.com/agent-skills/tune-and-polish.tar.gz",
-      "digest": "sha256:d2284217dccb51e06e81be08b8a5ea0fb01c964b3da9cd7ff5bb9db6c734ad9b"
+      "digest": "sha256:775eff57ff71cdd800188347e0fa4cfcdab1ed176fcf05fe9ffdf40bb8261d7e"
     },
     {
       "name": "tune-skill",
