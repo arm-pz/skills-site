@@ -1,2 +1,9 @@
 .Wordsmith.qoder.site
 .wrangler/
+__pycache__/
+dist/
+out/
+agent-skills/*.tar.gz
+agent-skills/index.json
+.well-known/agent-skills/index.json
+sitemap.xml
