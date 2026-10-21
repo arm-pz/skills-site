@@ -15,8 +15,14 @@ const mode = process.argv[2] ?? "local";
 const base = mode === "local" ? null : mode.replace(/\/$/, "");
 const indexUrl = base ? `${base}/.well-known/agent-skills/index.json` : "out/index.json";
 
+const bust = process.env.CACHE_BUST
+  ? `?v=${encodeURIComponent(process.env.CACHE_BUST)}`
+  : "";
+const withBust = (url) =>
+  bust ? `${url}${url.includes("?") ? "&" : "?"}${bust.slice(1)}` : url;
+
 const get = async (url) => {
-  if (base) return new Uint8Array(await (await fetch(url)).arrayBuffer());
+  if (base) return new Uint8Array(await (await fetch(withBust(url))).arrayBuffer());
   const path = url.startsWith("http")
     ? join("out", new URL(url).pathname.split("/").pop())
     : url;
