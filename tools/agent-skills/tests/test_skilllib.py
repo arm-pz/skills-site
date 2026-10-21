@@ -44,6 +44,11 @@ class FrontmatterTest(unittest.TestCase):
     def test_folded_paragraph_keeps_blank_line(self):
         self.assertIn("\n", fm("description: >-\n  para one\n\n  para two")["description"])
 
+    def test_nested_mapping_is_ignored(self):
+        fields = fm("name: demo\ndescription: one line\nmetadata:\n  version: \"1.0.0\"")
+        self.assertEqual(fields["name"], "demo")
+        self.assertEqual(fields["description"], "one line")
+
 
 class ShapeTest(unittest.TestCase):
     def test_root_layout_passes(self):

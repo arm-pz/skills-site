@@ -144,6 +144,9 @@ def _parse_mapping(block):
         if not line.strip() or line.lstrip().startswith("#"):
             i += 1
             continue
+        if line.startswith((" ", "\t")):
+            i += 1
+            continue
         kv = re.match(r"^([A-Za-z0-9_-]+):(?:[ \t]*(.*))?$", line)
         if not kv:
             raise ManifestError(f"unparseable frontmatter line: {line!r}")
