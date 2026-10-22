@@ -4,7 +4,18 @@ cd "$(dirname "$0")/../.."
 
 # Windows editors can hold the dist directory handle; clearing contents is enough.
 if [ -d dist ]; then
-  rm -rf dist 2>/dev/null || find dist -mindepth 1 -delete
+  rm -rf dist 2>/dev/null || true
+  if [ -d dist ]; then
+    find dist -mindepth 1 -delete 2>/dev/null || true
+  fi
+  if [ -n "$(find dist -mindepth 1 -print -quit 2>/dev/null)" ]; then
+    sleep 1
+    find dist -mindepth 1 -delete 2>/dev/null || true
+  fi
+  if [ -n "$(find dist -mindepth 1 -print -quit 2>/dev/null)" ]; then
+    echo "make_dist: dist/ is held by another process; close it and retry" >&2
+    exit 1
+  fi
 fi
 mkdir -p dist/agent-skills dist/.well-known/agent-skills dist/fonts
 
