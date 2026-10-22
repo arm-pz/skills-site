@@ -1,14 +1,22 @@
-# skills-site — a static hub for agent skills
+# skills-site
 
-The source of [skills.caffeinity.com](https://skills.caffeinity.com): one
-single-file landing page per agent skill, plus a hub index, downloadable
-archives and machine-readable discovery indexes at `/.well-known/agent-skills/`
-and `/agent-skills/`. Pages, cards and indexes are generated from
-`site/skills.json`; the site itself is plain HTML, CSS and self-hosted fonts,
-deployed to Cloudflare Pages.
+A static site and publish pipeline for a catalog of agent skills. Each skill
+(a SKILL.md repo) or Claude Code mod gets its own landing page with a one-line
+install command; the hub lists them all with a live filter; and a
+`/.well-known/agent-skills/index.json` discovery index lets anyone run
+`npx skills add https://your-domain`. One GitHub Actions workflow tests, builds
+and verifies the site before each Cloudflare Pages deploy, and opens a pull
+request when a new skill repo appears. Plain HTML, CSS and Python, no
+framework. It is the source of [skills.caffeinity.com](https://skills.caffeinity.com/).
 
-Fork it if you want a site like this for your own skills: every page is
-self-contained, and the shared design tokens live in one `:root` block.
+Fork it for your own skills: list them in `site/skills.json`, then follow
+[Run locally](#run-locally). Every page is self-contained, and the shared design
+tokens live in one `:root` block per page.
+
+Related: [caffeinity-skills](https://github.com/arm-pz/caffeinity-skills) is
+the plugin marketplace for the same skills, and
+[publish-pipeline](https://github.com/arm-pz/publish-pipeline) is the agent
+skill that sets up and repairs this kind of pipeline.
 
 ## Run locally
 
