@@ -429,6 +429,101 @@
         "commit": "50f04b96c33aebbddd143eee817a6a976b18e492",
         "sha256": "2df94736e478bc7a31051e7016611081870e6cf5ce0f16f497f7b8220fa38b6c"
       }
+    },
+    {
+      "name": "seo-crawl",
+      "repo": "arm-pz/seo-crawl",
+      "path": ".",
+      "group": "writing-growth",
+      "tag": "seo",
+      "title": "SEO Crawl",
+      "pageTitle": "SEO Crawl — agent skill",
+      "blurb": "Crawls a site you own and returns deterministic, evidence-backed technical SEO findings, with blocked or unrun checks reported INCONCLUSIVE rather than a pass.",
+      "stats": "14 files · 1,885 lines · 19 KB",
+      "install": "npx skills add arm-pz/seo-crawl",
+      "page": "generated",
+      "order": 27,
+      "pageSource": {
+        "description": "Use when you need evidence about the technical SEO state of a site you own or are authorized to crawl, covering HTTP statuses and redirects, indexability (meta and header robots), robots.txt, canonical tags, titles, meta descriptions, H1s, internal links, sitemap coverage, and static JSON-LD. Runs a bounded, read-only crawl and returns deterministic findings JSON with stable IDs and explicit INCONCLUSIVE checks, so an SEO audit or content change starts from measured evidence instead of guesses. Trigger phrases include \"crawl the site for SEO\", \"check sitemap coverage\", \"find broken internal links\", \"why is this page not indexed\", \"check titles and metas\", \"canonical audit\", and \"pre-audit crawl\". Not for Search Console clicks, impressions, rankings or keyword volumes; Core Web Vitals, Lighthouse or bundle performance; release security and exposed files; content rewriting or keyword strategy.",
+        "files": [
+          {
+            "path": ".gitignore",
+            "lines": 5,
+            "bytes": 49
+          },
+          {
+            "path": "SKILL.md",
+            "lines": 88,
+            "bytes": 5924
+          },
+          {
+            "path": "examples/sample-report.md",
+            "lines": 187,
+            "bytes": 5737
+          },
+          {
+            "path": "package.json",
+            "lines": 17,
+            "bytes": 322
+          },
+          {
+            "path": "references/checks.md",
+            "lines": 89,
+            "bytes": 6412
+          },
+          {
+            "path": "references/findings-schema.md",
+            "lines": 81,
+            "bytes": 4058
+          },
+          {
+            "path": "scripts/lib/checks.mjs",
+            "lines": 443,
+            "bytes": 13123
+          },
+          {
+            "path": "scripts/lib/crawl.mjs",
+            "lines": 298,
+            "bytes": 8893
+          },
+          {
+            "path": "scripts/lib/fetch.mjs",
+            "lines": 158,
+            "bytes": 4728
+          },
+          {
+            "path": "scripts/lib/parse.mjs",
+            "lines": 178,
+            "bytes": 5371
+          },
+          {
+            "path": "scripts/lib/report.mjs",
+            "lines": 46,
+            "bytes": 1471
+          },
+          {
+            "path": "scripts/lib/robots.mjs",
+            "lines": 117,
+            "bytes": 3393
+          },
+          {
+            "path": "scripts/lib/sitemap.mjs",
+            "lines": 35,
+            "bytes": 1164
+          },
+          {
+            "path": "scripts/seo-crawl.mjs",
+            "lines": 143,
+            "bytes": 3925
+          }
+        ],
+        "fileCount": 14,
+        "lines": 1885,
+        "bytes": 19109,
+        "license": "MIT",
+        "commit": "8011f18e5143135697f7aad62438f6abf4487230",
+        "sha256": "05e3eafecc6b2264cc54864e9320ff2401058dccd238b4037f14751fa510487a"
+      }
     }
   ]
 }
