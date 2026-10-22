@@ -45,8 +45,15 @@ class GenHomeTest(unittest.TestCase):
     def test_writes_one_card_and_the_group_count(self):
         out = self.rendered()
         self.assertEqual(out.count('class="skill"'), 1)
-        self.assertIn("<h2>Writing &amp; Growth</h2>", out)
-        self.assertIn("1 skills · editorial", out)
+        self.assertIn(">Writing &amp; Growth</h2>", out)
+        self.assertIn("1 skill · editorial", out)
+
+    def test_mod_is_labelled_and_counted(self):
+        mod = dict(MANIFEST["skills"][0], name="watch", title="Watch", kind="mod", order=3)
+        out = gen_home.render(TEXT, {**MANIFEST, "skills": MANIFEST["skills"] + [mod]})
+        self.assertIn("1 skill and 1 mod · editorial", out)
+        self.assertIn('<span class="sk-kind">Claude Code mod</span>', out)
+        self.assertEqual(out.count('class="skill"'), 2)
 
     def test_jsonld_counts_cards(self):
         self.assertIn('"numberOfItems": 1', self.rendered())

@@ -9,90 +9,97 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Caffeinity Skills">
 <meta property="og:title" content="Caffeinity Skills — Teach your agent a craft">
-<meta property="og:description" content="Open, plain-markdown skills for AI coding agents: wordsmith edits like an editor, recruiter-lens screens like a recruiter, applicant-kit writes the better version, topic-primer teaches like a professor, do-better runs agent tournaments, keyword-guard wins each query once, web-preflight reads a 200 as a signal rather than a leak. One-line install. No API keys.">
+<meta property="og:description" content="Open, plain-markdown skills for AI coding agents: edit like an editor, screen like a recruiter, teach like a professor, rank each query once and check a site before it ships. One-line install. No API keys.">
 <meta property="og:url" content="https://skills.caffeinity.com/">
 <meta name="twitter:card" content="summary">
+<meta name="color-scheme" content="dark light">
 <link rel="stylesheet" href="/fonts/fonts.css">
 <link rel="preload" href="/fonts/files/cY9AfjOCX1hbuyalUrK4397yjA.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/files/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+  /* Same tokens as the skill pages: dark shell, paper catalogue. */
   :root{
-    --ink:#0c0a10;
-    --surface:#15121b;
-    --raised:#1c1824;
-    --paper:#f2eee5;
-    --dim:#a49dae;
-    --ember:#ff6a3d;
-    --brass:#e8b44c;
-    --rule:rgba(242,238,229,.10);
-    --rule-strong:rgba(242,238,229,.20);
+    --bg:#121016;
+    --surface:#1d1a23;
+    --ink:#ede8de;
+    --muted:#a59eae;
+    --accent:#ff6a3d;
+    --accent-ink:#1a0c06;
+    --paper:#ebe5d7;
+    --paper-surface:#e0d9c8;
+    --paper-ink:#1c1820;
+    --paper-muted:#57515e;
     --serif:'Newsreader',Georgia,serif;
     --sans:'Instrument Sans',system-ui,sans-serif;
     --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --ease:cubic-bezier(.23,1,.32,1);
+    --gutter:clamp(16px,5vw,56px);
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{
-    background:var(--ink);color:var(--paper);font-family:var(--sans);font-size:16px;line-height:1.6;
-    background-image:radial-gradient(ellipse 90% 55% at 50% -12%,rgba(255,106,61,.07),transparent);
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.22em}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
+  ::selection{background:var(--accent);color:var(--accent-ink)}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 var(--gutter)}
+  code{font-family:var(--mono);font-size:.88em}
+
+  .nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;height:72px}
+  .brand{font-family:var(--serif);font-size:20px;text-decoration:none}
+  .brand b{color:var(--accent);font-weight:400;margin-right:6px}
+  .nav a.gh{font-size:15px;color:var(--muted);text-decoration:none;transition:color 160ms var(--ease)}
+
+  /* hero: the promise, then the catalogue's own search */
+  .hero{padding:clamp(56px,10vw,136px) 0 clamp(48px,7vw,88px)}
+  h1{font-family:var(--serif);font-weight:400;font-size:clamp(52px,9vw,128px);line-height:.96;letter-spacing:-.028em;max-width:10ch}
+  .lead{font-size:clamp(19px,1.8vw,23px);line-height:1.45;max-width:40ch;margin-top:28px}
+  .find{margin-top:48px;max-width:760px}
+  .find label{display:block;font-size:15px;color:var(--muted);margin-bottom:10px}
+  .find input{width:100%;font:400 clamp(19px,2vw,22px)/1.3 var(--sans);color:var(--ink);background:var(--surface);border:0;border-radius:10px;padding:20px 22px;box-shadow:inset 0 0 0 1px rgba(237,232,222,.1);transition:box-shadow 160ms var(--ease)}
+  .find input::placeholder{color:var(--muted)}
+  .find input:focus{outline:none;box-shadow:inset 0 0 0 2px var(--accent)}
+  .jump{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:22px;font-size:15px;color:var(--muted)}
+  .jump a{text-decoration:none;transition:color 160ms var(--ease)}
+  .find-status{margin-top:14px;font-size:15px;color:var(--muted);min-height:1.6em}
+
+  /* catalogue on paper */
+  .catalogue{background:var(--paper);color:var(--paper-ink);padding:clamp(24px,4vw,48px) 0 clamp(64px,9vw,120px)}
+  .catalogue ::selection{background:var(--paper-ink);color:var(--paper)}
+  .sk-group{scroll-margin-top:24px}
+  .sk-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 32px;padding:clamp(48px,6vw,80px) 0 18px;border-bottom:2px solid var(--paper-ink)}
+  .sk-head h2{font-family:var(--serif);font-weight:400;font-size:clamp(36px,4.6vw,56px);line-height:1.02;letter-spacing:-.018em}
+  .sk-head p{color:var(--paper-muted);font-size:15px}
+  .skill{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.7fr);gap:12px 48px;padding:30px 0;border-bottom:1px solid rgba(28,24,32,.14);scroll-margin-top:24px}
+  .skill h3{font-family:var(--serif);font-weight:400;font-size:clamp(26px,2.6vw,32px);line-height:1.12;letter-spacing:-.01em}
+  .skill h3 a{text-decoration:none;transition:color 160ms var(--ease)}
+  .sk-kind{display:block;margin-top:6px;font-family:var(--sans);font-size:14px;color:var(--paper-muted)}
+  .sk-body p{max-width:60ch}
+  .sk-body .sk-stats{margin-top:8px;font-size:15px;color:var(--paper-muted)}
+  .sk-install{display:inline-block;margin-top:16px;background:var(--paper-surface);border-radius:7px;padding:9px 14px;font-size:14px;overflow-wrap:break-word;max-width:100%}
+  .sk-links{display:flex;flex-wrap:wrap;gap:20px;margin-top:14px;font-size:15px;font-weight:600}
+  .sk-links a{text-underline-offset:.3em;text-decoration-color:rgba(28,24,32,.3);transition:text-decoration-color 160ms var(--ease)}
+  .empty{padding:56px 0 0;font-family:var(--serif);font-size:clamp(24px,2.6vw,32px);max-width:30ch}
+  .empty a{color:var(--paper-ink)}
+  [hidden]{display:none!important}
+
+  /* closing: how the catalogue works */
+  .close{padding:clamp(64px,9vw,120px) 0}
+  .close h2{font-family:var(--serif);font-weight:400;font-size:clamp(34px,4.4vw,52px);line-height:1.05;letter-spacing:-.015em;max-width:18ch}
+  .close-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px clamp(32px,5vw,72px);margin-top:36px}
+  .close-grid p{color:var(--muted)}
+  .close-grid b{display:block;color:var(--ink);font-weight:600;margin-bottom:6px}
+  .close-grid a{color:var(--ink)}
+
+  footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-top:28px;padding-bottom:36px;font-size:14px;color:var(--muted);border-top:1px solid rgba(237,232,222,.1)}
+  footer a{text-decoration:none}
+
+  @media (hover:hover) and (pointer:fine){
+    .nav a.gh:hover,.jump a:hover,footer a:hover{color:var(--ink)}
+    .skill h3 a:hover{color:#b8401b}
+    .sk-links a:hover{text-decoration-color:currentColor}
   }
-  a{color:inherit;text-decoration:none}
-  :focus-visible{outline:2px solid var(--ember);outline-offset:3px;border-radius:2px}
-  ::selection{background:rgba(255,106,61,.32)}
-  .wrap{max-width:1060px;margin:0 auto;padding:0 28px}
-  .mono{font-family:var(--mono)}
-
-  .nav{position:sticky;top:0;z-index:50;background:rgba(12,10,16,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule)}
-  .nav .wrap{height:64px;display:flex;align-items:center;justify-content:space-between;gap:24px}
-  .brand{display:flex;align-items:baseline;gap:9px;font-family:var(--serif);font-size:21px;font-weight:500;letter-spacing:.01em}
-  .brand .caret{color:var(--ember);font-family:var(--mono);font-size:17px;transform:translateY(-1px)}
-  .nav-links{display:flex;align-items:center;gap:22px;font-size:14px;color:var(--dim)}
-  .nav-links a{transition:color .25s}
-  .nav-links a:hover{color:var(--paper)}
-  .nav-links .src{color:var(--paper);border:1px solid var(--rule-strong);padding:7px 14px;border-radius:999px;font-size:13.5px;transition:border-color .25s}
-  .nav-links .src:hover{border-color:var(--ember)}
-
-  .hero{padding:110px 0 78px}
-  .eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;color:var(--dim);text-transform:lowercase}
-  .eyebrow b{color:var(--brass);font-weight:500}
-  h1{font-family:var(--serif);font-weight:400;font-size:clamp(40px,6vw,68px);line-height:1.08;letter-spacing:-.012em;margin:24px 0 0;max-width:760px}
-  h1 em{font-style:italic;color:var(--ember)}
-  .hero-sub{color:var(--dim);max-width:580px;margin:24px 0 0;font-size:17px}
-  .hero-sub b{color:var(--paper);font-weight:500}
-
-  /* ---------- skill rows ---------- */
-  .skills{border-top:1px solid var(--rule);margin-top:64px}
-  .sk-group{display:flex;align-items:baseline;gap:14px;padding:46px 0 10px;border-bottom:1px solid var(--rule);scroll-margin-top:84px}
-  .sk-group h2{font-family:var(--serif);font-size:23px;font-weight:500;color:var(--paper);letter-spacing:-.01em;margin:0}
-  .sk-group span{font-family:var(--mono);font-size:12.5px;color:var(--dim);letter-spacing:.04em}
-  .skill{scroll-margin-top:84px}
-  .skill{display:grid;grid-template-columns:280px 1fr;gap:32px;padding:40px 0 40px;border-bottom:1px solid var(--rule);align-items:start}
-  .skill:hover .sk-name{color:var(--ember)}
-  .sk-id{display:flex;flex-direction:column;gap:6px}
-  .sk-name{font-family:var(--serif);font-size:30px;font-weight:500;letter-spacing:-.01em;color:var(--paper);transition:color .25s;line-height:1.15}
-  .sk-tag{font-family:var(--mono);font-size:12.5px;color:var(--dim);letter-spacing:.04em}
-  .sk-body p{font-size:16px;max-width:56ch}
-  .sk-body .sk-stats{font-family:var(--mono);font-size:13px;color:var(--brass);margin-top:10px}
-  .sk-install{font-family:var(--mono);font-size:13.5px;color:var(--paper);background:var(--surface);border:1px solid var(--rule);border-radius:8px;padding:10px 14px;margin-top:16px;display:inline-block}
-  .sk-install::before{content:"$ ";color:var(--dim)}
-  .sk-links{display:flex;gap:18px;margin-top:16px;font-size:14px;flex-wrap:wrap}
-  .sk-links a{color:var(--ember);border-bottom:1px solid transparent;transition:border-color .2s}
-  .sk-links a:hover{border-color:var(--ember)}
-  .sk-links a.page{color:var(--paper)}
-  .sk-links a.page:hover{color:var(--ember)}
-
-  .foot-note{padding:56px 0 10px;color:var(--dim);font-size:15px;max-width:620px}
-  .foot-note a{color:var(--paper);border-bottom:1px solid var(--rule-strong)}
-  footer{border-top:1px solid var(--rule);margin-top:44px;padding:30px 0 40px}
-  footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:12.5px;color:var(--dim)}
-  footer a:hover{color:var(--paper)}
-
-  @media (max-width:860px){
-    .skill{grid-template-columns:1fr;gap:18px}
-    .nav .wrap{flex-wrap:wrap;height:auto;padding:10px 28px;row-gap:10px}
-    .nav-links{gap:13px;width:100%;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
-    .nav-links::-webkit-scrollbar{display:none}
-    .nav-links a{white-space:nowrap}
+  @media (max-width:760px){
+    .skill{grid-template-columns:1fr}
   }
   @media (prefers-reduced-motion:reduce){
     *,*::before,*::after{transition:none!important;animation:none!important}
@@ -284,520 +291,452 @@
 </head>
 <body>
 
-<nav class="nav">
+<nav class="nav" aria-label="Site">
   <div class="wrap">
-    <a class="brand" href="/"><span class="caret">∧</span>caffeinity skills</a>
-    <div class="nav-links">
-      <a href="#writing-growth">Writing</a>
-      <a href="#career">Career</a>
-      <a href="#thinking-learning">Thinking</a>
-      <a href="#skill-authoring">Authoring</a>
-      <a href="#ship-checks">Ship Checks</a>
-      <a href="#outbound">Outbound</a>
-      <a class="src" href="https://github.com/arm-pz" target="_blank" rel="noopener">GitHub</a>
-    </div>
+    <a class="brand" href="/"><b>∧</b>caffeinity skills</a>
+    <a class="gh" href="https://github.com/arm-pz" target="_blank" rel="noopener">GitHub</a>
   </div>
 </nav>
 
 <header class="hero">
   <div class="wrap">
-    <p class="eyebrow">open agent skills · <b>one-line install, no API keys</b></p>
-    <h1>Give your agent a <em>craft</em>.</h1>
-    <p class="hero-sub">Plain-markdown skills that teach Claude Code, Cursor, Codex, Qoder and any agent that reads a <b>SKILL.md</b> how to edit, screen, teach, compete, rank and ship. Nothing to run, nothing to pay for, nothing to lock in.</p>
-
-    <div class="skills">
-    <!-- gen:skills:start -->
-    <div class="sk-group" id="writing-growth">
-      <h2>Writing &amp; Growth</h2>
-      <span>7 skills · editorial · seo · discovery · chains</span>
+    <h1>Give your agent a craft.</h1>
+    <p class="lead">Plain-markdown skills that teach Claude Code, Cursor, Codex, Qoder and any agent that reads a SKILL.md how to edit, screen, teach, rank and ship. One-line install, no API keys, nothing to run.</p>
+    <div class="find" role="search">
+      <label for="q">What should your agent get better at?</label>
+      <input id="q" type="search" placeholder="Try resume, SEO or git push" autocomplete="off" spellcheck="false">
+      <p class="find-status" id="find-status" role="status" aria-live="polite"></p>
+      <nav class="jump" aria-label="Skill groups">
+        <a href="#writing-growth">Writing &amp; Growth</a>
+        <a href="#career">Career</a>
+        <a href="#thinking-learning">Thinking &amp; Learning</a>
+        <a href="#skill-authoring">Skill Authoring</a>
+        <a href="#ship-checks">Ship Checks</a>
+        <a href="#outbound">Outbound</a>
+      </nav>
     </div>
-
-      <div class="skill" id="wordsmith">
-        <div class="sk-id">
-          <a class="sk-name" href="wordsmith/">wordsmith</a>
-          <span class="sk-tag">editorial</span>
-        </div>
-        <div class="sk-body">
-          <p>Teaches your agent to edit, not just generate: 44 commands across 5 disciplines that tighten, rewrite, critique and proofread while keeping the author's meaning, hedges and voice intact.</p>
-          <p class="sk-stats">44 commands · 5 disciplines · ~1,200 lines · 0 API keys</p>
-          <p class="sk-install mono">npx skills add arm-pz/wordsmith</p>
-          <div class="sk-links">
-            <a class="page" href="wordsmith/">Full install page →</a>
-            <a href="https://github.com/arm-pz/wordsmith" target="_blank" rel="noopener">Source</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="skill" id="keyword-guard">
-        <div class="sk-id">
-          <a class="sk-name" href="keyword-guard/">keyword-guard</a>
-          <span class="sk-tag">seo</span>
-        </div>
-        <div class="sk-body">
-          <p>Plans topic clusters and kills keyword cannibalization so exactly one page wins each query. The cannibalization audit is a mandatory blocker before any content change — with a sitemap fallback for when you have no Search Console access.</p>
-          <p class="sk-stats">6 phases · 3 reference checklists · ~300 lines · 0 API keys</p>
-          <p class="sk-install mono">npx skills add arm-pz/keyword-guard</p>
-          <div class="sk-links">
-            <a class="page" href="keyword-guard/">Full install page →</a>
-            <a href="https://github.com/arm-pz/keyword-guard" target="_blank" rel="noopener">Source</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="skill" id="findable">
-        <div class="sk-id">
-          <a class="sk-name" href="findable/">findable</a>
-          <span class="sk-tag">discovery</span>
-        </div>
-        <div class="sk-body">
-          <p>Sets up discovery for a GitHub repo, skill, plugin or MCP server so it gets found by what it does, not only by its name. It audits where you rank today, works out the queries strangers type, then drafts the About text, topics, README opening, release notes, site page and directory plan — real numbers only, and nothing public changes without your go-ahead.</p>
-          <p class="sk-stats">8 workflow steps · 10 kit sections · 4 reference guides · 1 listing validator · 0 API keys</p>
-          <p class="sk-install mono">npx skills add arm-pz/findable --skill findable</p>
-          <div class="sk-links">
-            <a class="page" href="findable/">Full install page →</a>
-            <a href="https://github.com/arm-pz/findable" target="_blank" rel="noopener">Source</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="skill" id="findable-polish">
-        <div class="sk-id">
-          <a class="sk-name" href="findable-polish/">findable-polish</a>
-          <span class="sk-tag">discovery</span>
-        </div>
-        <div class="sk-body">
-          <p>Chains Findable and Wordsmith: audits a README, skill page or landing copy against the queries a real stranger types, then writes two or three alternatives per finding that fix it without inventing a fact. Proven on its own repo: seven live searches, zero hits, six named gaps, fixes applied the same day.</p>
-          <p class="sk-stats">3 files · 125 lines · 2 chained skills · 0 API keys</p>
-          <p class="sk-install mono">npx skills add arm-pz/findable-polish --skill findable-polish</p>
-          <div class="sk-links">
-            <a class="page" href="findable-polish/">Full install page →</a>
-            <a href="https://github.com/arm-pz/findable-polish" target="_blank" rel="noopener">Source</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="skill" id="keyword-resolver">
-        <div class="sk-id">
-          <a class="sk-name" href="keyword-resolver/">keyword-resolver</a>
-          <span class="sk-tag">seo</span>
-        </div>
-        <div class="sk-body">
-          <p>Resolves keyword cannibalization with Keyword-Guard, then rewrites titles, H1s and meta descriptions with Wordsmith. One query, one owner — the ownership audit blocks until the map is settled, and a sitemap fallback is named as a fallback when you have no Search Console.</p>
-          <p class="sk-stats">3 files · 127 lines · 2 chained skills · 0 API keys</p>
-          <p class="sk-install mono">npx skills add arm-pz/keyword-resolver --skill keyword-resolver</p>
-          <div class="sk-links">
-            <a class="page" href="keyword-resolver/">Full install page →</a>
-            <a href="https://github.com/arm-pz/keyword-resolver" target="_blank" rel="noopener">Source</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="skill" id="seo-polish">
-        <div class="sk-id">
-          <a class="sk-name" href="seo-polish/">seo-polish</a>
-          <span class="sk-tag">seo</span>
-        </div>
-        <div class="sk-body">
-          <p>The full Seo-Audit diagnosis — crawlability, indexation, technical, on-page, content, authority — then Wordsmith drafts optimized alternatives for every High and Medium finding. Checks that couldn’t run come back INCONCLUSIVE, and no position is promised.</p>
-          <p class="sk-stats">3 files · 85 lines · 5 audit layers · 0 API keys</p>
-          <p class="sk-install mono">npx skills add arm-pz/seo-polish --skill seo-polish</p>
-          <div class="sk-links">
-            <a class="page" href="seo-polish/">Full install page →</a>
-            <a href="https://github.com/arm-pz/seo-polish" target="_blank" rel="noopener">Source</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="skill" id="seo-crawl">
-        <div class="sk-id">
-          <a class="sk-name" href="seo-crawl/">seo-crawl</a>
-          <span class="sk-tag">seo</span>
-        </div>
-        <div class="sk-body">
-          <p>Crawls a site you own and returns deterministic, evidence-backed technical SEO findings, with blocked or unrun checks reported INCONCLUSIVE rather than a pass.</p>
-          <p class="sk-stats">14 files · 1,885 lines · 19 KB</p>
-          <p class="sk-install mono">npx skills add arm-pz/seo-crawl</p>
-          <div class="sk-links">
-            <a class="page" href="seo-crawl/">Full install page →</a>
-            <a href="https://github.com/arm-pz/seo-crawl" target="_blank" rel="noopener">Source</a>
-          </div>
-        </div>
-      </div>
-
-    <div class="sk-group" id="career">
-      <h2>Career</h2>
-      <span>3 skills · screening · applications · follow-through</span>
-    </div>
-
-      <div class="skill" id="recruiter-lens">
-        <div class="sk-id">
-          <a class="sk-name" href="recruiter-lens/">recruiter-lens</a>
-          <span class="sk-tag">career</span>
-        </div>
-        <div class="sk-body">
-          <p>Reviews resumes, CVs and LinkedIn profiles the way recruiters actually screen them: first-impression scans, ATS compatibility, rejection-pattern diagnosis, and interview prep. 13 commands through 5 filters, and it never invents a metric.</p>
-          <p class="sk-stats">13 commands · 5 filters · ~2,500 lines · 0 API keys</p>
-          <p class="sk-install mono">npx skills add arm-pz/recruiter-lens</p>
-          <div class="sk-links">
-            <a class="page" href="recruiter-lens/">Full install page →</a>
-            <a href="https://github.com/arm-pz/recruiter-lens" target="_blank" rel="noopener">Source</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="skill" id="applicant-kit">
-        <div class="sk-id">
-          <a class="sk-name" href="applicant-kit/">applicant-kit</a>
-          <span class="sk-tag">career</span>
-        </div>
-        <div class="sk-body">
-          <p>Writes the better version: decoded job description, tailored resume, bullets rewritten as action-task-result-impact, honest keyword placement, five summaries, a LinkedIn rewrite and twenty interview answers, all built from real experience. recruiter-lens judges; applicant-kit produces. Nothing invented.</p>
-          <p class="sk-stats">7 modes · 6 produce + 1 hand-off · ~320 lines · 0 API keys</p>
-          <p class="sk-install mono">npx skills add arm-pz/applicant-kit --skill applicant-kit</p>
-          <div class="sk-links">
-            <a class="page" href="applicant-kit/">Full install page →</a>
-            <a href="https://github.com/arm-pz/applicant-kit" target="_blank" rel="noopener">Source</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="skill" id="application-pilot">
-        <div class="sk-id">
-          <a class="sk-name" href="application-pilot/">application-pilot</a>
-          <span class="sk-tag">career</span>
-        </div>
-        <div class="sk-body">
-          <p>Runs the job search around the applications: turns role criteria into a live shortlist, scores each role for fit with evidence, keeps a reviewable tracker with submission and follow-up dates, flags roles that have gone quiet, drafts the follow-up and the interview briefing, and reads the funnel weekly. applicant-kit writes the packet; application-pilot keeps the search alive. It never submits anything, and never claims a status it did not see.</p>
-          <p class="sk-stats">8 modes · 9 ground rules · 5 files · no CLI, no telemetry</p>
-          <p class="sk-install mono">npx skills add arm-pz/application-pilot --skill application-pilot</p>
-          <div class="sk-links">
-            <a class="page" href="application-pilot/">Full install page →</a>
-            <a href="https://github.com/arm-pz/application-pilot" target="_blank" rel="noopener">Source</a>
-          </div>
-        </div>
-      </div>
-
-    <div class="sk-group" id="thinking-learning">
-      <h2>Thinking &amp; Learning</h2>
-      <span>3 skills · teaching · tournaments · decisions</span>
-    </div>
-
-      <div class="skill" id="topic-primer">
-        <div class="sk-id">
-          <a class="sk-name" href="topic-primer/">topic-primer</a>
-          <span class="sk-tag">learning</span>
-        </div>
-        <div class="sk-body">
-          <p>A world-class teacher for any topic, from zero background toward expert depth. Eight modes: foundations, full curriculum, concept-by-concept lessons, adaptive tutoring, expert mental models, mistake prevention, strict exams, and ELI5. One question at a time, then it waits.</p>
-          <p class="sk-stats">8 modes · 68 lines · 0 API keys</p>
-          <p class="sk-install mono">npx skills add arm-pz/topic-primer</p>
-          <div class="sk-links">
-            <a class="page" href="topic-primer/">Full install page →</a>
-            <a href="https://github.com/arm-pz/topic-primer" target="_blank" rel="noopener">Source</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="skill" id="do-better">
-        <div class="sk-id">
-          <a class="sk-name" href="do-better/">do-better</a>
-          <span class="sk-tag">arena</span>
-        </div>
-        <div class="sk-body">
-          <p>When an answer is bad, don't ask twice: N sub-agents (100 by default, 16 with --quick) get the exact same task with different strategy cards, then attack, defend and judge each other in a single-elimination bracket until one solution survives.</p>
-          <p class="sk-stats">2,160 strategy cards · 7 rounds at full size · ~1,700 lines · 0 API keys</p>
-          <p class="sk-install mono">npx skills add arm-pz/do-better</p>
-          <div class="sk-links">
-            <a class="page" href="do-better/">Full install page →</a>
-            <a href="https://github.com/arm-pz/do-better" target="_blank" rel="noopener">Source</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="skill" id="crash-test">
-        <div class="sk-id">
-          <a class="sk-name" href="crash-test/">crash-test</a>
-          <span class="sk-tag">decisions</span>
-        </div>
-        <div class="sk-body">
-          <p>Crash-tests a decision before you build it. Four fixed roles draft the same task in separate contexts and attack each other's drafts anonymously; the chair merges what survived on evidence, not votes, keeps a dissent log for what it could not settle, and grounds the winner's claims about your files against the source before adopting them.</p>
-          <p class="sk-stats">4 roles · ~9 calls · 1 opt-in Operator seat · 2 modes · 0 API keys</p>
-          <p class="sk-install mono">npx skills add arm-pz/crash-test --skill crash-test</p>
-          <div class="sk-links">
-            <a class="page" href="crash-test/">Full install page →</a>
-            <a href="https://github.com/arm-pz/crash-test" target="_blank" rel="noopener">Source</a>
-          </div>
-        </div>
-      </div>
-
-    <div class="sk-group" id="skill-authoring">
-      <h2>Skill Authoring</h2>
-      <span>9 skills · draft · tune · package · chains</span>
-    </div>
-
-      <div class="skill" id="draft-skill">
-        <div class="sk-id">
-          <a class="sk-name" href="draft-skill/">draft-skill</a>
-          <span class="sk-tag">authoring</span>
-        </div>
-        <div class="sk-body">
-          <p>Creates a new agent skill from a plain idea: confirms the purpose before writing anything, checks the installed siblings for overlap, splits scripts from references from assets, writes a description that actually triggers, then validates it with check_skill.py. Written from scratch, so it carries no text from Qoder's built-in skill-creator, which ships without a licence permitting redistribution.</p>
-          <p class="sk-stats">2 files · 112 lines · 8 workflow steps · 0 API keys</p>
-          <p class="sk-install mono">npx skills add arm-pz/draft-skill</p>
-          <div class="sk-links">
-            <a class="page" href="draft-skill/">Full install page →</a>
-            <a href="https://github.com/arm-pz/draft-skill" target="_blank" rel="noopener">Source</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="skill" id="tune-skill">
-        <div class="sk-id">
-          <a class="sk-name" href="tune-skill/">tune-skill</a>
-          <span class="sk-tag">authoring</span>
-        </div>
-        <div class="sk-body">
-          <p>Audits and fine-tunes a skill that already exists: the description that never fires, overlap with installed siblings, stale names and counts, handoff contracts that do not hand off. Ships check_skill.py, a deterministic validator over frontmatter, folder and heading agreement, description length and reference paths that do not exist. Not for creating one from scratch; that is draft-skill.</p>
-          <p class="sk-stats">4 files · 268 lines · 1 validator script · 0 API keys</p>
-          <p class="sk-install mono">npx skills add arm-pz/tune-skill</p>
-          <div class="sk-links">
-            <a class="page" href="tune-skill/">Full install page →</a>
-            <a href="https://github.com/arm-pz/tune-skill" target="_blank" rel="noopener">Source</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="skill" id="prompts-to-skill">
-        <div class="sk-id">
-          <a class="sk-name" href="prompts-to-skill/">prompts-to-skill</a>
-          <span class="sk-tag">authoring</span>
-        </div>
-        <div class="sk-body">
-          <p>Turns a list of your own prompts into a finished, tested skill, one skill per prompt: an intent interview, an overlap check against what is already installed, a draft written with draft-skill, trigger test cases that include near-misses, and a tune-skill gate at the end. It needs draft-skill and tune-skill and stops with a clear message if either is missing.</p>
-          <p class="sk-stats">3 files · 141 lines · depends on draft-skill + tune-skill · 0 API keys</p>
-          <p class="sk-install mono">npx skills add arm-pz/prompts-to-skill</p>
-          <div class="sk-links">
-            <a class="page" href="prompts-to-skill/">Full install page →</a>
-            <a href="https://github.com/arm-pz/prompts-to-skill" target="_blank" rel="noopener">Source</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="skill" id="prompts-to-skill-release">
-        <div class="sk-id">
-          <a class="sk-name" href="prompts-to-skill-release/">prompts-to-skill-release</a>
-          <span class="sk-tag">release</span>
-        </div>
-        <div class="sk-body">
-          <p>Packages a finished skill for release: runs its trigger test cases and records which passed and which did not, sets the version and CHANGELOG, builds the archive, writes the README, and ends with a per-platform install checklist. Failed tests stay in the report instead of being dropped from it.</p>
-          <p class="sk-stats">3 files · 113 lines · 5 release sections · 0 API keys</p>
-          <p class="sk-install mono">npx skills add arm-pz/prompts-to-skill-release</p>
-          <div class="sk-links">
-            <a class="page" href="prompts-to-skill-release/">Full install page →</a>
-            <a href="https://github.com/arm-pz/prompts-to-skill-release" target="_blank" rel="noopener">Source</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="skill" id="tune-and-polish">
-        <div class="sk-id">
-          <a class="sk-name" href="tune-and-polish/">tune-and-polish</a>
-          <span class="sk-tag">authoring</span>
-        </div>
-        <div class="sk-body">
-          <p>For a skill that both misfires and hides: Tune-Skill fixes the triggering description, sibling overlaps and stale counts, gated on check_skill.py with zero FAILs; then Findable-Polish audits and polishes the README, About and site copy against real queries. Listings are written from the final description, never before.</p>
-          <p class="sk-stats">3 files · 89 lines · 2 gated phases · 0 API keys</p>
-          <p class="sk-install mono">npx skills add arm-pz/tune-and-polish --skill tune-and-polish</p>
-          <div class="sk-links">
-            <a class="page" href="tune-and-polish/">Full install page →</a>
-            <a href="https://github.com/arm-pz/tune-and-polish" target="_blank" rel="noopener">Source</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="skill" id="skill-launch">
-        <div class="sk-id">
-          <a class="sk-name" href="skill-launch/">skill-launch</a>
-          <span class="sk-tag">authoring</span>
-        </div>
-        <div class="sk-body">
-          <p>The full pipeline from idea to launched skill: Draft-Skill writes it, Tune-Skill gates it through the validator, Findable-Polish polishes its discovery surfaces. Six chain skills went through this loop in one day — and every public change still needs your go-ahead.</p>
-          <p class="sk-stats">3 files · 110 lines · 3 gated phases · 0 API keys</p>
-          <p class="sk-install mono">npx skills add arm-pz/skill-launch --skill skill-launch</p>
-          <div class="sk-links">
-            <a class="page" href="skill-launch/">Full install page →</a>
-            <a href="https://github.com/arm-pz/skill-launch" target="_blank" rel="noopener">Source</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="skill" id="upstream-polish">
-        <div class="sk-id">
-          <a class="sk-name" href="upstream-polish/">upstream-polish</a>
-          <span class="sk-tag">authoring</span>
-        </div>
-        <div class="sk-body">
-          <p>Chains Upstream-Check — fetch-based push verdicts, fast-forward only, screened for credential-shaped lines — with Wordsmith rewriting drifted descriptions, topics and README rows, so repos and listings tell the same story again. An unreadable source is inconclusive, never counted as empty.</p>
-          <p class="sk-stats">3 files · 122 lines · 7 verdicts · 0 API keys</p>
-          <p class="sk-install mono">npx skills add arm-pz/upstream-polish --skill upstream-polish</p>
-          <div class="sk-links">
-            <a class="page" href="upstream-polish/">Full install page →</a>
-            <a href="https://github.com/arm-pz/upstream-polish" target="_blank" rel="noopener">Source</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="skill" id="publish-pipeline">
-        <div class="sk-id">
-          <a class="sk-name" href="publish-pipeline/">publish-pipeline</a>
-          <span class="sk-tag">authoring</span>
-        </div>
-        <div class="sk-body">
-          <p>Turns a pile of skill repos into a published site: a committed manifest decides what is public, discovery opens a pull request, and a green merge deploys generated pages, both discovery indexes, a sitemap and a verified build.</p>
-          <p class="sk-stats">9 files · 1,214 lines · 20 KB</p>
-          <p class="sk-install mono">npx skills add arm-pz/publish-pipeline</p>
-          <div class="sk-links">
-            <a class="page" href="publish-pipeline/">Full install page →</a>
-            <a href="https://github.com/arm-pz/publish-pipeline" target="_blank" rel="noopener">Source</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="skill" id="skill-to-mod">
-        <div class="sk-id">
-          <a class="sk-name" href="skill-to-mod/">skill-to-mod</a>
-          <span class="sk-tag">authoring</span>
-        </div>
-        <div class="sk-body">
-          <p>Checks whether a skill should become a Claude Code mod, then builds the plugin with your skill unchanged and a thin trigger, validates and tests it, and lists what it can touch. Says no when a skill should stay a skill.</p>
-          <p class="sk-stats">12 files · 1,790 lines · 3 trigger patterns · 0 API keys</p>
-          <p class="sk-install mono">npx skills add arm-pz/skill-to-mod --skill skill-to-mod</p>
-          <div class="sk-links">
-            <a class="page" href="skill-to-mod/">Full install page →</a>
-            <a href="https://github.com/arm-pz/skill-to-mod" target="_blank" rel="noopener">Source</a>
-          </div>
-        </div>
-      </div>
-
-    <div class="sk-group" id="ship-checks">
-      <h2>Ship Checks</h2>
-      <span>4 skills · pre-launch audits</span>
-    </div>
-
-      <div class="skill" id="web-preflight">
-        <div class="sk-id">
-          <a class="sk-name" href="web-preflight/">web-preflight</a>
-          <span class="sk-tag">release</span>
-        </div>
-        <div class="sk-body">
-          <p>Checks a site you own before you ship it, without pretending a status code is a finding. A 200 on /.env that matches the app shell is catch-all routing, a blanket 403 is an unanswered question, and a check that never ran becomes INCONCLUSIVE — never a pass.</p>
-          <p class="sk-stats">4 verdicts · 19 fixed paths · 9 behavioral tests · ~215 lines · 0 API keys</p>
-          <p class="sk-install mono">npx skills add arm-pz/web-preflight</p>
-          <div class="sk-links">
-            <a class="page" href="web-preflight/">Full install page →</a>
-            <a href="https://github.com/arm-pz/web-preflight" target="_blank" rel="noopener">Source</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="skill" id="pre-ship-performance-audit">
-        <div class="sk-id">
-          <a class="sk-name" href="pre-ship-performance-audit/">pre-ship-performance-audit</a>
-          <span class="sk-tag">performance</span>
-        </div>
-        <div class="sk-body">
-          <p>Audits and fixes a web app's real-world speed before launch: four read-only subagents sweep twenty known slow-downs across images, bundles, database queries and servers, then the same mobile Lighthouse protocol, three runs per page, proves each fix before and after. Never removes a feature for a score, never invents a baseline, and asks before touching dependencies, the database or the deploy region.</p>
-          <p class="sk-stats">4 subagents · 20 slow-downs · 6 phases · ~120 lines · 0 API keys</p>
-          <p class="sk-install mono">npx skills add arm-pz/pre-ship-performance-audit</p>
-          <div class="sk-links">
-            <a class="page" href="pre-ship-performance-audit/">Full install page →</a>
-            <a href="https://github.com/arm-pz/pre-ship-performance-audit" target="_blank" rel="noopener">Source</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="skill" id="pre-ship-security-red-team">
-        <div class="sk-id">
-          <a class="sk-name" href="pre-ship-security-red-team/">pre-ship-security-red-team</a>
-          <span class="sk-tag">release</span>
-        </div>
-        <div class="sk-body">
-          <p>Red-teams a web app you own before launch, in an isolated local environment. Three parallel read-only subagents run fourteen authorization and abuse checks across three groups (identity and authorization; UI and API bypass; browser, network, cache and AI), each with captured evidence, then the fix is rerun against the same check. A check that cannot fail is falsified first, and findings stay on the record even when the pass clears.</p>
-          <p class="sk-stats">3 subagents · 14 checks · 9 files · local environments only</p>
-          <p class="sk-install mono">npx skills add arm-pz/pre-ship-security-red-team</p>
-          <div class="sk-links">
-            <a class="page" href="pre-ship-security-red-team/">Full install page →</a>
-            <a href="https://github.com/arm-pz/pre-ship-security-red-team" target="_blank" rel="noopener">Source</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="skill" id="ship-sentinel">
-        <div class="sk-id">
-          <a class="sk-name" href="ship-sentinel/">ship-sentinel</a>
-          <span class="sk-tag">release</span>
-        </div>
-        <div class="sk-body">
-          <p>A Claude Code mod that holds git push, PR, publish and deploy commands until your pre-ship check skills have run since the last edit. Ask, block or nudge; fails open and touches no files, network or processes.</p>
-          <p class="sk-stats">1 hook module · 173 lines · 4 calls · 0 network</p>
-          <p class="sk-install mono">/plugin install ship-sentinel --marketplace arm-pz/ship-sentinel</p>
-          <div class="sk-links">
-            <a class="page" href="ship-sentinel/">Full install page →</a>
-            <a href="https://github.com/arm-pz/ship-sentinel" target="_blank" rel="noopener">Source</a>
-          </div>
-        </div>
-      </div>
-
-    <div class="sk-group" id="outbound">
-      <h2>Outbound</h2>
-      <span>2 skills · cold email · deliverability · list gates</span>
-    </div>
-
-      <div class="skill" id="cold-email-ops">
-        <div class="sk-id">
-          <a class="sk-name" href="cold-email-ops/">cold-email-ops</a>
-          <span class="sk-tag">outbound</span>
-        </div>
-        <div class="sk-body">
-          <p>Plan and audit a cold-email program at volume and keep it from degrading: computes inbox and domain capacity from a monthly send target, sets per-domain reply-rate floors, burn-replacement cadence, shadow-ban tests, and automation error…</p>
-          <p class="sk-stats">4 files · 393 lines · 8 KB</p>
-          <p class="sk-install mono">npx skills add arm-pz/cold-email-ops</p>
-          <div class="sk-links">
-            <a class="page" href="cold-email-ops/">Full install page →</a>
-            <a href="https://github.com/arm-pz/cold-email-ops" target="_blank" rel="noopener">Source</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="skill" id="cold-email-list-gate">
-        <div class="sk-id">
-          <a class="sk-name" href="cold-email-list-gate/">cold-email-list-gate</a>
-          <span class="sk-tag">outbound</span>
-        </div>
-        <div class="sk-body">
-          <p>Gate a cold-email lead list before it loads: sample ten rows, check company, title, size, and mailbox against the ICP, compare data providers on the same criteria, and return a GO or HOLD decision with the fail pattern and the re-run…</p>
-          <p class="sk-stats">2 files · 96 lines · 2 KB</p>
-          <p class="sk-install mono">npx skills add arm-pz/cold-email-list-gate</p>
-          <div class="sk-links">
-            <a class="page" href="cold-email-list-gate/">Full install page →</a>
-            <a href="https://github.com/arm-pz/cold-email-list-gate" target="_blank" rel="noopener">Source</a>
-          </div>
-        </div>
-      </div>
-
-    <!-- gen:skills:end -->
-    </div>
-
-    <p class="foot-note">Every skill is open markdown on GitHub. New install pages appear here as each skill earns one. Problems with a skill? <a href="https://github.com/arm-pz" target="_blank" rel="noopener">Open an issue</a>.</p>
   </div>
 </header>
 
+<main class="catalogue">
+  <div class="wrap skills">
+    <!-- gen:skills:start -->
+    <section class="sk-group" id="writing-growth" aria-labelledby="writing-growth-h">
+      <div class="sk-head">
+        <h2 id="writing-growth-h">Writing &amp; Growth</h2>
+        <p>7 skills · editorial · seo · discovery · chains</p>
+      </div>
+      <article class="skill" id="wordsmith" data-search="wordsmith wordsmith editorial teaches your agent to edit, not just generate: 44 commands across 5 disciplines that tighten, rewrite, critique and proofread while keeping the author&#x27;s meaning, hedges and voice intact.">
+        <h3><a href="wordsmith/">Wordsmith</a></h3>
+        <div class="sk-body">
+          <p>Teaches your agent to edit, not just generate: 44 commands across 5 disciplines that tighten, rewrite, critique and proofread while keeping the author's meaning, hedges and voice intact.</p>
+          <p class="sk-stats">44 commands · 5 disciplines · ~1,200 lines · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/wordsmith</code>
+          <p class="sk-links">
+            <a href="wordsmith/">Install page</a>
+            <a href="https://github.com/arm-pz/wordsmith" target="_blank" rel="noopener">Source</a>
+          </p>
+        </div>
+      </article>
+      <article class="skill" id="keyword-guard" data-search="keyword-guard keyword guard seo plans topic clusters and kills keyword cannibalization so exactly one page wins each query. the cannibalization audit is a mandatory blocker before any content change — with a sitemap fallback for when you have no search console access.">
+        <h3><a href="keyword-guard/">Keyword Guard</a></h3>
+        <div class="sk-body">
+          <p>Plans topic clusters and kills keyword cannibalization so exactly one page wins each query. The cannibalization audit is a mandatory blocker before any content change — with a sitemap fallback for when you have no Search Console access.</p>
+          <p class="sk-stats">6 phases · 3 reference checklists · ~300 lines · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/keyword-guard</code>
+          <p class="sk-links">
+            <a href="keyword-guard/">Install page</a>
+            <a href="https://github.com/arm-pz/keyword-guard" target="_blank" rel="noopener">Source</a>
+          </p>
+        </div>
+      </article>
+      <article class="skill" id="findable" data-search="findable findable discovery sets up discovery for a github repo, skill, plugin or mcp server so it gets found by what it does, not only by its name. it audits where you rank today, works out the queries strangers type, then drafts the about text, topics, readme opening, release notes, site page and directory plan — real numbers only, and nothing public changes without your go-ahead.">
+        <h3><a href="findable/">Findable</a></h3>
+        <div class="sk-body">
+          <p>Sets up discovery for a GitHub repo, skill, plugin or MCP server so it gets found by what it does, not only by its name. It audits where you rank today, works out the queries strangers type, then drafts the About text, topics, README opening, release notes, site page and directory plan — real numbers only, and nothing public changes without your go-ahead.</p>
+          <p class="sk-stats">8 workflow steps · 10 kit sections · 4 reference guides · 1 listing validator · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/findable --skill findable</code>
+          <p class="sk-links">
+            <a href="findable/">Install page</a>
+            <a href="https://github.com/arm-pz/findable" target="_blank" rel="noopener">Source</a>
+          </p>
+        </div>
+      </article>
+      <article class="skill" id="findable-polish" data-search="findable-polish findable polish discovery chains findable and wordsmith: audits a readme, skill page or landing copy against the queries a real stranger types, then writes two or three alternatives per finding that fix it without inventing a fact. proven on its own repo: seven live searches, zero hits, six named gaps, fixes applied the same day.">
+        <h3><a href="findable-polish/">Findable Polish</a></h3>
+        <div class="sk-body">
+          <p>Chains Findable and Wordsmith: audits a README, skill page or landing copy against the queries a real stranger types, then writes two or three alternatives per finding that fix it without inventing a fact. Proven on its own repo: seven live searches, zero hits, six named gaps, fixes applied the same day.</p>
+          <p class="sk-stats">3 files · 125 lines · 2 chained skills · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/findable-polish --skill findable-polish</code>
+          <p class="sk-links">
+            <a href="findable-polish/">Install page</a>
+            <a href="https://github.com/arm-pz/findable-polish" target="_blank" rel="noopener">Source</a>
+          </p>
+        </div>
+      </article>
+      <article class="skill" id="keyword-resolver" data-search="keyword-resolver keyword resolver seo resolves keyword cannibalization with keyword-guard, then rewrites titles, h1s and meta descriptions with wordsmith. one query, one owner — the ownership audit blocks until the map is settled, and a sitemap fallback is named as a fallback when you have no search console.">
+        <h3><a href="keyword-resolver/">Keyword Resolver</a></h3>
+        <div class="sk-body">
+          <p>Resolves keyword cannibalization with Keyword-Guard, then rewrites titles, H1s and meta descriptions with Wordsmith. One query, one owner — the ownership audit blocks until the map is settled, and a sitemap fallback is named as a fallback when you have no Search Console.</p>
+          <p class="sk-stats">3 files · 127 lines · 2 chained skills · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/keyword-resolver --skill keyword-resolver</code>
+          <p class="sk-links">
+            <a href="keyword-resolver/">Install page</a>
+            <a href="https://github.com/arm-pz/keyword-resolver" target="_blank" rel="noopener">Source</a>
+          </p>
+        </div>
+      </article>
+      <article class="skill" id="seo-polish" data-search="seo-polish seo polish seo the full seo-audit diagnosis — crawlability, indexation, technical, on-page, content, authority — then wordsmith drafts optimized alternatives for every high and medium finding. checks that couldn’t run come back inconclusive, and no position is promised.">
+        <h3><a href="seo-polish/">Seo Polish</a></h3>
+        <div class="sk-body">
+          <p>The full Seo-Audit diagnosis — crawlability, indexation, technical, on-page, content, authority — then Wordsmith drafts optimized alternatives for every High and Medium finding. Checks that couldn’t run come back INCONCLUSIVE, and no position is promised.</p>
+          <p class="sk-stats">3 files · 85 lines · 5 audit layers · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/seo-polish --skill seo-polish</code>
+          <p class="sk-links">
+            <a href="seo-polish/">Install page</a>
+            <a href="https://github.com/arm-pz/seo-polish" target="_blank" rel="noopener">Source</a>
+          </p>
+        </div>
+      </article>
+      <article class="skill" id="seo-crawl" data-search="seo-crawl seo crawl seo crawls a site you own and returns deterministic, evidence-backed technical seo findings, with blocked or unrun checks reported inconclusive rather than a pass.">
+        <h3><a href="seo-crawl/">SEO Crawl</a></h3>
+        <div class="sk-body">
+          <p>Crawls a site you own and returns deterministic, evidence-backed technical SEO findings, with blocked or unrun checks reported INCONCLUSIVE rather than a pass.</p>
+          <p class="sk-stats">14 files · 1,885 lines · 19 KB</p>
+          <code class="sk-install">npx skills add arm-pz/seo-crawl</code>
+          <p class="sk-links">
+            <a href="seo-crawl/">Install page</a>
+            <a href="https://github.com/arm-pz/seo-crawl" target="_blank" rel="noopener">Source</a>
+          </p>
+        </div>
+      </article>
+    </section>
+
+    <section class="sk-group" id="career" aria-labelledby="career-h">
+      <div class="sk-head">
+        <h2 id="career-h">Career</h2>
+        <p>3 skills · screening · applications · follow-through</p>
+      </div>
+      <article class="skill" id="recruiter-lens" data-search="recruiter-lens recruiter lens career reviews resumes, cvs and linkedin profiles the way recruiters actually screen them: first-impression scans, ats compatibility, rejection-pattern diagnosis, and interview prep. 13 commands through 5 filters, and it never invents a metric.">
+        <h3><a href="recruiter-lens/">Recruiter Lens</a></h3>
+        <div class="sk-body">
+          <p>Reviews resumes, CVs and LinkedIn profiles the way recruiters actually screen them: first-impression scans, ATS compatibility, rejection-pattern diagnosis, and interview prep. 13 commands through 5 filters, and it never invents a metric.</p>
+          <p class="sk-stats">13 commands · 5 filters · ~2,500 lines · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/recruiter-lens</code>
+          <p class="sk-links">
+            <a href="recruiter-lens/">Install page</a>
+            <a href="https://github.com/arm-pz/recruiter-lens" target="_blank" rel="noopener">Source</a>
+          </p>
+        </div>
+      </article>
+      <article class="skill" id="applicant-kit" data-search="applicant-kit applicant kit career writes the better version: decoded job description, tailored resume, bullets rewritten as action-task-result-impact, honest keyword placement, five summaries, a linkedin rewrite and twenty interview answers, all built from real experience. recruiter-lens judges; applicant-kit produces. nothing invented.">
+        <h3><a href="applicant-kit/">Applicant Kit</a></h3>
+        <div class="sk-body">
+          <p>Writes the better version: decoded job description, tailored resume, bullets rewritten as action-task-result-impact, honest keyword placement, five summaries, a LinkedIn rewrite and twenty interview answers, all built from real experience. recruiter-lens judges; applicant-kit produces. Nothing invented.</p>
+          <p class="sk-stats">7 modes · 6 produce + 1 hand-off · ~320 lines · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/applicant-kit --skill applicant-kit</code>
+          <p class="sk-links">
+            <a href="applicant-kit/">Install page</a>
+            <a href="https://github.com/arm-pz/applicant-kit" target="_blank" rel="noopener">Source</a>
+          </p>
+        </div>
+      </article>
+      <article class="skill" id="application-pilot" data-search="application-pilot application pilot career runs the job search around the applications: turns role criteria into a live shortlist, scores each role for fit with evidence, keeps a reviewable tracker with submission and follow-up dates, flags roles that have gone quiet, drafts the follow-up and the interview briefing, and reads the funnel weekly. applicant-kit writes the packet; application-pilot keeps the search alive. it never submits anything, and never claims a status it did not see.">
+        <h3><a href="application-pilot/">Application Pilot</a></h3>
+        <div class="sk-body">
+          <p>Runs the job search around the applications: turns role criteria into a live shortlist, scores each role for fit with evidence, keeps a reviewable tracker with submission and follow-up dates, flags roles that have gone quiet, drafts the follow-up and the interview briefing, and reads the funnel weekly. applicant-kit writes the packet; application-pilot keeps the search alive. It never submits anything, and never claims a status it did not see.</p>
+          <p class="sk-stats">8 modes · 9 ground rules · 5 files · no CLI, no telemetry</p>
+          <code class="sk-install">npx skills add arm-pz/application-pilot --skill application-pilot</code>
+          <p class="sk-links">
+            <a href="application-pilot/">Install page</a>
+            <a href="https://github.com/arm-pz/application-pilot" target="_blank" rel="noopener">Source</a>
+          </p>
+        </div>
+      </article>
+    </section>
+
+    <section class="sk-group" id="thinking-learning" aria-labelledby="thinking-learning-h">
+      <div class="sk-head">
+        <h2 id="thinking-learning-h">Thinking &amp; Learning</h2>
+        <p>3 skills · teaching · tournaments · decisions</p>
+      </div>
+      <article class="skill" id="topic-primer" data-search="topic-primer topic primer learning a world-class teacher for any topic, from zero background toward expert depth. eight modes: foundations, full curriculum, concept-by-concept lessons, adaptive tutoring, expert mental models, mistake prevention, strict exams, and eli5. one question at a time, then it waits.">
+        <h3><a href="topic-primer/">Topic Primer</a></h3>
+        <div class="sk-body">
+          <p>A world-class teacher for any topic, from zero background toward expert depth. Eight modes: foundations, full curriculum, concept-by-concept lessons, adaptive tutoring, expert mental models, mistake prevention, strict exams, and ELI5. One question at a time, then it waits.</p>
+          <p class="sk-stats">8 modes · 68 lines · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/topic-primer</code>
+          <p class="sk-links">
+            <a href="topic-primer/">Install page</a>
+            <a href="https://github.com/arm-pz/topic-primer" target="_blank" rel="noopener">Source</a>
+          </p>
+        </div>
+      </article>
+      <article class="skill" id="do-better" data-search="do-better do better arena when an answer is bad, don&#x27;t ask twice: n sub-agents (100 by default, 16 with --quick) get the exact same task with different strategy cards, then attack, defend and judge each other in a single-elimination bracket until one solution survives.">
+        <h3><a href="do-better/">Do Better</a></h3>
+        <div class="sk-body">
+          <p>When an answer is bad, don't ask twice: N sub-agents (100 by default, 16 with --quick) get the exact same task with different strategy cards, then attack, defend and judge each other in a single-elimination bracket until one solution survives.</p>
+          <p class="sk-stats">2,160 strategy cards · 7 rounds at full size · ~1,700 lines · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/do-better</code>
+          <p class="sk-links">
+            <a href="do-better/">Install page</a>
+            <a href="https://github.com/arm-pz/do-better" target="_blank" rel="noopener">Source</a>
+          </p>
+        </div>
+      </article>
+      <article class="skill" id="crash-test" data-search="crash-test crash test decisions crash-tests a decision before you build it. four fixed roles draft the same task in separate contexts and attack each other&#x27;s drafts anonymously; the chair merges what survived on evidence, not votes, keeps a dissent log for what it could not settle, and grounds the winner&#x27;s claims about your files against the source before adopting them.">
+        <h3><a href="crash-test/">Crash Test</a></h3>
+        <div class="sk-body">
+          <p>Crash-tests a decision before you build it. Four fixed roles draft the same task in separate contexts and attack each other's drafts anonymously; the chair merges what survived on evidence, not votes, keeps a dissent log for what it could not settle, and grounds the winner's claims about your files against the source before adopting them.</p>
+          <p class="sk-stats">4 roles · ~9 calls · 1 opt-in Operator seat · 2 modes · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/crash-test --skill crash-test</code>
+          <p class="sk-links">
+            <a href="crash-test/">Install page</a>
+            <a href="https://github.com/arm-pz/crash-test" target="_blank" rel="noopener">Source</a>
+          </p>
+        </div>
+      </article>
+    </section>
+
+    <section class="sk-group" id="skill-authoring" aria-labelledby="skill-authoring-h">
+      <div class="sk-head">
+        <h2 id="skill-authoring-h">Skill Authoring</h2>
+        <p>9 skills · draft · tune · package · chains</p>
+      </div>
+      <article class="skill" id="draft-skill" data-search="draft-skill draft skill authoring creates a new agent skill from a plain idea: confirms the purpose before writing anything, checks the installed siblings for overlap, splits scripts from references from assets, writes a description that actually triggers, then validates it with check_skill.py. written from scratch, so it carries no text from qoder&#x27;s built-in skill-creator, which ships without a licence permitting redistribution.">
+        <h3><a href="draft-skill/">Draft Skill</a></h3>
+        <div class="sk-body">
+          <p>Creates a new agent skill from a plain idea: confirms the purpose before writing anything, checks the installed siblings for overlap, splits scripts from references from assets, writes a description that actually triggers, then validates it with check_skill.py. Written from scratch, so it carries no text from Qoder's built-in skill-creator, which ships without a licence permitting redistribution.</p>
+          <p class="sk-stats">2 files · 112 lines · 8 workflow steps · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/draft-skill</code>
+          <p class="sk-links">
+            <a href="draft-skill/">Install page</a>
+            <a href="https://github.com/arm-pz/draft-skill" target="_blank" rel="noopener">Source</a>
+          </p>
+        </div>
+      </article>
+      <article class="skill" id="tune-skill" data-search="tune-skill tune skill authoring audits and fine-tunes a skill that already exists: the description that never fires, overlap with installed siblings, stale names and counts, handoff contracts that do not hand off. ships check_skill.py, a deterministic validator over frontmatter, folder and heading agreement, description length and reference paths that do not exist. not for creating one from scratch; that is draft-skill.">
+        <h3><a href="tune-skill/">Tune Skill</a></h3>
+        <div class="sk-body">
+          <p>Audits and fine-tunes a skill that already exists: the description that never fires, overlap with installed siblings, stale names and counts, handoff contracts that do not hand off. Ships check_skill.py, a deterministic validator over frontmatter, folder and heading agreement, description length and reference paths that do not exist. Not for creating one from scratch; that is draft-skill.</p>
+          <p class="sk-stats">4 files · 268 lines · 1 validator script · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/tune-skill</code>
+          <p class="sk-links">
+            <a href="tune-skill/">Install page</a>
+            <a href="https://github.com/arm-pz/tune-skill" target="_blank" rel="noopener">Source</a>
+          </p>
+        </div>
+      </article>
+      <article class="skill" id="prompts-to-skill" data-search="prompts-to-skill prompts to skill authoring turns a list of your own prompts into a finished, tested skill, one skill per prompt: an intent interview, an overlap check against what is already installed, a draft written with draft-skill, trigger test cases that include near-misses, and a tune-skill gate at the end. it needs draft-skill and tune-skill and stops with a clear message if either is missing.">
+        <h3><a href="prompts-to-skill/">Prompts To Skill</a></h3>
+        <div class="sk-body">
+          <p>Turns a list of your own prompts into a finished, tested skill, one skill per prompt: an intent interview, an overlap check against what is already installed, a draft written with draft-skill, trigger test cases that include near-misses, and a tune-skill gate at the end. It needs draft-skill and tune-skill and stops with a clear message if either is missing.</p>
+          <p class="sk-stats">3 files · 141 lines · depends on draft-skill + tune-skill · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/prompts-to-skill</code>
+          <p class="sk-links">
+            <a href="prompts-to-skill/">Install page</a>
+            <a href="https://github.com/arm-pz/prompts-to-skill" target="_blank" rel="noopener">Source</a>
+          </p>
+        </div>
+      </article>
+      <article class="skill" id="prompts-to-skill-release" data-search="prompts-to-skill-release prompts to skill release release packages a finished skill for release: runs its trigger test cases and records which passed and which did not, sets the version and changelog, builds the archive, writes the readme, and ends with a per-platform install checklist. failed tests stay in the report instead of being dropped from it.">
+        <h3><a href="prompts-to-skill-release/">Prompts To Skill Release</a></h3>
+        <div class="sk-body">
+          <p>Packages a finished skill for release: runs its trigger test cases and records which passed and which did not, sets the version and CHANGELOG, builds the archive, writes the README, and ends with a per-platform install checklist. Failed tests stay in the report instead of being dropped from it.</p>
+          <p class="sk-stats">3 files · 113 lines · 5 release sections · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/prompts-to-skill-release</code>
+          <p class="sk-links">
+            <a href="prompts-to-skill-release/">Install page</a>
+            <a href="https://github.com/arm-pz/prompts-to-skill-release" target="_blank" rel="noopener">Source</a>
+          </p>
+        </div>
+      </article>
+      <article class="skill" id="tune-and-polish" data-search="tune-and-polish tune and polish authoring for a skill that both misfires and hides: tune-skill fixes the triggering description, sibling overlaps and stale counts, gated on check_skill.py with zero fails; then findable-polish audits and polishes the readme, about and site copy against real queries. listings are written from the final description, never before.">
+        <h3><a href="tune-and-polish/">Tune And Polish</a></h3>
+        <div class="sk-body">
+          <p>For a skill that both misfires and hides: Tune-Skill fixes the triggering description, sibling overlaps and stale counts, gated on check_skill.py with zero FAILs; then Findable-Polish audits and polishes the README, About and site copy against real queries. Listings are written from the final description, never before.</p>
+          <p class="sk-stats">3 files · 89 lines · 2 gated phases · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/tune-and-polish --skill tune-and-polish</code>
+          <p class="sk-links">
+            <a href="tune-and-polish/">Install page</a>
+            <a href="https://github.com/arm-pz/tune-and-polish" target="_blank" rel="noopener">Source</a>
+          </p>
+        </div>
+      </article>
+      <article class="skill" id="skill-launch" data-search="skill-launch skill launch authoring the full pipeline from idea to launched skill: draft-skill writes it, tune-skill gates it through the validator, findable-polish polishes its discovery surfaces. six chain skills went through this loop in one day — and every public change still needs your go-ahead.">
+        <h3><a href="skill-launch/">Skill Launch</a></h3>
+        <div class="sk-body">
+          <p>The full pipeline from idea to launched skill: Draft-Skill writes it, Tune-Skill gates it through the validator, Findable-Polish polishes its discovery surfaces. Six chain skills went through this loop in one day — and every public change still needs your go-ahead.</p>
+          <p class="sk-stats">3 files · 110 lines · 3 gated phases · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/skill-launch --skill skill-launch</code>
+          <p class="sk-links">
+            <a href="skill-launch/">Install page</a>
+            <a href="https://github.com/arm-pz/skill-launch" target="_blank" rel="noopener">Source</a>
+          </p>
+        </div>
+      </article>
+      <article class="skill" id="upstream-polish" data-search="upstream-polish upstream polish authoring chains upstream-check — fetch-based push verdicts, fast-forward only, screened for credential-shaped lines — with wordsmith rewriting drifted descriptions, topics and readme rows, so repos and listings tell the same story again. an unreadable source is inconclusive, never counted as empty.">
+        <h3><a href="upstream-polish/">Upstream Polish</a></h3>
+        <div class="sk-body">
+          <p>Chains Upstream-Check — fetch-based push verdicts, fast-forward only, screened for credential-shaped lines — with Wordsmith rewriting drifted descriptions, topics and README rows, so repos and listings tell the same story again. An unreadable source is inconclusive, never counted as empty.</p>
+          <p class="sk-stats">3 files · 122 lines · 7 verdicts · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/upstream-polish --skill upstream-polish</code>
+          <p class="sk-links">
+            <a href="upstream-polish/">Install page</a>
+            <a href="https://github.com/arm-pz/upstream-polish" target="_blank" rel="noopener">Source</a>
+          </p>
+        </div>
+      </article>
+      <article class="skill" id="publish-pipeline" data-search="publish-pipeline publish pipeline authoring turns a pile of skill repos into a published site: a committed manifest decides what is public, discovery opens a pull request, and a green merge deploys generated pages, both discovery indexes, a sitemap and a verified build.">
+        <h3><a href="publish-pipeline/">Publish Pipeline</a></h3>
+        <div class="sk-body">
+          <p>Turns a pile of skill repos into a published site: a committed manifest decides what is public, discovery opens a pull request, and a green merge deploys generated pages, both discovery indexes, a sitemap and a verified build.</p>
+          <p class="sk-stats">9 files · 1,214 lines · 20 KB</p>
+          <code class="sk-install">npx skills add arm-pz/publish-pipeline</code>
+          <p class="sk-links">
+            <a href="publish-pipeline/">Install page</a>
+            <a href="https://github.com/arm-pz/publish-pipeline" target="_blank" rel="noopener">Source</a>
+          </p>
+        </div>
+      </article>
+      <article class="skill" id="skill-to-mod" data-search="skill-to-mod skill to mod authoring checks whether a skill should become a claude code mod, then builds the plugin with your skill unchanged and a thin trigger, validates and tests it, and lists what it can touch. says no when a skill should stay a skill.">
+        <h3><a href="skill-to-mod/">Skill to Mod</a></h3>
+        <div class="sk-body">
+          <p>Checks whether a skill should become a Claude Code mod, then builds the plugin with your skill unchanged and a thin trigger, validates and tests it, and lists what it can touch. Says no when a skill should stay a skill.</p>
+          <p class="sk-stats">12 files · 1,790 lines · 3 trigger patterns · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/skill-to-mod --skill skill-to-mod</code>
+          <p class="sk-links">
+            <a href="skill-to-mod/">Install page</a>
+            <a href="https://github.com/arm-pz/skill-to-mod" target="_blank" rel="noopener">Source</a>
+          </p>
+        </div>
+      </article>
+    </section>
+
+    <section class="sk-group" id="ship-checks" aria-labelledby="ship-checks-h">
+      <div class="sk-head">
+        <h2 id="ship-checks-h">Ship Checks</h2>
+        <p>3 skills and 1 mod · pre-launch audits</p>
+      </div>
+      <article class="skill" id="web-preflight" data-search="web-preflight web preflight release checks a site you own before you ship it, without pretending a status code is a finding. a 200 on /.env that matches the app shell is catch-all routing, a blanket 403 is an unanswered question, and a check that never ran becomes inconclusive — never a pass.">
+        <h3><a href="web-preflight/">Web Preflight</a></h3>
+        <div class="sk-body">
+          <p>Checks a site you own before you ship it, without pretending a status code is a finding. A 200 on /.env that matches the app shell is catch-all routing, a blanket 403 is an unanswered question, and a check that never ran becomes INCONCLUSIVE — never a pass.</p>
+          <p class="sk-stats">4 verdicts · 19 fixed paths · 9 behavioral tests · ~215 lines · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/web-preflight</code>
+          <p class="sk-links">
+            <a href="web-preflight/">Install page</a>
+            <a href="https://github.com/arm-pz/web-preflight" target="_blank" rel="noopener">Source</a>
+          </p>
+        </div>
+      </article>
+      <article class="skill" id="pre-ship-performance-audit" data-search="pre-ship-performance-audit pre ship performance audit performance audits and fixes a web app&#x27;s real-world speed before launch: four read-only subagents sweep twenty known slow-downs across images, bundles, database queries and servers, then the same mobile lighthouse protocol, three runs per page, proves each fix before and after. never removes a feature for a score, never invents a baseline, and asks before touching dependencies, the database or the deploy region.">
+        <h3><a href="pre-ship-performance-audit/">Pre Ship Performance Audit</a></h3>
+        <div class="sk-body">
+          <p>Audits and fixes a web app's real-world speed before launch: four read-only subagents sweep twenty known slow-downs across images, bundles, database queries and servers, then the same mobile Lighthouse protocol, three runs per page, proves each fix before and after. Never removes a feature for a score, never invents a baseline, and asks before touching dependencies, the database or the deploy region.</p>
+          <p class="sk-stats">4 subagents · 20 slow-downs · 6 phases · ~120 lines · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/pre-ship-performance-audit</code>
+          <p class="sk-links">
+            <a href="pre-ship-performance-audit/">Install page</a>
+            <a href="https://github.com/arm-pz/pre-ship-performance-audit" target="_blank" rel="noopener">Source</a>
+          </p>
+        </div>
+      </article>
+      <article class="skill" id="pre-ship-security-red-team" data-search="pre-ship-security-red-team pre ship security red team release red-teams a web app you own before launch, in an isolated local environment. three parallel read-only subagents run fourteen authorization and abuse checks across three groups (identity and authorization; ui and api bypass; browser, network, cache and ai), each with captured evidence, then the fix is rerun against the same check. a check that cannot fail is falsified first, and findings stay on the record even when the pass clears.">
+        <h3><a href="pre-ship-security-red-team/">Pre Ship Security Red Team</a></h3>
+        <div class="sk-body">
+          <p>Red-teams a web app you own before launch, in an isolated local environment. Three parallel read-only subagents run fourteen authorization and abuse checks across three groups (identity and authorization; UI and API bypass; browser, network, cache and AI), each with captured evidence, then the fix is rerun against the same check. A check that cannot fail is falsified first, and findings stay on the record even when the pass clears.</p>
+          <p class="sk-stats">3 subagents · 14 checks · 9 files · local environments only</p>
+          <code class="sk-install">npx skills add arm-pz/pre-ship-security-red-team</code>
+          <p class="sk-links">
+            <a href="pre-ship-security-red-team/">Install page</a>
+            <a href="https://github.com/arm-pz/pre-ship-security-red-team" target="_blank" rel="noopener">Source</a>
+          </p>
+        </div>
+      </article>
+      <article class="skill" id="ship-sentinel" data-search="ship-sentinel ship sentinel release a claude code mod that holds git push, pr, publish and deploy commands until your pre-ship check skills have run since the last edit. ask, block or nudge; fails open and touches no files, network or processes.">
+        <h3><a href="ship-sentinel/">Ship Sentinel</a> <span class="sk-kind">Claude Code mod</span></h3>
+        <div class="sk-body">
+          <p>A Claude Code mod that holds git push, PR, publish and deploy commands until your pre-ship check skills have run since the last edit. Ask, block or nudge; fails open and touches no files, network or processes.</p>
+          <p class="sk-stats">1 hook module · 173 lines · 4 calls · 0 network</p>
+          <code class="sk-install">/plugin install ship-sentinel --marketplace arm-pz/ship-sentinel</code>
+          <p class="sk-links">
+            <a href="ship-sentinel/">Install page</a>
+            <a href="https://github.com/arm-pz/ship-sentinel" target="_blank" rel="noopener">Source</a>
+          </p>
+        </div>
+      </article>
+    </section>
+
+    <section class="sk-group" id="outbound" aria-labelledby="outbound-h">
+      <div class="sk-head">
+        <h2 id="outbound-h">Outbound</h2>
+        <p>2 skills · cold email · deliverability · list gates</p>
+      </div>
+      <article class="skill" id="cold-email-ops" data-search="cold-email-ops cold email ops outbound plan and audit a cold-email program at volume and keep it from degrading: computes inbox and domain capacity from a monthly send target, sets per-domain reply-rate floors, burn-replacement cadence, shadow-ban tests, and automation error…">
+        <h3><a href="cold-email-ops/">Cold Email Ops</a></h3>
+        <div class="sk-body">
+          <p>Plan and audit a cold-email program at volume and keep it from degrading: computes inbox and domain capacity from a monthly send target, sets per-domain reply-rate floors, burn-replacement cadence, shadow-ban tests, and automation error…</p>
+          <p class="sk-stats">4 files · 393 lines · 8 KB</p>
+          <code class="sk-install">npx skills add arm-pz/cold-email-ops</code>
+          <p class="sk-links">
+            <a href="cold-email-ops/">Install page</a>
+            <a href="https://github.com/arm-pz/cold-email-ops" target="_blank" rel="noopener">Source</a>
+          </p>
+        </div>
+      </article>
+      <article class="skill" id="cold-email-list-gate" data-search="cold-email-list-gate cold email list gate outbound gate a cold-email lead list before it loads: sample ten rows, check company, title, size, and mailbox against the icp, compare data providers on the same criteria, and return a go or hold decision with the fail pattern and the re-run…">
+        <h3><a href="cold-email-list-gate/">Cold Email List Gate</a></h3>
+        <div class="sk-body">
+          <p>Gate a cold-email lead list before it loads: sample ten rows, check company, title, size, and mailbox against the ICP, compare data providers on the same criteria, and return a GO or HOLD decision with the fail pattern and the re-run…</p>
+          <p class="sk-stats">2 files · 96 lines · 2 KB</p>
+          <code class="sk-install">npx skills add arm-pz/cold-email-list-gate</code>
+          <p class="sk-links">
+            <a href="cold-email-list-gate/">Install page</a>
+            <a href="https://github.com/arm-pz/cold-email-list-gate" target="_blank" rel="noopener">Source</a>
+          </p>
+        </div>
+      </article>
+    </section>
+    <!-- gen:skills:end -->
+    <p class="empty" id="empty" hidden>Nothing matches that yet. <a href="https://github.com/arm-pz" target="_blank" rel="noopener">Ask for it on GitHub</a>.</p>
+  </div>
+</main>
+
+<section class="close" aria-labelledby="close-h">
+  <div class="wrap">
+    <h2 id="close-h">Open text you can read before you install</h2>
+    <div class="close-grid">
+      <p><b>Plain markdown</b>A skill is a SKILL.md plus references and, sometimes, a script. Every one links to its source on GitHub.</p>
+      <p><b>One line to install</b>Each card carries the exact command. <code>npx skills add</code> works with any agent that reads skills; mods install inside Claude Code.</p>
+      <p><b>Something wrong?</b>Every skill has its own repo. <a href="https://github.com/arm-pz" target="_blank" rel="noopener">Open an issue</a> on the one that let you down.</p>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="wrap">
-    <span>caffeinity skills — open agent skills</span>
-    <span><a href="https://github.com/arm-pz" target="_blank" rel="noopener">github.com/arm-pz</a></span>
+    <span>Caffeinity Skills: open agent skills by Abdul Rahman P Z.</span>
+    <a href="https://github.com/arm-pz" target="_blank" rel="noopener">github.com/arm-pz</a>
   </div>
 </footer>
 
+<script>
+(function(){
+  var q=document.getElementById('q'),status=document.getElementById('find-status'),empty=document.getElementById('empty');
+  var cards=[].slice.call(document.querySelectorAll('.skill')),groups=[].slice.call(document.querySelectorAll('.sk-group'));
+  function filter(){
+    var terms=q.value.toLowerCase().split(/\s+/).filter(Boolean),shown=0;
+    cards.forEach(function(c){
+      var hay=c.getAttribute('data-search'),on=terms.every(function(t){return hay.indexOf(t)!==-1;});
+      c.hidden=!on;if(on)shown++;
+    });
+    groups.forEach(function(g){g.hidden=!g.querySelector('.skill:not([hidden])');});
+    empty.hidden=shown>0;
+    status.textContent=terms.length?(shown+' of '+cards.length+(shown===1?' matches':' match')):'';
+  }
+  q.addEventListener('input',filter);
+})();
+</script>
 </body>
 </html>

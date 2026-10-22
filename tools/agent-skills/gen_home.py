@@ -31,38 +31,49 @@ def card(skill):
     name = esc(skill["name"])
     repo = html.escape(f"https://github.com/{skill['repo']}", quote=True)
     install = esc(skill.get("install") or f"npx skills add {skill['repo']}")
+    search = html.escape(" ".join([skill["name"], skill["title"], skill["tag"],
+                                   skill["blurb"]]).lower(), quote=True)
+    kind = ' <span class="sk-kind">Claude Code mod</span>' if skill.get("kind") == "mod" else ""
     return [
-        f'      <div class="skill" id="{name}">',
-        '        <div class="sk-id">',
-        f'          <a class="sk-name" href="{name}/">{name}</a>',
-        f'          <span class="sk-tag">{esc(skill["tag"])}</span>',
-        '        </div>',
+        f'      <article class="skill" id="{name}" data-search="{search}">',
+        f'        <h3><a href="{name}/">{esc(skill["title"])}</a>{kind}</h3>',
         '        <div class="sk-body">',
         f'          <p>{esc(skill["blurb"])}</p>',
         f'          <p class="sk-stats">{esc(skill["stats"])}</p>',
-        f'          <p class="sk-install mono">{install}</p>',
-        '          <div class="sk-links">',
-        f'            <a class="page" href="{name}/">Full install page →</a>',
+        f'          <code class="sk-install">{install}</code>',
+        '          <p class="sk-links">',
+        f'            <a href="{name}/">Install page</a>',
         f'            <a href="{repo}" target="_blank" rel="noopener">Source</a>',
-        '          </div>',
+        '          </p>',
         '        </div>',
-        '      </div>',
+        '      </article>',
     ]
+
+
+def count_label(cards):
+    mods = sum(1 for s in cards if s.get("kind") == "mod")
+    skills = len(cards) - mods
+    parts = [f"{skills} skill" + ("" if skills == 1 else "s")] if skills else []
+    if mods:
+        parts.append(f"{mods} mod" + ("" if mods == 1 else "s"))
+    return " and ".join(parts)
 
 
 def render_skills(manifest):
     lines = []
     for group in sorted(manifest["groups"], key=lambda g: g["order"]):
         cards = [s for s in visible(manifest) if s["group"] == group["id"]]
-        lines.append(f'    <div class="sk-group" id="{esc(group["id"])}">')
-        lines.append(f'      <h2>{esc(group["title"])}</h2>')
-        lines.append(f'      <span>{len(cards)} skills · {esc(group["descriptor"])}</span>')
-        lines.append('    </div>')
-        lines.append('')
+        lines.append(f'    <section class="sk-group" id="{esc(group["id"])}" '
+                     f'aria-labelledby="{esc(group["id"])}-h">')
+        lines.append('      <div class="sk-head">')
+        lines.append(f'        <h2 id="{esc(group["id"])}-h">{esc(group["title"])}</h2>')
+        lines.append(f'        <p>{count_label(cards)} · {esc(group["descriptor"])}</p>')
+        lines.append('      </div>')
         for skill in cards:
             lines.extend(card(skill))
-            lines.append('')
-    return "\n".join(lines) + "\n"
+        lines.append('    </section>')
+        lines.append('')
+    return "\n".join(lines)
 
 
 def render_jsonld(manifest):
