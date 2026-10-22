@@ -610,6 +610,33 @@
         "commit": "4104d949e6ddffca3bd0be903518731d0cfb9dba",
         "sha256": "efb8fa1bd2c440f9ca6c6b09a8a5d674fe32563407847f6e43ae4bfa204a6b27"
       }
+    },
+    {
+      "name": "skill-to-mod",
+      "repo": "arm-pz/skill-to-mod",
+      "path": "skills/skill-to-mod",
+      "group": "skill-authoring",
+      "tag": "authoring",
+      "title": "Skill to Mod",
+      "page": "bespoke",
+      "order": 30,
+      "blurb": "Checks whether a skill should become a Claude Code mod, then builds the plugin with your skill unchanged and a thin trigger, validates and tests it, and lists what it can touch. Says no when a skill should stay a skill.",
+      "stats": "12 files · 1,790 lines · 3 trigger patterns · 0 API keys",
+      "install": "npx skills add arm-pz/skill-to-mod --skill skill-to-mod"
+    },
+    {
+      "name": "ship-sentinel",
+      "repo": "arm-pz/ship-sentinel",
+      "path": ".",
+      "kind": "mod",
+      "group": "ship-checks",
+      "tag": "release",
+      "title": "Ship Sentinel",
+      "page": "bespoke",
+      "order": 31,
+      "blurb": "A Claude Code mod that holds git push, PR, publish and deploy commands until your pre-ship check skills have run since the last edit. Ask, block or nudge; fails open and touches no files, network or processes.",
+      "stats": "1 hook module · 173 lines · 4 calls · 0 network",
+      "install": "/plugin install ship-sentinel --marketplace arm-pz/ship-sentinel"
     }
   ]
 }

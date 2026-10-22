@@ -107,7 +107,7 @@
   "name": "Caffeinity Skills",
   "url": "https://skills.caffeinity.com/",
   "description": "Plain-markdown skills for AI coding agents: wordsmith edits, topic-primer teaches, keyword-guard ranks, web-preflight ships, findable gets found.",
-  "numberOfItems": 26,
+  "numberOfItems": 28,
   "itemListElement": [
     {
       "@type": "ListItem",
@@ -238,30 +238,42 @@
     {
       "@type": "ListItem",
       "position": 22,
+      "name": "skill-to-mod",
+      "url": "https://skills.caffeinity.com/skill-to-mod/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 23,
       "name": "web-preflight",
       "url": "https://skills.caffeinity.com/web-preflight/"
     },
     {
       "@type": "ListItem",
-      "position": 23,
+      "position": 24,
       "name": "pre-ship-performance-audit",
       "url": "https://skills.caffeinity.com/pre-ship-performance-audit/"
     },
     {
       "@type": "ListItem",
-      "position": 24,
+      "position": 25,
       "name": "pre-ship-security-red-team",
       "url": "https://skills.caffeinity.com/pre-ship-security-red-team/"
     },
     {
       "@type": "ListItem",
-      "position": 25,
+      "position": 26,
+      "name": "ship-sentinel",
+      "url": "https://skills.caffeinity.com/ship-sentinel/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 27,
       "name": "cold-email-ops",
       "url": "https://skills.caffeinity.com/cold-email-ops/"
     },
     {
       "@type": "ListItem",
-      "position": 26,
+      "position": 28,
       "name": "cold-email-list-gate",
       "url": "https://skills.caffeinity.com/cold-email-list-gate/"
     }
@@ -520,7 +532,7 @@
 
     <div class="sk-group" id="skill-authoring">
       <h2>Skill Authoring</h2>
-      <span>8 skills · draft · tune · package · chains</span>
+      <span>9 skills · draft · tune · package · chains</span>
     </div>
 
       <div class="skill" id="draft-skill">
@@ -651,9 +663,25 @@
         </div>
       </div>
 
+      <div class="skill" id="skill-to-mod">
+        <div class="sk-id">
+          <a class="sk-name" href="skill-to-mod/">skill-to-mod</a>
+          <span class="sk-tag">authoring</span>
+        </div>
+        <div class="sk-body">
+          <p>Checks whether a skill should become a Claude Code mod, then builds the plugin with your skill unchanged and a thin trigger, validates and tests it, and lists what it can touch. Says no when a skill should stay a skill.</p>
+          <p class="sk-stats">12 files · 1,790 lines · 3 trigger patterns · 0 API keys</p>
+          <p class="sk-install mono">npx skills add arm-pz/skill-to-mod --skill skill-to-mod</p>
+          <div class="sk-links">
+            <a class="page" href="skill-to-mod/">Full install page →</a>
+            <a href="https://github.com/arm-pz/skill-to-mod" target="_blank" rel="noopener">Source</a>
+          </div>
+        </div>
+      </div>
+
     <div class="sk-group" id="ship-checks">
       <h2>Ship Checks</h2>
-      <span>3 skills · pre-launch audits</span>
+      <span>4 skills · pre-launch audits</span>
     </div>
 
       <div class="skill" id="web-preflight">
@@ -700,6 +728,22 @@
           <div class="sk-links">
             <a class="page" href="pre-ship-security-red-team/">Full install page →</a>
             <a href="https://github.com/arm-pz/pre-ship-security-red-team" target="_blank" rel="noopener">Source</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill" id="ship-sentinel">
+        <div class="sk-id">
+          <a class="sk-name" href="ship-sentinel/">ship-sentinel</a>
+          <span class="sk-tag">release</span>
+        </div>
+        <div class="sk-body">
+          <p>A Claude Code mod that holds git push, PR, publish and deploy commands until your pre-ship check skills have run since the last edit. Ask, block or nudge; fails open and touches no files, network or processes.</p>
+          <p class="sk-stats">1 hook module · 173 lines · 4 calls · 0 network</p>
+          <p class="sk-install mono">/plugin install ship-sentinel --marketplace arm-pz/ship-sentinel</p>
+          <div class="sk-links">
+            <a class="page" href="ship-sentinel/">Full install page →</a>
+            <a href="https://github.com/arm-pz/ship-sentinel" target="_blank" rel="noopener">Source</a>
           </div>
         </div>
       </div>
