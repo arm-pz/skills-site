@@ -165,6 +165,8 @@ def main(argv=None):
     mode.add_argument("--report", action="store_true")
     mode.add_argument("--propose", action="store_true")
     parser.add_argument("--root", default=".")
+    parser.add_argument("--only", metavar="NAMES",
+                        help="propose only these comma-separated repos; the report lists all")
     parser.add_argument("--dry-run", action="store_true",
                         help="propose: write files locally, do not commit, push or open a PR")
     args = parser.parse_args(argv)
@@ -173,12 +175,19 @@ def main(argv=None):
     deny = skilllib.load_deny(root)
     denied = {item["repo"] for item in deny}
     existing = {s["name"] for s in manifest["skills"]}
+    only = ({n.strip() for n in args.only.split(",") if n.strip()}
+            if args.only else None)
 
     repos = list_repos()
     report = []
     eligible = []
+    seen = set()
     for repo in sorted(repos, key=lambda r: r["name"]):
         name = repo["name"]
+        seen.add(name)
+        if only is not None and name not in only:
+            report.append((name, "skip", "not selected by --only"))
+            continue
         if name in existing or repo["isFork"] or f"{OWNER}/{name}" in denied:
             report.append((name, "skip", "already published, fork, or denied"))
             continue
@@ -193,6 +202,11 @@ def main(argv=None):
                        "; ".join(fails)))
         if not fails:
             eligible.append((name, files))
+
+    if only is not None:
+        missing = sorted(only - seen)
+        if missing:
+            raise SystemExit(f"--only names not found among public repos: {', '.join(missing)}")
 
     for name, status, reason in report:
         print(f"{name:<40} {status:<10} {reason}")
