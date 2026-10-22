@@ -48,6 +48,28 @@ class GenPageTest(unittest.TestCase):
     def test_meta_description_is_155_or_less(self):
         self.assertLessEqual(len(gen_page.meta_description(SOURCE["description"])), 156)
 
+    def test_split_description_parts(self):
+        text = ('Use when you need a crawl. Runs a bounded crawl. Trigger phrases include '
+                '"crawl the site" and "audit links". Not for rankings; Core Web Vitals.')
+        purpose, when, says, nots = gen_page.split_description(text)
+        self.assertEqual(purpose, "Runs a bounded crawl.")
+        self.assertEqual(when, "you need a crawl")
+        self.assertEqual(says, ["crawl the site", "audit links"])
+        self.assertEqual(nots, ["rankings", "Core Web Vitals"])
+        _, _, _, nots = gen_page.split_description(
+            "Does X. Not for writing copy (wordsmith), or finding the ICP.")
+        self.assertEqual(nots, ["writing copy (wordsmith)", "finding the ICP"])
+
+    def test_related_lists_group_siblings(self):
+        other = dict(ENTRY, name="other", title="Other", blurb="Sibling.", order=2)
+        hidden = dict(ENTRY, name="gone", page="none", order=3)
+        manifest = {"groups": [{"id": "writing-growth", "title": "Writing & Growth"}],
+                    "skills": [ENTRY, other, hidden]}
+        out = gen_page.render_page(ENTRY, manifest)
+        self.assertIn("More in Writing &amp; Growth", out)
+        self.assertIn('href="/other/"', out)
+        self.assertNotIn('href="/gone/"', out)
+
     def test_license_detection(self):
         self.assertEqual(gen_page.detect_license("MIT License\n\nPermission is hereby granted"),
                          "MIT")

@@ -51,7 +51,67 @@ def detect_license(text):
     return "NOASSERTION"
 
 
-def render_page(entry):
+def split_description(text):
+    """Split a SKILL.md description into purpose, when, trigger phrases and not-for.
+
+    Descriptions follow the house pattern loosely, so each part is optional and
+    anything unrecognised stays in the purpose.
+    """
+    purpose, when, says, nots = [], "", [], []
+    for sentence in re.split(r"(?<=\.)\s+(?=[A-Z])", " ".join(text.split())):
+        if sentence.startswith("Use when "):
+            when = sentence[len("Use when "):].rstrip(".")
+        elif sentence.startswith("Trigger phrases include"):
+            says = re.findall(r'"([^"]+)"', sentence)
+        elif sentence.startswith("Not for "):
+            body = sentence[len("Not for "):].rstrip(".")
+            parts = body.split(";") if ";" in body else re.split(r"(?<=\)),\s+", body)
+            nots = [re.sub(r"^(or|and)\s+", "", p.strip()) for p in parts if p.strip()]
+        else:
+            purpose.append(sentence)
+    return " ".join(purpose), when, says, nots
+
+
+def uses_html(when, says, nots):
+    def block(cls, title, inner):
+        return (f'    <div class="uses-col {cls}">\n      <h3>{title}</h3>\n'
+                f'{inner}\n    </div>')
+
+    def items(values):
+        rows = "".join(f"<li>{esc(v[:1].upper() + v[1:])}</li>" for v in values)
+        return f"      <ul>{rows}</ul>"
+
+    cols = []
+    if when:
+        cols.append(block("when", "Reach for it when",
+                          f'      <ul><li>{esc(when[:1].upper() + when[1:])}.</li></ul>'))
+    if says:
+        cols.append(block("say", "Say it like this", items(says)))
+    if nots:
+        cols.append(block("not", "Not for", items(nots)))
+    if not cols:
+        return ""
+    return '    <div class="uses">\n' + "\n".join(cols) + "\n    </div>"
+
+
+def related_html(entry, manifest):
+    if not manifest:
+        return ""
+    siblings = sorted((s for s in manifest["skills"]
+                       if s["group"] == entry["group"] and s["page"] != "none"
+                       and s["name"] != entry["name"]),
+                      key=lambda s: s["order"])[:3]
+    if not siblings:
+        return ""
+    group = next(g["title"] for g in manifest["groups"] if g["id"] == entry["group"])
+    rows = "\n".join(
+        f'      <li><a href="/{esc(s["name"])}/"><strong>{esc(s["title"])}</strong>'
+        f'<span>{esc(s["blurb"])}</span></a></li>' for s in siblings)
+    return (f'    <h2 id="more-h">More in {esc(group)}</h2>\n'
+            f'    <ul class="related">\n{rows}\n    </ul>')
+
+
+def render_page(entry, manifest=None):
     source = entry["pageSource"]
     name = entry["name"]
     license_id = source["license"]
@@ -62,13 +122,13 @@ def render_page(entry):
     files = source["files"]
     kb = max(1, round(source["bytes"] / 1024))
     page_title = entry.get("pageTitle") or f"{entry['title']} — agent skill"
-    manuscript_rows = "\n".join(
-        f'            <li><span class="mono">{esc(f["path"])}</span>'
-        f'<span>{f["lines"]:,} lines · {f["bytes"]:,} B</span></li>'
-        for f in files)
+    purpose, when, says, nots = split_description(source["description"])
+    related = related_html(entry, manifest)
+    if not related:
+        related = '    <h2 id="more-h" class="sr-only">Source</h2>'
     table_rows = "\n".join(
-        f'        <tr><td class="mono">{esc(f["path"])}</td>'
-        f'<td class="n">{f["lines"]:,}</td><td class="n">{f["bytes"]:,} B</td></tr>'
+        f'        <tr><td>{esc(f["path"])}</td>'
+        f'<td class="n">{f["lines"]:,}</td><td class="n bytes">{f["bytes"]:,} B</td></tr>'
         for f in files)
     ld = {
         "@context": "https://schema.org",
@@ -96,19 +156,17 @@ def render_page(entry):
         "JSON_LD": json_ld,
         "NAME": esc(name),
         "TITLE": esc(entry["title"]),
-        "DESCRIPTION": esc(source["description"]),
+        "BLURB": esc(entry.get("blurb") or meta_description(source["description"])),
+        "PURPOSE": esc(purpose or source["description"]),
+        "USES": uses_html(when, says, nots),
+        "RELATED": related,
         "INSTALL": esc(entry.get("install") or f"npx skills add {entry['repo']}"),
         "REPO_URL": esc(repo_url),
         "REPO_SLUG": esc(entry["repo"]),
         "FILE_COUNT": str(source["fileCount"]),
         "LINES": f'{source["lines"]:,}',
         "KB": str(kb),
-        "LICENSE": esc(license_id if osi else "see LICENSE"),
-        "LICENSE_META": esc(f"free, open, {license_id}" if osi else "see LICENSE"),
-        "LICENSE_CLAUSE": esc(f", {license_id}" if osi else ""),
-        "MANUSCRIPT_LABEL": esc(f'what ships · {source["fileCount"]} files, '
-                                f'{source["lines"]:,} lines, {kb} KB'),
-        "MANUSCRIPT_FILES": manuscript_rows,
+        "LICENSE_FACT": esc(f"free under {license_id}" if osi else "see LICENSE for terms"),
         "FILES_TABLE": table_rows,
         "SOURCE_PATH": esc(entry["path"]),
         "COMMIT": esc(commit[:7]),
@@ -139,7 +197,7 @@ def write_pages(root, manifest):
         path = page_path(root, entry)
         path.parent.mkdir(parents=True, exist_ok=True)
         with open(path, "w", encoding="utf-8", newline="") as fh:
-            fh.write(render_page(entry))
+            fh.write(render_page(entry, manifest))
         written.append(str(path.relative_to(root)))
     return written
 
@@ -148,7 +206,7 @@ def check_pages(root, manifest):
     stale = []
     for entry in generated(manifest):
         path = page_path(root, entry)
-        expected = render_page(entry)
+        expected = render_page(entry, manifest)
         actual = path.read_text(encoding="utf-8") if path.exists() else None
         if actual != expected:
             stale.append(entry["name"])
