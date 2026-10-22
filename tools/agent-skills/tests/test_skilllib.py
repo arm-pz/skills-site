@@ -128,6 +128,23 @@ class ManifestTest(unittest.TestCase):
         with self.assertRaises(skilllib.ManifestError):
             skilllib.validate_manifest(data)
 
+    def test_mod_passes_and_is_not_archived(self):
+        data = self.manifest()
+        data["skills"].append(dict(data["skills"][0], name="watch", repo="arm-pz/watch",
+                                   path=".", kind="mod", order=2))
+        skilllib.validate_manifest(data)
+        self.assertEqual([s["name"] for s in skilllib.archived(data)], ["demo"])
+
+    def test_mod_must_be_bespoke_and_kind_known(self):
+        data = self.manifest()
+        data["skills"][0]["kind"] = "mod"
+        data["skills"][0]["page"] = "none"
+        with self.assertRaises(skilllib.ManifestError):
+            skilllib.validate_manifest(data)
+        data["skills"][0]["kind"] = "agent"
+        with self.assertRaises(skilllib.ManifestError):
+            skilllib.validate_manifest(data)
+
 
 if __name__ == "__main__":
     unittest.main()

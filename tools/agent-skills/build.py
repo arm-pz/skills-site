@@ -44,7 +44,7 @@ def build(manifest, out_dir, tarball_fetch, about_fetch, legacy_dir):
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     entries = []
-    for skill in manifest["skills"]:
+    for skill in skilllib.archived(manifest):
         name = skill["name"]
         if skill["repo"] is None:
             archive = Path(legacy_dir) / skill["legacy"]["archive"]
@@ -81,7 +81,7 @@ def build(manifest, out_dir, tarball_fetch, about_fetch, legacy_dir):
         })
         print(f"{name:<32} {len(blob):>7} B  {digest[:12]}...")
 
-    if len(entries) != len(manifest["skills"]):
+    if len(entries) != len(skilllib.archived(manifest)):
         raise SystemExit("shrink guard: built entries do not match the manifest")
     entries.sort(key=lambda entry: entry["name"])
     index = {"$schema": skilllib.INDEX_SCHEMA, "skills": entries}

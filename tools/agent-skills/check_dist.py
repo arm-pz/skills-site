@@ -46,7 +46,7 @@ def check(root="."):
         need(well_index.read_bytes() == out_bytes,
              ".well-known discovery index differs from out/index.json")
         index = json.loads(out_bytes)
-        names = [s["name"] for s in manifest["skills"]]
+        names = [s["name"] for s in skilllib.archived(manifest)]
         indexed = [entry["name"] for entry in index["skills"]]
         need(indexed == sorted(names),
              f"index names {indexed} do not equal the manifest names {sorted(names)}")

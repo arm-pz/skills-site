@@ -77,6 +77,26 @@ class CheckDistTest(unittest.TestCase):
     def test_valid_tree_passes(self):
         self.assertEqual(check_dist.check(self.root), [])
 
+    def test_mod_page_without_archive_passes(self):
+        path = self.root / "site/skills.json"
+        manifest = json.loads(path.read_text())
+        manifest["skills"].append(
+            {"name": "watch", "repo": "arm-pz/watch", "path": ".", "kind": "mod",
+             "group": "writing-growth", "tag": "editorial", "title": "Watch", "blurb": "W.",
+             "stats": "1", "install": "/plugin install watch", "page": "bespoke", "order": 3})
+        path.write_text(json.dumps(manifest))
+        sitemap = (self.root / "out/sitemap.xml").read_text().replace(
+            "</urlset>", "<url><loc>https://skills.caffeinity.com/watch/</loc></url></urlset>")
+        (self.root / "out/sitemap.xml").write_text(sitemap)
+        (self.root / "dist/sitemap.xml").write_text(sitemap)
+        (self.root / "dist/watch").mkdir()
+        (self.root / "dist/watch/index.html").write_text("<title>watch</title>")
+        (self.root / "dist/index.html").write_text(
+            '<a href="/alpha/">a</a><a href="/beta/">b</a><a href="/watch/">w</a>'
+            '<div class="skill"></div><div class="skill"></div><div class="skill"></div>'
+            '<script type="application/ld+json">{"numberOfItems": 3}</script>')
+        self.assertEqual(check_dist.check(self.root), [])
+
     def test_missing_404_fails(self):
         (self.root / "dist/404.html").unlink()
         self.assertTrue(check_dist.check(self.root))

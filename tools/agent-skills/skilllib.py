@@ -16,6 +16,8 @@ GROUP_IDS = ("writing-growth", "career", "thinking-learning", "skill-authoring",
 TAGS = ("editorial", "seo", "discovery", "career", "learning", "arena",
         "decisions", "authoring", "release", "performance", "outbound")
 PAGE_KINDS = ("bespoke", "generated", "none")
+# A mod is a Claude Code plugin with no SKILL.md: it gets a page but no archive.
+KINDS = ("skill", "mod")
 REPO_META = {"README.md", "LICENSE", "LICENSE.md", "CHANGELOG.md", "CONTRIBUTING.md"}
 REPO_META_DIRS = {".claude-plugin", ".github", ".git", "tests"}
 
@@ -32,6 +34,11 @@ def _req(cond, message):
 def valid_name(name):
     return (isinstance(name, str) and bool(NAME_RE.match(name))
             and not name.startswith("-") and not name.endswith("-") and "--" not in name)
+
+
+def archived(manifest):
+    """Entries packed as skill archives and listed in the discovery index."""
+    return [s for s in manifest["skills"] if s.get("kind", "skill") == "skill"]
 
 
 def load_manifest(root):
@@ -79,6 +86,11 @@ def validate_manifest(data):
         orders.add(s["order"])
         page = s.get("page")
         _req(page in PAGE_KINDS, f"{name}: page must be one of {PAGE_KINDS}")
+        kind = s.get("kind", "skill")
+        _req(kind in KINDS, f"{name}: kind must be one of {KINDS}")
+        if kind == "mod":
+            _req(s.get("repo") is not None, f"{name}: a mod needs a repo")
+            _req(page == "bespoke", f"{name}: a mod page must be bespoke")
         if page != "none":
             _req(isinstance(s.get("blurb"), str) and s["blurb"].strip(),
                  f"{name}: blurb required when page is not none")

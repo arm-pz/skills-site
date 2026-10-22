@@ -79,6 +79,22 @@ class BuildTest(unittest.TestCase):
         self.assertEqual(len(index["skills"]), 2)
         self.assertEqual(index["skills"][1]["description"], "Pinned.")
 
+    def test_mod_is_skipped_without_fetching(self):
+        self.manifest["skills"].append(
+            {"name": "watch", "repo": "arm-pz/watch", "path": ".", "kind": "mod",
+             "group": "skill-authoring", "tag": "authoring", "title": "Watch",
+             "blurb": "A mod.", "stats": "1 file", "page": "bespoke", "order": 3})
+        fetched = []
+        root = Path(self.tmp.name)
+        entries = build.build(
+            self.manifest, root / "out",
+            tarball_fetch=lambda repo: fetched.append(repo) or tarball(
+                {f"skills/demo/{k}": v for k, v in FILES.items()}),
+            about_fetch=lambda repo: "A demo skill.", legacy_dir=self.legacy)
+        self.assertEqual([e["name"] for e in entries], ["demo", "legacy"])
+        self.assertEqual(fetched, ["arm-pz/demo"])
+        self.assertFalse((root / "out" / "watch.tar.gz").exists())
+
     def test_empty_about_fails(self):
         with self.assertRaises(SystemExit):
             self.run_build(about=lambda repo: "")
