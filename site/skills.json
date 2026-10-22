@@ -359,6 +359,76 @@
       "title": "Upstream Check",
       "page": "none",
       "order": 25
+    },
+    {
+      "name": "publish-pipeline",
+      "repo": "arm-pz/publish-pipeline",
+      "path": ".",
+      "group": "writing-growth",
+      "tag": "discovery",
+      "title": "Publish Pipeline",
+      "pageTitle": "Publish Pipeline — agent skill",
+      "blurb": "Sets up, audits and repairs a manifest-driven CI/CD pipeline that publishes a collection of agent skills to a Cloudflare Pages site, with a generated page per skill.",
+      "stats": "9 files · 1,214 lines · 20 KB",
+      "install": "npx skills add arm-pz/publish-pipeline",
+      "page": "generated",
+      "order": 26,
+      "pageSource": {
+        "description": "Sets up, audits and repairs a manifest-driven CI/CD pipeline that publishes a collection of agent skills to a Cloudflare Pages site, with a generated page per skill. Use when someone asks for CI/CD or automation for a skills site, wants a new skill repo to appear on the site with its own page, asks why a skill is missing or its page is stale, or needs a red publish run diagnosed and a bad deploy rolled back. It installs one GitHub Actions workflow with check, publish and discover jobs, a committed manifest as the publication decision, generated hub rows, discovery indexes, sitemap and pages, and verification gates on both sides of the deploy. Not for releasing one skill through the marketplace, tarball or plugin channels (use publish-release-gate), checking unpushed work or listing drift (use upstream-check), deciding whether a build is safe to launch (use release-gate), or writing and tuning a skill (use draft-skill or tune-skill).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 213,
+            "bytes": 11610
+          },
+          {
+            "path": "references/design.md",
+            "lines": 58,
+            "bytes": 4788
+          },
+          {
+            "path": "references/generated-page.md",
+            "lines": 53,
+            "bytes": 2617
+          },
+          {
+            "path": "references/gotchas.md",
+            "lines": 64,
+            "bytes": 4017
+          },
+          {
+            "path": "references/manifest.md",
+            "lines": 195,
+            "bytes": 8735
+          },
+          {
+            "path": "references/shape-test.md",
+            "lines": 116,
+            "bytes": 5248
+          },
+          {
+            "path": "references/verification.md",
+            "lines": 77,
+            "bytes": 4111
+          },
+          {
+            "path": "references/workflow.md",
+            "lines": 193,
+            "bytes": 8065
+          },
+          {
+            "path": "scripts/validate_manifest.py",
+            "lines": 245,
+            "bytes": 11049
+          }
+        ],
+        "fileCount": 9,
+        "lines": 1214,
+        "bytes": 20143,
+        "license": "MIT",
+        "commit": "50f04b96c33aebbddd143eee817a6a976b18e492",
+        "sha256": "2df94736e478bc7a31051e7016611081870e6cf5ce0f16f497f7b8220fa38b6c"
+      }
     }
   ]
 }
