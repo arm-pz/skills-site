@@ -96,6 +96,26 @@
       "name": "tune-skill",
       "repo": "arm-pz/tune-skill",
       "description": "Audit and fine-tune a skill that already exists; ships the check_skill.py validator."
+    },
+    {
+      "name": "seo-crawl",
+      "repo": "arm-pz/seo-crawl",
+      "description": "Crawl a site you own for deterministic, evidence-backed technical SEO findings."
+    },
+    {
+      "name": "publish-pipeline",
+      "repo": "arm-pz/publish-pipeline",
+      "description": "Publish skill repos to a site through a manifest, generated pages and gated CI."
+    },
+    {
+      "name": "cold-email-ops",
+      "repo": "arm-pz/cold-email-ops",
+      "description": "Plan and audit a cold-email program at volume: inbox and domain capacity, reply floors, burn replacement."
+    },
+    {
+      "name": "cold-email-list-gate",
+      "repo": "arm-pz/cold-email-list-gate",
+      "description": "Gate a cold-email lead list before load: ten-row ICP sample, GO or HOLD, fail pattern."
     }
   ]
 }

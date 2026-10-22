@@ -31,6 +31,12 @@
       "title": "Ship Checks",
       "descriptor": "pre-launch audits",
       "order": 5
+    },
+    {
+      "id": "outbound",
+      "title": "Outbound",
+      "descriptor": "cold email · deliverability · list gates",
+      "order": 6
     }
   ],
   "skills": [
@@ -523,6 +529,86 @@
         "license": "MIT",
         "commit": "8011f18e5143135697f7aad62438f6abf4487230",
         "sha256": "05e3eafecc6b2264cc54864e9320ff2401058dccd238b4037f14751fa510487a"
+      }
+    },
+    {
+      "name": "cold-email-ops",
+      "repo": "arm-pz/cold-email-ops",
+      "path": ".",
+      "group": "outbound",
+      "tag": "outbound",
+      "title": "Cold Email Ops",
+      "pageTitle": "Cold Email Ops — agent skill",
+      "blurb": "Plan and audit a cold-email program at volume and keep it from degrading: computes inbox and domain capacity from a monthly send target, sets per-domain reply-rate floors, burn-replacement cadence, shadow-ban tests, and automation error…",
+      "stats": "4 files · 393 lines · 8 KB",
+      "install": "npx skills add arm-pz/cold-email-ops",
+      "page": "generated",
+      "order": 28,
+      "pageSource": {
+        "description": "Plan and audit a cold-email program at volume and keep it from degrading: computes inbox and domain capacity from a monthly send target, sets per-domain reply-rate floors, burn-replacement cadence, shadow-ban tests, and automation error budgets, and reports prospects-to-lead with per-client averages. Use when someone is scaling outbound, asks how many inboxes or domains they need, why reply rates are falling or a domain might be shadow banned, or reviews an AI outbound stack for failure points. Not for pre-load list QA (cold-email-list-gate), writing or polishing the emails themselves (wordsmith), inbound SEO (seo-audit, programmatic-seo), WhatsApp/RCS messaging (integrate-whatsapp, sent-two-way-messaging), or finding the market/ICP.",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 93,
+            "bytes": 7848
+          },
+          {
+            "path": "references/benchmarks.md",
+            "lines": 70,
+            "bytes": 4381
+          },
+          {
+            "path": "references/report-format.md",
+            "lines": 67,
+            "bytes": 3226
+          },
+          {
+            "path": "scripts/cold_email_math.py",
+            "lines": 163,
+            "bytes": 5709
+          }
+        ],
+        "fileCount": 4,
+        "lines": 393,
+        "bytes": 8176,
+        "license": "MIT",
+        "commit": "1b3850dd3f4ef67ecc66de3a5004151fff622e71",
+        "sha256": "7a4cb9267d8147ee32c6d8317043c747ee59c2a4a508fc0f0f3e4e4a785803eb"
+      }
+    },
+    {
+      "name": "cold-email-list-gate",
+      "repo": "arm-pz/cold-email-list-gate",
+      "path": ".",
+      "group": "outbound",
+      "tag": "outbound",
+      "title": "Cold Email List Gate",
+      "pageTitle": "Cold Email List Gate — agent skill",
+      "blurb": "Gate a cold-email lead list before it loads: sample ten rows, check company, title, size, and mailbox against the ICP, compare data providers on the same criteria, and return a GO or HOLD decision with the fail pattern and the re-run…",
+      "stats": "2 files · 96 lines · 2 KB",
+      "install": "npx skills add arm-pz/cold-email-list-gate",
+      "page": "generated",
+      "order": 29,
+      "pageSource": {
+        "description": "Gate a cold-email lead list before it loads: sample ten rows, check company, title, size, and mailbox against the ICP, compare data providers on the same criteria, and return a GO or HOLD decision with the fail pattern and the re-run condition. Use when someone wants a list QA'd, checked, sampled, or approved before a send, asks whether a list is clean or safe to load, or is choosing between data providers for one filter set. Not for buying, scraping, or enriching contacts (out of scope), writing the email copy (wordsmith), or diagnosing a list that already sent (cold-email-ops).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 46,
+            "bytes": 2896
+          },
+          {
+            "path": "references/gate-rules.md",
+            "lines": 50,
+            "bytes": 2380
+          }
+        ],
+        "fileCount": 2,
+        "lines": 96,
+        "bytes": 2485,
+        "license": "MIT",
+        "commit": "4104d949e6ddffca3bd0be903518731d0cfb9dba",
+        "sha256": "efb8fa1bd2c440f9ca6c6b09a8a5d674fe32563407847f6e43ae4bfa204a6b27"
       }
     }
   ]
