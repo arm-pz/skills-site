@@ -31,6 +31,12 @@
       "title": "Ship Checks",
       "descriptor": "pre-launch audits",
       "order": 5
+    },
+    {
+      "id": "outbound",
+      "title": "Outbound",
+      "descriptor": "cold email · deliverability · list gates",
+      "order": 6
     }
   ],
   "skills": [
@@ -359,6 +365,251 @@
       "title": "Upstream Check",
       "page": "none",
       "order": 25
+    },
+    {
+      "name": "publish-pipeline",
+      "repo": "arm-pz/publish-pipeline",
+      "path": ".",
+      "group": "skill-authoring",
+      "tag": "authoring",
+      "title": "Publish Pipeline",
+      "pageTitle": "Publish Pipeline — agent skill",
+      "blurb": "Turns a pile of skill repos into a published site: a committed manifest decides what is public, discovery opens a pull request, and a green merge deploys generated pages, both discovery indexes, a sitemap and a verified build.",
+      "stats": "9 files · 1,214 lines · 20 KB",
+      "install": "npx skills add arm-pz/publish-pipeline",
+      "page": "generated",
+      "order": 26,
+      "pageSource": {
+        "description": "Sets up, audits and repairs a manifest-driven CI/CD pipeline that publishes a collection of agent skills to a Cloudflare Pages site, with a generated page per skill. Use when someone asks for CI/CD or automation for a skills site, wants a new skill repo to appear on the site with its own page, asks why a skill is missing or its page is stale, or needs a red publish run diagnosed and a bad deploy rolled back. It installs one GitHub Actions workflow with check, publish and discover jobs, a committed manifest as the publication decision, generated hub rows, discovery indexes, sitemap and pages, and verification gates on both sides of the deploy. Not for releasing one skill through the marketplace, tarball or plugin channels (use publish-release-gate), checking unpushed work or listing drift (use upstream-check), deciding whether a build is safe to launch (use release-gate), or writing and tuning a skill (use draft-skill or tune-skill).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 213,
+            "bytes": 11610
+          },
+          {
+            "path": "references/design.md",
+            "lines": 58,
+            "bytes": 4788
+          },
+          {
+            "path": "references/generated-page.md",
+            "lines": 53,
+            "bytes": 2617
+          },
+          {
+            "path": "references/gotchas.md",
+            "lines": 64,
+            "bytes": 4017
+          },
+          {
+            "path": "references/manifest.md",
+            "lines": 195,
+            "bytes": 8735
+          },
+          {
+            "path": "references/shape-test.md",
+            "lines": 116,
+            "bytes": 5248
+          },
+          {
+            "path": "references/verification.md",
+            "lines": 77,
+            "bytes": 4111
+          },
+          {
+            "path": "references/workflow.md",
+            "lines": 193,
+            "bytes": 8065
+          },
+          {
+            "path": "scripts/validate_manifest.py",
+            "lines": 245,
+            "bytes": 11049
+          }
+        ],
+        "fileCount": 9,
+        "lines": 1214,
+        "bytes": 20143,
+        "license": "MIT",
+        "commit": "50f04b96c33aebbddd143eee817a6a976b18e492",
+        "sha256": "2df94736e478bc7a31051e7016611081870e6cf5ce0f16f497f7b8220fa38b6c"
+      }
+    },
+    {
+      "name": "seo-crawl",
+      "repo": "arm-pz/seo-crawl",
+      "path": ".",
+      "group": "writing-growth",
+      "tag": "seo",
+      "title": "SEO Crawl",
+      "pageTitle": "SEO Crawl — agent skill",
+      "blurb": "Crawls a site you own and returns deterministic, evidence-backed technical SEO findings, with blocked or unrun checks reported INCONCLUSIVE rather than a pass.",
+      "stats": "14 files · 1,885 lines · 19 KB",
+      "install": "npx skills add arm-pz/seo-crawl",
+      "page": "generated",
+      "order": 27,
+      "pageSource": {
+        "description": "Use when you need evidence about the technical SEO state of a site you own or are authorized to crawl, covering HTTP statuses and redirects, indexability (meta and header robots), robots.txt, canonical tags, titles, meta descriptions, H1s, internal links, sitemap coverage, and static JSON-LD. Runs a bounded, read-only crawl and returns deterministic findings JSON with stable IDs and explicit INCONCLUSIVE checks, so an SEO audit or content change starts from measured evidence instead of guesses. Trigger phrases include \"crawl the site for SEO\", \"check sitemap coverage\", \"find broken internal links\", \"why is this page not indexed\", \"check titles and metas\", \"canonical audit\", and \"pre-audit crawl\". Not for Search Console clicks, impressions, rankings or keyword volumes; Core Web Vitals, Lighthouse or bundle performance; release security and exposed files; content rewriting or keyword strategy.",
+        "files": [
+          {
+            "path": ".gitignore",
+            "lines": 5,
+            "bytes": 49
+          },
+          {
+            "path": "SKILL.md",
+            "lines": 88,
+            "bytes": 5924
+          },
+          {
+            "path": "examples/sample-report.md",
+            "lines": 187,
+            "bytes": 5737
+          },
+          {
+            "path": "package.json",
+            "lines": 17,
+            "bytes": 322
+          },
+          {
+            "path": "references/checks.md",
+            "lines": 89,
+            "bytes": 6412
+          },
+          {
+            "path": "references/findings-schema.md",
+            "lines": 81,
+            "bytes": 4058
+          },
+          {
+            "path": "scripts/lib/checks.mjs",
+            "lines": 443,
+            "bytes": 13123
+          },
+          {
+            "path": "scripts/lib/crawl.mjs",
+            "lines": 298,
+            "bytes": 8893
+          },
+          {
+            "path": "scripts/lib/fetch.mjs",
+            "lines": 158,
+            "bytes": 4728
+          },
+          {
+            "path": "scripts/lib/parse.mjs",
+            "lines": 178,
+            "bytes": 5371
+          },
+          {
+            "path": "scripts/lib/report.mjs",
+            "lines": 46,
+            "bytes": 1471
+          },
+          {
+            "path": "scripts/lib/robots.mjs",
+            "lines": 117,
+            "bytes": 3393
+          },
+          {
+            "path": "scripts/lib/sitemap.mjs",
+            "lines": 35,
+            "bytes": 1164
+          },
+          {
+            "path": "scripts/seo-crawl.mjs",
+            "lines": 143,
+            "bytes": 3925
+          }
+        ],
+        "fileCount": 14,
+        "lines": 1885,
+        "bytes": 19109,
+        "license": "MIT",
+        "commit": "8011f18e5143135697f7aad62438f6abf4487230",
+        "sha256": "05e3eafecc6b2264cc54864e9320ff2401058dccd238b4037f14751fa510487a"
+      }
+    },
+    {
+      "name": "cold-email-ops",
+      "repo": "arm-pz/cold-email-ops",
+      "path": ".",
+      "group": "outbound",
+      "tag": "outbound",
+      "title": "Cold Email Ops",
+      "pageTitle": "Cold Email Ops — agent skill",
+      "blurb": "Plan and audit a cold-email program at volume and keep it from degrading: computes inbox and domain capacity from a monthly send target, sets per-domain reply-rate floors, burn-replacement cadence, shadow-ban tests, and automation error…",
+      "stats": "4 files · 393 lines · 8 KB",
+      "install": "npx skills add arm-pz/cold-email-ops",
+      "page": "generated",
+      "order": 28,
+      "pageSource": {
+        "description": "Plan and audit a cold-email program at volume and keep it from degrading: computes inbox and domain capacity from a monthly send target, sets per-domain reply-rate floors, burn-replacement cadence, shadow-ban tests, and automation error budgets, and reports prospects-to-lead with per-client averages. Use when someone is scaling outbound, asks how many inboxes or domains they need, why reply rates are falling or a domain might be shadow banned, or reviews an AI outbound stack for failure points. Not for pre-load list QA (cold-email-list-gate), writing or polishing the emails themselves (wordsmith), inbound SEO (seo-audit, programmatic-seo), WhatsApp/RCS messaging (integrate-whatsapp, sent-two-way-messaging), or finding the market/ICP.",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 93,
+            "bytes": 7848
+          },
+          {
+            "path": "references/benchmarks.md",
+            "lines": 70,
+            "bytes": 4381
+          },
+          {
+            "path": "references/report-format.md",
+            "lines": 67,
+            "bytes": 3226
+          },
+          {
+            "path": "scripts/cold_email_math.py",
+            "lines": 163,
+            "bytes": 5709
+          }
+        ],
+        "fileCount": 4,
+        "lines": 393,
+        "bytes": 8176,
+        "license": "MIT",
+        "commit": "1b3850dd3f4ef67ecc66de3a5004151fff622e71",
+        "sha256": "7a4cb9267d8147ee32c6d8317043c747ee59c2a4a508fc0f0f3e4e4a785803eb"
+      }
+    },
+    {
+      "name": "cold-email-list-gate",
+      "repo": "arm-pz/cold-email-list-gate",
+      "path": ".",
+      "group": "outbound",
+      "tag": "outbound",
+      "title": "Cold Email List Gate",
+      "pageTitle": "Cold Email List Gate — agent skill",
+      "blurb": "Gate a cold-email lead list before it loads: sample ten rows, check company, title, size, and mailbox against the ICP, compare data providers on the same criteria, and return a GO or HOLD decision with the fail pattern and the re-run…",
+      "stats": "2 files · 96 lines · 2 KB",
+      "install": "npx skills add arm-pz/cold-email-list-gate",
+      "page": "generated",
+      "order": 29,
+      "pageSource": {
+        "description": "Gate a cold-email lead list before it loads: sample ten rows, check company, title, size, and mailbox against the ICP, compare data providers on the same criteria, and return a GO or HOLD decision with the fail pattern and the re-run condition. Use when someone wants a list QA'd, checked, sampled, or approved before a send, asks whether a list is clean or safe to load, or is choosing between data providers for one filter set. Not for buying, scraping, or enriching contacts (out of scope), writing the email copy (wordsmith), or diagnosing a list that already sent (cold-email-ops).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 46,
+            "bytes": 2896
+          },
+          {
+            "path": "references/gate-rules.md",
+            "lines": 50,
+            "bytes": 2380
+          }
+        ],
+        "fileCount": 2,
+        "lines": 96,
+        "bytes": 2485,
+        "license": "MIT",
+        "commit": "4104d949e6ddffca3bd0be903518731d0cfb9dba",
+        "sha256": "efb8fa1bd2c440f9ca6c6b09a8a5d674fe32563407847f6e43ae4bfa204a6b27"
+      }
     }
   ]
 }
