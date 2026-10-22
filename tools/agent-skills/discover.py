@@ -143,6 +143,15 @@ def candidate_entry(name, path, group, tag, source, order):
     }
 
 
+def bash_command():
+    # Windows resolves bare "bash" to the WSL stub, which fails in a subprocess.
+    if os.name == "nt":
+        candidate = Path(os.environ.get("ProgramFiles", r"C:\Program Files")) / "Git" / "bin" / "bash.exe"
+        if candidate.is_file():
+            return str(candidate)
+    return "bash"
+
+
 def run_gate(root):
     env = dict(os.environ, GH=GH)
     for cmd in (
@@ -152,7 +161,7 @@ def run_gate(root):
         [sys.executable, "tools/agent-skills/gen_home.py", "--check"],
         [sys.executable, "tools/agent-skills/gen_page.py", "--check"],
         [sys.executable, "tools/agent-skills/gen_sitemap.py", "--write"],
-        ["bash", "tools/agent-skills/make_dist.sh"],
+        [bash_command(), "tools/agent-skills/make_dist.sh"],
         [sys.executable, "tools/agent-skills/check_dist.py"],
         ["node", "tools/agent-skills/verify.mjs", "local"],
     ):
