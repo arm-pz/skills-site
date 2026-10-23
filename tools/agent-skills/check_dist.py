@@ -75,6 +75,17 @@ def check(root="."):
         need(locs == expected, f"sitemap URLs differ: missing {expected - locs}, "
                                f"extra {locs - expected}")
 
+    redirects = dist / "_redirects"
+    need(redirects.is_file(), "missing dist/_redirects")
+    if redirects.is_file():
+        need(redirects.read_text(encoding="utf-8") == skilllib.redirects(manifest),
+             "dist/_redirects differs from the manifest aliases")
+        for line in redirects.read_text(encoding="utf-8").splitlines():
+            target = line.split()[1]
+            path = dist / target.lstrip("/")
+            need((path / "index.html").is_file() if target.endswith("/") else path.is_file(),
+                 f"redirect target {target} does not exist")
+
     hub_path = dist / "index.html"
     need(hub_path.is_file(), "missing dist/index.html")
     if hub_path.is_file():

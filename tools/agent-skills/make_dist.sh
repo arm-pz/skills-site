@@ -29,11 +29,22 @@ cp out/*.tar.gz dist/agent-skills/
 cp out/index.json dist/agent-skills/index.json
 cp out/index.json dist/.well-known/agent-skills/index.json
 cp out/sitemap.xml dist/sitemap.xml
+cp out/_redirects dist/_redirects
 
 python tools/agent-skills/gen_page.py --list | tr -d '\r' | while read -r name; do
   [ -n "$name" ] || continue
   mkdir -p "dist/$name"
   cp "$name/index.html" "dist/$name/index.html"
 done
+
+# One hash over every file, so CI can tell whether the live site already matches this build.
+python - <<'PY'
+import hashlib, json, pathlib
+root = pathlib.Path("dist")
+digest = hashlib.sha256()
+for path in sorted(p for p in root.rglob("*") if p.is_file() and p.name != "version.json"):
+    digest.update(path.relative_to(root).as_posix().encode() + b"\0" + path.read_bytes() + b"\0")
+(root / "version.json").write_text(json.dumps({"tree": digest.hexdigest()}) + "\n")
+PY
 
 echo "dist: $(find dist -type f | wc -l) files"

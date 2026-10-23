@@ -16,17 +16,21 @@ GH = os.environ.get("GH", "gh")
 OWNER = "arm-pz"
 KEYWORDS = {
     # First because agent skills often mention SEO or writing only in their
-    # "not for" clause, which would otherwise claim them for writing-growth.
+    # "not for" clause, which would otherwise claim them for another group.
     "outbound": ["cold", "outbound", "deliverability", "inbox", "prospect",
                  "mailbox"],
     "career": ["resume", "cv", "linkedin", "recruiter", "applicant", "job",
-               "interview", "career"],
-    "writing-growth": ["seo", "keyword", "search", "content", "copy", "edit",
-                       "write", "wordsmith", "discover", "findable", "listing"],
-    "thinking-learning": ["teach", "learn", "study", "tutor", "explain", "decision",
-                          "debate", "brainstorm", "crash", "arena"],
+               "interview", "career", "promotion"],
+    "skill-authoring": ["frontmatter", "authoring", "triggering"],
+    "publish-discover": ["discover", "findable", "listing", "publish", "marketplace",
+                         "stars", "installs"],
+    "seo-search": ["seo", "keyword", "crawl", "cannibalization", "serp"],
     "ship-checks": ["release", "ship", "deploy", "security", "red-team", "preflight",
-                    "audit", "performance", "test", "verify"],
+                    "audit", "performance", "verify", "code", "website"],
+    "writing-growth": ["content", "copy", "edit", "write", "wordsmith", "newsletter",
+                       "thread", "post"],
+    "thinking-learning": ["teach", "learn", "study", "tutor", "explain", "decision",
+                          "debate", "brainstorm", "research", "strategy", "data"],
 }
 
 
@@ -45,24 +49,26 @@ def assign_group(name, description):
 
 def assign_tag(group, name, description):
     tokens = words(name, description)
-    if group == "career":
-        return "career"
-    if group == "outbound":
-        return "outbound"
+    if group in ("career", "outbound"):
+        return group
+    if group == "seo-search":
+        return "seo"
+    if group == "publish-discover":
+        return "discovery" if tokens & {"discover", "findable", "listing"} else "publishing"
     if group == "writing-growth":
-        if tokens & {"seo", "keyword"}:
-            return "seo"
-        if tokens & {"discover", "findable", "listing"}:
-            return "discovery"
-        return "editorial"
+        return "editorial" if tokens & {"edit", "proofread", "wordsmith"} else "content"
     if group == "thinking-learning":
-        if tokens & {"decisions", "decision"}:
+        if tokens & {"decisions", "decision", "strategy"}:
             return "decisions"
         if "arena" in tokens:
             return "arena"
+        if tokens & {"research", "data", "sources"}:
+            return "research"
         return "learning"
     if group == "ship-checks":
-        return "performance" if "performance" in tokens else "release"
+        if "performance" in tokens:
+            return "performance"
+        return "build" if tokens & {"code", "website", "prompt"} else "release"
     return "authoring"
 
 

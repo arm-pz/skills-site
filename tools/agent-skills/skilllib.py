@@ -147,6 +147,13 @@ def validate_manifest(data):
         else:
             _req("pageSource" not in s, f"{name}: pageSource is only for generated pages")
 
+    for s in skills:
+        aliases = s.get("aliases", [])
+        _req(isinstance(aliases, list) and all(valid_name(a) for a in aliases),
+             f"{s['name']}: aliases must be a list of skill names")
+        for alias in aliases:
+            _req(alias not in names, f"{s['name']}: alias {alias!r} is also a live skill name")
+
     paged = {s["name"] for s in skills if s.get("page") != "none"}
     flows = data.get("workflows", [])
     _req(isinstance(flows, list), "workflows must be a list")
@@ -331,6 +338,19 @@ def pack(files):
     with gzip.GzipFile(fileobj=gz, mode="wb", mtime=0, compresslevel=9) as g:
         g.write(raw.getvalue())
     return gz.getvalue()
+
+
+def redirects(manifest):
+    """Cloudflare Pages _redirects lines sending a renamed skill's old URLs to the new ones."""
+    lines = []
+    for s in sorted(manifest["skills"], key=lambda s: s["name"]):
+        for old in s.get("aliases", []):
+            if s["page"] != "none":
+                lines.append(f"/{old}/ /{s['name']}/ 301")
+                lines.append(f"/{old} /{s['name']}/ 301")
+            if s.get("kind", "skill") == "skill":
+                lines.append(f"/agent-skills/{old}.tar.gz /agent-skills/{s['name']}.tar.gz 301")
+    return "".join(line + "\n" for line in lines)
 
 
 def sha256_hex(blob):

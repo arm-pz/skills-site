@@ -48,6 +48,10 @@ def main(argv=None):
     with open(out / "sitemap.xml", "w", encoding="utf-8", newline="\n") as fh:
         fh.write(xml)
     print(f"out/sitemap.xml: {len(urls(manifest))} urls")
+    rules = skilllib.redirects(manifest)
+    with open(out / "_redirects", "w", encoding="utf-8", newline="\n") as fh:
+        fh.write(rules)
+    print(f"out/_redirects: {rules.count(chr(10))} rules")
     return 0
 
 

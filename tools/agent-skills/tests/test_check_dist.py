@@ -67,6 +67,7 @@ class CheckDistTest(unittest.TestCase):
             '<script type="application/ld+json">{"numberOfItems": 2}</script>')
         for name in ("404.html", "_headers"):
             (self.root / "dist" / name).write_text("x")
+        (self.root / "dist/_redirects").write_text("")
         (self.root / "dist/.well-known/skills.json").write_text("{}")
         (self.root / "dist/fonts").mkdir()
         (self.root / "dist/fonts/fonts.css").write_text("x")
@@ -114,6 +115,17 @@ class CheckDistTest(unittest.TestCase):
             '"numberOfItems": 2', '"numberOfItems": 1')
         (self.root / "dist/index.html").write_text(html)
         self.assertTrue(check_dist.check(self.root))
+
+    def test_alias_redirect_must_match_and_resolve(self):
+        manifest = json.loads((self.root / "site/skills.json").read_text())
+        manifest["skills"][0]["aliases"] = ["old-alpha"]
+        (self.root / "site/skills.json").write_text(json.dumps(manifest))
+        self.assertTrue(check_dist.check(self.root))  # _redirects is still empty
+        (self.root / "dist/_redirects").write_text(skilllib.redirects(manifest))
+        self.assertEqual(check_dist.check(self.root), [])
+        self.assertIn("/old-alpha/ /alpha/ 301", skilllib.redirects(manifest))
+        self.assertIn("/agent-skills/old-alpha.tar.gz /agent-skills/alpha.tar.gz 301",
+                      skilllib.redirects(manifest))
 
 
 if __name__ == "__main__":

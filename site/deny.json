@@ -2,5 +2,13 @@
   {
     "repo": "arm-pz/job-application-agent",
     "reason": "Third-party skill that fills and submits applications and transmits candidate data by default."
+  },
+  {
+    "repo": "arm-pz/outbound-ops",
+    "reason": "Qoder agent bundle of cold-email-list-gate and cold-email-ops, which are listed from their own repos."
+  },
+  {
+    "repo": "arm-pz/prompts-to-skill-agent",
+    "reason": "Qoder agent bundle of prompts-to-skill and prompts-to-skill-release, which are listed from their own repos; this copy still drafts with skill-creator."
   }
 ]

@@ -11,7 +11,10 @@ class AssignmentTest(unittest.TestCase):
     def test_group_table(self):
         cases = {
             "resume-screener": "career",
-            "seo-helper": "writing-growth",
+            "seo-helper": "seo-search",
+            "findable-helper": "publish-discover",
+            "newsletter-writer": "writing-growth",
+            "cold-inbox": "outbound",
             "study-coach": "thinking-learning",
             "deploy-audit": "ship-checks",
             "widget-maker": "skill-authoring",
@@ -20,8 +23,11 @@ class AssignmentTest(unittest.TestCase):
             self.assertEqual(discover.assign_group(name, ""), group, name)
 
     def test_tag_follows_group(self):
-        self.assertEqual(discover.assign_tag("writing-growth", "seo-x", ""), "seo")
-        self.assertEqual(discover.assign_tag("writing-growth", "findable-x", ""), "discovery")
+        self.assertEqual(discover.assign_tag("seo-search", "seo-x", ""), "seo")
+        self.assertEqual(discover.assign_tag("publish-discover", "findable-x", ""), "discovery")
+        self.assertEqual(discover.assign_tag("publish-discover", "pipeline-x", ""), "publishing")
+        self.assertEqual(discover.assign_tag("writing-growth", "wordsmith-x", ""), "editorial")
+        self.assertEqual(discover.assign_tag("ship-checks", "website-x", ""), "build")
         self.assertEqual(discover.assign_tag("ship-checks", "perf-x", ""), "release")
         self.assertEqual(discover.assign_tag("thinking-learning", "arena-x", ""), "arena")
         self.assertEqual(discover.assign_tag("skill-authoring", "x", ""), "authoring")
