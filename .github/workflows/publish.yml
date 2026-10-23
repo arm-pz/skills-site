@@ -1,24 +1,26 @@
 name: publish
 
+# Anything live on GitHub reaches skills.caffeinity.com without a human merge:
+# every hour sync.py adds new skill repos, refreshes generated pages whose repo
+# moved, follows renames (with 301s) and drops repos that went away. The build
+# and every gate still have to pass before anything deploys, and the sync is
+# committed back to main only after the live site has been proved.
+
 on:
   push:
     branches: [main]
   pull_request:
   schedule:
-    - cron: "30 6 * * *"
+    - cron: "17 * * * *"
   workflow_dispatch:
-    inputs:
-      mode:
-        description: Job to run
-        type: choice
-        options: [publish, discover]
-        default: publish
+  repository_dispatch:
+    types: [skill-updated]
 
 permissions:
   contents: read
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: publish-skills-site
   cancel-in-progress: false
 
 jobs:
@@ -44,6 +46,11 @@ jobs:
         run: |
           python tools/agent-skills/gen_home.py --check
           python tools/agent-skills/gen_page.py --check
+      - name: sync preview (read-only)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH: gh
+        run: python tools/agent-skills/sync.py --summary "$GITHUB_STEP_SUMMARY"
       - name: build
         env:
           GH_TOKEN: ${{ github.token }}
@@ -59,17 +66,15 @@ jobs:
         run: node tools/agent-skills/verify.mjs local
 
   publish:
-    if: github.event_name == 'push' || github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.mode == 'publish')
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 45
     permissions:
-      contents: read
-    concurrency:
-      group: publish-skills-site
-      cancel-in-progress: false
+      contents: write
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: main
           fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
@@ -77,6 +82,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "24"
+      - name: sync with GitHub
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH: gh
+        run: python tools/agent-skills/sync.py --write --summary "$GITHUB_STEP_SUMMARY" | tee "$RUNNER_TEMP/sync.txt"
       - name: unit tests
         run: python -m unittest discover -s tools/agent-skills/tests -v
       - name: generated surfaces are current
@@ -96,7 +106,23 @@ jobs:
         run: python tools/agent-skills/check_dist.py
       - name: verify local
         run: node tools/agent-skills/verify.mjs local
+      - name: anything to deploy?
+        id: changed
+        run: |
+          set -euo pipefail
+          reason=""
+          [ -n "$(git status --porcelain)" ] && reason="sync changed the repo"
+          # dist/version.json hashes every file make_dist wrote, so any page, archive,
+          # index or About change shows up here, and nothing Cloudflare injects does.
+          live=$(curl -fsS "https://skills.caffeinity.com/version.json?v=$GITHUB_RUN_ID" || true)
+          [ "$live" = "$(cat dist/version.json)" ] || reason="${reason:-the built site differs from the live one}"
+          case "${{ github.event_name }}" in
+            push|workflow_dispatch|repository_dispatch) reason="${reason:-${{ github.event_name }}}" ;;
+          esac
+          echo "reason=$reason" >> "$GITHUB_OUTPUT"
+          echo "- deploy: ${reason:-skipped, live site already matches}" >> "$GITHUB_STEP_SUMMARY"
       - name: preflight secrets
+        if: steps.changed.outputs.reason != ''
         env:
           CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CF_ACCOUNT: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -104,8 +130,10 @@ jobs:
           [ -n "$CF_TOKEN" ] || { echo "::error::CLOUDFLARE_API_TOKEN is not set in Settings → Secrets and variables → Actions"; exit 1; }
           [ -n "$CF_ACCOUNT" ] || { echo "::error::CLOUDFLARE_ACCOUNT_ID is not set in Settings → Secrets and variables → Actions"; exit 1; }
       - name: install wrangler
+        if: steps.changed.outputs.reason != ''
         run: npm install --no-save wrangler@4.151.1
       - name: deploy
+        if: steps.changed.outputs.reason != ''
         id: deploy
         shell: bash
         env:
@@ -116,50 +144,32 @@ jobs:
           npx wrangler pages deploy dist --project-name skills --branch main 2>&1 | tee deploy.log
           url=$(grep -oE 'https://[a-f0-9]+\.skills\.pages\.dev' deploy.log | tail -1 || true)
           echo "url=$url" >> "$GITHUB_OUTPUT"
-          echo "Deployment: ${url:-not reported}" >> "$GITHUB_STEP_SUMMARY"
+          echo "- deployment: ${url:-not reported}" >> "$GITHUB_STEP_SUMMARY"
       - name: verify live
+        if: steps.changed.outputs.reason != ''
         env:
-          CACHE_BUST: ${{ github.sha }}
+          CACHE_BUST: ${{ github.run_id }}
         run: node tools/agent-skills/verify.mjs https://skills.caffeinity.com
       - name: prove live
-        run: python tools/agent-skills/prove.py --site https://skills.caffeinity.com --bust "${{ github.sha }}"
-      - name: summary
-        if: always()
+        if: steps.changed.outputs.reason != ''
+        run: python tools/agent-skills/prove.py --site https://skills.caffeinity.com --bust "${{ github.run_id }}"
+      - name: commit the sync back to main
+        if: steps.changed.outputs.reason != ''
         run: |
-          {
-            echo "## skills-site publish"
-            echo "- commit: \`${{ github.sha }}\`"
-            echo "- deployment: ${{ steps.deploy.outputs.url }}"
-            echo "- archives: $(ls out/*.tar.gz 2>/dev/null | wc -l)"
-          } >> "$GITHUB_STEP_SUMMARY"
-
-  discover:
-    if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.mode == 'discover')
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    permissions:
-      contents: write
-      pull-requests: write
-    concurrency:
-      group: discover-skills-site
-      cancel-in-progress: false
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "24"
-      - name: shape report
+          set -euo pipefail
+          [ -n "$(git status --porcelain)" ] || exit 0
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "sync: publish what is live on GitHub" -m "$(head -40 "$RUNNER_TEMP/sync.txt")"
+          git pull --rebase origin main
+          git push origin HEAD:main
+      - name: tell the profile README
+        if: steps.changed.outputs.reason != ''
         env:
-          GH_TOKEN: ${{ github.token }}
-          GH: gh
-        run: python tools/agent-skills/discover.py --report | tee report.txt
-      - name: proposal
-        env:
-          GH_TOKEN: ${{ github.token }}
-          GH: gh
-        run: python tools/agent-skills/discover.py --propose
+          GH_TOKEN: ${{ secrets.PROFILE_DISPATCH_TOKEN }}
+        run: |
+          # Optional: a fine-grained token with Contents read/write on arm-pz/arm-pz.
+          # Without it, the profile workflow's own hourly schedule picks the change up.
+          [ -n "$GH_TOKEN" ] || { echo "no PROFILE_DISPATCH_TOKEN; the profile updates on its own schedule"; exit 0; }
+          gh api repos/arm-pz/arm-pz/dispatches -f event_type=skills-updated
