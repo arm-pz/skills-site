@@ -73,7 +73,7 @@ static checks above.
 3. **tune-skill's name**: a same-purpose `hburaktasyurek/tune-skill` already ranks. Keep and
    qualify, or rename while installs are near zero (`runs/findable-tune-skill.md`, section 2).
 4. **Profile README** (`arm-pz/arm-pz`) still has `[CITY, COUNTRY]` and `REPO-NAME` placeholders.
-5. **application-pilot** links to `arm-pz/job-lens`, which does not exist.
+5. **application-pilot**'s BUILD.md links to `arm-pz/job-lens`, the old name of applicant-kit (renamed 2026-10-15; GitHub redirects it). History notes only; no skill file uses the old name.
 6. **Third-party names cited as siblings**: `seo-audit` and `programmatic-seo`
    (coreyhaines31/marketingskills), `paper-trail` (solo-income-blueprint), and
    `module-learning-path-generator` (study-system). Fine if intended; say so in each README.
