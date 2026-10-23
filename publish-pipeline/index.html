@@ -166,7 +166,7 @@
       <button class="copy" id="copy" type="button" aria-describedby="cmd"><span class="idle">Copy install command</span><span class="done" aria-hidden="true">Copied</span></button>
       <span class="sr-only" id="copy-status" role="status" aria-live="polite"></span>
     </div>
-    <p class="facts">9 files and 1,214 lines, free under MIT. Built from <a href="https://github.com/arm-pz/publish-pipeline" target="_blank" rel="noopener">arm-pz/publish-pipeline</a> at <code>50f04b9</code>.</p>
+    <p class="facts">9 files and 1,217 lines, free under MIT. Built from <a href="https://github.com/arm-pz/publish-pipeline" target="_blank" rel="noopener">arm-pz/publish-pipeline</a> at <code>5504ae3</code>.</p>
   </div>
 </header>
 
@@ -190,32 +190,32 @@
 <section class="ships" aria-labelledby="ships-h">
   <div class="wrap">
     <h2 id="ships-h">Every file it installs</h2>
-    <p class="intro">Measured from the packed archive at commit <code>50f04b9</code>. A skill is plain text your agent reads, so this list is all of it.</p>
+    <p class="intro">Measured from the packed archive at commit <code>5504ae3</code>. A skill is plain text your agent reads, so this list is all of it.</p>
     <table class="files">
       <thead class="sr-only"><tr><th>File</th><th>Lines</th><th>Bytes</th></tr></thead>
       <tbody>
         <tr><td>SKILL.md</td><td class="n">213</td><td class="n bytes">11,610 B</td></tr>
         <tr><td>references/design.md</td><td class="n">58</td><td class="n bytes">4,788 B</td></tr>
         <tr><td>references/generated-page.md</td><td class="n">53</td><td class="n bytes">2,617 B</td></tr>
-        <tr><td>references/gotchas.md</td><td class="n">64</td><td class="n bytes">4,017 B</td></tr>
+        <tr><td>references/gotchas.md</td><td class="n">67</td><td class="n bytes">4,267 B</td></tr>
         <tr><td>references/manifest.md</td><td class="n">195</td><td class="n bytes">8,735 B</td></tr>
         <tr><td>references/shape-test.md</td><td class="n">116</td><td class="n bytes">5,248 B</td></tr>
         <tr><td>references/verification.md</td><td class="n">77</td><td class="n bytes">4,111 B</td></tr>
         <tr><td>references/workflow.md</td><td class="n">193</td><td class="n bytes">8,065 B</td></tr>
         <tr><td>scripts/validate_manifest.py</td><td class="n">245</td><td class="n bytes">11,049 B</td></tr>
       </tbody>
-      <tfoot><tr><td>9 files</td><td class="n">1,214</td><td class="n bytes">20 KB</td></tr></tfoot>
+      <tfoot><tr><td>9 files</td><td class="n">1,217</td><td class="n bytes">20 KB</td></tr></tfoot>
     </table>
   </div>
 </section>
 
 <section class="more" aria-labelledby="more-h">
   <div class="wrap">
-    <h2 id="more-h">More in Skill Authoring</h2>
+    <h2 id="more-h">More in Publish &amp; Discover</h2>
     <ul class="related">
-      <li><a href="/draft-skill/"><strong>Draft Skill</strong><span>Creates a new agent skill from a plain idea: confirms the purpose before writing anything, checks the installed siblings for overlap, splits scripts from references from assets, writes a description that actually triggers, then validates it with check_skill.py. Written from scratch, so it carries no text from Qoder&#x27;s built-in skill-creator, which ships without a licence permitting redistribution.</span></a></li>
-      <li><a href="/tune-skill/"><strong>Tune Skill</strong><span>Audits and fine-tunes a skill that already exists: the description that never fires, overlap with installed siblings, stale names and counts, handoff contracts that do not hand off. Ships check_skill.py, a deterministic validator over frontmatter, folder and heading agreement, description length and reference paths that do not exist. Not for creating one from scratch; that is draft-skill.</span></a></li>
-      <li><a href="/prompts-to-skill/"><strong>Prompts To Skill</strong><span>Turns a list of your own prompts into a finished, tested skill, one skill per prompt: an intent interview, an overlap check against what is already installed, a draft written with draft-skill, trigger test cases that include near-misses, and a tune-skill gate at the end. It needs draft-skill and tune-skill and stops with a clear message if either is missing.</span></a></li>
+      <li><a href="/findable/"><strong>Findable</strong><span>Sets up discovery for a GitHub repo, skill, plugin or MCP server so it gets found by what it does, not only by its name. It audits where you rank today, works out the queries strangers type, then drafts the About text, topics, README opening, release notes, site page and directory plan — real numbers only, and nothing public changes without your go-ahead.</span></a></li>
+      <li><a href="/upstream-check/"><strong>Upstream Check</strong><span>Finds local commits that never reached GitHub, pushes only clean fast-forwards after a secret screen, then checks that the site index, the homepage, the marketplace and the READMEs agree with the repos that actually ship a SKILL.md.</span></a></li>
+      <li><a href="/findable-polish/"><strong>Findable Polish</strong><span>Chains Findable and Wordsmith: audits a README, skill page or landing copy against the queries a real stranger types, then writes two or three alternatives per finding that fix it without inventing a fact. Proven on its own repo: seven live searches, zero hits, six named gaps, fixes applied the same day.</span></a></li>
     </ul>
     <div class="source">
       <p>Read it before you install it: the skill lives at <code>.</code> in <a href="https://github.com/arm-pz/publish-pipeline" target="_blank" rel="noopener">arm-pz/publish-pipeline</a>.</p>

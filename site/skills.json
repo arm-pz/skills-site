@@ -3,198 +3,105 @@
   "site": "https://skills.caffeinity.com",
   "groups": [
     {
-      "id": "writing-growth",
-      "title": "Writing & Growth",
-      "descriptor": "editorial · seo · discovery · chains",
+      "id": "start-here",
+      "title": "Start Here",
+      "descriptor": "routing · nine workflows",
       "order": 1
-    },
-    {
-      "id": "career",
-      "title": "Career",
-      "descriptor": "screening · applications · follow-through",
-      "order": 2
-    },
-    {
-      "id": "thinking-learning",
-      "title": "Thinking & Learning",
-      "descriptor": "teaching · tournaments · decisions",
-      "order": 3
     },
     {
       "id": "skill-authoring",
       "title": "Skill Authoring",
-      "descriptor": "draft · tune · package · chains",
-      "order": 4
+      "descriptor": "draft · tune · release · mods",
+      "order": 2
+    },
+    {
+      "id": "publish-discover",
+      "title": "Publish & Discover",
+      "descriptor": "discovery · pipeline · drift",
+      "order": 3
     },
     {
       "id": "ship-checks",
-      "title": "Ship Checks",
-      "descriptor": "pre-launch audits",
+      "title": "Build & Ship",
+      "descriptor": "build · exposure · security · speed · go/no-go",
+      "order": 4
+    },
+    {
+      "id": "seo-search",
+      "title": "SEO & Search",
+      "descriptor": "crawl · cannibalization · rewrites",
       "order": 5
+    },
+    {
+      "id": "writing-growth",
+      "title": "Writing & Content",
+      "descriptor": "editing · platforms · sales copy",
+      "order": 6
     },
     {
       "id": "outbound",
       "title": "Outbound",
-      "descriptor": "cold email · deliverability · list gates",
-      "order": 6
+      "descriptor": "list gates · deliverability",
+      "order": 7
+    },
+    {
+      "id": "career",
+      "title": "Career",
+      "descriptor": "screening · applications · growth",
+      "order": 8
+    },
+    {
+      "id": "thinking-learning",
+      "title": "Thinking & Learning",
+      "descriptor": "research · decisions · teaching",
+      "order": 9
     }
   ],
   "skills": [
     {
-      "name": "wordsmith",
-      "repo": "arm-pz/wordsmith",
-      "path": "skills/wordsmith",
-      "group": "writing-growth",
-      "tag": "editorial",
-      "title": "Wordsmith",
-      "page": "bespoke",
-      "order": 1,
-      "blurb": "Teaches your agent to edit, not just generate: 44 commands across 5 disciplines that tighten, rewrite, critique and proofread while keeping the author's meaning, hedges and voice intact.",
-      "stats": "44 commands · 5 disciplines · ~1,200 lines · 0 API keys",
-      "install": "npx skills add arm-pz/wordsmith"
-    },
-    {
-      "name": "keyword-guard",
-      "repo": "arm-pz/keyword-guard",
-      "path": ".",
-      "group": "writing-growth",
-      "tag": "seo",
-      "title": "Keyword Guard",
-      "page": "bespoke",
-      "order": 2,
-      "blurb": "Plans topic clusters and kills keyword cannibalization so exactly one page wins each query. The cannibalization audit is a mandatory blocker before any content change — with a sitemap fallback for when you have no Search Console access.",
-      "stats": "6 phases · 3 reference checklists · ~300 lines · 0 API keys",
-      "install": "npx skills add arm-pz/keyword-guard"
-    },
-    {
-      "name": "findable",
-      "repo": "arm-pz/findable",
-      "path": "skills/findable",
-      "group": "writing-growth",
-      "tag": "discovery",
-      "title": "Findable",
-      "page": "bespoke",
-      "order": 3,
-      "blurb": "Sets up discovery for a GitHub repo, skill, plugin or MCP server so it gets found by what it does, not only by its name. It audits where you rank today, works out the queries strangers type, then drafts the About text, topics, README opening, release notes, site page and directory plan — real numbers only, and nothing public changes without your go-ahead.",
-      "stats": "8 workflow steps · 10 kit sections · 4 reference guides · 1 listing validator · 0 API keys",
-      "install": "npx skills add arm-pz/findable --skill findable"
-    },
-    {
-      "name": "findable-polish",
-      "repo": "arm-pz/findable-polish",
-      "path": ".",
-      "group": "writing-growth",
-      "tag": "discovery",
-      "title": "Findable Polish",
-      "page": "bespoke",
-      "order": 4,
-      "blurb": "Chains Findable and Wordsmith: audits a README, skill page or landing copy against the queries a real stranger types, then writes two or three alternatives per finding that fix it without inventing a fact. Proven on its own repo: seven live searches, zero hits, six named gaps, fixes applied the same day.",
-      "stats": "3 files · 125 lines · 2 chained skills · 0 API keys",
-      "install": "npx skills add arm-pz/findable-polish --skill findable-polish"
-    },
-    {
-      "name": "keyword-resolver",
-      "repo": "arm-pz/keyword-resolver",
-      "path": ".",
-      "group": "writing-growth",
-      "tag": "seo",
-      "title": "Keyword Resolver",
-      "page": "bespoke",
-      "order": 5,
-      "blurb": "Resolves keyword cannibalization with Keyword-Guard, then rewrites titles, H1s and meta descriptions with Wordsmith. One query, one owner — the ownership audit blocks until the map is settled, and a sitemap fallback is named as a fallback when you have no Search Console.",
-      "stats": "3 files · 127 lines · 2 chained skills · 0 API keys",
-      "install": "npx skills add arm-pz/keyword-resolver --skill keyword-resolver"
-    },
-    {
-      "name": "seo-polish",
-      "repo": "arm-pz/seo-polish",
-      "path": ".",
-      "group": "writing-growth",
-      "tag": "seo",
-      "title": "Seo Polish",
-      "page": "bespoke",
-      "order": 6,
-      "blurb": "The full Seo-Audit diagnosis — crawlability, indexation, technical, on-page, content, authority — then Wordsmith drafts optimized alternatives for every High and Medium finding. Checks that couldn’t run come back INCONCLUSIVE, and no position is promised.",
-      "stats": "3 files · 85 lines · 5 audit layers · 0 API keys",
-      "install": "npx skills add arm-pz/seo-polish --skill seo-polish"
-    },
-    {
-      "name": "recruiter-lens",
-      "repo": "arm-pz/recruiter-lens",
-      "path": "skills/recruiter-lens",
-      "group": "career",
-      "tag": "career",
-      "title": "Recruiter Lens",
-      "page": "bespoke",
-      "order": 7,
-      "blurb": "Reviews resumes, CVs and LinkedIn profiles the way recruiters actually screen them: first-impression scans, ATS compatibility, rejection-pattern diagnosis, and interview prep. 13 commands through 5 filters, and it never invents a metric.",
-      "stats": "13 commands · 5 filters · ~2,500 lines · 0 API keys",
-      "install": "npx skills add arm-pz/recruiter-lens"
-    },
-    {
-      "name": "applicant-kit",
-      "repo": "arm-pz/applicant-kit",
-      "path": "skills/applicant-kit",
-      "group": "career",
-      "tag": "career",
-      "title": "Applicant Kit",
-      "page": "bespoke",
-      "order": 8,
-      "blurb": "Writes the better version: decoded job description, tailored resume, bullets rewritten as action-task-result-impact, honest keyword placement, five summaries, a LinkedIn rewrite and twenty interview answers, all built from real experience. recruiter-lens judges; applicant-kit produces. Nothing invented.",
-      "stats": "7 modes · 6 produce + 1 hand-off · ~320 lines · 0 API keys",
-      "install": "npx skills add arm-pz/applicant-kit --skill applicant-kit"
-    },
-    {
-      "name": "application-pilot",
-      "repo": "arm-pz/application-pilot",
-      "path": "skills/application-pilot",
-      "group": "career",
-      "tag": "career",
-      "title": "Application Pilot",
-      "page": "bespoke",
-      "order": 9,
-      "blurb": "Runs the job search around the applications: turns role criteria into a live shortlist, scores each role for fit with evidence, keeps a reviewable tracker with submission and follow-up dates, flags roles that have gone quiet, drafts the follow-up and the interview briefing, and reads the funnel weekly. applicant-kit writes the packet; application-pilot keeps the search alive. It never submits anything, and never claims a status it did not see.",
-      "stats": "8 modes · 9 ground rules · 5 files · no CLI, no telemetry",
-      "install": "npx skills add arm-pz/application-pilot --skill application-pilot"
-    },
-    {
-      "name": "topic-primer",
-      "repo": "arm-pz/topic-primer",
-      "path": "skills/topic-primer",
-      "group": "thinking-learning",
-      "tag": "learning",
-      "title": "Topic Primer",
-      "page": "bespoke",
-      "order": 10,
-      "blurb": "A world-class teacher for any topic, from zero background toward expert depth. Eight modes: foundations, full curriculum, concept-by-concept lessons, adaptive tutoring, expert mental models, mistake prevention, strict exams, and ELI5. One question at a time, then it waits.",
-      "stats": "8 modes · 68 lines · 0 API keys",
-      "install": "npx skills add arm-pz/topic-primer"
-    },
-    {
-      "name": "do-better",
-      "repo": "arm-pz/do-better",
-      "path": "skills/do-better",
-      "group": "thinking-learning",
-      "tag": "arena",
-      "title": "Do Better",
-      "page": "bespoke",
-      "order": 11,
-      "blurb": "When an answer is bad, don't ask twice: N sub-agents (100 by default, 16 with --quick) get the exact same task with different strategy cards, then attack, defend and judge each other in a single-elimination bracket until one solution survives.",
-      "stats": "2,160 strategy cards · 7 rounds at full size · ~1,700 lines · 0 API keys",
-      "install": "npx skills add arm-pz/do-better"
-    },
-    {
-      "name": "crash-test",
-      "repo": "arm-pz/crash-test",
-      "path": "skills/crash-test",
-      "group": "thinking-learning",
-      "tag": "decisions",
-      "title": "Crash Test",
-      "page": "bespoke",
-      "order": 12,
-      "blurb": "Crash-tests a decision before you build it. Four fixed roles draft the same task in separate contexts and attack each other's drafts anonymously; the chair merges what survived on evidence, not votes, keeps a dissent log for what it could not settle, and grounds the winner's claims about your files against the source before adopting them.",
-      "stats": "4 roles · ~9 calls · 1 opt-in Operator seat · 2 modes · 0 API keys",
-      "install": "npx skills add arm-pz/crash-test --skill crash-test"
+      "name": "caffeinity-routing",
+      "repo": "arm-pz/caffeinity-skills",
+      "path": "plugins/caffeinity-routing/skills/caffeinity-routing",
+      "group": "start-here",
+      "tag": "routing",
+      "title": "Caffeinity Routing",
+      "pageTitle": "Caffeinity Routing — agent skill",
+      "blurb": "Start here. Tell it the outcome you want and it picks one of nine workflows, lists the skills in order with what each hands the next, and names the ones you have not installed instead of improvising their work.",
+      "stats": "4 files · 320 lines · 7 KB",
+      "install": "npx skills add arm-pz/caffeinity-skills --skill caffeinity-routing",
+      "page": "generated",
+      "pageSource": {
+        "description": "Picks which caffeinity skills to run, in what order, for a goal that spans more than one of them, and says what each step hands the next: build and publish a skill, get a project found, pass a release gate, grow organic search traffic, run a job search, make a decision, learn a skill, run cold outbound, or launch a one-person product. Checks which of those skills are installed and names the missing ones instead of improvising their work. Use whenever someone asks which skill to use, what to run first, how the skills fit together, or describes a multi-step outcome such as \"take this idea to a published skill\" or \"get my site ready to ship and ranking\", even if they never name a skill. Not for a request one skill already owns (load that skill directly), and not for doing a step's work itself: the named skill does it.",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 85,
+            "bytes": 5399
+          },
+          {
+            "path": "references/trigger-cases.md",
+            "lines": 30,
+            "bytes": 2753
+          },
+          {
+            "path": "references/workflows.md",
+            "lines": 97,
+            "bytes": 7345
+          },
+          {
+            "path": "scripts/route_check.py",
+            "lines": 108,
+            "bytes": 4326
+          }
+        ],
+        "fileCount": 4,
+        "lines": 320,
+        "bytes": 7637,
+        "license": "MIT",
+        "commit": "41d4ae75762f9b0c0577aed27ca69a7baca6ac4e",
+        "sha256": "a50bb8914c45b05adbe1869a554361bdf6befe679954c214bf6868bb81c91230"
+      },
+      "order": 101
     },
     {
       "name": "draft-skill",
@@ -204,23 +111,10 @@
       "tag": "authoring",
       "title": "Draft Skill",
       "page": "bespoke",
-      "order": 13,
+      "order": 201,
       "blurb": "Creates a new agent skill from a plain idea: confirms the purpose before writing anything, checks the installed siblings for overlap, splits scripts from references from assets, writes a description that actually triggers, then validates it with check_skill.py. Written from scratch, so it carries no text from Qoder's built-in skill-creator, which ships without a licence permitting redistribution.",
       "stats": "2 files · 112 lines · 8 workflow steps · 0 API keys",
       "install": "npx skills add arm-pz/draft-skill"
-    },
-    {
-      "name": "tune-skill",
-      "repo": "arm-pz/tune-skill",
-      "path": ".",
-      "group": "skill-authoring",
-      "tag": "authoring",
-      "title": "Tune Skill",
-      "page": "bespoke",
-      "order": 14,
-      "blurb": "Audits and fine-tunes a skill that already exists: the description that never fires, overlap with installed siblings, stale names and counts, handoff contracts that do not hand off. Ships check_skill.py, a deterministic validator over frontmatter, folder and heading agreement, description length and reference paths that do not exist. Not for creating one from scratch; that is draft-skill.",
-      "stats": "4 files · 268 lines · 1 validator script · 0 API keys",
-      "install": "npx skills add arm-pz/tune-skill"
     },
     {
       "name": "prompts-to-skill",
@@ -230,10 +124,23 @@
       "tag": "authoring",
       "title": "Prompts To Skill",
       "page": "bespoke",
-      "order": 15,
+      "order": 202,
       "blurb": "Turns a list of your own prompts into a finished, tested skill, one skill per prompt: an intent interview, an overlap check against what is already installed, a draft written with draft-skill, trigger test cases that include near-misses, and a tune-skill gate at the end. It needs draft-skill and tune-skill and stops with a clear message if either is missing.",
       "stats": "3 files · 141 lines · depends on draft-skill + tune-skill · 0 API keys",
       "install": "npx skills add arm-pz/prompts-to-skill"
+    },
+    {
+      "name": "tune-skill",
+      "repo": "arm-pz/tune-skill",
+      "path": ".",
+      "group": "skill-authoring",
+      "tag": "authoring",
+      "title": "Tune Skill",
+      "page": "bespoke",
+      "order": 203,
+      "blurb": "Audits and fine-tunes a skill that already exists: the description that never fires, overlap with installed siblings, stale names and counts, handoff contracts that do not hand off. Ships check_skill.py, a deterministic validator over frontmatter, folder and heading agreement, description length and reference paths that do not exist. Not for creating one from scratch; that is draft-skill.",
+      "stats": "4 files · 268 lines · 1 validator script · 0 API keys",
+      "install": "npx skills add arm-pz/tune-skill"
     },
     {
       "name": "prompts-to-skill-release",
@@ -243,23 +150,23 @@
       "tag": "release",
       "title": "Prompts To Skill Release",
       "page": "bespoke",
-      "order": 16,
+      "order": 204,
       "blurb": "Packages a finished skill for release: runs its trigger test cases and records which passed and which did not, sets the version and CHANGELOG, builds the archive, writes the README, and ends with a per-platform install checklist. Failed tests stay in the report instead of being dropped from it.",
       "stats": "3 files · 113 lines · 5 release sections · 0 API keys",
       "install": "npx skills add arm-pz/prompts-to-skill-release"
     },
     {
-      "name": "tune-and-polish",
-      "repo": "arm-pz/tune-and-polish",
-      "path": ".",
+      "name": "skill-to-mod",
+      "repo": "arm-pz/skill-to-mod",
+      "path": "skills/skill-to-mod",
       "group": "skill-authoring",
       "tag": "authoring",
-      "title": "Tune And Polish",
+      "title": "Skill to Mod",
       "page": "bespoke",
-      "order": 17,
-      "blurb": "For a skill that both misfires and hides: Tune-Skill fixes the triggering description, sibling overlaps and stale counts, gated on check_skill.py with zero FAILs; then Findable-Polish audits and polishes the README, About and site copy against real queries. Listings are written from the final description, never before.",
-      "stats": "3 files · 89 lines · 2 gated phases · 0 API keys",
-      "install": "npx skills add arm-pz/tune-and-polish --skill tune-and-polish"
+      "order": 205,
+      "blurb": "Checks whether a skill should become a Claude Code mod, then builds the plugin with your skill unchanged and a thin trigger, validates and tests it, and lists what it can touch. Says no when a skill should stay a skill.",
+      "stats": "12 files · 1,790 lines · 3 trigger patterns · 0 API keys",
+      "install": "npx skills add arm-pz/skill-to-mod --skill skill-to-mod"
     },
     {
       "name": "skill-launch",
@@ -269,116 +176,52 @@
       "tag": "authoring",
       "title": "Skill Launch",
       "page": "bespoke",
-      "order": 18,
+      "order": 206,
       "blurb": "The full pipeline from idea to launched skill: Draft-Skill writes it, Tune-Skill gates it through the validator, Findable-Polish polishes its discovery surfaces. Six chain skills went through this loop in one day — and every public change still needs your go-ahead.",
       "stats": "3 files · 110 lines · 3 gated phases · 0 API keys",
-      "install": "npx skills add arm-pz/skill-launch --skill skill-launch"
+      "install": "npx skills add arm-pz/skill-launch --skill skill-launch",
+      "chain": true
     },
     {
-      "name": "upstream-polish",
-      "repo": "arm-pz/upstream-polish",
+      "name": "tune-and-polish",
+      "repo": "arm-pz/tune-and-polish",
       "path": ".",
       "group": "skill-authoring",
       "tag": "authoring",
-      "title": "Upstream Polish",
+      "title": "Tune And Polish",
       "page": "bespoke",
-      "order": 19,
-      "blurb": "Chains Upstream-Check — fetch-based push verdicts, fast-forward only, screened for credential-shaped lines — with Wordsmith rewriting drifted descriptions, topics and README rows, so repos and listings tell the same story again. An unreadable source is inconclusive, never counted as empty.",
-      "stats": "3 files · 122 lines · 7 verdicts · 0 API keys",
-      "install": "npx skills add arm-pz/upstream-polish --skill upstream-polish"
+      "order": 207,
+      "blurb": "For a skill that both misfires and hides: Tune-Skill fixes the triggering description, sibling overlaps and stale counts, gated on check_skill.py with zero FAILs; then Findable-Polish audits and polishes the README, About and site copy against real queries. Listings are written from the final description, never before.",
+      "stats": "3 files · 89 lines · 2 gated phases · 0 API keys",
+      "install": "npx skills add arm-pz/tune-and-polish --skill tune-and-polish",
+      "chain": true
     },
     {
-      "name": "web-preflight",
-      "repo": "arm-pz/web-preflight",
-      "path": ".",
-      "group": "ship-checks",
-      "tag": "release",
-      "title": "Web Preflight",
+      "name": "findable",
+      "repo": "arm-pz/findable",
+      "path": "skills/findable",
+      "group": "publish-discover",
+      "tag": "discovery",
+      "title": "Findable",
       "page": "bespoke",
-      "order": 20,
-      "blurb": "Checks a site you own before you ship it, without pretending a status code is a finding. A 200 on /.env that matches the app shell is catch-all routing, a blanket 403 is an unanswered question, and a check that never ran becomes INCONCLUSIVE — never a pass.",
-      "stats": "4 verdicts · 19 fixed paths · 9 behavioral tests · ~215 lines · 0 API keys",
-      "install": "npx skills add arm-pz/web-preflight"
-    },
-    {
-      "name": "pre-ship-performance-audit",
-      "repo": "arm-pz/pre-ship-performance-audit",
-      "path": ".",
-      "group": "ship-checks",
-      "tag": "performance",
-      "title": "Pre Ship Performance Audit",
-      "page": "bespoke",
-      "order": 21,
-      "blurb": "Audits and fixes a web app's real-world speed before launch: four read-only subagents sweep twenty known slow-downs across images, bundles, database queries and servers, then the same mobile Lighthouse protocol, three runs per page, proves each fix before and after. Never removes a feature for a score, never invents a baseline, and asks before touching dependencies, the database or the deploy region.",
-      "stats": "4 subagents · 20 slow-downs · 6 phases · ~120 lines · 0 API keys",
-      "install": "npx skills add arm-pz/pre-ship-performance-audit"
-    },
-    {
-      "name": "pre-ship-security-red-team",
-      "repo": "arm-pz/pre-ship-security-red-team",
-      "path": ".",
-      "group": "ship-checks",
-      "tag": "release",
-      "title": "Pre Ship Security Red Team",
-      "page": "bespoke",
-      "order": 22,
-      "blurb": "Red-teams a web app you own before launch, in an isolated local environment. Three parallel read-only subagents run fourteen authorization and abuse checks across three groups (identity and authorization; UI and API bypass; browser, network, cache and AI), each with captured evidence, then the fix is rerun against the same check. A check that cannot fail is falsified first, and findings stay on the record even when the pass clears.",
-      "stats": "3 subagents · 14 checks · 9 files · local environments only",
-      "install": "npx skills add arm-pz/pre-ship-security-red-team"
-    },
-    {
-      "name": "publish-release-gate",
-      "repo": null,
-      "path": null,
-      "group": "ship-checks",
-      "tag": "release",
-      "title": "Publish Release Gate",
-      "page": "none",
-      "order": 23,
-      "legacy": {
-        "archive": "publish-release-gate.tar.gz",
-        "sha256": "e59de0f296ca432a63929f92cdc55f2db0fde0d22594d2b661466cf4d55ba3a0",
-        "description": "Publishes a skill through three distribution channels: marketplace plugin, agent discovery protocol, and tarball delivery via Cloudflare Pages custom domain."
-      }
-    },
-    {
-      "name": "release-gate",
-      "repo": null,
-      "path": null,
-      "group": "ship-checks",
-      "tag": "release",
-      "title": "Release Gate",
-      "page": "none",
-      "order": 24,
-      "legacy": {
-        "archive": "release-gate.tar.gz",
-        "sha256": "5fc7b96613384bcd40fd3b65f2a6d63b7a287324dd7b797fc3a919bcf0eca50c",
-        "description": "Runs three pre-launch passes (exposure, app-tests, perf) in sequence and returns one release posture — HOLD or ready — with three separate verdicts and one merged finding register."
-      }
-    },
-    {
-      "name": "upstream-check",
-      "repo": "arm-pz/upstream-check",
-      "path": ".",
-      "group": "skill-authoring",
-      "tag": "authoring",
-      "title": "Upstream Check",
-      "page": "none",
-      "order": 25
+      "order": 301,
+      "blurb": "Sets up discovery for a GitHub repo, skill, plugin or MCP server so it gets found by what it does, not only by its name. It audits where you rank today, works out the queries strangers type, then drafts the About text, topics, README opening, release notes, site page and directory plan — real numbers only, and nothing public changes without your go-ahead.",
+      "stats": "8 workflow steps · 10 kit sections · 4 reference guides · 1 listing validator · 0 API keys",
+      "install": "npx skills add arm-pz/findable --skill findable"
     },
     {
       "name": "publish-pipeline",
       "repo": "arm-pz/publish-pipeline",
       "path": ".",
-      "group": "skill-authoring",
-      "tag": "authoring",
+      "group": "publish-discover",
+      "tag": "publishing",
       "title": "Publish Pipeline",
       "pageTitle": "Publish Pipeline — agent skill",
       "blurb": "Turns a pile of skill repos into a published site: a committed manifest decides what is public, discovery opens a pull request, and a green merge deploys generated pages, both discovery indexes, a sitemap and a verified build.",
       "stats": "9 files · 1,214 lines · 20 KB",
       "install": "npx skills add arm-pz/publish-pipeline",
       "page": "generated",
-      "order": 26,
+      "order": 302,
       "pageSource": {
         "description": "Sets up, audits and repairs a manifest-driven CI/CD pipeline that publishes a collection of agent skills to a Cloudflare Pages site, with a generated page per skill. Use when someone asks for CI/CD or automation for a skills site, wants a new skill repo to appear on the site with its own page, asks why a skill is missing or its page is stale, or needs a red publish run diagnosed and a bad deploy rolled back. It installs one GitHub Actions workflow with check, publish and discover jobs, a committed manifest as the publication decision, generated hub rows, discovery indexes, sitemap and pages, and verification gates on both sides of the deploy. Not for releasing one skill through the marketplace, tarball or plugin channels (use publish-release-gate), checking unpushed work or listing drift (use upstream-check), deciding whether a build is safe to launch (use release-gate), or writing and tuning a skill (use draft-skill or tune-skill).",
         "files": [
@@ -399,8 +242,8 @@
           },
           {
             "path": "references/gotchas.md",
-            "lines": 64,
-            "bytes": 4017
+            "lines": 67,
+            "bytes": 4267
           },
           {
             "path": "references/manifest.md",
@@ -429,18 +272,444 @@
           }
         ],
         "fileCount": 9,
-        "lines": 1214,
-        "bytes": 20143,
+        "lines": 1217,
+        "bytes": 20294,
         "license": "MIT",
-        "commit": "50f04b96c33aebbddd143eee817a6a976b18e492",
-        "sha256": "2df94736e478bc7a31051e7016611081870e6cf5ce0f16f497f7b8220fa38b6c"
+        "commit": "5504ae3579fbb2c06b9cbf715c8bcf2f3c838613",
+        "sha256": "4374b606b971671cebd1bf34f2e86394792f7433c8866212154f5b73a953bfe3"
+      }
+    },
+    {
+      "name": "upstream-check",
+      "repo": "arm-pz/upstream-check",
+      "path": ".",
+      "group": "publish-discover",
+      "tag": "publishing",
+      "title": "Upstream Check",
+      "page": "generated",
+      "order": 303,
+      "pageTitle": "Upstream Check — agent skill",
+      "blurb": "Finds local commits that never reached GitHub, pushes only clean fast-forwards after a secret screen, then checks that the site index, the homepage, the marketplace and the READMEs agree with the repos that actually ship a SKILL.md.",
+      "stats": "3 files · 354 lines · 8 KB",
+      "install": "npx skills add arm-pz/upstream-check",
+      "pageSource": {
+        "description": "Find local work that never reached its remote and push only what is safe, then check whether published listings agree with the repos. Scans a folder of git clones, fetches them, classifies every repo as push-ready, level, behind, diverged, no-upstream or no-remote, screens the outgoing diff for credential-shaped lines, and with --push fast-forwards only the clean ones and never forces, uses --no-verify, or touches a diverged repo. A second checker counts a catalogue wherever it is published (site index, homepage, marketplace, READMEs) against the repos that ship a SKILL.md, and names what drifted. Use when the user asks what has not been pushed, whether clones are behind upstream, to push a batch, or why a site and a README list different numbers than GitHub. Not for writing or tuning a skill (use draft-skill or tune-skill), making a repo discoverable (use findable), or deciding whether a build is safe to deploy (use release-gate).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 68,
+            "bytes": 6230
+          },
+          {
+            "path": "scripts/drift_check.mjs",
+            "lines": 149,
+            "bytes": 7712
+          },
+          {
+            "path": "scripts/upstream_check.mjs",
+            "lines": 137,
+            "bytes": 6963
+          }
+        ],
+        "fileCount": 3,
+        "lines": 354,
+        "bytes": 8037,
+        "license": "MIT",
+        "commit": "40ab62c135c8ba76c92a08e460761368d13e9e7d",
+        "sha256": "e0e01eb572f7d7136d167bd45a7af0cb9c07a5c9c5a93b21fab8ded15edacb58"
+      }
+    },
+    {
+      "name": "findable-polish",
+      "repo": "arm-pz/findable-polish",
+      "path": ".",
+      "group": "publish-discover",
+      "tag": "discovery",
+      "title": "Findable Polish",
+      "page": "bespoke",
+      "order": 304,
+      "blurb": "Chains Findable and Wordsmith: audits a README, skill page or landing copy against the queries a real stranger types, then writes two or three alternatives per finding that fix it without inventing a fact. Proven on its own repo: seven live searches, zero hits, six named gaps, fixes applied the same day.",
+      "stats": "3 files · 125 lines · 2 chained skills · 0 API keys",
+      "install": "npx skills add arm-pz/findable-polish --skill findable-polish",
+      "chain": true
+    },
+    {
+      "name": "upstream-polish",
+      "repo": "arm-pz/upstream-polish",
+      "path": ".",
+      "group": "publish-discover",
+      "tag": "publishing",
+      "title": "Upstream Polish",
+      "page": "bespoke",
+      "order": 305,
+      "blurb": "Chains Upstream-Check — fetch-based push verdicts, fast-forward only, screened for credential-shaped lines — with Wordsmith rewriting drifted descriptions, topics and README rows, so repos and listings tell the same story again. An unreadable source is inconclusive, never counted as empty.",
+      "stats": "3 files · 122 lines · 7 verdicts · 0 API keys",
+      "install": "npx skills add arm-pz/upstream-polish --skill upstream-polish",
+      "chain": true
+    },
+    {
+      "name": "publish-release-gate",
+      "repo": null,
+      "path": null,
+      "group": "publish-discover",
+      "tag": "publishing",
+      "title": "Publish Release Gate",
+      "page": "none",
+      "order": 306,
+      "legacy": {
+        "archive": "publish-release-gate.tar.gz",
+        "sha256": "e59de0f296ca432a63929f92cdc55f2db0fde0d22594d2b661466cf4d55ba3a0",
+        "description": "Publishes a skill through three distribution channels: marketplace plugin, agent discovery protocol, and tarball delivery via Cloudflare Pages custom domain."
+      }
+    },
+    {
+      "name": "site-prompt",
+      "repo": "arm-pz/site-prompt",
+      "path": ".",
+      "group": "ship-checks",
+      "tag": "build",
+      "title": "Site Prompt",
+      "pageTitle": "Site Prompt — agent skill",
+      "blurb": "Turns a website topic into one self-contained, paste-and-build prompt: it builds and verifies the site in a scratch folder first, then embeds every file verbatim with a pinned stack and the checks that actually ran.",
+      "stats": "8 files · 869 lines · 17 KB",
+      "install": "npx skills add arm-pz/site-prompt",
+      "page": "generated",
+      "pageSource": {
+        "description": "Writes one self-contained, paste-and-build prompt for a website from a topic. Narrows the topic to a concrete subject, derives the concept from that subject's world, builds and verifies the site in a scratch folder, then embeds every file verbatim with a pinned stack, final copy, code-native visuals and the checks that were actually run. Use when the user asks for a website prompt, one-shot build prompt, mega-prompt or SELENE-style prompt for a new site, landing page or one-pager. Not for building, hosting or reviewing the site itself, not for redesigning an existing page, and not for authoring skills.",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 70,
+            "bytes": 5739
+          },
+          {
+            "path": "discovery-kit.md",
+            "lines": 163,
+            "bytes": 9130
+          },
+          {
+            "path": "discovery/site-page.md",
+            "lines": 65,
+            "bytes": 3121
+          },
+          {
+            "path": "references/prompt-format.md",
+            "lines": 81,
+            "bytes": 4534
+          },
+          {
+            "path": "references/stack-presets.md",
+            "lines": 58,
+            "bytes": 3589
+          },
+          {
+            "path": "references/subject-brief.md",
+            "lines": 90,
+            "bytes": 6431
+          },
+          {
+            "path": "references/verification.md",
+            "lines": 83,
+            "bytes": 5189
+          },
+          {
+            "path": "scripts/replay-prompt.mjs",
+            "lines": 259,
+            "bytes": 9467
+          }
+        ],
+        "fileCount": 8,
+        "lines": 869,
+        "bytes": 17718,
+        "license": "MIT",
+        "commit": "70389029d0bcb1d983b7e8ff2b276b3aa63b6466",
+        "sha256": "ca17882ef70ae7bc37f3df22cf2116017573858d2c3a1186eeb373bacd6980c2"
+      },
+      "order": 401
+    },
+    {
+      "name": "production-code",
+      "repo": "arm-pz/production-code",
+      "path": "skills/production-code",
+      "group": "ship-checks",
+      "tag": "build",
+      "title": "Production Code",
+      "pageTitle": "Production Code — agent skill",
+      "blurb": "Delivers code as a finished artifact rather than a snippet: complete scripts, bug fixes with the root cause, reviews, API integrations and SQL, each with the run instructions and the edge cases handled.",
+      "stats": "4 files · 320 lines · 9 KB",
+      "install": "npx skills add arm-pz/production-code",
+      "page": "generated",
+      "pageSource": {
+        "description": "Production-ready code delivered as a complete artifact: scripts, bug fixes with the root cause, code reviews, API integrations, SQL of any complexity, automation jobs, scrapers, data analysis in pandas or R, technical documentation and architecture write-ups, each with setup steps, error handling and a plain-English explanation of every section. Use whenever someone describes something they want code to do, pastes an error or a snippet to fix or review, asks for a query, a scraper, an automation or a system design, even if they never say write code or name a language. Not for auditing a live web app before launch (use pre-ship-performance-audit, pre-ship-security-red-team), or for the business decision behind the build (use strategy-memo).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 104,
+            "bytes": 7477
+          },
+          {
+            "path": "references/deliverable-formats.md",
+            "lines": 89,
+            "bytes": 6832
+          },
+          {
+            "path": "references/security-notes.md",
+            "lines": 60,
+            "bytes": 4997
+          },
+          {
+            "path": "references/verification.md",
+            "lines": 67,
+            "bytes": 4394
+          }
+        ],
+        "fileCount": 4,
+        "lines": 320,
+        "bytes": 9719,
+        "license": "MIT",
+        "commit": "2625da94c7667019df2c01cb59085d6c2ac06973",
+        "sha256": "6fac09c18057101ae7b53a2511e5f9ce3387cd92f2f988daece86a4378ccf935"
+      },
+      "order": 402
+    },
+    {
+      "name": "web-preflight",
+      "repo": "arm-pz/web-preflight",
+      "path": ".",
+      "group": "ship-checks",
+      "tag": "release",
+      "title": "Web Preflight",
+      "page": "bespoke",
+      "order": 403,
+      "blurb": "Checks a site you own before you ship it, without pretending a status code is a finding. A 200 on /.env that matches the app shell is catch-all routing, a blanket 403 is an unanswered question, and a check that never ran becomes INCONCLUSIVE — never a pass.",
+      "stats": "4 verdicts · 19 fixed paths · 9 behavioral tests · ~215 lines · 0 API keys",
+      "install": "npx skills add arm-pz/web-preflight"
+    },
+    {
+      "name": "pre-ship-security-red-team",
+      "repo": "arm-pz/pre-ship-security-red-team",
+      "path": ".",
+      "group": "ship-checks",
+      "tag": "release",
+      "title": "Pre Ship Security Red Team",
+      "page": "bespoke",
+      "order": 404,
+      "blurb": "Red-teams a web app you own before launch, in an isolated local environment. Three parallel read-only subagents run fourteen authorization and abuse checks across three groups (identity and authorization; UI and API bypass; browser, network, cache and AI), each with captured evidence, then the fix is rerun against the same check. A check that cannot fail is falsified first, and findings stay on the record even when the pass clears.",
+      "stats": "3 subagents · 14 checks · 9 files · local environments only",
+      "install": "npx skills add arm-pz/pre-ship-security-red-team"
+    },
+    {
+      "name": "pre-ship-performance-audit",
+      "repo": "arm-pz/pre-ship-performance-audit",
+      "path": ".",
+      "group": "ship-checks",
+      "tag": "performance",
+      "title": "Pre Ship Performance Audit",
+      "page": "bespoke",
+      "order": 405,
+      "blurb": "Audits and fixes a web app's real-world speed before launch: four read-only subagents sweep twenty known slow-downs across images, bundles, database queries and servers, then the same mobile Lighthouse protocol, three runs per page, proves each fix before and after. Never removes a feature for a score, never invents a baseline, and asks before touching dependencies, the database or the deploy region.",
+      "stats": "4 subagents · 20 slow-downs · 6 phases · ~120 lines · 0 API keys",
+      "install": "npx skills add arm-pz/pre-ship-performance-audit"
+    },
+    {
+      "name": "release-gate-chair",
+      "repo": "arm-pz/release-gate-chair",
+      "path": ".",
+      "group": "ship-checks",
+      "tag": "release",
+      "title": "Release Gate · Chair",
+      "pageTitle": "Release Gate · Chair — agent skill",
+      "blurb": "One answer to “can we deploy?”: runs web-preflight, the security red team and the performance audit in order, keeps three separate verdicts, and computes HOLD or ready with a script instead of judgement.",
+      "stats": "4 files · 390 lines · 8 KB",
+      "install": "npx skills add arm-pz/release-gate-chair",
+      "page": "generated",
+      "pageSource": {
+        "description": "Runs the three pre-launch passes in order — web-preflight for external exposure, pre-ship-security-red-team for application behaviour in an isolated environment, pre-ship-performance-audit for measured speed — records each lane's own verdict and findings into one ledger, and computes a single release posture (HOLD or ready) with a script rather than judgement. Use when someone asks \"is this safe to launch\", \"ready to ship\", \"should we deploy\", \"give me a go/no-go\", or before any deploy of a site or client app you own or are authorized to test. Three verdicts stay separate; a pass in one lane never covers another. Variant: this fork runs the lanes itself and copies their finding tables verbatim. Not for a single-lane check (invoke that skill directly), not for penetration testing of production, and not for performing the deploy.",
+        "files": [
+          {
+            "path": ".gitignore",
+            "lines": 3,
+            "bytes": 28
+          },
+          {
+            "path": "SKILL.md",
+            "lines": 130,
+            "bytes": 6373
+          },
+          {
+            "path": "references/ledger.md",
+            "lines": 73,
+            "bytes": 4171
+          },
+          {
+            "path": "scripts/check_gate.mjs",
+            "lines": 184,
+            "bytes": 8721
+          }
+        ],
+        "fileCount": 4,
+        "lines": 390,
+        "bytes": 7737,
+        "license": "MIT",
+        "commit": "33db8cbc6ecf4a4f033ca153a01045e164390eb2",
+        "sha256": "c6b1efc3fe98f07223214a67c7a27e47733f4a7591877a8e4866810692f83706"
+      },
+      "order": 406
+    },
+    {
+      "name": "release-gate-ledger",
+      "repo": "arm-pz/release-gate-ledger",
+      "path": ".",
+      "group": "ship-checks",
+      "tag": "release",
+      "title": "Release Gate · Ledger",
+      "pageTitle": "Release Gate · Ledger — agent skill",
+      "blurb": "The release gate where each lane writes its own rows into one ledger through a validating recorder, so a malformed or missing verdict is rejected the moment it is written.",
+      "stats": "8 files · 529 lines · 9 KB",
+      "install": "npx skills add arm-pz/release-gate-ledger",
+      "page": "generated",
+      "pageSource": {
+        "description": "Runs the three pre-launch passes in order and has each lane write its own rows into one release-gate ledger through a validating recorder, instead of a chair copying tables after the fact. Produces three separate verdicts and one release posture (HOLD or ready) computed by script. Use when someone asks \"is this safe to launch\", \"ready to ship\", \"should we deploy\", \"give me a go/no-go\", or before any deploy of a site or client app you own or are authorized to test. Ships the three upstream patches that teach web-preflight, pre-ship-security-red-team and pre-ship-performance-audit to append their own rows — unapplied, because those are published skills. A pass in one lane never covers another. Not for a single-lane check, not for penetration testing of production, not for performing the deploy.",
+        "files": [
+          {
+            "path": ".gitignore",
+            "lines": 3,
+            "bytes": 28
+          },
+          {
+            "path": "SKILL.md",
+            "lines": 111,
+            "bytes": 5494
+          },
+          {
+            "path": "patches/pre-ship-performance-audit-ledger-handoff.patch",
+            "lines": 25,
+            "bytes": 1201
+          },
+          {
+            "path": "patches/pre-ship-security-red-team-ledger-handoff.patch",
+            "lines": 25,
+            "bytes": 1444
+          },
+          {
+            "path": "patches/web-preflight-ledger-handoff.patch",
+            "lines": 25,
+            "bytes": 1664
+          },
+          {
+            "path": "references/ledger.md",
+            "lines": 73,
+            "bytes": 4171
+          },
+          {
+            "path": "scripts/check_gate.mjs",
+            "lines": 184,
+            "bytes": 8721
+          },
+          {
+            "path": "scripts/gate_record.mjs",
+            "lines": 83,
+            "bytes": 4285
+          }
+        ],
+        "fileCount": 8,
+        "lines": 529,
+        "bytes": 9434,
+        "license": "MIT",
+        "commit": "950d6307643e99d0aed03a4f5c2fc5f9c4598214",
+        "sha256": "e4c75759f49fcb36d7bf9a25e3d76fdd8c7375b4e162b95c87a723f52d323ae2"
+      },
+      "order": 407
+    },
+    {
+      "name": "release-gate-validator",
+      "repo": "arm-pz/release-gate-validator",
+      "path": ".",
+      "group": "ship-checks",
+      "tag": "release",
+      "title": "Release Gate · Validator",
+      "pageTitle": "Release Gate · Validator — agent skill",
+      "blurb": "The cheapest release gate: turns three pre-launch reports that already exist into one posture, HOLD or ready, without running any lane or sending a single request.",
+      "stats": "6 files · 582 lines · 10 KB",
+      "install": "npx skills add arm-pz/release-gate-validator",
+      "page": "generated",
+      "pageSource": {
+        "description": "Turns three pre-launch reports that already exist into one release posture (HOLD or ready) without running any of them. Ingests the security red team's on-disk results table mechanically, takes the preflight and performance tables as verbatim pastes, and computes the posture with a script. Use when the lanes were run earlier or by someone else, when a deploy decision is needed now and re-running three skills is not affordable, or when asked \"is this safe to launch\", \"ready to ship\", \"give me a go/no-go\". Runs no attacks, no probes, no measurements, no subagents. A lane's pass never covers another lane, and an absent lane is reported absent. Not for producing the reports in the first place, and not for deploying.",
+        "files": [
+          {
+            "path": ".gitignore",
+            "lines": 3,
+            "bytes": 28
+          },
+          {
+            "path": "SKILL.md",
+            "lines": 106,
+            "bytes": 5186
+          },
+          {
+            "path": "references/ledger.md",
+            "lines": 73,
+            "bytes": 4171
+          },
+          {
+            "path": "scripts/check_gate.mjs",
+            "lines": 184,
+            "bytes": 8721
+          },
+          {
+            "path": "scripts/gate_ingest.mjs",
+            "lines": 133,
+            "bytes": 6845
+          },
+          {
+            "path": "scripts/gate_record.mjs",
+            "lines": 83,
+            "bytes": 4285
+          }
+        ],
+        "fileCount": 6,
+        "lines": 582,
+        "bytes": 10297,
+        "license": "MIT",
+        "commit": "5ec3cf39b390c4ac19e09a60ba6af87d632eef1b",
+        "sha256": "3c1b7b5ef20909af6c85773f4491ea25d1677b9570537c111ea10bc3eed8be32"
+      },
+      "order": 408
+    },
+    {
+      "name": "ship-sentinel",
+      "repo": "arm-pz/ship-sentinel",
+      "path": ".",
+      "kind": "mod",
+      "group": "ship-checks",
+      "tag": "release",
+      "title": "Ship Sentinel",
+      "page": "bespoke",
+      "order": 409,
+      "blurb": "A Claude Code mod that holds git push, PR, publish and deploy commands until your pre-ship check skills have run since the last edit. Ask, block or nudge; fails open and touches no files, network or processes.",
+      "stats": "1 hook module · 173 lines · 4 calls · 0 network",
+      "install": "/plugin install ship-sentinel --marketplace arm-pz/ship-sentinel"
+    },
+    {
+      "name": "release-gate",
+      "repo": null,
+      "path": null,
+      "group": "ship-checks",
+      "tag": "release",
+      "title": "Release Gate",
+      "page": "none",
+      "order": 410,
+      "legacy": {
+        "archive": "release-gate.tar.gz",
+        "sha256": "5fc7b96613384bcd40fd3b65f2a6d63b7a287324dd7b797fc3a919bcf0eca50c",
+        "description": "Runs three pre-launch passes (exposure, app-tests, perf) in sequence and returns one release posture — HOLD or ready — with three separate verdicts and one merged finding register."
       }
     },
     {
       "name": "seo-crawl",
       "repo": "arm-pz/seo-crawl",
       "path": ".",
-      "group": "writing-growth",
+      "group": "seo-search",
       "tag": "seo",
       "title": "SEO Crawl",
       "pageTitle": "SEO Crawl — agent skill",
@@ -448,7 +717,7 @@
       "stats": "14 files · 1,885 lines · 19 KB",
       "install": "npx skills add arm-pz/seo-crawl",
       "page": "generated",
-      "order": 27,
+      "order": 501,
       "pageSource": {
         "description": "Use when you need evidence about the technical SEO state of a site you own or are authorized to crawl, covering HTTP statuses and redirects, indexability (meta and header robots), robots.txt, canonical tags, titles, meta descriptions, H1s, internal links, sitemap coverage, and static JSON-LD. Runs a bounded, read-only crawl and returns deterministic findings JSON with stable IDs and explicit INCONCLUSIVE checks, so an SEO audit or content change starts from measured evidence instead of guesses. Trigger phrases include \"crawl the site for SEO\", \"check sitemap coverage\", \"find broken internal links\", \"why is this page not indexed\", \"check titles and metas\", \"canonical audit\", and \"pre-audit crawl\". Not for Search Console clicks, impressions, rankings or keyword volumes; Core Web Vitals, Lighthouse or bundle performance; release security and exposed files; content rewriting or keyword strategy.",
         "files": [
@@ -532,6 +801,175 @@
       }
     },
     {
+      "name": "keyword-guard",
+      "repo": "arm-pz/keyword-guard",
+      "path": ".",
+      "group": "seo-search",
+      "tag": "seo",
+      "title": "Keyword Guard",
+      "page": "bespoke",
+      "order": 502,
+      "blurb": "Plans topic clusters and kills keyword cannibalization so exactly one page wins each query. The cannibalization audit is a mandatory blocker before any content change — with a sitemap fallback for when you have no Search Console access.",
+      "stats": "6 phases · 3 reference checklists · ~300 lines · 0 API keys",
+      "install": "npx skills add arm-pz/keyword-guard"
+    },
+    {
+      "name": "keyword-resolver",
+      "repo": "arm-pz/keyword-resolver",
+      "path": ".",
+      "group": "seo-search",
+      "tag": "seo",
+      "title": "Keyword Resolver",
+      "page": "bespoke",
+      "order": 503,
+      "blurb": "Resolves keyword cannibalization with Keyword-Guard, then rewrites titles, H1s and meta descriptions with Wordsmith. One query, one owner — the ownership audit blocks until the map is settled, and a sitemap fallback is named as a fallback when you have no Search Console.",
+      "stats": "3 files · 127 lines · 2 chained skills · 0 API keys",
+      "install": "npx skills add arm-pz/keyword-resolver --skill keyword-resolver",
+      "chain": true
+    },
+    {
+      "name": "seo-polish",
+      "repo": "arm-pz/seo-polish",
+      "path": ".",
+      "group": "seo-search",
+      "tag": "seo",
+      "title": "Seo Polish",
+      "page": "bespoke",
+      "order": 504,
+      "blurb": "seo-crawl's measured findings, an optional seo-audit diagnosis, then Wordsmith drafts optimized alternatives for every High and Medium finding: titles, meta descriptions, headings and internal-link anchors.",
+      "stats": "3 files · 85 lines · 5 audit layers · 0 API keys",
+      "install": "npx skills add arm-pz/seo-polish --skill seo-polish",
+      "chain": true
+    },
+    {
+      "name": "wordsmith",
+      "repo": "arm-pz/wordsmith",
+      "path": "skills/wordsmith",
+      "group": "writing-growth",
+      "tag": "editorial",
+      "title": "Wordsmith",
+      "page": "bespoke",
+      "order": 601,
+      "blurb": "Teaches your agent to edit, not just generate: 44 commands across 5 disciplines that tighten, rewrite, critique and proofread while keeping the author's meaning, hedges and voice intact.",
+      "stats": "44 commands · 5 disciplines · ~1,200 lines · 0 API keys",
+      "install": "npx skills add arm-pz/wordsmith"
+    },
+    {
+      "name": "platform-content",
+      "repo": "arm-pz/platform-content",
+      "path": "skills/platform-content",
+      "group": "writing-growth",
+      "tag": "content",
+      "title": "Platform Content",
+      "pageTitle": "Platform Content — agent skill",
+      "blurb": "Writes platform-native content packs from one brief: X threads, LinkedIn posts, YouTube and TikTok scripts, Instagram captions, newsletters and blog articles, each shaped to how that platform is actually read.",
+      "stats": "3 files · 453 lines · 11 KB",
+      "install": "npx skills add arm-pz/platform-content",
+      "page": "generated",
+      "pageSource": {
+        "description": "Platform-native content packs: Twitter/X threads, LinkedIn posts, YouTube and TikTok scripts, Instagram captions, newsletter issues, blog articles, podcast outlines, 30-day calendars and repurposing chains, each with hook, body and call to action, built from a brief about your platform, niche, audience and goal. Use whenever someone asks for social or audience content: write me a thread about X, a LinkedIn post that brings leads, turn this into ten posts, plan next month of content, a YouTube script people actually finish, or they bring a blog, newsletter or podcast idea that needs an asset per platform, even if they never say content strategy. Not for copy that sells a product (use sales-copy), rewriting text the user already wrote (use wordsmith), SEO cluster and cannibalization planning (use keyword-guard), or career documents (use career-track).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 130,
+            "bytes": 10096
+          },
+          {
+            "path": "references/calendar-repurposing.md",
+            "lines": 126,
+            "bytes": 5730
+          },
+          {
+            "path": "references/formats.md",
+            "lines": 197,
+            "bytes": 12252
+          }
+        ],
+        "fileCount": 3,
+        "lines": 453,
+        "bytes": 11229,
+        "license": "MIT",
+        "commit": "55f2308587834f07753e07bbe3dd7597f8484bff",
+        "sha256": "1a2467069948aac811b616d24b6ae57708b5b8d1e81b744e0bdb6dc9e8632d4a"
+      },
+      "order": 602
+    },
+    {
+      "name": "sales-copy",
+      "repo": "arm-pz/sales-copy",
+      "path": "skills/sales-copy",
+      "group": "writing-growth",
+      "tag": "content",
+      "title": "Sales Copy",
+      "pageTitle": "Sales Copy — agent skill",
+      "blurb": "Writes buyer-facing conversion assets: long-form sales pages, landing pages, launch and abandoned-cart email sequences and ad variations, built on the offer and the objections you can actually back.",
+      "stats": "3 files · 595 lines · 13 KB",
+      "install": "npx skills add arm-pz/sales-copy",
+      "page": "generated",
+      "pageSource": {
+        "description": "Direct-response conversion assets: long-form sales pages, launch and abandoned-cart email sequences, Facebook, Google and LinkedIn ad variations, landing pages, product descriptions, video sales letter and webinar scripts, upsell flows and testimonial frameworks, each with headline, subheadline, body and call to action, built from the product, the buyer, their awareness level and the conversion goal. Use whenever someone needs copy that sells: write a sales page, an email sequence for my launch, ad copy for Facebook, my landing page does not convert, a VSL script, recover abandoned carts, or they paste a product brief expecting buyer-facing text, even if they never say copywriting. Not for organic audience content (use platform-content), editing text the user already wrote (use wordsmith), or pricing and go-to-market decisions (use strategy-memo).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 168,
+            "bytes": 10752
+          },
+          {
+            "path": "references/assets.md",
+            "lines": 293,
+            "bytes": 16865
+          },
+          {
+            "path": "references/awareness.md",
+            "lines": 134,
+            "bytes": 7323
+          }
+        ],
+        "fileCount": 3,
+        "lines": 595,
+        "bytes": 13421,
+        "license": "MIT",
+        "commit": "f82e60d2eb192b901f3ade8b1e2e3e842215fe9d",
+        "sha256": "d0f2205e286d7fe892805ccff4fd27be1b907ca96760b12f3cb9c78dfdb3a2a5"
+      },
+      "order": 603
+    },
+    {
+      "name": "cold-email-list-gate",
+      "repo": "arm-pz/cold-email-list-gate",
+      "path": ".",
+      "group": "outbound",
+      "tag": "outbound",
+      "title": "Cold Email List Gate",
+      "pageTitle": "Cold Email List Gate — agent skill",
+      "blurb": "Gate a cold-email lead list before it loads: sample ten rows, check company, title, size, and mailbox against the ICP, compare data providers on the same criteria, and return a GO or HOLD decision with the fail pattern and the re-run…",
+      "stats": "2 files · 96 lines · 2 KB",
+      "install": "npx skills add arm-pz/cold-email-list-gate",
+      "page": "generated",
+      "order": 701,
+      "pageSource": {
+        "description": "Gate a cold-email lead list before it loads: sample ten rows, check company, title, size, and mailbox against the ICP, compare data providers on the same criteria, and return a GO or HOLD decision with the fail pattern and the re-run condition. Use when someone wants a list QA'd, checked, sampled, or approved before a send, asks whether a list is clean or safe to load, or is choosing between data providers for one filter set. Not for buying, scraping, or enriching contacts (out of scope), writing the email copy (wordsmith), or diagnosing a list that already sent (cold-email-ops).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 46,
+            "bytes": 2896
+          },
+          {
+            "path": "references/gate-rules.md",
+            "lines": 50,
+            "bytes": 2380
+          }
+        ],
+        "fileCount": 2,
+        "lines": 96,
+        "bytes": 2485,
+        "license": "MIT",
+        "commit": "4104d949e6ddffca3bd0be903518731d0cfb9dba",
+        "sha256": "efb8fa1bd2c440f9ca6c6b09a8a5d674fe32563407847f6e43ae4bfa204a6b27"
+      }
+    },
+    {
       "name": "cold-email-ops",
       "repo": "arm-pz/cold-email-ops",
       "path": ".",
@@ -543,7 +981,7 @@
       "stats": "4 files · 393 lines · 8 KB",
       "install": "npx skills add arm-pz/cold-email-ops",
       "page": "generated",
-      "order": 28,
+      "order": 702,
       "pageSource": {
         "description": "Plan and audit a cold-email program at volume and keep it from degrading: computes inbox and domain capacity from a monthly send target, sets per-domain reply-rate floors, burn-replacement cadence, shadow-ban tests, and automation error budgets, and reports prospects-to-lead with per-client averages. Use when someone is scaling outbound, asks how many inboxes or domains they need, why reply rates are falling or a domain might be shadow banned, or reviews an AI outbound stack for failure points. Not for pre-load list QA (cold-email-list-gate), writing or polishing the emails themselves (wordsmith), inbound SEO (seo-audit, programmatic-seo), WhatsApp/RCS messaging (integrate-whatsapp, sent-two-way-messaging), or finding the market/ICP.",
         "files": [
@@ -577,66 +1015,567 @@
       }
     },
     {
-      "name": "cold-email-list-gate",
-      "repo": "arm-pz/cold-email-list-gate",
-      "path": ".",
-      "group": "outbound",
-      "tag": "outbound",
-      "title": "Cold Email List Gate",
-      "pageTitle": "Cold Email List Gate — agent skill",
-      "blurb": "Gate a cold-email lead list before it loads: sample ten rows, check company, title, size, and mailbox against the ICP, compare data providers on the same criteria, and return a GO or HOLD decision with the fail pattern and the re-run…",
-      "stats": "2 files · 96 lines · 2 KB",
-      "install": "npx skills add arm-pz/cold-email-list-gate",
+      "name": "recruiter-lens",
+      "repo": "arm-pz/recruiter-lens",
+      "path": "skills/recruiter-lens",
+      "group": "career",
+      "tag": "career",
+      "title": "Recruiter Lens",
+      "page": "bespoke",
+      "order": 801,
+      "blurb": "Reviews resumes, CVs and LinkedIn profiles the way recruiters actually screen them: first-impression scans, ATS compatibility, rejection-pattern diagnosis, and interview prep. 13 commands through 5 filters, and it never invents a metric.",
+      "stats": "13 commands · 5 filters · ~2,500 lines · 0 API keys",
+      "install": "npx skills add arm-pz/recruiter-lens"
+    },
+    {
+      "name": "applicant-kit",
+      "repo": "arm-pz/applicant-kit",
+      "path": "skills/applicant-kit",
+      "group": "career",
+      "tag": "career",
+      "title": "Applicant Kit",
+      "page": "bespoke",
+      "order": 802,
+      "blurb": "Writes the better version: decoded job description, tailored resume, bullets rewritten as action-task-result-impact, honest keyword placement, five summaries, a LinkedIn rewrite and twenty interview answers, all built from real experience. recruiter-lens judges; applicant-kit produces. Nothing invented.",
+      "stats": "7 modes · 6 produce + 1 hand-off · ~320 lines · 0 API keys",
+      "install": "npx skills add arm-pz/applicant-kit --skill applicant-kit"
+    },
+    {
+      "name": "application-pilot",
+      "repo": "arm-pz/application-pilot",
+      "path": "skills/application-pilot",
+      "group": "career",
+      "tag": "career",
+      "title": "Application Pilot",
+      "page": "bespoke",
+      "order": 803,
+      "blurb": "Runs the job search around the applications: turns role criteria into a live shortlist, scores each role for fit with evidence, keeps a reviewable tracker with submission and follow-up dates, flags roles that have gone quiet, drafts the follow-up and the interview briefing, and reads the funnel weekly. applicant-kit writes the packet; application-pilot keeps the search alive. It never submits anything, and never claims a status it did not see.",
+      "stats": "8 modes · 9 ground rules · 5 files · no CLI, no telemetry",
+      "install": "npx skills add arm-pz/application-pilot --skill application-pilot"
+    },
+    {
+      "name": "career-track",
+      "repo": "arm-pz/career-track",
+      "path": "skills/career-track",
+      "group": "career",
+      "tag": "career",
+      "title": "Career Track",
+      "pageTitle": "Career Track — agent skill",
+      "blurb": "For the moves around a career: a positioning line you can repeat, the case for the next level, review and promotion narratives, salary negotiation scripts and a ninety-day plan.",
+      "stats": "3 files · 382 lines · 12 KB",
+      "install": "npx skills add arm-pz/career-track",
       "page": "generated",
-      "order": 29,
       "pageSource": {
-        "description": "Gate a cold-email lead list before it loads: sample ten rows, check company, title, size, and mailbox against the ICP, compare data providers on the same criteria, and return a GO or HOLD decision with the fail pattern and the re-run condition. Use when someone wants a list QA'd, checked, sampled, or approved before a send, asks whether a list is clean or safe to load, or is choosing between data providers for one filter set. Not for buying, scraping, or enriching contacts (out of scope), writing the email copy (wordsmith), or diagnosing a list that already sent (cold-email-ops).",
+        "description": "Career positioning and the moves around it: personal brand and function-level visibility, promotion and performance-review narratives, executive presence, salary negotiation scripts, career pivots, networking that reaches opportunities before they are posted, interview preparation for the rooms you are already in, and a plan with immediate actions and ninety-day milestones. Use whenever someone wants to move up or across: how do I get promoted, negotiate a raise, am I ready for senior, pivot out of this role, prep for a promotion panel, people do not notice my work, even if they never say career plan. Not for the application documents themselves: resume and CV judging (use recruiter-lens) or tailored application material and LinkedIn rewrites (use applicant-kit).",
         "files": [
           {
             "path": "SKILL.md",
-            "lines": 46,
-            "bytes": 2896
+            "lines": 127,
+            "bytes": 10757
           },
           {
-            "path": "references/gate-rules.md",
-            "lines": 50,
-            "bytes": 2380
+            "path": "references/negotiation.md",
+            "lines": 107,
+            "bytes": 8975
+          },
+          {
+            "path": "references/planning.md",
+            "lines": 148,
+            "bytes": 11400
           }
         ],
-        "fileCount": 2,
-        "lines": 96,
-        "bytes": 2485,
+        "fileCount": 3,
+        "lines": 382,
+        "bytes": 12164,
         "license": "MIT",
-        "commit": "4104d949e6ddffca3bd0be903518731d0cfb9dba",
-        "sha256": "efb8fa1bd2c440f9ca6c6b09a8a5d674fe32563407847f6e43ae4bfa204a6b27"
-      }
+        "commit": "e3e1851878d701c44fad8bb44addda5377646422",
+        "sha256": "b5f3dbdde6922ee2865f2b2e28ebbd051965b5663367b51e5dccb80f95c3310c"
+      },
+      "order": 804
     },
     {
-      "name": "skill-to-mod",
-      "repo": "arm-pz/skill-to-mod",
-      "path": "skills/skill-to-mod",
-      "group": "skill-authoring",
-      "tag": "authoring",
-      "title": "Skill to Mod",
+      "name": "research-brief",
+      "repo": "arm-pz/research-brief",
+      "path": "skills/research-brief",
+      "group": "thinking-learning",
+      "tag": "research",
+      "title": "Research Brief",
+      "pageTitle": "Research Brief — agent skill",
+      "blurb": "Answers “what is known about this” with a sourced brief: overviews, competitor and industry analysis, fact checks with conflicts flagged, every claim tied to a dated source and every unknown named.",
+      "stats": "4 files · 520 lines · 14 KB",
+      "install": "npx skills add arm-pz/research-brief",
+      "page": "generated",
+      "pageSource": {
+        "description": "Decision-grade research: topic overviews, competitor and industry analysis, literature reviews, fact checks with conflicting sources flagged, synthesis of expert positions, trend scans, due diligence on a partner or investment, interpretation of numbers found in public sources and one-page executive briefs, with every claim tied to a dated source read in the session and unknowns named instead of filled in. Use whenever someone asks what is known about a subject: research X for me, who else does this, is this claim true, what is the market size, brief me before I meet them, summarise this literature, even if they never say research. Not for turning findings into a recommendation and roadmap (use strategy-memo), for analysing the user's own dataset (use data-readout), or for being taught a topic step by step (use topic-primer).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 135,
+            "bytes": 10262
+          },
+          {
+            "path": "references/due-diligence.md",
+            "lines": 112,
+            "bytes": 8162
+          },
+          {
+            "path": "references/report-formats.md",
+            "lines": 171,
+            "bytes": 10975
+          },
+          {
+            "path": "references/verification.md",
+            "lines": 102,
+            "bytes": 7392
+          }
+        ],
+        "fileCount": 4,
+        "lines": 520,
+        "bytes": 13976,
+        "license": "MIT",
+        "commit": "f8556893232b26235046ce01eca4cdeda09b86d2",
+        "sha256": "e103862e7f43326163660919d2c9044caacb0f6e6471167f8b10686ca299d990"
+      },
+      "order": 901
+    },
+    {
+      "name": "data-readout",
+      "repo": "arm-pz/data-readout",
+      "path": "skills/data-readout",
+      "group": "thinking-learning",
+      "tag": "research",
+      "title": "Data Readout",
+      "pageTitle": "Data Readout — agent skill",
+      "blurb": "Turns the numbers you already own into a readout you can act on: it opens the real file first, then gives findings with the business implication of each, chart specs and the caveats that matter.",
+      "stats": "4 files · 406 lines · 12 KB",
+      "install": "npx skills add arm-pz/data-readout",
+      "page": "generated",
+      "pageSource": {
+        "description": "Raw numbers turned into a decision: dataset interpretation, statistics with the business implication of each finding, chart specifications, pattern and anomaly detection, forecasts built on stated assumptions, segmentation, A/B test significance, dashboard metric selection and report templates, output as an executive summary, findings ranked by impact and the specific actions they support. Use whenever someone brings data, a spreadsheet, a CSV, an analytics export, an A/B result or an unexpected number and asks what it means, what to chart, whether the test won or which metrics to track, even if they never say analysis. Not for writing the pandas or R code that crunches the file (use production-code), for market research outside the user's own data (use research-brief) or for the strategic roadmap that follows (use strategy-memo).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 126,
+            "bytes": 8682
+          },
+          {
+            "path": "references/analysis-playbook.md",
+            "lines": 86,
+            "bytes": 10308
+          },
+          {
+            "path": "references/report-format.md",
+            "lines": 126,
+            "bytes": 6354
+          },
+          {
+            "path": "references/statistical-checks.md",
+            "lines": 68,
+            "bytes": 6645
+          }
+        ],
+        "fileCount": 4,
+        "lines": 406,
+        "bytes": 12496,
+        "license": "MIT",
+        "commit": "9eacca091a1dd4623bcb785c6b5ce108a78c080a",
+        "sha256": "6cb1c2c4c3dea6fd98eebe98362e328ef6e38bee4469279845241c0a56ce2aa2"
+      },
+      "order": 902
+    },
+    {
+      "name": "crash-test",
+      "repo": "arm-pz/crash-test",
+      "path": "skills/crash-test",
+      "group": "thinking-learning",
+      "tag": "decisions",
+      "title": "Crash Test",
       "page": "bespoke",
-      "order": 30,
-      "blurb": "Checks whether a skill should become a Claude Code mod, then builds the plugin with your skill unchanged and a thin trigger, validates and tests it, and lists what it can touch. Says no when a skill should stay a skill.",
-      "stats": "12 files · 1,790 lines · 3 trigger patterns · 0 API keys",
-      "install": "npx skills add arm-pz/skill-to-mod --skill skill-to-mod"
+      "order": 903,
+      "blurb": "Crash-tests a decision before you build it. Four fixed roles draft the same task in separate contexts and attack each other's drafts anonymously; the chair merges what survived on evidence, not votes, keeps a dissent log for what it could not settle, and grounds the winner's claims about your files against the source before adopting them.",
+      "stats": "4 roles · ~9 calls · 1 opt-in Operator seat · 2 modes · 0 API keys",
+      "install": "npx skills add arm-pz/crash-test --skill crash-test"
     },
     {
-      "name": "ship-sentinel",
-      "repo": "arm-pz/ship-sentinel",
+      "name": "do-better",
+      "repo": "arm-pz/do-better",
+      "path": "skills/do-better",
+      "group": "thinking-learning",
+      "tag": "arena",
+      "title": "Do Better",
+      "page": "bespoke",
+      "order": 904,
+      "blurb": "When an answer is bad, don't ask twice: N sub-agents (100 by default, 16 with --quick) get the exact same task with different strategy cards, then attack, defend and judge each other in a single-elimination bracket until one solution survives.",
+      "stats": "2,160 strategy cards · 7 rounds at full size · ~1,700 lines · 0 API keys",
+      "install": "npx skills add arm-pz/do-better"
+    },
+    {
+      "name": "strategy-memo",
+      "repo": "arm-pz/strategy-memo",
+      "path": "skills/strategy-memo",
+      "group": "thinking-learning",
+      "tag": "decisions",
+      "title": "Strategy Memo",
+      "pageTitle": "Strategy Memo — agent skill",
+      "blurb": "Turns a business question into a decision document: situation analysis, a recommendation written as ranked options, the risks, and a roadmap someone can execute.",
+      "stats": "3 files · 384 lines · 9 KB",
+      "install": "npx skills add arm-pz/strategy-memo",
+      "page": "generated",
+      "pageSource": {
+        "description": "Business strategy written as a decision document: competitive analysis, market and customer research, business model canvas, growth and pricing strategy, go-to-market plan, SWOT ranked by actionability, ninety-day, one-year and three-year roadmaps, board presentations and pivot assessments, structured as situation analysis, recommendation and execution roadmap. Use whenever someone faces a business decision: should I enter this market, who are my competitors, how should I price this, a go-to-market plan, build me a roadmap, is this worth more investment or a pivot, I need a board deck, even if they never say strategy. Not for pressure-testing a decision you already made (use crash-test), the copy or pages that execute it (use sales-copy, platform-content), or the numbers behind it (use data-readout).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 145,
+            "bytes": 10400
+          },
+          {
+            "path": "references/frameworks.md",
+            "lines": 141,
+            "bytes": 8353
+          },
+          {
+            "path": "references/memo-format.md",
+            "lines": 98,
+            "bytes": 5137
+          }
+        ],
+        "fileCount": 3,
+        "lines": 384,
+        "bytes": 9030,
+        "license": "MIT",
+        "commit": "440499df7f23119ef00b5109d95111e08beec895",
+        "sha256": "10fdad8a16b972d2a21212e8bbbcd25f71d125afca2b3ae6647b4d328bb1a60b"
+      },
+      "order": 905
+    },
+    {
+      "name": "solo-income-blueprint",
+      "repo": "arm-pz/solo-income-blueprint",
       "path": ".",
-      "kind": "mod",
-      "group": "ship-checks",
-      "tag": "release",
-      "title": "Ship Sentinel",
+      "group": "thinking-learning",
+      "tag": "decisions",
+      "title": "Solo Income Blueprint",
+      "pageTitle": "Solo Income Blueprint — agent skill",
+      "blurb": "Turns “I want to make money online” into one plan: a business model that fits your skills, time and budget, one offer, a demand check, a minimal tool stack and a seven-day launch.",
+      "stats": "3 files · 328 lines · 7 KB",
+      "install": "npx skills add arm-pz/solo-income-blueprint",
+      "page": "generated",
+      "pageSource": {
+        "description": "Design a realistic one-person online income plan from the user's skills, time and budget: one recommended business model, one offer, a demand check, a content and sales path, automations, a minimal tool stack, and a 7-day launch plan. Use when someone asks how to make money online or with AI tools, what to sell, which business model fits them, how to turn a skill they already have into income, how to get a first paying customer, or wants a step-by-step plan for a side business or one-person business. Not for job hunting (application-pilot, applicant-kit), SEO for an existing site (seo-audit), or privacy and legal pages (paper-trail).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 118,
+            "bytes": 5721
+          },
+          {
+            "path": "references/playbook.md",
+            "lines": 153,
+            "bytes": 7196
+          },
+          {
+            "path": "tests.md",
+            "lines": 57,
+            "bytes": 4000
+          }
+        ],
+        "fileCount": 3,
+        "lines": 328,
+        "bytes": 6993,
+        "license": "MIT",
+        "commit": "33491fb84d4567a3b613f2d484fcc40bfe22c2c1",
+        "sha256": "ba9ae1c80338ae23794142971bc4a177c60b2ab0105ed342759930d35b418b2c"
+      },
+      "order": 906
+    },
+    {
+      "name": "topic-primer",
+      "repo": "arm-pz/topic-primer",
+      "path": "skills/topic-primer",
+      "group": "thinking-learning",
+      "tag": "learning",
+      "title": "Topic Primer",
       "page": "bespoke",
-      "order": 31,
-      "blurb": "A Claude Code mod that holds git push, PR, publish and deploy commands until your pre-ship check skills have run since the last edit. Ask, block or nudge; fails open and touches no files, network or processes.",
-      "stats": "1 hook module · 173 lines · 4 calls · 0 network",
-      "install": "/plugin install ship-sentinel --marketplace arm-pz/ship-sentinel"
+      "order": 907,
+      "blurb": "A world-class teacher for any topic, from zero background toward expert depth. Eight modes: foundations, full curriculum, concept-by-concept lessons, adaptive tutoring, expert mental models, mistake prevention, strict exams, and ELI5. One question at a time, then it waits.",
+      "stats": "8 modes · 68 lines · 0 API keys",
+      "install": "npx skills add arm-pz/topic-primer"
+    },
+    {
+      "name": "study-system",
+      "repo": "arm-pz/study-system",
+      "path": "skills/study-system",
+      "group": "thinking-learning",
+      "tag": "learning",
+      "title": "Study System",
+      "pageTitle": "Study System — agent skill",
+      "blurb": "Builds the system around a skill you are acquiring: the minimum components, a beginner-to-practitioner roadmap, deliberate practice, spaced repetition and an honest mastery check.",
+      "stats": "3 files · 373 lines · 11 KB",
+      "install": "npx skills add arm-pz/study-system",
+      "page": "generated",
+      "pageSource": {
+        "description": "A personal system for acquiring a skill: decomposition into the minimum viable components, a beginner-to-practitioner roadmap, the mental models that unlock a subject, Feynman-level explanations, deliberate-practice routines, knowledge-gap audits that surface wrong assumptions, spaced-repetition schedules, application exercises and honest mastery assessments of where the learner actually is. Use whenever someone has a skill already in progress and needs the structure around it, asks how to practise, how long a skill takes, what they are missing, for a study plan or revision schedule, or says they keep forgetting what they read, even if they never say curriculum. Not for being taught the topic itself concept by concept (use topic-primer), for career positioning and moves (use career-track) or for course content written for a class of students (use module-learning-path-generator).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 123,
+            "bytes": 10304
+          },
+          {
+            "path": "references/assessment.md",
+            "lines": 105,
+            "bytes": 7333
+          },
+          {
+            "path": "references/system-design.md",
+            "lines": 145,
+            "bytes": 10852
+          }
+        ],
+        "fileCount": 3,
+        "lines": 373,
+        "bytes": 11542,
+        "license": "MIT",
+        "commit": "3cac33e5a0eee0a63ed7a6ee5a62135d633fc3da",
+        "sha256": "ca8c5df25870fe9af23268072575abb04763b50d750d612816338b428a8e66ed"
+      },
+      "order": 908
+    }
+  ],
+  "workflows": [
+    {
+      "id": "W1",
+      "title": "Build a skill and make it installable",
+      "steps": [
+        {
+          "skills": [
+            "draft-skill",
+            "prompts-to-skill"
+          ]
+        },
+        {
+          "skills": [
+            "tune-skill"
+          ]
+        },
+        {
+          "skills": [
+            "prompts-to-skill-release"
+          ]
+        },
+        {
+          "skills": [
+            "skill-to-mod"
+          ],
+          "optional": true
+        }
+      ],
+      "note": "skill-launch runs the first steps as one chain."
+    },
+    {
+      "id": "W2",
+      "title": "Get a repo, skill or plugin found",
+      "steps": [
+        {
+          "skills": [
+            "findable"
+          ]
+        },
+        {
+          "skills": [
+            "publish-pipeline"
+          ]
+        },
+        {
+          "skills": [
+            "upstream-check"
+          ]
+        }
+      ],
+      "note": "findable-polish and upstream-polish add the rewrite."
+    },
+    {
+      "id": "W3",
+      "title": "Decide whether a site is safe to launch",
+      "steps": [
+        {
+          "skills": [
+            "web-preflight"
+          ]
+        },
+        {
+          "skills": [
+            "pre-ship-security-red-team"
+          ]
+        },
+        {
+          "skills": [
+            "pre-ship-performance-audit"
+          ]
+        },
+        {
+          "skills": [
+            "release-gate-chair",
+            "release-gate-ledger",
+            "release-gate-validator"
+          ]
+        }
+      ],
+      "note": "ship-sentinel holds git push and deploys until the gate has run."
+    },
+    {
+      "id": "W4",
+      "title": "Grow organic search traffic",
+      "steps": [
+        {
+          "skills": [
+            "seo-crawl"
+          ]
+        },
+        {
+          "skills": [
+            "keyword-guard"
+          ]
+        },
+        {
+          "skills": [
+            "wordsmith"
+          ]
+        },
+        {
+          "skills": [
+            "pre-ship-performance-audit"
+          ],
+          "optional": true
+        }
+      ],
+      "note": "seo-polish and keyword-resolver package parts of this route."
+    },
+    {
+      "id": "W5",
+      "title": "Land a job",
+      "steps": [
+        {
+          "skills": [
+            "recruiter-lens"
+          ]
+        },
+        {
+          "skills": [
+            "applicant-kit"
+          ]
+        },
+        {
+          "skills": [
+            "application-pilot"
+          ]
+        },
+        {
+          "skills": [
+            "career-track"
+          ],
+          "optional": true
+        }
+      ],
+      "note": "It never submits an application for you."
+    },
+    {
+      "id": "W6",
+      "title": "Make a decision",
+      "steps": [
+        {
+          "skills": [
+            "research-brief"
+          ]
+        },
+        {
+          "skills": [
+            "data-readout"
+          ],
+          "optional": true
+        },
+        {
+          "skills": [
+            "crash-test",
+            "do-better"
+          ]
+        },
+        {
+          "skills": [
+            "strategy-memo"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "W7",
+      "title": "Learn a skill",
+      "steps": [
+        {
+          "skills": [
+            "topic-primer"
+          ]
+        },
+        {
+          "skills": [
+            "study-system"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "W8",
+      "title": "Run cold outbound",
+      "steps": [
+        {
+          "skills": [
+            "cold-email-list-gate"
+          ]
+        },
+        {
+          "skills": [
+            "cold-email-ops"
+          ]
+        },
+        {
+          "skills": [
+            "sales-copy"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "W9",
+      "title": "Launch a one-person product",
+      "steps": [
+        {
+          "skills": [
+            "solo-income-blueprint"
+          ]
+        },
+        {
+          "skills": [
+            "site-prompt"
+          ]
+        },
+        {
+          "skills": [
+            "production-code"
+          ]
+        },
+        {
+          "skills": [
+            "release-gate-chair"
+          ]
+        },
+        {
+          "skills": [
+            "platform-content"
+          ]
+        }
+      ],
+      "note": "Step four is the whole of W3."
     }
   ]
 }
