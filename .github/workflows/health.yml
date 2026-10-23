@@ -1,0 +1,71 @@
+name: skill health
+
+# Nightly regression check over every published skill, using tune-skill's
+# regress.py from arm-pz/tune-skill at HEAD. A regression opens (or updates)
+# one issue; a night with only improvements records them in site/health.json.
+
+on:
+  schedule:
+    - cron: "41 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: skill-health
+  cancel-in-progress: false
+
+jobs:
+  regress:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: install PyYAML
+        run: pip install pyyaml==6.0.2
+      - name: regress
+        id: regress
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH: gh
+        run: |
+          set +e
+          cd tools/agent-skills
+          python health.py --root ../.. --accept --report "$RUNNER_TEMP/health.md"
+          echo "code=$?" >> "$GITHUB_OUTPUT"
+          [ -f "$RUNNER_TEMP/health.md" ] && cat "$RUNNER_TEMP/health.md" >> "$GITHUB_STEP_SUMMARY"
+          exit 0
+      - name: record improvements
+        if: steps.regress.outputs.code == '0'
+        run: |
+          set -euo pipefail
+          [ -n "$(git status --porcelain site/health.json)" ] || exit 0
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add site/health.json
+          git commit -m "health: record skill improvements"
+          git pull --rebase origin main
+          git push origin HEAD:main
+      - name: open or update the regression issue
+        if: steps.regress.outputs.code != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          title="Skill health: regressions found"
+          number=$(gh issue list --state open --search "\"$title\" in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$number" ]; then
+            gh issue comment "$number" --body-file "$RUNNER_TEMP/health.md"
+          else
+            gh issue create --title "$title" --body-file "$RUNNER_TEMP/health.md"
+          fi
+          exit 1
