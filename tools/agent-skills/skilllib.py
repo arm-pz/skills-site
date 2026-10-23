@@ -11,10 +11,11 @@ SCHEMA = 1
 SITE = "https://skills.caffeinity.com"
 INDEX_SCHEMA = "https://schemas.agentskills.io/discovery/0.2.0/schema.json"
 NAME_RE = re.compile(r"^[a-z0-9-]{1,64}$")
-GROUP_IDS = ("writing-growth", "career", "thinking-learning", "skill-authoring", "ship-checks",
-             "outbound")
+GROUP_IDS = ("start-here", "writing-growth", "career", "thinking-learning", "skill-authoring",
+             "publish-discover", "ship-checks", "seo-search", "outbound")
 TAGS = ("editorial", "seo", "discovery", "career", "learning", "arena",
-        "decisions", "authoring", "release", "performance", "outbound")
+        "decisions", "authoring", "release", "performance", "outbound",
+        "routing", "build", "content", "research", "publishing")
 PAGE_KINDS = ("bespoke", "generated", "none")
 # A mod is a Claude Code plugin with no SKILL.md: it gets a page but no archive.
 KINDS = ("skill", "mod")
@@ -110,10 +111,15 @@ def validate_manifest(data):
             _req(isinstance(legacy.get("description"), str) and legacy["description"].strip(),
                  f"{name}: legacy.description required")
             _req(s.get("path") is None, f"{name}: legacy entries must have path null")
-        else:
-            _req(repo == f"arm-pz/{name}", f"{name}: repo must be arm-pz/{name}")
+        elif repo == f"arm-pz/{name}":
             _req(s.get("path") in (".", name, f"skills/{name}"),
                  f"{name}: path must be '.', '{name}' or 'skills/{name}'")
+        else:
+            # A skill bundled inside another repo, such as a marketplace plugin.
+            _req(re.fullmatch(r"arm-pz/[A-Za-z0-9._-]+", str(repo)),
+                 f"{name}: repo must be arm-pz/{name} or another arm-pz repo")
+            _req(str(s.get("path", "")).endswith(f"skills/{name}"),
+                 f"{name}: a skill in another repo needs a path ending in 'skills/{name}'")
 
         if page == "generated":
             src = s.get("pageSource")
@@ -140,6 +146,24 @@ def validate_manifest(data):
                  f"{name}: pageSource.sha256 must be 64 lowercase hex")
         else:
             _req("pageSource" not in s, f"{name}: pageSource is only for generated pages")
+
+    paged = {s["name"] for s in skills if s.get("page") != "none"}
+    flows = data.get("workflows", [])
+    _req(isinstance(flows, list), "workflows must be a list")
+    seen = set()
+    for f in flows:
+        _req(isinstance(f, dict) and re.fullmatch(r"W\d+", str(f.get("id"))),
+             "workflow id must look like W1")
+        _req(f["id"] not in seen, f"duplicate workflow {f['id']}")
+        seen.add(f["id"])
+        _req(isinstance(f.get("title"), str) and f["title"].strip(), f"{f['id']}: title required")
+        steps = f.get("steps")
+        _req(isinstance(steps, list) and steps, f"{f['id']}: steps must be a non-empty list")
+        for st in steps:
+            names = st.get("skills") if isinstance(st, dict) else None
+            _req(isinstance(names, list) and names, f"{f['id']}: each step needs skills")
+            for n in names:
+                _req(n in paged, f"{f['id']}: step skill {n!r} has no page on the site")
     return data
 
 

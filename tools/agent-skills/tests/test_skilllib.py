@@ -145,6 +145,25 @@ class ManifestTest(unittest.TestCase):
         with self.assertRaises(skilllib.ManifestError):
             skilllib.validate_manifest(data)
 
+    def test_skill_inside_another_repo(self):
+        data = self.manifest()
+        data["skills"][0].update(repo="arm-pz/market", path="plugins/demo/skills/demo")
+        skilllib.validate_manifest(data)
+        data["skills"][0]["path"] = "plugins/demo"
+        with self.assertRaises(skilllib.ManifestError):
+            skilllib.validate_manifest(data)
+        data["skills"][0].update(repo="someone/market", path="plugins/demo/skills/demo")
+        with self.assertRaises(skilllib.ManifestError):
+            skilllib.validate_manifest(data)
+
+    def test_workflow_steps_must_have_pages(self):
+        data = self.manifest()
+        data["workflows"] = [{"id": "W1", "title": "Demo", "steps": [{"skills": ["demo"]}]}]
+        skilllib.validate_manifest(data)
+        data["workflows"][0]["steps"].append({"skills": ["ghost"]})
+        with self.assertRaises(skilllib.ManifestError):
+            skilllib.validate_manifest(data)
+
 
 if __name__ == "__main__":
     unittest.main()
