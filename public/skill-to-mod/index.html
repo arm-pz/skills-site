@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skill to Mod — Turn a Skill Into a Claude Code Mod</title>
+<meta name="description" content="An open agent skill that checks whether a skill should be a Claude Code mod, then builds, validates and tests the plugin and shows what it can touch.">
+<link rel="canonical" href="https://skills.caffeinity.com/skill-to-mod/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Caffeinity Skills">
+<meta property="og:title" content="Skill to Mod — Turn a Skill Into a Claude Code Mod">
+<meta property="og:description" content="An open agent skill that checks whether a skill should be a Claude Code mod, then builds, validates and tests the plugin and shows what it can touch.">
+<meta property="og:url" content="https://skills.caffeinity.com/skill-to-mod/">
+<meta name="twitter:card" content="summary">
+<meta name="color-scheme" content="dark light">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="preload" href="/fonts/files/cY9AfjOCX1hbuyalUrK4397yjA.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/files/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+  /* Same tokens as the generated skill page: dark shell, paper text. */
+  :root{
+    --bg:#121016;
+    --surface:#1d1a23;
+    --ink:#ede8de;
+    --muted:#a59eae;
+    --accent:#ff6a3d;
+    --accent-ink:#1a0c06;
+    --paper:#ebe5d7;
+    --paper-ink:#1c1820;
+    --paper-muted:#57515e;
+      --serif:'Newsreader',Georgia,serif;
+    --sans:'Instrument Sans',system-ui,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --ease:cubic-bezier(.23,1,.32,1);
+    --gutter:clamp(16px,5vw,56px);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.22em}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
+  ::selection{background:var(--accent);color:var(--accent-ink)}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 var(--gutter)}
+  code{font-family:var(--mono);font-size:.88em}
+  .sr-only{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+  .nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;height:72px}
+  .brand{font-family:var(--serif);font-size:20px;text-decoration:none}
+  .brand b{color:var(--accent);font-weight:400;margin-right:6px}
+  .nav-links{display:flex;gap:28px;font-size:15px;color:var(--muted)}
+  .nav-links a{text-decoration:none;transition:color 160ms var(--ease)}
+
+  .hero{padding:clamp(56px,10vw,128px) 0 clamp(56px,8vw,96px)}
+  .hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(52px,9vw,124px);line-height:.98;letter-spacing:-.025em;max-width:11ch}
+  .hero .lead{font-size:clamp(19px,1.8vw,23px);line-height:1.45;max-width:38ch;margin-top:28px}
+  .console{margin-top:44px;max-width:760px;background:var(--surface);border-radius:10px;padding:10px 10px 10px 22px;display:flex;align-items:center;gap:16px}
+  .console code{flex:1;min-width:0;font-size:15.5px;line-height:1.5;overflow-wrap:break-word}
+  .console code::before{content:"> ";color:var(--muted)}
+  .copy{flex:none;display:grid;font:600 15px/1 var(--sans);color:var(--accent-ink);background:var(--accent);border:0;border-radius:7px;padding:15px 20px;cursor:pointer;transition:transform 160ms var(--ease)}
+  .copy:active{transform:scale(.97)}
+  .copy span{grid-area:1/1;text-align:center;transition:opacity 200ms var(--ease),transform 200ms var(--ease),filter 200ms var(--ease)}
+  .copy .done{opacity:0;transform:scale(.8);filter:blur(3px)}
+  .copy.is-done .idle{opacity:0;transform:scale(.8);filter:blur(3px)}
+  .copy.is-done .done{opacity:1;transform:none;filter:none}
+  .copy.quiet{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px rgba(237,232,222,.25)}
+  .facts{margin-top:20px;font-size:15px;color:var(--muted);max-width:62ch}
+  .facts a{color:var(--ink)}
+
+  h2{font-family:var(--serif);font-weight:400;font-size:clamp(34px,4.4vw,52px);line-height:1.05;letter-spacing:-.015em;max-width:20ch}
+  h3{font-size:17px;font-weight:600}
+
+  /* the live thing: real checker output, one skill at a time */
+  .tester{background:var(--surface);padding:clamp(56px,8vw,104px) 0}
+  .tester .intro{color:var(--muted);max-width:56ch;margin-top:18px}
+  .tabs{display:flex;flex-wrap:wrap;gap:8px;margin-top:32px}
+  .tabs button{font:600 15px/1 var(--sans);color:var(--muted);background:transparent;border:0;border-radius:7px;padding:13px 16px;cursor:pointer;box-shadow:inset 0 0 0 1px rgba(237,232,222,.14);transition:color 160ms var(--ease),background-color 160ms var(--ease),transform 160ms var(--ease)}
+  .tabs button:active{transform:scale(.97)}
+  .tabs button[aria-selected="true"]{color:var(--bg);background:var(--ink);box-shadow:none}
+  .verdict{margin-top:28px;font-family:var(--serif);font-size:clamp(34px,4.6vw,60px);line-height:1;letter-spacing:-.015em}
+  .tester pre{background:var(--bg)}
+  .tester [role="tabpanel"][hidden]{display:none}
+  /* paper: the argument */
+  .paper{background:var(--paper);color:var(--paper-ink);padding:clamp(64px,9vw,120px) 0}
+  .paper ::selection{background:var(--paper-ink);color:var(--paper)}
+  .paper .body{font-family:var(--serif);font-size:clamp(21px,2vw,25px);line-height:1.5;max-width:34em;margin-top:32px}
+  .paper .body+.body{margin-top:20px}
+  .paper .small-note{font-family:var(--sans);font-size:17px;color:var(--paper-muted);max-width:60ch}
+  .modes{margin-top:clamp(48px,6vw,80px);display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0 clamp(32px,4vw,56px)}
+  .modes div{padding-top:18px;border-top:2px solid var(--paper-ink)}
+  .modes dt{font-family:var(--serif);font-size:clamp(30px,3vw,38px);line-height:1.1}
+  .modes dd{margin-top:10px;color:var(--paper-muted);padding-bottom:28px}
+  .modes dd b{color:var(--paper-ink);font-weight:600}
+
+  /* shell: set-up, triggers, the real hold */
+  .shell{padding:clamp(64px,9vw,120px) 0}
+  .steps{margin-top:36px;display:grid;gap:28px;max-width:860px}
+  .step p{color:var(--muted);margin-bottom:12px;max-width:60ch}
+  .step p b{color:var(--ink);font-weight:600}
+  .step .console{margin-top:0;max-width:none}
+  .alt{margin-top:8px;color:var(--muted);font-size:15px;max-width:66ch}
+  .alt li{margin-top:6px;margin-left:1.1em}
+  .alt code{color:var(--ink)}
+  .reacts{width:100%;border-collapse:collapse;margin-top:36px;font-size:16px}
+  .reacts th{text-align:left;font-weight:600;font-size:15px;color:var(--muted);padding:0 24px 12px 0}
+  .reacts td{padding:18px 24px 18px 0;border-top:1px solid rgba(237,232,222,.1);vertical-align:top}
+  .reacts td:first-child{width:58%}
+  .reacts td:last-child{color:var(--muted)}
+  .reacts code{color:var(--ink)}
+  .block{margin-top:clamp(64px,8vw,104px)}
+  pre{margin-top:24px;background:var(--surface);border-radius:10px;padding:22px 24px;font:14.5px/1.65 var(--mono);white-space:pre-wrap;overflow-wrap:anywhere;color:var(--ink);max-width:860px}
+  .caption{margin-top:12px;font-size:15px;color:var(--muted);max-width:66ch}
+
+  /* paper again: questions */
+  .faq{margin-top:36px;max-width:860px}
+  .faq details{border-top:1px solid rgba(28,24,32,.16)}
+  .faq details:last-child{border-bottom:1px solid rgba(28,24,32,.16)}
+  .faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:24px;padding:22px 0;font-family:var(--serif);font-size:clamp(21px,2vw,25px);line-height:1.3}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";font-family:var(--sans);font-weight:300;font-size:28px;line-height:1;color:var(--paper-muted);transition:transform 200ms var(--ease)}
+  .faq details[open] summary::after{transform:rotate(45deg)}
+  .faq details p{padding:0 0 24px;max-width:62ch;color:var(--paper-muted)}
+  .faq details p code{color:var(--paper-ink)}
+
+  .more{background:var(--surface);padding:clamp(64px,8vw,104px) 0}
+  .related{list-style:none;margin-top:36px}
+  .related a{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:8px 40px;align-items:baseline;text-decoration:none;padding:24px 0;border-top:1px solid rgba(237,232,222,.12)}
+  .related strong{font-family:var(--serif);font-weight:400;font-size:clamp(24px,2.4vw,30px);line-height:1.15;transition:color 160ms var(--ease)}
+  .related span{color:var(--muted);font-size:16px;line-height:1.55}
+  .source{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:20px 40px;margin-top:clamp(56px,7vw,88px)}
+  .source p{max-width:52ch;color:var(--muted)}
+  .source p a{color:var(--ink)}
+  .btn{display:inline-block;font-weight:600;font-size:15px;text-decoration:none;color:var(--bg);background:var(--ink);border-radius:7px;padding:14px 22px;transition:transform 160ms var(--ease)}
+  .btn:active{transform:scale(.97)}
+
+  footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-top:28px;padding-bottom:36px;font-size:14px;color:var(--muted)}
+  footer a{text-decoration:none}
+
+  @media (hover:hover) and (pointer:fine){
+    .nav-links a:hover,footer a:hover,.samples button:hover{color:var(--ink)}
+    .related a:hover strong{color:var(--accent)}
+  }
+  @media (max-width:640px){
+    .nav-links a:first-child{display:none}
+    .console{flex-direction:column;align-items:stretch;padding:18px}
+    .related a{grid-template-columns:1fr}
+    .reacts thead{display:none}
+    .reacts tr{display:block;border-top:1px solid rgba(237,232,222,.1);padding:14px 0}
+    .reacts td{display:block;width:auto!important;border:0;padding:4px 0}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{transition:none!important;animation:none!important}
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "skill-to-mod",
+  "alternateName": "Skill to Mod",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any",
+  "url": "https://skills.caffeinity.com/skill-to-mod/",
+  "description": "An open agent skill that checks whether a skill should be a Claude Code mod, then builds, validates and tests the plugin and shows what it can touch.",
+  "codeRepository": "https://github.com/arm-pz/skill-to-mod",
+  "license": "https://spdx.org/licenses/MIT.html",
+  "softwareVersion": "0.1.0",
+  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+  "publisher": {"@type": "Organization", "name": "Caffeinity", "url": "https://caffeinity.com/"}
+}
+</script>
+</head>
+<body>
+
+<nav class="nav" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="/"><b>∧</b>caffeinity skills</a>
+    <div class="nav-links">
+      <a href="/">All skills</a>
+      <a href="https://github.com/arm-pz/skill-to-mod" target="_blank" rel="noopener">Source</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Skill to Mod</h1>
+    <p class="lead">Checks whether one of your skills should become a Claude Code mod, and builds the plugin only when it should. Most of the time the answer is “keep it a skill”.</p>
+    <div class="console">
+      <code id="cmd-install">npx skills add arm-pz/skill-to-mod --skill skill-to-mod</code>
+      <button class="copy" type="button" data-copy="cmd-install"><span class="idle">Copy install command</span><span class="done" aria-hidden="true">Copied</span></button>
+    </div>
+    <p class="facts">An agent skill for Claude Code 2.1.287 or later, with Python 3 and the <code>claude</code> command on your path. Version 0.1.0, free under MIT.</p>
+  </div>
+</header>
+
+<section class="tester" aria-labelledby="try-h">
+  <div class="wrap">
+    <h2 id="try-h">Two skills, two verdicts</h2>
+    <p class="intro">Real output from <code>check_skill.py</code> on two skills published on this site, run on 2026-10-21 against their main branches.</p>
+    <div class="tabs" role="tablist" aria-label="Skill checked">
+      <button type="button" role="tab" id="tab-a" aria-controls="panel-a" aria-selected="true">wordsmith</button>
+      <button type="button" role="tab" id="tab-b" aria-controls="panel-b" aria-selected="false" tabindex="-1">pre-ship-security-red-team</button>
+    </div>
+    <div role="tabpanel" id="panel-a" aria-labelledby="tab-a">
+      <p class="verdict">KEEP_SKILL</p>
+      <pre>wordsmith: KEEP_SKILL
+  - nothing in it happens at a particular moment, so there is nothing for a mod to hook
+  - substantial guidance: keep the skill text intact and bundle it</pre>
+      <p class="caption">Nothing to hook, so it generates nothing.</p>
+    </div>
+    <div role="tabpanel" id="panel-b" aria-labelledby="tab-b" hidden>
+      <p class="verdict">HYBRID</p>
+      <pre>pre-ship-security-red-team: HYBRID
+  - it has instructions worth keeping as a skill and moments a mod can trigger it at
+  - moments found: before-risky-action, after-edit
+  - interface words found (needs a hand-written pane, band or status line)
+  - substantial guidance: keep the skill text intact and bundle it
+Trust notes: mentions secrets or credentials; bundles scripts
+Scaffoldable: gate, command
+By hand: pane / band / status line (see plugin-authoring and Anthropic's sample mods); hooks for: after-edit</pre>
+      <p class="caption">The verdict is evidence, not a decision. “Interface words found” is a false alarm here: the match is “hosting dashboard” inside a safety rule, not an interface the skill shows. That is why the skill has Claude weigh the evidence against a written rubric before it answers.</p>
+    </div>
+  </div>
+</section>
+
+<section class="paper" aria-labelledby="why-h">
+  <div class="wrap">
+    <h2 id="why-h">Skills wait. Mods run on events.</h2>
+    <p class="body">A skill is instructions Claude reads when it decides they are relevant. A Claude Code mod is code that runs inside Claude Code on events: a command about to run, a prompt being submitted, a turn ending. So a skill that keeps getting skipped before <code>git push</code> can be made to run there.</p>
+    <p class="body">Your skill stays unchanged and is bundled in the plugin. The mod only adds a thin trigger; it never copies your skill’s logic into code and never writes into your skill’s folder.</p>
+    <dl class="modes">
+      <div><dt>gate</dt><dd>Holds commands such as <code>git push</code> or <code>npm publish</code> until the skill has run.</dd></div>
+      <div><dt>prime</dt><dd>Adds one line of context when a prompt contains a phrase you name.</dd></div>
+      <div><dt>command</dt><dd>A slash command that shows state and can be snoozed.</dd></div>
+    </dl>
+    <p class="body small-note">Panes, bands, status lines that draw, model calls and compaction handoffs are not generated. For those it points you to Claude Code’s built-in <code>plugin-authoring</code> skill and Anthropic’s sample mods.</p>
+  </div>
+</section>
+
+<section class="shell" aria-labelledby="ask-h">
+  <div class="wrap">
+    <h2 id="ask-h">What you can ask it</h2>
+    <table class="reacts" aria-labelledby="ask-h">
+      <thead><tr><th scope="col">Ask</th><th scope="col">What happens</th></tr></thead>
+      <tbody>
+        <tr><td>“Can my release-gate skill be a mod?”</td><td>Runs the checker, reports KEEP_SKILL, HYBRID or MOD_FIRST with the evidence, and says why in a few lines.</td></tr>
+        <tr><td>“Turn this skill into a mod that runs before git push”</td><td>Scaffolds a plugin: the skill, a hooks module with a gate on ship commands, tests and a README.</td></tr>
+        <tr><td>“Should this be a mod or a settings hook?”</td><td>Compares mod, settings hook, skill and MCP server for your skill and recommends one.</td></tr>
+        <tr><td>“Verify the mod”</td><td>Runs <code>claude plugin validate</code> and <code>claude plugin test</code>, prints the hooks it registers and the calls it makes, and writes that into the README.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="block">
+      <h2 id="setup-h">Other ways to install it</h2>
+      <div class="steps">
+        <div class="step">
+          <p><b>As a Claude Code plugin</b>, from its own marketplace.</p>
+          <div class="console">
+            <code id="cmd-plugin">/plugin install skill-to-mod --marketplace arm-pz/skill-to-mod</code>
+            <button class="copy quiet" type="button" data-copy="cmd-plugin"><span class="idle">Copy</span><span class="done" aria-hidden="true">Copied</span></button>
+          </div>
+        </div>
+      </div>
+      <ul class="alt">
+        <li>For one session from a clone: <code>claude --plugin-dir ./skill-to-mod</code></li>
+        <li>By hand: copy <code>skills/skill-to-mod/</code> into <code>.claude/skills/</code>.</li>
+        <li>Python 3 uses the standard library only. Node.js is optional; the scaffold uses it to test-compile regular expressions and says so if it is missing. Claude Code only: the validate and test steps do not exist elsewhere.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="paper" aria-labelledby="faq-h">
+  <div class="wrap">
+    <h2 id="faq-h">Questions before you install it</h2>
+    <div class="faq">
+      <details><summary>Will it turn every skill into a mod?</summary><p>No. If nothing in the skill happens at a particular moment, it stops at KEEP_SKILL and generates nothing. Of five published skills it was run on, two came out KEEP_SKILL.</p></details>
+      <details><summary>Does it change my skill?</summary><p>No. The skill is copied unchanged into <code>skills/&lt;name&gt;/</code> inside the new plugin, and the generator refuses to write its output inside the source skill’s folder.</p></details>
+      <details><summary>What can the generated mod touch?</summary><p>The generated mods call only <code>$.ui.ask</code>, <code>$.ui.status</code>, <code>$.ui.toast</code> and <code>$.command.register</code>: no files, processes, network, environment variables or model calls. <code>claude plugin validate</code> prints the exact list for every mod and the skill copies it into the README. Mods are not sandboxed, so read that list before you install anyone’s mod, including this one’s output.</p></details>
+      <details><summary>Is the verdict reliable?</summary><p>It is a keyword heuristic over the skill’s text, plus a written rubric Claude applies. It can miss an unusual phrasing or over-read an example. It counts a moment only with two points of evidence and lists weaker hits separately, and regression tests cover the wordings that fooled it before. A verdict you disagree with is a bug report.</p></details>
+      <details><summary>Is a generated gate a security control?</summary><p>No. It reads the text of a command, so <code>echo "git push"</code> also matches and a rewritten command can slip past. It is a reminder that fails open. Use permission rules or managed settings for enforcement.</p></details>
+      <details><summary>Is “mod” the game kind?</summary><p>No. A Claude Code mod is a plugin whose code runs inside Claude Code. This is not made or endorsed by Anthropic.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="more" aria-labelledby="more-h">
+  <div class="wrap">
+    <h2 id="more-h">More in Skill Authoring</h2>
+    <ul class="related">
+      <li><a href="/draft-skill/"><strong>Draft Skill</strong><span>Writes a new skill from an idea. Skill to Mod starts from a skill that already exists.</span></a></li>
+      <li><a href="/tune-skill/"><strong>Tune Skill</strong><span>Audits a skill that is not triggering well. Use it first if the real problem is the description; use Skill to Mod when the behaviour should not depend on Claude choosing to load the skill.</span></a></li>
+      <li><a href="/ship-sentinel/"><strong>Ship Sentinel</strong><span>A mod that holds ship commands until your pre-ship check skills have run. The scaffold’s gate pattern mirrors it.</span></a></li>
+    </ul>
+    <div class="source">
+      <p>Read it before you install it: the skill lives at <code>skills/skill-to-mod</code> in <a href="https://github.com/arm-pz/skill-to-mod" target="_blank" rel="noopener">arm-pz/skill-to-mod</a>.</p>
+      <a class="btn" href="https://github.com/arm-pz/skill-to-mod" target="_blank" rel="noopener">Open the repo</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>Skill to Mod is an open agent skill on <a href="/">Caffeinity Skills</a>. Not made or endorsed by Anthropic.</span>
+    <a href="https://github.com/arm-pz/skill-to-mod" target="_blank" rel="noopener">arm-pz/skill-to-mod</a>
+  </div>
+</footer>
+<span class="sr-only" id="copy-status" role="status" aria-live="polite"></span>
+
+<script>
+(function(){
+  var status=document.getElementById('copy-status');
+  document.querySelectorAll('[data-copy]').forEach(function(btn){
+    var cmd=document.getElementById(btn.getAttribute('data-copy')),timer;
+    function ok(){btn.classList.add('is-done');status.textContent='Copied to clipboard.';clearTimeout(timer);timer=setTimeout(function(){btn.classList.remove('is-done');},1600);}
+    function fail(){var r=document.createRange();r.selectNodeContents(cmd);var s=window.getSelection();s.removeAllRanges();s.addRange(r);status.textContent='Clipboard unavailable. The command is selected; press Ctrl+C.';}
+    btn.addEventListener('click',function(){var t=cmd.textContent;if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,fail);}else{fail();}});
+  });
+
+  var tabs=[].slice.call(document.querySelectorAll('[role="tab"]'));
+  function select(tab){
+    tabs.forEach(function(t){
+      var on=t===tab;
+      t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden=!on;
+    });
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){select(t);});
+    t.addEventListener('keydown',function(e){
+      var d=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;
+      if(d){var n=tabs[(i+d+tabs.length)%tabs.length];select(n);n.focus();e.preventDefault();}
+    });
+  });
+})();
+</script>
+</body>
+</html>

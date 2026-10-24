@@ -1,0 +1,95 @@
+# Caffeinity Skills
+
+> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: 45 skills mapped into 10 workflows (build a skill, get found, gate a release, grow search traffic, land a job, decide, learn, run outbound, launch a product). Plain markdown, no API keys.
+
+## Install
+
+- Claude Code, every skill plus ten workflow agents: `/plugin marketplace add arm-pz/caffeinity-skills` then `/plugin install caffeinity@caffeinity-skills`
+- Codex: `codex plugin marketplace add arm-pz/caffeinity-skills`, then install caffeinity from the Plugins directory
+- Any agent, one skill: `npx skills add arm-pz/<skill>`
+- Discovery index: https://skills.caffeinity.com/.well-known/agent-skills/index.json
+
+## Start Here
+
+- [caffeinity-routing](https://skills.caffeinity.com/caffeinity-routing/): Start here. Tell it the outcome you want and it picks one of ten workflows, lists the skills in order with what each hands the next, and names the ones you have not installed instead of improvising their work.
+
+## Skill Authoring
+
+- [draft-skill](https://skills.caffeinity.com/draft-skill/): Creates a new agent skill from a plain idea: confirms the purpose before writing anything, checks the installed siblings for overlap, splits scripts from references from assets, writes a description that actually triggers, then validates it with check_skill.py.
+- [prompts-to-skill](https://skills.caffeinity.com/prompts-to-skill/): Turns a list of your own prompts into a finished, tested skill, one skill per prompt: an intent interview, an overlap check against what is already installed, a draft written with draft-skill, trigger test cases that include near-misses, and a tune-skill gate at the end.
+- [tune-skill](https://skills.caffeinity.com/tune-skill/): Audits and fine-tunes a skill that already exists: the description that never fires, overlap with installed siblings, stale names and counts, handoff contracts that do not hand off.
+- [prompts-to-skill-release](https://skills.caffeinity.com/prompts-to-skill-release/): Packages a finished skill for release: runs its trigger test cases and records which passed and which did not, sets the version and CHANGELOG, builds the archive, writes the README, and ends with a per-platform install checklist.
+- [skill-to-mod](https://skills.caffeinity.com/skill-to-mod/): Checks whether a skill should become a Claude Code mod, then builds the plugin with your skill unchanged and a thin trigger, validates and tests it, and lists what it can touch.
+- [skill-launch](https://skills.caffeinity.com/skill-launch/): The full pipeline from idea to launched skill: Draft-Skill writes it, Tune-Skill gates it through the validator, Findable-Polish polishes its discovery surfaces.
+- [tune-and-polish](https://skills.caffeinity.com/tune-and-polish/): For a skill that both misfires and hides: Tune-Skill fixes the triggering description, sibling overlaps and stale counts, gated on check_skill.py with zero FAILs; then Findable-Polish audits and polishes the README, About and site copy against real queries.
+
+## Publish & Discover
+
+- [findable](https://skills.caffeinity.com/findable/): Sets up discovery for a GitHub repo, skill, plugin or MCP server so it gets found by what it does, not only by its name.
+- [publish-pipeline](https://skills.caffeinity.com/publish-pipeline/): Turns a pile of skill repos into a published site: a committed manifest decides what is public, discovery opens a pull request, and a green merge deploys generated pages, both discovery indexes, a sitemap and a verified build.
+- [upstream-check](https://skills.caffeinity.com/upstream-check/): Finds local commits that never reached GitHub, pushes only clean fast-forwards after a secret screen, then checks that the site index, the homepage, the marketplace and the READMEs agree with the repos that actually ship a SKILL.md.
+- [findable-polish](https://skills.caffeinity.com/findable-polish/): Chains Findable and Wordsmith: audits a README, skill page or landing copy against the queries a real stranger types, then writes two or three alternatives per finding that fix it without inventing a fact.
+- [upstream-polish](https://skills.caffeinity.com/upstream-polish/): Chains Upstream-Check — fetch-based push verdicts, fast-forward only, screened for credential-shaped lines — with Wordsmith rewriting drifted descriptions, topics and README rows, so repos and listings tell the same story again.
+
+## Build & Ship
+
+- [site-prompt](https://skills.caffeinity.com/site-prompt/): Turns a website topic into one self-contained, paste-and-build prompt: it builds and verifies the site in a scratch folder first, then embeds every file verbatim with a pinned stack and the checks that actually ran.
+- [production-code](https://skills.caffeinity.com/production-code/): Delivers code as a finished artifact rather than a snippet: complete scripts, bug fixes with the root cause, reviews, API integrations and SQL, each with the run instructions and the edge cases handled.
+- [web-preflight](https://skills.caffeinity.com/web-preflight/): Checks a site you own before you ship it, without pretending a status code is a finding.
+- [pre-ship-security-red-team](https://skills.caffeinity.com/pre-ship-security-red-team/): Red-teams a web app you own before launch, in an isolated local environment.
+- [pre-ship-performance-audit](https://skills.caffeinity.com/pre-ship-performance-audit/): Audits and fixes a web app's real-world speed before launch: four read-only subagents sweep twenty known slow-downs across images, bundles, database queries and servers, then the same mobile Lighthouse protocol, three runs per page, proves each fix before and after.
+- [release-gate-chair](https://skills.caffeinity.com/release-gate-chair/): One answer to “can we deploy?”: runs web-preflight, the security red team and the performance audit in order, keeps three separate verdicts, and computes HOLD or ready with a script instead of judgement.
+- [release-gate-ledger](https://skills.caffeinity.com/release-gate-ledger/): The release gate where each lane writes its own rows into one ledger through a validating recorder, so a malformed or missing verdict is rejected the moment it is written.
+- [release-gate-validator](https://skills.caffeinity.com/release-gate-validator/): The cheapest release gate: turns three pre-launch reports that already exist into one posture, HOLD or ready, without running any lane or sending a single request.
+- [ship-sentinel](https://skills.caffeinity.com/ship-sentinel/): A Claude Code mod that holds git push, PR, publish and deploy commands until your pre-ship check skills have run since the last edit.
+- [paper-trail](https://skills.caffeinity.com/paper-trail/): Privacy policy, terms, refund and cookie pages written only from facts you confirm, then checked for placeholders, missing sections and emails nobody supplied.
+
+## SEO & Search
+
+- [seo-crawl](https://skills.caffeinity.com/seo-crawl/): Crawls a site you own and returns deterministic, evidence-backed technical SEO findings, with blocked or unrun checks reported INCONCLUSIVE rather than a pass.
+- [keyword-guard](https://skills.caffeinity.com/keyword-guard/): Plans topic clusters and kills keyword cannibalization so exactly one page wins each query.
+- [keyword-resolver](https://skills.caffeinity.com/keyword-resolver/): Resolves keyword cannibalization with Keyword-Guard, then rewrites titles, H1s and meta descriptions with Wordsmith.
+- [seo-polish](https://skills.caffeinity.com/seo-polish/): seo-crawl's measured findings, an optional seo-audit diagnosis, then Wordsmith drafts optimized alternatives for every High and Medium finding: titles, meta descriptions, headings and internal-link anchors.
+
+## Writing & Content
+
+- [wordsmith](https://skills.caffeinity.com/wordsmith/): Teaches your agent to edit, not just generate: 44 commands across 5 disciplines that tighten, rewrite, critique and proofread while keeping the author's meaning, hedges and voice intact.
+- [platform-content](https://skills.caffeinity.com/platform-content/): Writes platform-native content packs from one brief: X threads, LinkedIn posts, YouTube and TikTok scripts, Instagram captions, newsletters and blog articles, each shaped to how that platform is actually read.
+- [sales-copy](https://skills.caffeinity.com/sales-copy/): Writes buyer-facing conversion assets: long-form sales pages, landing pages, launch and abandoned-cart email sequences and ad variations, built on the offer and the objections you can actually back.
+
+## Outbound
+
+- [cold-email-list-gate](https://skills.caffeinity.com/cold-email-list-gate/): Gate a cold-email lead list before it loads: sample ten rows, check company, title, size, and mailbox against the ICP, compare data providers on the same criteria, and return a GO or HOLD decision with the fail pattern and the re-run…
+- [cold-email-ops](https://skills.caffeinity.com/cold-email-ops/): Plan and audit a cold-email program at volume and keep it from degrading: computes inbox and domain capacity from a monthly send target, sets per-domain reply-rate floors, burn-replacement cadence, shadow-ban tests, and automation error…
+
+## Career
+
+- [recruiter-lens](https://skills.caffeinity.com/recruiter-lens/): Reviews resumes, CVs and LinkedIn profiles the way recruiters actually screen them: first-impression scans, ATS compatibility, rejection-pattern diagnosis, and interview prep.
+- [applicant-kit](https://skills.caffeinity.com/applicant-kit/): Writes the better version: decoded job description, tailored resume, bullets rewritten as action-task-result-impact, honest keyword placement, five summaries, a LinkedIn rewrite and twenty interview answers, all built from real experience.
+- [application-pilot](https://skills.caffeinity.com/application-pilot/): Runs the job search around the applications: turns role criteria into a live shortlist, scores each role for fit with evidence, keeps a reviewable tracker with submission and follow-up dates, flags roles that have gone quiet, drafts the follow-up and the interview briefing, and reads the funnel weekly.
+- [career-track](https://skills.caffeinity.com/career-track/): For the moves around a career: a positioning line you can repeat, the case for the next level, review and promotion narratives, salary negotiation scripts and a ninety-day plan.
+
+## Thinking & Learning
+
+- [research-brief](https://skills.caffeinity.com/research-brief/): Answers “what is known about this” with a sourced brief: overviews, competitor and industry analysis, fact checks with conflicts flagged, every claim tied to a dated source and every unknown named.
+- [data-readout](https://skills.caffeinity.com/data-readout/): Turns the numbers you already own into a readout you can act on: it opens the real file first, then gives findings with the business implication of each, chart specs and the caveats that matter.
+- [crash-test](https://skills.caffeinity.com/crash-test/): Crash-tests a decision before you build it.
+- [do-better](https://skills.caffeinity.com/do-better/): When an answer is bad, don't ask twice: N sub-agents (100 by default, 16 with --quick) get the exact same task with different strategy cards, then attack, defend and judge each other in a single-elimination bracket until one solution survives.
+- [strategy-memo](https://skills.caffeinity.com/strategy-memo/): Turns a business question into a decision document: situation analysis, a recommendation written as ranked options, the risks, and a roadmap someone can execute.
+- [solo-income-blueprint](https://skills.caffeinity.com/solo-income-blueprint/): Turns “I want to make money online” into one plan: a business model that fits your skills, time and budget, one offer, a demand check, a minimal tool stack and a seven-day launch.
+- [topic-primer](https://skills.caffeinity.com/topic-primer/): A world-class teacher for any topic, from zero background toward expert depth.
+- [study-system](https://skills.caffeinity.com/study-system/): Builds the system around a skill you are acquiring: the minimum components, a beginner-to-practitioner roadmap, deliberate practice, spaced repetition and an honest mastery check.
+- [course-builder](https://skills.caffeinity.com/course-builder/): A course for a class or cohort: measurable outcomes, modules in prerequisite order, an assessment for every outcome and a time budget that fits, checked by a script before the first session.
+
+## Workflows
+
+- W1 Build a skill and make it installable: draft-skill or prompts-to-skill -> tune-skill -> prompts-to-skill-release -> skill-to-mod
+- W2 Get a repo, skill or plugin found: findable -> publish-pipeline -> upstream-check
+- W3 Decide whether a site is safe to launch: web-preflight -> pre-ship-security-red-team -> pre-ship-performance-audit -> release-gate-chair or release-gate-ledger or release-gate-validator
+- W4 Grow organic search traffic: seo-crawl -> keyword-guard -> wordsmith -> pre-ship-performance-audit -> platform-content
+- W5 Land a job: recruiter-lens -> applicant-kit -> application-pilot -> career-track
+- W6 Make a decision: research-brief -> data-readout -> crash-test or do-better -> strategy-memo
+- W7 Learn a skill: topic-primer -> study-system -> course-builder
+- W8 Run cold outbound: cold-email-list-gate -> cold-email-ops -> sales-copy
+- W9 Launch a one-person product: solo-income-blueprint -> site-prompt -> production-code -> paper-trail -> release-gate-chair -> platform-content
+- W10 Maintain the skill family: tune-skill -> prompts-to-skill-release -> upstream-check
