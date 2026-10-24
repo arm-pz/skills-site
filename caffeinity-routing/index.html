@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caffeinity Routing — agent skill</title>
+<meta name="description" content="Picks which caffeinity skills to run, in what order, for a goal that spans more than one of them, and says what each step hands the next: build and…">
+<link rel="canonical" href="https://skills.caffeinity.com/caffeinity-routing/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Caffeinity Skills">
+<meta property="og:title" content="Caffeinity Routing — agent skill">
+<meta property="og:description" content="Picks which caffeinity skills to run, in what order, for a goal that spans more than one of them, and says what each step hands the next: build and publish a skill, get a project found, pass a release gate, grow organic search traffic, run a job search, make a decision, learn a skill, run cold outbound, or launch a one-person product. Checks which of those skills are installed and names the missing ones instead of improvising their work. Use whenever someone asks which skill to use, what to run first, how the skills fit together, or describes a multi-step outcome such as &quot;take this idea to a published skill&quot; or &quot;get my site ready to ship and ranking&quot;, even if they never name a skill. Not for a request one skill already owns (load that skill directly), and not for doing a step&#x27;s work itself: the named skill does it.">
+<meta property="og:url" content="https://skills.caffeinity.com/caffeinity-routing/">
+<meta name="twitter:card" content="summary">
+<meta name="color-scheme" content="dark light">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="preload" href="/fonts/files/cY9AfjOCX1hbuyalUrK4397yjA.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/files/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+  /* Two grounds: the dark shell you run, the paper your agent reads. */
+  :root{
+    --bg:#121016;
+    --surface:#1d1a23;
+    --ink:#ede8de;
+    --muted:#a59eae;
+    --accent:#ff6a3d;
+    --accent-ink:#1a0c06;
+    --paper:#ebe5d7;
+    --paper-surface:#e0d9c8;
+    --paper-ink:#1c1820;
+    --paper-muted:#57515e;
+    --serif:'Newsreader',Georgia,serif;
+    --sans:'Instrument Sans',system-ui,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --ease:cubic-bezier(.23,1,.32,1);
+    --gutter:clamp(16px,5vw,56px);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.22em}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
+  ::selection{background:var(--accent);color:var(--accent-ink)}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 var(--gutter)}
+  code,.mono{font-family:var(--mono);font-size:.88em}
+  .sr-only{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+  /* nav */
+  .nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;height:72px}
+  .brand{font-family:var(--serif);font-size:20px;text-decoration:none}
+  .brand b{color:var(--accent);font-weight:400;margin-right:6px}
+  .nav-links{display:flex;gap:28px;font-size:15px;color:var(--muted)}
+  .nav-links a{text-decoration:none;transition:color 160ms var(--ease)}
+
+  /* hero: the title is the poster, the command is the action */
+  .hero{padding:clamp(56px,10vw,128px) 0 clamp(56px,8vw,104px)}
+  .hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(52px,9vw,124px);line-height:.98;letter-spacing:-.025em;max-width:11ch}
+  .hero .lead{font-size:clamp(19px,1.8vw,23px);line-height:1.45;max-width:36ch;margin-top:28px;color:var(--ink)}
+  .console{margin-top:44px;max-width:760px;background:var(--surface);border-radius:10px;padding:10px 10px 10px 22px;display:flex;align-items:center;gap:16px}
+  .console code{flex:1;min-width:0;font-size:15.5px;line-height:1.5;overflow-wrap:break-word;color:var(--ink)}
+  .console code::before{content:"$ ";color:var(--muted)}
+  .copy{flex:none;position:relative;display:grid;font:600 15px/1 var(--sans);color:var(--accent-ink);background:var(--accent);border:0;border-radius:7px;padding:15px 20px;cursor:pointer;transition:transform 160ms var(--ease)}
+  .copy:active{transform:scale(.97)}
+  .copy span{grid-area:1/1;text-align:center;transition:opacity 200ms var(--ease),transform 200ms var(--ease),filter 200ms var(--ease)}
+  .copy .done{opacity:0;transform:scale(.8);filter:blur(3px)}
+  .copy.is-done .idle{opacity:0;transform:scale(.8);filter:blur(3px)}
+  .copy.is-done .done{opacity:1;transform:none;filter:none}
+  .facts{margin-top:20px;font-size:15px;color:var(--muted);max-width:760px}
+  .facts a{color:var(--ink)}
+
+  /* paper: what the skill is for */
+  .paper{background:var(--paper);color:var(--paper-ink);padding:clamp(64px,9vw,120px) 0}
+  .paper ::selection{background:var(--paper-ink);color:var(--paper)}
+  h2{font-family:var(--serif);font-weight:400;font-size:clamp(34px,4.4vw,52px);line-height:1.05;letter-spacing:-.015em;max-width:16ch}
+  .paper .body{font-family:var(--serif);font-size:clamp(21px,2vw,25px);line-height:1.5;max-width:34em;margin-top:32px}
+  .uses{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(32px,5vw,72px);margin-top:clamp(48px,6vw,80px)}
+  .uses h3{font-size:17px;font-weight:600;margin-bottom:14px}
+  .uses ul{list-style:none}
+  .uses li{padding:12px 0;border-top:1px solid rgba(28,24,32,.14)}
+  .say li{font-family:var(--serif);font-size:21px;line-height:1.35}
+  .say li::before{content:"\201C"}
+  .say li::after{content:"\201D"}
+  .not li{color:var(--paper-muted)}
+
+  /* shell: what ships */
+  .ships{padding:clamp(64px,9vw,120px) 0}
+  .ships .intro{color:var(--muted);max-width:44ch;margin-top:20px}
+  .files{width:100%;max-width:880px;border-collapse:collapse;margin-top:40px;font-size:15px}
+  .files td{padding:13px 0;border-top:1px solid rgba(237,232,222,.09)}
+  .files td:first-child{font-family:var(--mono);font-size:14px;overflow-wrap:anywhere;padding-right:20px}
+  .files td.n{text-align:right;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .files tfoot td{font-family:var(--sans);font-size:15px;font-weight:600;color:var(--ink);border-top-color:rgba(237,232,222,.3)}
+
+  /* related + source */
+  .more{background:var(--surface);padding:clamp(64px,8vw,104px) 0}
+  .related{list-style:none;margin-top:36px}
+  .related a{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:8px 40px;align-items:baseline;text-decoration:none;padding:24px 0;border-top:1px solid rgba(237,232,222,.12)}
+  .related strong{font-family:var(--serif);font-weight:400;font-size:clamp(24px,2.4vw,30px);line-height:1.15;transition:color 160ms var(--ease)}
+  .related span{color:var(--muted);font-size:16px;line-height:1.55;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .source{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:20px 40px;margin-top:clamp(56px,7vw,88px)}
+  .source p{max-width:52ch;color:var(--muted)}
+  .source p a{color:var(--ink)}
+  .btn{display:inline-block;font-weight:600;font-size:15px;text-decoration:none;color:var(--bg);background:var(--ink);border-radius:7px;padding:14px 22px;transition:transform 160ms var(--ease)}
+  .btn:active{transform:scale(.97)}
+
+  footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-top:28px;padding-bottom:36px;font-size:14px;color:var(--muted)}
+  footer a{text-decoration:none}
+
+  @media (hover:hover) and (pointer:fine){
+    .nav-links a:hover,footer a:hover{color:var(--ink)}
+    .related a:hover strong{color:var(--accent)}
+  }
+  @media (max-width:640px){
+    .related a{grid-template-columns:1fr}
+    .nav-links a:first-child{display:none}
+    .console{flex-direction:column;align-items:stretch;padding:18px}
+    .copy{padding:15px}
+    .files td.bytes{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{transition:none!important;animation:none!important}
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "caffeinity-routing",
+  "alternateName": "Caffeinity Routing",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any",
+  "url": "https://skills.caffeinity.com/caffeinity-routing/",
+  "description": "Picks which caffeinity skills to run, in what order, for a goal that spans more than one of them, and says what each step hands the next: build and publish a skill, get a project found, pass a release gate, grow organic search traffic, run a job search, make a decision, learn a skill, run cold outbound, or launch a one-person product. Checks which of those skills are installed and names the missing ones instead of improvising their work. Use whenever someone asks which skill to use, what to run first, how the skills fit together, or describes a multi-step outcome such as \"take this idea to a published skill\" or \"get my site ready to ship and ranking\", even if they never name a skill. Not for a request one skill already owns (load that skill directly), and not for doing a step's work itself: the named skill does it.",
+  "codeRepository": "https://github.com/arm-pz/caffeinity-skills",
+  "license": "https://spdx.org/licenses/MIT.html",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Caffeinity",
+    "url": "https://caffeinity.com/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+</head>
+<body>
+
+<nav class="nav" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="/"><b>∧</b>caffeinity skills</a>
+    <div class="nav-links">
+      <a href="/">All skills</a>
+      <a href="https://github.com/arm-pz/caffeinity-skills" target="_blank" rel="noopener">Source</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Caffeinity Routing</h1>
+    <p class="lead">Start here. Tell it the outcome you want and it picks one of nine workflows, lists the skills in order with what each hands the next, and names the ones you have not installed instead of improvising their work.</p>
+    <div class="console">
+      <code id="cmd">npx skills add arm-pz/caffeinity-skills --skill caffeinity-routing</code>
+      <button class="copy" id="copy" type="button" aria-describedby="cmd"><span class="idle">Copy install command</span><span class="done" aria-hidden="true">Copied</span></button>
+      <span class="sr-only" id="copy-status" role="status" aria-live="polite"></span>
+    </div>
+    <p class="facts">4 files and 320 lines, free under MIT. Built from <a href="https://github.com/arm-pz/caffeinity-skills" target="_blank" rel="noopener">arm-pz/caffeinity-skills</a> at <code>10b9178</code>.</p>
+  </div>
+</header>
+
+<section class="paper" aria-labelledby="for-h">
+  <div class="wrap">
+    <h2 id="for-h">What it is for</h2>
+    <p class="body">Picks which caffeinity skills to run, in what order, for a goal that spans more than one of them, and says what each step hands the next: build and publish a skill, get a project found, pass a release gate, grow organic search traffic, run a job search, make a decision, learn a skill, run cold outbound, or launch a one-person product. Checks which of those skills are installed and names the missing ones instead of improvising their work. Use whenever someone asks which skill to use, what to run first, how the skills fit together, or describes a multi-step outcome such as &quot;take this idea to a published skill&quot; or &quot;get my site ready to ship and ranking&quot;, even if they never name a skill.</p>
+    <div class="uses">
+    <div class="uses-col not">
+      <h3>Not for</h3>
+      <ul><li>A request one skill already owns (load that skill directly)</li><li>Not for doing a step&#x27;s work itself: the named skill does it</li></ul>
+    </div>
+    </div>
+  </div>
+</section>
+
+<section class="ships" aria-labelledby="ships-h">
+  <div class="wrap">
+    <h2 id="ships-h">Every file it installs</h2>
+    <p class="intro">Measured from the packed archive at commit <code>10b9178</code>. A skill is plain text your agent reads, so this list is all of it.</p>
+    <table class="files">
+      <thead class="sr-only"><tr><th>File</th><th>Lines</th><th>Bytes</th></tr></thead>
+      <tbody>
+        <tr><td>SKILL.md</td><td class="n">85</td><td class="n bytes">5,399 B</td></tr>
+        <tr><td>references/trigger-cases.md</td><td class="n">30</td><td class="n bytes">2,753 B</td></tr>
+        <tr><td>references/workflows.md</td><td class="n">97</td><td class="n bytes">7,345 B</td></tr>
+        <tr><td>scripts/route_check.py</td><td class="n">108</td><td class="n bytes">4,326 B</td></tr>
+      </tbody>
+      <tfoot><tr><td>4 files</td><td class="n">320</td><td class="n bytes">7 KB</td></tr></tfoot>
+    </table>
+  </div>
+</section>
+
+<section class="more" aria-labelledby="more-h">
+  <div class="wrap">
+    <h2 id="more-h" class="sr-only">Source</h2>
+    <div class="source">
+      <p>Read it before you install it: the skill lives at <code>plugins/caffeinity-routing/skills/caffeinity-routing</code> in <a href="https://github.com/arm-pz/caffeinity-skills" target="_blank" rel="noopener">arm-pz/caffeinity-skills</a>.</p>
+      <a class="btn" href="https://github.com/arm-pz/caffeinity-skills" target="_blank" rel="noopener">Open the repo</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>Caffeinity Routing is an open agent skill on <a href="/">Caffeinity Skills</a>.</span>
+    <a href="https://github.com/arm-pz/caffeinity-skills" target="_blank" rel="noopener">arm-pz/caffeinity-skills</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var cmd=document.getElementById('cmd'),btn=document.getElementById('copy'),status=document.getElementById('copy-status'),timer;
+  function ok(){btn.classList.add('is-done');status.textContent='Copied to clipboard.';clearTimeout(timer);timer=setTimeout(function(){btn.classList.remove('is-done');},1600);}
+  function fail(){var r=document.createRange();r.selectNodeContents(cmd);var s=window.getSelection();s.removeAllRanges();s.addRange(r);status.textContent='Clipboard unavailable. The command is selected; press Ctrl+C.';}
+  btn.addEventListener('click',function(){var t=cmd.textContent;if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,fail);}else{fail();}});
+})();
+</script>
+</body>
+</html>

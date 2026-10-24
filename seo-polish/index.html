@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>seo-polish — Full SEO Audit, Then the Optimized Rewrite</title>
-<meta name="description" content="An open agent skill that diagnoses technical and on-page SEO with Seo-Audit, then generates optimized titles, meta descriptions, headings and content fixes with Wordsmith. Evidence first, prose second.">
+<meta name="description" content="Measures technical SEO with seo-crawl, diagnoses it, then writes optimized titles, meta descriptions, headings and content fixes with Wordsmith.">
 <link rel="canonical" href="https://skills.caffeinity.com/seo-polish/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Caffeinity Skills">
 <meta property="og:title" content="seo-polish — Full SEO Audit, Then the Optimized Rewrite">
-<meta property="og:description" content="An open agent skill that chains Seo-Audit (crawlability, indexation, Core Web Vitals, titles, metas, headings, content gaps, internal linking) into Wordsmith (optimized alternatives for every High and Medium finding, priority-ranked). One pass gets you the diagnosis and the paste-ready fix — and says which checks were inconclusive because a source was unreadable.">
+<meta property="og:description" content="An open agent skill that chains seo-crawl (status codes, redirects, indexability, canonicals, sitemap coverage, broken links), an optional seo-audit diagnosis, and Wordsmith (optimized alternatives for every High and Medium finding, priority-ranked). One pass gets you the diagnosis and the paste-ready fix — and says which checks were inconclusive because a source was unreadable.">
 <meta property="og:url" content="https://skills.caffeinity.com/seo-polish/">
 <meta name="twitter:card" content="summary">
 <link rel="stylesheet" href="/fonts/fonts.css">
@@ -197,7 +197,7 @@
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "Any",
   "url": "https://skills.caffeinity.com/seo-polish/",
-  "description": "An open agent skill that diagnoses technical and on-page SEO with Seo-Audit, then generates optimized titles, meta descriptions, headings and content fixes with Wordsmith. Evidence first, prose second.",
+  "description": "An open agent skill that measures technical SEO with seo-crawl, diagnoses on-page SEO, then generates optimized titles, meta descriptions, headings and content fixes with Wordsmith. Evidence first, prose second.",
   "codeRepository": "https://github.com/arm-pz/seo-polish",
   "license": "https://spdx.org/licenses/MIT.html",
   "offers": {
@@ -233,7 +233,7 @@
     <div class="hero-grid">
       <div class="hero-copy">
         <h1 class="hero-h">The audit says what's broken. <em>Then write the fix.</em></h1>
-        <p class="hero-sub">One install chains two skills: <b>Seo-Audit</b> works the priority order — crawlability and indexation, technical foundations, on-page optimization, content quality, authority — and <b>Wordsmith</b> turns every High and Medium finding into optimized alternatives: titles, meta descriptions, headings, internal-link anchors. Report plus rewrite in one pass, and every finding carries its evidence and impact rating.</p>
+        <p class="hero-sub">One install chains the SEO skills: <b>seo-crawl</b> measures crawlability, indexation, redirects and broken links as findings JSON, <b>seo-audit</b> adds a diagnosis when it is installed, and <b>Wordsmith</b> turns every High and Medium finding into optimized alternatives: titles, meta descriptions, headings, internal-link anchors. Report plus rewrite in one pass, and every finding carries its evidence and impact rating.</p>
         <div class="hero-actions">
           <a class="big-btn" href="#install">Install seo-polish</a>
           <a class="big-btn alt" href="https://github.com/arm-pz/seo-polish" target="_blank" rel="noopener">Read the source</a>
@@ -281,7 +281,7 @@
       <button class="tab" role="tab" aria-selected="false" data-cmd="qoder">Qoder</button>
       <button class="tab" role="tab" aria-selected="false" data-cmd="other">Any other agent</button>
     </div>
-    <p class="cmd-note" id="cmd-note">The install line from the repo README. This skill is a chain: <b>seo-audit</b> and <b>wordsmith</b> must be installed too — if either is missing it says so and stops.</p>
+    <p class="cmd-note" id="cmd-note">The install line from the repo README. This skill is a chain: <b>seo-crawl</b> and <b>wordsmith</b> must be installed too — if either is missing it says so and stops. The third-party <b>seo-audit</b> is optional.</p>
     <div class="cmd-card">
       <code class="cmd-line" id="cmd-line">npx skills add arm-pz/seo-polish --skill seo-polish</code>
       <button class="copy-btn" id="copy-btn" type="button">Copy</button>
@@ -294,7 +294,7 @@
           <li><span class="mono">npx skills add arm-pz/seo-polish --skill seo-polish</span> is the line in the README. It installs the skill folder into your agent's skills directory.</li>
           <li><span class="mono">git clone https://github.com/arm-pz/seo-polish</span> produces a <span class="mono">seo-polish/</span> folder with <span class="mono">SKILL.md</span> at its root, so copy that folder whole into <span class="mono">.claude/skills/</span>, <span class="mono">.cursor/skills/</span>, <span class="mono">.agents/skills/</span>, <span class="mono">.qoder/skills/</span>, or wherever your agent loads skills from: <span class="mono">cp -r seo-polish .claude/skills/</span>.</li>
           <li>Or paste to your agent: "Install the seo-polish skill from github.com/arm-pz/seo-polish into this project's skills directory, then confirm it loads."</li>
-          <li>Requires the <span class="mono">seo-audit</span> and <span class="mono">wordsmith</span> skills; the chain names and stops on a missing dependency.</li>
+          <li>Requires the <span class="mono">seo-crawl</span> and <span class="mono">wordsmith</span> skills (seo-audit optional); the chain names and stops on a missing dependency.</li>
         </ul>
         <p>Browse the source: <a href="https://github.com/arm-pz/seo-polish" target="_blank" rel="noopener">github.com/arm-pz/seo-polish</a></p>
       </div>
@@ -382,7 +382,7 @@
 
   /* install tabs */
   var cmds={
-    one:{say:false,note:'The install line from the repo README. <b>SKILL.md</b> sits at the repo root, so the archive arrives whole. Requires the seo-audit and wordsmith skills installed alongside.',text:'npx skills add arm-pz/seo-polish --skill seo-polish'},
+    one:{say:false,note:'The install line from the repo README. <b>SKILL.md</b> sits at the repo root, so the archive arrives whole. Requires seo-crawl and wordsmith installed alongside; seo-audit is optional.',text:'npx skills add arm-pz/seo-polish --skill seo-polish'},
     agent:{say:true,note:'Paste this to your agent. It reads the repo, installs itself, and reports where it put things.',text:'Install the seo-polish skill from github.com/arm-pz/seo-polish into this project\u2019s skills directory, then confirm it loads.'},
     claude:{say:false,note:'Manual install into <b>.claude/skills/</b>. The clone folder is the skill folder.',text:'git clone https://github.com/arm-pz/seo-polish && mkdir -p .claude/skills && cp -r seo-polish .claude/skills/'},
     cursor:{say:false,note:'Manual install into <b>.cursor/skills/</b>.',text:'git clone https://github.com/arm-pz/seo-polish && mkdir -p .cursor/skills && cp -r seo-polish .cursor/skills/'},

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Publish Pipeline — agent skill</title>
+<meta name="description" content="Sets up, audits and repairs a manifest-driven CI/CD pipeline that publishes a collection of agent skills to a Cloudflare Pages site, with a generated page…">
+<link rel="canonical" href="https://skills.caffeinity.com/publish-pipeline/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Caffeinity Skills">
+<meta property="og:title" content="Publish Pipeline — agent skill">
+<meta property="og:description" content="Sets up, audits and repairs a manifest-driven CI/CD pipeline that publishes a collection of agent skills to a Cloudflare Pages site, with a generated page per skill. Use when someone asks for CI/CD or automation for a skills site, wants a new skill repo to appear on the site with its own page, asks why a skill is missing or its page is stale, or needs a red publish run diagnosed and a bad deploy rolled back. It installs one GitHub Actions workflow with check, publish and discover jobs, a committed manifest as the publication decision, generated hub rows, discovery indexes, sitemap and pages, and verification gates on both sides of the deploy. Not for releasing one skill through the marketplace, tarball or plugin channels (use publish-release-gate), checking unpushed work or listing drift (use upstream-check), deciding whether a build is safe to launch (use release-gate), or writing and tuning a skill (use draft-skill or tune-skill).">
+<meta property="og:url" content="https://skills.caffeinity.com/publish-pipeline/">
+<meta name="twitter:card" content="summary">
+<meta name="color-scheme" content="dark light">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="preload" href="/fonts/files/cY9AfjOCX1hbuyalUrK4397yjA.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/files/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+  /* Two grounds: the dark shell you run, the paper your agent reads. */
+  :root{
+    --bg:#121016;
+    --surface:#1d1a23;
+    --ink:#ede8de;
+    --muted:#a59eae;
+    --accent:#ff6a3d;
+    --accent-ink:#1a0c06;
+    --paper:#ebe5d7;
+    --paper-surface:#e0d9c8;
+    --paper-ink:#1c1820;
+    --paper-muted:#57515e;
+    --serif:'Newsreader',Georgia,serif;
+    --sans:'Instrument Sans',system-ui,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --ease:cubic-bezier(.23,1,.32,1);
+    --gutter:clamp(16px,5vw,56px);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.22em}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
+  ::selection{background:var(--accent);color:var(--accent-ink)}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 var(--gutter)}
+  code,.mono{font-family:var(--mono);font-size:.88em}
+  .sr-only{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+  /* nav */
+  .nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;height:72px}
+  .brand{font-family:var(--serif);font-size:20px;text-decoration:none}
+  .brand b{color:var(--accent);font-weight:400;margin-right:6px}
+  .nav-links{display:flex;gap:28px;font-size:15px;color:var(--muted)}
+  .nav-links a{text-decoration:none;transition:color 160ms var(--ease)}
+
+  /* hero: the title is the poster, the command is the action */
+  .hero{padding:clamp(56px,10vw,128px) 0 clamp(56px,8vw,104px)}
+  .hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(52px,9vw,124px);line-height:.98;letter-spacing:-.025em;max-width:11ch}
+  .hero .lead{font-size:clamp(19px,1.8vw,23px);line-height:1.45;max-width:36ch;margin-top:28px;color:var(--ink)}
+  .console{margin-top:44px;max-width:760px;background:var(--surface);border-radius:10px;padding:10px 10px 10px 22px;display:flex;align-items:center;gap:16px}
+  .console code{flex:1;min-width:0;font-size:15.5px;line-height:1.5;overflow-wrap:break-word;color:var(--ink)}
+  .console code::before{content:"$ ";color:var(--muted)}
+  .copy{flex:none;position:relative;display:grid;font:600 15px/1 var(--sans);color:var(--accent-ink);background:var(--accent);border:0;border-radius:7px;padding:15px 20px;cursor:pointer;transition:transform 160ms var(--ease)}
+  .copy:active{transform:scale(.97)}
+  .copy span{grid-area:1/1;text-align:center;transition:opacity 200ms var(--ease),transform 200ms var(--ease),filter 200ms var(--ease)}
+  .copy .done{opacity:0;transform:scale(.8);filter:blur(3px)}
+  .copy.is-done .idle{opacity:0;transform:scale(.8);filter:blur(3px)}
+  .copy.is-done .done{opacity:1;transform:none;filter:none}
+  .facts{margin-top:20px;font-size:15px;color:var(--muted);max-width:760px}
+  .facts a{color:var(--ink)}
+
+  /* paper: what the skill is for */
+  .paper{background:var(--paper);color:var(--paper-ink);padding:clamp(64px,9vw,120px) 0}
+  .paper ::selection{background:var(--paper-ink);color:var(--paper)}
+  h2{font-family:var(--serif);font-weight:400;font-size:clamp(34px,4.4vw,52px);line-height:1.05;letter-spacing:-.015em;max-width:16ch}
+  .paper .body{font-family:var(--serif);font-size:clamp(21px,2vw,25px);line-height:1.5;max-width:34em;margin-top:32px}
+  .uses{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(32px,5vw,72px);margin-top:clamp(48px,6vw,80px)}
+  .uses h3{font-size:17px;font-weight:600;margin-bottom:14px}
+  .uses ul{list-style:none}
+  .uses li{padding:12px 0;border-top:1px solid rgba(28,24,32,.14)}
+  .say li{font-family:var(--serif);font-size:21px;line-height:1.35}
+  .say li::before{content:"\201C"}
+  .say li::after{content:"\201D"}
+  .not li{color:var(--paper-muted)}
+
+  /* shell: what ships */
+  .ships{padding:clamp(64px,9vw,120px) 0}
+  .ships .intro{color:var(--muted);max-width:44ch;margin-top:20px}
+  .files{width:100%;max-width:880px;border-collapse:collapse;margin-top:40px;font-size:15px}
+  .files td{padding:13px 0;border-top:1px solid rgba(237,232,222,.09)}
+  .files td:first-child{font-family:var(--mono);font-size:14px;overflow-wrap:anywhere;padding-right:20px}
+  .files td.n{text-align:right;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .files tfoot td{font-family:var(--sans);font-size:15px;font-weight:600;color:var(--ink);border-top-color:rgba(237,232,222,.3)}
+
+  /* related + source */
+  .more{background:var(--surface);padding:clamp(64px,8vw,104px) 0}
+  .related{list-style:none;margin-top:36px}
+  .related a{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:8px 40px;align-items:baseline;text-decoration:none;padding:24px 0;border-top:1px solid rgba(237,232,222,.12)}
+  .related strong{font-family:var(--serif);font-weight:400;font-size:clamp(24px,2.4vw,30px);line-height:1.15;transition:color 160ms var(--ease)}
+  .related span{color:var(--muted);font-size:16px;line-height:1.55;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .source{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:20px 40px;margin-top:clamp(56px,7vw,88px)}
+  .source p{max-width:52ch;color:var(--muted)}
+  .source p a{color:var(--ink)}
+  .btn{display:inline-block;font-weight:600;font-size:15px;text-decoration:none;color:var(--bg);background:var(--ink);border-radius:7px;padding:14px 22px;transition:transform 160ms var(--ease)}
+  .btn:active{transform:scale(.97)}
+
+  footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-top:28px;padding-bottom:36px;font-size:14px;color:var(--muted)}
+  footer a{text-decoration:none}
+
+  @media (hover:hover) and (pointer:fine){
+    .nav-links a:hover,footer a:hover{color:var(--ink)}
+    .related a:hover strong{color:var(--accent)}
+  }
+  @media (max-width:640px){
+    .related a{grid-template-columns:1fr}
+    .nav-links a:first-child{display:none}
+    .console{flex-direction:column;align-items:stretch;padding:18px}
+    .copy{padding:15px}
+    .files td.bytes{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{transition:none!important;animation:none!important}
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "publish-pipeline",
+  "alternateName": "Publish Pipeline",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any",
+  "url": "https://skills.caffeinity.com/publish-pipeline/",
+  "description": "Sets up, audits and repairs a manifest-driven CI/CD pipeline that publishes a collection of agent skills to a Cloudflare Pages site, with a generated page per skill. Use when someone asks for CI/CD or automation for a skills site, wants a new skill repo to appear on the site with its own page, asks why a skill is missing or its page is stale, or needs a red publish run diagnosed and a bad deploy rolled back. It installs one GitHub Actions workflow with check, publish and discover jobs, a committed manifest as the publication decision, generated hub rows, discovery indexes, sitemap and pages, and verification gates on both sides of the deploy. Not for releasing one skill through the marketplace, tarball or plugin channels (use publish-release-gate), checking unpushed work or listing drift (use upstream-check), deciding whether a build is safe to launch (use release-gate), or writing and tuning a skill (use draft-skill or tune-skill).",
+  "codeRepository": "https://github.com/arm-pz/publish-pipeline",
+  "license": "https://spdx.org/licenses/MIT.html",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Caffeinity",
+    "url": "https://caffeinity.com/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+</head>
+<body>
+
+<nav class="nav" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="/"><b>∧</b>caffeinity skills</a>
+    <div class="nav-links">
+      <a href="/">All skills</a>
+      <a href="https://github.com/arm-pz/publish-pipeline" target="_blank" rel="noopener">Source</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Publish Pipeline</h1>
+    <p class="lead">Turns a pile of skill repos into a published site: a committed manifest decides what is public, discovery opens a pull request, and a green merge deploys generated pages, both discovery indexes, a sitemap and a verified build.</p>
+    <div class="console">
+      <code id="cmd">npx skills add arm-pz/publish-pipeline</code>
+      <button class="copy" id="copy" type="button" aria-describedby="cmd"><span class="idle">Copy install command</span><span class="done" aria-hidden="true">Copied</span></button>
+      <span class="sr-only" id="copy-status" role="status" aria-live="polite"></span>
+    </div>
+    <p class="facts">9 files and 1,217 lines, free under MIT. Built from <a href="https://github.com/arm-pz/publish-pipeline" target="_blank" rel="noopener">arm-pz/publish-pipeline</a> at <code>5504ae3</code>.</p>
+  </div>
+</header>
+
+<section class="paper" aria-labelledby="for-h">
+  <div class="wrap">
+    <h2 id="for-h">What it is for</h2>
+    <p class="body">Sets up, audits and repairs a manifest-driven CI/CD pipeline that publishes a collection of agent skills to a Cloudflare Pages site, with a generated page per skill. It installs one GitHub Actions workflow with check, publish and discover jobs, a committed manifest as the publication decision, generated hub rows, discovery indexes, sitemap and pages, and verification gates on both sides of the deploy.</p>
+    <div class="uses">
+    <div class="uses-col when">
+      <h3>Reach for it when</h3>
+      <ul><li>Someone asks for CI/CD or automation for a skills site, wants a new skill repo to appear on the site with its own page, asks why a skill is missing or its page is stale, or needs a red publish run diagnosed and a bad deploy rolled back.</li></ul>
+    </div>
+    <div class="uses-col not">
+      <h3>Not for</h3>
+      <ul><li>Releasing one skill through the marketplace, tarball or plugin channels (use publish-release-gate)</li><li>Checking unpushed work or listing drift (use upstream-check)</li><li>Deciding whether a build is safe to launch (use release-gate)</li><li>Writing and tuning a skill (use draft-skill or tune-skill)</li></ul>
+    </div>
+    </div>
+  </div>
+</section>
+
+<section class="ships" aria-labelledby="ships-h">
+  <div class="wrap">
+    <h2 id="ships-h">Every file it installs</h2>
+    <p class="intro">Measured from the packed archive at commit <code>5504ae3</code>. A skill is plain text your agent reads, so this list is all of it.</p>
+    <table class="files">
+      <thead class="sr-only"><tr><th>File</th><th>Lines</th><th>Bytes</th></tr></thead>
+      <tbody>
+        <tr><td>SKILL.md</td><td class="n">213</td><td class="n bytes">11,610 B</td></tr>
+        <tr><td>references/design.md</td><td class="n">58</td><td class="n bytes">4,788 B</td></tr>
+        <tr><td>references/generated-page.md</td><td class="n">53</td><td class="n bytes">2,617 B</td></tr>
+        <tr><td>references/gotchas.md</td><td class="n">67</td><td class="n bytes">4,267 B</td></tr>
+        <tr><td>references/manifest.md</td><td class="n">195</td><td class="n bytes">8,735 B</td></tr>
+        <tr><td>references/shape-test.md</td><td class="n">116</td><td class="n bytes">5,248 B</td></tr>
+        <tr><td>references/verification.md</td><td class="n">77</td><td class="n bytes">4,111 B</td></tr>
+        <tr><td>references/workflow.md</td><td class="n">193</td><td class="n bytes">8,065 B</td></tr>
+        <tr><td>scripts/validate_manifest.py</td><td class="n">245</td><td class="n bytes">11,049 B</td></tr>
+      </tbody>
+      <tfoot><tr><td>9 files</td><td class="n">1,217</td><td class="n bytes">20 KB</td></tr></tfoot>
+    </table>
+  </div>
+</section>
+
+<section class="more" aria-labelledby="more-h">
+  <div class="wrap">
+    <h2 id="more-h">More in Publish &amp; Discover</h2>
+    <ul class="related">
+      <li><a href="/findable/"><strong>Findable</strong><span>Sets up discovery for a GitHub repo, skill, plugin or MCP server so it gets found by what it does, not only by its name. It audits where you rank today, works out the queries strangers type, then drafts the About text, topics, README opening, release notes, site page and directory plan — real numbers only, and nothing public changes without your go-ahead.</span></a></li>
+      <li><a href="/upstream-check/"><strong>Upstream Check</strong><span>Finds local commits that never reached GitHub, pushes only clean fast-forwards after a secret screen, then checks that the site index, the homepage, the marketplace and the READMEs agree with the repos that actually ship a SKILL.md.</span></a></li>
+      <li><a href="/findable-polish/"><strong>Findable Polish</strong><span>Chains Findable and Wordsmith: audits a README, skill page or landing copy against the queries a real stranger types, then writes two or three alternatives per finding that fix it without inventing a fact. Proven on its own repo: seven live searches, zero hits, six named gaps, fixes applied the same day.</span></a></li>
+    </ul>
+    <div class="source">
+      <p>Read it before you install it: the skill lives at <code>.</code> in <a href="https://github.com/arm-pz/publish-pipeline" target="_blank" rel="noopener">arm-pz/publish-pipeline</a>.</p>
+      <a class="btn" href="https://github.com/arm-pz/publish-pipeline" target="_blank" rel="noopener">Open the repo</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>Publish Pipeline is an open agent skill on <a href="/">Caffeinity Skills</a>.</span>
+    <a href="https://github.com/arm-pz/publish-pipeline" target="_blank" rel="noopener">arm-pz/publish-pipeline</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var cmd=document.getElementById('cmd'),btn=document.getElementById('copy'),status=document.getElementById('copy-status'),timer;
+  function ok(){btn.classList.add('is-done');status.textContent='Copied to clipboard.';clearTimeout(timer);timer=setTimeout(function(){btn.classList.remove('is-done');},1600);}
+  function fail(){var r=document.createRange();r.selectNodeContents(cmd);var s=window.getSelection();s.removeAllRanges();s.addRange(r);status.textContent='Clipboard unavailable. The command is selected; press Ctrl+C.';}
+  btn.addEventListener('click',function(){var t=cmd.textContent;if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,fail);}else{fail();}});
+})();
+</script>
+</body>
+</html>

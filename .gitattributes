@@ -1,6 +1,3 @@
 *.tar.gz binary
-
-dist/** -text
 .well-known/skills.json -text
-agent-skills/index.json -text
-.well-known/agent-skills/index.json -text
+site/legacy/*.tar.gz -text

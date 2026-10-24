@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pre-Ship Security Red Team — Run the Attacks Before Your Users Do</title>
-<meta name="description" content="An open agent skill that red-teams a web app you own before launch: three record-only subagents, isolated synthetic accounts, 14 authorization and abuse checks, evidence per row, then a rerun with a negative control.">
+<title>Pre-Ship Security Red Team — Attack It Before Users Do</title>
+<meta name="description" content="Red-teams a web app you own before launch: isolated synthetic accounts, 14 authorization and abuse checks, evidence per row and a negative-control rerun.">
 <link rel="canonical" href="https://skills.caffeinity.com/pre-ship-security-red-team/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Caffeinity Skills">
-<meta property="og:title" content="Pre-Ship Security Red Team — Run the Attacks Before Your Users Do">
+<meta property="og:title" content="Pre-Ship Security Red Team — Attack It Before Users Do">
 <meta property="og:description" content="An open agent skill that executes 14 authorization and abuse checks against a web app you own, before launch. Three record-only subagents, each with its own isolated User A, User B and Admin accounts, capture a request and a response per row; one agent fixes centrally and reruns with a negative control. Local or isolated environments only, never production.">
 <meta property="og:url" content="https://skills.caffeinity.com/pre-ship-security-red-team/">
 <meta name="twitter:card" content="summary">
@@ -351,7 +351,7 @@
       </div>
       <div class="cat">
         <h3>One isolated account set each <span>no collisions</span></h3>
-        <p class="cat-desc">User A, User B and Admin per group, prefixed <span class="mono" style="font-size:12.5px">g1a@test.invalid</span> so two subagents never write the same rows and cleanup stays mechanical. The chair creates and deletes them; subagents never promote or remove an account.</p>
+        <p class="cat-desc">User A, User B and Admin per group, prefixed <!--email_off--><span class="mono" style="font-size:12.5px">g1a@test.invalid</span><!--/email_off--> so two subagents never write the same rows and cleanup stays mechanical. The chair creates and deletes them; subagents never promote or remove an account.</p>
         <ul><li>one browser context per group</li><li>synthetic rows only, never a prod copy</li><li>each group fills only its own file</li><li>sequential fallback if subagents are unavailable</li></ul>
       </div>
       <div class="cat wide">

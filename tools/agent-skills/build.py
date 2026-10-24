@@ -1,136 +1,110 @@
-"""Build the agent-skills discovery artifacts from the GitHub repos.
+"""Build the discovery artifacts from site/skills.json.
 
-Downloads each repo's default-branch tarball, extracts the skill directory, and
-writes a deterministic .tar.gz per skill plus the v0.2.0 discovery index.
+Repo-backed entries are fetched from GitHub at their current HEAD and packed
+deterministically. Legacy entries are copied from site/legacy and checked
+against their pinned digest. Nothing is written unless every entry succeeds.
 """
 
-import gzip
-import hashlib
-import os
-import io
+import argparse
 import json
+import os
 import subprocess
-import tarfile
+import sys
+from pathlib import Path
 
-GH = os.environ.get("GH", "gh")  # Windows: point GH at the real gh.exe, not the npm shim
-REPOS = {
-    "wordsmith": "skills/wordsmith",
-    "recruiter-lens": "skills/recruiter-lens",
-    "applicant-kit": "skills/applicant-kit",
-    "topic-primer": "skills/topic-primer",
-    "do-better": "skills/do-better",
-    "findable": "skills/findable",
-    "keyword-guard": ".",
-    "web-preflight": ".",
-    "application-pilot": "skills/application-pilot",
-    "crash-test": "skills/crash-test",
-    "pre-ship-performance-audit": ".",
-    "pre-ship-security-red-team": ".",
-    "findable-polish": ".",
-    "upstream-polish": ".",
-    "keyword-resolver": ".",
-    "seo-polish": ".",
-    "tune-and-polish": ".",
-    "skill-launch": ".",
-    "upstream-check": ".",
-}
-# Repo scaffolding that is not part of the skill itself; only applies to repos
-# whose skill sits at the repository root.
-REPO_META = {"README.md", "LICENSE", "LICENSE.md", "CHANGELOG.md", "CONTRIBUTING.md"}
-REPO_META_DIRS = {".claude-plugin", ".github", ".git", "tests"}
+import skilllib
+
+GH = os.environ.get("GH", "gh")
 OUT = os.environ.get("OUT", "out")
-SITE = "https://skills.caffeinity.com"
 
 
 def gh(*args):
-    out = subprocess.run([GH, "api", *args], capture_output=True, check=True)
-    return out.stdout
+    result = subprocess.run([GH, "api", *args], capture_output=True)
+    if result.returncode != 0:
+        raise SystemExit(f"gh api {' '.join(args)} failed: "
+                         f"{result.stderr.decode('utf-8', 'replace').strip()}")
+    return result.stdout
 
 
-def skill_files(repo, base):
-    tarball = gh(f"repos/arm-pz/{repo}/tarball")
-    files = {}
-    with tarfile.open(fileobj=io.BytesIO(tarball), mode="r:gz") as tf:
-        root = next(iter({m.name.split("/")[0] for m in tf.getmembers()}))
-        for m in tf.getmembers():
-            if not m.isfile():
-                continue
-            rel = m.name[len(root) + 1:]
-            if base == ".":
-                top = rel.split("/")[0]
-                if top in REPO_META or top in REPO_META_DIRS:
-                    continue
-            elif not rel.startswith(base + "/"):
-                continue
-            else:
-                rel = rel[len(base) + 1:]
-            files[rel] = tf.extractfile(m).read()
-    return files
+def repo_about(repo):
+    data = json.loads(gh(f"repos/{repo}").decode("utf-8"))
+    return data.get("description")
 
 
-def pack(files):
-    raw = io.BytesIO()
-    with tarfile.open(fileobj=raw, mode="w") as tf:
-        for name in sorted(files):
-            info = tarfile.TarInfo(name)
-            info.size = len(files[name])
-            info.mode = 0o644
-            info.uid = info.gid = 0
-            info.uname = info.gname = ""
-            info.mtime = 0
-            tf.addfile(info, io.BytesIO(files[name]))
-    gz = io.BytesIO()
-    with gzip.GzipFile(fileobj=gz, mode="wb", mtime=0, compresslevel=9) as g:
-        g.write(raw.getvalue())
-    return gz.getvalue()
+def check_about(repo, description):
+    if not isinstance(description, str) or not description.strip():
+        raise SystemExit(f"{repo}: the repository About is empty; set it before building")
+    description = " ".join(description.split())
+    if len(description) > 1024:
+        raise SystemExit(f"{repo}: repo About is {len(description)} characters (max 1024)")
+    return description
 
 
-def main():
-    os.makedirs(OUT, exist_ok=True)
+def build(manifest, out_dir, tarball_fetch, about_fetch, legacy_dir):
+    out_dir = Path(out_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
     entries = []
-    for name, base in REPOS.items():
-        files = skill_files(name, base)
-        if "SKILL.md" not in files:
-            raise SystemExit(f"{name}: no SKILL.md found under {base!r}")
-        blob = pack(files)
-        digest = "sha256:" + hashlib.sha256(blob).hexdigest()
-        with open(os.path.join(OUT, f"{name}.tar.gz"), "wb") as fh:
+    for skill in skilllib.archived(manifest):
+        name = skill["name"]
+        if skill["repo"] is None:
+            archive = Path(legacy_dir) / skill["legacy"]["archive"]
+            if not archive.is_file():
+                raise SystemExit(f"{name}: legacy archive {archive} is missing")
+            blob = archive.read_bytes()
+            digest = skilllib.sha256_hex(blob)
+            if digest != skill["legacy"]["sha256"]:
+                raise SystemExit(f"{name}: legacy digest mismatch: "
+                                 f"{digest} != {skill['legacy']['sha256']}")
+            description = skill["legacy"]["description"]
+        else:
+            full = skilllib.expand_tarball(tarball_fetch(skill["repo"]))
+            files = skilllib.select_skill_files(full, skill["path"])
+            if "SKILL.md" not in files:
+                raise SystemExit(f"{name}: no SKILL.md under {skill['path']!r}")
+            try:
+                fm = skilllib.parse_frontmatter(files["SKILL.md"].decode("utf-8", "replace"))
+            except skilllib.ManifestError as exc:
+                raise SystemExit(f"{name}: {exc}") from exc
+            if not (fm.get("description") or "").strip():
+                raise SystemExit(f"{name}: SKILL.md description is empty")
+            blob = skilllib.pack(files)
+            digest = skilllib.sha256_hex(blob)
+            description = check_about(skill["repo"], about_fetch(skill["repo"]))
+        with open(out_dir / f"{name}.tar.gz", "wb") as fh:
             fh.write(blob)
-        description = json.loads(
-            gh(f"repos/arm-pz/{name}").decode("utf-8")
-        )["description"]
-        entries.append(
-            {
-                "name": name,
-                "description": description,
-                "type": "archive",
-                "url": f"{SITE}/agent-skills/{name}.tar.gz",
-                "digest": digest,
-            }
-        )
-        print(f"{name:<15} files={len(files):<3} tar={len(blob):>6}B  {digest[7:19]}…")
-        for f in sorted(files):
-            print(f"                  {f} ({len(files[f])}B)")
+        entries.append({
+            "name": name,
+            "description": description,
+            "type": "archive",
+            "url": f"{skilllib.SITE}/agent-skills/{name}.tar.gz",
+            "digest": f"sha256:{digest}",
+        })
+        print(f"{name:<32} {len(blob):>7} B  {digest[:12]}...")
 
-    # Skills whose archive exists but whose repo does not (or is not mapped
-    # here) keep their previous index row instead of being silently dropped.
-    prior = os.path.join(OUT, "index.json")
-    if os.path.exists(prior):
-        built = {e["name"] for e in entries}
-        for e in json.load(open(prior, encoding="utf-8"))["skills"]:
-            if e["name"] not in built and os.path.exists(
-                os.path.join(OUT, f"{e['name']}.tar.gz")
-            ):
-                entries.append(e)
-
-    index = {"$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
-             "skills": sorted(entries, key=lambda e: e["name"])}
-    with open(os.path.join(OUT, "index.json"), "w", encoding="utf-8", newline="\n") as fh:
+    if len(entries) != len(skilllib.archived(manifest)):
+        raise SystemExit("shrink guard: built entries do not match the manifest")
+    entries.sort(key=lambda entry: entry["name"])
+    index = {"$schema": skilllib.INDEX_SCHEMA, "skills": entries}
+    with open(out_dir / "index.json", "w", encoding="utf-8", newline="\n") as fh:
         json.dump(index, fh, indent=2, ensure_ascii=False)
         fh.write("\n")
-    print(f"\nindex.json: {len(index['skills'])} skills, "
-          f"{len(json.dumps(index))} bytes")
+    print(f"index.json: {len(entries)} skills")
+    return entries
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--root", default=".")
+    args = parser.parse_args(argv)
+    root = Path(args.root)
+    manifest = skilllib.load_manifest(root)
+    skilllib.validate_manifest(manifest)
+    build(manifest, root / OUT,
+          tarball_fetch=lambda repo: gh(f"repos/{repo}/tarball"),
+          about_fetch=repo_about,
+          legacy_dir=root / "site" / "legacy")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
