@@ -39,7 +39,7 @@ settings, so this one runs locally.
 | [skillsdirectory.com](https://www.skillsdirectory.com/) | submission form; reviewed before publishing | the marketplace repo | not submitted |
 | [claudepluginhub.com](https://www.claudepluginhub.com/) | submit a repo with `.claude-plugin/plugin.json` for indexing | `arm-pz/caffeinity-skills` | not submitted |
 | [skills.sh](https://www.skills.sh/) | no form: a skill appears once people install it with `npx skills add`, ranked by installs | nothing to submit; link to install commands from the README and site | 2 skills listed on 2026-10-23 (wordsmith, pre-ship-security-red-team) |
-| [travisvn/awesome-claude-skills](https://github.com/travisvn/awesome-claude-skills) | pull request adding one line to the right section; read its CONTRIBUTING first | the "Awesome-list line" below | not submitted |
+| [travisvn/awesome-claude-skills](https://github.com/travisvn/awesome-claude-skills) | pull request adding one line; its CONTRIBUTING closes PRs for skills under 10 GitHub stars and PRs written or submitted with AI help | the "Awesome-list line" below, submitted by you, once caffeinity-skills has 10+ stars | waiting on stars |
 
 Do not install skills yourself from many machines to climb skills.sh; it counts installs, and
 padding them is the kind of signal directories delist for.
@@ -62,4 +62,4 @@ padding them is the kind of signal directories delist for.
 ## After submitting
 
 Change the status column above, and re-check in two weeks: search the directory for the skill,
-note whether it is listed and how it is described. `findable` (W2) does this re-check per repo.
+note whether it is listed and how it is described. `findable` (Brew 2 · Bloom) does this re-check per repo.

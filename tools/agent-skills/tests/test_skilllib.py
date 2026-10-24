@@ -167,7 +167,7 @@ class ManifestTest(unittest.TestCase):
 
     def test_workflow_steps_must_have_pages(self):
         data = self.manifest()
-        data["workflows"] = [{"id": "W1", "title": "Demo", "steps": [{"skills": ["demo"]}]}]
+        data["workflows"] = [{"id": "pour-over", "number": 1, "name": "Pour-over", "title": "Demo", "steps": [{"skills": ["demo"]}]}]
         skilllib.validate_manifest(data)
         data["workflows"][0]["steps"].append({"skills": ["ghost"]})
         with self.assertRaises(skilllib.ManifestError):

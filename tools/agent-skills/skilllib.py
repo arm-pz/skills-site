@@ -162,11 +162,17 @@ def validate_manifest(data):
     flows = data.get("workflows", [])
     _req(isinstance(flows, list), "workflows must be a list")
     seen = set()
+    numbers = set()
     for f in flows:
-        _req(isinstance(f, dict) and re.fullmatch(r"W\d+", str(f.get("id"))),
-             "workflow id must look like W1")
+        # A workflow is a brew: an id slug ("cold-brew"), its number and name ("Brew 4 · Cold brew").
+        _req(isinstance(f, dict) and re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", str(f.get("id"))),
+             "workflow id must be a lowercase slug such as cold-brew")
         _req(f["id"] not in seen, f"duplicate workflow {f['id']}")
         seen.add(f["id"])
+        _req(isinstance(f.get("number"), int) and f["number"] > 0 and f["number"] not in numbers,
+             f"{f['id']}: number must be a unique positive integer")
+        numbers.add(f["number"])
+        _req(isinstance(f.get("name"), str) and f["name"].strip(), f"{f['id']}: name required")
         _req(isinstance(f.get("title"), str) and f["title"].strip(), f"{f['id']}: title required")
         steps = f.get("steps")
         _req(isinstance(steps, list) and steps, f"{f['id']}: steps must be a non-empty list")
@@ -394,12 +400,16 @@ def llms_txt(manifest):
         out.append("")
     flows = manifest.get("workflows", [])
     if flows:
-        out += ["## Workflows", ""]
+        out += ["## Brews (workflows)", ""]
         for f in flows:
             steps = " -> ".join(" or ".join(st["skills"]) for st in f["steps"])
-            out.append(f"- {f['id']} {f['title']}: {steps}")
+            out.append(f"- {brew_label(f)}: {f['title']}: {steps}")
         out.append("")
     return "\n".join(out)
+
+
+def brew_label(flow):
+    return f"Brew {flow['number']} · {flow['name']}"
 
 
 def sha256_hex(blob):

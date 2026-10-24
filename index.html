@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Caffeinity Skills — Agent skills mapped into workflows</title>
-<meta name="description" content="Open agent skills for Claude Code, Cursor, Codex and Qoder, mapped into eleven workflows: build a skill, get found, ship safely, rank, get hired, decide.">
+<meta name="description" content="Open agent skills for Claude Code, Cursor, Codex and Qoder, mapped into eleven workflows we call brews: build a skill, get found, ship safely, rank, get hired, decide.">
 <link rel="canonical" href="https://skills.caffeinity.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Caffeinity Skills">
 <meta property="og:title" content="Caffeinity Skills — Agent skills mapped into workflows">
-<meta property="og:description" content="Plain-markdown skills that teach your agent to edit, screen, teach, rank and ship, mapped into eleven workflows and tested on real targets. One-line install. No API keys.">
+<meta property="og:description" content="Plain-markdown skills that teach your agent to edit, screen, teach, rank and ship, mapped into eleven brews (workflows) and tested on real targets. One-line install. No API keys.">
 <meta property="og:url" content="https://skills.caffeinity.com/">
 <meta name="twitter:card" content="summary">
 <meta name="color-scheme" content="light dark">
@@ -230,7 +230,7 @@
   "@type": "ItemList",
   "name": "Caffeinity Skills",
   "url": "https://skills.caffeinity.com/",
-  "description": "Open agent skills for Claude Code, Cursor, Codex and Qoder, mapped into eleven workflows: build a skill, get found, ship safely, rank, get hired, decide.",
+  "description": "Open agent skills for Claude Code, Cursor, Codex and Qoder, mapped into eleven workflows we call brews: build a skill, get found, ship safely, rank, get hired, decide.",
   "numberOfItems": 52,
   "itemListElement": [
     {
@@ -591,7 +591,7 @@
 <nav class="nav" aria-label="Site">
   <div class="wrap">
     <div class="nav-links">
-      <a href="#workflows">Workflows</a>
+      <a href="#workflows">Brews</a>
       <a href="#skills">Skills</a>
       <a href="#install">Install</a>
       <a href="#proof">Proof</a>
@@ -612,7 +612,7 @@
       <button class="cmd" type="button" data-copy="npx skills add arm-pz/caffeinity-skills --skill caffeinity-routing" aria-label="Copy the install command for caffeinity-routing"><span>$ npx skills add arm-pz/caffeinity-skills --skill caffeinity-routing</span><span class="copy" aria-hidden="true">Copy</span></button>
       <a class="btn2" href="#skills">Browse the skills</a>
     </div>
-    <!-- gen:stats:start --><p class="stats">45 skills and 7 mods · 11 workflows · 9 categories · 0 API keys</p><!-- gen:stats:end -->
+    <!-- gen:stats:start --><p class="stats">45 skills and 7 mods · 11 brews · 9 categories · 0 API keys</p><!-- gen:stats:end -->
   </div>
 </header>
 
@@ -731,13 +731,13 @@
 
 <section class="flows" id="workflows" aria-labelledby="workflows-h">
   <div class="wrap">
-    <p class="eyebrow">Eleven routes through the catalogue</p>
+    <p class="eyebrow">Eleven brews on the menu</p>
     <h2 class="title" id="workflows-h">Skills that hand off to each other.</h2>
-    <p class="section-lead">Each workflow is an ordered chain: every step receives what the step before it produced, and stops at its own gate. Install <a href="caffeinity-routing/">caffeinity-routing</a> and describe the outcome; it picks the route and tells you which steps you have not installed yet.</p>
+    <p class="section-lead">Each brew is a workflow, an ordered chain: every step receives what the step before it produced, and stops at its own gate. Install <a href="caffeinity-routing/">caffeinity-routing</a> and describe the outcome; it picks the route and tells you which steps you have not installed yet.</p>
     <div class="flow-grid">
     <!-- gen:workflows:start -->
-    <article class="flow" id="w1">
-      <p class="flow-id">W1</p>
+    <article class="flow" id="pour-over">
+      <p class="flow-id">Brew 1 · Pour-over</p>
       <h3>Build a skill and make it installable</h3>
       <ol class="flow-steps">
         <li><a href="draft-skill/">draft-skill</a> <span class="or">or</span> <a href="prompts-to-skill/">prompts-to-skill</a></li>
@@ -747,8 +747,8 @@
       </ol>
       <p class="flow-note">skill-launch runs the first steps as one chain.</p>
     </article>
-    <article class="flow" id="w2">
-      <p class="flow-id">W2</p>
+    <article class="flow" id="bloom">
+      <p class="flow-id">Brew 2 · Bloom</p>
       <h3>Get a repo, skill or plugin found</h3>
       <ol class="flow-steps">
         <li><a href="findable/">findable</a></li>
@@ -757,8 +757,8 @@
       </ol>
       <p class="flow-note">findable-polish and upstream-polish add the rewrite.</p>
     </article>
-    <article class="flow" id="w3">
-      <p class="flow-id">W3</p>
+    <article class="flow" id="espresso">
+      <p class="flow-id">Brew 3 · Espresso</p>
       <h3>Decide whether a site is safe to launch</h3>
       <ol class="flow-steps">
         <li><a href="web-preflight/">web-preflight</a></li>
@@ -768,8 +768,8 @@
       </ol>
       <p class="flow-note">ship-sentinel holds git push and deploys until the gate has run.</p>
     </article>
-    <article class="flow" id="w4">
-      <p class="flow-id">W4</p>
+    <article class="flow" id="cold-brew">
+      <p class="flow-id">Brew 4 · Cold brew</p>
       <h3>Grow organic search traffic</h3>
       <ol class="flow-steps">
         <li><a href="seo-crawl/">seo-crawl</a></li>
@@ -780,8 +780,8 @@
       </ol>
       <p class="flow-note">seo-polish and keyword-resolver package parts of this route.</p>
     </article>
-    <article class="flow" id="w5">
-      <p class="flow-id">W5</p>
+    <article class="flow" id="french-press">
+      <p class="flow-id">Brew 5 · French press</p>
       <h3>Land a job</h3>
       <ol class="flow-steps">
         <li><a href="recruiter-lens/">recruiter-lens</a></li>
@@ -791,8 +791,8 @@
       </ol>
       <p class="flow-note">It never submits an application for you.</p>
     </article>
-    <article class="flow" id="w6">
-      <p class="flow-id">W6</p>
+    <article class="flow" id="cupping">
+      <p class="flow-id">Brew 6 · Cupping</p>
       <h3>Make a decision</h3>
       <ol class="flow-steps">
         <li><a href="research-brief/">research-brief</a></li>
@@ -801,8 +801,8 @@
         <li><a href="strategy-memo/">strategy-memo</a></li>
       </ol>
     </article>
-    <article class="flow" id="w7">
-      <p class="flow-id">W7</p>
+    <article class="flow" id="slow-drip">
+      <p class="flow-id">Brew 7 · Slow drip</p>
       <h3>Learn a skill</h3>
       <ol class="flow-steps">
         <li><a href="topic-primer/">topic-primer</a></li>
@@ -811,8 +811,8 @@
       </ol>
       <p class="flow-note">course-builder applies when the learner is a class or cohort, not one person.</p>
     </article>
-    <article class="flow" id="w8">
-      <p class="flow-id">W8</p>
+    <article class="flow" id="nitro">
+      <p class="flow-id">Brew 8 · Nitro</p>
       <h3>Run cold outbound</h3>
       <ol class="flow-steps">
         <li><a href="cold-email-list-gate/">cold-email-list-gate</a></li>
@@ -820,8 +820,8 @@
         <li><a href="sales-copy/">sales-copy</a></li>
       </ol>
     </article>
-    <article class="flow" id="w9">
-      <p class="flow-id">W9</p>
+    <article class="flow" id="moka-pot">
+      <p class="flow-id">Brew 9 · Moka pot</p>
       <h3>Launch a one-person product</h3>
       <ol class="flow-steps">
         <li><a href="solo-income-blueprint/">solo-income-blueprint</a></li>
@@ -831,10 +831,10 @@
         <li><a href="release-gate-chair/">release-gate-chair</a></li>
         <li><a href="platform-content/">platform-content</a></li>
       </ol>
-      <p class="flow-note">Step five is the whole of W3; paper-trail gives the gate the policy pages to check.</p>
+      <p class="flow-note">Step five is the whole of Brew 3 · Espresso; paper-trail gives the gate the policy pages to check.</p>
     </article>
-    <article class="flow" id="w10">
-      <p class="flow-id">W10</p>
+    <article class="flow" id="descale">
+      <p class="flow-id">Brew 10 · Descale</p>
       <h3>Maintain the skill family</h3>
       <ol class="flow-steps">
         <li><a href="tune-skill/">tune-skill</a></li>
@@ -843,13 +843,13 @@
       </ol>
       <p class="flow-note">The nightly health job opens the issue this starts from; a weekly scheduled session runs it and opens PRs.</p>
     </article>
-    <article class="flow" id="w11">
-      <p class="flow-id">W11</p>
+    <article class="flow" id="estate-roast">
+      <p class="flow-id">Brew 11 · Estate roast</p>
       <h3>Stand up or audit a skill estate</h3>
       <ol class="flow-steps">
         <li><a href="skill-estate/">skill-estate</a></li>
       </ol>
-      <p class="flow-note">One run over the whole collection in eight gated phases; W10 keeps it healthy afterwards.</p>
+      <p class="flow-note">One run over the whole collection in eight gated phases; Brew 10 · Descale keeps it healthy afterwards.</p>
     </article>
     <!-- gen:workflows:end -->
     </div>
@@ -885,13 +885,13 @@
     <section class="sk-group" id="start-here" aria-labelledby="start-here-h">
       <div class="sk-head">
         <h2 id="start-here-h">Start Here</h2>
-        <p>1 skill · routing · eleven workflows</p>
+        <p>1 skill · routing · eleven brews</p>
       </div>
       <div class="sk-grid">
-        <article class="skill" id="caffeinity-routing" data-search="caffeinity-routing caffeinity routing routing start here. tell it the outcome you want and it picks one of eleven workflows, lists the skills in order with what each hands the next, and names the ones you have not installed instead of improvising their work.">
+        <article class="skill" id="caffeinity-routing" data-search="caffeinity-routing caffeinity routing routing start here. tell it the outcome you want and it picks one of eleven brews (workflows), lists the skills in order with what each hands the next, and names the ones you have not installed instead of improvising their work.">
           <p class="chips"><span class="chip">routing</span></p>
           <h3><a href="caffeinity-routing/">Caffeinity Routing</a></h3>
-          <p class="sk-blurb">Start here. Tell it the outcome you want and it picks one of eleven workflows, lists the skills in order with what each hands the next, and names the ones you have not installed instead of improvising their work.</p>
+          <p class="sk-blurb">Start here. Tell it the outcome you want and it picks one of eleven brews (workflows), lists the skills in order with what each hands the next, and names the ones you have not installed instead of improvising their work.</p>
           <p class="sk-stats">4 files · 357 lines · 8 KB</p>
           <code class="sk-install">npx skills add arm-pz/caffeinity-skills --skill caffeinity-routing</code>
           <p class="sk-links">
@@ -1543,7 +1543,7 @@
   <div class="wrap">
     <p class="eyebrow">Install</p>
     <h2 class="title" id="install-h">Everything, in the agent you use.</h2>
-    <p class="section-lead">One plugin carries every skill above plus eleven workflow agents, one per route. Or take a single skill into any agent that reads a SKILL.md.</p>
+    <p class="section-lead">One plugin carries every skill above plus eleven agents, one per brew. Or take a single skill into any agent that reads a SKILL.md.</p>
     <div class="install-grid">
       <article class="inst">
         <h3>Claude Code</h3>
@@ -1553,7 +1553,7 @@
       </article>
       <article class="inst">
         <h3>Codex</h3>
-        <p>The same plugin from the Codex marketplace in the repo; then install <b>caffeinity</b> from the Plugins directory. caffeinity-routing picks the workflow.</p>
+        <p>The same plugin from the Codex marketplace in the repo; then install <b>caffeinity</b> from the Plugins directory. caffeinity-routing picks the brew.</p>
         <button class="cmd" type="button" data-copy="codex plugin marketplace add arm-pz/caffeinity-skills" aria-label="Copy the Codex marketplace command"><span>codex plugin marketplace add arm-pz/caffeinity-skills</span><span class="copy" aria-hidden="true">Copy</span></button>
       </article>
       <article class="inst">
@@ -1726,9 +1726,9 @@ trigger cases     10 + 4 pairs</pre>
 <pre>W3, W4 cited by 5 skills
 router  (did not exist)</pre></div>
           <div class="ba after"><span>after</span>
-<pre>caffeinity-routing  10 workflows
+<pre>caffeinity-routing  11 brews
 check_skill.py      0 fail · 0 warn</pre></div>
-          <p class="verdict">new; now eleven workflows</p>
+          <p class="verdict">new; now eleven brews</p>
         </div>
       </div>
       <div class="shell-progress" aria-hidden="true"><b></b></div>

@@ -70,7 +70,7 @@ class SyncTest(unittest.TestCase):
             "groups": [{"id": g, "title": g, "descriptor": "x", "order": i}
                        for i, g in enumerate(skilllib.GROUP_IDS, 1)],
             "skills": [entry("keeper")],
-            "workflows": [{"id": "W1", "title": "Flow", "steps": [{"skills": ["keeper"]}]}],
+            "workflows": [{"id": "pour-over", "number": 1, "name": "Pour-over", "title": "Flow", "steps": [{"skills": ["keeper"]}]}],
         }
 
     def run_sync(self, gh, deny=()):
