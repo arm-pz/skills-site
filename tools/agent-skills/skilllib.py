@@ -376,7 +376,7 @@ def llms_txt(manifest):
            "(build a skill, get found, gate a release, grow search traffic, land a job, decide, "
            "learn, run outbound, launch a product). Plain markdown, no API keys.", "",
            "## Install", "",
-           "- Claude Code, every skill plus ten workflow agents: "
+           "- Claude Code, every skill plus eleven workflow agents: "
            + " then ".join(f"`{c}`" for c in INSTALL["claude"]),
            "- Codex: " + " ".join(f"`{c}`" for c in INSTALL["codex"])
            + ", then install caffeinity from the Plugins directory",

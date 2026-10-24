@@ -19,7 +19,7 @@ WALL_START = "<!-- gen:wall:start -->"
 WALL_END = "<!-- gen:wall:end -->"
 JSONLD_START = "<!-- gen:jsonld:start -->"
 JSONLD_END = "<!-- gen:jsonld:end -->"
-HUB_DESCRIPTION = ("Open agent skills for Claude Code, Cursor, Codex and Qoder, mapped into ten "
+HUB_DESCRIPTION = ("Open agent skills for Claude Code, Cursor, Codex and Qoder, mapped into eleven "
                    "workflows: build a skill, get found, ship safely, rank, get hired, decide.")
 
 
