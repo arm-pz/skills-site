@@ -32,9 +32,11 @@ push a public arm-pz repo with one SKILL.md and a repo About
   └─ within the hour: skills-site  publish.yml  (cron 17 * * * *)
        sync.py --write   add · refresh · rename · remove · hold
        unit tests → build → sitemap + _redirects → dist + version.json → check_dist → verify
-       deploy to Cloudflare Pages only if dist/version.json differs from the live one
-       verify live → prove live → commit the sync to main as github-actions[bot]
+       commit the sync to main as github-actions[bot]
        the same build writes /llms.txt (install commands + every skill) for agents and AI search
+       if dist/version.json differs from the live one: open one "Deploy pending" issue
+  └─ when you choose: on your machine, bash tools/agent-skills/deploy.sh (or ask Claude Code)
+       same gates, wrangler with your own login, then verify live → prove live; the issue closes
   └─ within the hour: arm-pz/caffeinity-skills  build-plugin.yml  (cron 27 * * * *)
        re-bundle plugins/caffeinity from every skill repo; bump its version only if content changed
   └─ within the hour: arm-pz/arm-pz  skills-readme.yml  (cron 47 * * * *)
@@ -57,12 +59,9 @@ Want it faster than an hour? Give a skill repo a fine-grained token that can dis
 
 ### Secrets
 
-| Repo | Secret | Needed for |
-| --- | --- | --- |
-| skills-site | `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID` | every deploy (the job fails with that message if missing) |
-| skills-site | `PROFILE_DISPATCH_TOKEN` (optional) | refreshing the profile README right after a deploy instead of within the hour |
-
-The profile workflow and the health job use each repo's own `GITHUB_TOKEN`; nothing else is needed.
+None. Every workflow uses its own repo's `GITHUB_TOKEN`. Deploying needs Cloudflare access, and
+that lives only on the machine you deploy from: `npx wrangler login` once, or a
+`CLOUDFLARE_API_TOKEN` exported in that shell. Nothing about Cloudflare is stored in GitHub.
 
 ## How the skills keep each other honest
 

@@ -4,9 +4,10 @@ A static site and publish pipeline for a catalog of agent skills. Each skill
 (a SKILL.md repo) or Claude Code mod gets its own landing page with a one-line
 install command; the hub lists them all with a live filter; and a
 `/.well-known/agent-skills/index.json` discovery index lets anyone run
-`npx skills add https://your-domain`. One GitHub Actions workflow tests, builds
-and verifies the site before each Cloudflare Pages deploy, and opens a pull
-request when a new skill repo appears. Plain HTML, CSS and Python, no
+`npx skills add https://your-domain`. One GitHub Actions workflow keeps the
+manifest in step with GitHub and tests, builds and verifies the site; the owner
+deploys it to Cloudflare Pages from their own machine, so CI holds no
+Cloudflare credentials. Plain HTML, CSS and Python, no
 framework. It is the source of [skills.caffeinity.com](https://skills.caffeinity.com/).
 
 Fork it for your own skills: list them in `site/skills.json`, then follow
@@ -27,19 +28,25 @@ skill that sets up and repairs this kind of pipeline.
 
 ## Deploy
 
-CI publishes on every push to `main` and every hour. `.github/workflows/publish.yml`
-first runs `sync.py`, which brings `site/skills.json` in line with GitHub (new
-skill repos, moved repo HEADs, renames, removals), then rebuilds the site, gates
-it with `check_dist.py` and `verify.mjs`, deploys `dist/` to Cloudflare Pages
-only when the build differs from what is live, proves the live result, and
-commits the sync back to `main`. `.github/workflows/health.yml` runs tune-skill's
-regression check over every published skill each night. `PROJECT.md` maps the
-whole ecosystem. A manual deploy needs the same build first:
+CI never deploys and holds no Cloudflare credentials. Every hour, and on every
+push to `main`, `.github/workflows/publish.yml` runs `sync.py`, which brings
+`site/skills.json` in line with GitHub (new skill repos, moved repo HEADs,
+renames, removals), rebuilds the site, gates it with `check_dist.py` and
+`verify.mjs`, and commits the sync back to `main`. When the built site differs
+from what is live it opens one "Deploy pending" issue, and closes it once live
+matches. `.github/workflows/health.yml` runs tune-skill's regression check over
+every published skill each night. `PROJECT.md` maps the whole ecosystem.
 
-    python tools/agent-skills/build.py
-    python tools/agent-skills/gen_sitemap.py --write
-    bash tools/agent-skills/make_dist.sh
-    npx wrangler pages deploy dist --project-name <your-project>
+Deploy from your own machine, or ask Claude Code to "deploy the skills site":
+
+    npx wrangler login                     # once; an OAuth login kept on this machine
+    git checkout main && git pull
+    bash tools/agent-skills/deploy.sh      # --dry-run to build and gate only
+
+`deploy.sh` refuses anything but a clean, current `main`, runs the same gates
+as CI, deploys only when the build differs from the live `version.json`, then
+proves the live site. No token is written to the repo; if you prefer a token to
+`wrangler login`, export `CLOUDFLARE_API_TOKEN` in that shell only.
 
 A deploy replaces the whole production artifact set, so `dist/` has to hold
 every page, tarball and index you want live — not only the new ones. If `dist/`
