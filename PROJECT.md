@@ -1,7 +1,7 @@
 # PROJECT.md: the caffeinity skills ecosystem
 
 What exists, where it lives, how a skill gets from a repo to skills.caffeinity.com and the profile
-README, and how the skills keep checking each other. Written 2026-10-23. When this file and a repo
+README, and how the skills keep checking each other. Written 2026-10-23, updated 2026-10-24. When this file and a repo
 disagree, the repo wins; fix this file.
 
 ## The pieces
@@ -10,7 +10,7 @@ disagree, the repo wins; fix this file.
 | --- | --- |
 | `arm-pz/<skill>` (one per skill) | The skills themselves: one `SKILL.md` per repo, at `SKILL.md`, `<repo>/SKILL.md` or `skills/<repo>/SKILL.md`. Installed with `npx skills add arm-pz/<repo>`. |
 | `arm-pz/skills-site` (this repo) | skills.caffeinity.com: the hub, one page per skill, both discovery indexes, archives, sitemap, and all the automation below. `site/skills.json` is the single list of what is published. |
-| `arm-pz/caffeinity-skills` | Plugin marketplace for Claude Code (`.claude-plugin/marketplace.json`) and Codex (`.agents/plugins/marketplace.json`). Holds the mods (`mods/*`), `plugins/caffeinity-routing` (the start-here router) and `plugins/caffeinity`: every skill plus nine workflow agents in one install, generated hourly by `scripts/build_plugin.py`. |
+| `arm-pz/caffeinity-skills` | Plugin marketplace for Claude Code (`.claude-plugin/marketplace.json`) and Codex (`.agents/plugins/marketplace.json`). Holds the mods (`mods/*`), `plugins/caffeinity-routing` (the start-here router), two skills that live only here (`plugins/paper-trail`, `plugins/course-builder`) and `plugins/caffeinity`: every skill plus ten workflow agents in one install, generated hourly by `scripts/build_plugin.py`. |
 | `arm-pz/arm-pz` | The GitHub profile README. Its skills block is generated from `site/skills.json`. |
 | `arm-pz/ship-sentinel` | A Claude Code mod (no SKILL.md) that holds `git push` and deploys until the check skills have run. Listed on the site as a mod. |
 | `arm-pz/outbound-ops`, `arm-pz/prompts-to-skill-agent` | Qoder agent bundles that repackage skills listed from their own repos. Denied in `site/deny.json`, so they never publish twice. |
@@ -21,7 +21,7 @@ disagree, the repo wins; fix this file.
 
 Everything else under arm-pz (apps, sites, forks) has no SKILL.md and is ignored by the pipeline.
 
-**The skill inventory is `site/skills.json`**: name, repo, group, page kind, blurb, and the nine
+**The skill inventory is `site/skills.json`**: name, repo, group, page kind, blurb, and the ten
 workflows. Do not copy it into other files; the hub, both indexes, the sitemap, the pages and the
 profile README are all generated from it.
 
@@ -76,8 +76,23 @@ nightly  skills-site  health.yml  (cron 41 3 * * *)
     improvement → site/health.json updated and committed
 ```
 
-The loop closes by hand or by agent: open the issue, run tune-skill on the skill it names, open a
-PR in that skill's repo. When the PR merges, the next night records the improvement. Because the
+The loop closes through workflow W10 (below): the `skill-maintainer` agent, or a person, runs
+tune-skill's `regress.py` on the family, fixes each regression in the skill's own repo, re-releases
+a skill whose behaviour changed, and runs upstream-check so nothing stays local. When the PR
+merges, the next night records the improvement and closes the issue.
+
+```
+health.yml (nightly)  ──regression──▶  "Skill health" issue
+        ▲                                     │
+        │                         weekly scheduled session runs W10
+        │                         (or skill-maintainer on demand)
+        │                                     ▼
+  next night records the      tune-skill fix ─▶ PR in the skill's repo ─▶ merge
+  improvement in health.json  ◀──────────── sync.py refreshes the page within the hour
+```
+
+A weekly scheduled Claude Code session (Mondays) runs W10 over every published skill and opens one
+PR per repo it fixes. It never merges, deploys or accepts a baseline on its own. Because the
 job pulls tune-skill's scripts at HEAD, an improvement to the checker reaches every skill the next
 night. Skills that live elsewhere but are handed off to are listed in `EXTERNAL` in
 `tools/agent-skills/health.py`.
@@ -87,7 +102,7 @@ To accept an intended change (a new WARN you decided to keep):
 
 ## The workflows across skills
 
-Nine routes, defined once in `site/skills.json` (`workflows`) and in
+Ten routes, defined once in `site/skills.json` (`workflows`) and in
 `caffeinity-skills/plugins/caffeinity-routing/skills/caffeinity-routing/references/workflows.md`
 (the router's copy, with each step's input and output). They must name the same skills in the same
 order; check with `route_check.py`.
@@ -97,12 +112,29 @@ order; check with `route_check.py`.
 | W1 | Build a skill and make it installable | draft-skill or prompts-to-skill → tune-skill → prompts-to-skill-release → skill-to-mod (optional) |
 | W2 | Get a repo, skill or plugin found | findable → publish-pipeline → upstream-check |
 | W3 | Decide whether a site is safe to launch | web-preflight → pre-ship-security-red-team → pre-ship-performance-audit → release-gate-chair / -ledger / -validator |
-| W4 | Grow organic search traffic | seo-crawl → keyword-guard → wordsmith → pre-ship-performance-audit (optional) |
+| W4 | Grow organic search traffic | seo-crawl → keyword-guard → wordsmith → pre-ship-performance-audit (optional) → platform-content (optional) |
 | W5 | Land a job | recruiter-lens → applicant-kit → application-pilot → career-track (optional) |
 | W6 | Make a decision | research-brief → data-readout (optional) → crash-test or do-better → strategy-memo |
-| W7 | Learn a skill | topic-primer → study-system |
+| W7 | Learn a skill | topic-primer → study-system → course-builder (optional, for a class) |
 | W8 | Run cold outbound | cold-email-list-gate → cold-email-ops → sales-copy |
-| W9 | Launch a one-person product | solo-income-blueprint → site-prompt → production-code → release-gate-chair → platform-content |
+| W9 | Launch a one-person product | solo-income-blueprint → site-prompt → production-code → paper-trail → release-gate-chair → platform-content |
+| W10 | Maintain the skill family | tune-skill (regress.py) → prompts-to-skill-release (optional) → upstream-check |
+
+Each workflow has an agent in the `caffeinity` plugin: skill-builder, discovery-lead,
+release-gatekeeper, seo-lead, job-search-coach, decision-analyst, learning-coach, outbound-lead,
+solo-launcher and skill-maintainer (W1 to W10). Codex has no subagents; there the
+`caffeinity-routing` skill names the workflow and the next skill.
+
+### Changing a workflow
+
+1. Edit `references/workflows.md` in caffeinity-routing and `workflows` in `site/skills.json`
+   together; never renumber (other skills cite W3 and W4).
+2. Run `python -I plugins/caffeinity-routing/tests/test_route_check.py` and
+   `python scripts/build_plugin.py --agents-only` in caffeinity-skills; add the agent to
+   `plugins/caffeinity/agents.json` for a new workflow.
+3. A skill that lives in caffeinity-skills needs an `install` of
+   `npx skills add arm-pz/caffeinity-skills --skill <name>` in the manifest and an entry in
+   `IN_MARKETPLACE` in `route_check.py`.
 
 ## Adding or changing a skill
 
@@ -128,10 +160,26 @@ python -m http.server 8080 --directory dist
 
 ## Known gaps
 
-- `caffeinity-stack` is cited by the three release-gate skills and is not public. If it, or a
-  local `caffeinity-routing`, lives only on a PC, run `upstream-check` on that folder: it finds
-  unpushed work, and anything pushed here gets picked up by the sync.
+Closed on 2026-10-24:
+
+- W9 sent policy pages to `paper-trail`, which did not exist. It does now (caffeinity-skills).
+- study-system sent class curricula to an unpublished skill. `course-builder` owns them now.
+- The three release-gate skills required `caffeinity-stack`, which is not public. They read it
+  only when it is installed.
+- Nothing ran the health loop's fixes. W10, the skill-maintainer agent and the weekly session do.
+- W4 ended at the rewrite; `platform-content` now carries the owner pages out (optional).
+
+Still open:
+
+- **The first deploy.** skills.caffeinity.com serves the old site until someone runs
+  `bash tools/agent-skills/deploy.sh` with a wrangler login. The "Deploy pending" issue tracks it.
+- **Directory listings.** findable's kit says where to list a skill (skills.sh, awesome lists,
+  plugin directories); submitting is manual and not tracked anywhere.
+- **Trigger tests are hand-run.** Each skill's `references/trigger-cases.md` records them; no job
+  replays them against the descriptions.
+- **Descriptions past 850 of the 1,024-character limit** (caffeinity-routing 862, study-system 875) leave little
+  room for a new boundary; the next edit should cut before it adds.
 - Bespoke pages carry hand-written stats (for example tune-skill's file count) that the sync does
   not refresh. Regenerate or edit them when a skill grows.
-- The health job reads SKILL.md files only. Trigger cases are still hand-run; record them in each
-  skill's `references/trigger-cases.md` (tune-skill's format) so the next tuner can re-run them.
+- If skills still live only on a PC, run `upstream-check` on that folder: it finds unpushed work,
+  and anything pushed here gets picked up by the sync.

@@ -17,7 +17,7 @@ STATS_START = "<!-- gen:stats:start -->"
 STATS_END = "<!-- gen:stats:end -->"
 JSONLD_START = "<!-- gen:jsonld:start -->"
 JSONLD_END = "<!-- gen:jsonld:end -->"
-HUB_DESCRIPTION = ("Open agent skills for Claude Code, Cursor, Codex and Qoder, mapped into nine "
+HUB_DESCRIPTION = ("Open agent skills for Claude Code, Cursor, Codex and Qoder, mapped into ten "
                    "workflows: build a skill, get found, ship safely, rank, get hired, decide.")
 
 
