@@ -1,17 +1,17 @@
 # Caffeinity Skills
 
-> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: 51 skills mapped into 10 workflows (build a skill, get found, gate a release, grow search traffic, land a job, decide, learn, run outbound, launch a product). Plain markdown, no API keys.
+> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: 52 skills mapped into 11 workflows (build a skill, get found, gate a release, grow search traffic, land a job, decide, learn, run outbound, launch a product). Plain markdown, no API keys.
 
 ## Install
 
-- Claude Code, every skill plus ten workflow agents: `/plugin marketplace add arm-pz/caffeinity-skills` then `/plugin install caffeinity@caffeinity-skills`
+- Claude Code, every skill plus eleven workflow agents: `/plugin marketplace add arm-pz/caffeinity-skills` then `/plugin install caffeinity@caffeinity-skills`
 - Codex: `codex plugin marketplace add arm-pz/caffeinity-skills`, then install caffeinity from the Plugins directory
 - Any agent, one skill: `npx skills add arm-pz/<skill>`
 - Discovery index: https://skills.caffeinity.com/.well-known/agent-skills/index.json
 
 ## Start Here
 
-- [caffeinity-routing](https://skills.caffeinity.com/caffeinity-routing/): Start here. Tell it the outcome you want and it picks one of ten workflows, lists the skills in order with what each hands the next, and names the ones you have not installed instead of improvising their work.
+- [caffeinity-routing](https://skills.caffeinity.com/caffeinity-routing/): Start here. Tell it the outcome you want and it picks one of eleven workflows, lists the skills in order with what each hands the next, and names the ones you have not installed instead of improvising their work.
 
 ## Skill Authoring
 
@@ -32,6 +32,7 @@
 - [upstream-check](https://skills.caffeinity.com/upstream-check/): Finds local commits that never reached GitHub, pushes only clean fast-forwards after a secret screen, then checks that the site index, the homepage, the marketplace and the READMEs agree with the repos that actually ship a SKILL.md.
 - [findable-polish](https://skills.caffeinity.com/findable-polish/): Chains Findable and Wordsmith: audits a README, skill page or landing copy against the queries a real stranger types, then writes two or three alternatives per finding that fix it without inventing a fact.
 - [upstream-polish](https://skills.caffeinity.com/upstream-polish/): Chains Upstream-Check — fetch-based push verdicts, fast-forward only, screened for credential-shaped lines — with Wordsmith rewriting drifted descriptions, topics and README rows, so repos and listings tell the same story again.
+- [skill-estate](https://skills.caffeinity.com/skill-estate/): The whole-collection sweep: inventory every skill repo, reconcile the site, marketplace and README, tune the family, close workflow gaps, wire self-publishing, add trigger tests and listings, and leave a maintenance loop.
 
 ## Build & Ship
 
@@ -99,3 +100,4 @@
 - W8 Run cold outbound: cold-email-list-gate -> cold-email-ops -> sales-copy
 - W9 Launch a one-person product: solo-income-blueprint -> site-prompt -> production-code -> paper-trail -> release-gate-chair -> platform-content
 - W10 Maintain the skill family: tune-skill -> prompts-to-skill-release -> upstream-check
+- W11 Stand up or audit a skill estate: skill-estate

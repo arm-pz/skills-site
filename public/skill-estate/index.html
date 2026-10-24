@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skill Estate — agent skill</title>
+<meta name="description" content="Takes a whole collection of agent skill repos from scattered to published, consistent and self-maintaining, in gated phases: inventory every repo…">
+<link rel="canonical" href="https://skills.caffeinity.com/skill-estate/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Caffeinity Skills">
+<meta property="og:title" content="Skill Estate — agent skill">
+<meta property="og:description" content="Takes a whole collection of agent skill repos from scattered to published, consistent and self-maintaining, in gated phases: inventory every repo, reconcile site, marketplace and README listings, test and tune the family, close workflow gaps, wire publishing so new skill repos go live on their own, bundle a plugin with agents, add trigger tests and directory listings, and leave a maintenance loop and a map. Each phase hands off to the skill that owns it and ends in PRs. Use when someone&#x27;s skills site and GitHub disagree, wants all their skill repos audited or cleaned up, wants new skills to publish themselves, or wants that cleanup repeated on another org, even if they never say estate. Not for one skill (use tune-skill), one listing (use findable), the site pipeline alone (use publish-pipeline), or weekly upkeep (use caffeinity-routing W10).">
+<meta property="og:url" content="https://skills.caffeinity.com/skill-estate/">
+<meta name="twitter:card" content="summary">
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="preload" href="/fonts/files/cY9AfjOCX1hbuyalUrK4397yjA.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/files/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+  /* Light paper like the hub; the dark shell when the reader prefers dark. The "paper" band is
+     the text your agent reads, set one shade deeper than the page. */
+  :root{
+    --bg:#f2eee5;
+    --surface:#fffdf8;
+    --ink:#17141b;
+    --muted:#5c5562;
+    --accent:#ff6a3d;
+    --accent-ink:#1a0c06;
+    --paper:#e9e3d6;
+    --paper-surface:#fffdf8;
+    --paper-ink:#1c1820;
+    --paper-muted:#57515e;
+    --line:rgba(23,20,27,.12);
+    --line-strong:rgba(23,20,27,.3);
+    --serif:'Newsreader',Georgia,serif;
+    --sans:'Instrument Sans',system-ui,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --ease:cubic-bezier(.23,1,.32,1);
+    --gutter:clamp(16px,5vw,56px);
+  }
+  @media (prefers-color-scheme:dark){
+    :root{--bg:#121016;--surface:#1d1a23;--ink:#ede8de;--muted:#a59eae;
+          --paper:#ebe5d7;--paper-surface:#e0d9c8;--line:rgba(237,232,222,.12);--line-strong:rgba(237,232,222,.3)}
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.22em}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
+  ::selection{background:var(--accent);color:var(--accent-ink)}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 var(--gutter)}
+  code,.mono{font-family:var(--mono);font-size:.88em}
+  .sr-only{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+  /* nav */
+  .nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;height:72px}
+  .brand{font-family:var(--serif);font-size:20px;text-decoration:none}
+  .brand b{color:var(--accent);font-weight:400;margin-right:6px}
+  .nav-links{display:flex;gap:28px;font-size:15px;color:var(--muted)}
+  .nav-links a{text-decoration:none;transition:color 160ms var(--ease)}
+
+  /* hero: the title is the poster, the command is the action */
+  .hero{padding:clamp(56px,10vw,128px) 0 clamp(56px,8vw,104px)}
+  .hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(52px,9vw,124px);line-height:.98;letter-spacing:-.025em;max-width:11ch}
+  .hero .lead{font-size:clamp(19px,1.8vw,23px);line-height:1.45;max-width:36ch;margin-top:28px;color:var(--ink)}
+  .console{margin-top:44px;max-width:760px;background:var(--surface);border-radius:10px;padding:10px 10px 10px 22px;display:flex;align-items:center;gap:16px}
+  .console code{flex:1;min-width:0;font-size:15.5px;line-height:1.5;overflow-wrap:break-word;color:var(--ink)}
+  .console code::before{content:"$ ";color:var(--muted)}
+  .copy{flex:none;position:relative;display:grid;font:600 15px/1 var(--sans);color:var(--accent-ink);background:var(--accent);border:0;border-radius:7px;padding:15px 20px;cursor:pointer;transition:transform 160ms var(--ease)}
+  .copy:active{transform:scale(.97)}
+  .copy span{grid-area:1/1;text-align:center;transition:opacity 200ms var(--ease),transform 200ms var(--ease),filter 200ms var(--ease)}
+  .copy .done{opacity:0;transform:scale(.8);filter:blur(3px)}
+  .copy.is-done .idle{opacity:0;transform:scale(.8);filter:blur(3px)}
+  .copy.is-done .done{opacity:1;transform:none;filter:none}
+  .facts{margin-top:20px;font-size:15px;color:var(--muted);max-width:760px}
+  .facts a{color:var(--ink)}
+
+  /* paper: what the skill is for */
+  .paper{background:var(--paper);color:var(--paper-ink);padding:clamp(64px,9vw,120px) 0}
+  .paper ::selection{background:var(--paper-ink);color:var(--paper)}
+  h2{font-family:var(--serif);font-weight:400;font-size:clamp(34px,4.4vw,52px);line-height:1.05;letter-spacing:-.015em;max-width:16ch}
+  .paper .body{font-family:var(--serif);font-size:clamp(21px,2vw,25px);line-height:1.5;max-width:34em;margin-top:32px}
+  .uses{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(32px,5vw,72px);margin-top:clamp(48px,6vw,80px)}
+  .uses h3{font-size:17px;font-weight:600;margin-bottom:14px}
+  .uses ul{list-style:none}
+  .uses li{padding:12px 0;border-top:1px solid rgba(28,24,32,.14)}
+  .say li{font-family:var(--serif);font-size:21px;line-height:1.35}
+  .say li::before{content:"\201C"}
+  .say li::after{content:"\201D"}
+  .not li{color:var(--paper-muted)}
+
+  /* shell: what ships */
+  .ships{padding:clamp(64px,9vw,120px) 0}
+  .ships .intro{color:var(--muted);max-width:44ch;margin-top:20px}
+  .files{width:100%;max-width:880px;border-collapse:collapse;margin-top:40px;font-size:15px}
+  .files td{padding:13px 0;border-top:1px solid var(--line)}
+  .files td:first-child{font-family:var(--mono);font-size:14px;overflow-wrap:anywhere;padding-right:20px}
+  .files td.n{text-align:right;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .files tfoot td{font-family:var(--sans);font-size:15px;font-weight:600;color:var(--ink);border-top-color:var(--line-strong)}
+
+  /* related + source */
+  .more{background:var(--surface);padding:clamp(64px,8vw,104px) 0}
+  .related{list-style:none;margin-top:36px}
+  .related a{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:8px 40px;align-items:baseline;text-decoration:none;padding:24px 0;border-top:1px solid var(--line)}
+  .related strong{font-family:var(--serif);font-weight:400;font-size:clamp(24px,2.4vw,30px);line-height:1.15;transition:color 160ms var(--ease)}
+  .related span{color:var(--muted);font-size:16px;line-height:1.55;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .source{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:20px 40px;margin-top:clamp(56px,7vw,88px)}
+  .source p{max-width:52ch;color:var(--muted)}
+  .source p a{color:var(--ink)}
+  .btn{display:inline-block;font-weight:600;font-size:15px;text-decoration:none;color:var(--bg);background:var(--ink);border-radius:7px;padding:14px 22px;transition:transform 160ms var(--ease)}
+  .btn:active{transform:scale(.97)}
+
+  footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-top:28px;padding-bottom:36px;font-size:14px;color:var(--muted)}
+  footer a{text-decoration:none}
+
+  @media (hover:hover) and (pointer:fine){
+    .nav-links a:hover,footer a:hover{color:var(--ink)}
+    .related a:hover strong{color:var(--accent)}
+  }
+  @media (max-width:640px){
+    .related a{grid-template-columns:1fr}
+    .nav-links a:first-child{display:none}
+    .console{flex-direction:column;align-items:stretch;padding:18px}
+    .copy{padding:15px}
+    .files td.bytes{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{transition:none!important;animation:none!important}
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "skill-estate",
+  "alternateName": "Skill Estate",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any",
+  "url": "https://skills.caffeinity.com/skill-estate/",
+  "description": "Takes a whole collection of agent skill repos from scattered to published, consistent and self-maintaining, in gated phases: inventory every repo, reconcile site, marketplace and README listings, test and tune the family, close workflow gaps, wire publishing so new skill repos go live on their own, bundle a plugin with agents, add trigger tests and directory listings, and leave a maintenance loop and a map. Each phase hands off to the skill that owns it and ends in PRs. Use when someone's skills site and GitHub disagree, wants all their skill repos audited or cleaned up, wants new skills to publish themselves, or wants that cleanup repeated on another org, even if they never say estate. Not for one skill (use tune-skill), one listing (use findable), the site pipeline alone (use publish-pipeline), or weekly upkeep (use caffeinity-routing W10).",
+  "codeRepository": "https://github.com/arm-pz/caffeinity-skills",
+  "license": "https://spdx.org/licenses/MIT.html",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Caffeinity",
+    "url": "https://caffeinity.com/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+</head>
+<body>
+
+<nav class="nav" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="/"><b>∧</b>caffeinity skills</a>
+    <div class="nav-links">
+      <a href="/">All skills</a>
+      <a href="https://github.com/arm-pz/caffeinity-skills" target="_blank" rel="noopener">Source</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Skill Estate</h1>
+    <p class="lead">The whole-collection sweep: inventory every skill repo, reconcile the site, marketplace and README, tune the family, close workflow gaps, wire self-publishing, add trigger tests and listings, and leave a maintenance loop. Each phase is handed to the skill that owns it.</p>
+    <div class="console">
+      <code id="cmd">npx skills add arm-pz/caffeinity-skills --skill skill-estate</code>
+      <button class="copy" id="copy" type="button" aria-describedby="cmd"><span class="idle">Copy install command</span><span class="done" aria-hidden="true">Copied</span></button>
+      <span class="sr-only" id="copy-status" role="status" aria-live="polite"></span>
+    </div>
+    <p class="facts">4 files and 175 lines, free under MIT. Built from <a href="https://github.com/arm-pz/caffeinity-skills" target="_blank" rel="noopener">arm-pz/caffeinity-skills</a> at <code>57c183a</code>.</p>
+  </div>
+</header>
+
+<section class="paper" aria-labelledby="for-h">
+  <div class="wrap">
+    <h2 id="for-h">What it is for</h2>
+    <p class="body">Takes a whole collection of agent skill repos from scattered to published, consistent and self-maintaining, in gated phases: inventory every repo, reconcile site, marketplace and README listings, test and tune the family, close workflow gaps, wire publishing so new skill repos go live on their own, bundle a plugin with agents, add trigger tests and directory listings, and leave a maintenance loop and a map. Each phase hands off to the skill that owns it and ends in PRs.</p>
+    <div class="uses">
+    <div class="uses-col when">
+      <h3>Reach for it when</h3>
+      <ul><li>Someone&#x27;s skills site and GitHub disagree, wants all their skill repos audited or cleaned up, wants new skills to publish themselves, or wants that cleanup repeated on another org, even if they never say estate.</li></ul>
+    </div>
+    <div class="uses-col not">
+      <h3>Not for</h3>
+      <ul><li>One skill (use tune-skill)</li><li>One listing (use findable)</li><li>The site pipeline alone (use publish-pipeline)</li><li>Weekly upkeep (use caffeinity-routing W10)</li></ul>
+    </div>
+    </div>
+  </div>
+</section>
+
+<section class="ships" aria-labelledby="ships-h">
+  <div class="wrap">
+    <h2 id="ships-h">Every file it installs</h2>
+    <p class="intro">Measured from the packed archive at commit <code>57c183a</code>. A skill is plain text your agent reads, so this list is all of it.</p>
+    <table class="files">
+      <thead class="sr-only"><tr><th>File</th><th>Lines</th><th>Bytes</th></tr></thead>
+      <tbody>
+        <tr><td>SKILL.md</td><td class="n">78</td><td class="n bytes">5,068 B</td></tr>
+        <tr><td>references/brief.md</td><td class="n">26</td><td class="n bytes">1,800 B</td></tr>
+        <tr><td>references/phases.md</td><td class="n">43</td><td class="n bytes">4,111 B</td></tr>
+        <tr><td>references/trigger-cases.md</td><td class="n">28</td><td class="n bytes">1,994 B</td></tr>
+      </tbody>
+      <tfoot><tr><td>4 files</td><td class="n">175</td><td class="n bytes">5 KB</td></tr></tfoot>
+    </table>
+  </div>
+</section>
+
+<section class="more" aria-labelledby="more-h">
+  <div class="wrap">
+    <h2 id="more-h">More in Publish &amp; Discover</h2>
+    <ul class="related">
+      <li><a href="/findable/"><strong>Findable</strong><span>Sets up discovery for a GitHub repo, skill, plugin or MCP server so it gets found by what it does, not only by its name. It audits where you rank today, works out the queries strangers type, then drafts the About text, topics, README opening, release notes, site page and directory plan — real numbers only, and nothing public changes without your go-ahead.</span></a></li>
+      <li><a href="/publish-pipeline/"><strong>Publish Pipeline</strong><span>Turns a pile of skill repos into a published site: a committed manifest decides what is public, discovery opens a pull request, and a green merge deploys generated pages, both discovery indexes, a sitemap and a verified build.</span></a></li>
+      <li><a href="/upstream-check/"><strong>Upstream Check</strong><span>Finds local commits that never reached GitHub, pushes only clean fast-forwards after a secret screen, then checks that the site index, the homepage, the marketplace and the READMEs agree with the repos that actually ship a SKILL.md.</span></a></li>
+    </ul>
+    <div class="source">
+      <p>Read it before you install it: the skill lives at <code>plugins/skill-estate/skills/skill-estate</code> in <a href="https://github.com/arm-pz/caffeinity-skills" target="_blank" rel="noopener">arm-pz/caffeinity-skills</a>.</p>
+      <a class="btn" href="https://github.com/arm-pz/caffeinity-skills" target="_blank" rel="noopener">Open the repo</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>Skill Estate is an open agent skill on <a href="/">Caffeinity Skills</a>.</span>
+    <a href="https://github.com/arm-pz/caffeinity-skills" target="_blank" rel="noopener">arm-pz/caffeinity-skills</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var cmd=document.getElementById('cmd'),btn=document.getElementById('copy'),status=document.getElementById('copy-status'),timer;
+  function ok(){btn.classList.add('is-done');status.textContent='Copied to clipboard.';clearTimeout(timer);timer=setTimeout(function(){btn.classList.remove('is-done');},1600);}
+  function fail(){var r=document.createRange();r.selectNodeContents(cmd);var s=window.getSelection();s.removeAllRanges();s.addRange(r);status.textContent='Clipboard unavailable. The command is selected; press Ctrl+C.';}
+  btn.addEventListener('click',function(){var t=cmd.textContent;if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,fail);}else{fail();}});
+})();
+</script>
+</body>
+</html>

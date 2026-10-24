@@ -20,7 +20,7 @@
       "description": "Claude Code plugin marketplace and index of arm-pz agent skills: editorial, teaching, recruiting, SEO planning, release preflight, sub-agent tournaments and repo discovery. Install with npx skills add arm-pz/caffeinity-skills.",
       "type": "archive",
       "url": "https://skills.caffeinity.com/agent-skills/caffeinity-routing.tar.gz",
-      "digest": "sha256:c3dccd7ba4b366d0aece85ef979438315ed88c3d6610a2b686fb582f252991b2"
+      "digest": "sha256:294a6c6e73ea8349483635f45b58cd1971c321b1c1185d19ec4a9722e5281d12"
     },
     {
       "name": "career-track",
@@ -238,6 +238,13 @@
       "type": "archive",
       "url": "https://skills.caffeinity.com/agent-skills/site-prompt.tar.gz",
       "digest": "sha256:ca17882ef70ae7bc37f3df22cf2116017573858d2c3a1186eeb373bacd6980c2"
+    },
+    {
+      "name": "skill-estate",
+      "description": "Claude Code plugin marketplace and index of arm-pz agent skills: editorial, teaching, recruiting, SEO planning, release preflight, sub-agent tournaments and repo discovery. Install with npx skills add arm-pz/caffeinity-skills.",
+      "type": "archive",
+      "url": "https://skills.caffeinity.com/agent-skills/skill-estate.tar.gz",
+      "digest": "sha256:401eb2c843d066dc01f9edbffb1f993c90c3258e7472a841299fbbf1d3ecbdd5"
     },
     {
       "name": "skill-launch",
