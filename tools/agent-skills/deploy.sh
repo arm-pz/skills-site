@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Deploy main to skills.caffeinity.com from your own machine. CI never holds Cloudflare
+# Manual fallback. Normally the publish workflow commits the build to the `deploy` branch and the
+# Git-connected Cloudflare Pages project serves it. This deploys main from your own machine. CI never holds Cloudflare
 # credentials: wrangler uses your login (`npx wrangler login`, an OAuth session stored on this
 # machine) or a CLOUDFLARE_API_TOKEN you export in this shell only. Nothing is written to the repo.
 #

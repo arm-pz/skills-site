@@ -34,9 +34,10 @@ push a public arm-pz repo with one SKILL.md and a repo About
        unit tests → build → sitemap + _redirects → dist + version.json → check_dist → verify
        commit the sync to main as github-actions[bot]
        the same build writes /llms.txt (install commands + every skill) for agents and AI search
-       if dist/version.json differs from the live one: open one "Deploy pending" issue
-  └─ when you choose: on your machine, bash tools/agent-skills/deploy.sh (or ask Claude Code)
-       same gates, wrangler with your own login, then verify live → prove live; the issue closes
+       commit the gated dist/ to the `deploy` branch (public/), only when the build changed
+  └─ minutes later: Cloudflare Pages (Git-connected to `deploy`) pulls and serves it
+       the same job waits for the live version.json to match, verifies live, and opens one
+       "Deploy pending" issue only if it never does (fallback: tools/agent-skills/deploy.sh)
   └─ within the hour: arm-pz/caffeinity-skills  build-plugin.yml  (cron 27 * * * *)
        re-bundle plugins/caffeinity from every skill repo; bump its version only if content changed
   └─ within the hour: arm-pz/arm-pz  skills-readme.yml  (cron 47 * * * *)
@@ -59,9 +60,10 @@ Want it faster than an hour? Give a skill repo a fine-grained token that can dis
 
 ### Secrets
 
-None. Every workflow uses its own repo's `GITHUB_TOKEN`. Deploying needs Cloudflare access, and
-that lives only on the machine you deploy from: `npx wrangler login` once, or a
-`CLOUDFLARE_API_TOKEN` exported in that shell. Nothing about Cloudflare is stored in GitHub.
+None. Every workflow uses its own repo's `GITHUB_TOKEN`. Cloudflare reads the `deploy` branch
+through its own GitHub app (installed on `arm-pz/skills-site` only), so nothing about Cloudflare
+is stored in GitHub. The manual fallback uses `npx wrangler login` on your own machine. Setup
+steps are in README.md, "Connecting Cloudflare Pages".
 
 ## How the skills keep each other honest
 
@@ -171,8 +173,8 @@ Closed on 2026-10-24:
 
 Still open:
 
-- **The first deploy.** skills.caffeinity.com serves the old site until someone runs
-  `bash tools/agent-skills/deploy.sh` with a wrangler login. The "Deploy pending" issue tracks it.
+- **Connect Cloudflare to the `deploy` branch** (README.md, "Connecting Cloudflare Pages"). Until
+  then skills.caffeinity.com serves the 2026-10-20 build and the "Deploy pending" issue stays open.
 - **Directory listings.** findable's kit says where to list a skill (skills.sh, awesome lists,
   plugin directories); submitting is manual and not tracked anywhere.
 - **Trigger tests are hand-run.** Each skill's `references/trigger-cases.md` records them; no job
