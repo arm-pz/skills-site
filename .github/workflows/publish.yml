@@ -1,10 +1,12 @@
 name: publish
 
-# Anything live on GitHub reaches skills.caffeinity.com without a human merge:
-# every hour sync.py adds new skill repos, refreshes generated pages whose repo
-# moved, follows renames (with 301s) and drops repos that went away. The build
-# and every gate still have to pass before anything deploys, and the sync is
-# committed back to main only after the live site has been proved.
+# Anything live on GitHub reaches main without a human merge: every hour
+# sync.py adds new skill repos, refreshes generated pages whose repo moved,
+# follows renames (with 301s) and drops repos that went away. The build and
+# every gate must pass before the sync is committed. CI holds no Cloudflare
+# credentials: the owner deploys main from their own machine with
+# tools/agent-skills/deploy.sh, and this job keeps one "Deploy pending" issue
+# open while the live site is behind.
 
 on:
   push:
@@ -71,6 +73,7 @@ jobs:
     timeout-minutes: 45
     permissions:
       contents: write
+      issues: write
     steps:
       - uses: actions/checkout@v4
         with:
@@ -106,70 +109,38 @@ jobs:
         run: python tools/agent-skills/check_dist.py
       - name: verify local
         run: node tools/agent-skills/verify.mjs local
-      - name: anything to deploy?
-        id: changed
-        run: |
-          set -euo pipefail
-          reason=""
-          [ -n "$(git status --porcelain)" ] && reason="sync changed the repo"
-          # dist/version.json hashes every file make_dist wrote, so any page, archive,
-          # index or About change shows up here, and nothing Cloudflare injects does.
-          live=$(curl -fsS "https://skills.caffeinity.com/version.json?v=$GITHUB_RUN_ID" || true)
-          [ "$live" = "$(cat dist/version.json)" ] || reason="${reason:-the built site differs from the live one}"
-          case "${{ github.event_name }}" in
-            push|workflow_dispatch|repository_dispatch) reason="${reason:-${{ github.event_name }}}" ;;
-          esac
-          echo "reason=$reason" >> "$GITHUB_OUTPUT"
-          echo "- deploy: ${reason:-skipped, live site already matches}" >> "$GITHUB_STEP_SUMMARY"
-      - name: preflight secrets
-        if: steps.changed.outputs.reason != ''
-        env:
-          CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CF_ACCOUNT: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: |
-          [ -n "$CF_TOKEN" ] || { echo "::error::CLOUDFLARE_API_TOKEN is not set in Settings → Secrets and variables → Actions"; exit 1; }
-          [ -n "$CF_ACCOUNT" ] || { echo "::error::CLOUDFLARE_ACCOUNT_ID is not set in Settings → Secrets and variables → Actions"; exit 1; }
-      - name: install wrangler
-        if: steps.changed.outputs.reason != ''
-        run: npm install --no-save wrangler@4.151.1
-      - name: deploy
-        if: steps.changed.outputs.reason != ''
-        id: deploy
-        shell: bash
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: |
-          set -euo pipefail
-          npx wrangler pages deploy dist --project-name skills --branch main 2>&1 | tee deploy.log
-          url=$(grep -oE 'https://[a-f0-9]+\.skills\.pages\.dev' deploy.log | tail -1 || true)
-          echo "url=$url" >> "$GITHUB_OUTPUT"
-          echo "- deployment: ${url:-not reported}" >> "$GITHUB_STEP_SUMMARY"
-      - name: verify live
-        if: steps.changed.outputs.reason != ''
-        env:
-          CACHE_BUST: ${{ github.run_id }}
-        run: node tools/agent-skills/verify.mjs https://skills.caffeinity.com
-      - name: prove live
-        if: steps.changed.outputs.reason != ''
-        run: python tools/agent-skills/prove.py --site https://skills.caffeinity.com --bust "${{ github.run_id }}"
       - name: commit the sync back to main
-        if: steps.changed.outputs.reason != ''
         run: |
           set -euo pipefail
-          [ -n "$(git status --porcelain)" ] || exit 0
+          [ -n "$(git status --porcelain)" ] || { echo "- sync: nothing new" >> "$GITHUB_STEP_SUMMARY"; exit 0; }
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
-          git commit -m "sync: publish what is live on GitHub" -m "$(head -40 "$RUNNER_TEMP/sync.txt")"
+          git commit -m "sync: add what is live on GitHub" -m "$(head -40 "$RUNNER_TEMP/sync.txt")"
           git pull --rebase origin main
           git push origin HEAD:main
-      - name: tell the profile README
-        if: steps.changed.outputs.reason != ''
+      - name: flag a pending deploy
+        # CI holds no Cloudflare credentials; the owner deploys from their own machine with
+        # tools/agent-skills/deploy.sh. dist/version.json hashes the whole build, so this
+        # compares what main would publish with what is live, and nothing the CDN injects counts.
         env:
-          GH_TOKEN: ${{ secrets.PROFILE_DISPATCH_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
         run: |
-          # Optional: a fine-grained token with Contents read/write on arm-pz/arm-pz.
-          # Without it, the profile workflow's own hourly schedule picks the change up.
-          [ -n "$GH_TOKEN" ] || { echo "no PROFILE_DISPATCH_TOKEN; the profile updates on its own schedule"; exit 0; }
-          gh api repos/arm-pz/arm-pz/dispatches -f event_type=skills-updated
+          set -euo pipefail
+          title="Deploy pending: skills.caffeinity.com is behind main"
+          live=$(curl -fsS "https://skills.caffeinity.com/version.json?v=$GITHUB_RUN_ID" || true)
+          open=$(gh issue list --state open --search "\"$title\" in:title" --json number --jq '.[0].number // empty')
+          if [ "$live" = "$(cat dist/version.json)" ]; then
+            echo "- live site matches main" >> "$GITHUB_STEP_SUMMARY"
+            [ -z "$open" ] || gh issue close "$open" --comment "Live site now matches main ($(cat dist/version.json))."
+            exit 0
+          fi
+          echo "- live site is behind main: run tools/agent-skills/deploy.sh" >> "$GITHUB_STEP_SUMMARY"
+          [ -n "$open" ] && exit 0
+          printf '%s\n' \
+            "The build on main differs from what skills.caffeinity.com serves." "" \
+            "Deploy from your machine (no secrets in CI):" "" \
+            '```' "git pull && bash tools/agent-skills/deploy.sh" '```' "" \
+            "or ask Claude Code to \"deploy the skills site\". This issue closes itself once the live site matches." \
+            > "$RUNNER_TEMP/issue.md"
+          gh issue create --title "$title" --body-file "$RUNNER_TEMP/issue.md"
