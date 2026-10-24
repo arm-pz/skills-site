@@ -9,7 +9,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Caffeinity Skills">
 <meta property="og:title" content="Release Gate · Chair — agent skill">
-<meta property="og:description" content="Runs the three pre-launch passes in order — web-preflight for external exposure, pre-ship-security-red-team for application behaviour in an isolated environment, pre-ship-performance-audit for measured speed — records each lane&#x27;s own verdict and findings into one ledger, and computes a single release posture (HOLD or ready) with a script rather than judgement. Use when someone asks &quot;is this safe to launch&quot;, &quot;ready to ship&quot;, &quot;should we deploy&quot;, &quot;give me a go/no-go&quot;, or before any deploy of a site or client app you own or are authorized to test. Three verdicts stay separate; a pass in one lane never covers another. Variant: this fork runs the lanes itself and copies their finding tables verbatim. Not for a single-lane check (invoke that skill directly), not for penetration testing of production, and not for performing the deploy.">
+<meta property="og:description" content="Runs the three pre-launch passes in order — web-preflight for external exposure, pre-ship-security-red-team for application behaviour in an isolated environment, pre-ship-performance-audit for measured speed — records each lane&#x27;s own verdict and findings into one ledger, and computes a single release posture (HOLD or ready) with a script rather than judgement. Use when someone asks &quot;is this safe to launch&quot;, &quot;ready to ship&quot;, &quot;should we deploy&quot;, &quot;give me a go/no-go&quot;, or before any deploy of a site or client app you own or are authorized to test. Three verdicts stay separate; a pass in one lane never covers another. Variant: this fork runs the lanes itself and copies their finding tables verbatim; it is the default release gate. Not for a single-lane check (invoke that skill directly), for reports that already exist (use release-gate-validator), for penetration testing of production, or for performing the deploy.">
 <meta property="og:url" content="https://skills.caffeinity.com/release-gate-chair/">
 <meta name="twitter:card" content="summary">
 <meta name="color-scheme" content="dark light">
@@ -129,7 +129,7 @@
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "Any",
   "url": "https://skills.caffeinity.com/release-gate-chair/",
-  "description": "Runs the three pre-launch passes in order — web-preflight for external exposure, pre-ship-security-red-team for application behaviour in an isolated environment, pre-ship-performance-audit for measured speed — records each lane's own verdict and findings into one ledger, and computes a single release posture (HOLD or ready) with a script rather than judgement. Use when someone asks \"is this safe to launch\", \"ready to ship\", \"should we deploy\", \"give me a go/no-go\", or before any deploy of a site or client app you own or are authorized to test. Three verdicts stay separate; a pass in one lane never covers another. Variant: this fork runs the lanes itself and copies their finding tables verbatim. Not for a single-lane check (invoke that skill directly), not for penetration testing of production, and not for performing the deploy.",
+  "description": "Runs the three pre-launch passes in order — web-preflight for external exposure, pre-ship-security-red-team for application behaviour in an isolated environment, pre-ship-performance-audit for measured speed — records each lane's own verdict and findings into one ledger, and computes a single release posture (HOLD or ready) with a script rather than judgement. Use when someone asks \"is this safe to launch\", \"ready to ship\", \"should we deploy\", \"give me a go/no-go\", or before any deploy of a site or client app you own or are authorized to test. Three verdicts stay separate; a pass in one lane never covers another. Variant: this fork runs the lanes itself and copies their finding tables verbatim; it is the default release gate. Not for a single-lane check (invoke that skill directly), for reports that already exist (use release-gate-validator), for penetration testing of production, or for performing the deploy.",
   "codeRepository": "https://github.com/arm-pz/release-gate-chair",
   "license": "https://spdx.org/licenses/MIT.html",
   "publisher": {
@@ -166,14 +166,14 @@
       <button class="copy" id="copy" type="button" aria-describedby="cmd"><span class="idle">Copy install command</span><span class="done" aria-hidden="true">Copied</span></button>
       <span class="sr-only" id="copy-status" role="status" aria-live="polite"></span>
     </div>
-    <p class="facts">4 files and 390 lines, free under MIT. Built from <a href="https://github.com/arm-pz/release-gate-chair" target="_blank" rel="noopener">arm-pz/release-gate-chair</a> at <code>33db8cb</code>.</p>
+    <p class="facts">4 files and 391 lines, free under MIT. Built from <a href="https://github.com/arm-pz/release-gate-chair" target="_blank" rel="noopener">arm-pz/release-gate-chair</a> at <code>49ccb53</code>.</p>
   </div>
 </header>
 
 <section class="paper" aria-labelledby="for-h">
   <div class="wrap">
     <h2 id="for-h">What it is for</h2>
-    <p class="body">Runs the three pre-launch passes in order — web-preflight for external exposure, pre-ship-security-red-team for application behaviour in an isolated environment, pre-ship-performance-audit for measured speed — records each lane&#x27;s own verdict and findings into one ledger, and computes a single release posture (HOLD or ready) with a script rather than judgement. Three verdicts stay separate; a pass in one lane never covers another. Variant: this fork runs the lanes itself and copies their finding tables verbatim.</p>
+    <p class="body">Runs the three pre-launch passes in order — web-preflight for external exposure, pre-ship-security-red-team for application behaviour in an isolated environment, pre-ship-performance-audit for measured speed — records each lane&#x27;s own verdict and findings into one ledger, and computes a single release posture (HOLD or ready) with a script rather than judgement. Three verdicts stay separate; a pass in one lane never covers another. Variant: this fork runs the lanes itself and copies their finding tables verbatim; it is the default release gate.</p>
     <div class="uses">
     <div class="uses-col when">
       <h3>Reach for it when</h3>
@@ -181,7 +181,7 @@
     </div>
     <div class="uses-col not">
       <h3>Not for</h3>
-      <ul><li>A single-lane check (invoke that skill directly)</li><li>Not for penetration testing of production, and not for performing the deploy</li></ul>
+      <ul><li>A single-lane check (invoke that skill directly)</li><li>For reports that already exist (use release-gate-validator)</li><li>For penetration testing of production, or for performing the deploy</li></ul>
     </div>
     </div>
   </div>
@@ -190,16 +190,16 @@
 <section class="ships" aria-labelledby="ships-h">
   <div class="wrap">
     <h2 id="ships-h">Every file it installs</h2>
-    <p class="intro">Measured from the packed archive at commit <code>33db8cb</code>. A skill is plain text your agent reads, so this list is all of it.</p>
+    <p class="intro">Measured from the packed archive at commit <code>49ccb53</code>. A skill is plain text your agent reads, so this list is all of it.</p>
     <table class="files">
       <thead class="sr-only"><tr><th>File</th><th>Lines</th><th>Bytes</th></tr></thead>
       <tbody>
         <tr><td>.gitignore</td><td class="n">3</td><td class="n bytes">28 B</td></tr>
-        <tr><td>SKILL.md</td><td class="n">130</td><td class="n bytes">6,373 B</td></tr>
+        <tr><td>SKILL.md</td><td class="n">131</td><td class="n bytes">6,449 B</td></tr>
         <tr><td>references/ledger.md</td><td class="n">73</td><td class="n bytes">4,171 B</td></tr>
         <tr><td>scripts/check_gate.mjs</td><td class="n">184</td><td class="n bytes">8,721 B</td></tr>
       </tbody>
-      <tfoot><tr><td>4 files</td><td class="n">390</td><td class="n bytes">8 KB</td></tr></tfoot>
+      <tfoot><tr><td>4 files</td><td class="n">391</td><td class="n bytes">8 KB</td></tr></tfoot>
     </table>
   </div>
 </section>

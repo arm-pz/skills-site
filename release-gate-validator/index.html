@@ -9,7 +9,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Caffeinity Skills">
 <meta property="og:title" content="Release Gate · Validator — agent skill">
-<meta property="og:description" content="Turns three pre-launch reports that already exist into one release posture (HOLD or ready) without running any of them. Ingests the security red team&#x27;s on-disk results table mechanically, takes the preflight and performance tables as verbatim pastes, and computes the posture with a script. Use when the lanes were run earlier or by someone else, when a deploy decision is needed now and re-running three skills is not affordable, or when asked &quot;is this safe to launch&quot;, &quot;ready to ship&quot;, &quot;give me a go/no-go&quot;. Runs no attacks, no probes, no measurements, no subagents. A lane&#x27;s pass never covers another lane, and an absent lane is reported absent. Not for producing the reports in the first place, and not for deploying.">
+<meta property="og:description" content="Turns three pre-launch reports that already exist into one release posture (HOLD or ready) without running any of them. Ingests the security red team&#x27;s on-disk results table mechanically, takes the preflight and performance tables as verbatim pastes, and computes the posture with a script. Use when the lanes were run earlier or by someone else, or when a deploy decision is needed now from those reports and re-running three skills is not affordable. Runs no attacks, no probes, no measurements, no subagents. A lane&#x27;s pass never covers another lane, and an absent lane is reported absent. Not for producing the reports in the first place (use release-gate-chair), and not for deploying.">
 <meta property="og:url" content="https://skills.caffeinity.com/release-gate-validator/">
 <meta name="twitter:card" content="summary">
 <meta name="color-scheme" content="dark light">
@@ -129,7 +129,7 @@
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "Any",
   "url": "https://skills.caffeinity.com/release-gate-validator/",
-  "description": "Turns three pre-launch reports that already exist into one release posture (HOLD or ready) without running any of them. Ingests the security red team's on-disk results table mechanically, takes the preflight and performance tables as verbatim pastes, and computes the posture with a script. Use when the lanes were run earlier or by someone else, when a deploy decision is needed now and re-running three skills is not affordable, or when asked \"is this safe to launch\", \"ready to ship\", \"give me a go/no-go\". Runs no attacks, no probes, no measurements, no subagents. A lane's pass never covers another lane, and an absent lane is reported absent. Not for producing the reports in the first place, and not for deploying.",
+  "description": "Turns three pre-launch reports that already exist into one release posture (HOLD or ready) without running any of them. Ingests the security red team's on-disk results table mechanically, takes the preflight and performance tables as verbatim pastes, and computes the posture with a script. Use when the lanes were run earlier or by someone else, or when a deploy decision is needed now from those reports and re-running three skills is not affordable. Runs no attacks, no probes, no measurements, no subagents. A lane's pass never covers another lane, and an absent lane is reported absent. Not for producing the reports in the first place (use release-gate-chair), and not for deploying.",
   "codeRepository": "https://github.com/arm-pz/release-gate-validator",
   "license": "https://spdx.org/licenses/MIT.html",
   "publisher": {
@@ -166,7 +166,7 @@
       <button class="copy" id="copy" type="button" aria-describedby="cmd"><span class="idle">Copy install command</span><span class="done" aria-hidden="true">Copied</span></button>
       <span class="sr-only" id="copy-status" role="status" aria-live="polite"></span>
     </div>
-    <p class="facts">6 files and 582 lines, free under MIT. Built from <a href="https://github.com/arm-pz/release-gate-validator" target="_blank" rel="noopener">arm-pz/release-gate-validator</a> at <code>5ec3cf3</code>.</p>
+    <p class="facts">6 files and 583 lines, free under MIT. Built from <a href="https://github.com/arm-pz/release-gate-validator" target="_blank" rel="noopener">arm-pz/release-gate-validator</a> at <code>c9dc14e</code>.</p>
   </div>
 </header>
 
@@ -177,11 +177,11 @@
     <div class="uses">
     <div class="uses-col when">
       <h3>Reach for it when</h3>
-      <ul><li>The lanes were run earlier or by someone else, when a deploy decision is needed now and re-running three skills is not affordable, or when asked &quot;is this safe to launch&quot;, &quot;ready to ship&quot;, &quot;give me a go/no-go&quot;.</li></ul>
+      <ul><li>The lanes were run earlier or by someone else, or when a deploy decision is needed now from those reports and re-running three skills is not affordable.</li></ul>
     </div>
     <div class="uses-col not">
       <h3>Not for</h3>
-      <ul><li>Producing the reports in the first place, and not for deploying</li></ul>
+      <ul><li>Producing the reports in the first place (use release-gate-chair)</li><li>Not for deploying</li></ul>
     </div>
     </div>
   </div>
@@ -190,18 +190,18 @@
 <section class="ships" aria-labelledby="ships-h">
   <div class="wrap">
     <h2 id="ships-h">Every file it installs</h2>
-    <p class="intro">Measured from the packed archive at commit <code>5ec3cf3</code>. A skill is plain text your agent reads, so this list is all of it.</p>
+    <p class="intro">Measured from the packed archive at commit <code>c9dc14e</code>. A skill is plain text your agent reads, so this list is all of it.</p>
     <table class="files">
       <thead class="sr-only"><tr><th>File</th><th>Lines</th><th>Bytes</th></tr></thead>
       <tbody>
         <tr><td>.gitignore</td><td class="n">3</td><td class="n bytes">28 B</td></tr>
-        <tr><td>SKILL.md</td><td class="n">106</td><td class="n bytes">5,186 B</td></tr>
+        <tr><td>SKILL.md</td><td class="n">107</td><td class="n bytes">5,146 B</td></tr>
         <tr><td>references/ledger.md</td><td class="n">73</td><td class="n bytes">4,171 B</td></tr>
         <tr><td>scripts/check_gate.mjs</td><td class="n">184</td><td class="n bytes">8,721 B</td></tr>
         <tr><td>scripts/gate_ingest.mjs</td><td class="n">133</td><td class="n bytes">6,845 B</td></tr>
         <tr><td>scripts/gate_record.mjs</td><td class="n">83</td><td class="n bytes">4,285 B</td></tr>
       </tbody>
-      <tfoot><tr><td>6 files</td><td class="n">582</td><td class="n bytes">10 KB</td></tr></tfoot>
+      <tfoot><tr><td>6 files</td><td class="n">583</td><td class="n bytes">10 KB</td></tr></tfoot>
     </table>
   </div>
 </section>

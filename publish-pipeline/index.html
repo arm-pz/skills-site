@@ -9,7 +9,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Caffeinity Skills">
 <meta property="og:title" content="Publish Pipeline — agent skill">
-<meta property="og:description" content="Sets up, audits and repairs a manifest-driven CI/CD pipeline that publishes a collection of agent skills to a Cloudflare Pages site, with a generated page per skill. Use when someone asks for CI/CD or automation for a skills site, wants a new skill repo to appear on the site with its own page, asks why a skill is missing or its page is stale, or needs a red publish run diagnosed and a bad deploy rolled back. It installs one GitHub Actions workflow with check, publish and discover jobs, a committed manifest as the publication decision, generated hub rows, discovery indexes, sitemap and pages, and verification gates on both sides of the deploy. Not for releasing one skill through the marketplace, tarball or plugin channels (use publish-release-gate), checking unpushed work or listing drift (use upstream-check), deciding whether a build is safe to launch (use release-gate), or writing and tuning a skill (use draft-skill or tune-skill).">
+<meta property="og:description" content="Sets up, audits and repairs a manifest-driven CI/CD pipeline that publishes a collection of agent skills to a Cloudflare Pages site, with a generated page per skill. Use when someone asks for CI/CD or automation for a skills site, wants a new skill repo to appear on the site with its own page, asks why a skill is missing or its page is stale, or needs a red publish run diagnosed and a bad deploy rolled back. It installs one GitHub Actions workflow with check and publish jobs, a review-PR or auto-sync publication gate, generated hub rows, discovery indexes, sitemap and pages, and gates on both sides of the deploy. Not for releasing one skill through the marketplace, tarball or plugin channels (use publish-release-gate), checking unpushed work or listing drift (use upstream-check), deciding whether a build is safe to launch (use release-gate-chair), or writing and tuning a skill (use draft-skill or tune-skill).">
 <meta property="og:url" content="https://skills.caffeinity.com/publish-pipeline/">
 <meta name="twitter:card" content="summary">
 <meta name="color-scheme" content="dark light">
@@ -129,7 +129,7 @@
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "Any",
   "url": "https://skills.caffeinity.com/publish-pipeline/",
-  "description": "Sets up, audits and repairs a manifest-driven CI/CD pipeline that publishes a collection of agent skills to a Cloudflare Pages site, with a generated page per skill. Use when someone asks for CI/CD or automation for a skills site, wants a new skill repo to appear on the site with its own page, asks why a skill is missing or its page is stale, or needs a red publish run diagnosed and a bad deploy rolled back. It installs one GitHub Actions workflow with check, publish and discover jobs, a committed manifest as the publication decision, generated hub rows, discovery indexes, sitemap and pages, and verification gates on both sides of the deploy. Not for releasing one skill through the marketplace, tarball or plugin channels (use publish-release-gate), checking unpushed work or listing drift (use upstream-check), deciding whether a build is safe to launch (use release-gate), or writing and tuning a skill (use draft-skill or tune-skill).",
+  "description": "Sets up, audits and repairs a manifest-driven CI/CD pipeline that publishes a collection of agent skills to a Cloudflare Pages site, with a generated page per skill. Use when someone asks for CI/CD or automation for a skills site, wants a new skill repo to appear on the site with its own page, asks why a skill is missing or its page is stale, or needs a red publish run diagnosed and a bad deploy rolled back. It installs one GitHub Actions workflow with check and publish jobs, a review-PR or auto-sync publication gate, generated hub rows, discovery indexes, sitemap and pages, and gates on both sides of the deploy. Not for releasing one skill through the marketplace, tarball or plugin channels (use publish-release-gate), checking unpushed work or listing drift (use upstream-check), deciding whether a build is safe to launch (use release-gate-chair), or writing and tuning a skill (use draft-skill or tune-skill).",
   "codeRepository": "https://github.com/arm-pz/publish-pipeline",
   "license": "https://spdx.org/licenses/MIT.html",
   "publisher": {
@@ -166,14 +166,14 @@
       <button class="copy" id="copy" type="button" aria-describedby="cmd"><span class="idle">Copy install command</span><span class="done" aria-hidden="true">Copied</span></button>
       <span class="sr-only" id="copy-status" role="status" aria-live="polite"></span>
     </div>
-    <p class="facts">9 files and 1,217 lines, free under MIT. Built from <a href="https://github.com/arm-pz/publish-pipeline" target="_blank" rel="noopener">arm-pz/publish-pipeline</a> at <code>5504ae3</code>.</p>
+    <p class="facts">9 files and 1,272 lines, free under MIT. Built from <a href="https://github.com/arm-pz/publish-pipeline" target="_blank" rel="noopener">arm-pz/publish-pipeline</a> at <code>b24df39</code>.</p>
   </div>
 </header>
 
 <section class="paper" aria-labelledby="for-h">
   <div class="wrap">
     <h2 id="for-h">What it is for</h2>
-    <p class="body">Sets up, audits and repairs a manifest-driven CI/CD pipeline that publishes a collection of agent skills to a Cloudflare Pages site, with a generated page per skill. It installs one GitHub Actions workflow with check, publish and discover jobs, a committed manifest as the publication decision, generated hub rows, discovery indexes, sitemap and pages, and verification gates on both sides of the deploy.</p>
+    <p class="body">Sets up, audits and repairs a manifest-driven CI/CD pipeline that publishes a collection of agent skills to a Cloudflare Pages site, with a generated page per skill. It installs one GitHub Actions workflow with check and publish jobs, a review-PR or auto-sync publication gate, generated hub rows, discovery indexes, sitemap and pages, and gates on both sides of the deploy.</p>
     <div class="uses">
     <div class="uses-col when">
       <h3>Reach for it when</h3>
@@ -181,7 +181,7 @@
     </div>
     <div class="uses-col not">
       <h3>Not for</h3>
-      <ul><li>Releasing one skill through the marketplace, tarball or plugin channels (use publish-release-gate)</li><li>Checking unpushed work or listing drift (use upstream-check)</li><li>Deciding whether a build is safe to launch (use release-gate)</li><li>Writing and tuning a skill (use draft-skill or tune-skill)</li></ul>
+      <ul><li>Releasing one skill through the marketplace, tarball or plugin channels (use publish-release-gate)</li><li>Checking unpushed work or listing drift (use upstream-check)</li><li>Deciding whether a build is safe to launch (use release-gate-chair)</li><li>Writing and tuning a skill (use draft-skill or tune-skill)</li></ul>
     </div>
     </div>
   </div>
@@ -190,21 +190,21 @@
 <section class="ships" aria-labelledby="ships-h">
   <div class="wrap">
     <h2 id="ships-h">Every file it installs</h2>
-    <p class="intro">Measured from the packed archive at commit <code>5504ae3</code>. A skill is plain text your agent reads, so this list is all of it.</p>
+    <p class="intro">Measured from the packed archive at commit <code>b24df39</code>. A skill is plain text your agent reads, so this list is all of it.</p>
     <table class="files">
       <thead class="sr-only"><tr><th>File</th><th>Lines</th><th>Bytes</th></tr></thead>
       <tbody>
-        <tr><td>SKILL.md</td><td class="n">213</td><td class="n bytes">11,610 B</td></tr>
-        <tr><td>references/design.md</td><td class="n">58</td><td class="n bytes">4,788 B</td></tr>
+        <tr><td>SKILL.md</td><td class="n">237</td><td class="n bytes">13,280 B</td></tr>
+        <tr><td>references/design.md</td><td class="n">66</td><td class="n bytes">6,491 B</td></tr>
         <tr><td>references/generated-page.md</td><td class="n">53</td><td class="n bytes">2,617 B</td></tr>
         <tr><td>references/gotchas.md</td><td class="n">67</td><td class="n bytes">4,267 B</td></tr>
         <tr><td>references/manifest.md</td><td class="n">195</td><td class="n bytes">8,735 B</td></tr>
         <tr><td>references/shape-test.md</td><td class="n">116</td><td class="n bytes">5,248 B</td></tr>
         <tr><td>references/verification.md</td><td class="n">77</td><td class="n bytes">4,111 B</td></tr>
-        <tr><td>references/workflow.md</td><td class="n">193</td><td class="n bytes">8,065 B</td></tr>
+        <tr><td>references/workflow.md</td><td class="n">216</td><td class="n bytes">9,667 B</td></tr>
         <tr><td>scripts/validate_manifest.py</td><td class="n">245</td><td class="n bytes">11,049 B</td></tr>
       </tbody>
-      <tfoot><tr><td>9 files</td><td class="n">1,217</td><td class="n bytes">20 KB</td></tr></tfoot>
+      <tfoot><tr><td>9 files</td><td class="n">1,272</td><td class="n bytes">22 KB</td></tr></tfoot>
     </table>
   </div>
 </section>
