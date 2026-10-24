@@ -123,7 +123,8 @@ def render_page(entry, manifest=None):
     kb = max(1, round(source["bytes"] / 1024))
     mod = entry.get("kind") == "mod"
     noun = "Claude Code mod" if mod else "agent skill"
-    page_title = entry.get("pageTitle") or f"{entry['title']} — {noun}"
+    page_title = entry.get("pageTitle") or (f"{entry['title']} — Claude Code mod" if mod else
+                                            f"{entry['title']} — AI Agent Skill for Claude Code and Codex")
     purpose, when, says, nots = split_description(source["description"])
     related = related_html(entry, manifest)
     if not related:

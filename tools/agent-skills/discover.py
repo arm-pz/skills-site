@@ -157,7 +157,7 @@ def candidate_entry(name, path, group, tag, source, order):
         "group": group,
         "tag": tag,
         "title": title,
-        "pageTitle": f"{title} — agent skill",
+        "pageTitle": f"{title} — AI Agent Skill for Claude Code and Codex",
         "blurb": draft_blurb(source["description"]),
         "stats": (f'{source["fileCount"]} files · {source["lines"]:,} lines · '
                   f'{max(1, round(source["bytes"] / 1024))} KB'),

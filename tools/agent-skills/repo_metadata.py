@@ -3,10 +3,11 @@
 
     python tools/agent-skills/repo_metadata.py            # show what would change (needs `gh auth login`)
     python tools/agent-skills/repo_metadata.py --apply    # apply it
+    python tools/agent-skills/repo_metadata.py --apply --about   # also set About text findable wrote
 
 Additive only: a topic is added when missing (never removed, GitHub's cap of 20 respected) and the
-homepage is set to the skill's page only when it is empty. The About text is never touched; findable
-writes that per repo. Run it from your own machine: Claude Code cloud sessions cannot write repo
+homepage is set to the skill's page only when it is empty. The About text changes only with --about,
+and only for entries whose `githubAbout` (written by findable, in site/skills.json) differs from it. Run it from your own machine: Claude Code cloud sessions cannot write repo
 settings. Safe to re-run whenever a skill is added.
 """
 import argparse
@@ -24,14 +25,14 @@ MARKETPLACE_TOPICS = ["claude-code-plugin", "plugin-marketplace", "codex-plugin"
 
 
 def wanted(manifest):
-    """{repo: (topics, homepage)} for every repo the site publishes."""
-    out = {MARKETPLACE: (MARKETPLACE_TOPICS, f"{skilllib.SITE}/")}
+    """{repo: (topics, homepage, about or None)} for every repo the site publishes."""
+    out = {MARKETPLACE: (MARKETPLACE_TOPICS, f"{skilllib.SITE}/", None)}
     for s in manifest["skills"]:
         repo = s.get("repo")
         if not repo or repo in out:
             continue
-        topics = MOD_TOPICS if s.get("kind") == "mod" else SKILL_TOPICS
-        out[repo] = (topics, f"{skilllib.SITE}/{s['name']}/")
+        topics = list(MOD_TOPICS if s.get("kind") == "mod" else SKILL_TOPICS) + s.get("githubTopics", [])
+        out[repo] = (topics, f"{skilllib.SITE}/{s['name']}/", s.get("githubAbout"))
     return out
 
 
@@ -52,11 +53,12 @@ def gh(*args, data=None):
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--apply", action="store_true")
+    ap.add_argument("--about", action="store_true", help="also replace About text with githubAbout")
     ap.add_argument("--root", default=".")
     a = ap.parse_args(argv)
     manifest = json.loads((Path(a.root) / "site" / "skills.json").read_text(encoding="utf-8"))
     changes = failures = 0
-    for repo, (topics, homepage) in sorted(wanted(manifest).items()):
+    for repo, (topics, homepage, about) in sorted(wanted(manifest).items()):
         try:
             current = json.loads(gh("api", f"repos/{repo}"))
         except RuntimeError as e:
@@ -64,12 +66,14 @@ def main(argv=None):
             failures += 1
             continue
         have, add, home = plan(current, topics, homepage)
-        if not add and not home:
+        new_about = about if a.about and about and about != (current.get("description") or "") else None
+        if not add and not home and not new_about:
             continue
         changes += 1
         print(f"{'apply' if a.apply else 'would'}  {repo}: "
               + ", ".join(filter(None, [f"+topics {' '.join(add)}" if add else "",
-                                        f"homepage {home}" if home else ""])))
+                                        f"homepage {home}" if home else "",
+                                        f"about {new_about!r}" if new_about else ""])))
         if not a.apply:
             continue
         try:
@@ -78,6 +82,8 @@ def main(argv=None):
                    data=json.dumps({"names": have + add}))
             if home:
                 gh("api", "-X", "PATCH", f"repos/{repo}", "-f", f"homepage={home}")
+            if new_about:
+                gh("api", "-X", "PATCH", f"repos/{repo}", "-f", f"description={new_about}")
         except RuntimeError as e:
             print(f"failed {repo}: {e}")
             failures += 1

@@ -28,7 +28,7 @@ ENTRY = {
 class GenPageTest(unittest.TestCase):
     def test_title_default_and_description_escaping(self):
         out = gen_page.render_page(ENTRY)
-        self.assertIn("<title>Demo Skill — agent skill</title>", out)
+        self.assertIn("<title>Demo Skill — AI Agent Skill for Claude Code and Codex</title>", out)
         self.assertNotIn("<script>alert(1)</script>", out)
         self.assertIn("&lt;script&gt;alert(1)&lt;/script&gt;", out)
         self.assertIn("&amp;", out)
