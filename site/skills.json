@@ -67,7 +67,7 @@
       "title": "Caffeinity Routing",
       "pageTitle": "Caffeinity Routing — agent skill",
       "blurb": "Start here. Tell it the outcome you want and it picks one of eleven brews (workflows), lists the skills in order with what each hands the next, and names the ones you have not installed instead of improvising their work.",
-      "stats": "4 files · 357 lines · 8 KB",
+      "stats": "4 files · 384 lines · 9 KB",
       "install": "npx skills add arm-pz/caffeinity-skills --skill caffeinity-routing",
       "page": "generated",
       "pageSource": {
@@ -76,30 +76,30 @@
           {
             "path": "SKILL.md",
             "lines": 87,
-            "bytes": 5818
+            "bytes": 6176
           },
           {
             "path": "references/trigger-cases.md",
             "lines": 30,
-            "bytes": 2753
+            "bytes": 2888
           },
           {
             "path": "references/workflows.md",
-            "lines": 122,
-            "bytes": 9856
+            "lines": 126,
+            "bytes": 10364
           },
           {
             "path": "scripts/route_check.py",
-            "lines": 118,
-            "bytes": 4652
+            "lines": 141,
+            "bytes": 5514
           }
         ],
         "fileCount": 4,
-        "lines": 357,
-        "bytes": 8694,
+        "lines": 384,
+        "bytes": 9276,
         "license": "MIT",
-        "commit": "c207987c336ccb12dc314d9061db011fcd740601",
-        "sha256": "294a6c6e73ea8349483635f45b58cd1971c321b1c1185d19ec4a9722e5281d12"
+        "commit": "1695f28d7d688b9f49fd37599e381c1ef02ace98",
+        "sha256": "c129ba6ab9debbff1cd8a636b0f652b738c130e4419dac5804342a79d9418098"
       },
       "order": 101
     },
@@ -297,7 +297,7 @@
         "lines": 1288,
         "bytes": 20897,
         "license": "MIT",
-        "commit": "c207987c336ccb12dc314d9061db011fcd740601",
+        "commit": "1695f28d7d688b9f49fd37599e381c1ef02ace98",
         "sha256": "e79c3f9cbd44fd97b950ca333c4a51b40f644416361a221b0754d0fa31e31a28"
       },
       "order": 208
@@ -383,7 +383,7 @@
         "lines": 627,
         "bytes": 10387,
         "license": "MIT",
-        "commit": "c207987c336ccb12dc314d9061db011fcd740601",
+        "commit": "1695f28d7d688b9f49fd37599e381c1ef02ace98",
         "sha256": "0261e8afac9fd1c1a6bc03685149f45eae4a09c0c0b6f48f1e61b1ca60093aa9"
       },
       "order": 209
@@ -567,12 +567,12 @@
       "install": "npx skills add arm-pz/caffeinity-skills --skill skill-estate",
       "page": "generated",
       "pageSource": {
-        "description": "Takes a whole collection of agent skill repos from scattered to published, consistent and self-maintaining, in gated phases: inventory every repo, reconcile site, marketplace and README listings, test and tune the family, close workflow gaps, wire publishing so new skill repos go live on their own, bundle a plugin with agents, add trigger tests and directory listings, and leave a maintenance loop and a map. Each phase hands off to the skill that owns it and ends in PRs. Use when someone's skills site and GitHub disagree, wants all their skill repos audited or cleaned up, wants new skills to publish themselves, or wants that cleanup repeated on another org, even if they never say estate. Not for one skill (use tune-skill), one listing (use findable), the site pipeline alone (use publish-pipeline), or weekly upkeep (use caffeinity-routing Brew 10 · Descale).",
+        "description": "Takes a whole collection of agent skill repos from scattered to published, consistent and self-maintaining, in gated phases: inventory every repo, reconcile site, marketplace and README listings, test and tune the family, close workflow gaps, wire publishing so new skill repos go live on their own, bundle a plugin with agents, add trigger tests and directory listings, and leave a maintenance loop and a map. Each phase hands off to the skill that owns it and ends in PRs. Use when someone's skills site and GitHub disagree, wants all their skill repos audited or cleaned up, wants new skills to publish themselves, or wants that cleanup repeated on another org, even if they never say estate. Not for one skill (use tune-skill), one listing (use findable), the site pipeline alone (use publish-pipeline), or weekly upkeep (use caffeinity-routing's Descale brew).",
         "files": [
           {
             "path": "SKILL.md",
             "lines": 78,
-            "bytes": 5068
+            "bytes": 5092
           },
           {
             "path": "references/brief.md",
@@ -582,20 +582,20 @@
           {
             "path": "references/phases.md",
             "lines": 43,
-            "bytes": 4111
+            "bytes": 4141
           },
           {
             "path": "references/trigger-cases.md",
             "lines": 28,
-            "bytes": 1994
+            "bytes": 2009
           }
         ],
         "fileCount": 4,
         "lines": 175,
-        "bytes": 5460,
+        "bytes": 5483,
         "license": "MIT",
-        "commit": "c207987c336ccb12dc314d9061db011fcd740601",
-        "sha256": "401eb2c843d066dc01f9edbffb1f993c90c3258e7472a841299fbbf1d3ecbdd5"
+        "commit": "1695f28d7d688b9f49fd37599e381c1ef02ace98",
+        "sha256": "3b6d01bf0e34fa13c3bd449e2c544e025dd8f04bd7dff4a7637a6e2e072a8dc7"
       },
       "order": 307
     },
@@ -771,7 +771,7 @@
           {
             "path": "SKILL.md",
             "lines": 131,
-            "bytes": 6477
+            "bytes": 6484
           },
           {
             "path": "references/ledger.md",
@@ -786,10 +786,10 @@
         ],
         "fileCount": 4,
         "lines": 391,
-        "bytes": 7777,
+        "bytes": 7790,
         "license": "MIT",
-        "commit": "67ae6bf57d94b95768a7fc353e418edc730e2d76",
-        "sha256": "4fc3a25bb2fd32daead300ed76ce78fb703fa6d01d20b63e0dc9da3c4e634c34"
+        "commit": "6dbcbf7ad5a97fa02ef83eb05f8d0bfeb0b1c479",
+        "sha256": "820da9183f46d247f9f3d04fe345e498d9814999df2e08688aaa574f9b3c0751"
       },
       "order": 406
     },
@@ -816,7 +816,7 @@
           {
             "path": "SKILL.md",
             "lines": 112,
-            "bytes": 5618
+            "bytes": 5634
           },
           {
             "path": "patches/pre-ship-performance-audit-ledger-handoff.patch",
@@ -851,10 +851,10 @@
         ],
         "fileCount": 8,
         "lines": 530,
-        "bytes": 9454,
+        "bytes": 9480,
         "license": "MIT",
-        "commit": "f71b39bf32f8061efcd2ce68df60080a55cd55ef",
-        "sha256": "54cfe0e8c1fb25928ff003c2ca980e46c86fedbc20870c08b8127334ba984b01"
+        "commit": "8e84d64c6a70adb4fb967e6e48d6c461d7eb04ea",
+        "sha256": "6cd3568b8c50b4197c92e26293034e281bf598b698eeefc5b1256f1b404853f4"
       },
       "order": 407
     },
@@ -881,7 +881,7 @@
           {
             "path": "SKILL.md",
             "lines": 107,
-            "bytes": 5174
+            "bytes": 5190
           },
           {
             "path": "references/ledger.md",
@@ -906,10 +906,10 @@
         ],
         "fileCount": 6,
         "lines": 583,
-        "bytes": 10281,
+        "bytes": 10305,
         "license": "MIT",
-        "commit": "e39188fd1b13c6a2cfaff019dc671c50b1ff90a0",
-        "sha256": "b2b936923a21bb04e85a651f24c402d8d5c43fb9860685b29ea92e1d8f0a08f9"
+        "commit": "1b4c4c31fd2032574792cc6a62de12904990254d",
+        "sha256": "33f91264d733601a3be595a3aca6ed831ada4876012a35881c1cddc22f40f849"
       },
       "order": 408
     },
@@ -960,7 +960,7 @@
           {
             "path": "SKILL.md",
             "lines": 81,
-            "bytes": 4887
+            "bytes": 4903
           },
           {
             "path": "references/facts.md",
@@ -990,10 +990,10 @@
         ],
         "fileCount": 6,
         "lines": 381,
-        "bytes": 8572,
+        "bytes": 8594,
         "license": "MIT",
-        "commit": "c207987c336ccb12dc314d9061db011fcd740601",
-        "sha256": "a5206ab80f987b87fdbd09e894fe4324f3eb851ddc9fc102a49f033a41d53ec6"
+        "commit": "1695f28d7d688b9f49fd37599e381c1ef02ace98",
+        "sha256": "708fa51813888d0fa0d62a22b56e4468f5d0e55b76f3903961ddfc872d14356d"
       },
       "order": 411
     },
@@ -1056,7 +1056,7 @@
           {
             "path": "skills/release-gate-chair/SKILL.md",
             "lines": 131,
-            "bytes": 6477
+            "bytes": 6493
           },
           {
             "path": "skills/release-gate-chair/references/ledger.md",
@@ -1081,10 +1081,10 @@
         ],
         "fileCount": 13,
         "lines": 950,
-        "bytes": 15768,
+        "bytes": 15781,
         "license": "MIT",
-        "commit": "c207987c336ccb12dc314d9061db011fcd740601",
-        "sha256": "f46ec6341b008bd7748e7f2a8543dffea98fd18578266be9165c995ec4f89e1b"
+        "commit": "1695f28d7d688b9f49fd37599e381c1ef02ace98",
+        "sha256": "483f9eaa604c13a11140d9ee8ba44deaf5ae46289fd23c277f366014f623312e"
       },
       "order": 412
     },
@@ -1164,7 +1164,7 @@
         "lines": 872,
         "bytes": 15074,
         "license": "MIT",
-        "commit": "c207987c336ccb12dc314d9061db011fcd740601",
+        "commit": "1695f28d7d688b9f49fd37599e381c1ef02ace98",
         "sha256": "196c0f18c29c96eb51d0aa2096766dc642351fe7a571be583eccb7ea17289d9f"
       },
       "order": 413
@@ -1275,7 +1275,7 @@
         "lines": 1588,
         "bytes": 30959,
         "license": "MIT",
-        "commit": "c207987c336ccb12dc314d9061db011fcd740601",
+        "commit": "1695f28d7d688b9f49fd37599e381c1ef02ace98",
         "sha256": "9fa3a48b71b2026a6d834903d0a2322ebf5dcc7cf065e441ef8041cf4184a711"
       },
       "order": 414
@@ -1346,7 +1346,7 @@
         "lines": 597,
         "bytes": 11488,
         "license": "MIT",
-        "commit": "c207987c336ccb12dc314d9061db011fcd740601",
+        "commit": "1695f28d7d688b9f49fd37599e381c1ef02ace98",
         "sha256": "b8a788d07ff582c241ad3489dd83f30c482caab29d18a419b7c10c4cfd7b1a72"
       },
       "order": 415
@@ -1375,7 +1375,7 @@
           {
             "path": "SKILL.md",
             "lines": 88,
-            "bytes": 5924
+            "bytes": 5946
           },
           {
             "path": "examples/sample-report.md",
@@ -1440,10 +1440,10 @@
         ],
         "fileCount": 14,
         "lines": 1885,
-        "bytes": 19109,
+        "bytes": 19128,
         "license": "MIT",
-        "commit": "8011f18e5143135697f7aad62438f6abf4487230",
-        "sha256": "05e3eafecc6b2264cc54864e9320ff2401058dccd238b4037f14751fa510487a"
+        "commit": "be96031d9a03b8f478f7fbd83eda36d5996de91a",
+        "sha256": "154b53859ee5775614c59d03a9a500d9c220161f3422a5458fd7f512a8baa860"
       }
     },
     {
@@ -2033,7 +2033,7 @@
         "lines": 301,
         "bytes": 6078,
         "license": "MIT",
-        "commit": "c207987c336ccb12dc314d9061db011fcd740601",
+        "commit": "dcdbf36c410a74af9b72b62b2afd987b84be9748",
         "sha256": "f51263530294c91d85bbf58013df1a6f849c25c4209f34837655298799028c86"
       },
       "order": 909
