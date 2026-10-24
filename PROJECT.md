@@ -10,7 +10,7 @@ disagree, the repo wins; fix this file.
 | --- | --- |
 | `arm-pz/<skill>` (one per skill) | The skills themselves: one `SKILL.md` per repo, at `SKILL.md`, `<repo>/SKILL.md` or `skills/<repo>/SKILL.md`. Installed with `npx skills add arm-pz/<repo>`. |
 | `arm-pz/skills-site` (this repo) | skills.caffeinity.com: the hub, one page per skill, both discovery indexes, archives, sitemap, and all the automation below. `site/skills.json` is the single list of what is published. |
-| `arm-pz/caffeinity-skills` | Plugin marketplace for Claude Code (`.claude-plugin/marketplace.json`) and Codex (`.agents/plugins/marketplace.json`). Holds the mods (`mods/*`), `plugins/caffeinity-routing` (the start-here router), two skills that live only here (`plugins/paper-trail`, `plugins/course-builder`) and `plugins/caffeinity`: every skill plus ten workflow agents in one install, generated hourly by `scripts/build_plugin.py`. |
+| `arm-pz/caffeinity-skills` | Plugin marketplace for Claude Code (`.claude-plugin/marketplace.json`) and Codex (`.agents/plugins/marketplace.json`). Holds the mods (`mods/*`), `plugins/caffeinity-routing` (the start-here router), three skills that live only here (`plugins/paper-trail`, `plugins/course-builder`, `plugins/skill-estate`) and `plugins/caffeinity`: every skill plus eleven workflow agents in one install, generated hourly by `scripts/build_plugin.py`. |
 | `arm-pz/arm-pz` | The GitHub profile README. Its skills block is generated from `site/skills.json`. |
 | `arm-pz/ship-sentinel` | A Claude Code mod (no SKILL.md) that holds `git push` and deploys until the check skills have run. Listed on the site as a mod. |
 | `caffeinity-skills/mods/*` | Six more mods made with skill-to-mod (release-gate, web-preflight, security red team, performance audit, tune-skill, skill-release). Each has a generated page measured from its `.claude-plugin/plugin.json`, refreshed by the sync like any skill. Mods get pages, not archives or discovery-index entries. |
@@ -22,7 +22,7 @@ disagree, the repo wins; fix this file.
 
 Everything else under arm-pz (apps, sites, forks) has no SKILL.md and is ignored by the pipeline.
 
-**The skill inventory is `site/skills.json`**: name, repo, group, page kind, blurb, and the ten
+**The skill inventory is `site/skills.json`**: name, repo, group, page kind, blurb, and the eleven
 workflows. Do not copy it into other files; the hub, both indexes, the sitemap, the pages and the
 profile README are all generated from it.
 
@@ -105,7 +105,7 @@ To accept an intended change (a new WARN you decided to keep):
 
 ## The workflows across skills
 
-Ten routes, defined once in `site/skills.json` (`workflows`) and in
+Eleven routes, defined once in `site/skills.json` (`workflows`) and in
 `caffeinity-skills/plugins/caffeinity-routing/skills/caffeinity-routing/references/workflows.md`
 (the router's copy, with each step's input and output). They must name the same skills in the same
 order; check with `route_check.py`.
@@ -122,10 +122,11 @@ order; check with `route_check.py`.
 | W8 | Run cold outbound | cold-email-list-gate → cold-email-ops → sales-copy |
 | W9 | Launch a one-person product | solo-income-blueprint → site-prompt → production-code → paper-trail → release-gate-chair → platform-content |
 | W10 | Maintain the skill family | tune-skill (regress.py) → prompts-to-skill-release (optional) → upstream-check |
+| W11 | Stand up or audit a skill estate | skill-estate: the whole sweep this project was, in eight gated phases (inventory, listings, tune, gaps, publish and bundle, trigger tests, discovery, maintenance loop) |
 
 Each workflow has an agent in the `caffeinity` plugin: skill-builder, discovery-lead,
 release-gatekeeper, seo-lead, job-search-coach, decision-analyst, learning-coach, outbound-lead,
-solo-launcher and skill-maintainer (W1 to W10). Codex has no subagents; there the
+solo-launcher, skill-maintainer and estate-lead (W1 to W11). Codex has no subagents; there the
 `caffeinity-routing` skill names the workflow and the next skill.
 
 ### Changing a workflow
