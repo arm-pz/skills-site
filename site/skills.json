@@ -98,7 +98,7 @@
         "lines": 347,
         "bytes": 8492,
         "license": "MIT",
-        "commit": "b381cef432ba2822e04c52aa089afdfedc0bd2d2",
+        "commit": "d1334f6f377f4a3446c6fc1e071559303471b48d",
         "sha256": "c3dccd7ba4b366d0aece85ef979438315ed88c3d6610a2b686fb582f252991b2"
       },
       "order": 101
@@ -534,7 +534,7 @@
           {
             "path": "SKILL.md",
             "lines": 131,
-            "bytes": 6449
+            "bytes": 6477
           },
           {
             "path": "references/ledger.md",
@@ -549,10 +549,10 @@
         ],
         "fileCount": 4,
         "lines": 391,
-        "bytes": 7763,
+        "bytes": 7777,
         "license": "MIT",
-        "commit": "49ccb5335a68c989c5668092c8e4565d5b689f13",
-        "sha256": "62dffab3bab1c5ae551ebe535a57778a8fc5fae0ad599ddbbc4dd22d9c4311b9"
+        "commit": "67ae6bf57d94b95768a7fc353e418edc730e2d76",
+        "sha256": "4fc3a25bb2fd32daead300ed76ce78fb703fa6d01d20b63e0dc9da3c4e634c34"
       },
       "order": 406
     },
@@ -579,7 +579,7 @@
           {
             "path": "SKILL.md",
             "lines": 112,
-            "bytes": 5590
+            "bytes": 5618
           },
           {
             "path": "patches/pre-ship-performance-audit-ledger-handoff.patch",
@@ -614,10 +614,10 @@
         ],
         "fileCount": 8,
         "lines": 530,
-        "bytes": 9441,
+        "bytes": 9454,
         "license": "MIT",
-        "commit": "0feae5eae5aff9ef35fb5d9cee38ca93d690c46d",
-        "sha256": "12b512075de2f310e3e8bc911ed278441e6920d9d4207d8bb559dbed47da2545"
+        "commit": "f71b39bf32f8061efcd2ce68df60080a55cd55ef",
+        "sha256": "54cfe0e8c1fb25928ff003c2ca980e46c86fedbc20870c08b8127334ba984b01"
       },
       "order": 407
     },
@@ -644,7 +644,7 @@
           {
             "path": "SKILL.md",
             "lines": 107,
-            "bytes": 5146
+            "bytes": 5174
           },
           {
             "path": "references/ledger.md",
@@ -669,10 +669,10 @@
         ],
         "fileCount": 6,
         "lines": 583,
-        "bytes": 10266,
+        "bytes": 10281,
         "license": "MIT",
-        "commit": "c9dc14eeb16d1382a6ad0b42aa413276ea71ff7b",
-        "sha256": "2a9ea62d531ba67be8c2105ac5f0b4383ffa930983aa0916af508ab2869c1092"
+        "commit": "e39188fd1b13c6a2cfaff019dc671c50b1ff90a0",
+        "sha256": "b2b936923a21bb04e85a651f24c402d8d5c43fb9860685b29ea92e1d8f0a08f9"
       },
       "order": 408
     },
@@ -704,6 +704,61 @@
         "sha256": "5fc7b96613384bcd40fd3b65f2a6d63b7a287324dd7b797fc3a919bcf0eca50c",
         "description": "Runs three pre-launch passes (exposure, app-tests, perf) in sequence and returns one release posture — HOLD or ready — with three separate verdicts and one merged finding register."
       }
+    },
+    {
+      "name": "paper-trail",
+      "repo": "arm-pz/caffeinity-skills",
+      "path": "plugins/paper-trail/skills/paper-trail",
+      "group": "ship-checks",
+      "tag": "release",
+      "title": "Paper Trail",
+      "pageTitle": "Paper Trail — agent skill",
+      "blurb": "Privacy policy, terms, refund and cookie pages written only from facts you confirm, then checked for placeholders, missing sections and emails nobody supplied. Says when a lawyer should look.",
+      "stats": "6 files · 381 lines · 8 KB",
+      "install": "npx skills add arm-pz/caffeinity-skills --skill paper-trail",
+      "page": "generated",
+      "pageSource": {
+        "description": "Drafts the policy pages a small product needs before it takes money or data (privacy policy, terms of service, refund policy, cookie notice) from a fact sheet about what the product actually collects, stores, shares and charges, then checks the drafts for placeholders, missing sections and facts nobody supplied. Use when someone needs a privacy policy, terms, refund or cookie page for a site, app, SaaS, newsletter or digital product, asks what legal pages they need before launch, or wants existing policy pages checked against what the product really does, even if they never say \"legal\". Not legal advice and not for contracts, NDAs or employment documents (use a lawyer), and not for the launch plan itself (use solo-income-blueprint) or the site build (use site-prompt).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 81,
+            "bytes": 4887
+          },
+          {
+            "path": "references/facts.md",
+            "lines": 60,
+            "bytes": 2595
+          },
+          {
+            "path": "references/jurisdictions.md",
+            "lines": 23,
+            "bytes": 2546
+          },
+          {
+            "path": "references/pages.md",
+            "lines": 64,
+            "bytes": 2338
+          },
+          {
+            "path": "references/trigger-cases.md",
+            "lines": 28,
+            "bytes": 2141
+          },
+          {
+            "path": "scripts/check_pages.py",
+            "lines": 125,
+            "bytes": 6005
+          }
+        ],
+        "fileCount": 6,
+        "lines": 381,
+        "bytes": 8572,
+        "license": "MIT",
+        "commit": "d1334f6f377f4a3446c6fc1e071559303471b48d",
+        "sha256": "a5206ab80f987b87fdbd09e894fe4324f3eb851ddc9fc102a49f033a41d53ec6"
+      },
+      "order": 411
     },
     {
       "name": "seo-crawl",
@@ -1315,12 +1370,12 @@
       "install": "npx skills add arm-pz/study-system",
       "page": "generated",
       "pageSource": {
-        "description": "A personal system for acquiring a skill: decomposition into the minimum viable components, a beginner-to-practitioner roadmap, the mental models that unlock a subject, Feynman-level explanations, deliberate-practice routines, knowledge-gap audits that surface wrong assumptions, spaced-repetition schedules, application exercises and honest mastery assessments of where the learner actually is. Use whenever someone has a skill already in progress and needs the structure around it, asks how to practise, how long a skill takes, what they are missing, for a study plan or revision schedule, or says they keep forgetting what they read, even if they never say curriculum. Not for being taught the topic itself concept by concept (use topic-primer), for career positioning and moves (use career-track) or for course content written for a class of students (use module-learning-path-generator).",
+        "description": "A personal system for acquiring a skill: decomposition into the minimum viable components, a beginner-to-practitioner roadmap, the mental models that unlock a subject, Feynman-level explanations, deliberate-practice routines, knowledge-gap audits that surface wrong assumptions, spaced-repetition schedules, application exercises and honest mastery assessments of where the learner actually is. Use whenever someone has a skill already in progress and needs the structure around it, asks how to practise, how long a skill takes, what they are missing, for a study plan or revision schedule, or says they keep forgetting what they read, even if they never say curriculum. Not for being taught the topic itself concept by concept (use topic-primer), for career positioning and moves (use career-track) or for course content written for a class of students (use course-builder).",
         "files": [
           {
             "path": "SKILL.md",
             "lines": 123,
-            "bytes": 10304
+            "bytes": 10272
           },
           {
             "path": "references/assessment.md",
@@ -1335,67 +1390,12 @@
         ],
         "fileCount": 3,
         "lines": 373,
-        "bytes": 11542,
+        "bytes": 11531,
         "license": "MIT",
-        "commit": "3cac33e5a0eee0a63ed7a6ee5a62135d633fc3da",
-        "sha256": "ca8c5df25870fe9af23268072575abb04763b50d750d612816338b428a8e66ed"
+        "commit": "82320f687421ae0a334e06dab6b0dbd59aa7ef23",
+        "sha256": "67998d85149ba4cf4af0e62db5921c8315f71c6c220089b4a93f8b6e9f6f0c8a"
       },
       "order": 908
-    },
-    {
-      "name": "paper-trail",
-      "repo": "arm-pz/caffeinity-skills",
-      "path": "plugins/paper-trail/skills/paper-trail",
-      "group": "ship-checks",
-      "tag": "release",
-      "title": "Paper Trail",
-      "pageTitle": "Paper Trail — agent skill",
-      "blurb": "Privacy policy, terms, refund and cookie pages written only from facts you confirm, then checked for placeholders, missing sections and emails nobody supplied. Says when a lawyer should look.",
-      "stats": "6 files · 381 lines · 8 KB",
-      "install": "npx skills add arm-pz/caffeinity-skills --skill paper-trail",
-      "page": "generated",
-      "pageSource": {
-        "description": "Drafts the policy pages a small product needs before it takes money or data (privacy policy, terms of service, refund policy, cookie notice) from a fact sheet about what the product actually collects, stores, shares and charges, then checks the drafts for placeholders, missing sections and facts nobody supplied. Use when someone needs a privacy policy, terms, refund or cookie page for a site, app, SaaS, newsletter or digital product, asks what legal pages they need before launch, or wants existing policy pages checked against what the product really does, even if they never say \"legal\". Not legal advice and not for contracts, NDAs or employment documents (use a lawyer), and not for the launch plan itself (use solo-income-blueprint) or the site build (use site-prompt).",
-        "files": [
-          {
-            "path": "SKILL.md",
-            "lines": 81,
-            "bytes": 4887
-          },
-          {
-            "path": "references/facts.md",
-            "lines": 60,
-            "bytes": 2595
-          },
-          {
-            "path": "references/jurisdictions.md",
-            "lines": 23,
-            "bytes": 2546
-          },
-          {
-            "path": "references/pages.md",
-            "lines": 64,
-            "bytes": 2338
-          },
-          {
-            "path": "references/trigger-cases.md",
-            "lines": 28,
-            "bytes": 2141
-          },
-          {
-            "path": "scripts/check_pages.py",
-            "lines": 125,
-            "bytes": 6005
-          }
-        ],
-        "fileCount": 6,
-        "lines": 381,
-        "bytes": 8572,
-        "license": "MIT",
-        "commit": "b381cef432ba2822e04c52aa089afdfedc0bd2d2",
-        "sha256": "a5206ab80f987b87fdbd09e894fe4324f3eb851ddc9fc102a49f033a41d53ec6"
-      },
-      "order": 411
     },
     {
       "name": "course-builder",
@@ -1442,7 +1442,7 @@
         "lines": 301,
         "bytes": 6078,
         "license": "MIT",
-        "commit": "b381cef432ba2822e04c52aa089afdfedc0bd2d2",
+        "commit": "d1334f6f377f4a3446c6fc1e071559303471b48d",
         "sha256": "f51263530294c91d85bbf58013df1a6f849c25c4209f34837655298799028c86"
       },
       "order": 909
