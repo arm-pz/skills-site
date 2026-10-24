@@ -121,7 +121,9 @@ def render_page(entry, manifest=None):
     canonical = f"{skilllib.SITE}/{name}/"
     files = source["files"]
     kb = max(1, round(source["bytes"] / 1024))
-    page_title = entry.get("pageTitle") or f"{entry['title']} — agent skill"
+    mod = entry.get("kind") == "mod"
+    noun = "Claude Code mod" if mod else "agent skill"
+    page_title = entry.get("pageTitle") or f"{entry['title']} — {noun}"
     purpose, when, says, nots = split_description(source["description"])
     related = related_html(entry, manifest)
     if not related:
@@ -170,6 +172,11 @@ def render_page(entry, manifest=None):
         "FILES_TABLE": table_rows,
         "SOURCE_PATH": esc(entry["path"]),
         "COMMIT": esc(commit[:7]),
+        "NOUN": noun,
+        "NOUN_SHORT": "mod" if mod else "skill",
+        "FILES_INTRO": ("A mod is code that runs inside Claude Code with your permissions, so read "
+                        "its hooks before you install it." if mod else
+                        "A skill is plain text your agent reads, so this list is all of it."),
     }
     template = TEMPLATE.read_text(encoding="utf-8")
     for key, value in tokens.items():

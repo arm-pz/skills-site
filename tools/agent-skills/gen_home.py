@@ -15,6 +15,8 @@ FLOWS_START = "    <!-- gen:workflows:start -->"
 FLOWS_END = "    <!-- gen:workflows:end -->"
 STATS_START = "<!-- gen:stats:start -->"
 STATS_END = "<!-- gen:stats:end -->"
+WALL_START = "<!-- gen:wall:start -->"
+WALL_END = "<!-- gen:wall:end -->"
 JSONLD_START = "<!-- gen:jsonld:start -->"
 JSONLD_END = "<!-- gen:jsonld:end -->"
 HUB_DESCRIPTION = ("Open agent skills for Claude Code, Cursor, Codex and Qoder, mapped into ten "
@@ -89,6 +91,27 @@ def render_skills(manifest):
     return "\n".join(lines)
 
 
+def render_wall(manifest):
+    """Two drifting rows of small cards: every skill and mod at a glance, linking to its page.
+
+    Each row holds its cards twice so the CSS loop is seamless; the copy is hidden from
+    assistive tech and the tab order.
+    """
+    cards = visible(manifest)
+    rows = [cards[0::2], cards[1::2]]
+    lines = ['<div class="wall" aria-label="Every skill and mod">']
+    for i, row in enumerate(rows):
+        lines.append(f'  <div class="wall-row{" wall-rev" if i else ""}"><div class="wall-track">')
+        for copy in (False, True):
+            hide = ' aria-hidden="true" tabindex="-1"' if copy else ""
+            for s in row:
+                lines.append(f'    <a class="wcard" href="{esc(s["name"])}/"{hide}><b>{esc(s["name"])}</b>'
+                             f'<code>{esc(s["repo"])}</code></a>')
+        lines.append('  </div></div>')
+    lines.append('</div>')
+    return "\n".join(lines)
+
+
 def render_workflows(manifest):
     lines = []
     for flow in manifest.get("workflows", []):
@@ -147,6 +170,9 @@ def render(text, manifest):
     if FLOWS_START in text:
         flows = render_workflows(manifest).replace("\n", nl)
         text = replace_region(text, FLOWS_START, FLOWS_END, nl + flows + nl)
+    if WALL_START in text:
+        wall = render_wall(manifest).replace("\n", nl)
+        text = replace_region(text, WALL_START, WALL_END, nl + wall + nl)
     if STATS_START in text:
         text = replace_region(text, STATS_START, STATS_END, render_stats(manifest))
     ld = render_jsonld(manifest).replace("\n", nl)

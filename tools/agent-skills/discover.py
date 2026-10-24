@@ -112,9 +112,22 @@ def gh_bytes(args):
     return result.stdout
 
 
+def entry_point(files, path):
+    """The file that describes what lives at path: a SKILL.md, or a mod's plugin.json."""
+    prefix = "" if path == "." else path + "/"
+    for rel in ("SKILL.md", ".claude-plugin/plugin.json"):
+        if prefix + rel in files:
+            return prefix + rel
+    return None
+
+
 def measure(repo, files, path):
-    skill_file = files[(path + "/SKILL.md") if path != "." else "SKILL.md"]
-    fm = skilllib.parse_frontmatter(skill_file.decode("utf-8", "replace"))
+    point = entry_point(files, path)
+    if point is None:
+        raise KeyError(f"no SKILL.md or .claude-plugin/plugin.json at {path}")
+    text = files[point].decode("utf-8", "replace")
+    fm = (skilllib.parse_frontmatter(text) if point.endswith("SKILL.md")
+          else {"description": json.loads(text)["description"]})
     selected = skilllib.select_skill_files(files, path)
     blob = skilllib.pack(selected)
     commit = json.loads(gh("api", f"repos/{OWNER}/{repo}/commits/HEAD"))["sha"]

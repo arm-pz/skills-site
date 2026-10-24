@@ -91,7 +91,7 @@ def validate_manifest(data):
         _req(kind in KINDS, f"{name}: kind must be one of {KINDS}")
         if kind == "mod":
             _req(s.get("repo") is not None, f"{name}: a mod needs a repo")
-            _req(page == "bespoke", f"{name}: a mod page must be bespoke")
+            _req(page in ("bespoke", "generated"), f"{name}: a mod page must be bespoke or generated")
         if page != "none":
             _req(isinstance(s.get("blurb"), str) and s["blurb"].strip(),
                  f"{name}: blurb required when page is not none")
@@ -115,11 +115,15 @@ def validate_manifest(data):
             _req(s.get("path") in (".", name, f"skills/{name}"),
                  f"{name}: path must be '.', '{name}' or 'skills/{name}'")
         else:
-            # A skill bundled inside another repo, such as a marketplace plugin.
+            # A skill or mod bundled inside another repo, such as a marketplace plugin.
             _req(re.fullmatch(r"arm-pz/[A-Za-z0-9._-]+", str(repo)),
                  f"{name}: repo must be arm-pz/{name} or another arm-pz repo")
-            _req(str(s.get("path", "")).endswith(f"skills/{name}"),
-                 f"{name}: a skill in another repo needs a path ending in 'skills/{name}'")
+            if kind == "mod":
+                _req(str(s.get("path", "")).rstrip("/").split("/")[-1] == name,
+                     f"{name}: a mod in another repo needs a path ending in '/{name}'")
+            else:
+                _req(str(s.get("path", "")).endswith(f"skills/{name}"),
+                     f"{name}: a skill in another repo needs a path ending in 'skills/{name}'")
 
         if page == "generated":
             src = s.get("pageSource")
