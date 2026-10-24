@@ -19,7 +19,8 @@ if [ -d dist ]; then
 fi
 mkdir -p dist/agent-skills dist/.well-known/agent-skills dist/fonts
 
-for f in 404.html _headers favicon.ico favicon.svg robots.txt index.html; do
+for f in 404.html _headers favicon.ico favicon.svg robots.txt index.html \
+         "$(python tools/agent-skills/indexnow.py --key-file | tr -d '\r')"; do
   cp "$f" dist/
 done
 cp -r fonts/. dist/fonts/
@@ -30,6 +31,7 @@ cp out/index.json dist/agent-skills/index.json
 cp out/index.json dist/.well-known/agent-skills/index.json
 cp out/sitemap.xml dist/sitemap.xml
 cp out/_redirects dist/_redirects
+cp out/_routes.json dist/_routes.json
 cp out/llms.txt dist/llms.txt
 
 python tools/agent-skills/gen_page.py --list | tr -d '\r' | while read -r name; do
@@ -37,6 +39,9 @@ python tools/agent-skills/gen_page.py --list | tr -d '\r' | while read -r name; 
   mkdir -p "dist/$name"
   cp "$name/index.html" "dist/$name/index.html"
 done
+
+# Dates, author and a Markdown twin for every page (dates come from git, so only now).
+python tools/agent-skills/twins.py
 
 # One hash over every file, so CI can tell whether the live site already matches this build.
 python - <<'PY'

@@ -17,6 +17,19 @@ def entry(name, digest):
             "digest": f"sha256:{digest}"}
 
 
+KEY_FILE = "0123456789abcdef0123456789abcdef.txt"
+
+
+def stamped(name):
+    """A page as twins.py leaves it: dated JSON-LD, the stamp line and the twin link."""
+    twin = f"/{name}/index.md" if name else "/index.md"
+    ld = json.dumps({"@type": "SoftwareApplication", "datePublished": "2026-10-14",
+                     "dateModified": "2026-10-24", "author": {"name": "x"}})
+    return (f"<title>{name or 'hub'}</title>"
+            f'<link rel="alternate" type="text/markdown" href="{twin}">'
+            f'<script type="application/ld+json">{ld}</script><p class="page-stamp">x</p>')
+
+
 class CheckDistTest(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
@@ -60,14 +73,18 @@ class CheckDistTest(unittest.TestCase):
         shutil.copyfile(self.root / "out/sitemap.xml", self.root / "dist/sitemap.xml")
         for name in ("alpha", "beta"):
             (self.root / "dist" / name).mkdir()
-            (self.root / "dist" / name / "index.html").write_text(
-                f"<title>{name}</title>")
+            (self.root / "dist" / name / "index.html").write_text(stamped(name))
+            (self.root / "dist" / name / "index.md").write_text(f"# {name}\n")
         (self.root / "dist/index.html").write_text(
             '<a href="/alpha/">a</a><a href="/beta/">b</a>'
             '<div class="skill"></div><div class="skill"></div>'
-            '<script type="application/ld+json">{"numberOfItems": 2}</script>')
+            '<script type="application/ld+json">{"numberOfItems": 2}</script>' + stamped(""))
+        (self.root / "dist/index.md").write_text("# hub\n")
         for name in ("404.html", "_headers"):
             (self.root / "dist" / name).write_text("x")
+        (self.root / "dist/_routes.json").write_text(json.dumps(skilllib.routes(manifest, KEY_FILE)))
+        (self.root / KEY_FILE).write_text(KEY_FILE[:-4])
+        (self.root / "dist" / KEY_FILE).write_text(KEY_FILE[:-4])
         (self.root / "dist/_redirects").write_text("")
         (self.root / "dist/.well-known/skills.json").write_text("{}")
         (self.root / "dist/fonts").mkdir()
@@ -93,15 +110,29 @@ class CheckDistTest(unittest.TestCase):
         (self.root / "out/sitemap.xml").write_text(sitemap)
         (self.root / "dist/sitemap.xml").write_text(sitemap)
         (self.root / "dist/watch").mkdir()
-        (self.root / "dist/watch/index.html").write_text("<title>watch</title>")
+        (self.root / "dist/watch/index.html").write_text(stamped("watch"))
+        (self.root / "dist/watch/index.md").write_text("# watch\n")
         (self.root / "dist/index.html").write_text(
             '<a href="/alpha/">a</a><a href="/beta/">b</a><a href="/watch/">w</a>'
             '<div class="skill"></div><div class="skill"></div><div class="skill"></div>'
-            '<script type="application/ld+json">{"numberOfItems": 3}</script>')
+            '<script type="application/ld+json">{"numberOfItems": 3}</script>' + stamped(""))
         self.assertEqual(check_dist.check(self.root), [])
 
     def test_missing_404_fails(self):
         (self.root / "dist/404.html").unlink()
+        self.assertTrue(check_dist.check(self.root))
+
+    def test_missing_markdown_twin_fails(self):
+        (self.root / "dist/beta/index.md").unlink()
+        self.assertTrue(check_dist.check(self.root))
+
+    def test_undated_page_fails(self):
+        (self.root / "dist/beta/index.html").write_text(
+            stamped("beta").replace('"dateModified"', '"updated"'))
+        self.assertTrue(check_dist.check(self.root))
+
+    def test_missing_indexnow_key_fails(self):
+        (self.root / "dist" / KEY_FILE).unlink()
         self.assertTrue(check_dist.check(self.root))
 
     def test_digest_mismatch_fails(self):
@@ -124,6 +155,10 @@ class CheckDistTest(unittest.TestCase):
         (self.root / "site/skills.json").write_text(json.dumps(manifest))
         self.assertTrue(check_dist.check(self.root))  # _redirects is still empty
         (self.root / "dist/_redirects").write_text(skilllib.redirects(manifest))
+        self.assertTrue(check_dist.check(self.root))  # _routes.json still runs the old path
+        routes = skilllib.routes(manifest, KEY_FILE)
+        self.assertIn("/old-alpha/*", routes["exclude"])
+        (self.root / "dist/_routes.json").write_text(json.dumps(routes))
         self.assertEqual(check_dist.check(self.root), [])
         self.assertIn("/old-alpha/ /alpha/ 301", skilllib.redirects(manifest))
         self.assertIn("/agent-skills/old-alpha.tar.gz /agent-skills/alpha.tar.gz 301",

@@ -6,3 +6,11 @@
 
 /fonts/files/*
   Cache-Control: public, max-age=31536000, immutable
+
+/index.md
+  Content-Type: text/markdown; charset=utf-8
+  Link: <https://skills.caffeinity.com/>; rel="canonical"
+
+/:name/index.md
+  Content-Type: text/markdown; charset=utf-8
+  Link: <https://skills.caffeinity.com/:name/>; rel="canonical"

@@ -1,10 +1,12 @@
 """Write out/sitemap.xml from the manifest with per-path git dates."""
 
 import argparse
+import json
 import subprocess
 import sys
 from pathlib import Path
 
+import indexnow
 import skilllib
 
 
@@ -55,6 +57,10 @@ def main(argv=None):
     with open(out / "_redirects", "w", encoding="utf-8", newline="\n") as fh:
         fh.write(rules)
     print(f"out/_redirects: {rules.count(chr(10))} rules")
+    with open(out / "_routes.json", "w", encoding="utf-8", newline="\n") as fh:
+        json.dump(skilllib.routes(manifest, indexnow.key_file(root).name), fh, indent=2)
+        fh.write("\n")
+    print("out/_routes.json written")
     return 0
 
 

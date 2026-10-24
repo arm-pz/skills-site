@@ -34,11 +34,13 @@ push a public arm-pz repo with one SKILL.md and a repo About
        sync.py --write   add · refresh · rename · remove · hold
        unit tests → build → sitemap + _redirects → dist + version.json → check_dist → verify
        commit the sync to main as github-actions[bot]
-       the same build writes /llms.txt (install commands + every skill) for agents and AI search
+       the same build writes /llms.txt (install commands + every skill) for agents and AI search,
+       stamps each page with its git dates and author, and writes its Markdown twin (index.md)
        commit the gated dist/ to the `deploy` branch (public/), only when the build changed
   └─ minutes later: Cloudflare Pages (Git-connected to `deploy`) pulls and serves it
        the same job waits for the live version.json to match, verifies live, and opens one
        "Deploy pending" issue only if it never does (fallback: tools/agent-skills/deploy.sh)
+       once live, it submits the pages that changed to IndexNow (Bing and friends)
   └─ within the hour: arm-pz/caffeinity-skills  build-plugin.yml  (cron 27 * * * *)
        re-bundle plugins/caffeinity from every skill repo; bump its version only if content changed
   └─ within the hour: arm-pz/arm-pz  skills-readme.yml  (cron 47 * * * *)
@@ -183,6 +185,10 @@ Still open:
 - **Search.** Google autocorrects "skills caffeinity" to "caffeine" and its AI Overview still
   describes the 2026-10-20 build. The hub now carries WebSite and Organization JSON-LD; add
   caffeinity.com to Google Search Console, submit `/sitemap.xml` and request indexing of the hub.
+- **Organic growth.** GROWTH.md maps the organic growth playbook onto this site: what the
+  pipeline does (Markdown twins, Accept negotiation, dates and author, IndexNow) and what needs
+  your accounts (Search Console, Bing Webmaster Tools, Brave, Reddit) or a content decision
+  (listicles, programmatic pages, other languages).
 - **Directory listings.** DIRECTORIES.md lists every directory, how it takes skills in, the
   text to submit and the status. Submitting is yours (each form needs your account); run
   `python tools/agent-skills/repo_metadata.py --apply` once to add topics and homepages.

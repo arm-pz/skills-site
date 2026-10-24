@@ -7,12 +7,14 @@ import sys
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
+import indexnow
 import skilllib
+import twins
 
 REF_RE = re.compile(r'(?:href|src)="(/[^"#?]*)"')
 TITLE_RE = re.compile(r"<title>(.*?)</title>", re.S)
 LD_RE = re.compile(r'<script type="application/ld\+json">\s*(\{.*?\})\s*</script>', re.S)
-STATIC = ["404.html", "_headers"]
+STATIC = ["404.html", "_headers", "_routes.json"]
 
 
 def sha256(path):
@@ -65,6 +67,32 @@ def check(root="."):
             title = TITLE_RE.search(page.read_text(encoding="utf-8"))
             need(bool(title and title.group(1).strip()),
                  f"{skill['name']}: page has no <title>")
+
+    # Every page carries its dates and author and has a Markdown twin (twins.py).
+    for rel in ["index.html"] + [f"{s['name']}/index.html" for s in pages]:
+        page = dist / rel
+        if not page.is_file():
+            continue
+        text = page.read_text(encoding="utf-8")
+        twin = Path(rel).with_suffix(".md")
+        need((dist / twin).is_file(), f"missing Markdown twin dist/{twin.as_posix()}")
+        need(f'<link rel="alternate" type="text/markdown" href="/{twin.as_posix()}">' in text,
+             f"{rel}: no alternate link to its Markdown twin")
+        need('class="page-stamp"' in text, f"{rel}: no visible author and date line")
+        nodes = [twins.dated_node(json.loads(m)) for m in LD_RE.findall(text)]
+        need(any(n and {"datePublished", "dateModified", "author"} <= n.keys() for n in nodes),
+             f"{rel}: JSON-LD has no dates or author")
+
+    try:
+        key = indexnow.key_file(root).name
+    except SystemExit as exc:
+        errors.append(str(exc))
+    else:
+        need((dist / key).is_file(), f"missing IndexNow key file dist/{key}")
+        routes = dist / "_routes.json"
+        need(routes.is_file() and
+             json.loads(routes.read_text(encoding="utf-8")) == skilllib.routes(manifest, key),
+             "dist/_routes.json is missing or differs from the manifest aliases")
 
     sitemap_path = dist / "sitemap.xml"
     need(sitemap_path.is_file(), "missing dist/sitemap.xml")

@@ -363,6 +363,28 @@ def redirects(manifest):
     return "".join(line + "\n" for line in lines)
 
 
+ROUTES_STATIC = ["/fonts/*", "/agent-skills/*", "/.well-known/*", "/favicon.ico", "/favicon.svg",
+                 "/robots.txt", "/sitemap.xml", "/llms.txt", "/version.json"]
+
+
+def routes(manifest, key_file):
+    """Cloudflare Pages _routes.json: which paths run functions/_middleware.js.
+
+    Static files skip it, and so does every renamed page's old URL: Cloudflare does not apply
+    _redirects to a path a Function serves, so the 301s in redirects() need those paths excluded.
+    """
+    exclude = list(ROUTES_STATIC) + [f"/{key_file}"]
+    for s in sorted(manifest["skills"], key=lambda s: s["name"]):
+        if s["page"] != "none":
+            for old in s.get("aliases", []):
+                exclude += [f"/{old}", f"/{old}/*"]
+    if len(exclude) + 1 > 100:
+        raise ManifestError(f"_routes.json would hold {len(exclude) + 1} rules; Cloudflare allows 100")
+    return {"version": 1,
+            "description": "Pages and their Markdown twins run functions/_middleware.js.",
+            "include": ["/*"], "exclude": exclude}
+
+
 INSTALL = {
     "claude": ["/plugin marketplace add arm-pz/caffeinity-skills",
                "/plugin install caffeinity@caffeinity-skills"],
@@ -387,7 +409,9 @@ def llms_txt(manifest):
            "- Codex: " + " ".join(f"`{c}`" for c in INSTALL["codex"])
            + ", then install caffeinity from the Plugins directory",
            "- Any agent, one skill: " + " ".join(f"`{c}`" for c in INSTALL["any"]),
-           f"- Discovery index: {SITE}/.well-known/agent-skills/index.json", ""]
+           f"- Discovery index: {SITE}/.well-known/agent-skills/index.json",
+           f"- Markdown: every page has a twin at its URL plus index.md (for example "
+           f"{SITE}/index.md), also served at the page URL for `Accept: text/markdown`", ""]
     for g in sorted(manifest["groups"], key=lambda g: g["order"]):
         rows = [s for s in pages if s["group"] == g["id"]]
         if not rows:

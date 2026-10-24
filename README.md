@@ -4,7 +4,8 @@ A static site and publish pipeline for a catalog of agent skills. Each skill
 (a SKILL.md repo) or Claude Code mod gets its own landing page with a one-line
 install command; the hub lists them all with a live filter; and a
 `/.well-known/agent-skills/index.json` discovery index lets anyone run
-`npx skills add https://your-domain`. One GitHub Actions workflow keeps the
+`npx skills add https://your-domain`. Every page also has a Markdown twin at
+`<page>/index.md`, served at the page URL to agents that ask for `text/markdown`. One GitHub Actions workflow keeps the
 manifest in step with GitHub and tests, builds and verifies the site, then
 commits the build to a `deploy` branch that Cloudflare Pages pulls through its
 own GitHub app, so CI holds no Cloudflare credentials. Plain HTML, CSS and Python, no
@@ -33,11 +34,14 @@ push to `main`, `.github/workflows/publish.yml` runs `sync.py`, which brings
 `site/skills.json` in line with GitHub (new skill repos, moved repo HEADs,
 renames, removals), rebuilds the site, gates it with `check_dist.py` and
 `verify.mjs`, commits the sync back to `main`, and commits the gated `dist/` to
-the `deploy` branch (under `public/`, only when the build changed). The
+the `deploy` branch (under `public/`, only when the build changed, with
+`functions/` beside it for Pages Functions). The
 Cloudflare Pages project is connected to that branch, so each push there goes
 live in a few minutes. The job then waits for the live `version.json` to match
 and verifies the live site; if it never matches it opens one "Deploy pending"
-issue, and closes it once live matches. `.github/workflows/health.yml` runs tune-skill's regression check over
+issue, and closes it once live matches. Once live, it submits the pages that
+changed to IndexNow (`indexnow.py`). GROWTH.md lists what else is done for
+search and what is left. `.github/workflows/health.yml` runs tune-skill's regression check over
 every published skill each night. `PROJECT.md` maps the whole ecosystem.
 
 ### Connecting Cloudflare Pages (once)
