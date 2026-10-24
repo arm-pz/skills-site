@@ -180,10 +180,12 @@ Still open:
 - **Search.** Google autocorrects "skills caffeinity" to "caffeine" and its AI Overview still
   describes the 2026-10-20 build. The hub now carries WebSite and Organization JSON-LD; add
   caffeinity.com to Google Search Console, submit `/sitemap.xml` and request indexing of the hub.
-- **Directory listings.** findable's kit says where to list a skill (skills.sh, awesome lists,
-  plugin directories); submitting is manual and not tracked anywhere.
-- **Trigger tests are hand-run.** Each skill's `references/trigger-cases.md` records them; no job
-  replays them against the descriptions.
+- **Directory listings.** DIRECTORIES.md lists every directory, how it takes skills in, the
+  text to submit and the status. Submitting is yours (each form needs your account); run
+  `python tools/agent-skills/repo_metadata.py --apply` once to add topics and homepages.
+- **Trigger tests** run with `bash scripts/run_evals.sh` in caffeinity-skills (about $5, on your login,
+  never in CI). Baseline 2026-10-24: 43/52; nine skills under-trigger on direct requests; those are
+  W10's next tuning targets.
 - **Descriptions past 850 of the 1,024-character limit** (caffeinity-routing 862, study-system 875) leave little
   room for a new boundary; the next edit should cut before it adds.
 - Bespoke pages carry hand-written stats (for example tune-skill's file count) that the sync does
