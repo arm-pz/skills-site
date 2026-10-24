@@ -165,6 +165,9 @@ python -m http.server 8080 --directory dist
 
 Closed on 2026-10-24:
 
+- skills.caffeinity.com deploys itself: the `skills-site` Pages project serves the `deploy`
+  branch, so every merge is live within the hour. Issue #8 closed on the first verified run.
+
 - W9 sent policy pages to `paper-trail`, which did not exist. It does now (caffeinity-skills).
 - study-system sent class curricula to an unpublished skill. `course-builder` owns them now.
 - The three release-gate skills required `caffeinity-stack`, which is not public. They read it
@@ -174,8 +177,9 @@ Closed on 2026-10-24:
 
 Still open:
 
-- **Connect Cloudflare to the `deploy` branch** (README.md, "Connecting Cloudflare Pages"). Until
-  then skills.caffeinity.com serves the 2026-10-20 build and the "Deploy pending" issue stays open.
+- **Search.** Google autocorrects "skills caffeinity" to "caffeine" and its AI Overview still
+  describes the 2026-10-20 build. The hub now carries WebSite and Organization JSON-LD; add
+  caffeinity.com to Google Search Console, submit `/sitemap.xml` and request indexing of the hub.
 - **Directory listings.** findable's kit says where to list a skill (skills.sh, awesome lists,
   plugin directories); submitting is manual and not tracked anywhere.
 - **Trigger tests are hand-run.** Each skill's `references/trigger-cases.md` records them; no job
