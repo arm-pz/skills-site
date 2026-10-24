@@ -1,27 +1,13 @@
 {
-  "collisions": [
-    "release-gate-chair & release-gate-ledger: \"give me a go/no-go\"",
-    "release-gate-chair & release-gate-ledger: \"is this safe to launch\"",
-    "release-gate-chair & release-gate-ledger: \"ready to ship\"",
-    "release-gate-chair & release-gate-ledger: \"should we deploy\"",
-    "release-gate-chair & release-gate-validator: \"give me a go/no-go\"",
-    "release-gate-chair & release-gate-validator: \"is this safe to launch\"",
-    "release-gate-chair & release-gate-validator: \"ready to ship\"",
-    "release-gate-ledger & release-gate-validator: \"give me a go/no-go\"",
-    "release-gate-ledger & release-gate-validator: \"is this safe to launch\"",
-    "release-gate-ledger & release-gate-validator: \"ready to ship\""
-  ],
-  "dangling": [
-    "study-system -> module-learning-path-generator"
-  ],
+  "collisions": [],
+  "dangling": [],
   "skills": {
     "applicant-kit": {
       "description_sha": "b926049273e7",
       "fail": [],
       "note": [],
       "warn": [
-        "description is 1000 characters, close to the 1024 limit",
-        "body says 'Six workflows'; check it matches the list that follows"
+        "description is 1000 characters, close to the 1024 limit"
       ]
     },
     "application-pilot": {
@@ -31,6 +17,12 @@
       "warn": [
         "description is 1007 characters, close to the 1024 limit"
       ]
+    },
+    "caffeinity-routing": {
+      "description_sha": "1b687fdf56e1",
+      "fail": [],
+      "note": [],
+      "warn": []
     },
     "career-track": {
       "description_sha": "f461156023cd",
@@ -50,11 +42,15 @@
       "note": [],
       "warn": []
     },
+    "course-builder": {
+      "description_sha": "172ca734c4ac",
+      "fail": [],
+      "note": [],
+      "warn": []
+    },
     "crash-test": {
       "description_sha": "66ea66fed445",
-      "fail": [
-        "frontmatter is not valid YAML: mapping values are not allowed here"
-      ],
+      "fail": [],
       "note": [],
       "warn": []
     },
@@ -65,12 +61,10 @@
       "warn": []
     },
     "do-better": {
-      "description_sha": "b3e41692aa31",
+      "description_sha": "8b237b967daa",
       "fail": [],
       "note": [],
-      "warn": [
-        "description has no 'Not for' boundary (fine for a skill with no siblings)"
-      ]
+      "warn": []
     },
     "draft-skill": {
       "description_sha": "d64ee40f5a0f",
@@ -91,16 +85,19 @@
       "warn": []
     },
     "keyword-guard": {
-      "description_sha": "a280cdd0b2cf",
+      "description_sha": "a33252ccdf90",
       "fail": [],
       "note": [],
-      "warn": [
-        "description has no 'Not for' boundary (fine for a skill with no siblings)",
-        "H1 'SEO Content Clusters' does not match name 'keyword-guard' (stale name?)"
-      ]
+      "warn": []
     },
     "keyword-resolver": {
       "description_sha": "52f657cc13cf",
+      "fail": [],
+      "note": [],
+      "warn": []
+    },
+    "paper-trail": {
+      "description_sha": "2dc5fd0e710f",
       "fail": [],
       "note": [],
       "warn": []
@@ -112,21 +109,17 @@
       "warn": []
     },
     "pre-ship-performance-audit": {
-      "description_sha": "43a24fc5b538",
+      "description_sha": "81b202ac8c07",
       "fail": [],
       "note": [],
-      "warn": [
-        "description has no 'Not for' boundary (fine for a skill with no siblings)"
-      ]
+      "warn": []
     },
     "pre-ship-security-red-team": {
-      "description_sha": "16f342401946",
+      "description_sha": "a72cd872dd6b",
       "fail": [],
       "note": [],
       "warn": [
-        "description is 980 characters, close to the 1024 limit",
-        "description has no 'Use when/whenever' trigger wording",
-        "description has no 'Not for' boundary (fine for a skill with no siblings)"
+        "description is 975 characters, close to the 1024 limit"
       ]
     },
     "production-code": {
@@ -148,10 +141,10 @@
       "warn": []
     },
     "publish-pipeline": {
-      "description_sha": "3c326db73e40",
+      "description_sha": "8ea5c2193750",
       "fail": [],
       "note": [
-        "body ties the skill to 2 moments like 'before pushing or deploying'; if a skipped run is costly, skill-to-mod can add a trigger"
+        "body ties the skill to 3 moments like 'before pushing or deploying'; if a skipped run is costly, skill-to-mod can add a trigger"
       ],
       "warn": []
     },
@@ -164,30 +157,24 @@
       ]
     },
     "release-gate-chair": {
-      "description_sha": "404e196fd02e",
+      "description_sha": "c1b72658b02f",
       "fail": [],
       "note": [
         "body ties the skill to 2 moments like 'before pushing or deploying'; if a skipped run is costly, skill-to-mod can add a trigger"
       ],
-      "warn": [
-        "H1 'Release gate (chair variant)' does not match name 'release-gate-chair' (stale name?)"
-      ]
+      "warn": []
     },
     "release-gate-ledger": {
-      "description_sha": "7dbb70080667",
+      "description_sha": "ff2e8abd175d",
       "fail": [],
       "note": [],
-      "warn": [
-        "H1 'Release gate (ledger variant)' does not match name 'release-gate-ledger' (stale name?)"
-      ]
+      "warn": []
     },
     "release-gate-validator": {
-      "description_sha": "04b259cbb216",
+      "description_sha": "b0d66c3c7d76",
       "fail": [],
       "note": [],
-      "warn": [
-        "H1 'Release gate (validator variant)' does not match name 'release-gate-validator' (stale name?)"
-      ]
+      "warn": []
     },
     "research-brief": {
       "description_sha": "4f89e187e035",
@@ -208,13 +195,19 @@
       "warn": []
     },
     "seo-polish": {
-      "description_sha": "1d08a4c22ac0",
+      "description_sha": "9d852f33f024",
       "fail": [],
       "note": [],
       "warn": []
     },
     "site-prompt": {
       "description_sha": "5083697325bf",
+      "fail": [],
+      "note": [],
+      "warn": []
+    },
+    "skill-estate": {
+      "description_sha": "f4c37dbc5791",
       "fail": [],
       "note": [],
       "warn": []
@@ -244,7 +237,7 @@
       "warn": []
     },
     "study-system": {
-      "description_sha": "b4b70d3479bb",
+      "description_sha": "7dd3ab1ec284",
       "fail": [],
       "note": [],
       "warn": []
@@ -253,10 +246,7 @@
       "description_sha": "5a1b617730a6",
       "fail": [],
       "note": [],
-      "warn": [
-        "body says 'eight modes'; check it matches the list that follows",
-        "body says 'eight modes'; check it matches the list that follows"
-      ]
+      "warn": []
     },
     "tune-and-polish": {
       "description_sha": "d5e62771909d",
@@ -271,7 +261,7 @@
       "warn": []
     },
     "upstream-check": {
-      "description_sha": "7aa486287349",
+      "description_sha": "23b32439fd39",
       "fail": [],
       "note": [],
       "warn": []
