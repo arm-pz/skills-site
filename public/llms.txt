@@ -1,6 +1,6 @@
 # Caffeinity Skills
 
-> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: 45 skills mapped into 10 workflows (build a skill, get found, gate a release, grow search traffic, land a job, decide, learn, run outbound, launch a product). Plain markdown, no API keys.
+> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: 51 skills mapped into 10 workflows (build a skill, get found, gate a release, grow search traffic, land a job, decide, learn, run outbound, launch a product). Plain markdown, no API keys.
 
 ## Install
 
@@ -22,6 +22,8 @@
 - [skill-to-mod](https://skills.caffeinity.com/skill-to-mod/): Checks whether a skill should become a Claude Code mod, then builds the plugin with your skill unchanged and a thin trigger, validates and tests it, and lists what it can touch.
 - [skill-launch](https://skills.caffeinity.com/skill-launch/): The full pipeline from idea to launched skill: Draft-Skill writes it, Tune-Skill gates it through the validator, Findable-Polish polishes its discovery surfaces.
 - [tune-and-polish](https://skills.caffeinity.com/tune-and-polish/): For a skill that both misfires and hides: Tune-Skill fixes the triggering description, sibling overlaps and stale counts, gated on check_skill.py with zero FAILs; then Findable-Polish audits and polishes the README, About and site copy against real queries.
+- [tune-skill-mod](https://skills.caffeinity.com/tune-skill-mod/): Arms when Claude edits a SKILL.md, then holds git push, PRs and releases until tune-skill has validated the change.
+- [skill-release-mod](https://skills.caffeinity.com/skill-release-mod/): Holds gh release create and npm publish in Claude Code until prompts-to-skill-release has run the skill's test cases since your last edit.
 
 ## Publish & Discover
 
@@ -43,6 +45,10 @@
 - [release-gate-validator](https://skills.caffeinity.com/release-gate-validator/): The cheapest release gate: turns three pre-launch reports that already exist into one posture, HOLD or ready, without running any lane or sending a single request.
 - [ship-sentinel](https://skills.caffeinity.com/ship-sentinel/): A Claude Code mod that holds git push, PR, publish and deploy commands until your pre-ship check skills have run since the last edit.
 - [paper-trail](https://skills.caffeinity.com/paper-trail/): Privacy policy, terms, refund and cookie pages written only from facts you confirm, then checked for placeholders, missing sections and emails nobody supplied.
+- [release-gate-mod](https://skills.caffeinity.com/release-gate-mod/): Holds production deploys and PR merges in Claude Code until the release-gate chair has run web-preflight, the security red team and the performance audit since your last edit.
+- [web-preflight-mod](https://skills.caffeinity.com/web-preflight-mod/): Reminds Claude Code to run web-preflight (exposed .env files, source maps, admin and debug surfaces) before a production deploy.
+- [pre-ship-security-red-team-mod](https://skills.caffeinity.com/pre-ship-security-red-team-mod/): Holds production deploys in Claude Code until the pre-ship security red team has run since your last edit.
+- [pre-ship-performance-audit-mod](https://skills.caffeinity.com/pre-ship-performance-audit-mod/): Reminds Claude Code to run the pre-ship performance audit before a production deploy.
 
 ## SEO & Search
 

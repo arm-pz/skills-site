@@ -80,6 +80,17 @@
   .btn2{display:inline-flex;align-items:center;border-radius:12px;padding:15px 20px;background:var(--surface);box-shadow:inset 0 0 0 1px var(--line);text-decoration:none;font-weight:600;font-size:15px}
   .stats{margin-top:26px;font-family:var(--mono);font-size:13.5px;color:var(--brass)}
 
+  /* card wall: every skill and mod drifting under the hero; hover or focus pauses it */
+  .wall{display:grid;gap:12px;padding:0 0 clamp(24px,4vw,48px);-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+  .wall-row{overflow:hidden}
+  .wall-track{display:flex;width:max-content;animation:drift 220s linear infinite}
+  .wall-rev .wall-track{animation-direction:reverse;animation-duration:260s}
+  .wall:hover .wall-track,.wall:focus-within .wall-track{animation-play-state:paused}
+  .wcard{flex:none;width:236px;min-height:104px;margin-right:12px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;background:var(--surface);border-radius:var(--radius);box-shadow:0 0 0 1px var(--line);padding:18px 20px;text-decoration:none}
+  .wcard b{font-family:var(--serif);font-weight:400;font-size:23px;line-height:1.1;letter-spacing:-.01em;overflow-wrap:anywhere}
+  .wcard code{font-size:11.5px;color:var(--muted)}
+  @keyframes drift{to{transform:translateX(-50%)}}
+
   /* workflows: the ecosystem as routes */
   .flows{padding:clamp(56px,8vw,104px) 0}
   .flow-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:16px;margin-top:40px}
@@ -119,7 +130,7 @@
   .chip-hot{background:color-mix(in srgb,var(--accent) 18%,transparent);color:var(--accent-text)}
   .skill h3{font-family:var(--serif);font-weight:400;font-size:26px;line-height:1.1;letter-spacing:-.01em;margin-top:14px}
   .skill h3 a{text-decoration:none}
-  .sk-blurb{font-size:15.5px;line-height:1.55;margin-top:10px;color:var(--muted)}
+  .sk-blurb{font-size:15.5px;line-height:1.55;margin-top:10px;color:var(--muted);display:-webkit-box;-webkit-line-clamp:3;line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
   .sk-stats{font-family:var(--mono);font-size:12.5px;color:var(--brass);margin-top:12px}
   .sk-install{display:block;margin-top:auto;padding-top:16px}
   .skill .sk-install{font-size:12.5px;overflow-wrap:break-word}
@@ -137,6 +148,30 @@
   .inst p{font-size:15px;color:var(--muted)}
   .inst .cmd{width:100%;justify-content:space-between;font-size:13px;padding:12px 14px}
   .inst-note a{color:var(--ink)}
+
+  /* proof: an app shell, one tab per real run, with what it found and what changed */
+  .shell{margin-top:40px;background:var(--sunk);border-radius:22px;padding:8px;box-shadow:0 0 0 1px var(--line),0 30px 60px -40px rgba(0,0,0,.45)}
+  .shell-bar{display:flex;align-items:center;gap:14px;padding:8px 10px 10px}
+  .shell-bar .dots{display:flex;gap:6px;flex:none}
+  .shell-bar .dots i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+  .shell-bar .dots i:first-child{background:var(--accent)}
+  .tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+  .tabs button{flex:none;font:500 13px/1 var(--mono);color:var(--muted);background:transparent;border:0;border-radius:10px;padding:9px 12px;cursor:pointer;transition:background 150ms var(--ease),color 150ms var(--ease)}
+  .tabs button[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:0 0 0 1px var(--line)}
+  .pane{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:8px}
+  .pane+.pane{margin-top:8px}
+  .pane-col{background:var(--surface);border-radius:16px;padding:22px 24px;display:flex;flex-direction:column;gap:12px}
+  .pane-label{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .pane h3{font-family:var(--serif);font-weight:400;font-size:clamp(24px,2.4vw,30px);line-height:1.12;letter-spacing:-.01em}
+  .pane pre{font-family:var(--mono);font-size:12.5px;line-height:1.6;background:var(--bg);border-radius:10px;padding:12px 14px;overflow-x:auto;white-space:pre}
+  .pane p{font-size:15px;color:var(--muted)}
+  .ba{display:grid;gap:6px}
+  .ba span{font-family:var(--mono);font-size:11.5px;font-weight:600;color:var(--muted)}
+  .ba.after span{color:var(--accent-text)}
+  .ba.after pre{box-shadow:inset 3px 0 0 var(--accent)}
+  .pane .verdict{font-family:var(--mono);font-size:12.5px;font-weight:600;color:var(--accent-text);margin-top:auto}
+  .shell-progress{height:3px;margin:8px 10px 2px;border-radius:3px;background:var(--line);overflow:hidden}
+  .shell-progress b{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--ink) calc(100% - 18px),var(--accent) 0);transition:width 300ms var(--ease)}
 
   /* proof: real runs from this release */
   .proof{padding:clamp(56px,8vw,104px) 0;border-top:1px solid var(--line)}
@@ -184,6 +219,7 @@
   }
   @media (prefers-reduced-motion:reduce){
     *,*::before,*::after{transition:none!important;animation:none!important}
+    .wall-row{overflow-x:auto}
     html{scroll-behavior:auto}
   }
 </style>
@@ -195,7 +231,7 @@
   "name": "Caffeinity Skills",
   "url": "https://skills.caffeinity.com/",
   "description": "Open agent skills for Claude Code, Cursor, Codex and Qoder, mapped into ten workflows: build a skill, get found, ship safely, rank, get hired, decide.",
-  "numberOfItems": 45,
+  "numberOfItems": 51,
   "itemListElement": [
     {
       "@type": "ListItem",
@@ -248,222 +284,258 @@
     {
       "@type": "ListItem",
       "position": 9,
+      "name": "tune-skill-mod",
+      "url": "https://skills.caffeinity.com/tune-skill-mod/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 10,
+      "name": "skill-release-mod",
+      "url": "https://skills.caffeinity.com/skill-release-mod/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 11,
       "name": "findable",
       "url": "https://skills.caffeinity.com/findable/"
     },
     {
       "@type": "ListItem",
-      "position": 10,
+      "position": 12,
       "name": "publish-pipeline",
       "url": "https://skills.caffeinity.com/publish-pipeline/"
     },
     {
       "@type": "ListItem",
-      "position": 11,
+      "position": 13,
       "name": "upstream-check",
       "url": "https://skills.caffeinity.com/upstream-check/"
     },
     {
       "@type": "ListItem",
-      "position": 12,
+      "position": 14,
       "name": "findable-polish",
       "url": "https://skills.caffeinity.com/findable-polish/"
     },
     {
       "@type": "ListItem",
-      "position": 13,
+      "position": 15,
       "name": "upstream-polish",
       "url": "https://skills.caffeinity.com/upstream-polish/"
     },
     {
       "@type": "ListItem",
-      "position": 14,
+      "position": 16,
       "name": "site-prompt",
       "url": "https://skills.caffeinity.com/site-prompt/"
     },
     {
       "@type": "ListItem",
-      "position": 15,
+      "position": 17,
       "name": "production-code",
       "url": "https://skills.caffeinity.com/production-code/"
     },
     {
       "@type": "ListItem",
-      "position": 16,
+      "position": 18,
       "name": "web-preflight",
       "url": "https://skills.caffeinity.com/web-preflight/"
     },
     {
       "@type": "ListItem",
-      "position": 17,
+      "position": 19,
       "name": "pre-ship-security-red-team",
       "url": "https://skills.caffeinity.com/pre-ship-security-red-team/"
     },
     {
       "@type": "ListItem",
-      "position": 18,
+      "position": 20,
       "name": "pre-ship-performance-audit",
       "url": "https://skills.caffeinity.com/pre-ship-performance-audit/"
     },
     {
       "@type": "ListItem",
-      "position": 19,
+      "position": 21,
       "name": "release-gate-chair",
       "url": "https://skills.caffeinity.com/release-gate-chair/"
     },
     {
       "@type": "ListItem",
-      "position": 20,
+      "position": 22,
       "name": "release-gate-ledger",
       "url": "https://skills.caffeinity.com/release-gate-ledger/"
     },
     {
       "@type": "ListItem",
-      "position": 21,
+      "position": 23,
       "name": "release-gate-validator",
       "url": "https://skills.caffeinity.com/release-gate-validator/"
     },
     {
       "@type": "ListItem",
-      "position": 22,
+      "position": 24,
       "name": "ship-sentinel",
       "url": "https://skills.caffeinity.com/ship-sentinel/"
     },
     {
       "@type": "ListItem",
-      "position": 23,
+      "position": 25,
       "name": "paper-trail",
       "url": "https://skills.caffeinity.com/paper-trail/"
     },
     {
       "@type": "ListItem",
-      "position": 24,
+      "position": 26,
+      "name": "release-gate-mod",
+      "url": "https://skills.caffeinity.com/release-gate-mod/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 27,
+      "name": "web-preflight-mod",
+      "url": "https://skills.caffeinity.com/web-preflight-mod/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 28,
+      "name": "pre-ship-security-red-team-mod",
+      "url": "https://skills.caffeinity.com/pre-ship-security-red-team-mod/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 29,
+      "name": "pre-ship-performance-audit-mod",
+      "url": "https://skills.caffeinity.com/pre-ship-performance-audit-mod/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 30,
       "name": "seo-crawl",
       "url": "https://skills.caffeinity.com/seo-crawl/"
     },
     {
       "@type": "ListItem",
-      "position": 25,
+      "position": 31,
       "name": "keyword-guard",
       "url": "https://skills.caffeinity.com/keyword-guard/"
     },
     {
       "@type": "ListItem",
-      "position": 26,
+      "position": 32,
       "name": "keyword-resolver",
       "url": "https://skills.caffeinity.com/keyword-resolver/"
     },
     {
       "@type": "ListItem",
-      "position": 27,
+      "position": 33,
       "name": "seo-polish",
       "url": "https://skills.caffeinity.com/seo-polish/"
     },
     {
       "@type": "ListItem",
-      "position": 28,
+      "position": 34,
       "name": "wordsmith",
       "url": "https://skills.caffeinity.com/wordsmith/"
     },
     {
       "@type": "ListItem",
-      "position": 29,
+      "position": 35,
       "name": "platform-content",
       "url": "https://skills.caffeinity.com/platform-content/"
     },
     {
       "@type": "ListItem",
-      "position": 30,
+      "position": 36,
       "name": "sales-copy",
       "url": "https://skills.caffeinity.com/sales-copy/"
     },
     {
       "@type": "ListItem",
-      "position": 31,
+      "position": 37,
       "name": "cold-email-list-gate",
       "url": "https://skills.caffeinity.com/cold-email-list-gate/"
     },
     {
       "@type": "ListItem",
-      "position": 32,
+      "position": 38,
       "name": "cold-email-ops",
       "url": "https://skills.caffeinity.com/cold-email-ops/"
     },
     {
       "@type": "ListItem",
-      "position": 33,
+      "position": 39,
       "name": "recruiter-lens",
       "url": "https://skills.caffeinity.com/recruiter-lens/"
     },
     {
       "@type": "ListItem",
-      "position": 34,
+      "position": 40,
       "name": "applicant-kit",
       "url": "https://skills.caffeinity.com/applicant-kit/"
     },
     {
       "@type": "ListItem",
-      "position": 35,
+      "position": 41,
       "name": "application-pilot",
       "url": "https://skills.caffeinity.com/application-pilot/"
     },
     {
       "@type": "ListItem",
-      "position": 36,
+      "position": 42,
       "name": "career-track",
       "url": "https://skills.caffeinity.com/career-track/"
     },
     {
       "@type": "ListItem",
-      "position": 37,
+      "position": 43,
       "name": "research-brief",
       "url": "https://skills.caffeinity.com/research-brief/"
     },
     {
       "@type": "ListItem",
-      "position": 38,
+      "position": 44,
       "name": "data-readout",
       "url": "https://skills.caffeinity.com/data-readout/"
     },
     {
       "@type": "ListItem",
-      "position": 39,
+      "position": 45,
       "name": "crash-test",
       "url": "https://skills.caffeinity.com/crash-test/"
     },
     {
       "@type": "ListItem",
-      "position": 40,
+      "position": 46,
       "name": "do-better",
       "url": "https://skills.caffeinity.com/do-better/"
     },
     {
       "@type": "ListItem",
-      "position": 41,
+      "position": 47,
       "name": "strategy-memo",
       "url": "https://skills.caffeinity.com/strategy-memo/"
     },
     {
       "@type": "ListItem",
-      "position": 42,
+      "position": 48,
       "name": "solo-income-blueprint",
       "url": "https://skills.caffeinity.com/solo-income-blueprint/"
     },
     {
       "@type": "ListItem",
-      "position": 43,
+      "position": 49,
       "name": "topic-primer",
       "url": "https://skills.caffeinity.com/topic-primer/"
     },
     {
       "@type": "ListItem",
-      "position": 44,
+      "position": 50,
       "name": "study-system",
       "url": "https://skills.caffeinity.com/study-system/"
     },
     {
       "@type": "ListItem",
-      "position": 45,
+      "position": 51,
       "name": "course-builder",
       "url": "https://skills.caffeinity.com/course-builder/"
     }
@@ -498,13 +570,124 @@
       <button class="cmd" type="button" data-copy="npx skills add arm-pz/caffeinity-skills --skill caffeinity-routing" aria-label="Copy the install command for caffeinity-routing"><span>$ npx skills add arm-pz/caffeinity-skills --skill caffeinity-routing</span><span class="copy" aria-hidden="true">Copy</span></button>
       <a class="btn2" href="#skills">Browse the skills</a>
     </div>
-    <!-- gen:stats:start --><p class="stats">44 skills and 1 mod · 10 workflows · 9 categories · 0 API keys</p><!-- gen:stats:end -->
+    <!-- gen:stats:start --><p class="stats">44 skills and 7 mods · 10 workflows · 9 categories · 0 API keys</p><!-- gen:stats:end -->
   </div>
 </header>
 
+<!-- gen:wall:start -->
+<div class="wall" aria-label="Every skill and mod">
+  <div class="wall-row"><div class="wall-track">
+    <a class="wcard" href="caffeinity-routing/"><b>caffeinity-routing</b><code>arm-pz/caffeinity-skills</code></a>
+    <a class="wcard" href="prompts-to-skill/"><b>prompts-to-skill</b><code>arm-pz/prompts-to-skill</code></a>
+    <a class="wcard" href="prompts-to-skill-release/"><b>prompts-to-skill-release</b><code>arm-pz/prompts-to-skill-release</code></a>
+    <a class="wcard" href="skill-launch/"><b>skill-launch</b><code>arm-pz/skill-launch</code></a>
+    <a class="wcard" href="tune-skill-mod/"><b>tune-skill-mod</b><code>arm-pz/caffeinity-skills</code></a>
+    <a class="wcard" href="findable/"><b>findable</b><code>arm-pz/findable</code></a>
+    <a class="wcard" href="upstream-check/"><b>upstream-check</b><code>arm-pz/upstream-check</code></a>
+    <a class="wcard" href="upstream-polish/"><b>upstream-polish</b><code>arm-pz/upstream-polish</code></a>
+    <a class="wcard" href="production-code/"><b>production-code</b><code>arm-pz/production-code</code></a>
+    <a class="wcard" href="pre-ship-security-red-team/"><b>pre-ship-security-red-team</b><code>arm-pz/pre-ship-security-red-team</code></a>
+    <a class="wcard" href="release-gate-chair/"><b>release-gate-chair</b><code>arm-pz/release-gate-chair</code></a>
+    <a class="wcard" href="release-gate-validator/"><b>release-gate-validator</b><code>arm-pz/release-gate-validator</code></a>
+    <a class="wcard" href="paper-trail/"><b>paper-trail</b><code>arm-pz/caffeinity-skills</code></a>
+    <a class="wcard" href="web-preflight-mod/"><b>web-preflight-mod</b><code>arm-pz/caffeinity-skills</code></a>
+    <a class="wcard" href="pre-ship-performance-audit-mod/"><b>pre-ship-performance-audit-mod</b><code>arm-pz/caffeinity-skills</code></a>
+    <a class="wcard" href="keyword-guard/"><b>keyword-guard</b><code>arm-pz/keyword-guard</code></a>
+    <a class="wcard" href="seo-polish/"><b>seo-polish</b><code>arm-pz/seo-polish</code></a>
+    <a class="wcard" href="platform-content/"><b>platform-content</b><code>arm-pz/platform-content</code></a>
+    <a class="wcard" href="cold-email-list-gate/"><b>cold-email-list-gate</b><code>arm-pz/cold-email-list-gate</code></a>
+    <a class="wcard" href="recruiter-lens/"><b>recruiter-lens</b><code>arm-pz/recruiter-lens</code></a>
+    <a class="wcard" href="application-pilot/"><b>application-pilot</b><code>arm-pz/application-pilot</code></a>
+    <a class="wcard" href="research-brief/"><b>research-brief</b><code>arm-pz/research-brief</code></a>
+    <a class="wcard" href="crash-test/"><b>crash-test</b><code>arm-pz/crash-test</code></a>
+    <a class="wcard" href="strategy-memo/"><b>strategy-memo</b><code>arm-pz/strategy-memo</code></a>
+    <a class="wcard" href="topic-primer/"><b>topic-primer</b><code>arm-pz/topic-primer</code></a>
+    <a class="wcard" href="course-builder/"><b>course-builder</b><code>arm-pz/caffeinity-skills</code></a>
+    <a class="wcard" href="caffeinity-routing/" aria-hidden="true" tabindex="-1"><b>caffeinity-routing</b><code>arm-pz/caffeinity-skills</code></a>
+    <a class="wcard" href="prompts-to-skill/" aria-hidden="true" tabindex="-1"><b>prompts-to-skill</b><code>arm-pz/prompts-to-skill</code></a>
+    <a class="wcard" href="prompts-to-skill-release/" aria-hidden="true" tabindex="-1"><b>prompts-to-skill-release</b><code>arm-pz/prompts-to-skill-release</code></a>
+    <a class="wcard" href="skill-launch/" aria-hidden="true" tabindex="-1"><b>skill-launch</b><code>arm-pz/skill-launch</code></a>
+    <a class="wcard" href="tune-skill-mod/" aria-hidden="true" tabindex="-1"><b>tune-skill-mod</b><code>arm-pz/caffeinity-skills</code></a>
+    <a class="wcard" href="findable/" aria-hidden="true" tabindex="-1"><b>findable</b><code>arm-pz/findable</code></a>
+    <a class="wcard" href="upstream-check/" aria-hidden="true" tabindex="-1"><b>upstream-check</b><code>arm-pz/upstream-check</code></a>
+    <a class="wcard" href="upstream-polish/" aria-hidden="true" tabindex="-1"><b>upstream-polish</b><code>arm-pz/upstream-polish</code></a>
+    <a class="wcard" href="production-code/" aria-hidden="true" tabindex="-1"><b>production-code</b><code>arm-pz/production-code</code></a>
+    <a class="wcard" href="pre-ship-security-red-team/" aria-hidden="true" tabindex="-1"><b>pre-ship-security-red-team</b><code>arm-pz/pre-ship-security-red-team</code></a>
+    <a class="wcard" href="release-gate-chair/" aria-hidden="true" tabindex="-1"><b>release-gate-chair</b><code>arm-pz/release-gate-chair</code></a>
+    <a class="wcard" href="release-gate-validator/" aria-hidden="true" tabindex="-1"><b>release-gate-validator</b><code>arm-pz/release-gate-validator</code></a>
+    <a class="wcard" href="paper-trail/" aria-hidden="true" tabindex="-1"><b>paper-trail</b><code>arm-pz/caffeinity-skills</code></a>
+    <a class="wcard" href="web-preflight-mod/" aria-hidden="true" tabindex="-1"><b>web-preflight-mod</b><code>arm-pz/caffeinity-skills</code></a>
+    <a class="wcard" href="pre-ship-performance-audit-mod/" aria-hidden="true" tabindex="-1"><b>pre-ship-performance-audit-mod</b><code>arm-pz/caffeinity-skills</code></a>
+    <a class="wcard" href="keyword-guard/" aria-hidden="true" tabindex="-1"><b>keyword-guard</b><code>arm-pz/keyword-guard</code></a>
+    <a class="wcard" href="seo-polish/" aria-hidden="true" tabindex="-1"><b>seo-polish</b><code>arm-pz/seo-polish</code></a>
+    <a class="wcard" href="platform-content/" aria-hidden="true" tabindex="-1"><b>platform-content</b><code>arm-pz/platform-content</code></a>
+    <a class="wcard" href="cold-email-list-gate/" aria-hidden="true" tabindex="-1"><b>cold-email-list-gate</b><code>arm-pz/cold-email-list-gate</code></a>
+    <a class="wcard" href="recruiter-lens/" aria-hidden="true" tabindex="-1"><b>recruiter-lens</b><code>arm-pz/recruiter-lens</code></a>
+    <a class="wcard" href="application-pilot/" aria-hidden="true" tabindex="-1"><b>application-pilot</b><code>arm-pz/application-pilot</code></a>
+    <a class="wcard" href="research-brief/" aria-hidden="true" tabindex="-1"><b>research-brief</b><code>arm-pz/research-brief</code></a>
+    <a class="wcard" href="crash-test/" aria-hidden="true" tabindex="-1"><b>crash-test</b><code>arm-pz/crash-test</code></a>
+    <a class="wcard" href="strategy-memo/" aria-hidden="true" tabindex="-1"><b>strategy-memo</b><code>arm-pz/strategy-memo</code></a>
+    <a class="wcard" href="topic-primer/" aria-hidden="true" tabindex="-1"><b>topic-primer</b><code>arm-pz/topic-primer</code></a>
+    <a class="wcard" href="course-builder/" aria-hidden="true" tabindex="-1"><b>course-builder</b><code>arm-pz/caffeinity-skills</code></a>
+  </div></div>
+  <div class="wall-row wall-rev"><div class="wall-track">
+    <a class="wcard" href="draft-skill/"><b>draft-skill</b><code>arm-pz/draft-skill</code></a>
+    <a class="wcard" href="tune-skill/"><b>tune-skill</b><code>arm-pz/tune-skill</code></a>
+    <a class="wcard" href="skill-to-mod/"><b>skill-to-mod</b><code>arm-pz/skill-to-mod</code></a>
+    <a class="wcard" href="tune-and-polish/"><b>tune-and-polish</b><code>arm-pz/tune-and-polish</code></a>
+    <a class="wcard" href="skill-release-mod/"><b>skill-release-mod</b><code>arm-pz/caffeinity-skills</code></a>
+    <a class="wcard" href="publish-pipeline/"><b>publish-pipeline</b><code>arm-pz/publish-pipeline</code></a>
+    <a class="wcard" href="findable-polish/"><b>findable-polish</b><code>arm-pz/findable-polish</code></a>
+    <a class="wcard" href="site-prompt/"><b>site-prompt</b><code>arm-pz/site-prompt</code></a>
+    <a class="wcard" href="web-preflight/"><b>web-preflight</b><code>arm-pz/web-preflight</code></a>
+    <a class="wcard" href="pre-ship-performance-audit/"><b>pre-ship-performance-audit</b><code>arm-pz/pre-ship-performance-audit</code></a>
+    <a class="wcard" href="release-gate-ledger/"><b>release-gate-ledger</b><code>arm-pz/release-gate-ledger</code></a>
+    <a class="wcard" href="ship-sentinel/"><b>ship-sentinel</b><code>arm-pz/ship-sentinel</code></a>
+    <a class="wcard" href="release-gate-mod/"><b>release-gate-mod</b><code>arm-pz/caffeinity-skills</code></a>
+    <a class="wcard" href="pre-ship-security-red-team-mod/"><b>pre-ship-security-red-team-mod</b><code>arm-pz/caffeinity-skills</code></a>
+    <a class="wcard" href="seo-crawl/"><b>seo-crawl</b><code>arm-pz/seo-crawl</code></a>
+    <a class="wcard" href="keyword-resolver/"><b>keyword-resolver</b><code>arm-pz/keyword-resolver</code></a>
+    <a class="wcard" href="wordsmith/"><b>wordsmith</b><code>arm-pz/wordsmith</code></a>
+    <a class="wcard" href="sales-copy/"><b>sales-copy</b><code>arm-pz/sales-copy</code></a>
+    <a class="wcard" href="cold-email-ops/"><b>cold-email-ops</b><code>arm-pz/cold-email-ops</code></a>
+    <a class="wcard" href="applicant-kit/"><b>applicant-kit</b><code>arm-pz/applicant-kit</code></a>
+    <a class="wcard" href="career-track/"><b>career-track</b><code>arm-pz/career-track</code></a>
+    <a class="wcard" href="data-readout/"><b>data-readout</b><code>arm-pz/data-readout</code></a>
+    <a class="wcard" href="do-better/"><b>do-better</b><code>arm-pz/do-better</code></a>
+    <a class="wcard" href="solo-income-blueprint/"><b>solo-income-blueprint</b><code>arm-pz/solo-income-blueprint</code></a>
+    <a class="wcard" href="study-system/"><b>study-system</b><code>arm-pz/study-system</code></a>
+    <a class="wcard" href="draft-skill/" aria-hidden="true" tabindex="-1"><b>draft-skill</b><code>arm-pz/draft-skill</code></a>
+    <a class="wcard" href="tune-skill/" aria-hidden="true" tabindex="-1"><b>tune-skill</b><code>arm-pz/tune-skill</code></a>
+    <a class="wcard" href="skill-to-mod/" aria-hidden="true" tabindex="-1"><b>skill-to-mod</b><code>arm-pz/skill-to-mod</code></a>
+    <a class="wcard" href="tune-and-polish/" aria-hidden="true" tabindex="-1"><b>tune-and-polish</b><code>arm-pz/tune-and-polish</code></a>
+    <a class="wcard" href="skill-release-mod/" aria-hidden="true" tabindex="-1"><b>skill-release-mod</b><code>arm-pz/caffeinity-skills</code></a>
+    <a class="wcard" href="publish-pipeline/" aria-hidden="true" tabindex="-1"><b>publish-pipeline</b><code>arm-pz/publish-pipeline</code></a>
+    <a class="wcard" href="findable-polish/" aria-hidden="true" tabindex="-1"><b>findable-polish</b><code>arm-pz/findable-polish</code></a>
+    <a class="wcard" href="site-prompt/" aria-hidden="true" tabindex="-1"><b>site-prompt</b><code>arm-pz/site-prompt</code></a>
+    <a class="wcard" href="web-preflight/" aria-hidden="true" tabindex="-1"><b>web-preflight</b><code>arm-pz/web-preflight</code></a>
+    <a class="wcard" href="pre-ship-performance-audit/" aria-hidden="true" tabindex="-1"><b>pre-ship-performance-audit</b><code>arm-pz/pre-ship-performance-audit</code></a>
+    <a class="wcard" href="release-gate-ledger/" aria-hidden="true" tabindex="-1"><b>release-gate-ledger</b><code>arm-pz/release-gate-ledger</code></a>
+    <a class="wcard" href="ship-sentinel/" aria-hidden="true" tabindex="-1"><b>ship-sentinel</b><code>arm-pz/ship-sentinel</code></a>
+    <a class="wcard" href="release-gate-mod/" aria-hidden="true" tabindex="-1"><b>release-gate-mod</b><code>arm-pz/caffeinity-skills</code></a>
+    <a class="wcard" href="pre-ship-security-red-team-mod/" aria-hidden="true" tabindex="-1"><b>pre-ship-security-red-team-mod</b><code>arm-pz/caffeinity-skills</code></a>
+    <a class="wcard" href="seo-crawl/" aria-hidden="true" tabindex="-1"><b>seo-crawl</b><code>arm-pz/seo-crawl</code></a>
+    <a class="wcard" href="keyword-resolver/" aria-hidden="true" tabindex="-1"><b>keyword-resolver</b><code>arm-pz/keyword-resolver</code></a>
+    <a class="wcard" href="wordsmith/" aria-hidden="true" tabindex="-1"><b>wordsmith</b><code>arm-pz/wordsmith</code></a>
+    <a class="wcard" href="sales-copy/" aria-hidden="true" tabindex="-1"><b>sales-copy</b><code>arm-pz/sales-copy</code></a>
+    <a class="wcard" href="cold-email-ops/" aria-hidden="true" tabindex="-1"><b>cold-email-ops</b><code>arm-pz/cold-email-ops</code></a>
+    <a class="wcard" href="applicant-kit/" aria-hidden="true" tabindex="-1"><b>applicant-kit</b><code>arm-pz/applicant-kit</code></a>
+    <a class="wcard" href="career-track/" aria-hidden="true" tabindex="-1"><b>career-track</b><code>arm-pz/career-track</code></a>
+    <a class="wcard" href="data-readout/" aria-hidden="true" tabindex="-1"><b>data-readout</b><code>arm-pz/data-readout</code></a>
+    <a class="wcard" href="do-better/" aria-hidden="true" tabindex="-1"><b>do-better</b><code>arm-pz/do-better</code></a>
+    <a class="wcard" href="solo-income-blueprint/" aria-hidden="true" tabindex="-1"><b>solo-income-blueprint</b><code>arm-pz/solo-income-blueprint</code></a>
+    <a class="wcard" href="study-system/" aria-hidden="true" tabindex="-1"><b>study-system</b><code>arm-pz/study-system</code></a>
+  </div></div>
+</div>
+<!-- gen:wall:end -->
+
 <section class="flows" id="workflows" aria-labelledby="workflows-h">
   <div class="wrap">
-    <p class="eyebrow">Nine routes through the catalogue</p>
+    <p class="eyebrow">Ten routes through the catalogue</p>
     <h2 class="title" id="workflows-h">Skills that hand off to each other.</h2>
     <p class="section-lead">Each workflow is an ordered chain: every step receives what the step before it produced, and stops at its own gate. Install <a href="caffeinity-routing/">caffeinity-routing</a> and describe the outcome; it picks the route and tells you which steps you have not installed yet.</p>
     <div class="flow-grid">
@@ -670,7 +853,7 @@
     <section class="sk-group" id="skill-authoring" aria-labelledby="skill-authoring-h">
       <div class="sk-head">
         <h2 id="skill-authoring-h">Skill Authoring</h2>
-        <p>7 skills · draft · tune · release · mods</p>
+        <p>7 skills and 2 mods · draft · tune · release · mods</p>
       </div>
       <div class="sk-grid">
         <article class="skill" id="draft-skill" data-search="draft-skill draft skill authoring creates a new agent skill from a plain idea: confirms the purpose before writing anything, checks the installed siblings for overlap, splits scripts from references from assets, writes a description that actually triggers, then validates it with check_skill.py. written from scratch, so it carries no text from qoder&#x27;s built-in skill-creator, which ships without a licence permitting redistribution.">
@@ -750,6 +933,28 @@
             <a href="https://github.com/arm-pz/tune-and-polish" target="_blank" rel="noopener">Source</a>
           </p>
         </article>
+        <article class="skill" id="tune-skill-mod" data-search="tune-skill-mod tune skill mod authoring arms when claude edits a skill.md, then holds git push, prs and releases until tune-skill has validated the change. edits to any other file are ignored.">
+          <p class="chips"><span class="chip">authoring</span><span class="chip chip-hot">Claude Code mod</span></p>
+          <h3><a href="tune-skill-mod/">Tune Skill Mod</a></h3>
+          <p class="sk-blurb">Arms when Claude edits a SKILL.md, then holds git push, PRs and releases until tune-skill has validated the change. Edits to any other file are ignored.</p>
+          <p class="sk-stats">16 files · 1,288 lines · 2 hook files · fails open</p>
+          <code class="sk-install">/plugin install tune-skill-mod --marketplace arm-pz/caffeinity-skills</code>
+          <p class="sk-links">
+            <a href="tune-skill-mod/">Install page</a>
+            <a href="https://github.com/arm-pz/caffeinity-skills" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="skill-release-mod" data-search="skill-release-mod skill release mod release holds gh release create and npm publish in claude code until prompts-to-skill-release has run the skill&#x27;s test cases since your last edit.">
+          <p class="chips"><span class="chip">release</span><span class="chip chip-hot">Claude Code mod</span></p>
+          <h3><a href="skill-release-mod/">Skill Release Mod</a></h3>
+          <p class="sk-blurb">Holds gh release create and npm publish in Claude Code until prompts-to-skill-release has run the skill's test cases since your last edit.</p>
+          <p class="sk-stats">12 files · 627 lines · 2 hook files · fails open</p>
+          <code class="sk-install">/plugin install skill-release-mod --marketplace arm-pz/caffeinity-skills</code>
+          <p class="sk-links">
+            <a href="skill-release-mod/">Install page</a>
+            <a href="https://github.com/arm-pz/caffeinity-skills" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
       </div>
     </section>
 
@@ -820,7 +1025,7 @@
     <section class="sk-group" id="ship-checks" aria-labelledby="ship-checks-h">
       <div class="sk-head">
         <h2 id="ship-checks-h">Build &amp; Ship</h2>
-        <p>9 skills and 1 mod · build · exposure · security · speed · go/no-go</p>
+        <p>9 skills and 5 mods · build · exposure · security · speed · go/no-go</p>
       </div>
       <div class="sk-grid">
         <article class="skill" id="site-prompt" data-search="site-prompt site prompt build turns a website topic into one self-contained, paste-and-build prompt: it builds and verifies the site in a scratch folder first, then embeds every file verbatim with a pinned stack and the checks that actually ran.">
@@ -930,6 +1135,50 @@
           <code class="sk-install">npx skills add arm-pz/caffeinity-skills --skill paper-trail</code>
           <p class="sk-links">
             <a href="paper-trail/">Install page</a>
+            <a href="https://github.com/arm-pz/caffeinity-skills" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="release-gate-mod" data-search="release-gate-mod release gate mod release holds production deploys and pr merges in claude code until the release-gate chair has run web-preflight, the security red team and the performance audit since your last edit. install this one rather than the three single-check mods.">
+          <p class="chips"><span class="chip">release</span><span class="chip chip-hot">Claude Code mod</span></p>
+          <h3><a href="release-gate-mod/">Release Gate Mod</a></h3>
+          <p class="sk-blurb">Holds production deploys and PR merges in Claude Code until the release-gate chair has run web-preflight, the security red team and the performance audit since your last edit. Install this one rather than the three single-check mods.</p>
+          <p class="sk-stats">13 files · 950 lines · 2 hook files · fails open</p>
+          <code class="sk-install">/plugin install release-gate-mod --marketplace arm-pz/caffeinity-skills</code>
+          <p class="sk-links">
+            <a href="release-gate-mod/">Install page</a>
+            <a href="https://github.com/arm-pz/caffeinity-skills" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="web-preflight-mod" data-search="web-preflight-mod web preflight mod release reminds claude code to run web-preflight (exposed .env files, source maps, admin and debug surfaces) before a production deploy.">
+          <p class="chips"><span class="chip">release</span><span class="chip chip-hot">Claude Code mod</span></p>
+          <h3><a href="web-preflight-mod/">Web Preflight Mod</a></h3>
+          <p class="sk-blurb">Reminds Claude Code to run web-preflight (exposed .env files, source maps, admin and debug surfaces) before a production deploy.</p>
+          <p class="sk-stats">11 files · 872 lines · 2 hook files · fails open</p>
+          <code class="sk-install">/plugin install web-preflight-mod --marketplace arm-pz/caffeinity-skills</code>
+          <p class="sk-links">
+            <a href="web-preflight-mod/">Install page</a>
+            <a href="https://github.com/arm-pz/caffeinity-skills" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="pre-ship-security-red-team-mod" data-search="pre-ship-security-red-team-mod security red team mod release holds production deploys in claude code until the pre-ship security red team has run since your last edit.">
+          <p class="chips"><span class="chip">release</span><span class="chip chip-hot">Claude Code mod</span></p>
+          <h3><a href="pre-ship-security-red-team-mod/">Security Red Team Mod</a></h3>
+          <p class="sk-blurb">Holds production deploys in Claude Code until the pre-ship security red team has run since your last edit.</p>
+          <p class="sk-stats">17 files · 1,588 lines · 2 hook files · fails open</p>
+          <code class="sk-install">/plugin install pre-ship-security-red-team-mod --marketplace arm-pz/caffeinity-skills</code>
+          <p class="sk-links">
+            <a href="pre-ship-security-red-team-mod/">Install page</a>
+            <a href="https://github.com/arm-pz/caffeinity-skills" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="pre-ship-performance-audit-mod" data-search="pre-ship-performance-audit-mod performance audit mod performance reminds claude code to run the pre-ship performance audit before a production deploy.">
+          <p class="chips"><span class="chip">performance</span><span class="chip chip-hot">Claude Code mod</span></p>
+          <h3><a href="pre-ship-performance-audit-mod/">Performance Audit Mod</a></h3>
+          <p class="sk-blurb">Reminds Claude Code to run the pre-ship performance audit before a production deploy.</p>
+          <p class="sk-stats">9 files · 597 lines · 2 hook files · fails open</p>
+          <code class="sk-install">/plugin install pre-ship-performance-audit-mod --marketplace arm-pz/caffeinity-skills</code>
+          <p class="sk-links">
+            <a href="pre-ship-performance-audit-mod/">Install page</a>
             <a href="https://github.com/arm-pz/caffeinity-skills" target="_blank" rel="noopener">Source</a>
           </p>
         </article>
@@ -1256,89 +1505,170 @@
 
 <section class="proof" id="proof" aria-labelledby="proof-h">
   <div class="wrap">
-    <p class="eyebrow">Shown running · 23 October 2026</p>
+    <p class="eyebrow">Shown running · 23 and 24 October 2026</p>
     <h2 class="title" id="proof-h">Tested on real targets, this site first.</h2>
-    <p class="section-lead">Before this release every skill was checked with tune-skill's validator, and the ones below were run against live targets. What they found was fixed in this release or is listed as open.</p>
-    <div class="runs">
-      <article class="run">
-        <div class="run-bar"><i></i><i></i><i></i><span>seo-crawl · skills.caffeinity.com</span></div>
-        <div class="run-body">
+    <p class="section-lead">Each tab is a real run: what the skill found, and what changed because of it. Nothing here is a mock-up; where a fix is still waiting on a decision, the tab says so.</p>
+    <div class="shell">
+      <div class="shell-bar">
+        <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <div class="tabs" role="tablist" aria-label="Real runs">
+          <button type="button" role="tab" id="tab-seo-crawl" aria-controls="pane-seo-crawl" aria-selected="true">seo-crawl</button>
+          <button type="button" role="tab" id="tab-web-preflight" aria-controls="pane-web-preflight" aria-selected="false" tabindex="-1">web-preflight</button>
+          <button type="button" role="tab" id="tab-check_skill" aria-controls="pane-check_skill" aria-selected="false" tabindex="-1">check_skill</button>
+          <button type="button" role="tab" id="tab-regress" aria-controls="pane-regress" aria-selected="false" tabindex="-1">regress</button>
+          <button type="button" role="tab" id="tab-findable" aria-controls="pane-findable" aria-selected="false" tabindex="-1">findable</button>
+          <button type="button" role="tab" id="tab-upstream-check" aria-controls="pane-upstream-check" aria-selected="false" tabindex="-1">upstream-check</button>
+          <button type="button" role="tab" id="tab-draft-skill" aria-controls="pane-draft-skill" aria-selected="false" tabindex="-1">draft-skill</button>
+        </div>
+      </div>
+      <div class="pane" role="tabpanel" id="pane-seo-crawl" aria-labelledby="tab-seo-crawl">
+        <div class="pane-col">
+          <p class="pane-label">seo-crawl · skills.caffeinity.com</p>
           <h3>One broken link, found by the crawler</h3>
 <pre>pages      24 of 24 fetched
 checks     5 complete
-findings   1 error · 12 info
-error      broken-internal-link
-  /cdn-cgi/l/email-protection
-  → 404</pre>
-          <p>Cloudflare rewrote a sample address on the red-team page into a link that 404s. The address is now excluded from obfuscation; the 12 long titles and descriptions were shortened.</p>
-          <p class="verdict">fixed in this release</p>
+findings   1 error · 12 info</pre>
+          <p>Cloudflare rewrote a sample address on the red-team page into a link that 404s. The address is now excluded from obfuscation and the 12 long titles and descriptions were shortened.</p>
         </div>
-      </article>
-      <article class="run">
-        <div class="run-bar"><i></i><i></i><i></i><span>web-preflight · skills.caffeinity.com</span></div>
-        <div class="run-body">
+        <div class="pane-col">
+          <p class="pane-label">Before → after</p>
+          <div class="ba"><span>before</span>
+<pre>23 Oct · error broken-internal-link
+  /cdn-cgi/l/email-protection → 404</pre></div>
+          <div class="ba after"><span>after</span>
+<pre>24 Oct · new build, 25 pages fetched
+  errors 0
+  warnings 25 canonical → skills.caffeinity.com
+  (expected on the preview host)</pre></div>
+          <p class="verdict">fixed; re-crawled 24 October</p>
+        </div>
+      </div>
+      <div class="pane" role="tabpanel" id="pane-web-preflight" aria-labelledby="tab-web-preflight">
+        <div class="pane-col">
+          <p class="pane-label">web-preflight · skills.caffeinity.com</p>
           <h3>Nothing exposed; headers in place</h3>
 <pre>http → https     301
 HSTS, CSP        present
-X-Frame, nosniff present
-sensitive paths  404 × 19
-catch-all        none</pre>
+X-Frame, nosniff present</pre>
           <p>All 19 high-value paths return a real 404 rather than the homepage, so a missing file cannot pass for a present one.</p>
+        </div>
+        <div class="pane-col">
+          <p class="pane-label">Before → after</p>
+          <div class="ba"><span>before</span>
+<pre>sensitive paths probed  19
+.env, .git, source maps, admin, debug</pre></div>
+          <div class="ba after"><span>after</span>
+<pre>404 × 19
+catch-all  none</pre></div>
           <p class="verdict">verdict: PASS</p>
         </div>
-      </article>
-      <article class="run">
-        <div class="run-bar"><i></i><i></i><i></i><span>tune-skill · check_skill.py × 42 skills</span></div>
-        <div class="run-body">
+      </div>
+      <div class="pane" role="tabpanel" id="pane-check_skill" aria-labelledby="tab-check_skill">
+        <div class="pane-col">
+          <p class="pane-label">tune-skill · check_skill.py × 42 skills</p>
           <h3>One skill strict installers could not load</h3>
 <pre>SKILL.md files   42
 pass             41
-FAIL crash-test  invalid YAML
-  unquoted ": " in description
 WARN 16 · NOTE 2</pre>
-          <p>crash-test's description now sits in a YAML block. tune-skill's own fallback parser had let the error through without PyYAML; it now fails it too.</p>
+          <p>tune-skill's own fallback parser had let the error through without PyYAML; it now fails it too.</p>
+        </div>
+        <div class="pane-col">
+          <p class="pane-label">Before → after</p>
+          <div class="ba"><span>before</span>
+<pre>FAIL crash-test  invalid YAML
+  unquoted ": " in description</pre></div>
+          <div class="ba after"><span>after</span>
+<pre>crash-test  description in a YAML block
+  check_skill.py: 0 fail</pre></div>
           <p class="verdict">fixed in crash-test and tune-skill</p>
         </div>
-      </article>
-      <article class="run">
-        <div class="run-bar"><i></i><i></i><i></i><span>findable · arm-pz/tune-skill</span></div>
-        <div class="run-body">
+      </div>
+      <div class="pane" role="tabpanel" id="pane-regress" aria-labelledby="tab-regress">
+        <div class="pane-col">
+          <p class="pane-label">tune-skill · regress.py × 44 skills</p>
+          <h3>The family checked against itself</h3>
+<pre>skills checked   44
+regressions      0
+improvements     23
+new skills       3</pre>
+          <p>regress.py runs the validator on every skill, then the checks one file cannot show: handoffs to skills that do not exist, and two skills claiming the same trigger. The nightly health job runs it; W10 fixes what it finds.</p>
+        </div>
+        <div class="pane-col">
+          <p class="pane-label">Before → after</p>
+          <div class="ba"><span>before</span>
+<pre>dangling  study-system →
+  module-learning-path-generator
+collision release-gate-chair &amp; -ledger
+  "should we deploy"</pre></div>
+          <div class="ba after"><span>after</span>
+<pre>study-system → course-builder (new)
+release-gate variants: one owner
+0 regressions · 23 improvements</pre></div>
+          <p class="verdict">24 October, after the W10 fixes</p>
+        </div>
+      </div>
+      <div class="pane" role="tabpanel" id="pane-findable" aria-labelledby="tab-findable">
+        <div class="pane-col">
+          <p class="pane-label">findable · arm-pz/tune-skill</p>
           <h3>Unfound, and a same-name rival</h3>
 <pre>baseline queries  0 of 5 found
-same name         hburaktasyurek/
-                  tune-skill
-skills.sh         2 of 42 listed
-check_listing.py  OK (250/350)</pre>
-          <p>The discovery kit (About text, topics, README opening, re-check date) is drafted and waiting for a go-ahead; nothing public changed.</p>
-          <p class="verdict">open: owner's call on the name</p>
+same name         hburaktasyurek/tune-skill
+skills.sh         2 of 42 listed</pre>
+          <p>The discovery kit (About text, topics, README opening, re-check date) is drafted; nothing public changes without a go-ahead.</p>
         </div>
-      </article>
-      <article class="run">
-        <div class="run-bar"><i></i><i></i><i></i><span>upstream-check · listing drift</span></div>
-        <div class="run-body">
+        <div class="pane-col">
+          <p class="pane-label">Before → after</p>
+          <div class="ba"><span>before</span>
+<pre>About   (none that names the job)
+found   0 of 5 target queries</pre></div>
+          <div class="ba after"><span>after</span>
+<pre>About   Agent skill that audits an existing
+        SKILL.md: why it does not trigger,
+        where it overlaps a sibling skill…
+check_listing.py  OK (250/350)</pre></div>
+          <p class="verdict">drafted; owner's call on the name</p>
+        </div>
+      </div>
+      <div class="pane" role="tabpanel" id="pane-upstream-check" aria-labelledby="tab-upstream-check">
+        <div class="pane-col">
+          <p class="pane-label">upstream-check · listing drift</p>
           <h3>Three skills installable but unlisted</h3>
 <pre>site index.json  25
-homepage         22 (read as 27)
-index-only       upstream-check
-                 release-gate
-                 publish-release-gate</pre>
-          <p>The drift check counted section anchors as skills and hid the difference; both bugs are fixed upstream, and the catalogue above now has a page for every published skill.</p>
+homepage         22 (read as 27)</pre>
+          <p>The drift check counted section anchors as skills and hid the difference; both bugs are fixed upstream.</p>
+        </div>
+        <div class="pane-col">
+          <p class="pane-label">Before → after</p>
+          <div class="ba"><span>before</span>
+<pre>index-only  upstream-check
+            release-gate
+            publish-release-gate</pre></div>
+          <div class="ba after"><span>after</span>
+<pre>hub, pages, sitemap and indexes
+generated from one site/skills.json</pre></div>
           <p class="verdict">fixed in upstream-check and this site</p>
         </div>
-      </article>
-      <article class="run">
-        <div class="run-bar"><i></i><i></i><i></i><span>draft-skill · caffeinity-routing</span></div>
-        <div class="run-body">
+      </div>
+      <div class="pane" role="tabpanel" id="pane-draft-skill" aria-labelledby="tab-draft-skill">
+        <div class="pane-col">
+          <p class="pane-label">draft-skill · caffeinity-routing</p>
           <h3>The missing map, drafted</h3>
 <pre>skills citing it  5 (W3, W4)
-route_check.py    9 workflows
-                  35 skills
-check_skill.py    0 fail · 0 warn
 trigger cases     10 + 4 pairs</pre>
-          <p>Five skills pointed at workflows in a routing skill that did not exist. draft-skill wrote it, tune-skill's validator checked it, and its cases were run by hand.</p>
-          <p class="verdict">new in this release</p>
+          <p>Five skills pointed at workflows in a routing skill that did not exist. draft-skill wrote it and tune-skill's validator checked it.</p>
         </div>
-      </article>
+        <div class="pane-col">
+          <p class="pane-label">Before → after</p>
+          <div class="ba"><span>before</span>
+<pre>W3, W4 cited by 5 skills
+router  (did not exist)</pre></div>
+          <div class="ba after"><span>after</span>
+<pre>caffeinity-routing  10 workflows
+check_skill.py      0 fail · 0 warn</pre></div>
+          <p class="verdict">new; now ten workflows</p>
+        </div>
+      </div>
+      <div class="shell-progress" aria-hidden="true"><b></b></div>
     </div>
   </div>
 </section>
@@ -1379,6 +1709,23 @@ trigger cases     10 + 4 pairs</pre>
     status.textContent=terms.length?(shown+' of '+cards.length+(shown===1?' matches':' match')):'';
   }
   q.addEventListener('input',filter);
+  var tabs=[].slice.call(document.querySelectorAll('.tabs [role="tab"]')),bar=document.querySelector('.shell-progress b');
+  function show(i,focus){
+    tabs.forEach(function(t,j){
+      var on=i===j;t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden=!on;
+    });
+    if(bar)bar.style.width=((i+1)/tabs.length*100)+'%';
+    if(focus)tabs[i].focus();
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){show(i);});
+    t.addEventListener('keydown',function(e){
+      var k={ArrowRight:1,ArrowLeft:-1}[e.key];
+      if(k){e.preventDefault();show((i+k+tabs.length)%tabs.length,true);}
+    });
+  });
+  if(tabs.length)show(0);
   [].forEach.call(document.querySelectorAll('[data-copy]'),function(b){
     b.addEventListener('click',function(){
       var label=b.querySelector('.copy');
