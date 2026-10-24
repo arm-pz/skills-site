@@ -75,6 +75,10 @@ def check(root="."):
         need(locs == expected, f"sitemap URLs differ: missing {expected - locs}, "
                                f"extra {locs - expected}")
 
+    llms = dist / "llms.txt"
+    need(llms.is_file() and llms.read_text(encoding="utf-8") == skilllib.llms_txt(manifest),
+         "dist/llms.txt is missing or differs from the manifest")
+
     redirects = dist / "_redirects"
     need(redirects.is_file(), "missing dist/_redirects")
     if redirects.is_file():

@@ -30,6 +30,7 @@ cp out/index.json dist/agent-skills/index.json
 cp out/index.json dist/.well-known/agent-skills/index.json
 cp out/sitemap.xml dist/sitemap.xml
 cp out/_redirects dist/_redirects
+cp out/llms.txt dist/llms.txt
 
 python tools/agent-skills/gen_page.py --list | tr -d '\r' | while read -r name; do
   [ -n "$name" ] || continue

@@ -353,6 +353,51 @@ def redirects(manifest):
     return "".join(line + "\n" for line in lines)
 
 
+INSTALL = {
+    "claude": ["/plugin marketplace add arm-pz/caffeinity-skills",
+               "/plugin install caffeinity@caffeinity-skills"],
+    "codex": ["codex plugin marketplace add arm-pz/caffeinity-skills"],
+    "any": ["npx skills add arm-pz/<skill>"],
+}
+
+
+def llms_txt(manifest):
+    """/llms.txt: what the site offers, for agents and AI search, rendered from the manifest."""
+    order = {g["id"]: g["order"] for g in manifest["groups"]}
+    pages = sorted((s for s in manifest["skills"] if s["page"] != "none"),
+                   key=lambda s: (order[s["group"]], s["order"]))
+    out = ["# Caffeinity Skills", "",
+           "> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: "
+           f"{len(pages)} skills mapped into {len(manifest.get('workflows', []))} workflows "
+           "(build a skill, get found, gate a release, grow search traffic, land a job, decide, "
+           "learn, run outbound, launch a product). Plain markdown, no API keys.", "",
+           "## Install", "",
+           "- Claude Code, every skill plus nine workflow agents: "
+           + " then ".join(f"`{c}`" for c in INSTALL["claude"]),
+           "- Codex: " + " ".join(f"`{c}`" for c in INSTALL["codex"])
+           + ", then install caffeinity from the Plugins directory",
+           "- Any agent, one skill: " + " ".join(f"`{c}`" for c in INSTALL["any"]),
+           f"- Discovery index: {SITE}/.well-known/agent-skills/index.json", ""]
+    for g in sorted(manifest["groups"], key=lambda g: g["order"]):
+        rows = [s for s in pages if s["group"] == g["id"]]
+        if not rows:
+            continue
+        out += [f"## {g['title']}", ""]
+        for s in rows:
+            parts = re.findall(r".+?[.!?](?=\s|$)", " ".join(s["blurb"].split())) or [s["blurb"]]
+            lead = parts[0] if len(parts[0]) >= 40 or len(parts) == 1 else f"{parts[0]} {parts[1].strip()}"
+            out.append(f"- [{s['name']}]({SITE}/{s['name']}/): {lead.strip()}")
+        out.append("")
+    flows = manifest.get("workflows", [])
+    if flows:
+        out += ["## Workflows", ""]
+        for f in flows:
+            steps = " -> ".join(" or ".join(st["skills"]) for st in f["steps"])
+            out.append(f"- {f['id']} {f['title']}: {steps}")
+        out.append("")
+    return "\n".join(out)
+
+
 def sha256_hex(blob):
     import hashlib
     return hashlib.sha256(blob).hexdigest()
