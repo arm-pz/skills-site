@@ -10,7 +10,7 @@ disagree, the repo wins; fix this file.
 | --- | --- |
 | `arm-pz/<skill>` (one per skill) | The skills themselves: one `SKILL.md` per repo, at `SKILL.md`, `<repo>/SKILL.md` or `skills/<repo>/SKILL.md`. Installed with `npx skills add arm-pz/<repo>`. |
 | `arm-pz/skills-site` (this repo) | skills.caffeinity.com: the hub, one page per skill, both discovery indexes, archives, sitemap, and all the automation below. `site/skills.json` is the single list of what is published. |
-| `arm-pz/caffeinity-skills` | Claude Code plugin marketplace. Points at the skill repos, and holds the mods (`mods/*`) and `plugins/caffeinity-routing`, the start-here router. |
+| `arm-pz/caffeinity-skills` | Plugin marketplace for Claude Code (`.claude-plugin/marketplace.json`) and Codex (`.agents/plugins/marketplace.json`). Holds the mods (`mods/*`), `plugins/caffeinity-routing` (the start-here router) and `plugins/caffeinity`: every skill plus nine workflow agents in one install, generated hourly by `scripts/build_plugin.py`. |
 | `arm-pz/arm-pz` | The GitHub profile README. Its skills block is generated from `site/skills.json`. |
 | `arm-pz/ship-sentinel` | A Claude Code mod (no SKILL.md) that holds `git push` and deploys until the check skills have run. Listed on the site as a mod. |
 | `arm-pz/outbound-ops`, `arm-pz/prompts-to-skill-agent` | Qoder agent bundles that repackage skills listed from their own repos. Denied in `site/deny.json`, so they never publish twice. |
@@ -34,6 +34,9 @@ push a public arm-pz repo with one SKILL.md and a repo About
        unit tests → build → sitemap + _redirects → dist + version.json → check_dist → verify
        deploy to Cloudflare Pages only if dist/version.json differs from the live one
        verify live → prove live → commit the sync to main as github-actions[bot]
+       the same build writes /llms.txt (install commands + every skill) for agents and AI search
+  └─ within the hour: arm-pz/caffeinity-skills  build-plugin.yml  (cron 27 * * * *)
+       re-bundle plugins/caffeinity from every skill repo; bump its version only if content changed
   └─ within the hour: arm-pz/arm-pz  skills-readme.yml  (cron 47 * * * *)
        regenerate the <!-- skills:start --> block of the profile README from site/skills.json
 ```

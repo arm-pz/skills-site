@@ -50,6 +50,7 @@ class CheckDistTest(unittest.TestCase):
             ],
         }
         (self.root / "site/skills.json").write_text(json.dumps(manifest))
+        (self.root / "dist/llms.txt").write_text(skilllib.llms_txt(manifest), encoding="utf-8")
         (self.root / "out/sitemap.xml").write_text(
             '<?xml version="1.0"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
             '<url><loc>https://skills.caffeinity.com/</loc></url>'
@@ -86,6 +87,7 @@ class CheckDistTest(unittest.TestCase):
              "group": "writing-growth", "tag": "editorial", "title": "Watch", "blurb": "W.",
              "stats": "1", "install": "/plugin install watch", "page": "bespoke", "order": 3})
         path.write_text(json.dumps(manifest))
+        (self.root / "dist/llms.txt").write_text(skilllib.llms_txt(manifest), encoding="utf-8")
         sitemap = (self.root / "out/sitemap.xml").read_text().replace(
             "</urlset>", "<url><loc>https://skills.caffeinity.com/watch/</loc></url></urlset>")
         (self.root / "out/sitemap.xml").write_text(sitemap)
@@ -126,6 +128,14 @@ class CheckDistTest(unittest.TestCase):
         self.assertIn("/old-alpha/ /alpha/ 301", skilllib.redirects(manifest))
         self.assertIn("/agent-skills/old-alpha.tar.gz /agent-skills/alpha.tar.gz 301",
                       skilllib.redirects(manifest))
+
+    def test_llms_txt_must_match_the_manifest(self):
+        text = (self.root / "dist/llms.txt").read_text(encoding="utf-8")
+        self.assertIn("- [alpha](https://skills.caffeinity.com/alpha/): A.", text)
+        self.assertIn("/plugin install caffeinity@caffeinity-skills", text)
+        self.assertIn("codex plugin marketplace add arm-pz/caffeinity-skills", text)
+        (self.root / "dist/llms.txt").write_text(text + "stale\n", encoding="utf-8")
+        self.assertTrue(check_dist.check(self.root))
 
 
 if __name__ == "__main__":

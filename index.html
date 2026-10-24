@@ -129,6 +129,15 @@
   .empty{padding:56px 0 0;font-family:var(--serif);font-size:clamp(24px,2.6vw,30px);max-width:30ch}
   [hidden]{display:none!important}
 
+  /* install: one card per agent */
+  .install{padding:clamp(56px,8vw,104px) 0;border-top:1px solid var(--line)}
+  .install-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:16px;margin-top:40px}
+  .inst{background:var(--surface);border-radius:var(--radius);box-shadow:0 0 0 1px var(--line);padding:24px;display:flex;flex-direction:column;gap:12px}
+  .inst h3{font-family:var(--serif);font-weight:400;font-size:26px;line-height:1.1}
+  .inst p{font-size:15px;color:var(--muted)}
+  .inst .cmd{width:100%;justify-content:space-between;font-size:13px;padding:12px 14px}
+  .inst-note a{color:var(--ink)}
+
   /* proof: real runs from this release */
   .proof{padding:clamp(56px,8vw,104px) 0;border-top:1px solid var(--line)}
   .runs{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,360px),1fr));gap:16px;margin-top:40px}
@@ -458,6 +467,7 @@
     <div class="nav-links">
       <a href="#workflows">Workflows</a>
       <a href="#skills">Skills</a>
+      <a href="#install">Install</a>
       <a href="#proof">Proof</a>
     </div>
     <a class="brand" href="/"><b>∧</b>caffeinity skills</a>
@@ -1168,6 +1178,33 @@
     <p class="empty" id="empty" hidden>Nothing matches that yet. <a href="https://github.com/arm-pz" target="_blank" rel="noopener">Ask for it on GitHub</a>.</p>
   </div>
 </main>
+
+<section class="install" id="install" aria-labelledby="install-h">
+  <div class="wrap">
+    <p class="eyebrow">Install</p>
+    <h2 class="title" id="install-h">Everything, in the agent you use.</h2>
+    <p class="section-lead">One plugin carries every skill above plus nine workflow agents, one per route. Or take a single skill into any agent that reads a SKILL.md.</p>
+    <div class="install-grid">
+      <article class="inst">
+        <h3>Claude Code</h3>
+        <p>Every skill, plus the nine agents: <code>skill-builder</code>, <code>release-gatekeeper</code>, <code>seo-lead</code> and the rest.</p>
+        <button class="cmd" type="button" data-copy="/plugin marketplace add arm-pz/caffeinity-skills" aria-label="Copy the marketplace command"><span>/plugin marketplace add arm-pz/caffeinity-skills</span><span class="copy" aria-hidden="true">Copy</span></button>
+        <button class="cmd" type="button" data-copy="/plugin install caffeinity@caffeinity-skills" aria-label="Copy the plugin install command"><span>/plugin install caffeinity@caffeinity-skills</span><span class="copy" aria-hidden="true">Copy</span></button>
+      </article>
+      <article class="inst">
+        <h3>Codex</h3>
+        <p>The same plugin from the Codex marketplace in the repo; then install <b>caffeinity</b> from the Plugins directory. caffeinity-routing picks the workflow.</p>
+        <button class="cmd" type="button" data-copy="codex plugin marketplace add arm-pz/caffeinity-skills" aria-label="Copy the Codex marketplace command"><span>codex plugin marketplace add arm-pz/caffeinity-skills</span><span class="copy" aria-hidden="true">Copy</span></button>
+      </article>
+      <article class="inst">
+        <h3>Any agent</h3>
+        <p>Cursor, Qoder, Gemini CLI and others: one skill at a time with the skills installer. Swap wordsmith for any skill; each card above has its exact command.</p>
+        <button class="cmd" type="button" data-copy="npx skills add arm-pz/wordsmith" aria-label="Copy an example install command"><span>npx skills add arm-pz/wordsmith</span><span class="copy" aria-hidden="true">Copy</span></button>
+        <p class="inst-note">Agents can also read <a href="/llms.txt">/llms.txt</a> and the <a href="/.well-known/agent-skills/index.json">discovery index</a>.</p>
+      </article>
+    </div>
+  </div>
+</section>
 
 <section class="proof" id="proof" aria-labelledby="proof-h">
   <div class="wrap">
