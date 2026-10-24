@@ -5,7 +5,7 @@
     {
       "id": "start-here",
       "title": "Start Here",
-      "descriptor": "routing · eleven workflows",
+      "descriptor": "routing · eleven brews",
       "order": 1
     },
     {
@@ -66,7 +66,7 @@
       "tag": "routing",
       "title": "Caffeinity Routing",
       "pageTitle": "Caffeinity Routing — agent skill",
-      "blurb": "Start here. Tell it the outcome you want and it picks one of eleven workflows, lists the skills in order with what each hands the next, and names the ones you have not installed instead of improvising their work.",
+      "blurb": "Start here. Tell it the outcome you want and it picks one of eleven brews (workflows), lists the skills in order with what each hands the next, and names the ones you have not installed instead of improvising their work.",
       "stats": "4 files · 357 lines · 8 KB",
       "install": "npx skills add arm-pz/caffeinity-skills --skill caffeinity-routing",
       "page": "generated",
@@ -567,7 +567,7 @@
       "install": "npx skills add arm-pz/caffeinity-skills --skill skill-estate",
       "page": "generated",
       "pageSource": {
-        "description": "Takes a whole collection of agent skill repos from scattered to published, consistent and self-maintaining, in gated phases: inventory every repo, reconcile site, marketplace and README listings, test and tune the family, close workflow gaps, wire publishing so new skill repos go live on their own, bundle a plugin with agents, add trigger tests and directory listings, and leave a maintenance loop and a map. Each phase hands off to the skill that owns it and ends in PRs. Use when someone's skills site and GitHub disagree, wants all their skill repos audited or cleaned up, wants new skills to publish themselves, or wants that cleanup repeated on another org, even if they never say estate. Not for one skill (use tune-skill), one listing (use findable), the site pipeline alone (use publish-pipeline), or weekly upkeep (use caffeinity-routing W10).",
+        "description": "Takes a whole collection of agent skill repos from scattered to published, consistent and self-maintaining, in gated phases: inventory every repo, reconcile site, marketplace and README listings, test and tune the family, close workflow gaps, wire publishing so new skill repos go live on their own, bundle a plugin with agents, add trigger tests and directory listings, and leave a maintenance loop and a map. Each phase hands off to the skill that owns it and ends in PRs. Use when someone's skills site and GitHub disagree, wants all their skill repos audited or cleaned up, wants new skills to publish themselves, or wants that cleanup repeated on another org, even if they never say estate. Not for one skill (use tune-skill), one listing (use findable), the site pipeline alone (use publish-pipeline), or weekly upkeep (use caffeinity-routing Brew 10 · Descale).",
         "files": [
           {
             "path": "SKILL.md",
@@ -2041,7 +2041,9 @@
   ],
   "workflows": [
     {
-      "id": "W1",
+      "id": "pour-over",
+      "number": 1,
+      "name": "Pour-over",
       "title": "Build a skill and make it installable",
       "steps": [
         {
@@ -2070,7 +2072,9 @@
       "note": "skill-launch runs the first steps as one chain."
     },
     {
-      "id": "W2",
+      "id": "bloom",
+      "number": 2,
+      "name": "Bloom",
       "title": "Get a repo, skill or plugin found",
       "steps": [
         {
@@ -2092,7 +2096,9 @@
       "note": "findable-polish and upstream-polish add the rewrite."
     },
     {
-      "id": "W3",
+      "id": "espresso",
+      "number": 3,
+      "name": "Espresso",
       "title": "Decide whether a site is safe to launch",
       "steps": [
         {
@@ -2121,7 +2127,9 @@
       "note": "ship-sentinel holds git push and deploys until the gate has run."
     },
     {
-      "id": "W4",
+      "id": "cold-brew",
+      "number": 4,
+      "name": "Cold brew",
       "title": "Grow organic search traffic",
       "steps": [
         {
@@ -2155,7 +2163,9 @@
       "note": "seo-polish and keyword-resolver package parts of this route."
     },
     {
-      "id": "W5",
+      "id": "french-press",
+      "number": 5,
+      "name": "French press",
       "title": "Land a job",
       "steps": [
         {
@@ -2183,7 +2193,9 @@
       "note": "It never submits an application for you."
     },
     {
-      "id": "W6",
+      "id": "cupping",
+      "number": 6,
+      "name": "Cupping",
       "title": "Make a decision",
       "steps": [
         {
@@ -2211,7 +2223,9 @@
       ]
     },
     {
-      "id": "W7",
+      "id": "slow-drip",
+      "number": 7,
+      "name": "Slow drip",
       "title": "Learn a skill",
       "steps": [
         {
@@ -2234,7 +2248,9 @@
       "note": "course-builder applies when the learner is a class or cohort, not one person."
     },
     {
-      "id": "W8",
+      "id": "nitro",
+      "number": 8,
+      "name": "Nitro",
       "title": "Run cold outbound",
       "steps": [
         {
@@ -2255,7 +2271,9 @@
       ]
     },
     {
-      "id": "W9",
+      "id": "moka-pot",
+      "number": 9,
+      "name": "Moka pot",
       "title": "Launch a one-person product",
       "steps": [
         {
@@ -2289,10 +2307,12 @@
           ]
         }
       ],
-      "note": "Step five is the whole of W3; paper-trail gives the gate the policy pages to check."
+      "note": "Step five is the whole of Brew 3 · Espresso; paper-trail gives the gate the policy pages to check."
     },
     {
-      "id": "W10",
+      "id": "descale",
+      "number": 10,
+      "name": "Descale",
       "title": "Maintain the skill family",
       "steps": [
         {
@@ -2315,7 +2335,9 @@
       "note": "The nightly health job opens the issue this starts from; a weekly scheduled session runs it and opens PRs."
     },
     {
-      "id": "W11",
+      "id": "estate-roast",
+      "number": 11,
+      "name": "Estate roast",
       "title": "Stand up or audit a skill estate",
       "steps": [
         {
@@ -2324,7 +2346,7 @@
           ]
         }
       ],
-      "note": "One run over the whole collection in eight gated phases; W10 keeps it healthy afterwards."
+      "note": "One run over the whole collection in eight gated phases; Brew 10 · Descale keeps it healthy afterwards."
     }
   ]
 }

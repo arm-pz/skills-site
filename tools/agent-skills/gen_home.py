@@ -20,7 +20,7 @@ WALL_END = "<!-- gen:wall:end -->"
 JSONLD_START = "<!-- gen:jsonld:start -->"
 JSONLD_END = "<!-- gen:jsonld:end -->"
 HUB_DESCRIPTION = ("Open agent skills for Claude Code, Cursor, Codex and Qoder, mapped into eleven "
-                   "workflows: build a skill, get found, ship safely, rank, get hired, decide.")
+                   "workflows we call brews: build a skill, get found, ship safely, rank, get hired, decide.")
 
 
 def esc(value):
@@ -115,8 +115,8 @@ def render_wall(manifest):
 def render_workflows(manifest):
     lines = []
     for flow in manifest.get("workflows", []):
-        lines.append(f'    <article class="flow" id="{esc(flow["id"].lower())}">')
-        lines.append(f'      <p class="flow-id">{esc(flow["id"])}</p>')
+        lines.append(f'    <article class="flow" id="{esc(flow["id"])}">')
+        lines.append(f'      <p class="flow-id">{esc(skilllib.brew_label(flow))}</p>')
         lines.append(f'      <h3>{esc(flow["title"])}</h3>')
         lines.append('      <ol class="flow-steps">')
         for step in flow["steps"]:
@@ -135,7 +135,7 @@ def render_stats(manifest):
     cards = visible(manifest)
     groups = sum(1 for g in manifest["groups"] if any(s["group"] == g["id"] for s in cards))
     flows = len(manifest.get("workflows", []))
-    return (f'<p class="stats">{count_label(cards)} · {flows} workflow{"" if flows == 1 else "s"} · '
+    return (f'<p class="stats">{count_label(cards)} · {flows} brew{"" if flows == 1 else "s"} · '
             f'{groups} {"category" if groups == 1 else "categories"} · 0 API keys</p>')
 
 

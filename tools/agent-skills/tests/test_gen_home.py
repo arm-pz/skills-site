@@ -80,12 +80,13 @@ class GenHomeTest(unittest.TestCase):
     def test_workflows_and_stats_regions(self):
         text = TEXT.replace("<body>", "<body>\n<!-- gen:stats:start -->x<!-- gen:stats:end -->\n"
                             "    <!-- gen:workflows:start -->\nold\n    <!-- gen:workflows:end -->")
-        flows = [{"id": "W1", "title": "Edit", "steps": [{"skills": ["alpha"]},
+        flows = [{"id": "pour-over", "number": 1, "name": "Pour-over", "title": "Edit", "steps": [{"skills": ["alpha"]},
                   {"skills": ["alpha"], "optional": True}], "note": "One & done."}]
         out = gen_home.render(text, {**MANIFEST, "workflows": flows})
         self.assertIn('<a href="alpha/">alpha</a> <span class="opt">optional</span>', out)
         self.assertIn("One &amp; done.", out)
-        self.assertIn("1 skill · 1 workflow · 1 category · 0 API keys", out)
+        self.assertIn("1 skill · 1 brew · 1 category · 0 API keys", out)
+        self.assertIn('<p class="flow-id">Brew 1 · Pour-over</p>', out)
         self.assertEqual(gen_home.render(out, {**MANIFEST, "workflows": flows}), out)
 
 
