@@ -5,7 +5,7 @@
     {
       "id": "start-here",
       "title": "Start Here",
-      "descriptor": "routing · nine workflows",
+      "descriptor": "routing · ten workflows",
       "order": 1
     },
     {
@@ -66,17 +66,17 @@
       "tag": "routing",
       "title": "Caffeinity Routing",
       "pageTitle": "Caffeinity Routing — agent skill",
-      "blurb": "Start here. Tell it the outcome you want and it picks one of nine workflows, lists the skills in order with what each hands the next, and names the ones you have not installed instead of improvising their work.",
-      "stats": "4 files · 320 lines · 7 KB",
+      "blurb": "Start here. Tell it the outcome you want and it picks one of ten workflows, lists the skills in order with what each hands the next, and names the ones you have not installed instead of improvising their work.",
+      "stats": "4 files · 347 lines · 8 KB",
       "install": "npx skills add arm-pz/caffeinity-skills --skill caffeinity-routing",
       "page": "generated",
       "pageSource": {
-        "description": "Picks which caffeinity skills to run, in what order, for a goal that spans more than one of them, and says what each step hands the next: build and publish a skill, get a project found, pass a release gate, grow organic search traffic, run a job search, make a decision, learn a skill, run cold outbound, or launch a one-person product. Checks which of those skills are installed and names the missing ones instead of improvising their work. Use whenever someone asks which skill to use, what to run first, how the skills fit together, or describes a multi-step outcome such as \"take this idea to a published skill\" or \"get my site ready to ship and ranking\", even if they never name a skill. Not for a request one skill already owns (load that skill directly), and not for doing a step's work itself: the named skill does it.",
+        "description": "Picks which caffeinity skills to run, in what order, for a goal that spans more than one of them, and says what each step hands the next: build and publish a skill, get a project found, pass a release gate, grow organic search traffic, run a job search, make a decision, learn a skill, run cold outbound, launch a one-person product, or keep the skills themselves healthy. Checks which of those skills are installed and names the missing ones instead of improvising their work. Use whenever someone asks which skill to use, what to run first, how the skills fit together, or describes a multi-step outcome such as \"take this idea to a published skill\" or \"get my site ready to ship and ranking\", even if they never name a skill. Not for a request one skill already owns (load that skill directly), and not for doing a step's work itself: the named skill does it.",
         "files": [
           {
             "path": "SKILL.md",
-            "lines": 85,
-            "bytes": 5399
+            "lines": 86,
+            "bytes": 5699
           },
           {
             "path": "references/trigger-cases.md",
@@ -85,21 +85,21 @@
           },
           {
             "path": "references/workflows.md",
-            "lines": 97,
-            "bytes": 7345
+            "lines": 113,
+            "bytes": 9331
           },
           {
             "path": "scripts/route_check.py",
-            "lines": 108,
-            "bytes": 4326
+            "lines": 118,
+            "bytes": 4636
           }
         ],
         "fileCount": 4,
-        "lines": 320,
-        "bytes": 7637,
+        "lines": 347,
+        "bytes": 8492,
         "license": "MIT",
-        "commit": "b54bd380d57b1a5b000ac43e5076b3ac39d43783",
-        "sha256": "a50bb8914c45b05adbe1869a554361bdf6befe679954c214bf6868bb81c91230"
+        "commit": "b381cef432ba2822e04c52aa089afdfedc0bd2d2",
+        "sha256": "c3dccd7ba4b366d0aece85ef979438315ed88c3d6610a2b686fb582f252991b2"
       },
       "order": 101
     },
@@ -1341,6 +1341,111 @@
         "sha256": "ca8c5df25870fe9af23268072575abb04763b50d750d612816338b428a8e66ed"
       },
       "order": 908
+    },
+    {
+      "name": "paper-trail",
+      "repo": "arm-pz/caffeinity-skills",
+      "path": "plugins/paper-trail/skills/paper-trail",
+      "group": "ship-checks",
+      "tag": "release",
+      "title": "Paper Trail",
+      "pageTitle": "Paper Trail — agent skill",
+      "blurb": "Privacy policy, terms, refund and cookie pages written only from facts you confirm, then checked for placeholders, missing sections and emails nobody supplied. Says when a lawyer should look.",
+      "stats": "6 files · 381 lines · 8 KB",
+      "install": "npx skills add arm-pz/caffeinity-skills --skill paper-trail",
+      "page": "generated",
+      "pageSource": {
+        "description": "Drafts the policy pages a small product needs before it takes money or data (privacy policy, terms of service, refund policy, cookie notice) from a fact sheet about what the product actually collects, stores, shares and charges, then checks the drafts for placeholders, missing sections and facts nobody supplied. Use when someone needs a privacy policy, terms, refund or cookie page for a site, app, SaaS, newsletter or digital product, asks what legal pages they need before launch, or wants existing policy pages checked against what the product really does, even if they never say \"legal\". Not legal advice and not for contracts, NDAs or employment documents (use a lawyer), and not for the launch plan itself (use solo-income-blueprint) or the site build (use site-prompt).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 81,
+            "bytes": 4887
+          },
+          {
+            "path": "references/facts.md",
+            "lines": 60,
+            "bytes": 2595
+          },
+          {
+            "path": "references/jurisdictions.md",
+            "lines": 23,
+            "bytes": 2546
+          },
+          {
+            "path": "references/pages.md",
+            "lines": 64,
+            "bytes": 2338
+          },
+          {
+            "path": "references/trigger-cases.md",
+            "lines": 28,
+            "bytes": 2141
+          },
+          {
+            "path": "scripts/check_pages.py",
+            "lines": 125,
+            "bytes": 6005
+          }
+        ],
+        "fileCount": 6,
+        "lines": 381,
+        "bytes": 8572,
+        "license": "MIT",
+        "commit": "b381cef432ba2822e04c52aa089afdfedc0bd2d2",
+        "sha256": "a5206ab80f987b87fdbd09e894fe4324f3eb851ddc9fc102a49f033a41d53ec6"
+      },
+      "order": 411
+    },
+    {
+      "name": "course-builder",
+      "repo": "arm-pz/caffeinity-skills",
+      "path": "plugins/course-builder/skills/course-builder",
+      "group": "thinking-learning",
+      "tag": "learning",
+      "title": "Course Builder",
+      "pageTitle": "Course Builder — agent skill",
+      "blurb": "A course for a class or cohort: measurable outcomes, modules in prerequisite order, an assessment for every outcome and a time budget that fits, checked by a script before the first session.",
+      "stats": "5 files · 301 lines · 6 KB",
+      "install": "npx skills add arm-pz/caffeinity-skills --skill course-builder",
+      "page": "generated",
+      "pageSource": {
+        "description": "Designs a course for a group of learners (a class, cohort, workshop series, bootcamp or internal training): measurable outcomes, a module sequence with prerequisites, activities and assessments aligned to each outcome, a time budget that fits the hours available, and a rubric, then checks the plan with a script so no outcome goes untaught or unassessed. Use when someone is teaching others and asks for a curriculum, syllabus, course outline, module plan, cohort or workshop structure, or wants an existing course checked for gaps and overload, even if they never say \"curriculum\". Not for one person's own learning plan (use study-system), for being taught the topic (use topic-primer), or for marketing the course (use sales-copy).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 84,
+            "bytes": 4995
+          },
+          {
+            "path": "references/alignment.md",
+            "lines": 58,
+            "bytes": 2433
+          },
+          {
+            "path": "references/outcomes.md",
+            "lines": 28,
+            "bytes": 1458
+          },
+          {
+            "path": "references/trigger-cases.md",
+            "lines": 25,
+            "bytes": 1790
+          },
+          {
+            "path": "scripts/check_course.py",
+            "lines": 106,
+            "bytes": 4527
+          }
+        ],
+        "fileCount": 5,
+        "lines": 301,
+        "bytes": 6078,
+        "license": "MIT",
+        "commit": "b381cef432ba2822e04c52aa089afdfedc0bd2d2",
+        "sha256": "f51263530294c91d85bbf58013df1a6f849c25c4209f34837655298799028c86"
+      },
+      "order": 909
     }
   ],
   "workflows": [
@@ -1448,6 +1553,12 @@
             "pre-ship-performance-audit"
           ],
           "optional": true
+        },
+        {
+          "skills": [
+            "platform-content"
+          ],
+          "optional": true
         }
       ],
       "note": "seo-polish and keyword-resolver package parts of this route."
@@ -1521,8 +1632,15 @@
           "skills": [
             "study-system"
           ]
+        },
+        {
+          "skills": [
+            "course-builder"
+          ],
+          "optional": true
         }
-      ]
+      ],
+      "note": "course-builder applies when the learner is a class or cohort, not one person."
     },
     {
       "id": "W8",
@@ -1566,6 +1684,11 @@
         },
         {
           "skills": [
+            "paper-trail"
+          ]
+        },
+        {
+          "skills": [
             "release-gate-chair"
           ]
         },
@@ -1575,7 +1698,30 @@
           ]
         }
       ],
-      "note": "Step four is the whole of W3."
+      "note": "Step five is the whole of W3; paper-trail gives the gate the policy pages to check."
+    },
+    {
+      "id": "W10",
+      "title": "Maintain the skill family",
+      "steps": [
+        {
+          "skills": [
+            "tune-skill"
+          ]
+        },
+        {
+          "skills": [
+            "prompts-to-skill-release"
+          ],
+          "optional": true
+        },
+        {
+          "skills": [
+            "upstream-check"
+          ]
+        }
+      ],
+      "note": "The nightly health job opens the issue this starts from; a weekly scheduled session runs it and opens PRs."
     }
   ]
 }
