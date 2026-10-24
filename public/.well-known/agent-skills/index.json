@@ -20,7 +20,7 @@
       "description": "Claude Code plugin marketplace and index of arm-pz agent skills: editorial, teaching, recruiting, SEO planning, release preflight, sub-agent tournaments and repo discovery. Install with npx skills add arm-pz/caffeinity-skills.",
       "type": "archive",
       "url": "https://skills.caffeinity.com/agent-skills/caffeinity-routing.tar.gz",
-      "digest": "sha256:294a6c6e73ea8349483635f45b58cd1971c321b1c1185d19ec4a9722e5281d12"
+      "digest": "sha256:c129ba6ab9debbff1cd8a636b0f652b738c130e4419dac5804342a79d9418098"
     },
     {
       "name": "career-track",
@@ -111,7 +111,7 @@
       "description": "Claude Code plugin marketplace and index of arm-pz agent skills: editorial, teaching, recruiting, SEO planning, release preflight, sub-agent tournaments and repo discovery. Install with npx skills add arm-pz/caffeinity-skills.",
       "type": "archive",
       "url": "https://skills.caffeinity.com/agent-skills/paper-trail.tar.gz",
-      "digest": "sha256:a5206ab80f987b87fdbd09e894fe4324f3eb851ddc9fc102a49f033a41d53ec6"
+      "digest": "sha256:708fa51813888d0fa0d62a22b56e4468f5d0e55b76f3903961ddfc872d14356d"
     },
     {
       "name": "platform-content",
@@ -188,21 +188,21 @@
       "description": "Release gate (chair fork): runs the three pre-ship passes and computes one HOLD-or-ready posture by script. Three verdicts stay separate.",
       "type": "archive",
       "url": "https://skills.caffeinity.com/agent-skills/release-gate-chair.tar.gz",
-      "digest": "sha256:4fc3a25bb2fd32daead300ed76ce78fb703fa6d01d20b63e0dc9da3c4e634c34"
+      "digest": "sha256:820da9183f46d247f9f3d04fe345e498d9814999df2e08688aaa574f9b3c0751"
     },
     {
       "name": "release-gate-ledger",
       "description": "Release gate (ledger fork): runs the three pre-ship passes and computes one HOLD-or-ready posture by script. Three verdicts stay separate.",
       "type": "archive",
       "url": "https://skills.caffeinity.com/agent-skills/release-gate-ledger.tar.gz",
-      "digest": "sha256:54cfe0e8c1fb25928ff003c2ca980e46c86fedbc20870c08b8127334ba984b01"
+      "digest": "sha256:6cd3568b8c50b4197c92e26293034e281bf598b698eeefc5b1256f1b404853f4"
     },
     {
       "name": "release-gate-validator",
       "description": "Release gate (validator fork): runs the three pre-ship passes and computes one HOLD-or-ready posture by script. Three verdicts stay separate.",
       "type": "archive",
       "url": "https://skills.caffeinity.com/agent-skills/release-gate-validator.tar.gz",
-      "digest": "sha256:b2b936923a21bb04e85a651f24c402d8d5c43fb9860685b29ea92e1d8f0a08f9"
+      "digest": "sha256:33f91264d733601a3be595a3aca6ed831ada4876012a35881c1cddc22f40f849"
     },
     {
       "name": "research-brief",
@@ -223,7 +223,7 @@
       "description": "Agent skill for deterministic, read-only technical SEO crawls: HTTP status and redirects, indexability, canonicals, titles, metas, H1s, internal links, sitemap coverage and static JSON-LD. Findings carry evidence; blocked or unrun checks stay INCONCLUSIVE. Zero-dependency, bounded. Works with Claude Code, Cursor and Qoder.",
       "type": "archive",
       "url": "https://skills.caffeinity.com/agent-skills/seo-crawl.tar.gz",
-      "digest": "sha256:05e3eafecc6b2264cc54864e9320ff2401058dccd238b4037f14751fa510487a"
+      "digest": "sha256:154b53859ee5775614c59d03a9a500d9c220161f3422a5458fd7f512a8baa860"
     },
     {
       "name": "seo-polish",
@@ -244,7 +244,7 @@
       "description": "Claude Code plugin marketplace and index of arm-pz agent skills: editorial, teaching, recruiting, SEO planning, release preflight, sub-agent tournaments and repo discovery. Install with npx skills add arm-pz/caffeinity-skills.",
       "type": "archive",
       "url": "https://skills.caffeinity.com/agent-skills/skill-estate.tar.gz",
-      "digest": "sha256:401eb2c843d066dc01f9edbffb1f993c90c3258e7472a841299fbbf1d3ecbdd5"
+      "digest": "sha256:3b6d01bf0e34fa13c3bd449e2c544e025dd8f04bd7dff4a7637a6e2e072a8dc7"
     },
     {
       "name": "skill-launch",
