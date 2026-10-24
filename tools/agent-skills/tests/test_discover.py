@@ -55,5 +55,22 @@ class AssignmentTest(unittest.TestCase):
         self.assertEqual(source["sha256"], hashlib.sha256(blob).hexdigest())
 
 
+    def test_measure_reads_a_mod_plugin_json(self):
+        files = {
+            "mods/gate-mod/.claude-plugin/plugin.json": b'{"name": "gate-mod", "description": "Holds deploys."}',
+            "mods/gate-mod/hooks/register.js": b"export default {}\n",
+            "LICENSE": b"MIT License\n",
+        }
+        original = discover.gh
+        discover.gh = lambda *args, **kwargs: '{"sha": "' + "a" * 40 + '"}'
+        try:
+            source, _ = discover.measure("market", files, "mods/gate-mod")
+        finally:
+            discover.gh = original
+        self.assertEqual(source["description"], "Holds deploys.")
+        self.assertEqual(source["fileCount"], 2)
+        self.assertIsNone(discover.entry_point(files, "mods/none"))
+
+
 if __name__ == "__main__":
     unittest.main()

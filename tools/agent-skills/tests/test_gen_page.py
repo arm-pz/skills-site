@@ -33,6 +33,13 @@ class GenPageTest(unittest.TestCase):
         self.assertIn("&lt;script&gt;alert(1)&lt;/script&gt;", out)
         self.assertIn("&amp;", out)
 
+    def test_mod_page_says_mod_not_skill(self):
+        out = gen_page.render_page(dict(ENTRY, kind="mod", install="/plugin install demo"))
+        self.assertIn("<title>Demo Skill — Claude Code mod</title>", out)
+        self.assertIn("is an open Claude Code mod", out)
+        self.assertIn("read its hooks before you install it", out)
+        self.assertNotIn("plain text your agent reads", out)
+
     def test_jsonld_is_valid_and_escapes_script_close(self):
         out = gen_page.render_page(ENTRY)
         self.assertIn("<\\/script>", out)

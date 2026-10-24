@@ -183,8 +183,8 @@ def apply(root, manifest, actions):
             short = entry["repo"].split("/", 1)[1]
             files = discover.fetch_files(short)
             path = (locate(name, files) if short == name else None) or entry["path"]
-            if path != "." and f"{path}/SKILL.md" not in files or path == "." and "SKILL.md" not in files:
-                notes.append(f"{name}: SKILL.md is no longer at {path}; page not refreshed")
+            if discover.entry_point(files, path) is None:
+                notes.append(f"{name}: no SKILL.md or plugin.json at {path} any more; page not refreshed")
                 continue
             entry["path"] = path
             entry["pageSource"], _ = discover.measure(short, files, path)

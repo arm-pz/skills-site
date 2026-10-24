@@ -135,7 +135,16 @@ class ManifestTest(unittest.TestCase):
         skilllib.validate_manifest(data)
         self.assertEqual([s["name"] for s in skilllib.archived(data)], ["demo"])
 
-    def test_mod_must_be_bespoke_and_kind_known(self):
+    def test_mod_inside_another_repo_can_be_generated(self):
+        data = self.manifest()
+        data["skills"].append(dict(data["skills"][0], name="gate-mod", repo="arm-pz/market",
+                                   path="mods/gate-mod", kind="mod", order=2))
+        skilllib.validate_manifest(data)
+        data["skills"][1]["path"] = "mods/other-mod"
+        with self.assertRaises(skilllib.ManifestError):
+            skilllib.validate_manifest(data)
+
+    def test_mod_must_have_a_page_and_kind_known(self):
         data = self.manifest()
         data["skills"][0]["kind"] = "mod"
         data["skills"][0]["page"] = "none"

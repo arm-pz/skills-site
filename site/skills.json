@@ -197,6 +197,198 @@
       "chain": true
     },
     {
+      "name": "tune-skill-mod",
+      "repo": "arm-pz/caffeinity-skills",
+      "path": "mods/tune-skill-mod",
+      "kind": "mod",
+      "group": "skill-authoring",
+      "tag": "authoring",
+      "title": "Tune Skill Mod",
+      "pageTitle": "Tune Skill Mod — Claude Code mod",
+      "blurb": "Arms when Claude edits a SKILL.md, then holds git push, PRs and releases until tune-skill has validated the change. Edits to any other file are ignored.",
+      "stats": "16 files · 1,288 lines · 2 hook files · fails open",
+      "install": "/plugin install tune-skill-mod --marketplace arm-pz/caffeinity-skills",
+      "page": "generated",
+      "pageSource": {
+        "description": "After Claude edits a SKILL.md, holds git push and releases until tune-skill has validated the change.",
+        "files": [
+          {
+            "path": ".claude-plugin/plugin.json",
+            "lines": 35,
+            "bytes": 960
+          },
+          {
+            "path": "README.md",
+            "lines": 53,
+            "bytes": 2289
+          },
+          {
+            "path": "hooks/hooks.json",
+            "lines": 6,
+            "bytes": 130
+          },
+          {
+            "path": "hooks/register.js",
+            "lines": 186,
+            "bytes": 7049
+          },
+          {
+            "path": "skills/tune-skill/.claude-plugin/plugin.json",
+            "lines": 9,
+            "bytes": 377
+          },
+          {
+            "path": "skills/tune-skill/LICENSE",
+            "lines": 21,
+            "bytes": 1073
+          },
+          {
+            "path": "skills/tune-skill/README.md",
+            "lines": 83,
+            "bytes": 3236
+          },
+          {
+            "path": "skills/tune-skill/SKILL.md",
+            "lines": 82,
+            "bytes": 5914
+          },
+          {
+            "path": "skills/tune-skill/references/audit-checklist.md",
+            "lines": 64,
+            "bytes": 4104
+          },
+          {
+            "path": "skills/tune-skill/references/test-cases.md",
+            "lines": 39,
+            "bytes": 1987
+          },
+          {
+            "path": "skills/tune-skill/references/trigger-cases.md",
+            "lines": 78,
+            "bytes": 6697
+          },
+          {
+            "path": "skills/tune-skill/scripts/check_skill.py",
+            "lines": 193,
+            "bytes": 7117
+          },
+          {
+            "path": "skills/tune-skill/scripts/regress.py",
+            "lines": 160,
+            "bytes": 6689
+          },
+          {
+            "path": "skills/tune-skill/scripts/test_check_skill.py",
+            "lines": 71,
+            "bytes": 3008
+          },
+          {
+            "path": "skills/tune-skill/scripts/test_regress.py",
+            "lines": 73,
+            "bytes": 3816
+          },
+          {
+            "path": "tests/tune-skill-mod.test.ts",
+            "lines": 135,
+            "bytes": 5868
+          }
+        ],
+        "fileCount": 16,
+        "lines": 1288,
+        "bytes": 20897,
+        "license": "MIT",
+        "commit": "d1334f6f377f4a3446c6fc1e071559303471b48d",
+        "sha256": "e79c3f9cbd44fd97b950ca333c4a51b40f644416361a221b0754d0fa31e31a28"
+      },
+      "order": 208
+    },
+    {
+      "name": "skill-release-mod",
+      "repo": "arm-pz/caffeinity-skills",
+      "path": "mods/skill-release-mod",
+      "kind": "mod",
+      "group": "skill-authoring",
+      "tag": "release",
+      "title": "Skill Release Mod",
+      "pageTitle": "Skill Release Mod — Claude Code mod",
+      "blurb": "Holds gh release create and npm publish in Claude Code until prompts-to-skill-release has run the skill's test cases since your last edit.",
+      "stats": "12 files · 627 lines · 2 hook files · fails open",
+      "install": "/plugin install skill-release-mod --marketplace arm-pz/caffeinity-skills",
+      "page": "generated",
+      "pageSource": {
+        "description": "Holds gh release create and npm publish until prompts-to-skill-release has run its test cases since the last edit.",
+        "files": [
+          {
+            "path": ".claude-plugin/plugin.json",
+            "lines": 34,
+            "bytes": 975
+          },
+          {
+            "path": "README.md",
+            "lines": 52,
+            "bytes": 2095
+          },
+          {
+            "path": "hooks/hooks.json",
+            "lines": 6,
+            "bytes": 147
+          },
+          {
+            "path": "hooks/register.js",
+            "lines": 166,
+            "bytes": 6199
+          },
+          {
+            "path": "skills/prompts-to-skill-release/.claude-plugin/plugin.json",
+            "lines": 9,
+            "bytes": 439
+          },
+          {
+            "path": "skills/prompts-to-skill-release/LICENSE",
+            "lines": 21,
+            "bytes": 1073
+          },
+          {
+            "path": "skills/prompts-to-skill-release/README.md",
+            "lines": 60,
+            "bytes": 2223
+          },
+          {
+            "path": "skills/prompts-to-skill-release/SKILL.md",
+            "lines": 46,
+            "bytes": 3971
+          },
+          {
+            "path": "skills/prompts-to-skill-release/references/readme-template.md",
+            "lines": 28,
+            "bytes": 583
+          },
+          {
+            "path": "skills/prompts-to-skill-release/references/release-steps.md",
+            "lines": 39,
+            "bytes": 1968
+          },
+          {
+            "path": "skills/prompts-to-skill-release/references/trigger-cases.md",
+            "lines": 57,
+            "bytes": 4682
+          },
+          {
+            "path": "tests/skill-release-mod.test.ts",
+            "lines": 109,
+            "bytes": 4915
+          }
+        ],
+        "fileCount": 12,
+        "lines": 627,
+        "bytes": 10387,
+        "license": "MIT",
+        "commit": "d1334f6f377f4a3446c6fc1e071559303471b48d",
+        "sha256": "0261e8afac9fd1c1a6bc03685149f45eae4a09c0c0b6f48f1e61b1ca60093aa9"
+      },
+      "order": 209
+    },
+    {
       "name": "findable",
       "repo": "arm-pz/findable",
       "path": "skills/findable",
@@ -759,6 +951,360 @@
         "sha256": "a5206ab80f987b87fdbd09e894fe4324f3eb851ddc9fc102a49f033a41d53ec6"
       },
       "order": 411
+    },
+    {
+      "name": "release-gate-mod",
+      "repo": "arm-pz/caffeinity-skills",
+      "path": "mods/release-gate-mod",
+      "kind": "mod",
+      "group": "ship-checks",
+      "tag": "release",
+      "title": "Release Gate Mod",
+      "pageTitle": "Release Gate Mod — Claude Code mod",
+      "blurb": "Holds production deploys and PR merges in Claude Code until the release-gate chair has run web-preflight, the security red team and the performance audit since your last edit. Install this one rather than the three single-check mods.",
+      "stats": "13 files · 950 lines · 2 hook files · fails open",
+      "install": "/plugin install release-gate-mod --marketplace arm-pz/caffeinity-skills",
+      "page": "generated",
+      "pageSource": {
+        "description": "Holds production deploys and PR merges until the release-gate chair (web-preflight, security red team, performance audit) has run since the last edit.",
+        "files": [
+          {
+            "path": ".claude-plugin/plugin.json",
+            "lines": 35,
+            "bytes": 1021
+          },
+          {
+            "path": "README.md",
+            "lines": 53,
+            "bytes": 2364
+          },
+          {
+            "path": "hooks/hooks.json",
+            "lines": 6,
+            "bytes": 140
+          },
+          {
+            "path": "hooks/register.js",
+            "lines": 176,
+            "bytes": 6742
+          },
+          {
+            "path": "skills/release-gate-chair/.claude-plugin/plugin.json",
+            "lines": 9,
+            "bytes": 364
+          },
+          {
+            "path": "skills/release-gate-chair/.gitignore",
+            "lines": 3,
+            "bytes": 28
+          },
+          {
+            "path": "skills/release-gate-chair/LICENSE",
+            "lines": 21,
+            "bytes": 1073
+          },
+          {
+            "path": "skills/release-gate-chair/README.md",
+            "lines": 76,
+            "bytes": 3316
+          },
+          {
+            "path": "skills/release-gate-chair/SKILL.md",
+            "lines": 131,
+            "bytes": 6477
+          },
+          {
+            "path": "skills/release-gate-chair/references/ledger.md",
+            "lines": 73,
+            "bytes": 4171
+          },
+          {
+            "path": "skills/release-gate-chair/scripts/check_gate.mjs",
+            "lines": 184,
+            "bytes": 8721
+          },
+          {
+            "path": "skills/release-gate-chair/tests/posture.mjs",
+            "lines": 74,
+            "bytes": 6522
+          },
+          {
+            "path": "tests/release-gate-mod.test.ts",
+            "lines": 109,
+            "bytes": 4880
+          }
+        ],
+        "fileCount": 13,
+        "lines": 950,
+        "bytes": 15768,
+        "license": "MIT",
+        "commit": "d1334f6f377f4a3446c6fc1e071559303471b48d",
+        "sha256": "f46ec6341b008bd7748e7f2a8543dffea98fd18578266be9165c995ec4f89e1b"
+      },
+      "order": 412
+    },
+    {
+      "name": "web-preflight-mod",
+      "repo": "arm-pz/caffeinity-skills",
+      "path": "mods/web-preflight-mod",
+      "kind": "mod",
+      "group": "ship-checks",
+      "tag": "release",
+      "title": "Web Preflight Mod",
+      "pageTitle": "Web Preflight Mod — Claude Code mod",
+      "blurb": "Reminds Claude Code to run web-preflight (exposed .env files, source maps, admin and debug surfaces) before a production deploy.",
+      "stats": "11 files · 872 lines · 2 hook files · fails open",
+      "install": "/plugin install web-preflight-mod --marketplace arm-pz/caffeinity-skills",
+      "page": "generated",
+      "pageSource": {
+        "description": "Reminds Claude to run web-preflight (exposed .env, source maps, admin and debug surfaces) before a production deploy.",
+        "files": [
+          {
+            "path": ".claude-plugin/plugin.json",
+            "lines": 35,
+            "bytes": 987
+          },
+          {
+            "path": "README.md",
+            "lines": 53,
+            "bytes": 2325
+          },
+          {
+            "path": "hooks/hooks.json",
+            "lines": 6,
+            "bytes": 136
+          },
+          {
+            "path": "hooks/register.js",
+            "lines": 172,
+            "bytes": 6530
+          },
+          {
+            "path": "skills/web-preflight/.claude-plugin/plugin.json",
+            "lines": 10,
+            "bytes": 397
+          },
+          {
+            "path": "skills/web-preflight/LICENSE",
+            "lines": 21,
+            "bytes": 1073
+          },
+          {
+            "path": "skills/web-preflight/README.md",
+            "lines": 51,
+            "bytes": 3340
+          },
+          {
+            "path": "skills/web-preflight/SKILL.md",
+            "lines": 229,
+            "bytes": 15006
+          },
+          {
+            "path": "skills/web-preflight/examples/sample-report-spa.md",
+            "lines": 60,
+            "bytes": 3018
+          },
+          {
+            "path": "skills/web-preflight/tests.md",
+            "lines": 126,
+            "bytes": 5271
+          },
+          {
+            "path": "tests/web-preflight-mod.test.ts",
+            "lines": 109,
+            "bytes": 4878
+          }
+        ],
+        "fileCount": 11,
+        "lines": 872,
+        "bytes": 15074,
+        "license": "MIT",
+        "commit": "d1334f6f377f4a3446c6fc1e071559303471b48d",
+        "sha256": "196c0f18c29c96eb51d0aa2096766dc642351fe7a571be583eccb7ea17289d9f"
+      },
+      "order": 413
+    },
+    {
+      "name": "pre-ship-security-red-team-mod",
+      "repo": "arm-pz/caffeinity-skills",
+      "path": "mods/pre-ship-security-red-team-mod",
+      "kind": "mod",
+      "group": "ship-checks",
+      "tag": "release",
+      "title": "Security Red Team Mod",
+      "pageTitle": "Security Red Team Mod — Claude Code mod",
+      "blurb": "Holds production deploys in Claude Code until the pre-ship security red team has run since your last edit.",
+      "stats": "17 files · 1,588 lines · 2 hook files · fails open",
+      "install": "/plugin install pre-ship-security-red-team-mod --marketplace arm-pz/caffeinity-skills",
+      "page": "generated",
+      "pageSource": {
+        "description": "Holds production deploys until the pre-ship security red team has run since the last edit.",
+        "files": [
+          {
+            "path": ".claude-plugin/plugin.json",
+            "lines": 35,
+            "bytes": 983
+          },
+          {
+            "path": "README.md",
+            "lines": 53,
+            "bytes": 2454
+          },
+          {
+            "path": "hooks/hooks.json",
+            "lines": 6,
+            "bytes": 162
+          },
+          {
+            "path": "hooks/register.js",
+            "lines": 172,
+            "bytes": 6632
+          },
+          {
+            "path": "skills/pre-ship-security-red-team/.claude-plugin/plugin.json",
+            "lines": 9,
+            "bytes": 381
+          },
+          {
+            "path": "skills/pre-ship-security-red-team/LICENSE",
+            "lines": 21,
+            "bytes": 1073
+          },
+          {
+            "path": "skills/pre-ship-security-red-team/README.md",
+            "lines": 93,
+            "bytes": 9294
+          },
+          {
+            "path": "skills/pre-ship-security-red-team/SKILL.md",
+            "lines": 163,
+            "bytes": 12756
+          },
+          {
+            "path": "skills/pre-ship-security-red-team/assets/brief-template.md",
+            "lines": 33,
+            "bytes": 2826
+          },
+          {
+            "path": "skills/pre-ship-security-red-team/assets/negative-control.mjs",
+            "lines": 179,
+            "bytes": 9465
+          },
+          {
+            "path": "skills/pre-ship-security-red-team/assets/results-table.md",
+            "lines": 22,
+            "bytes": 2067
+          },
+          {
+            "path": "skills/pre-ship-security-red-team/references/attacks.md",
+            "lines": 141,
+            "bytes": 10151
+          },
+          {
+            "path": "skills/pre-ship-security-red-team/references/guardrails.md",
+            "lines": 56,
+            "bytes": 4817
+          },
+          {
+            "path": "skills/pre-ship-security-red-team/scripts/check_results.mjs",
+            "lines": 194,
+            "bytes": 8704
+          },
+          {
+            "path": "skills/pre-ship-security-red-team/scripts/scaffold_run.mjs",
+            "lines": 223,
+            "bytes": 9698
+          },
+          {
+            "path": "skills/pre-ship-security-red-team/scripts/shared.mjs",
+            "lines": 79,
+            "bytes": 2635
+          },
+          {
+            "path": "tests/pre-ship-security-red-team-mod.test.ts",
+            "lines": 109,
+            "bytes": 4932
+          }
+        ],
+        "fileCount": 17,
+        "lines": 1588,
+        "bytes": 30959,
+        "license": "MIT",
+        "commit": "d1334f6f377f4a3446c6fc1e071559303471b48d",
+        "sha256": "9fa3a48b71b2026a6d834903d0a2322ebf5dcc7cf065e441ef8041cf4184a711"
+      },
+      "order": 414
+    },
+    {
+      "name": "pre-ship-performance-audit-mod",
+      "repo": "arm-pz/caffeinity-skills",
+      "path": "mods/pre-ship-performance-audit-mod",
+      "kind": "mod",
+      "group": "ship-checks",
+      "tag": "performance",
+      "title": "Performance Audit Mod",
+      "pageTitle": "Performance Audit Mod — Claude Code mod",
+      "blurb": "Reminds Claude Code to run the pre-ship performance audit before a production deploy.",
+      "stats": "9 files · 597 lines · 2 hook files · fails open",
+      "install": "/plugin install pre-ship-performance-audit-mod --marketplace arm-pz/caffeinity-skills",
+      "page": "generated",
+      "pageSource": {
+        "description": "Reminds Claude to run the pre-ship performance audit before a production deploy.",
+        "files": [
+          {
+            "path": ".claude-plugin/plugin.json",
+            "lines": 35,
+            "bytes": 980
+          },
+          {
+            "path": "README.md",
+            "lines": 53,
+            "bytes": 2444
+          },
+          {
+            "path": "hooks/hooks.json",
+            "lines": 6,
+            "bytes": 162
+          },
+          {
+            "path": "hooks/register.js",
+            "lines": 172,
+            "bytes": 6639
+          },
+          {
+            "path": "skills/pre-ship-performance-audit/.claude-plugin/plugin.json",
+            "lines": 10,
+            "bytes": 453
+          },
+          {
+            "path": "skills/pre-ship-performance-audit/LICENSE",
+            "lines": 21,
+            "bytes": 1073
+          },
+          {
+            "path": "skills/pre-ship-performance-audit/README.md",
+            "lines": 62,
+            "bytes": 3758
+          },
+          {
+            "path": "skills/pre-ship-performance-audit/SKILL.md",
+            "lines": 128,
+            "bytes": 11230
+          },
+          {
+            "path": "tests/pre-ship-performance-audit-mod.test.ts",
+            "lines": 110,
+            "bytes": 4894
+          }
+        ],
+        "fileCount": 9,
+        "lines": 597,
+        "bytes": 11488,
+        "license": "MIT",
+        "commit": "d1334f6f377f4a3446c6fc1e071559303471b48d",
+        "sha256": "b8a788d07ff582c241ad3489dd83f30c482caab29d18a419b7c10c4cfd7b1a72"
+      },
+      "order": 415
     },
     {
       "name": "seo-crawl",
