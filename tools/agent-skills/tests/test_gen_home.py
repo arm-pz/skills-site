@@ -7,7 +7,7 @@ import gen_home
 
 MANIFEST = {
     "schema": 1,
-    "site": "https://skills.caffeinity.com",
+    "site": "https://skillsmith.tech",
     "groups": [
         {"id": "writing-growth", "title": "Writing & Growth", "descriptor": "editorial", "order": 1},
         {"id": "ship-checks", "title": "Ship Checks", "descriptor": "audits", "order": 2},

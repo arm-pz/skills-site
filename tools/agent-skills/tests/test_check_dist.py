@@ -13,7 +13,7 @@ import skilllib
 
 def entry(name, digest):
     return {"name": name, "description": "x", "type": "archive",
-            "url": f"https://skills.caffeinity.com/agent-skills/{name}.tar.gz",
+            "url": f"https://skillsmith.tech/agent-skills/{name}.tar.gz",
             "digest": f"sha256:{digest}"}
 
 
@@ -53,10 +53,10 @@ class CheckDistTest(unittest.TestCase):
         (self.root / "dist/llms.txt").write_text(skilllib.llms_txt(manifest), encoding="utf-8")
         (self.root / "out/sitemap.xml").write_text(
             '<?xml version="1.0"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
-            '<url><loc>https://skills.caffeinity.com/</loc></url>'
-            '<url><loc>https://skills.caffeinity.com/work/</loc></url>'
-            '<url><loc>https://skills.caffeinity.com/alpha/</loc></url>'
-            '<url><loc>https://skills.caffeinity.com/beta/</loc></url>'
+            '<url><loc>https://skillsmith.tech/</loc></url>'
+            '<url><loc>https://skillsmith.tech/work/</loc></url>'
+            '<url><loc>https://skillsmith.tech/alpha/</loc></url>'
+            '<url><loc>https://skillsmith.tech/beta/</loc></url>'
             "</urlset>")
         shutil.copyfile(self.root / "out/sitemap.xml", self.root / "dist/sitemap.xml")
         for name in ("alpha", "beta"):
@@ -92,7 +92,7 @@ class CheckDistTest(unittest.TestCase):
         path.write_text(json.dumps(manifest))
         (self.root / "dist/llms.txt").write_text(skilllib.llms_txt(manifest), encoding="utf-8")
         sitemap = (self.root / "out/sitemap.xml").read_text().replace(
-            "</urlset>", "<url><loc>https://skills.caffeinity.com/watch/</loc></url></urlset>")
+            "</urlset>", "<url><loc>https://skillsmith.tech/watch/</loc></url></urlset>")
         (self.root / "out/sitemap.xml").write_text(sitemap)
         (self.root / "dist/sitemap.xml").write_text(sitemap)
         (self.root / "dist/watch").mkdir()
@@ -138,7 +138,7 @@ class CheckDistTest(unittest.TestCase):
 
     def test_llms_txt_must_match_the_manifest(self):
         text = (self.root / "dist/llms.txt").read_text(encoding="utf-8")
-        self.assertIn("- [alpha](https://skills.caffeinity.com/alpha/): A.", text)
+        self.assertIn("- [alpha](https://skillsmith.tech/alpha/): A.", text)
         self.assertIn("/plugin install caffeinity@caffeinity-skills", text)
         self.assertIn("codex plugin marketplace add arm-pz/caffeinity-skills", text)
         (self.root / "dist/llms.txt").write_text(text + "stale\n", encoding="utf-8")

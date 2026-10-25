@@ -73,7 +73,7 @@ def main(argv=None):
         regressed = run.returncode != 0
         if args.report:
             with open(args.report, "w", encoding="utf-8") as fh:
-                fh.write("Nightly `regress.py` over every skill published on skills.caffeinity.com.\n\n")
+                fh.write("Nightly `regress.py` over every skill published on skillsmith.tech.\n\n")
                 fh.write("```\n" + run.stdout + "```\n\n")
                 fh.write("Fix each regression in its repo with tune-skill; the next nightly run "
                          "records the fix. If a regression is intended, accept it with "

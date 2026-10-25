@@ -1,6 +1,6 @@
 # PROJECT.md: the caffeinity skills ecosystem
 
-What exists, where it lives, how a skill gets from a repo to skills.caffeinity.com and the profile
+What exists, where it lives, how a skill gets from a repo to skillsmith.tech and the profile
 README, and how the skills keep checking each other. Written 2026-10-23, updated 2026-10-24. When this file and a repo
 disagree, the repo wins; fix this file.
 
@@ -9,7 +9,7 @@ disagree, the repo wins; fix this file.
 | Repo | Role |
 | --- | --- |
 | `arm-pz/<skill>` (one per skill) | The skills themselves: one `SKILL.md` per repo, at `SKILL.md`, `<repo>/SKILL.md` or `skills/<repo>/SKILL.md`. Installed with `npx skills add arm-pz/<repo>`. |
-| `arm-pz/skills-site` (this repo) | skills.caffeinity.com: the hub, one page per skill, both discovery indexes, archives, sitemap, and all the automation below. `site/skills.json` is the single list of what is published. |
+| `arm-pz/skills-site` (this repo) | skillsmith.tech (formerly skills.caffeinity.com, which now redirects to it): the hub, one page per skill, both discovery indexes, archives, sitemap, and all the automation below. `site/skills.json` is the single list of what is published. |
 | `arm-pz/caffeinity-skills` | Plugin marketplace for Claude Code (`.claude-plugin/marketplace.json`) and Codex (`.agents/plugins/marketplace.json`). Holds the mods (`mods/*`), `plugins/caffeinity-routing` (the start-here router), three skills that live only here (`plugins/paper-trail`, `plugins/course-builder`, `plugins/skill-estate`) and `plugins/caffeinity`: every skill plus eleven workflow agents in one install, generated hourly by `scripts/build_plugin.py`. |
 | `arm-pz/arm-pz` | The GitHub profile README. Its skills block is generated from `site/skills.json`. |
 | `arm-pz/ship-sentinel` | A Claude Code mod (no SKILL.md) that holds `git push` and deploys until the check skills have run. Listed on the site as a mod. |
@@ -182,6 +182,14 @@ bash tools/agent-skills/make_dist.sh
 python tools/agent-skills/check_dist.py && node tools/agent-skills/verify.mjs local
 python -m http.server 8080 --directory dist
 ```
+
+## Domains
+
+`skillsmith.tech` is the canonical address (`skilllib.SITE`); every canonical tag, the sitemap,
+`llms.txt`, the discovery index and the deploy check use it. The `skills-site` Pages project also
+serves `www.skillsmith.tech` and `skills.caffeinity.com`, and two Cloudflare Redirect Rules send both
+to `https://skillsmith.tech` with the path kept (301). Keep both hostnames attached to the Pages
+project: the redirects only fire on hostnames Cloudflare serves.
 
 ## Known gaps
 

@@ -16,10 +16,10 @@ class RepoMetadataTest(unittest.TestCase):
             {"name": "old", "repo": None},
         ]}
         w = repo_metadata.wanted(manifest)
-        self.assertEqual(w["arm-pz/demo"][1], "https://skills.caffeinity.com/demo/")
+        self.assertEqual(w["arm-pz/demo"][1], "https://skillsmith.tech/demo/")
         self.assertIsNone(w["arm-pz/demo"][2])
         self.assertIn("claude-code-mod", w["arm-pz/watch"][0])
-        self.assertEqual(w["arm-pz/caffeinity-skills"][1], "https://skills.caffeinity.com/")
+        self.assertEqual(w["arm-pz/caffeinity-skills"][1], "https://skillsmith.tech/")
         self.assertNotIn(None, w)
         self.assertEqual(w["arm-pz/found"][2], "AI agent skill.")
         self.assertIn("skill-md", w["arm-pz/found"][0])

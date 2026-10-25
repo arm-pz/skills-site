@@ -8,7 +8,7 @@ import tarfile
 from pathlib import Path
 
 SCHEMA = 1
-SITE = "https://skills.caffeinity.com"
+SITE = "https://skillsmith.tech"
 # Hand-written pages served at /<name>/, beside the hub and the skill pages.
 STATIC_PAGES = ["work"]
 INDEX_SCHEMA = "https://schemas.agentskills.io/discovery/0.2.0/schema.json"

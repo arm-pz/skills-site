@@ -13,7 +13,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/../.."
 
-SITE=https://skills.caffeinity.com
+SITE=https://skillsmith.tech
 PROJECT=skills
 WRANGLER="npx --yes wrangler@4.151.1"
 force=0 dry=0

@@ -18,10 +18,10 @@ MANIFEST = {
 class SitemapTest(unittest.TestCase):
     def test_url_set_and_order(self):
         self.assertEqual([u for u, _ in gen_sitemap.urls(MANIFEST)],
-                         ["https://skills.caffeinity.com/",
-                          "https://skills.caffeinity.com/work/",
-                          "https://skills.caffeinity.com/gamma/",
-                          "https://skills.caffeinity.com/alpha/"])
+                         ["https://skillsmith.tech/",
+                          "https://skillsmith.tech/work/",
+                          "https://skillsmith.tech/gamma/",
+                          "https://skillsmith.tech/alpha/"])
 
     def test_xml_parses(self):
         xml = gen_sitemap.render(MANIFEST, lambda path: "2026-10-21")
