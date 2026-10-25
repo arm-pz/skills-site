@@ -219,6 +219,16 @@ class ManifestTest(unittest.TestCase):
         with self.assertRaises(skilllib.ManifestError):
             skilllib.validate_manifest(data)
 
+    def test_pairs_with_needs_https_and_a_cost_line(self):
+        pair = {"name": "Tool", "url": "https://example.com", "for": "data.", "needs": "A key."}
+        data = self.manifest()
+        data["skills"][0]["pairsWith"] = [pair]
+        skilllib.validate_manifest(data)
+        for bad in ({"url": "http://example.com"}, {"needs": ""}):
+            data["skills"][0]["pairsWith"] = [dict(pair, **bad)]
+            with self.assertRaises(skilllib.ManifestError):
+                skilllib.validate_manifest(data)
+
     def test_section_names_are_reserved(self):
         for name in ("skills", "subagents", "harnesses"):
             data = self.manifest()

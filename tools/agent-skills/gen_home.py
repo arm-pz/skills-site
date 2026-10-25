@@ -311,12 +311,25 @@ def flow_steps_html(flow, manifest):
     return "\n".join(out)
 
 
+def flow_title(title):
+    """The longest title that still fits the 60 characters search results show."""
+    for candidate in (f"{title}: AI agent workflow | Skillsmith", f"{title} | Skillsmith"):
+        if len(candidate) <= 60:
+            return candidate
+    return title
+
+
 def render_flow_page(flow, manifest):
     flows = manifest.get("workflows", [])
     canonical = f"{skilllib.SITE}/workflows/{flow['slug']}/"
     others = "\n".join(f'      <li><a href="/workflows/{esc(f["slug"])}/">{esc(f["title"])}</a></li>'
                        for f in flows if f["id"] != flow["id"])
     note = f'    <p class="note">{esc(flow["note"])}</p>' if flow.get("note") else ""
+    pairs = "".join(
+        f'\n    <div class="pair"><p class="step-n">Pairs with · third-party</p>'
+        f'<p><a href="{attr(p["url"])}" target="_blank" rel="noopener"><b>{esc(p["name"])}</b></a> for {esc(p["for"])}</p>'
+        f'<p class="pair-needs">Not made by Skillsmith. {esc(p["needs"])}</p></div>'
+        for p in flow.get("pairsWith", []))
     by_name = {s["name"]: s for s in manifest["skills"]}
     ld = {
         "@context": "https://schema.org",
@@ -332,7 +345,7 @@ def render_flow_page(flow, manifest):
     }
     tokens = {
         "MARKER": FLOW_MARKER,
-        "PAGE_TITLE": esc(f"{flow['title']}: an AI agent workflow | Skillsmith"),
+        "PAGE_TITLE": esc(flow_title(flow["title"])),
         "DESCRIPTION": attr(flow["summary"]),
         "CANONICAL": attr(canonical),
         "JSON_LD": json.dumps(ld, indent=2, ensure_ascii=False).replace("</", "<\\/"),
@@ -342,7 +355,7 @@ def render_flow_page(flow, manifest):
         "INSTALL": esc(flow_install(flow, manifest)),
         "INSTALL_ATTR": attr(flow_install(flow, manifest)),
         "STEPS": flow_steps_html(flow, manifest),
-        "NOTE": note,
+        "NOTE": note + pairs,
         "OTHERS": others,
     }
     text = FLOW_TEMPLATE.read_text(encoding="utf-8")

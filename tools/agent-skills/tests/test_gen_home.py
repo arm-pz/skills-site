@@ -123,6 +123,13 @@ class FlowPageTest(unittest.TestCase):
         self.assertIn('"@type": "HowTo"', out)
         self.assertNotIn("{{", out)
 
+    def test_page_shows_a_third_party_pairing(self):
+        pair = {"name": "Tool", "url": "https://example.com", "for": "rankings.", "needs": "A key."}
+        flow = dict(MANIFEST["workflows"][0], pairsWith=[pair])
+        out = gen_home.render_flow_page(flow, MANIFEST)
+        self.assertIn("Pairs with · third-party", out)
+        self.assertIn("Not made by Skillsmith. A key.", out)
+
     def test_write_removes_a_dropped_workflow_and_check_flags_it(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

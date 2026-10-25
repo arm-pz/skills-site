@@ -1752,7 +1752,15 @@
         "result": "Found one broken internal link across 24 pages; the re-crawl after the fix came back clean.",
         "evidence": "/#proof"
       },
-      "featured": 2
+      "featured": 2,
+      "pairsWith": [
+        {
+          "name": "OpenSEO",
+          "url": "https://github.com/every-app/open-seo",
+          "for": "keyword volumes, rankings, backlinks, competitor and AI-visibility data, read by your agent through its MCP server.",
+          "needs": "Open source (MIT); needs a DataForSEO API key (pay per use) or an openseo.so account."
+        }
+      ]
     },
     {
       "name": "keyword-guard",
@@ -1775,7 +1783,15 @@
           "rewriting the copy once ownership is settled (use keyword-resolver)",
           "mass page generation (use programmatic-seo)"
         ]
-      }
+      },
+      "pairsWith": [
+        {
+          "name": "OpenSEO",
+          "url": "https://github.com/every-app/open-seo",
+          "for": "keyword volumes, rankings, backlinks, competitor and AI-visibility data, read by your agent through its MCP server.",
+          "needs": "Open source (MIT); needs a DataForSEO API key (pay per use) or an openseo.so account."
+        }
+      ]
     },
     {
       "name": "keyword-resolver",
@@ -2670,7 +2686,15 @@
           "optional": true
         }
       ],
-      "note": "seo-polish and keyword-resolver package parts of this route."
+      "note": "seo-polish and keyword-resolver package parts of this route.",
+      "pairsWith": [
+        {
+          "name": "OpenSEO",
+          "url": "https://github.com/every-app/open-seo",
+          "for": "keyword volumes, rankings, backlinks, competitor and AI-visibility data, read by your agent through its MCP server.",
+          "needs": "Open source (MIT); needs a DataForSEO API key (pay per use) or an openseo.so account."
+        }
+      ]
     },
     {
       "id": "french-press",

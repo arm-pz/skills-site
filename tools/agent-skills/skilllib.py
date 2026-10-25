@@ -55,6 +55,18 @@ def load_deny(root):
     return json.loads(path.read_text(encoding="utf-8")) if path.exists() else []
 
 
+def check_pairs(pairs, owner):
+    """A third-party tool an entry or workflow pairs with: named, linked, and honest about its cost."""
+    if pairs is None:
+        return
+    _req(isinstance(pairs, list) and pairs, f"{owner}: pairsWith must be a non-empty list")
+    for pair in pairs:
+        _req(isinstance(pair, dict), f"{owner}: each pairsWith entry must be an object")
+        for key in ("name", "url", "for", "needs"):
+            _req(isinstance(pair.get(key), str) and pair[key].strip(), f"{owner}: pairsWith.{key} required")
+        _req(pair["url"].startswith("https://"), f"{owner}: pairsWith.url must be https")
+
+
 def validate_manifest(data):
     _req(isinstance(data, dict), "manifest must be an object")
     _req(data.get("schema") == SCHEMA, f"schema must be {SCHEMA}")
@@ -146,6 +158,7 @@ def validate_manifest(data):
         if s.get("featured") is not None:
             _req(s["featured"] in (1, 2, 3), f"{name}: featured must be 1, 2 or 3")
             _req(s.get("tested") is not None, f"{name}: a featured skill needs a tested run")
+        check_pairs(s.get("pairsWith"), name)
         tested = s.get("tested")
         if tested is not None:
             _req(isinstance(tested, dict), f"{name}: tested must be an object")
@@ -216,6 +229,7 @@ def validate_manifest(data):
         _req(f["slug"] not in slugs, f"{f['id']}: duplicate slug {f['slug']!r}")
         slugs.add(f["slug"])
         _req(isinstance(f.get("summary"), str) and f["summary"].strip(), f"{f['id']}: summary required")
+        check_pairs(f.get("pairsWith"), f["id"])
         steps = f.get("steps")
         _req(isinstance(steps, list) and steps, f"{f['id']}: steps must be a non-empty list")
         for st in steps:

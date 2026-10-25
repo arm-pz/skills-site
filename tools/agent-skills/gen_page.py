@@ -195,6 +195,10 @@ def quality_html(entry, health=None):
         limits_dd = "None stated in its description. Read the source before relying on it."
     rows = [("Version", version_dd), ("Updated", updated_dd), ("Works in", agents_dd),
             ("Nightly check", check_dd), ("Last real-world run", tested_dd)]
+    pairs = "".join(
+        f'\n      <div class="qb-wide"><dt>Pairs with</dt><dd><a href="{esc(p["url"])}" target="_blank" '
+        f'rel="noopener">{esc(p["name"])}</a> for {esc(p["for"])}<small>Third-party, not made by Skillsmith. '
+        f'{esc(p["needs"])}</small></dd></div>' for p in entry.get("pairsWith", []))
     cells = "\n".join(f"      <div><dt>{k}</dt><dd>{v}</dd></div>" for k, v in rows)
     return (f'{QUALITY_START}\n<section class="qb" aria-labelledby="qb-h">\n  <div class="wrap">\n'
             f'    <p class="qb-kicker">Quality record</p>\n'
@@ -202,7 +206,7 @@ def quality_html(entry, health=None):
             f'    <p class="qb-lead">Version, date and limits are read from the repo on every sync, and the '
             f'check runs every night. Real-world runs are listed only with their evidence.</p>\n'
             f'    <dl class="qb-grid">\n{cells}\n'
-            f'      <div class="qb-wide"><dt>Known limits</dt><dd>{limits_dd}</dd></div>\n'
+            f'      <div class="qb-wide"><dt>Known limits</dt><dd>{limits_dd}</dd></div>{pairs}\n'
             f'    </dl>\n  </div>\n</section>\n{QUALITY_END}')
 
 

@@ -49,6 +49,14 @@ class QualityBlockTest(unittest.TestCase):
                      "Not checked yet", "No public run yet", "None stated in its description"):
             self.assertIn(text, out)
 
+    def test_pairs_with_is_labelled_third_party(self):
+        pair = {"name": "Tool & Co", "url": "https://example.com/tool", "for": "rankings.",
+                "needs": "Needs an API key."}
+        out = gen_page.quality_html(dict(ENTRY, pairsWith=[pair]))
+        self.assertIn('<a href="https://example.com/tool" target="_blank" rel="noopener">Tool &amp; Co</a> for rankings.', out)
+        self.assertIn("Third-party, not made by Skillsmith. Needs an API key.", out)
+        self.assertNotIn("Pairs with", gen_page.quality_html(ENTRY))
+
     def test_failing_check_and_mod(self):
         out = gen_page.quality_html(dict(ENTRY, quality=QUALITY), {"demo": {"fail": ["x"], "warn": []}})
         self.assertIn('<span class="qb-flag fail">1 failing</span>', out)
