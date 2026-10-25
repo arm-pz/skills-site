@@ -9,6 +9,8 @@ from pathlib import Path
 
 SCHEMA = 1
 SITE = "https://skills.caffeinity.com"
+# Hand-written pages served at /<name>/, beside the hub and the skill pages.
+STATIC_PAGES = ["work"]
 INDEX_SCHEMA = "https://schemas.agentskills.io/discovery/0.2.0/schema.json"
 NAME_RE = re.compile(r"^[a-z0-9-]{1,64}$")
 GROUP_IDS = ("start-here", "writing-growth", "career", "thinking-learning", "skill-authoring",
@@ -78,6 +80,7 @@ def validate_manifest(data):
         name = s.get("name")
         _req(valid_name(name), f"bad skill name {name!r}")
         _req(name not in names, f"duplicate skill name {name!r}")
+        _req(name not in STATIC_PAGES, f"skill name {name!r} is taken by a static page")
         names.add(name)
         _req(s.get("group") in gids, f"{name}: unknown group {s.get('group')!r}")
         _req(s.get("tag") in TAGS, f"{name}: unknown tag {s.get('tag')!r}")

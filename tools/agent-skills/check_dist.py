@@ -32,6 +32,8 @@ def check(root="."):
 
     for name in STATIC:
         need((dist / name).is_file(), f"missing dist/{name}")
+    for name in skilllib.STATIC_PAGES:
+        need((dist / name / "index.html").is_file(), f"missing dist/{name}/index.html")
     need((dist / ".well-known/skills.json").is_file(),
          "missing dist/.well-known/skills.json")
 
@@ -71,7 +73,8 @@ def check(root="."):
     if sitemap_path.is_file():
         ns = "{http://www.sitemaps.org/schemas/sitemap/0.9}"
         locs = {el.text for el in ET.parse(sitemap_path).getroot().iter(ns + "loc")}
-        expected = {f"{skilllib.SITE}/"} | {f"{skilllib.SITE}/{s['name']}/" for s in pages}
+        expected = ({f"{skilllib.SITE}/"} | {f"{skilllib.SITE}/{s['name']}/" for s in pages}
+                    | {f"{skilllib.SITE}/{name}/" for name in skilllib.STATIC_PAGES})
         need(locs == expected, f"sitemap URLs differ: missing {expected - locs}, "
                                f"extra {locs - expected}")
 

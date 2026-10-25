@@ -19,6 +19,7 @@ class SitemapTest(unittest.TestCase):
     def test_url_set_and_order(self):
         self.assertEqual([u for u, _ in gen_sitemap.urls(MANIFEST)],
                          ["https://skills.caffeinity.com/",
+                          "https://skills.caffeinity.com/work/",
                           "https://skills.caffeinity.com/gamma/",
                           "https://skills.caffeinity.com/alpha/"])
 
@@ -27,7 +28,7 @@ class SitemapTest(unittest.TestCase):
         root = ET.fromstring(xml)
         locs = [el.text for el in root.iter(
             "{http://www.sitemaps.org/schemas/sitemap/0.9}loc")]
-        self.assertEqual(len(locs), 3)
+        self.assertEqual(len(locs), 4)
 
 
 if __name__ == "__main__":

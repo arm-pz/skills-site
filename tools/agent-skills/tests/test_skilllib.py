@@ -122,6 +122,12 @@ class ManifestTest(unittest.TestCase):
         with self.assertRaises(skilllib.ManifestError):
             skilllib.validate_manifest(data)
 
+    def test_static_page_name_fails(self):
+        data = self.manifest()
+        data["skills"][0]["name"] = "work"
+        with self.assertRaises(skilllib.ManifestError):
+            skilllib.validate_manifest(data)
+
     def test_generated_needs_page_source(self):
         data = self.manifest()
         data["skills"][0]["page"] = "generated"

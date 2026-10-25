@@ -12,6 +12,8 @@ def urls(manifest):
     pages = sorted((s for s in manifest["skills"] if s["page"] != "none"),
                    key=lambda s: s["order"])
     result = [(f"{skilllib.SITE}/", "index.html")]
+    result.extend((f"{skilllib.SITE}/{name}/", f"{name}/index.html")
+                  for name in skilllib.STATIC_PAGES)
     result.extend((f"{skilllib.SITE}/{s['name']}/", f"{s['name']}/index.html") for s in pages)
     return result
 

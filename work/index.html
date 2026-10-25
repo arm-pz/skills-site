@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Work with us — Custom Agent Skills for Your Team | Caffeinity Skills</title>
+<meta name="description" content="Custom SKILL.md agent skills for Claude Code, Cursor and Codex, built and tested on your team's real tasks. Fixed-price skill sprints, team packs and monthly upkeep.">
+<link rel="canonical" href="https://skills.caffeinity.com/work/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Caffeinity Skills">
+<meta property="og:title" content="Work with us — Custom Agent Skills for Your Team">
+<meta property="og:description" content="Skills built and tested on your real tasks, for Claude Code, Cursor, Codex and any agent that reads a SKILL.md.">
+<meta property="og:url" content="https://skills.caffeinity.com/work/">
+<meta name="twitter:card" content="summary">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="preload" href="/fonts/files/cY9AfjOCX1hbuyalUrK4397yjA.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/files/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+  /* Same tokens as the hub: light paper by default, dark shell when the reader prefers dark. */
+  :root{
+    --bg:#f2eee5;
+    --surface:#fffdf8;
+    --sunk:#e9e3d6;
+    --ink:#17141b;
+    --muted:#5c5562;
+    --line:rgba(23,20,27,.12);
+    --accent:#ff6a3d;
+    --accent-ink:#1a0c06;
+    --accent-text:#ad3a12;
+    --brass:#8f5226;
+    --serif:'Newsreader',Georgia,serif;
+    --sans:'Instrument Sans',system-ui,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --ease:cubic-bezier(.4,0,.2,1);
+    --gutter:clamp(16px,5vw,56px);
+    --radius:18px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#121016;--surface:#1d1a23;--sunk:#27232e;--ink:#ede8de;--muted:#a59eae;
+      --line:rgba(237,232,222,.12);--accent-text:#ff8a62;--brass:#d39b6a;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#121016;--surface:#1d1a23;--sunk:#27232e;--ink:#ede8de;--muted:#a59eae;
+    --line:rgba(237,232,222,.12);--accent-text:#ff8a62;--brass:#d39b6a;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.22em}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+  ::selection{background:var(--accent);color:var(--accent-ink)}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 var(--gutter)}
+  .eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  h2.title{font-family:var(--serif);font-weight:400;font-size:clamp(34px,4.6vw,56px);line-height:1.02;letter-spacing:-.022em;margin-top:14px}
+  .section-lead{color:var(--muted);max-width:56ch;margin-top:16px;font-size:18px}
+
+  .nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:72px}
+  .brand{font-family:var(--serif);font-size:21px;text-decoration:none;white-space:nowrap}
+  .brand b{color:var(--accent);font-weight:400;margin-right:6px}
+  .nav-links{display:flex;align-items:center;gap:22px;font-size:15px}
+  .nav-links a{text-decoration:none;color:var(--muted);transition:color 150ms var(--ease)}
+
+  .hero{padding:clamp(48px,8vw,104px) 0 clamp(40px,6vw,72px)}
+  h1{font-family:var(--serif);font-weight:400;font-size:clamp(46px,7.6vw,96px);line-height:.98;letter-spacing:-.03em;max-width:14ch;margin-top:18px}
+  h1 em{color:var(--accent-text)}
+  .lead{color:var(--muted);max-width:58ch;margin-top:24px;font-size:19px}
+  .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+  .pill{display:inline-block;background:var(--accent);color:var(--accent-ink);text-decoration:none;font-weight:600;font-size:15px;padding:12px 22px;border-radius:999px;transition:transform 150ms var(--ease)}
+  .btn2{display:inline-block;border:1px solid var(--line);text-decoration:none;font-size:15px;padding:12px 22px;border-radius:999px}
+
+  section{padding:clamp(56px,8vw,96px) 0;border-top:1px solid var(--line)}
+  .plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:18px;margin-top:40px}
+  .plan{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px;display:flex;flex-direction:column}
+  .plan.main{box-shadow:0 0 0 2px var(--accent)}
+  .plan .tag{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-text)}
+  .plan h3{font-family:var(--serif);font-weight:400;font-size:30px;line-height:1.1;margin-top:10px}
+  .plan .price{font-family:var(--serif);font-size:40px;line-height:1;margin-top:18px}
+  .plan .price small{font-family:var(--sans);font-size:15px;color:var(--muted)}
+  .plan .for{color:var(--muted);font-size:15.5px;margin-top:12px}
+  .plan ul{list-style:none;margin-top:20px;display:grid;gap:10px;font-size:15.5px;flex:1}
+  .plan li{padding-left:22px;position:relative}
+  .plan li::before{content:"∧";position:absolute;left:0;color:var(--accent-text);font-family:var(--mono);font-size:13px;top:2px}
+  .plan .pill,.plan .btn2{margin-top:26px;text-align:center}
+  .note{color:var(--muted);font-size:14.5px;margin-top:22px}
+
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:28px;margin-top:40px;counter-reset:step}
+  .steps li{list-style:none;counter-increment:step}
+  .steps li::before{content:counter(step,decimal-leading-zero);display:block;font-family:var(--mono);font-size:13px;color:var(--accent-text);margin-bottom:10px}
+  .steps b{display:block;font-weight:600;margin-bottom:6px}
+  .steps p{color:var(--muted);font-size:15.5px}
+
+  .faq{margin-top:32px;max-width:760px}
+  .faq details{border-bottom:1px solid var(--line);padding:18px 0}
+  .faq summary{cursor:pointer;font-weight:600;list-style-position:outside}
+  .faq p{color:var(--muted);margin-top:10px;font-size:16px}
+
+  .contact{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(28px,5vw,56px);margin-top:8px}
+  .contact p{color:var(--muted);max-width:56ch;margin-top:14px}
+  .contact .mail{font-family:var(--mono);font-size:clamp(16px,2.4vw,22px);color:var(--ink);word-break:break-all}
+
+  footer .meta{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-top:28px;padding-bottom:36px;font-size:14px;color:var(--muted);border-top:1px solid var(--line)}
+  footer .meta a{text-decoration:none}
+
+  @media (hover:hover) and (pointer:fine){
+    .nav-links a:hover,footer .meta a:hover{color:var(--ink)}
+    .pill:hover{transform:translateY(-1px)}
+    .btn2:hover{border-color:var(--accent)}
+  }
+  @media (max-width:520px){
+    .nav-links a.hide-sm{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{transition:none!important;animation:none!important}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="/"><b>∧</b>caffeinity skills</a>
+    <div class="nav-links">
+      <a href="/">All skills</a>
+      <a class="hide-sm" href="#packages">Packages</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Work with us</p>
+    <h1>Skills built for <em>your</em> team's work.</h1>
+    <p class="lead">Every skill on this site is free and open. If your team needs skills for its own workflows, written in your house style and tested on your real tasks, we build them for you. They work in Claude Code, Cursor, Codex, Qoder and any agent that reads a SKILL.md.</p>
+    <div class="cta">
+      <a class="pill" href="#contact">Book a free 30-minute call</a>
+      <a class="btn2" href="#packages">See packages</a>
+    </div>
+  </div>
+</header>
+
+<section id="packages" aria-labelledby="packages-title">
+  <div class="wrap">
+    <p class="eyebrow">Packages</p>
+    <h2 class="title" id="packages-title">Fixed scope, fixed price.</h2>
+    <p class="section-lead">Pick the size that fits. Not sure which? Start with the call and we'll tell you honestly, including when you don't need us.</p>
+
+    <div class="plans">
+      <article class="plan">
+        <span class="tag">Start small</span>
+        <h3>Skill sprint</h3>
+        <p class="price">$750 <small>fixed</small></p>
+        <p class="for">One workflow your team repeats every week, turned into a skill.</p>
+        <ul>
+          <li>One custom skill, scoped on a short call</li>
+          <li>Tested on 3 to 5 of your real tasks before delivery</li>
+          <li>Delivered as a private repo you own</li>
+          <li>Install guide for your team's agents</li>
+          <li>One revision round</li>
+          <li>About one week</li>
+        </ul>
+        <a class="btn2" href="mailto:hello@skillsmith.tech?subject=Skill%20sprint">Ask about a sprint</a>
+      </article>
+
+      <article class="plan main">
+        <span class="tag">Most teams</span>
+        <h3>Team pack</h3>
+        <p class="price">from $2,500</p>
+        <p class="for">A set of skills that hand work from one to the next, like the brews on this site.</p>
+        <ul>
+          <li>Workflow mapping session with your team</li>
+          <li>3 to 5 skills wired into one workflow</li>
+          <li>Tested end to end on your real tasks</li>
+          <li>Setup across Claude Code, Cursor or Codex</li>
+          <li>60-minute handover and training call</li>
+          <li>Two weeks of fixes after delivery</li>
+          <li>About two to three weeks</li>
+        </ul>
+        <a class="pill" href="mailto:hello@skillsmith.tech?subject=Team%20pack">Plan a team pack</a>
+      </article>
+
+      <article class="plan">
+        <span class="tag">Ongoing</span>
+        <h3>Skill upkeep</h3>
+        <p class="price">$400 <small>/ month</small></p>
+        <p class="for">Agents change every few weeks. Upkeep keeps your skills working when they do.</p>
+        <ul>
+          <li>Monthly health run on every skill you own</li>
+          <li>Fixes when an agent update breaks one</li>
+          <li>One small new skill or major revision per quarter</li>
+          <li>Short monthly report of what changed</li>
+          <li>Cancel any time</li>
+        </ul>
+        <a class="btn2" href="mailto:hello@skillsmith.tech?subject=Skill%20upkeep">Ask about upkeep</a>
+      </article>
+    </div>
+    <p class="note">Prices in USD, before any local taxes. Larger or unusual projects get a written quote.</p>
+  </div>
+</section>
+
+<section aria-labelledby="how-title">
+  <div class="wrap">
+    <p class="eyebrow">How it works</p>
+    <h2 class="title" id="how-title">From call to working skill.</h2>
+    <ol class="steps">
+      <li><b>Call</b><p>Thirty minutes, free. You show us the work you want an agent to do; we tell you whether a skill will help.</p></li>
+      <li><b>Scope</b><p>A one-page plan: which skills, what they do, what they never do, and how we'll test them. You approve before we start.</p></li>
+      <li><b>Build and test</b><p>We write the skills and run them on your real tasks, the same way every skill on this site is tested.</p></li>
+      <li><b>Hand over</b><p>You get the repo, install steps and a walkthrough. The skills are yours to keep and change.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section aria-labelledby="faq-title">
+  <div class="wrap">
+    <p class="eyebrow">Questions</p>
+    <h2 class="title" id="faq-title">Before you write.</h2>
+    <div class="faq">
+      <details>
+        <summary>Who owns the skills you build?</summary>
+        <p>You do. They're delivered in a private repo under the license you choose. We don't publish them here unless you ask us to.</p>
+      </details>
+      <details>
+        <summary>Do you need access to our systems or data?</summary>
+        <p>No. We work from example tasks you share, with anything sensitive removed. We never need production access or your API keys.</p>
+      </details>
+      <details>
+        <summary>Which agents do the skills work with?</summary>
+        <p>Claude Code, Cursor, Codex, Qoder and any agent that reads a SKILL.md. Tell us which ones your team uses and we test on those.</p>
+      </details>
+      <details>
+        <summary>Why pay when the skills on this site are free?</summary>
+        <p>The free skills cover general work. A custom skill knows your workflow, your rules and your tools, and someone has tested it on your tasks. The free skills stay free.</p>
+      </details>
+      <details>
+        <summary>Can we see what your work looks like first?</summary>
+        <p>Yes. Every skill on <a href="/">this site</a> is open on GitHub with its tests, so you can read exactly how we build before you book a call.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section id="contact" aria-labelledby="contact-title">
+  <div class="wrap">
+    <div class="contact">
+      <p class="eyebrow">Contact</p>
+      <h2 class="title" id="contact-title">Tell us what your team repeats.</h2>
+      <p>Send a few lines on the work you'd like an agent to take over and which agents your team uses. We reply within two working days with times for a call.</p>
+      <p><a class="mail" href="mailto:hello@skillsmith.tech?subject=Custom%20skills">hello@skillsmith.tech</a></p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="meta">
+      <span>Caffeinity Skills: open agent skills by Abdul Rahman P Z, and custom skills built to order.</span>
+      <a href="https://github.com/arm-pz" target="_blank" rel="noopener">github.com/arm-pz</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

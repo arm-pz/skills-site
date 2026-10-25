@@ -54,6 +54,7 @@ class CheckDistTest(unittest.TestCase):
         (self.root / "out/sitemap.xml").write_text(
             '<?xml version="1.0"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
             '<url><loc>https://skills.caffeinity.com/</loc></url>'
+            '<url><loc>https://skills.caffeinity.com/work/</loc></url>'
             '<url><loc>https://skills.caffeinity.com/alpha/</loc></url>'
             '<url><loc>https://skills.caffeinity.com/beta/</loc></url>'
             "</urlset>")
@@ -66,6 +67,8 @@ class CheckDistTest(unittest.TestCase):
             '<a href="/alpha/">a</a><a href="/beta/">b</a>'
             '<div class="skill"></div><div class="skill"></div>'
             '<script type="application/ld+json">{"numberOfItems": 2}</script>')
+        (self.root / "dist/work").mkdir()
+        (self.root / "dist/work/index.html").write_text("<title>work</title>")
         for name in ("404.html", "_headers"):
             (self.root / "dist" / name).write_text("x")
         (self.root / "dist/_redirects").write_text("")
@@ -102,6 +105,10 @@ class CheckDistTest(unittest.TestCase):
 
     def test_missing_404_fails(self):
         (self.root / "dist/404.html").unlink()
+        self.assertTrue(check_dist.check(self.root))
+
+    def test_missing_static_page_fails(self):
+        shutil.rmtree(self.root / "dist/work")
         self.assertTrue(check_dist.check(self.root))
 
     def test_digest_mismatch_fails(self):
