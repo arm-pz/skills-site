@@ -128,6 +128,31 @@ def validate_manifest(data):
                 _req(str(s.get("path", "")).endswith(f"skills/{name}"),
                      f"{name}: a skill in another repo needs a path ending in 'skills/{name}'")
 
+        quality = s.get("quality")
+        if quality is not None:
+            _req(isinstance(quality, dict), f"{name}: quality must be an object")
+            _req(quality.get("version") is None or isinstance(quality["version"], str),
+                 f"{name}: quality.version must be a string or null")
+            _req(isinstance(quality.get("commit"), str) and re.fullmatch(r"[a-f0-9]{7}", quality["commit"]),
+                 f"{name}: quality.commit must be 7 lowercase hex")
+            _req(isinstance(quality.get("updated"), str)
+                 and re.fullmatch(r"\d{4}-\d{2}-\d{2}", quality["updated"]),
+                 f"{name}: quality.updated must be YYYY-MM-DD")
+            _req(isinstance(quality.get("notFor"), list)
+                 and all(isinstance(n, str) for n in quality["notFor"]),
+                 f"{name}: quality.notFor must be a list of strings")
+        tested = s.get("tested")
+        if tested is not None:
+            _req(isinstance(tested, dict), f"{name}: tested must be an object")
+            _req(isinstance(tested.get("date"), str)
+                 and re.fullmatch(r"\d{4}-\d{2}-\d{2}", tested["date"]),
+                 f"{name}: tested.date must be YYYY-MM-DD")
+            for key in ("target", "result", "evidence"):
+                _req(isinstance(tested.get(key), str) and tested[key].strip(),
+                     f"{name}: tested.{key} required")
+            _req(tested["evidence"].startswith(("/", "https://")),
+                 f"{name}: tested.evidence must be a site path or https URL")
+
         if page == "generated":
             src = s.get("pageSource")
             _req(isinstance(src, dict), f"{name}: generated pages need pageSource")
@@ -190,6 +215,27 @@ def validate_manifest(data):
 def parse_frontmatter(text):
     match = re.match(r"^---\r?\n(.*?)\r?\n---(?:\r?\n|$)", text, re.S)
     return _parse_mapping(match.group(1)) if match else {}
+
+
+def frontmatter_version(text):
+    """A SKILL.md version: top-level `version:` first, else the one under `metadata:`."""
+    match = re.match(r"^---\r?\n(.*?)\r?\n---(?:\r?\n|$)", text, re.S)
+    if not match:
+        return None
+    block = match.group(1)
+    found = (re.search(r"^version:[ \t]*[\"']?([^\"'\s]+)", block, re.M)
+             or re.search(r"^metadata:[ \t]*\r?\n(?:[ \t]+.*\r?\n)*?[ \t]+version:[ \t]*[\"']?([^\"'\s]+)",
+                          block, re.M))
+    return found.group(1) if found else None
+
+
+def load_health(root):
+    """Per-skill results of the nightly check, keyed by skill name; empty before its first run."""
+    path = Path(root) / "site" / "health.json"
+    if not path.is_file():
+        return {}
+    with open(path, encoding="utf-8") as fh:
+        return json.load(fh).get("skills", {})
 
 
 def _parse_mapping(block):

@@ -1,4 +1,6 @@
+import json
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -23,6 +25,70 @@ ENTRY = {
     "install": "npx skills add arm-pz/demo", "page": "generated", "order": 1,
     "pageSource": SOURCE,
 }
+
+
+QUALITY = {"version": "1.2.0", "commit": "abcdef1", "updated": "2026-10-24",
+           "notFor": ["prose editing", "final <pdf> output"]}
+TESTED = {"date": "2026-10-23", "target": "example.com", "result": "Found 2 issues.",
+          "evidence": "/#proof"}
+
+
+class QualityBlockTest(unittest.TestCase):
+    def test_full_record(self):
+        out = gen_page.quality_html(dict(ENTRY, quality=QUALITY, tested=TESTED),
+                                    {"demo": {"fail": [], "warn": ["long"]}})
+        for text in ("1.2.0<small>commit abcdef1</small>", "24 Oct 2026",
+                     "Passing<small>1 warning, no failures.", "23 Oct 2026, on example.com",
+                     '<a href="/#proof">See the run</a>', "<li>Prose editing</li>",
+                     "<li>Final &lt;pdf&gt; output</li>", gen_page.AGENTS):
+            self.assertIn(text, out)
+
+    def test_missing_data_is_said_not_guessed(self):
+        out = gen_page.quality_html(dict(ENTRY, pageSource=dict(SOURCE, description="Edits.")))
+        for text in ("Unversioned<small>commit aaaaaaa</small>", "Updated</dt><dd>Not recorded yet",
+                     "Not checked yet", "No public run yet", "None stated in its description"):
+            self.assertIn(text, out)
+
+    def test_failing_check_and_mod(self):
+        out = gen_page.quality_html(dict(ENTRY, quality=QUALITY), {"demo": {"fail": ["x"], "warn": []}})
+        self.assertIn('<span class="qb-flag fail">1 failing</span>', out)
+        mod = gen_page.quality_html(dict(ENTRY, kind="mod", quality=dict(QUALITY, version="0.1.0")),
+                                    {"demo": {"fail": ["x"]}})
+        self.assertIn("Not covered", mod)
+        self.assertIn("installed as a plugin", mod)
+
+    def test_generated_page_carries_the_block_once(self):
+        out = gen_page.render_page(dict(ENTRY, quality=QUALITY))
+        self.assertEqual(out.count(gen_page.QUALITY_START), 1)
+        self.assertEqual(out.count(gen_page.QUALITY_CSS_START), 1)
+
+    def test_bespoke_page_only_its_regions_change(self):
+        page = ("<head><title>x</title>" + gen_page.QUALITY_CSS_START + "old" + gen_page.QUALITY_CSS_END
+                + "</head><p>hand-written</p>" + gen_page.QUALITY_START + "old" + gen_page.QUALITY_END
+                + "<footer>kept</footer>")
+        out = gen_page.render_bespoke(dict(ENTRY, page="bespoke", quality=QUALITY), page)
+        self.assertNotIn("old", out)
+        self.assertIn("<p>hand-written</p>", out)
+        self.assertIn("<footer>kept</footer>", out)
+        self.assertEqual(out, gen_page.render_bespoke(dict(ENTRY, page="bespoke", quality=QUALITY), out))
+        with self.assertRaises(SystemExit):
+            gen_page.render_bespoke(ENTRY, "<p>no markers</p>")
+
+    def test_check_flags_a_stale_bespoke_block(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            entry = dict(ENTRY, page="bespoke", quality=QUALITY)
+            (root / "demo").mkdir()
+            page = gen_page.render_bespoke(
+                entry, gen_page.QUALITY_CSS_START + gen_page.QUALITY_CSS_END
+                + gen_page.QUALITY_START + gen_page.QUALITY_END)
+            (root / "demo/index.html").write_text(page, encoding="utf-8")
+            manifest = {"skills": [entry]}
+            self.assertEqual(gen_page.check_pages(root, manifest), [])
+            entry["quality"] = dict(QUALITY, version="2.0.0")
+            self.assertEqual(gen_page.check_pages(root, manifest), ["demo"])
+            gen_page.write_pages(root, manifest)
+            self.assertEqual(gen_page.check_pages(root, manifest), [])
 
 
 class GenPageTest(unittest.TestCase):

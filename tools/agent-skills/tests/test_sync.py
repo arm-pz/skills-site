@@ -41,7 +41,8 @@ class FakeGitHub:
         path = args[1]
         repo = path.split("/")[2]
         if path.endswith("/commits/HEAD"):
-            return {"sha": self.heads.get(repo, "a" * 40)}, None
+            return {"sha": self.heads.get(repo, "a" * 40),
+                    "commit": {"committer": {"date": "2026-10-24T09:00:00Z"}}}, None
         if "/git/trees/" in path:
             return {"tree": [{"path": p} for p in self.files.get(repo, {})]}, None
         if repo in self.repos:
@@ -69,7 +70,8 @@ class SyncTest(unittest.TestCase):
             "schema": 1, "site": skilllib.SITE,
             "groups": [{"id": g, "title": g, "descriptor": "x", "order": i}
                        for i, g in enumerate(skilllib.GROUP_IDS, 1)],
-            "skills": [entry("keeper")],
+            "skills": [entry("keeper", quality={"version": None, "commit": "aaaaaaa",
+                                                "updated": "2026-10-24", "notFor": []})],
             "workflows": [{"id": "pour-over", "number": 1, "name": "Pour-over", "title": "Flow", "steps": [{"skills": ["keeper"]}]}],
         }
 
@@ -138,7 +140,8 @@ class SyncTest(unittest.TestCase):
         self.assertNotIn("aliases", e)
 
     def test_gone_repo_is_removed_from_entries_and_workflows(self):
-        self.manifest["skills"].append(entry("other", order=2))
+        self.manifest["skills"].append(entry("other", order=2,
+                                             quality=self.manifest["skills"][0]["quality"]))
         self.manifest["workflows"][0]["steps"].append({"skills": ["other"]})
         gh = FakeGitHub({"other": "About."}, {"other": skill_files("other")})
         actions, _ = self.run_sync(gh)
@@ -163,10 +166,22 @@ class SyncTest(unittest.TestCase):
         self.manifest["skills"].append(entry("gen-skill", page="generated", order=2,
                                              pageSource=dict(source, commit="0" * 40)))
         actions, _ = self.run_sync(gh)
-        self.assertEqual(actions, {("refresh", "gen-skill")})
+        self.assertEqual(actions, {("refresh", "gen-skill"), ("quality", "gen-skill")})
         e = self.manifest["skills"][1]
+        self.assertEqual(e["quality"]["commit"], "bbbbbbb")
         self.assertEqual((e["pageSource"]["commit"], e["blurb"]), ("b" * 40, "Hand-written."))
         self.assertTrue(e["pageSource"]["description"].startswith("New description."))
+
+    def test_quality_record_follows_head(self):
+        files = {"SKILL.md": b"---\nname: keeper\nversion: 1.4.0\ndescription: Does a thing. "
+                             b"Not for poems; or essays.\n---\n", "LICENSE": LICENSE}
+        gh = FakeGitHub({"keeper": "About."}, {"keeper": files}, heads={"keeper": "c" * 40})
+        actions, _ = self.run_sync(gh)
+        self.assertEqual(actions, {("quality", "keeper")})
+        self.assertEqual(self.manifest["skills"][0]["quality"],
+                         {"version": "1.4.0", "commit": "ccccccc", "updated": "2026-10-24",
+                          "notFor": ["poems", "essays"]})
+        self.assertEqual(self.run_sync(gh)[0], set())
 
 
 if __name__ == "__main__":

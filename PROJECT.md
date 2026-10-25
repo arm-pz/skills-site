@@ -49,12 +49,29 @@ push a public arm-pz repo with one SKILL.md and a repo About
 | --- | --- | --- |
 | add | public, non-fork repo passes the shape test, has an About, is not denied | entry + generated page; group and tag guessed from keywords (fix the guess in `site/skills.json` by hand; sync keeps it) |
 | refresh | a generated page's repo HEAD moved | file list, stats, commit and description re-measured; blurb, title and group kept |
+| quality | any page's repo HEAD moved | `quality` re-read: version (SKILL.md frontmatter or plugin.json), commit, commit date, and the description's "Not for" list |
 | rename | the old repo name now redirects (findable may recommend a rename) | entry, page folder and workflows follow; the old name becomes an alias; `_redirects` 301s the old page and archive URLs |
 | remove | GitHub answers Not Found, or the repo went private | entry and generated page dropped. A failed or unreadable API call stops the run instead |
 | hold | empty About, failed shape test | reported in the run summary; nothing published |
 
-Bespoke (hand-written) pages are never edited by any of this. After a rename the run summary says
-when a bespoke page's copy may still use the old name.
+Bespoke (hand-written) pages are never edited by any of this, except the region between
+`<!-- gen:quality:start -->` and `<!-- gen:quality:end -->` (and its CSS between the
+`gen:quality-css` markers), which `gen_page.py` rewrites on every page. After a rename the run summary
+says when a bespoke page's copy may still use the old name.
+
+### Quality record
+
+Every skill and mod page carries the same block: version, last commit date, which agents it works in,
+the nightly check result from `site/health.json`, the last real-world run, and its known limits. All
+of it is generated except the real-world run, which is the hand-kept `tested` field on an entry:
+
+```json
+"tested": {"date": "2026-10-24", "target": "skills.caffeinity.com",
+           "result": "One sentence on what it found.", "evidence": "/#proof"}
+```
+
+Add one only with evidence a visitor can open (a site path or an https URL). Without it the page says
+"No public run yet".
 
 Want it faster than an hour? Give a skill repo a fine-grained token that can dispatch to
 `arm-pz/skills-site` and send `repository_dispatch` with `event_type: skill-updated`. Not required.
@@ -101,7 +118,7 @@ night. Skills that live elsewhere but are handed off to are listed in `EXTERNAL`
 `tools/agent-skills/health.py`.
 
 To accept an intended change (a new WARN you decided to keep):
-`python tools/agent-skills/health.py --accept-all`, then commit `site/health.json`.
+`python tools/agent-skills/health.py --accept-all` and `python tools/agent-skills/gen_page.py --write`, then commit `site/health.json` and the pages.
 
 ## The brews (workflows across skills)
 
@@ -149,7 +166,9 @@ solo-launcher, skill-maintainer and estate-lead (Brew 1 · Pour-over to Brew 11 
    the hour; check the run summary for its guessed group, and move it in `site/skills.json` if needed.
 2. **Rename a repo** (findable's name decision): rename on GitHub. The redirect does the rest.
 3. **Retire a skill:** delete or privatize the repo, or add it to `site/deny.json` with a reason.
-4. **Hand-written page:** set `page: bespoke` and write `<name>/index.html`. Generators never touch it.
+4. **Hand-written page:** set `page: bespoke` and write `<name>/index.html`, with the two quality marker
+   pairs (one before `</head>`, one where the block should sit); `gen_page.py --check` fails without them.
+   Generators touch nothing else on it.
 5. **Before a push you are unsure of:** `python <tune-skill>/scripts/regress.py <folder-with-your-skills> --baseline health.json`.
 
 ## Running it locally

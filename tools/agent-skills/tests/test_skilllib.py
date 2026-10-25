@@ -122,6 +122,29 @@ class ManifestTest(unittest.TestCase):
         with self.assertRaises(skilllib.ManifestError):
             skilllib.validate_manifest(data)
 
+    def test_quality_and_tested_shapes(self):
+        data = self.manifest()
+        data["skills"][0]["quality"] = {"version": None, "commit": "abcdef1",
+                                        "updated": "2026-10-24", "notFor": []}
+        data["skills"][0]["tested"] = {"date": "2026-10-24", "target": "t", "result": "r",
+                                       "evidence": "/#proof"}
+        skilllib.validate_manifest(data)
+        for key, bad in (("quality", {"commit": "abc"}),
+                         ("tested", {"date": "24 Oct", "target": "t", "result": "r", "evidence": "/"}),
+                         ("tested", {"date": "2026-10-24", "target": "t", "result": "r",
+                                     "evidence": "javascript:alert(1)"})):
+            broken = self.manifest()
+            broken["skills"][0][key] = bad
+            with self.assertRaises(skilllib.ManifestError):
+                skilllib.validate_manifest(broken)
+
+    def test_frontmatter_version(self):
+        self.assertEqual(skilllib.frontmatter_version("---\nname: a\nversion: 1.0.0\n---\n"), "1.0.0")
+        self.assertEqual(skilllib.frontmatter_version(
+            '---\nname: a\nmetadata:\n  author: x\n  version: "2.1.0"\n---\n'), "2.1.0")
+        self.assertIsNone(skilllib.frontmatter_version("---\nname: a\n---\nversion: 9\n"))
+        self.assertIsNone(skilllib.frontmatter_version("no frontmatter"))
+
     def test_static_page_name_fails(self):
         data = self.manifest()
         data["skills"][0]["name"] = "work"

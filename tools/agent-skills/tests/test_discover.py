@@ -71,6 +71,13 @@ class AssignmentTest(unittest.TestCase):
         self.assertEqual(source["fileCount"], 2)
         self.assertIsNone(discover.entry_point(files, "mods/none"))
 
+    def test_quality_reads_a_mod_version(self):
+        files = {"mods/gate-mod/.claude-plugin/plugin.json":
+                 b'{"name": "gate-mod", "version": "0.3.0", "description": "Holds deploys."}'}
+        self.assertEqual(discover.quality(files, "mods/gate-mod", "d" * 40, "2026-10-25"),
+                         {"version": "0.3.0", "commit": "ddddddd", "updated": "2026-10-25",
+                          "notFor": []})
+
 
 if __name__ == "__main__":
     unittest.main()

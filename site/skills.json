@@ -101,7 +101,16 @@
         "commit": "8f64a143ab8a4837ac6b73eac337dcdcec263028",
         "sha256": "c129ba6ab9debbff1cd8a636b0f652b738c130e4419dac5804342a79d9418098"
       },
-      "order": 101
+      "order": 101,
+      "quality": {
+        "version": null,
+        "commit": "8f64a14",
+        "updated": "2026-10-24",
+        "notFor": [
+          "a request one skill already owns (load that skill directly)",
+          "not for doing a step's work itself: the named skill does it"
+        ]
+      }
     },
     {
       "name": "draft-skill",
@@ -120,7 +129,23 @@
         "skill-creation",
         "prompt-engineering",
         "qoder"
-      ]
+      ],
+      "quality": {
+        "version": null,
+        "commit": "a9eb67f",
+        "updated": "2026-10-24",
+        "notFor": [
+          "turning a batch of existing prompts into a skill (use prompts-to-skill)",
+          "tightening a skill that already exists (use tune-skill)",
+          "releasing a finished one (use prompts-to-skill-release)"
+        ]
+      },
+      "tested": {
+        "date": "2026-10-24",
+        "target": "caffeinity-routing",
+        "result": "Drafted the missing routing skill five others pointed at; it passed tune-skill's validator with 0 failures.",
+        "evidence": "/#proof"
+      }
     },
     {
       "name": "prompts-to-skill",
@@ -133,7 +158,17 @@
       "order": 202,
       "blurb": "Turns a list of your own prompts into a finished, tested skill, one skill per prompt: an intent interview, an overlap check against what is already installed, a draft written with draft-skill, trigger test cases that include near-misses, and a tune-skill gate at the end. It needs draft-skill and tune-skill and stops with a clear message if either is missing.",
       "stats": "3 files · 141 lines · depends on draft-skill + tune-skill · 0 API keys",
-      "install": "npx skills add arm-pz/prompts-to-skill"
+      "install": "npx skills add arm-pz/prompts-to-skill",
+      "quality": {
+        "version": null,
+        "commit": "bf5b07b",
+        "updated": "2026-10-19",
+        "notFor": [
+          "editing an existing skill (use tune-skill)",
+          "creating a skill from a plain description with no prompts (use draft-skill)",
+          "finding existing skills for a task"
+        ]
+      }
     },
     {
       "name": "tune-skill",
@@ -146,7 +181,22 @@
       "order": 203,
       "blurb": "Audits and fine-tunes a skill that already exists: the description that never fires, overlap with installed siblings, stale names and counts, handoff contracts that do not hand off. Ships check_skill.py, a deterministic validator over frontmatter, folder and heading agreement, description length and reference paths that do not exist. Not for creating one from scratch; that is draft-skill.",
       "stats": "4 files · 268 lines · 1 validator script · 0 API keys",
-      "install": "npx skills add arm-pz/tune-skill"
+      "install": "npx skills add arm-pz/tune-skill",
+      "quality": {
+        "version": null,
+        "commit": "aa1882c",
+        "updated": "2026-10-24",
+        "notFor": [
+          "creating a skill from scratch (use draft-skill) or from a list of prompts (use prompts-to-skill)",
+          "for making a skill run automatically at a moment such as before git push (use skill-to-mod)"
+        ]
+      },
+      "tested": {
+        "date": "2026-10-24",
+        "target": "the 42 skills in this catalogue",
+        "result": "Caught one skill that strict installers could not load; fixed in that skill and in tune-skill.",
+        "evidence": "/#proof"
+      }
     },
     {
       "name": "prompts-to-skill-release",
@@ -159,7 +209,17 @@
       "order": 204,
       "blurb": "Packages a finished skill for release: runs its trigger test cases and records which passed and which did not, sets the version and CHANGELOG, builds the archive, writes the README, and ends with a per-platform install checklist. Failed tests stay in the report instead of being dropped from it.",
       "stats": "3 files · 113 lines · 5 release sections · 0 API keys",
-      "install": "npx skills add arm-pz/prompts-to-skill-release"
+      "install": "npx skills add arm-pz/prompts-to-skill-release",
+      "quality": {
+        "version": null,
+        "commit": "43957c6",
+        "updated": "2026-10-19",
+        "notFor": [
+          "drafting or tuning a skill (use prompts-to-skill or tune-skill)",
+          "for repo discoverability copy (use findable)",
+          "for pushing existing clones (use upstream-check)"
+        ]
+      }
     },
     {
       "name": "skill-to-mod",
@@ -172,7 +232,18 @@
       "order": 205,
       "blurb": "Checks whether a skill should become a Claude Code mod, then builds the plugin with your skill unchanged and a thin trigger, validates and tests it, and lists what it can touch. Says no when a skill should stay a skill.",
       "stats": "12 files · 1,790 lines · 3 trigger patterns · 0 API keys",
-      "install": "npx skills add arm-pz/skill-to-mod --skill skill-to-mod"
+      "install": "npx skills add arm-pz/skill-to-mod --skill skill-to-mod",
+      "quality": {
+        "version": null,
+        "commit": "e7cb2d8",
+        "updated": "2026-10-21",
+        "notFor": [
+          "writing a brand-new mod with no source skill (use plugin-authoring)",
+          "writing a new skill (use draft-skill)",
+          "improving a skill's wording or triggering (use tune-skill)",
+          "plain skill packaging (use skill-creator)"
+        ]
+      }
     },
     {
       "name": "skill-launch",
@@ -186,7 +257,16 @@
       "blurb": "The full pipeline from idea to launched skill: Draft-Skill writes it, Tune-Skill gates it through the validator, Findable-Polish polishes its discovery surfaces. Six chain skills went through this loop in one day — and every public change still needs your go-ahead.",
       "stats": "3 files · 110 lines · 3 gated phases · 0 API keys",
       "install": "npx skills add arm-pz/skill-launch --skill skill-launch",
-      "chain": true
+      "chain": true,
+      "quality": {
+        "version": "0.1.0",
+        "commit": "1e181b9",
+        "updated": "2026-10-19",
+        "notFor": [
+          "editing existing skills (use tune-and-polish)",
+          "not for a batch of prompts the user already wrote (use prompts-to-skill)"
+        ]
+      }
     },
     {
       "name": "tune-and-polish",
@@ -200,7 +280,16 @@
       "blurb": "For a skill that both misfires and hides: Tune-Skill fixes the triggering description, sibling overlaps and stale counts, gated on check_skill.py with zero FAILs; then Findable-Polish audits and polishes the README, About and site copy against real queries. Listings are written from the final description, never before.",
       "stats": "3 files · 89 lines · 2 gated phases · 0 API keys",
       "install": "npx skills add arm-pz/tune-and-polish --skill tune-and-polish",
-      "chain": true
+      "chain": true,
+      "quality": {
+        "version": "1.0.0",
+        "commit": "9cb6260",
+        "updated": "2026-10-19",
+        "notFor": [
+          "creating skills from scratch (use draft-skill)",
+          "not for a triggering-only or listing-only request, which belong to tune-skill and findable-polish alone"
+        ]
+      }
     },
     {
       "name": "tune-skill-mod",
@@ -306,7 +395,13 @@
         "commit": "8f64a143ab8a4837ac6b73eac337dcdcec263028",
         "sha256": "e79c3f9cbd44fd97b950ca333c4a51b40f644416361a221b0754d0fa31e31a28"
       },
-      "order": 208
+      "order": 208,
+      "quality": {
+        "version": "0.1.0",
+        "commit": "8f64a14",
+        "updated": "2026-10-24",
+        "notFor": []
+      }
     },
     {
       "name": "skill-release-mod",
@@ -392,7 +487,13 @@
         "commit": "8f64a143ab8a4837ac6b73eac337dcdcec263028",
         "sha256": "0261e8afac9fd1c1a6bc03685149f45eae4a09c0c0b6f48f1e61b1ca60093aa9"
       },
-      "order": 209
+      "order": 209,
+      "quality": {
+        "version": "0.1.0",
+        "commit": "8f64a14",
+        "updated": "2026-10-24",
+        "notFor": []
+      }
     },
     {
       "name": "findable",
@@ -405,7 +506,21 @@
       "order": 301,
       "blurb": "Sets up discovery for a GitHub repo, skill, plugin or MCP server so it gets found by what it does, not only by its name. It audits where you rank today, works out the queries strangers type, then drafts the About text, topics, README opening, release notes, site page and directory plan — real numbers only, and nothing public changes without your go-ahead.",
       "stats": "8 workflow steps · 10 kit sections · 4 reference guides · 1 listing validator · 0 API keys",
-      "install": "npx skills add arm-pz/findable --skill findable"
+      "install": "npx skills add arm-pz/findable --skill findable",
+      "quality": {
+        "version": null,
+        "commit": "8831f1d",
+        "updated": "2026-10-24",
+        "notFor": [
+          "authoring a new skill (use draft-skill) or tuning a SKILL.md description so an agent triggers it better (use tune-skill)"
+        ]
+      },
+      "tested": {
+        "date": "2026-10-24",
+        "target": "arm-pz/tune-skill",
+        "result": "Found the repo in 0 of 5 target searches and a same-name rival; drafted the discovery kit.",
+        "evidence": "/#proof"
+      }
     },
     {
       "name": "publish-pipeline",
@@ -475,6 +590,17 @@
         "license": "MIT",
         "commit": "b24df390092f4149c77f8d6e142b60e7a56db0d2",
         "sha256": "e76df7824ec98dfe3df85ca85c33d2347e75a327cbfade7f4cb85a1b11c349ae"
+      },
+      "quality": {
+        "version": null,
+        "commit": "b24df39",
+        "updated": "2026-10-24",
+        "notFor": [
+          "releasing one skill through the marketplace, tarball or plugin channels (use publish-release-gate)",
+          "checking unpushed work or listing drift (use upstream-check)",
+          "deciding whether a build is safe to launch (use release-gate-chair)",
+          "writing and tuning a skill (use draft-skill or tune-skill)"
+        ]
       }
     },
     {
@@ -515,6 +641,22 @@
         "license": "MIT",
         "commit": "6a5e4d828f4ba01138ea5dfd003589fc92e5d743",
         "sha256": "117dcbcfaffd68fe28b74c84a4fece589335f96db3094d26edd6d01a9fb7e59f"
+      },
+      "quality": {
+        "version": null,
+        "commit": "6a5e4d8",
+        "updated": "2026-10-24",
+        "notFor": [
+          "writing or tuning a skill (use draft-skill or tune-skill)",
+          "making a repo discoverable (use findable)",
+          "deciding whether a build is safe to deploy (use release-gate-chair)"
+        ]
+      },
+      "tested": {
+        "date": "2026-10-24",
+        "target": "this site's listings",
+        "result": "Found three skills installable but not listed; all are listed now.",
+        "evidence": "/#proof"
       }
     },
     {
@@ -529,7 +671,16 @@
       "blurb": "Chains Findable and Wordsmith: audits a README, skill page or landing copy against the queries a real stranger types, then writes two or three alternatives per finding that fix it without inventing a fact. Proven on its own repo: seven live searches, zero hits, six named gaps, fixes applied the same day.",
       "stats": "3 files · 125 lines · 2 chained skills · 0 API keys",
       "install": "npx skills add arm-pz/findable-polish --skill findable-polish",
-      "chain": true
+      "chain": true,
+      "quality": {
+        "version": "1.0.0",
+        "commit": "9d9173b",
+        "updated": "2026-10-19",
+        "notFor": [
+          "tuning SKILL.md trigger language (use tune-skill)",
+          "not for code review, and not for resume optimization (use recruiter-lens)"
+        ]
+      }
     },
     {
       "name": "upstream-polish",
@@ -543,7 +694,15 @@
       "blurb": "Chains Upstream-Check — fetch-based push verdicts, fast-forward only, screened for credential-shaped lines — with Wordsmith rewriting drifted descriptions, topics and README rows, so repos and listings tell the same story again. An unreadable source is inconclusive, never counted as empty.",
       "stats": "3 files · 122 lines · 7 verdicts · 0 API keys",
       "install": "npx skills add arm-pz/upstream-polish --skill upstream-polish",
-      "chain": true
+      "chain": true,
+      "quality": {
+        "version": "1.0.0",
+        "commit": "e2165b1",
+        "updated": "2026-10-19",
+        "notFor": [
+          "creating skills from scratch (use draft-skill) or tuning trigger language only (use tune-skill)"
+        ]
+      }
     },
     {
       "name": "publish-release-gate",
@@ -603,7 +762,18 @@
         "commit": "8f64a143ab8a4837ac6b73eac337dcdcec263028",
         "sha256": "3b6d01bf0e34fa13c3bd449e2c544e025dd8f04bd7dff4a7637a6e2e072a8dc7"
       },
-      "order": 307
+      "order": 307,
+      "quality": {
+        "version": null,
+        "commit": "8f64a14",
+        "updated": "2026-10-24",
+        "notFor": [
+          "one skill (use tune-skill)",
+          "one listing (use findable)",
+          "the site pipeline alone (use publish-pipeline)",
+          "weekly upkeep (use caffeinity-routing's Descale brew)"
+        ]
+      }
     },
     {
       "name": "site-prompt",
@@ -668,7 +838,15 @@
         "commit": "70389029d0bcb1d983b7e8ff2b276b3aa63b6466",
         "sha256": "ca17882ef70ae7bc37f3df22cf2116017573858d2c3a1186eeb373bacd6980c2"
       },
-      "order": 401
+      "order": 401,
+      "quality": {
+        "version": null,
+        "commit": "7038902",
+        "updated": "2026-10-22",
+        "notFor": [
+          "building, hosting or reviewing the site itself, not for redesigning an existing page, and not for authoring skills"
+        ]
+      }
     },
     {
       "name": "production-code",
@@ -713,7 +891,16 @@
         "commit": "2625da94c7667019df2c01cb59085d6c2ac06973",
         "sha256": "6fac09c18057101ae7b53a2511e5f9ce3387cd92f2f988daece86a4378ccf935"
       },
-      "order": 402
+      "order": 402,
+      "quality": {
+        "version": null,
+        "commit": "2625da9",
+        "updated": "2026-10-18",
+        "notFor": [
+          "auditing a live web app before launch (use pre-ship-performance-audit, pre-ship-security-red-team)",
+          "for the business decision behind the build (use strategy-memo)"
+        ]
+      }
     },
     {
       "name": "web-preflight",
@@ -726,7 +913,22 @@
       "order": 403,
       "blurb": "Checks a site you own before you ship it, without pretending a status code is a finding. A 200 on /.env that matches the app shell is catch-all routing, a blanket 403 is an unanswered question, and a check that never ran becomes INCONCLUSIVE — never a pass.",
       "stats": "4 verdicts · 19 fixed paths · 9 behavioral tests · ~215 lines · 0 API keys",
-      "install": "npx skills add arm-pz/web-preflight"
+      "install": "npx skills add arm-pz/web-preflight",
+      "quality": {
+        "version": null,
+        "commit": "ab528c5",
+        "updated": "2026-10-17",
+        "notFor": [
+          "penetration testing, exploitation, credential testing, broad port scanning, or application-code review",
+          "use a dedicated authorized security-testing or code-review workflow instead"
+        ]
+      },
+      "tested": {
+        "date": "2026-10-24",
+        "target": "skills.caffeinity.com",
+        "result": "Probed 19 sensitive paths; nothing exposed and every security header in place: PASS.",
+        "evidence": "/#proof"
+      }
     },
     {
       "name": "pre-ship-security-red-team",
@@ -739,7 +941,15 @@
       "order": 404,
       "blurb": "Red-teams a web app you own before launch, in an isolated local environment. Three parallel read-only subagents run fourteen authorization and abuse checks across three groups (identity and authorization; UI and API bypass; browser, network, cache and AI), each with captured evidence, then the fix is rerun against the same check. A check that cannot fail is falsified first, and findings stay on the record even when the pass clears.",
       "stats": "3 subagents · 14 checks · 9 files · local environments only",
-      "install": "npx skills add arm-pz/pre-ship-security-red-team"
+      "install": "npx skills add arm-pz/pre-ship-security-red-team",
+      "quality": {
+        "version": null,
+        "commit": "1e3bc2a",
+        "updated": "2026-10-24",
+        "notFor": [
+          "production, or for a passive exposure check (use web-preflight)"
+        ]
+      }
     },
     {
       "name": "pre-ship-performance-audit",
@@ -752,7 +962,15 @@
       "order": 405,
       "blurb": "Audits and fixes a web app's real-world speed before launch: four read-only subagents sweep twenty known slow-downs across images, bundles, database queries and servers, then the same mobile Lighthouse protocol, three runs per page, proves each fix before and after. Never removes a feature for a score, never invents a baseline, and asks before touching dependencies, the database or the deploy region.",
       "stats": "4 subagents · 20 slow-downs · 6 phases · ~120 lines · 0 API keys",
-      "install": "npx skills add arm-pz/pre-ship-performance-audit"
+      "install": "npx skills add arm-pz/pre-ship-performance-audit",
+      "quality": {
+        "version": null,
+        "commit": "748a3b5",
+        "updated": "2026-10-24",
+        "notFor": [
+          "authorization and abuse testing (use pre-ship-security-red-team) or exposed secrets and source files (use web-preflight)"
+        ]
+      }
     },
     {
       "name": "release-gate-chair",
@@ -797,7 +1015,17 @@
         "commit": "6dbcbf7ad5a97fa02ef83eb05f8d0bfeb0b1c479",
         "sha256": "820da9183f46d247f9f3d04fe345e498d9814999df2e08688aaa574f9b3c0751"
       },
-      "order": 406
+      "order": 406,
+      "quality": {
+        "version": "0.1.0",
+        "commit": "6dbcbf7",
+        "updated": "2026-10-24",
+        "notFor": [
+          "a single-lane check (invoke that skill directly)",
+          "for reports that already exist (use release-gate-validator)",
+          "for penetration testing of production, or for performing the deploy"
+        ]
+      }
     },
     {
       "name": "release-gate-ledger",
@@ -862,7 +1090,16 @@
         "commit": "8e84d64c6a70adb4fb967e6e48d6c461d7eb04ea",
         "sha256": "6cd3568b8c50b4197c92e26293034e281bf598b698eeefc5b1256f1b404853f4"
       },
-      "order": 407
+      "order": 407,
+      "quality": {
+        "version": "0.1.0",
+        "commit": "8e84d64",
+        "updated": "2026-10-24",
+        "notFor": [
+          "a single-lane check, not for the default go/no-go (use release-gate-chair)",
+          "not for penetration testing of production, not for performing the deploy"
+        ]
+      }
     },
     {
       "name": "release-gate-validator",
@@ -917,7 +1154,16 @@
         "commit": "1b4c4c31fd2032574792cc6a62de12904990254d",
         "sha256": "33f91264d733601a3be595a3aca6ed831ada4876012a35881c1cddc22f40f849"
       },
-      "order": 408
+      "order": 408,
+      "quality": {
+        "version": "0.1.0",
+        "commit": "1b4c4c3",
+        "updated": "2026-10-24",
+        "notFor": [
+          "producing the reports in the first place (use release-gate-chair)",
+          "not for deploying"
+        ]
+      }
     },
     {
       "name": "ship-sentinel",
@@ -931,7 +1177,13 @@
       "order": 409,
       "blurb": "A Claude Code mod that holds git push, PR, publish and deploy commands until your pre-ship check skills have run since the last edit. Ask, block or nudge; fails open and touches no files, network or processes.",
       "stats": "1 hook module · 173 lines · 4 calls · 0 network",
-      "install": "/plugin install ship-sentinel --marketplace arm-pz/ship-sentinel"
+      "install": "/plugin install ship-sentinel --marketplace arm-pz/ship-sentinel",
+      "quality": {
+        "version": "0.1.0",
+        "commit": "b3c9290",
+        "updated": "2026-10-21",
+        "notFor": []
+      }
     },
     {
       "name": "release-gate",
@@ -1001,7 +1253,13 @@
         "commit": "8f64a143ab8a4837ac6b73eac337dcdcec263028",
         "sha256": "708fa51813888d0fa0d62a22b56e4468f5d0e55b76f3903961ddfc872d14356d"
       },
-      "order": 411
+      "order": 411,
+      "quality": {
+        "version": null,
+        "commit": "8f64a14",
+        "updated": "2026-10-24",
+        "notFor": []
+      }
     },
     {
       "name": "release-gate-mod",
@@ -1092,7 +1350,13 @@
         "commit": "8f64a143ab8a4837ac6b73eac337dcdcec263028",
         "sha256": "483f9eaa604c13a11140d9ee8ba44deaf5ae46289fd23c277f366014f623312e"
       },
-      "order": 412
+      "order": 412,
+      "quality": {
+        "version": "0.1.0",
+        "commit": "8f64a14",
+        "updated": "2026-10-24",
+        "notFor": []
+      }
     },
     {
       "name": "web-preflight-mod",
@@ -1173,7 +1437,13 @@
         "commit": "8f64a143ab8a4837ac6b73eac337dcdcec263028",
         "sha256": "196c0f18c29c96eb51d0aa2096766dc642351fe7a571be583eccb7ea17289d9f"
       },
-      "order": 413
+      "order": 413,
+      "quality": {
+        "version": "0.1.0",
+        "commit": "8f64a14",
+        "updated": "2026-10-24",
+        "notFor": []
+      }
     },
     {
       "name": "pre-ship-security-red-team-mod",
@@ -1284,7 +1554,13 @@
         "commit": "8f64a143ab8a4837ac6b73eac337dcdcec263028",
         "sha256": "9fa3a48b71b2026a6d834903d0a2322ebf5dcc7cf065e441ef8041cf4184a711"
       },
-      "order": 414
+      "order": 414,
+      "quality": {
+        "version": "0.1.0",
+        "commit": "8f64a14",
+        "updated": "2026-10-24",
+        "notFor": []
+      }
     },
     {
       "name": "pre-ship-performance-audit-mod",
@@ -1355,7 +1631,13 @@
         "commit": "8f64a143ab8a4837ac6b73eac337dcdcec263028",
         "sha256": "b8a788d07ff582c241ad3489dd83f30c482caab29d18a419b7c10c4cfd7b1a72"
       },
-      "order": 415
+      "order": 415,
+      "quality": {
+        "version": "0.1.0",
+        "commit": "8f64a14",
+        "updated": "2026-10-24",
+        "notFor": []
+      }
     },
     {
       "name": "seo-crawl",
@@ -1450,6 +1732,23 @@
         "license": "MIT",
         "commit": "be96031d9a03b8f478f7fbd83eda36d5996de91a",
         "sha256": "154b53859ee5775614c59d03a9a500d9c220161f3422a5458fd7f512a8baa860"
+      },
+      "quality": {
+        "version": null,
+        "commit": "be96031",
+        "updated": "2026-10-24",
+        "notFor": [
+          "Search Console clicks, impressions, rankings or keyword volumes",
+          "Core Web Vitals, Lighthouse or bundle performance",
+          "release security and exposed files",
+          "content rewriting or keyword strategy"
+        ]
+      },
+      "tested": {
+        "date": "2026-10-24",
+        "target": "skills.caffeinity.com",
+        "result": "Found one broken internal link across 24 pages; the re-crawl after the fix came back clean.",
+        "evidence": "/#proof"
       }
     },
     {
@@ -1463,7 +1762,17 @@
       "order": 502,
       "blurb": "Plans topic clusters and kills keyword cannibalization so exactly one page wins each query. The cannibalization audit is a mandatory blocker before any content change — with a sitemap fallback for when you have no Search Console access.",
       "stats": "6 phases · 3 reference checklists · ~300 lines · 0 API keys",
-      "install": "npx skills add arm-pz/keyword-guard"
+      "install": "npx skills add arm-pz/keyword-guard",
+      "quality": {
+        "version": null,
+        "commit": "e7b1e74",
+        "updated": "2026-10-24",
+        "notFor": [
+          "crawl and index health (use seo-crawl)",
+          "rewriting the copy once ownership is settled (use keyword-resolver)",
+          "mass page generation (use programmatic-seo)"
+        ]
+      }
     },
     {
       "name": "keyword-resolver",
@@ -1477,7 +1786,15 @@
       "blurb": "Resolves keyword cannibalization with Keyword-Guard, then rewrites titles, H1s and meta descriptions with Wordsmith. One query, one owner — the ownership audit blocks until the map is settled, and a sitemap fallback is named as a fallback when you have no Search Console.",
       "stats": "3 files · 127 lines · 2 chained skills · 0 API keys",
       "install": "npx skills add arm-pz/keyword-resolver --skill keyword-resolver",
-      "chain": true
+      "chain": true,
+      "quality": {
+        "version": "1.0.0",
+        "commit": "525a0b4",
+        "updated": "2026-10-24",
+        "notFor": [
+          "technical SEO diagnosis (use seo-audit) or mass page generation (use programmatic-seo)"
+        ]
+      }
     },
     {
       "name": "seo-polish",
@@ -1491,7 +1808,15 @@
       "blurb": "seo-crawl's measured findings, an optional seo-audit diagnosis, then Wordsmith drafts optimized alternatives for every High and Medium finding: titles, meta descriptions, headings and internal-link anchors.",
       "stats": "3 files · 85 lines · 5 audit layers · 0 API keys",
       "install": "npx skills add arm-pz/seo-polish --skill seo-polish",
-      "chain": true
+      "chain": true,
+      "quality": {
+        "version": "1.0.0",
+        "commit": "6396aa3",
+        "updated": "2026-10-24",
+        "notFor": [
+          "keyword cannibalization resolution (use keyword-resolver) or mass page generation (use programmatic-seo)"
+        ]
+      }
     },
     {
       "name": "wordsmith",
@@ -1504,7 +1829,16 @@
       "order": 601,
       "blurb": "Teaches your agent to edit, not just generate: 44 commands across 5 disciplines that tighten, rewrite, critique and proofread while keeping the author's meaning, hedges and voice intact.",
       "stats": "44 commands · 5 disciplines · ~1,200 lines · 0 API keys",
-      "install": "npx skills add arm-pz/wordsmith"
+      "install": "npx skills add arm-pz/wordsmith",
+      "quality": {
+        "version": "1.0.0",
+        "commit": "7f7f4c7",
+        "updated": "2026-10-12",
+        "notFor": [
+          "resumes, CVs or LinkedIn profiles (use recruiter-lens if installed)",
+          "not for code or code comments, and not for building .docx or .pdf files (write the text here, then use the file skill)"
+        ]
+      }
     },
     {
       "name": "platform-content",
@@ -1544,7 +1878,18 @@
         "commit": "55f2308587834f07753e07bbe3dd7597f8484bff",
         "sha256": "1a2467069948aac811b616d24b6ae57708b5b8d1e81b744e0bdb6dc9e8632d4a"
       },
-      "order": 602
+      "order": 602,
+      "quality": {
+        "version": null,
+        "commit": "55f2308",
+        "updated": "2026-10-18",
+        "notFor": [
+          "copy that sells a product (use sales-copy)",
+          "rewriting text the user already wrote (use wordsmith)",
+          "SEO cluster and cannibalization planning (use keyword-guard)",
+          "career documents (use career-track)"
+        ]
+      }
     },
     {
       "name": "sales-copy",
@@ -1584,7 +1929,17 @@
         "commit": "f82e60d2eb192b901f3ade8b1e2e3e842215fe9d",
         "sha256": "d0f2205e286d7fe892805ccff4fd27be1b907ca96760b12f3cb9c78dfdb3a2a5"
       },
-      "order": 603
+      "order": 603,
+      "quality": {
+        "version": null,
+        "commit": "f82e60d",
+        "updated": "2026-10-18",
+        "notFor": [
+          "organic audience content (use platform-content)",
+          "editing text the user already wrote (use wordsmith)",
+          "pricing and go-to-market decisions (use strategy-memo)"
+        ]
+      }
     },
     {
       "name": "cold-email-list-gate",
@@ -1619,6 +1974,16 @@
         "license": "MIT",
         "commit": "4104d949e6ddffca3bd0be903518731d0cfb9dba",
         "sha256": "efb8fa1bd2c440f9ca6c6b09a8a5d674fe32563407847f6e43ae4bfa204a6b27"
+      },
+      "quality": {
+        "version": null,
+        "commit": "4104d94",
+        "updated": "2026-10-22",
+        "notFor": [
+          "buying, scraping, or enriching contacts (out of scope)",
+          "writing the email copy (wordsmith)",
+          "diagnosing a list that already sent (cold-email-ops)"
+        ]
       }
     },
     {
@@ -1664,6 +2029,18 @@
         "license": "MIT",
         "commit": "1b3850dd3f4ef67ecc66de3a5004151fff622e71",
         "sha256": "7a4cb9267d8147ee32c6d8317043c747ee59c2a4a508fc0f0f3e4e4a785803eb"
+      },
+      "quality": {
+        "version": null,
+        "commit": "1b3850d",
+        "updated": "2026-10-22",
+        "notFor": [
+          "pre-load list QA (cold-email-list-gate)",
+          "writing or polishing the emails themselves (wordsmith)",
+          "inbound SEO (seo-audit, programmatic-seo)",
+          "WhatsApp/RCS messaging (integrate-whatsapp, sent-two-way-messaging)",
+          "finding the market/ICP"
+        ]
       }
     },
     {
@@ -1677,7 +2054,15 @@
       "order": 801,
       "blurb": "Reviews resumes, CVs and LinkedIn profiles the way recruiters actually screen them: first-impression scans, ATS compatibility, rejection-pattern diagnosis, and interview prep. 13 commands through 5 filters, and it never invents a metric.",
       "stats": "13 commands · 5 filters · ~2,500 lines · 0 API keys",
-      "install": "npx skills add arm-pz/recruiter-lens"
+      "install": "npx skills add arm-pz/recruiter-lens",
+      "quality": {
+        "version": "1.0.0",
+        "commit": "5be8412",
+        "updated": "2026-10-18",
+        "notFor": [
+          "prose editing (wordsmith, if installed) or producing the final .docx or .pdf (the file skills)"
+        ]
+      }
     },
     {
       "name": "applicant-kit",
@@ -1690,7 +2075,15 @@
       "order": 802,
       "blurb": "Writes the better version: decoded job description, tailored resume, bullets rewritten as action-task-result-impact, honest keyword placement, five summaries, a LinkedIn rewrite and twenty interview answers, all built from real experience. recruiter-lens judges; applicant-kit produces. Nothing invented.",
       "stats": "7 modes · 6 produce + 1 hand-off · ~320 lines · 0 API keys",
-      "install": "npx skills add arm-pz/applicant-kit --skill applicant-kit"
+      "install": "npx skills add arm-pz/applicant-kit --skill applicant-kit",
+      "quality": {
+        "version": null,
+        "commit": "0fe7eee",
+        "updated": "2026-10-18",
+        "notFor": [
+          "running the search itself (finding roles, the application tracker, follow-ups, interview briefings): use the application-pilot skill"
+        ]
+      }
     },
     {
       "name": "application-pilot",
@@ -1703,7 +2096,15 @@
       "order": 803,
       "blurb": "Runs the job search around the applications: turns role criteria into a live shortlist, scores each role for fit with evidence, keeps a reviewable tracker with submission and follow-up dates, flags roles that have gone quiet, drafts the follow-up and the interview briefing, and reads the funnel weekly. applicant-kit writes the packet; application-pilot keeps the search alive. It never submits anything, and never claims a status it did not see.",
       "stats": "8 modes · 9 ground rules · 5 files · no CLI, no telemetry",
-      "install": "npx skills add arm-pz/application-pilot --skill application-pilot"
+      "install": "npx skills add arm-pz/application-pilot --skill application-pilot",
+      "quality": {
+        "version": "1.0.1",
+        "commit": "2350dfb",
+        "updated": "2026-10-19",
+        "notFor": [
+          "judging (scans, ATS checks, critique, rejection reasons, gap analysis): use recruiter-lens"
+        ]
+      }
     },
     {
       "name": "career-track",
@@ -1743,7 +2144,15 @@
         "commit": "e3e1851878d701c44fad8bb44addda5377646422",
         "sha256": "b5f3dbdde6922ee2865f2b2e28ebbd051965b5663367b51e5dccb80f95c3310c"
       },
-      "order": 804
+      "order": 804,
+      "quality": {
+        "version": null,
+        "commit": "e3e1851",
+        "updated": "2026-10-19",
+        "notFor": [
+          "the application documents themselves: resume and CV judging (use recruiter-lens) or tailored application material and LinkedIn rewrites (use applicant-kit)"
+        ]
+      }
     },
     {
       "name": "research-brief",
@@ -1788,7 +2197,17 @@
         "commit": "f8556893232b26235046ce01eca4cdeda09b86d2",
         "sha256": "e103862e7f43326163660919d2c9044caacb0f6e6471167f8b10686ca299d990"
       },
-      "order": 901
+      "order": 901,
+      "quality": {
+        "version": null,
+        "commit": "f855689",
+        "updated": "2026-10-18",
+        "notFor": [
+          "turning findings into a recommendation and roadmap (use strategy-memo)",
+          "for analysing the user's own dataset (use data-readout)",
+          "for being taught a topic step by step (use topic-primer)"
+        ]
+      }
     },
     {
       "name": "data-readout",
@@ -1833,7 +2252,16 @@
         "commit": "9eacca091a1dd4623bcb785c6b5ce108a78c080a",
         "sha256": "6cb1c2c4c3dea6fd98eebe98362e328ef6e38bee4469279845241c0a56ce2aa2"
       },
-      "order": 902
+      "order": 902,
+      "quality": {
+        "version": null,
+        "commit": "9eacca0",
+        "updated": "2026-10-18",
+        "notFor": [
+          "writing the pandas or R code that crunches the file (use production-code)",
+          "for market research outside the user's own data (use research-brief) or for the strategic roadmap that follows (use strategy-memo)"
+        ]
+      }
     },
     {
       "name": "crash-test",
@@ -1846,7 +2274,15 @@
       "order": 903,
       "blurb": "Crash-tests a decision before you build it. Four fixed roles draft the same task in separate contexts and attack each other's drafts anonymously; the chair merges what survived on evidence, not votes, keeps a dissent log for what it could not settle, and grounds the winner's claims about your files against the source before adopting them.",
       "stats": "4 roles · ~9 calls · 1 opt-in Operator seat · 2 modes · 0 API keys",
-      "install": "npx skills add arm-pz/crash-test --skill crash-test"
+      "install": "npx skills add arm-pz/crash-test --skill crash-test",
+      "quality": {
+        "version": null,
+        "commit": "faa73a0",
+        "updated": "2026-10-24",
+        "notFor": [
+          "factual lookups, small edits, debugging an actual crash, or reviewing code for defects: it examines a decision, not a diff"
+        ]
+      }
     },
     {
       "name": "do-better",
@@ -1859,7 +2295,15 @@
       "order": 904,
       "blurb": "When an answer is bad, don't ask twice: N sub-agents (100 by default, 16 with --quick) get the exact same task with different strategy cards, then attack, defend and judge each other in a single-elimination bracket until one solution survives.",
       "stats": "2,160 strategy cards · 7 rounds at full size · ~1,700 lines · 0 API keys",
-      "install": "npx skills add arm-pz/do-better"
+      "install": "npx skills add arm-pz/do-better",
+      "quality": {
+        "version": "1.0.0",
+        "commit": "80bf4b7",
+        "updated": "2026-10-24",
+        "notFor": [
+          "stress-testing a decision or plan before building it (use crash-test)"
+        ]
+      }
     },
     {
       "name": "strategy-memo",
@@ -1899,7 +2343,17 @@
         "commit": "440499df7f23119ef00b5109d95111e08beec895",
         "sha256": "10fdad8a16b972d2a21212e8bbbcd25f71d125afca2b3ae6647b4d328bb1a60b"
       },
-      "order": 905
+      "order": 905,
+      "quality": {
+        "version": null,
+        "commit": "440499d",
+        "updated": "2026-10-18",
+        "notFor": [
+          "pressure-testing a decision you already made (use crash-test)",
+          "the copy or pages that execute it (use sales-copy, platform-content)",
+          "the numbers behind it (use data-readout)"
+        ]
+      }
     },
     {
       "name": "solo-income-blueprint",
@@ -1939,7 +2393,17 @@
         "commit": "33491fb84d4567a3b613f2d484fcc40bfe22c2c1",
         "sha256": "ba9ae1c80338ae23794142971bc4a177c60b2ab0105ed342759930d35b418b2c"
       },
-      "order": 906
+      "order": 906,
+      "quality": {
+        "version": null,
+        "commit": "33491fb",
+        "updated": "2026-10-22",
+        "notFor": [
+          "job hunting (application-pilot, applicant-kit)",
+          "SEO for an existing site (seo-audit)",
+          "privacy and legal pages (paper-trail)"
+        ]
+      }
     },
     {
       "name": "topic-primer",
@@ -1952,7 +2416,17 @@
       "order": 907,
       "blurb": "A world-class teacher for any topic, from zero background toward expert depth. Eight modes: foundations, full curriculum, concept-by-concept lessons, adaptive tutoring, expert mental models, mistake prevention, strict exams, and ELI5. One question at a time, then it waits.",
       "stats": "8 modes · 68 lines · 0 API keys",
-      "install": "npx skills add arm-pz/topic-primer"
+      "install": "npx skills add arm-pz/topic-primer",
+      "quality": {
+        "version": "1.0.0",
+        "commit": "0ad10bd",
+        "updated": "2026-10-15",
+        "notFor": [
+          "file-format conversion (use wordsmith)",
+          "resume screening (use recruiter-lens)",
+          "SEO audits (use seo-audit)"
+        ]
+      }
     },
     {
       "name": "study-system",
@@ -1992,7 +2466,16 @@
         "commit": "82320f687421ae0a334e06dab6b0dbd59aa7ef23",
         "sha256": "67998d85149ba4cf4af0e62db5921c8315f71c6c220089b4a93f8b6e9f6f0c8a"
       },
-      "order": 908
+      "order": 908,
+      "quality": {
+        "version": null,
+        "commit": "82320f6",
+        "updated": "2026-10-24",
+        "notFor": [
+          "being taught the topic itself concept by concept (use topic-primer)",
+          "for career positioning and moves (use career-track) or for course content written for a class of students (use course-builder)"
+        ]
+      }
     },
     {
       "name": "course-builder",
@@ -2042,7 +2525,17 @@
         "commit": "8f64a143ab8a4837ac6b73eac337dcdcec263028",
         "sha256": "f51263530294c91d85bbf58013df1a6f849c25c4209f34837655298799028c86"
       },
-      "order": 909
+      "order": 909,
+      "quality": {
+        "version": null,
+        "commit": "8f64a14",
+        "updated": "2026-10-24",
+        "notFor": [
+          "one person's own learning plan (use study-system)",
+          "for being taught the topic (use topic-primer)",
+          "for marketing the course (use sales-copy)"
+        ]
+      }
     }
   ],
   "workflows": [

@@ -8,6 +8,7 @@ test. For each manifest entry and each such repo, sync decides one of:
 
   add       an eligible repo with no entry gets a generated page
   refresh   a generated page whose repo HEAD moved is re-measured; hand-written copy is kept
+  quality   any page whose repo HEAD moved gets its quality record (version, date, limits) re-read
   rename    the repo answers under a new name; the entry, its page folder and the workflows follow,
             and the old name becomes an alias that _redirects sends to the new page
   remove    the repo is gone or private (the API says Not Found); the entry and a generated page go
@@ -68,11 +69,13 @@ def has_skill_md(name):
     return any(i["path"] == "SKILL.md" or i["path"].endswith("/SKILL.md") for i in data.get("tree", []))
 
 
-def head_sha(repo):
+def head(repo):
+    """(sha, YYYY-MM-DD commit date) of the repo's default-branch HEAD."""
     data, err = gh_json("api", f"repos/{repo}/commits/HEAD")
     if data is None:
         raise SystemExit(f"cannot read HEAD of {repo}: {err}")
-    return data["sha"]
+    date = ((data.get("commit") or {}).get("committer") or {}).get("date") or ""
+    return data["sha"], date[:10]
 
 
 def locate(name, files):
@@ -104,6 +107,7 @@ def plan(root, manifest, deny):
     denied = {d["repo"] for d in deny}
     actions = []
     known = set()
+    heads = {}
     for entry in manifest["skills"]:
         repo = entry.get("repo")
         if repo is None:
@@ -120,10 +124,13 @@ def plan(root, manifest, deny):
                 known.add(full.split("/", 1)[1])
                 actions.append(("rename", entry["name"], full))
                 continue
-        if entry["page"] == "generated":
-            sha = head_sha(repo)
-            if sha != entry["pageSource"]["commit"]:
-                actions.append(("refresh", entry["name"], sha))
+        if repo not in heads:
+            heads[repo] = head(repo)
+        sha, date = heads[repo]
+        if entry["page"] == "generated" and sha != entry["pageSource"]["commit"]:
+            actions.append(("refresh", entry["name"], sha))
+        if entry["page"] != "none" and sha[:7] != (entry.get("quality") or {}).get("commit"):
+            actions.append(("quality", entry["name"], (sha, date)))
     for name, r in sorted(repos.items()):
         if name in known or f"{OWNER}/{name}" in denied:
             continue
@@ -145,6 +152,13 @@ def plan(root, manifest, deny):
 def apply(root, manifest, actions):
     by_name = {s["name"]: s for s in manifest["skills"]}
     notes = []
+    fetched = {}
+
+    def files_of(short):
+        if short not in fetched:
+            fetched[short] = discover.fetch_files(short)
+        return fetched[short]
+
     for kind, name, detail in actions:
         if kind == "remove":
             entry = by_name.pop(name)
@@ -181,7 +195,7 @@ def apply(root, manifest, actions):
         elif kind == "refresh":
             entry = by_name[name]
             short = entry["repo"].split("/", 1)[1]
-            files = discover.fetch_files(short)
+            files = files_of(short)
             path = (locate(name, files) if short == name else None) or entry["path"]
             if discover.entry_point(files, path) is None:
                 notes.append(f"{name}: no SKILL.md or plugin.json at {path} any more; page not refreshed")
@@ -191,6 +205,11 @@ def apply(root, manifest, actions):
             entry["stats"] = (f'{entry["pageSource"]["fileCount"]} files · '
                               f'{entry["pageSource"]["lines"]:,} lines · '
                               f'{max(1, round(entry["pageSource"]["bytes"] / 1024))} KB')
+        elif kind == "quality":
+            entry = by_name[name]
+            sha, date = detail
+            files = files_of(entry["repo"].split("/", 1)[1])
+            entry["quality"] = discover.quality(files, entry["path"], sha, date)
         elif kind == "add":
             files = detail
             path = locate(name, files)

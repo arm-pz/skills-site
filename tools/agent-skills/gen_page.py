@@ -11,6 +11,29 @@ from pathlib import Path
 import skilllib
 
 TEMPLATE = Path(__file__).resolve().parent / "templates" / "skill-page.html"
+QUALITY_START = "<!-- gen:quality:start -->"
+QUALITY_END = "<!-- gen:quality:end -->"
+QUALITY_CSS_START = "<!-- gen:quality-css:start -->"
+QUALITY_CSS_END = "<!-- gen:quality-css:end -->"
+HEALTH_URL = "https://github.com/arm-pz/skills-site/blob/main/.github/workflows/health.yml"
+AGENTS = "Claude Code, Codex, Cursor, Qoder and any agent that loads a SKILL.md"
+# Hand-written pages come in a dark and a light palette; the fallbacks cover both.
+QUALITY_CSS = """<style>
+  .qb{--qb-line:var(--rule,var(--line,color-mix(in srgb,currentColor 14%,transparent)));padding:clamp(48px,6vw,80px) 0;border-top:1px solid var(--qb-line)}
+  .qb-kicker{font-family:var(--mono);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim,var(--muted))}
+  .qb h2{font-family:var(--serif);font-weight:400;font-size:clamp(30px,3.6vw,44px);line-height:1.08;letter-spacing:-.015em;margin-top:10px}
+  .qb-lead{color:var(--dim,var(--muted));max-width:62ch;margin-top:12px;font-size:16px}
+  .qb a{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.22em}
+  .qb-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:0 36px;margin-top:28px}
+  .qb-grid>div{border-top:1px solid var(--qb-line);padding:16px 0 18px}
+  .qb dt{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim,var(--muted))}
+  .qb dd{margin:6px 0 0;font-size:16px;line-height:1.5}
+  .qb dd small{display:block;color:var(--dim,var(--muted));font-size:14px;margin-top:2px}
+  .qb .qb-wide{grid-column:1/-1}
+  .qb ul{margin:6px 0 0;padding-left:20px;display:grid;gap:4px}
+  .qb .qb-flag{font-weight:600}
+  .qb .qb-flag.fail{color:var(--ember,var(--accent))}
+</style>"""
 OSI = {"MIT", "Apache-2.0", "AGPL-3.0", "GPL-3.0", "MPL-2.0",
        "BSD-3-Clause", "BSD-2-Clause", "ISC", "Unlicense"}
 
@@ -111,7 +134,96 @@ def related_html(entry, manifest):
             f'    <ul class="related">\n{rows}\n    </ul>')
 
 
-def render_page(entry, manifest=None):
+def human_date(iso):
+    year, month, day = iso.split("-")
+    months = "Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split()
+    return f"{int(day)} {months[int(month) - 1]} {year}"
+
+
+def health_html(entry, health):
+    if entry.get("kind") == "mod":
+        return ("Not covered", "The nightly check reads SKILL.md files, and a mod has none.")
+    result = health.get(entry["name"])
+    if result is None:
+        return ("Not checked yet", "It joins the nightly check after its first run.")
+    fails, warns = len(result.get("fail", [])), len(result.get("warn", []))
+    if fails:
+        return (f'<span class="qb-flag fail">{fails} failing</span>',
+                "Fails at least one structural check; the fix is tracked in the health issue.")
+    if warns:
+        return ("Passing", f"{warns} warning{'s' if warns != 1 else ''}, no failures.")
+    return ("Passing", "No failures or warnings.")
+
+
+def quality_html(entry, health=None):
+    """The quality block every skill page carries, generated and hand-written alike."""
+    quality = entry.get("quality") or {}
+    source = entry.get("pageSource") or {}
+    mod = entry.get("kind") == "mod"
+    commit = quality.get("commit") or source.get("commit", "")[:7]
+    version = quality.get("version")
+    repo_url = f"https://github.com/{entry['repo']}"
+    if version:
+        version_dd = f"{esc(version)}<small>commit {esc(commit)}</small>" if commit else esc(version)
+    elif commit:
+        version_dd = f"Unversioned<small>commit {esc(commit)}</small>"
+    else:
+        version_dd = "Not recorded yet"
+    updated = quality.get("updated")
+    updated_dd = (f'<a href="{esc(repo_url)}/commits" target="_blank" rel="noopener">'
+                  f"{esc(human_date(updated))}</a><small>last commit to the repo</small>"
+                  if updated else "Not recorded yet")
+    agents_dd = ("Claude Code<small>installed as a plugin; it runs hooks with your permissions</small>"
+                 if mod else f"{esc(AGENTS)}<small>plain text; no API keys</small>")
+    state, note = health_html(entry, health or {})
+    check_dd = f'{state}<small>{esc(note)} <a href="{HEALTH_URL}" target="_blank" rel="noopener">How it is checked</a></small>'
+    tested = entry.get("tested")
+    if tested:
+        evidence = tested["evidence"]
+        external = ' target="_blank" rel="noopener"' if evidence.startswith("https://") else ""
+        tested_dd = (f'{esc(human_date(tested["date"]))}, on {esc(tested["target"])}'
+                     f'<small>{esc(tested["result"])} <a href="{esc(evidence)}"{external}>See the run</a></small>')
+    else:
+        tested_dd = "No public run yet<small>Runs are published only with their evidence.</small>"
+    if "notFor" in quality:
+        nots = quality["notFor"]
+    else:
+        nots = split_description(source.get("description", ""))[3]
+    if nots:
+        limits_dd = "Not built for:<ul>" + "".join(f"<li>{esc(n[:1].upper() + n[1:])}</li>" for n in nots) + "</ul>"
+    else:
+        limits_dd = "None stated in its description. Read the source before relying on it."
+    rows = [("Version", version_dd), ("Updated", updated_dd), ("Works in", agents_dd),
+            ("Nightly check", check_dd), ("Last real-world run", tested_dd)]
+    cells = "\n".join(f"      <div><dt>{k}</dt><dd>{v}</dd></div>" for k, v in rows)
+    return (f'{QUALITY_START}\n<section class="qb" aria-labelledby="qb-h">\n  <div class="wrap">\n'
+            f'    <p class="qb-kicker">Quality record</p>\n'
+            f'    <h2 id="qb-h">Know what you are installing.</h2>\n'
+            f'    <p class="qb-lead">Version, date and limits are read from the repo on every sync, and the '
+            f'check runs every night. Real-world runs are listed only with their evidence.</p>\n'
+            f'    <dl class="qb-grid">\n{cells}\n'
+            f'      <div class="qb-wide"><dt>Known limits</dt><dd>{limits_dd}</dd></div>\n'
+            f'    </dl>\n  </div>\n</section>\n{QUALITY_END}')
+
+
+def quality_css():
+    return f"{QUALITY_CSS_START}\n{QUALITY_CSS}\n{QUALITY_CSS_END}"
+
+
+def replace_region(text, start, end, block, label):
+    i, j = text.find(start), text.find(end)
+    if i < 0 or j < i:
+        raise SystemExit(f"{label}: missing {start} … {end}")
+    return text[:i] + block + text[j + len(end):]
+
+
+def render_bespoke(entry, text, health=None):
+    """A hand-written page with only its generated regions rewritten."""
+    text = replace_region(text, QUALITY_CSS_START, QUALITY_CSS_END, quality_css(), entry["name"])
+    return replace_region(text, QUALITY_START, QUALITY_END, quality_html(entry, health), entry["name"])
+
+
+def render_page(entry, manifest=None, health=None):
     source = entry["pageSource"]
     name = entry["name"]
     license_id = source["license"]
@@ -163,6 +275,8 @@ def render_page(entry, manifest=None):
         "PURPOSE": esc(purpose or source["description"]),
         "USES": uses_html(when, says, nots),
         "RELATED": related,
+        "QUALITY": quality_html(entry, health),
+        "QUALITY_CSS": quality_css(),
         "INSTALL": esc(entry.get("install") or f"npx skills add {entry['repo']}"),
         "REPO_URL": esc(repo_url),
         "REPO_SLUG": esc(entry["repo"]),
@@ -191,6 +305,10 @@ def generated(manifest):
     return [s for s in manifest["skills"] if s["page"] == "generated"]
 
 
+def bespoke(manifest):
+    return [s for s in manifest["skills"] if s["page"] == "bespoke"]
+
+
 def visible(manifest):
     return [s for s in manifest["skills"] if s["page"] != "none"]
 
@@ -199,22 +317,34 @@ def page_path(root, entry):
     return Path(root) / entry["name"] / "index.html"
 
 
+def expected_pages(root, manifest):
+    """(entry, path, expected text) for every page this script owns all or part of."""
+    health = skilllib.load_health(root)
+    for entry in generated(manifest):
+        yield entry, page_path(root, entry), render_page(entry, manifest, health)
+    for entry in bespoke(manifest):
+        path = page_path(root, entry)
+        if path.is_file():
+            yield entry, path, render_bespoke(entry, path.read_text(encoding="utf-8"), health)
+
+
 def write_pages(root, manifest):
     written = []
-    for entry in generated(manifest):
-        path = page_path(root, entry)
+    for entry, path, text in list(expected_pages(root, manifest)):
         path.parent.mkdir(parents=True, exist_ok=True)
         with open(path, "w", encoding="utf-8", newline="") as fh:
-            fh.write(render_page(entry, manifest))
+            fh.write(text)
         written.append(str(path.relative_to(root)))
     return written
 
 
 def check_pages(root, manifest):
     stale = []
-    for entry in generated(manifest):
-        path = page_path(root, entry)
-        expected = render_page(entry, manifest)
+    for entry in bespoke(manifest):
+        if not page_path(root, entry).is_file():
+            stale.append(entry["name"])
+            print(f"{entry['name']}: bespoke page is missing")
+    for entry, path, expected in expected_pages(root, manifest):
         actual = path.read_text(encoding="utf-8") if path.exists() else None
         if actual != expected:
             stale.append(entry["name"])
@@ -247,10 +377,11 @@ def main(argv=None):
         if stale:
             print(f"generated pages are stale: {', '.join(stale)}", file=sys.stderr)
             return 1
-        print(f"{len(generated(manifest))} generated pages are current")
+        print(f"{len(generated(manifest))} generated pages and the quality blocks "
+              f"on {len(bespoke(manifest))} bespoke pages are current")
         return 0
     written = write_pages(root, manifest)
-    print(f"generated pages written: {len(written)}")
+    print(f"pages written: {len(written)}")
     return 0
 
 
