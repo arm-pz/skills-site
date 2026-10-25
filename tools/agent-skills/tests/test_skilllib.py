@@ -194,9 +194,42 @@ class ManifestTest(unittest.TestCase):
         with self.assertRaises(skilllib.ManifestError):
             skilllib.validate_manifest(data)
 
+    def test_workflow_needs_a_unique_slug_and_a_summary(self):
+        flow = {"id": "pour-over", "number": 1, "name": "Pour-over", "title": "Demo",
+                "slug": "demo-flow", "summary": "Does it.", "steps": [{"skills": ["demo"]}]}
+        for bad in ({"slug": "Demo Flow"}, {"summary": " "}):
+            data = self.manifest()
+            data["workflows"] = [dict(flow, **bad)]
+            with self.assertRaises(skilllib.ManifestError):
+                skilllib.validate_manifest(data)
+        data = self.manifest()
+        data["workflows"] = [flow, dict(flow, id="bloom", number=2)]
+        with self.assertRaises(skilllib.ManifestError):
+            skilllib.validate_manifest(data)
+
+    def test_featured_needs_a_tested_run_and_its_own_spot(self):
+        data = self.manifest()
+        data["skills"][0]["featured"] = 1
+        with self.assertRaises(skilllib.ManifestError):
+            skilllib.validate_manifest(data)
+        data["skills"][0]["tested"] = {"date": "2026-10-24", "target": "t", "result": "r",
+                                       "evidence": "/#proof"}
+        skilllib.validate_manifest(data)
+        data["skills"][0]["featured"] = 4
+        with self.assertRaises(skilllib.ManifestError):
+            skilllib.validate_manifest(data)
+
+    def test_section_names_are_reserved(self):
+        for name in ("skills", "subagents", "harnesses"):
+            data = self.manifest()
+            data["skills"][0]["name"] = name
+            with self.assertRaises(skilllib.ManifestError):
+                skilllib.validate_manifest(data)
+
     def test_workflow_steps_must_have_pages(self):
         data = self.manifest()
-        data["workflows"] = [{"id": "pour-over", "number": 1, "name": "Pour-over", "title": "Demo", "steps": [{"skills": ["demo"]}]}]
+        data["workflows"] = [{"id": "pour-over", "number": 1, "name": "Pour-over", "title": "Demo",
+                              "slug": "demo-flow", "summary": "Does it.", "steps": [{"skills": ["demo"]}]}]
         skilllib.validate_manifest(data)
         data["workflows"][0]["steps"].append({"skills": ["ghost"]})
         with self.assertRaises(skilllib.ManifestError):

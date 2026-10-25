@@ -34,7 +34,7 @@ cp out/llms.txt dist/llms.txt
 
 for name in $(cd tools/agent-skills && python -c "import skilllib; print(*skilllib.STATIC_PAGES)" | tr -d '\r'); do
   mkdir -p "dist/$name"
-  cp "$name/index.html" "dist/$name/index.html"
+  cp -r "$name/." "dist/$name/"
 done
 
 python tools/agent-skills/gen_page.py --list | tr -d '\r' | while read -r name; do

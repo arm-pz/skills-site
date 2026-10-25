@@ -59,6 +59,28 @@ Bespoke (hand-written) pages are never edited by any of this, except the region 
 `gen:quality-css` markers), which `gen_page.py` rewrites on every page. After a rename the run summary
 says when a bespoke page's copy may still use the old name.
 
+### Site structure
+
+| Path | What | Made by |
+| --- | --- | --- |
+| `/` | Outcome-led front door: hero, one card per workflow, three featured skills, proof runs, install, custom work | `index.html` shell; `gen_home.py` fills its regions |
+| `/skills/` | Every skill by group, with search | `skills/index.html` shell + `gen_home.py` |
+| `/mods/` | Every Claude Code mod | `mods/index.html` shell + `gen_home.py` |
+| `/workflows/` and `/workflows/<slug>/` | Every workflow, then one page each with its steps and one install block | `workflows/index.html` shell + `gen_home.py`; the per-workflow pages are fully generated from `templates/workflow-page.html` |
+| `/work/` | Custom skills service | hand-written |
+| `/<name>/` | One page per skill or mod; item URLs stay flat whatever their type | `gen_page.py` (generated) or hand-written (bespoke) |
+
+The hub shells are hand-written; only the text between `<!-- gen:NAME:start -->` and
+`<!-- gen:NAME:end -->` is generated, and `gen_home.py --check` fails on drift. Section names are
+reserved in `skilllib.RESERVED` (including `subagents` and `harnesses` for later), so no skill can
+take one. The three homepage flagships are the entries with `featured: 1`, `2` and `3`; a featured
+entry must have a `tested` run.
+
+Naming: the site is **Skillsmith**, made by **Caffeinity**. Headers, titles and `og:site_name` say
+Skillsmith; the footer keeps the caffeinity wordmark and a "made by Caffeinity" line. Skill names,
+the `caffeinity-skills` marketplace and the `caffeinity` plugin keep their names, because install
+commands depend on them.
+
 ### Quality record
 
 Every skill and mod page carries the same block: version, last commit date, which agents it works in,
@@ -151,7 +173,9 @@ solo-launcher, skill-maintainer and estate-lead (Brew 1 · Pour-over to Brew 11 
 ### Changing a workflow
 
 1. Edit `references/workflows.md` in caffeinity-routing and `workflows` in `site/skills.json`
-   together; never renumber (other skills cite Brew 3 · Espresso and Brew 4 · Cold brew).
+   together; never renumber (other skills cite Brew 3 · Espresso and Brew 4 · Cold brew). Each
+   workflow in the manifest also needs a `slug` (its page, `/workflows/<slug>/`, named by the
+   outcome: `land-a-job`) and a one-sentence `summary`; changing a slug changes a public URL.
 2. Run `python -I plugins/caffeinity-routing/tests/test_route_check.py` and
    `python scripts/build_plugin.py --agents-only` in caffeinity-skills; add the agent to
    `plugins/caffeinity/agents.json` for a new workflow.

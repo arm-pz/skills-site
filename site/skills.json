@@ -196,7 +196,8 @@
         "target": "the 42 skills in this catalogue",
         "result": "Caught one skill that strict installers could not load; fixed in that skill and in tune-skill.",
         "evidence": "/#proof"
-      }
+      },
+      "featured": 3
     },
     {
       "name": "prompts-to-skill-release",
@@ -928,7 +929,8 @@
         "target": "skills.caffeinity.com",
         "result": "Probed 19 sensitive paths; nothing exposed and every security header in place: PASS.",
         "evidence": "/#proof"
-      }
+      },
+      "featured": 1
     },
     {
       "name": "pre-ship-security-red-team",
@@ -1749,7 +1751,8 @@
         "target": "skills.caffeinity.com",
         "result": "Found one broken internal link across 24 pages; the re-crawl after the fix came back clean.",
         "evidence": "/#proof"
-      }
+      },
+      "featured": 2
     },
     {
       "name": "keyword-guard",
@@ -2544,6 +2547,8 @@
       "number": 1,
       "name": "Pour-over",
       "title": "Build a skill and make it installable",
+      "slug": "build-a-skill",
+      "summary": "Go from an idea or a pile of prompts to a tested skill anyone can install: draft it, tune its trigger, then package and release it.",
       "steps": [
         {
           "skills": [
@@ -2575,6 +2580,8 @@
       "number": 2,
       "name": "Bloom",
       "title": "Get a repo, skill or plugin found",
+      "slug": "get-found",
+      "summary": "Make a repo, skill or plugin show up for what it does: fix how it is described and listed, publish it, then check every listing matches what is live.",
       "steps": [
         {
           "skills": [
@@ -2599,6 +2606,8 @@
       "number": 3,
       "name": "Espresso",
       "title": "Decide whether a site is safe to launch",
+      "slug": "launch-safely",
+      "summary": "Get one honest answer to \"can we ship?\": check for exposed files, red-team the app, audit its speed, then let a release gate weigh the three verdicts.",
       "steps": [
         {
           "skills": [
@@ -2630,6 +2639,8 @@
       "number": 4,
       "name": "Cold brew",
       "title": "Grow organic search traffic",
+      "slug": "grow-search-traffic",
+      "summary": "Grow organic traffic on a site you own: crawl it for technical problems, give each query one page that wins it, then tighten the copy.",
       "steps": [
         {
           "skills": [
@@ -2666,6 +2677,8 @@
       "number": 5,
       "name": "French press",
       "title": "Land a job",
+      "slug": "land-a-job",
+      "summary": "Run a job search without inventing credentials: see your resume the way recruiters screen it, write the tailored version, then manage the applications.",
       "steps": [
         {
           "skills": [
@@ -2696,6 +2709,8 @@
       "number": 6,
       "name": "Cupping",
       "title": "Make a decision",
+      "slug": "make-a-decision",
+      "summary": "Turn a hard question into a decision you can defend: gather sourced evidence, read your own numbers, attack the options, then write the memo.",
       "steps": [
         {
           "skills": [
@@ -2726,6 +2741,8 @@
       "number": 7,
       "name": "Slow drip",
       "title": "Learn a skill",
+      "slug": "learn-a-skill",
+      "summary": "Learn any topic from zero: get taught concept by concept, then build the practice system that makes it stick.",
       "steps": [
         {
           "skills": [
@@ -2751,6 +2768,8 @@
       "number": 8,
       "name": "Nitro",
       "title": "Run cold outbound",
+      "slug": "run-cold-outbound",
+      "summary": "Send cold email that lands: check the lead list before it loads, size and protect the sending setup, then write the copy.",
       "steps": [
         {
           "skills": [
@@ -2774,6 +2793,8 @@
       "number": 9,
       "name": "Moka pot",
       "title": "Launch a one-person product",
+      "slug": "launch-a-product",
+      "summary": "Take a one-person product from plan to launch: pick the offer, build the site and code, write the policy pages, pass the release gate, then announce it.",
       "steps": [
         {
           "skills": [
@@ -2813,6 +2834,8 @@
       "number": 10,
       "name": "Descale",
       "title": "Maintain the skill family",
+      "slug": "maintain-skills",
+      "summary": "Keep a family of skills healthy after release: tune what drifted, re-release what changed, and confirm every listing still matches.",
       "steps": [
         {
           "skills": [
@@ -2838,6 +2861,8 @@
       "number": 11,
       "name": "Estate roast",
       "title": "Stand up or audit a skill estate",
+      "slug": "audit-a-skill-estate",
+      "summary": "Inventory and repair a whole collection of skills in one gated run, from repos and listings to the workflows that connect them.",
       "steps": [
         {
           "skills": [

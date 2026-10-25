@@ -55,6 +55,9 @@ class CheckDistTest(unittest.TestCase):
             '<?xml version="1.0"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
             '<url><loc>https://skillsmith.tech/</loc></url>'
             '<url><loc>https://skillsmith.tech/work/</loc></url>'
+            '<url><loc>https://skillsmith.tech/skills/</loc></url>'
+            '<url><loc>https://skillsmith.tech/mods/</loc></url>'
+            '<url><loc>https://skillsmith.tech/workflows/</loc></url>'
             '<url><loc>https://skillsmith.tech/alpha/</loc></url>'
             '<url><loc>https://skillsmith.tech/beta/</loc></url>'
             "</urlset>")
@@ -63,10 +66,12 @@ class CheckDistTest(unittest.TestCase):
             (self.root / "dist" / name).mkdir()
             (self.root / "dist" / name / "index.html").write_text(
                 f"<title>{name}</title>")
-        (self.root / "dist/index.html").write_text(
-            '<a href="/alpha/">a</a><a href="/beta/">b</a>'
-            '<div class="skill"></div><div class="skill"></div>'
-            '<script type="application/ld+json">{"numberOfItems": 2}</script>')
+        (self.root / "dist/index.html").write_text('<a href="/skills/">all</a>')
+        for name in ("skills", "mods", "workflows"):
+            (self.root / "dist" / name).mkdir()
+        self.write_section("skills", 2, '<a href="/alpha/">a</a><a href="/beta/">b</a>')
+        self.write_section("mods", 0)
+        (self.root / "dist/workflows/index.html").write_text("<title>workflows</title>")
         (self.root / "dist/work").mkdir()
         (self.root / "dist/work/index.html").write_text("<title>work</title>")
         for name in ("404.html", "_headers"):
@@ -75,6 +80,11 @@ class CheckDistTest(unittest.TestCase):
         (self.root / "dist/.well-known/skills.json").write_text("{}")
         (self.root / "dist/fonts").mkdir()
         (self.root / "dist/fonts/fonts.css").write_text("x")
+
+    def write_section(self, name, cards, links=""):
+        (self.root / "dist" / name / "index.html").write_text(
+            links + '<div class="skill"></div>' * cards
+            + '<script type="application/ld+json">{"numberOfItems": %d}</script>' % cards)
 
     def tearDown(self):
         self.tmp.cleanup()
@@ -97,10 +107,7 @@ class CheckDistTest(unittest.TestCase):
         (self.root / "dist/sitemap.xml").write_text(sitemap)
         (self.root / "dist/watch").mkdir()
         (self.root / "dist/watch/index.html").write_text("<title>watch</title>")
-        (self.root / "dist/index.html").write_text(
-            '<a href="/alpha/">a</a><a href="/beta/">b</a><a href="/watch/">w</a>'
-            '<div class="skill"></div><div class="skill"></div><div class="skill"></div>'
-            '<script type="application/ld+json">{"numberOfItems": 3}</script>')
+        self.write_section("mods", 1, '<a href="/watch/">w</a>')
         self.assertEqual(check_dist.check(self.root), [])
 
     def test_missing_404_fails(self):
@@ -119,10 +126,14 @@ class CheckDistTest(unittest.TestCase):
         shutil.rmtree(self.root / "dist/beta")
         self.assertTrue(check_dist.check(self.root))
 
+    def test_broken_reference_on_any_page_fails(self):
+        (self.root / "dist/workflows/index.html").write_text('<a href="/ghost/">g</a>')
+        self.assertTrue(check_dist.check(self.root))
+
     def test_stale_jsonld_count_fails(self):
-        html = (self.root / "dist/index.html").read_text().replace(
+        html = (self.root / "dist/skills/index.html").read_text().replace(
             '"numberOfItems": 2', '"numberOfItems": 1')
-        (self.root / "dist/index.html").write_text(html)
+        (self.root / "dist/skills/index.html").write_text(html)
         self.assertTrue(check_dist.check(self.root))
 
     def test_alias_redirect_must_match_and_resolve(self):

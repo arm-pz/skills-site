@@ -9,8 +9,10 @@ from pathlib import Path
 
 SCHEMA = 1
 SITE = "https://skillsmith.tech"
-# Hand-written pages served at /<name>/, beside the hub and the skill pages.
-STATIC_PAGES = ["work"]
+# Hand-written pages served at /<name>/, beside the hub and the skill pages. /workflows/ also
+# holds one generated page per workflow. RESERVED are section names kept for what comes next.
+STATIC_PAGES = ["work", "skills", "mods", "workflows"]
+RESERVED = STATIC_PAGES + ["agents", "subagents", "harnesses"]
 INDEX_SCHEMA = "https://schemas.agentskills.io/discovery/0.2.0/schema.json"
 NAME_RE = re.compile(r"^[a-z0-9-]{1,64}$")
 GROUP_IDS = ("start-here", "writing-growth", "career", "thinking-learning", "skill-authoring",
@@ -80,7 +82,7 @@ def validate_manifest(data):
         name = s.get("name")
         _req(valid_name(name), f"bad skill name {name!r}")
         _req(name not in names, f"duplicate skill name {name!r}")
-        _req(name not in STATIC_PAGES, f"skill name {name!r} is taken by a static page")
+        _req(name not in RESERVED, f"skill name {name!r} is taken by a site section")
         names.add(name)
         _req(s.get("group") in gids, f"{name}: unknown group {s.get('group')!r}")
         _req(s.get("tag") in TAGS, f"{name}: unknown tag {s.get('tag')!r}")
@@ -141,6 +143,9 @@ def validate_manifest(data):
             _req(isinstance(quality.get("notFor"), list)
                  and all(isinstance(n, str) for n in quality["notFor"]),
                  f"{name}: quality.notFor must be a list of strings")
+        if s.get("featured") is not None:
+            _req(s["featured"] in (1, 2, 3), f"{name}: featured must be 1, 2 or 3")
+            _req(s.get("tested") is not None, f"{name}: a featured skill needs a tested run")
         tested = s.get("tested")
         if tested is not None:
             _req(isinstance(tested, dict), f"{name}: tested must be an object")
@@ -186,11 +191,14 @@ def validate_manifest(data):
         for alias in aliases:
             _req(alias not in names, f"{s['name']}: alias {alias!r} is also a live skill name")
 
+    spots = [s["featured"] for s in skills if s.get("featured") is not None]
+    _req(len(spots) == len(set(spots)), "two skills share a featured spot")
     paged = {s["name"] for s in skills if s.get("page") != "none"}
     flows = data.get("workflows", [])
     _req(isinstance(flows, list), "workflows must be a list")
     seen = set()
     numbers = set()
+    slugs = set()
     for f in flows:
         # A workflow is a brew: an id slug ("cold-brew"), its number and name ("Brew 4 · Cold brew").
         _req(isinstance(f, dict) and re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", str(f.get("id"))),
@@ -202,6 +210,12 @@ def validate_manifest(data):
         numbers.add(f["number"])
         _req(isinstance(f.get("name"), str) and f["name"].strip(), f"{f['id']}: name required")
         _req(isinstance(f.get("title"), str) and f["title"].strip(), f"{f['id']}: title required")
+        # The slug names the outcome and gives the workflow its page at /workflows/<slug>/.
+        _req(re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", str(f.get("slug"))),
+             f"{f['id']}: slug must be a lowercase slug such as land-a-job")
+        _req(f["slug"] not in slugs, f"{f['id']}: duplicate slug {f['slug']!r}")
+        slugs.add(f["slug"])
+        _req(isinstance(f.get("summary"), str) and f["summary"].strip(), f"{f['id']}: summary required")
         steps = f.get("steps")
         _req(isinstance(steps, list) and steps, f"{f['id']}: steps must be a non-empty list")
         for st in steps:
@@ -425,7 +439,7 @@ def llms_txt(manifest):
     order = {g["id"]: g["order"] for g in manifest["groups"]}
     pages = sorted((s for s in manifest["skills"] if s["page"] != "none"),
                    key=lambda s: (order[s["group"]], s["order"]))
-    out = ["# Caffeinity Skills", "",
+    out = ["# Skillsmith", "",
            "> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: "
            f"{len(pages)} skills mapped into {len(manifest.get('workflows', []))} workflows "
            "(build a skill, get found, gate a release, grow search traffic, land a job, decide, "
@@ -436,7 +450,9 @@ def llms_txt(manifest):
            "- Codex: " + " ".join(f"`{c}`" for c in INSTALL["codex"])
            + ", then install caffeinity from the Plugins directory",
            "- Any agent, one skill: " + " ".join(f"`{c}`" for c in INSTALL["any"]),
-           f"- Discovery index: {SITE}/.well-known/agent-skills/index.json", ""]
+           f"- Discovery index: {SITE}/.well-known/agent-skills/index.json", "",
+           f"Sections: [skills]({SITE}/skills/), [workflows]({SITE}/workflows/), [mods]({SITE}/mods/), "
+           f"[custom work]({SITE}/work/). Skillsmith is made by Caffeinity (https://caffeinity.com/).", ""]
     for g in sorted(manifest["groups"], key=lambda g: g["order"]):
         rows = [s for s in pages if s["group"] == g["id"]]
         if not rows:
@@ -452,7 +468,7 @@ def llms_txt(manifest):
         out += ["## Brews (workflows)", ""]
         for f in flows:
             steps = " -> ".join(" or ".join(st["skills"]) for st in f["steps"])
-            out.append(f"- {brew_label(f)}: {f['title']}: {steps}")
+            out.append(f"- [{f['title']}]({SITE}/workflows/{f['slug']}/) ({brew_label(f)}): {steps}")
         out.append("")
     return "\n".join(out)
 
