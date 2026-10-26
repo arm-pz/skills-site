@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Publish Pipeline — AI Agent Skill for Claude Code and Codex</title>
 <meta name="description" content="Sets up, audits and repairs a manifest-driven CI/CD pipeline that publishes a collection of agent skills to a Cloudflare Pages site, with a generated page…">
-<link rel="canonical" href="https://skills.caffeinity.com/publish-pipeline/">
+<link rel="canonical" href="https://skillsmith.tech/publish-pipeline/">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Caffeinity Skills">
+<meta property="og:site_name" content="Skillsmith">
 <meta property="og:title" content="Publish Pipeline — AI Agent Skill for Claude Code and Codex">
 <meta property="og:description" content="Sets up, audits and repairs a manifest-driven CI/CD pipeline that publishes a collection of agent skills to a Cloudflare Pages site, with a generated page per skill. Use when someone asks for CI/CD or automation for a skills site, wants a new skill repo to appear on the site with its own page, asks why a skill is missing or its page is stale, or needs a red publish run diagnosed and a bad deploy rolled back. It installs one GitHub Actions workflow with check and publish jobs, a review-PR or auto-sync publication gate, generated hub rows, discovery indexes, sitemap and pages, and gates on both sides of the deploy. Not for releasing one skill through the marketplace, tarball or plugin channels (use publish-release-gate), checking unpushed work or listing drift (use upstream-check), deciding whether a build is safe to launch (use release-gate-chair), or writing and tuning a skill (use draft-skill or tune-skill).">
-<meta property="og:url" content="https://skills.caffeinity.com/publish-pipeline/">
+<meta property="og:url" content="https://skillsmith.tech/publish-pipeline/">
 <meta name="twitter:card" content="summary">
 <meta name="color-scheme" content="light dark">
 <link rel="stylesheet" href="/fonts/fonts.css">
@@ -135,7 +135,7 @@
   "alternateName": "Publish Pipeline",
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "Any",
-  "url": "https://skills.caffeinity.com/publish-pipeline/",
+  "url": "https://skillsmith.tech/publish-pipeline/",
   "description": "Sets up, audits and repairs a manifest-driven CI/CD pipeline that publishes a collection of agent skills to a Cloudflare Pages site, with a generated page per skill. Use when someone asks for CI/CD or automation for a skills site, wants a new skill repo to appear on the site with its own page, asks why a skill is missing or its page is stale, or needs a red publish run diagnosed and a bad deploy rolled back. It installs one GitHub Actions workflow with check and publish jobs, a review-PR or auto-sync publication gate, generated hub rows, discovery indexes, sitemap and pages, and gates on both sides of the deploy. Not for releasing one skill through the marketplace, tarball or plugin channels (use publish-release-gate), checking unpushed work or listing drift (use upstream-check), deciding whether a build is safe to launch (use release-gate-chair), or writing and tuning a skill (use draft-skill or tune-skill).",
   "codeRepository": "https://github.com/arm-pz/publish-pipeline",
   "license": "https://spdx.org/licenses/MIT.html",
@@ -151,14 +151,32 @@
   }
 }
 </script>
+<!-- gen:quality-css:start -->
+<style>
+  .qb{--qb-line:var(--rule,var(--line,color-mix(in srgb,currentColor 14%,transparent)));padding:clamp(48px,6vw,80px) 0;border-top:1px solid var(--qb-line)}
+  .qb-kicker{font-family:var(--mono);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim,var(--muted))}
+  .qb h2{font-family:var(--serif);font-weight:400;font-size:clamp(30px,3.6vw,44px);line-height:1.08;letter-spacing:-.015em;margin-top:10px}
+  .qb-lead{color:var(--dim,var(--muted));max-width:62ch;margin-top:12px;font-size:16px}
+  .qb a{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.22em}
+  .qb-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:0 36px;margin-top:28px}
+  .qb-grid>div{border-top:1px solid var(--qb-line);padding:16px 0 18px}
+  .qb dt{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim,var(--muted))}
+  .qb dd{margin:6px 0 0;font-size:16px;line-height:1.5}
+  .qb dd small{display:block;color:var(--dim,var(--muted));font-size:14px;margin-top:2px}
+  .qb .qb-wide{grid-column:1/-1}
+  .qb ul{margin:6px 0 0;padding-left:20px;display:grid;gap:4px}
+  .qb .qb-flag{font-weight:600}
+  .qb .qb-flag.fail{color:var(--ember,var(--accent))}
+</style>
+<!-- gen:quality-css:end -->
 </head>
 <body>
 
 <nav class="nav" aria-label="Site">
   <div class="wrap">
-    <a class="brand" href="/"><b>∧</b>caffeinity skills</a>
+    <a class="brand" href="/"><b>∧</b>skillsmith</a>
     <div class="nav-links">
-      <a href="/">All skills</a>
+      <a href="/skills/">All skills</a>
       <a href="https://github.com/arm-pz/publish-pipeline" target="_blank" rel="noopener">Source</a>
     </div>
   </div>
@@ -176,6 +194,24 @@
     <p class="facts">9 files and 1,272 lines, free under MIT. Built from <a href="https://github.com/arm-pz/publish-pipeline" target="_blank" rel="noopener">arm-pz/publish-pipeline</a> at <code>b24df39</code>.</p>
   </div>
 </header>
+
+<!-- gen:quality:start -->
+<section class="qb" aria-labelledby="qb-h">
+  <div class="wrap">
+    <p class="qb-kicker">Quality record</p>
+    <h2 id="qb-h">Know what you are installing.</h2>
+    <p class="qb-lead">Version, date and limits are read from the repo on every sync, and the check runs every night. Real-world runs are listed only with their evidence.</p>
+    <dl class="qb-grid">
+      <div><dt>Version</dt><dd>Unversioned<small>commit b24df39</small></dd></div>
+      <div><dt>Updated</dt><dd><a href="https://github.com/arm-pz/publish-pipeline/commits" target="_blank" rel="noopener">24 Oct 2026</a><small>last commit to the repo</small></dd></div>
+      <div><dt>Works in</dt><dd>Claude Code, Codex, Cursor, Qoder and any agent that loads a SKILL.md<small>plain text; no API keys</small></dd></div>
+      <div><dt>Nightly check</dt><dd>Passing<small>No failures or warnings. <a href="https://github.com/arm-pz/skills-site/blob/main/.github/workflows/health.yml" target="_blank" rel="noopener">How it is checked</a></small></dd></div>
+      <div><dt>Last real-world run</dt><dd>No public run yet<small>Runs are published only with their evidence.</small></dd></div>
+      <div class="qb-wide"><dt>Known limits</dt><dd>Not built for:<ul><li>Releasing one skill through the marketplace, tarball or plugin channels (use publish-release-gate)</li><li>Checking unpushed work or listing drift (use upstream-check)</li><li>Deciding whether a build is safe to launch (use release-gate-chair)</li><li>Writing and tuning a skill (use draft-skill or tune-skill)</li></ul></dd></div>
+    </dl>
+  </div>
+</section>
+<!-- gen:quality:end -->
 
 <section class="paper" aria-labelledby="for-h">
   <div class="wrap">
@@ -233,7 +269,7 @@
 
 <footer>
   <div class="wrap">
-    <span>Publish Pipeline is an open agent skill on <a href="/">Caffeinity Skills</a>.</span>
+    <span>Publish Pipeline is an open agent skill on <a href="/">Skillsmith</a>, made by <a href="https://caffeinity.com/">Caffeinity</a>.</span>
     <a href="https://github.com/arm-pz/publish-pipeline" target="_blank" rel="noopener">arm-pz/publish-pipeline</a>
   </div>
 </footer>

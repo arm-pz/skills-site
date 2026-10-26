@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code mods: plugins with hooks | Skillsmith</title>
+<meta name="description" content="Claude Code mods from Skillsmith: plugins with hooks that hold git push until checks pass, gate releases and run audits inside Claude Code.">
+<link rel="canonical" href="https://skillsmith.tech/mods/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Skillsmith">
+<meta property="og:title" content="Claude Code mods: plugins with hooks | Skillsmith">
+<meta property="og:description" content="Claude Code mods from Skillsmith: plugins with hooks that hold git push until checks pass, gate releases and run audits inside Claude Code.">
+<meta property="og:url" content="https://skillsmith.tech/mods/">
+<meta name="twitter:card" content="summary">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="preload" href="/fonts/files/cY9AfjOCX1hbuyalUrK4397yjA.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/files/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+  /* Light paper by default; the skill pages' dark shell when the reader prefers dark. */
+  :root{
+    --bg:#f2eee5;
+    --surface:#fffdf8;
+    --sunk:#e9e3d6;
+    --ink:#17141b;
+    --muted:#5c5562;
+    --line:rgba(23,20,27,.12);
+    --accent:#ff6a3d;
+    --accent-ink:#1a0c06;
+    --accent-text:#ad3a12;
+    --brass:#8f5226;
+    --serif:'Newsreader',Georgia,serif;
+    --sans:'Instrument Sans',system-ui,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --ease:cubic-bezier(.4,0,.2,1);
+    --gutter:clamp(16px,5vw,56px);
+    --radius:18px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#121016;--surface:#1d1a23;--sunk:#27232e;--ink:#ede8de;--muted:#a59eae;
+      --line:rgba(237,232,222,.12);--accent-text:#ff8a62;--brass:#d39b6a;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#121016;--surface:#1d1a23;--sunk:#27232e;--ink:#ede8de;--muted:#a59eae;
+    --line:rgba(237,232,222,.12);--accent-text:#ff8a62;--brass:#d39b6a;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.22em}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+  ::selection{background:var(--accent);color:var(--accent-ink)}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 var(--gutter)}
+  code{font-family:var(--mono);font-size:.86em}
+  .eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  h2.title{font-family:var(--serif);font-weight:400;font-size:clamp(38px,5.4vw,68px);line-height:1;letter-spacing:-.022em;margin-top:14px}
+  .section-lead{color:var(--muted);max-width:56ch;margin-top:16px;font-size:18px}
+
+  /* nav: links left, mark centre, one accent pill right */
+  .nav .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;height:72px}
+  .nav-links{display:flex;gap:22px;font-size:15px}
+  .nav-links a,.nav .gh{text-decoration:none;color:var(--muted);transition:color 150ms var(--ease)}
+  .nav-links a[aria-current]{color:var(--ink)}
+  .brand{font-family:var(--serif);font-size:21px;text-decoration:none;justify-self:center;white-space:nowrap}
+  .brand b{color:var(--accent);font-weight:400;margin-right:6px}
+  .nav-cta{justify-self:end;display:flex;align-items:center;gap:20px}
+  .pill{background:var(--accent);color:var(--accent-ink);text-decoration:none;font-weight:600;font-size:14.5px;padding:9px 16px;border-radius:999px;transition:transform 150ms var(--ease)}
+
+  /* hero */
+  .hero{text-align:center;padding:clamp(56px,9vw,120px) 0 clamp(40px,6vw,72px)}
+  h1{font-family:var(--serif);font-weight:400;font-size:clamp(54px,9.4vw,124px);line-height:.95;letter-spacing:-.03em;max-width:12ch;margin:0 auto}
+  h1 em{color:var(--accent-text);font-style:italic}
+  .lead{font-size:clamp(18px,1.7vw,21px);line-height:1.5;max-width:46ch;margin:28px auto 0;color:var(--muted)}
+  .cta{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:36px}
+  .cmd{display:inline-flex;align-items:center;gap:12px;max-width:100%;background:var(--ink);color:var(--bg);border:0;border-radius:12px;padding:15px 18px;font:500 14.5px/1.3 var(--mono);cursor:pointer;text-align:left;transition:transform 150ms var(--ease)}
+  .cmd span{overflow-wrap:anywhere}
+  .cmd .copy{flex:none;font-family:var(--sans);font-size:12.5px;font-weight:600;opacity:.7}
+  .btn2{display:inline-flex;align-items:center;border-radius:12px;padding:15px 20px;background:var(--surface);box-shadow:inset 0 0 0 1px var(--line);text-decoration:none;font-weight:600;font-size:15px}
+  .stats{margin-top:26px;font-family:var(--mono);font-size:13.5px;color:var(--brass)}
+
+  /* card wall: every skill and mod drifting under the hero; hover or focus pauses it */
+  .wall{display:grid;gap:12px;padding:0 0 clamp(24px,4vw,48px);-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+  .wall-row{overflow:hidden}
+  .wall-track{display:flex;width:max-content;animation:drift 220s linear infinite}
+  .wall-rev .wall-track{animation-direction:reverse;animation-duration:260s}
+  .wall:hover .wall-track,.wall:focus-within .wall-track{animation-play-state:paused}
+  .wcard{flex:none;width:236px;min-height:104px;margin-right:12px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;background:var(--surface);border-radius:var(--radius);box-shadow:0 0 0 1px var(--line);padding:18px 20px;text-decoration:none}
+  .wcard b{font-family:var(--serif);font-weight:400;font-size:23px;line-height:1.1;letter-spacing:-.01em;overflow-wrap:anywhere}
+  .wcard code{font-size:11.5px;color:var(--muted)}
+  @keyframes drift{to{transform:translateX(-50%)}}
+
+  /* workflows: the ecosystem as routes */
+  .flows{padding:clamp(56px,8vw,104px) 0}
+  .flow-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:16px;margin-top:40px}
+  .flow{background:var(--surface);border-radius:var(--radius);padding:24px 24px 22px;box-shadow:0 0 0 1px var(--line);scroll-margin-top:24px}
+  .flow-id{font-family:var(--mono);font-size:13px;color:var(--accent-text);font-weight:600}
+  .flow h3{font-family:var(--serif);font-weight:400;font-size:25px;line-height:1.15;letter-spacing:-.01em;margin-top:6px}
+  .flow-steps{list-style:none;counter-reset:step;margin-top:16px;display:grid;gap:8px}
+  .flow-steps li{counter-increment:step;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;font-size:15px;line-height:1.4}
+  .flow-steps li::before{content:counter(step);flex:none;width:22px;height:22px;border-radius:50%;background:var(--sunk);font:600 12px/22px var(--mono);text-align:center;color:var(--muted);transform:translateY(-1px)}
+  .flow-steps a{font-family:var(--mono);font-size:13.5px;font-weight:500;text-decoration-color:var(--line)}
+  .flow-steps .or,.flow-steps .opt{font-size:13px;color:var(--muted)}
+  .flow-steps .opt{font-family:var(--mono);font-size:11.5px;border:1px solid var(--line);border-radius:999px;padding:0 7px}
+  .flow-note{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
+  .router{margin-top:16px;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;align-items:center;background:var(--ink);color:var(--bg);border-radius:var(--radius);padding:22px 24px}
+  .router b{font-family:var(--serif);font-weight:400;font-size:24px;grid-row:span 2}
+  .router p{font-size:15px;opacity:.85}
+  .router code{font-size:13px;opacity:1}
+
+  /* catalogue */
+  .catalogue{padding:clamp(40px,6vw,72px) 0 clamp(64px,9vw,120px);border-top:1px solid var(--line)}
+  .find{margin-top:20px;max-width:720px;position:sticky;top:0;z-index:2;background:var(--bg);padding:12px 0 2px}
+  .find input{width:100%;font:400 19px/1.3 var(--sans);color:var(--ink);background:var(--surface);border:0;border-radius:14px;padding:18px 20px;box-shadow:0 0 0 1px var(--line),0 10px 30px -18px rgba(0,0,0,.35);transition:box-shadow 150ms var(--ease)}
+  .find input::placeholder{color:var(--muted)}
+  .find input:focus{outline:none;box-shadow:0 0 0 2px var(--accent),0 10px 30px -18px rgba(0,0,0,.35)}
+  .find-status{margin-top:10px;font-size:14px;color:var(--muted);min-height:1.5em}
+  .jump{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .jump a{font-size:14px;text-decoration:none;padding:6px 12px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--line);transition:background 150ms var(--ease)}
+  .sk-group{padding:clamp(40px,5vw,64px) 0 0;scroll-margin-top:110px}
+  .sk-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 24px;padding-bottom:14px;margin-bottom:18px;border-bottom:1px solid var(--line)}
+  .sk-head h2{font-family:var(--serif);font-weight:400;font-size:clamp(30px,3.4vw,40px);line-height:1.05;letter-spacing:-.015em}
+  .sk-head p{font-family:var(--mono);font-size:12.5px;color:var(--muted)}
+  .sk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,272px),1fr));gap:14px}
+  .skill{display:flex;flex-direction:column;background:var(--surface);border-radius:var(--radius);padding:22px;box-shadow:0 0 0 1px var(--line);scroll-margin-top:96px;transition:box-shadow 150ms var(--ease),transform 150ms var(--ease)}
+  #start-here .skill{grid-column:1/-1;max-width:760px}
+  .chips{display:flex;flex-wrap:wrap;gap:6px}
+  .chip{font-family:var(--mono);font-size:11.5px;line-height:1;padding:5px 8px;border-radius:999px;background:var(--sunk);color:var(--muted)}
+  .chip-hot{background:color-mix(in srgb,var(--accent) 18%,transparent);color:var(--accent-text)}
+  .skill h3{font-family:var(--serif);font-weight:400;font-size:26px;line-height:1.1;letter-spacing:-.01em;margin-top:14px}
+  .skill h3 a{text-decoration:none}
+  .sk-blurb{font-size:15.5px;line-height:1.55;margin-top:10px;color:var(--muted);display:-webkit-box;-webkit-line-clamp:3;line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .sk-stats{font-family:var(--mono);font-size:12.5px;color:var(--brass);margin-top:12px}
+  .sk-install{display:block;margin-top:auto;padding-top:16px}
+  .skill .sk-install{font-size:12.5px;overflow-wrap:break-word}
+  .skill .sk-install::before{content:"$ ";color:var(--muted)}
+  .sk-links{display:flex;gap:18px;margin-top:12px;font-size:14px;font-weight:600}
+  .sk-links a{text-decoration-color:var(--line)}
+  .empty{padding:56px 0 0;font-family:var(--serif);font-size:clamp(24px,2.6vw,30px);max-width:30ch}
+  [hidden]{display:none!important}
+
+  /* install: one card per agent */
+  .install{padding:clamp(56px,8vw,104px) 0;border-top:1px solid var(--line)}
+  .install-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:16px;margin-top:40px}
+  .inst{background:var(--surface);border-radius:var(--radius);box-shadow:0 0 0 1px var(--line);padding:24px;display:flex;flex-direction:column;gap:12px}
+  .inst h3{font-family:var(--serif);font-weight:400;font-size:26px;line-height:1.1}
+  .inst p{font-size:15px;color:var(--muted)}
+  .inst .cmd{width:100%;justify-content:space-between;font-size:13px;padding:12px 14px}
+  .inst-note a{color:var(--ink)}
+
+  /* proof: an app shell, one tab per real run, with what it found and what changed */
+  .shell{margin-top:40px;background:var(--sunk);border-radius:22px;padding:8px;box-shadow:0 0 0 1px var(--line),0 30px 60px -40px rgba(0,0,0,.45)}
+  .shell-bar{display:flex;align-items:center;gap:14px;padding:8px 10px 10px}
+  .shell-bar .dots{display:flex;gap:6px;flex:none}
+  .shell-bar .dots i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+  .shell-bar .dots i:first-child{background:var(--accent)}
+  .tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+  .tabs button{flex:none;font:500 13px/1 var(--mono);color:var(--muted);background:transparent;border:0;border-radius:10px;padding:9px 12px;cursor:pointer;transition:background 150ms var(--ease),color 150ms var(--ease)}
+  .tabs button[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:0 0 0 1px var(--line)}
+  .pane{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:8px}
+  .pane+.pane{margin-top:8px}
+  .pane-col{background:var(--surface);border-radius:16px;padding:22px 24px;display:flex;flex-direction:column;gap:12px}
+  .pane-label{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .pane h3{font-family:var(--serif);font-weight:400;font-size:clamp(24px,2.4vw,30px);line-height:1.12;letter-spacing:-.01em}
+  .pane pre{font-family:var(--mono);font-size:12.5px;line-height:1.6;background:var(--bg);border-radius:10px;padding:12px 14px;overflow-x:auto;white-space:pre}
+  .pane p{font-size:15px;color:var(--muted)}
+  .ba{display:grid;gap:6px}
+  .ba span{font-family:var(--mono);font-size:11.5px;font-weight:600;color:var(--muted)}
+  .ba.after span{color:var(--accent-text)}
+  .ba.after pre{box-shadow:inset 3px 0 0 var(--accent)}
+  .pane .verdict{font-family:var(--mono);font-size:12.5px;font-weight:600;color:var(--accent-text);margin-top:auto}
+  .shell-progress{height:3px;margin:8px 10px 2px;border-radius:3px;background:var(--line);overflow:hidden}
+  .shell-progress b{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--ink) calc(100% - 18px),var(--accent) 0);transition:width 300ms var(--ease)}
+
+  /* proof: real runs from this release */
+  .proof{padding:clamp(56px,8vw,104px) 0;border-top:1px solid var(--line)}
+  .runs{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,360px),1fr));gap:16px;margin-top:40px}
+  .run{background:var(--surface);border-radius:var(--radius);box-shadow:0 0 0 1px var(--line);overflow:hidden;display:flex;flex-direction:column}
+  .run-bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12.5px;color:var(--muted)}
+  .run-bar i{width:9px;height:9px;border-radius:50%;background:var(--sunk);display:inline-block}
+  .run-bar i:first-child{background:var(--accent)}
+  .run-bar span{margin-left:6px}
+  .run-body{padding:18px 18px 20px;display:flex;flex-direction:column;gap:12px;flex:1}
+  .run h3{font-family:var(--serif);font-weight:400;font-size:23px;line-height:1.15}
+  .run pre{font-family:var(--mono);font-size:12.5px;line-height:1.6;background:var(--sunk);border-radius:10px;padding:12px 14px;overflow-x:auto;white-space:pre}
+  .run p{font-size:15px;color:var(--muted)}
+  .run .verdict{font-family:var(--mono);font-size:12.5px;font-weight:600;color:var(--accent-text)}
+
+  /* outcomes: the front door, one card per workflow */
+  .outcomes{padding:clamp(56px,8vw,104px) 0;border-top:1px solid var(--line)}
+  .outcome-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:12px;margin-top:36px}
+  .outcome{display:flex;flex-direction:column;justify-content:space-between;gap:14px;min-height:128px;background:var(--surface);border-radius:var(--radius);box-shadow:0 0 0 1px var(--line);padding:20px 22px;text-decoration:none;transition:box-shadow 150ms var(--ease),transform 150ms var(--ease)}
+  .outcome b{font-family:var(--serif);font-weight:400;font-size:25px;line-height:1.12;letter-spacing:-.01em}
+  .outcome span{font-family:var(--mono);font-size:12px;color:var(--muted)}
+  .more-link{display:inline-block;margin-top:24px;font-weight:600}
+
+  /* flagships: three skills, each with the run that earned the spot */
+  .flags{padding:clamp(56px,8vw,104px) 0;border-top:1px solid var(--line)}
+  .flag-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:16px;margin-top:40px}
+  .flag{display:flex;flex-direction:column;gap:12px;background:var(--surface);border-radius:var(--radius);box-shadow:0 0 0 1px var(--line);padding:24px}
+  .flag-tag{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-text)}
+  .flag h3{font-family:var(--serif);font-weight:400;font-size:30px;line-height:1.08;letter-spacing:-.015em}
+  .flag h3 a{text-decoration:none}
+  .flag-blurb{color:var(--muted);font-size:15.5px;display:-webkit-box;-webkit-line-clamp:4;line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+  .flag-run{font-size:15px;padding-top:12px;border-top:1px solid var(--line)}
+  .flag-run b{font-weight:600}
+  .flag .cmd{margin-top:auto;width:100%;justify-content:space-between;font-size:12.5px;padding:12px 14px}
+
+  /* work band */
+  .band{padding:clamp(48px,7vw,88px) 0;border-top:1px solid var(--line)}
+  .band-box{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px 40px;align-items:center;background:var(--ink);color:var(--bg);border-radius:22px;padding:clamp(28px,4vw,48px)}
+  .band-box h2{font-family:var(--serif);font-weight:400;font-size:clamp(30px,3.6vw,44px);line-height:1.05;letter-spacing:-.02em}
+  .band-box p{opacity:.8;margin-top:10px;max-width:56ch}
+  .band-box .pill{font-size:15.5px;padding:13px 22px;white-space:nowrap;justify-self:start}
+
+  /* section pages: /skills/, /mods/, /workflows/ */
+  .page-hero{padding:clamp(48px,7vw,96px) 0 clamp(24px,4vw,40px)}
+  .page-hero h1{font-size:clamp(46px,7vw,92px);max-width:16ch;margin:14px 0 0}
+  .page-hero .lead{margin:22px 0 0;max-width:60ch}
+  .page-hero .stats{margin-top:18px}
+  .flow-sum{font-size:15px;color:var(--muted);margin-top:8px}
+  .flow h3 a{text-decoration:none}
+  .flow-go{display:inline-block;margin-top:14px;font-size:14px;font-weight:600}
+  .aside{margin-top:40px;color:var(--muted);max-width:64ch}
+  .aside a{color:var(--ink);font-weight:600}
+
+  /* close + footer */
+  .close{padding:clamp(56px,8vw,96px) 0;border-top:1px solid var(--line)}
+  .close-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:24px clamp(32px,5vw,64px);margin-top:28px}
+  .close-grid p{color:var(--muted);font-size:16px}
+  .close-grid b{display:block;color:var(--ink);font-weight:600;margin-bottom:6px}
+  .close-grid a{color:var(--ink)}
+  footer{overflow:hidden}
+  .wordmark{font-family:var(--serif);font-weight:400;font-size:clamp(72px,19vw,300px);line-height:.82;letter-spacing:-.045em;text-align:center;padding-top:24px;white-space:nowrap}
+  .wordmark b{color:var(--accent);font-weight:400}
+  footer .meta{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-top:28px;padding-bottom:36px;font-size:14px;color:var(--muted)}
+  footer .meta a{text-decoration:none}
+
+  @media (hover:hover) and (pointer:fine){
+    .nav-links a:hover,.nav .gh:hover,footer .meta a:hover{color:var(--ink)}
+    .pill:hover,.cmd:hover{transform:translateY(-1px)}
+    .jump a:hover{background:var(--surface)}
+    .skill:hover{box-shadow:0 0 0 1px var(--line),0 18px 40px -24px rgba(0,0,0,.45);transform:translateY(-2px)}
+    .skill h3 a:hover,.flow-steps a:hover,.flow h3 a:hover,.flag h3 a:hover{color:var(--accent-text)}
+    .outcome:hover{box-shadow:0 0 0 1px var(--accent);transform:translateY(-2px)}
+  }
+  @media (max-width:860px){
+    .nav .wrap{grid-template-columns:auto 1fr;height:auto;padding-top:14px;padding-bottom:12px;row-gap:10px}
+    .nav-links{grid-column:1/-1;grid-row:2;overflow-x:auto;scrollbar-width:none}
+    .nav-links a{white-space:nowrap}
+    .brand{justify-self:start}
+    .band-box{grid-template-columns:1fr}
+    .router{grid-template-columns:1fr}
+    .router b{grid-row:auto}
+  }
+  @media (max-width:520px){
+    .nav .gh{display:none}
+    .cmd{font-size:13px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{transition:none!important;animation:none!important}
+    .wall-row{overflow-x:auto}
+    html{scroll-behavior:auto}
+  }
+</style>
+<!-- gen:jsonld-mods:start -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Skillsmith mods for Claude Code",
+  "url": "https://skillsmith.tech/mods/",
+  "numberOfItems": 7,
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "tune-skill-mod",
+      "url": "https://skillsmith.tech/tune-skill-mod/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "skill-release-mod",
+      "url": "https://skillsmith.tech/skill-release-mod/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "ship-sentinel",
+      "url": "https://skillsmith.tech/ship-sentinel/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "name": "release-gate-mod",
+      "url": "https://skillsmith.tech/release-gate-mod/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 5,
+      "name": "web-preflight-mod",
+      "url": "https://skillsmith.tech/web-preflight-mod/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 6,
+      "name": "pre-ship-security-red-team-mod",
+      "url": "https://skillsmith.tech/pre-ship-security-red-team-mod/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 7,
+      "name": "pre-ship-performance-audit-mod",
+      "url": "https://skillsmith.tech/pre-ship-performance-audit-mod/"
+    }
+  ]
+}
+</script>
+<!-- gen:jsonld-mods:end -->
+</head>
+<body>
+
+<nav class="nav" aria-label="Site">
+  <div class="wrap">
+    <div class="nav-links">
+      <a href="/skills/">Skills</a>
+      <a href="/workflows/">Workflows</a>
+      <a href="/mods/" aria-current="page">Mods</a>
+      <a href="/work/">Work with us</a>
+    </div>
+    <a class="brand" href="/"><b>∧</b>skillsmith</a>
+    <div class="nav-cta">
+      <a class="gh" href="https://github.com/arm-pz" target="_blank" rel="noopener">GitHub</a>
+      <a class="pill" href="/caffeinity-routing/">Start here</a>
+    </div>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow">Mods</p>
+    <h1>Mods for Claude Code.</h1>
+    <p class="lead">A mod is a Claude Code plugin with hooks: code that runs inside Claude Code with your permissions, for jobs a skill cannot do alone, like holding <code>git push</code> until the release checks have run. Read a mod's hooks before you install it; every page lists them.</p>
+  </div>
+</header>
+
+<main class="catalogue" id="mods">
+  <div class="wrap">
+    <!-- gen:mods:start -->
+    <div class="sk-grid">
+        <article class="skill" id="tune-skill-mod" data-search="tune-skill-mod tune skill mod authoring arms when claude edits a skill.md, then holds git push, prs and releases until tune-skill has validated the change. edits to any other file are ignored.">
+          <p class="chips"><span class="chip">authoring</span><span class="chip chip-hot">Claude Code mod</span></p>
+          <h3><a href="/tune-skill-mod/">Tune Skill Mod</a></h3>
+          <p class="sk-blurb">Arms when Claude edits a SKILL.md, then holds git push, PRs and releases until tune-skill has validated the change. Edits to any other file are ignored.</p>
+          <p class="sk-stats">16 files · 1,288 lines · 20 KB</p>
+          <code class="sk-install">/plugin install tune-skill-mod --marketplace arm-pz/caffeinity-skills</code>
+          <p class="sk-links">
+            <a href="/tune-skill-mod/">Install page</a>
+            <a href="https://github.com/arm-pz/caffeinity-skills" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="skill-release-mod" data-search="skill-release-mod skill release mod release holds gh release create and npm publish in claude code until prompts-to-skill-release has run the skill&#x27;s test cases since your last edit.">
+          <p class="chips"><span class="chip">release</span><span class="chip chip-hot">Claude Code mod</span></p>
+          <h3><a href="/skill-release-mod/">Skill Release Mod</a></h3>
+          <p class="sk-blurb">Holds gh release create and npm publish in Claude Code until prompts-to-skill-release has run the skill's test cases since your last edit.</p>
+          <p class="sk-stats">12 files · 627 lines · 10 KB</p>
+          <code class="sk-install">/plugin install skill-release-mod --marketplace arm-pz/caffeinity-skills</code>
+          <p class="sk-links">
+            <a href="/skill-release-mod/">Install page</a>
+            <a href="https://github.com/arm-pz/caffeinity-skills" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="ship-sentinel" data-search="ship-sentinel ship sentinel release a claude code mod that holds git push, pr, publish and deploy commands until your pre-ship check skills have run since the last edit. ask, block or nudge; fails open and touches no files, network or processes.">
+          <p class="chips"><span class="chip">release</span><span class="chip chip-hot">Claude Code mod</span></p>
+          <h3><a href="/ship-sentinel/">Ship Sentinel</a></h3>
+          <p class="sk-blurb">A Claude Code mod that holds git push, PR, publish and deploy commands until your pre-ship check skills have run since the last edit. Ask, block or nudge; fails open and touches no files, network or processes.</p>
+          <p class="sk-stats">1 hook module · 173 lines · 4 calls · 0 network</p>
+          <code class="sk-install">/plugin install ship-sentinel --marketplace arm-pz/ship-sentinel</code>
+          <p class="sk-links">
+            <a href="/ship-sentinel/">Install page</a>
+            <a href="https://github.com/arm-pz/ship-sentinel" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="release-gate-mod" data-search="release-gate-mod release gate mod release holds production deploys and pr merges in claude code until the release-gate chair has run web-preflight, the security red team and the performance audit since your last edit. install this one rather than the three single-check mods.">
+          <p class="chips"><span class="chip">release</span><span class="chip chip-hot">Claude Code mod</span></p>
+          <h3><a href="/release-gate-mod/">Release Gate Mod</a></h3>
+          <p class="sk-blurb">Holds production deploys and PR merges in Claude Code until the release-gate chair has run web-preflight, the security red team and the performance audit since your last edit. Install this one rather than the three single-check mods.</p>
+          <p class="sk-stats">13 files · 950 lines · 15 KB</p>
+          <code class="sk-install">/plugin install release-gate-mod --marketplace arm-pz/caffeinity-skills</code>
+          <p class="sk-links">
+            <a href="/release-gate-mod/">Install page</a>
+            <a href="https://github.com/arm-pz/caffeinity-skills" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="web-preflight-mod" data-search="web-preflight-mod web preflight mod release reminds claude code to run web-preflight (exposed .env files, source maps, admin and debug surfaces) before a production deploy.">
+          <p class="chips"><span class="chip">release</span><span class="chip chip-hot">Claude Code mod</span></p>
+          <h3><a href="/web-preflight-mod/">Web Preflight Mod</a></h3>
+          <p class="sk-blurb">Reminds Claude Code to run web-preflight (exposed .env files, source maps, admin and debug surfaces) before a production deploy.</p>
+          <p class="sk-stats">11 files · 872 lines · 15 KB</p>
+          <code class="sk-install">/plugin install web-preflight-mod --marketplace arm-pz/caffeinity-skills</code>
+          <p class="sk-links">
+            <a href="/web-preflight-mod/">Install page</a>
+            <a href="https://github.com/arm-pz/caffeinity-skills" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="pre-ship-security-red-team-mod" data-search="pre-ship-security-red-team-mod security red team mod release holds production deploys in claude code until the pre-ship security red team has run since your last edit.">
+          <p class="chips"><span class="chip">release</span><span class="chip chip-hot">Claude Code mod</span></p>
+          <h3><a href="/pre-ship-security-red-team-mod/">Security Red Team Mod</a></h3>
+          <p class="sk-blurb">Holds production deploys in Claude Code until the pre-ship security red team has run since your last edit.</p>
+          <p class="sk-stats">17 files · 1,588 lines · 30 KB</p>
+          <code class="sk-install">/plugin install pre-ship-security-red-team-mod --marketplace arm-pz/caffeinity-skills</code>
+          <p class="sk-links">
+            <a href="/pre-ship-security-red-team-mod/">Install page</a>
+            <a href="https://github.com/arm-pz/caffeinity-skills" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="pre-ship-performance-audit-mod" data-search="pre-ship-performance-audit-mod performance audit mod performance reminds claude code to run the pre-ship performance audit before a production deploy.">
+          <p class="chips"><span class="chip">performance</span><span class="chip chip-hot">Claude Code mod</span></p>
+          <h3><a href="/pre-ship-performance-audit-mod/">Performance Audit Mod</a></h3>
+          <p class="sk-blurb">Reminds Claude Code to run the pre-ship performance audit before a production deploy.</p>
+          <p class="sk-stats">9 files · 597 lines · 11 KB</p>
+          <code class="sk-install">/plugin install pre-ship-performance-audit-mod --marketplace arm-pz/caffeinity-skills</code>
+          <p class="sk-links">
+            <a href="/pre-ship-performance-audit-mod/">Install page</a>
+            <a href="https://github.com/arm-pz/caffeinity-skills" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+    </div>
+    <!-- gen:mods:end -->
+    <p class="aside">Want to turn one of your own skills into a mod? <a href="/skill-to-mod/">skill-to-mod</a> checks whether it should be one, then builds it.</p>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="wordmark" aria-hidden="true">caffeinity<b>.</b></p>
+    <div class="meta">
+      <span>Skillsmith is made by <a href="https://caffeinity.com/">Caffeinity</a>: open agent skills by Abdul Rahman P Z. Each skill lives in its own <a href="https://github.com/arm-pz">arm-pz</a> repo; the plugin marketplace is <a href="https://github.com/arm-pz/caffeinity-skills">arm-pz/caffeinity-skills</a>.</span>
+      <a href="/work/">Custom skills for your team</a>
+      <a href="https://github.com/arm-pz" target="_blank" rel="noopener">github.com/arm-pz</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var q=document.getElementById('q'),status=document.getElementById('find-status'),empty=document.getElementById('empty');
+  var cards=[].slice.call(document.querySelectorAll('.skill')),groups=[].slice.call(document.querySelectorAll('.sk-group'));
+  function filter(){
+    if(!q)return;
+    var terms=q.value.toLowerCase().split(/\s+/).filter(Boolean),shown=0;
+    cards.forEach(function(c){
+      var hay=c.getAttribute('data-search'),on=terms.every(function(t){return hay.indexOf(t)!==-1;});
+      c.hidden=!on;if(on)shown++;
+    });
+    groups.forEach(function(g){g.hidden=!g.querySelector('.skill:not([hidden])');});
+    empty.hidden=shown>0;
+    status.textContent=terms.length?(shown+' of '+cards.length+(shown===1?' matches':' match')):'';
+  }
+  if(q)q.addEventListener('input',filter);
+  var tabs=[].slice.call(document.querySelectorAll('.tabs [role="tab"]')),bar=document.querySelector('.shell-progress b');
+  function show(i,focus){
+    tabs.forEach(function(t,j){
+      var on=i===j;t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden=!on;
+    });
+    if(bar)bar.style.width=((i+1)/tabs.length*100)+'%';
+    if(focus)tabs[i].focus();
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){show(i);});
+    t.addEventListener('keydown',function(e){
+      var k={ArrowRight:1,ArrowLeft:-1}[e.key];
+      if(k){e.preventDefault();show((i+k+tabs.length)%tabs.length,true);}
+    });
+  });
+  if(tabs.length)show(0);
+  [].forEach.call(document.querySelectorAll('[data-copy]'),function(b){
+    b.addEventListener('click',function(){
+      var label=b.querySelector('.copy');
+      if(!navigator.clipboard){return;}
+      navigator.clipboard.writeText(b.getAttribute('data-copy')).then(function(){
+        label.textContent='Copied';setTimeout(function(){label.textContent='Copy';},1600);
+      },function(){});
+    });
+  });
+})();
+</script>
+</body>
+</body>
+</html>
