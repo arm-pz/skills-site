@@ -207,6 +207,25 @@ python tools/agent-skills/check_dist.py && node tools/agent-skills/verify.mjs lo
 python -m http.server 8080 --directory dist
 ```
 
+## Skills in a cloud session
+
+A cloud session starts with an empty workspace, so skills that are public on GitHub are not callable
+until something installs them. `tools/agent-skills/install_skills.py` reads `site/skills.json` and
+copies skills into `~/.claude/skills`; mods and pinned legacy archives are left out. Put this in the
+environment's **Setup script** (cloud environment menu in the session title bar, then Edit) and every
+new session has them:
+
+```
+git clone --depth 1 https://github.com/arm-pz/skills-site /tmp/skills-site
+python3 /tmp/skills-site/tools/agent-skills/install_skills.py
+```
+
+With no names it installs a short default list (`DEFAULT` in the script); name skills to choose your
+own, or pass `--all` for every plain skill (about 45; each one's description is read at session start,
+so more skills means more context used). `--list` prints what is installable. A failed install is
+reported and skipped, and the script always exits 0, so a GitHub hiccup cannot stop a session starting.
+On your own machine, `npx skills add arm-pz/<skill>` once is enough.
+
 ## Domains
 
 `skillsmith.tech` is the canonical address (`skilllib.SITE`); every canonical tag, the sitemap,
