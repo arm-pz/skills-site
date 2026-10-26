@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Custom AI agent skills for your team | Skillsmith</title>
-<meta name="description" content="Custom agent skills for Claude Code, Cursor and Codex, tested on your team's real tasks. Fixed-price skill sprints, team packs and monthly upkeep.">
+<meta name="description" content="Custom agent skills and a search and AI-visibility pack, tested on your real tasks. A free pilot, fixed-price packages and monthly upkeep.">
 <link rel="canonical" href="https://skillsmith.tech/work/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Skillsmith">
-<meta property="og:title" content="Work with us — Custom Agent Skills for Your Team">
-<meta property="og:description" content="Skills built and tested on your real tasks, for Claude Code, Cursor, Codex and any agent that reads a SKILL.md.">
+<meta property="og:title" content="Custom AI agent skills for your team">
+<meta property="og:description" content="Skills for the work your team repeats, tested on your real tasks, plus a search and AI-visibility pack. For Claude Code, Cursor, Codex and any agent that reads a SKILL.md.">
 <meta property="og:url" content="https://skillsmith.tech/work/">
 <meta name="twitter:card" content="summary">
 <meta name="color-scheme" content="light dark">
@@ -80,11 +80,22 @@
   .plan .price{font-family:var(--serif);font-size:40px;line-height:1;margin-top:18px}
   .plan .price small{font-family:var(--sans);font-size:15px;color:var(--muted)}
   .plan .for{color:var(--muted);font-size:15.5px;margin-top:12px}
-  .plan ul{list-style:none;margin-top:20px;display:grid;gap:10px;font-size:15.5px;flex:1}
+  .plan ul{list-style:none;margin-top:20px;display:grid;gap:10px;font-size:15.5px;flex:1;align-content:start}
   .plan li{padding-left:22px;position:relative}
   .plan li::before{content:"∧";position:absolute;left:0;color:var(--accent-text);font-family:var(--mono);font-size:13px;top:2px}
   .plan .pill,.plan .btn2{margin-top:26px;text-align:center}
   .note{color:var(--muted);font-size:14.5px;margin-top:22px}
+  .pilot{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px 40px;align-items:center;background:var(--ink);color:var(--bg);border-radius:22px;padding:clamp(28px,4vw,48px)}
+  .pilot h2{font-family:var(--serif);font-weight:400;font-size:clamp(30px,3.6vw,44px);line-height:1.05;letter-spacing:-.02em;margin-top:10px}
+  .pilot .eyebrow{color:inherit;opacity:.7}
+  .pilot p{opacity:.82;margin-top:12px;max-width:60ch}
+  .pilot .pill{white-space:nowrap;justify-self:start}
+  .limits{margin-top:28px;max-width:70ch;color:var(--muted);font-size:15.5px}
+  .limits b{color:var(--ink);font-weight:600}
+  .diy{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px;margin-top:32px}
+  .diy a{display:block;height:100%;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 20px;text-decoration:none}
+  .diy b{display:block;font-family:var(--serif);font-weight:400;font-size:24px;line-height:1.1}
+  .diy span{display:block;color:var(--muted);font-size:15px;margin-top:6px}
 
   .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:28px;margin-top:40px;counter-reset:step}
   .steps li{list-style:none;counter-increment:step}
@@ -107,7 +118,10 @@
   @media (hover:hover) and (pointer:fine){
     .nav-links a:hover,footer .meta a:hover{color:var(--ink)}
     .pill:hover{transform:translateY(-1px)}
-    .btn2:hover{border-color:var(--accent)}
+    .btn2:hover,.diy a:hover{border-color:var(--accent)}
+  }
+  @media (max-width:760px){
+    .pilot{grid-template-columns:1fr}
   }
   @media (max-width:520px){
     .nav-links a.hide-sm{display:none}
@@ -125,6 +139,7 @@
     <div class="nav-links">
       <a href="/skills/">All skills</a>
       <a class="hide-sm" href="#packages">Packages</a>
+      <a class="hide-sm" href="#search">Search pack</a>
       <a href="#contact">Contact</a>
     </div>
   </div>
@@ -133,20 +148,34 @@
 <header class="hero">
   <div class="wrap">
     <p class="eyebrow">Work with us</p>
-    <h1>Skills built for <em>your</em> team's work.</h1>
-    <p class="lead">Every skill on this site is free and open. If your team needs skills for its own workflows, written in your house style and tested on your real tasks, we build them for you. They work in Claude Code, Cursor, Codex, Qoder and any agent that reads a SKILL.md.</p>
+    <h1>Repeat work, done <em>right</em> by your agent.</h1>
+    <p class="lead">We turn a job your team repeats into a skill your agent runs the same way every time, tested on your real tasks and kept working as agents change. It works in Claude Code, Cursor, Codex, Qoder and any agent that reads a SKILL.md.</p>
     <div class="cta">
-      <a class="pill" href="#contact">Book a free 30-minute call</a>
+      <a class="pill" href="#pilot">Start with a free pilot</a>
       <a class="btn2" href="#packages">See packages</a>
+      <a class="btn2" href="#diy">Do it yourself</a>
     </div>
   </div>
 </header>
+
+<section id="pilot" aria-labelledby="pilot-title">
+  <div class="wrap">
+    <div class="pilot">
+      <div>
+        <p class="eyebrow">Free pilot</p>
+        <h2 id="pilot-title">One skill, one real task, no charge.</h2>
+        <p>For the first few teams: tell us one job your team repeats. We build a skill for it, test it on your real examples, and hand it over. In return we ask for a short write-up of how it went, and you approve every word, or keep your name out of it.</p>
+      </div>
+      <a class="pill" href="mailto:hello@skillsmith.tech?subject=Free%20pilot">Ask for a pilot</a>
+    </div>
+  </div>
+</section>
 
 <section id="packages" aria-labelledby="packages-title">
   <div class="wrap">
     <p class="eyebrow">Packages</p>
     <h2 class="title" id="packages-title">Fixed scope, fixed price.</h2>
-    <p class="section-lead">Pick the size that fits. Not sure which? Start with the call and we'll tell you honestly, including when you don't need us.</p>
+    <p class="section-lead">Pick the size that fits. Not sure which? Start with the pilot or a free 30-minute call, and we'll tell you honestly, including when you don't need us.</p>
 
     <div class="plans">
       <article class="plan">
@@ -201,6 +230,49 @@
   </div>
 </section>
 
+<section id="search" aria-labelledby="search-title">
+  <div class="wrap">
+    <p class="eyebrow">Search and AI visibility</p>
+    <h2 class="title" id="search-title">Be found in Google, and in AI answers.</h2>
+    <p class="section-lead">People now ask ChatGPT and Perplexity before they search. This pack checks your site for both, picks the few changes that matter, and sets your agent up to re-run the checks every month.</p>
+
+    <div class="plans">
+      <article class="plan main">
+        <span class="tag">One-off</span>
+        <h3>Search and AI visibility pack</h3>
+        <p class="price">$1,800 <small>fixed</small></p>
+        <p class="for">An evidence-backed audit of your site, with the one to three changes most worth making.</p>
+        <ul>
+          <li>Technical crawl: status codes, redirects, canonicals, titles, links and sitemap, with anything we could not measure marked as such</li>
+          <li>One page per search: which of your pages compete for the same query, and which should win</li>
+          <li>AI-search readiness: which AI crawlers your site blocks and what each block affects, plus Bing and llms.txt setup</li>
+          <li>Rankings, keyword volumes and AI-answer data from OpenSEO, a third-party tool (billed to you directly)</li>
+          <li>A short report: the one to three changes that matter, the evidence, and why each other idea was left out</li>
+          <li>The skills installed in your agent, so it can repeat the checks</li>
+          <li>About two weeks</li>
+        </ul>
+        <a class="pill" href="mailto:hello@skillsmith.tech?subject=Search%20and%20AI%20visibility%20pack">Ask about the pack</a>
+      </article>
+
+      <article class="plan">
+        <span class="tag">Ongoing</span>
+        <h3>Search upkeep</h3>
+        <p class="price">$600 <small>/ month</small></p>
+        <p class="for">The same checks every month, so you see what moved and what to do next.</p>
+        <ul>
+          <li>A fresh crawl and ranking check each month</li>
+          <li>AI-answer check: whether you are named or cited for your tracked questions</li>
+          <li>A short report: what changed, what it means, and the next one to three actions</li>
+          <li>Fixes to the pages we flag, if you want them</li>
+          <li>Cancel any time</li>
+        </ul>
+        <a class="btn2" href="mailto:hello@skillsmith.tech?subject=Search%20upkeep">Ask about upkeep</a>
+      </article>
+    </div>
+    <p class="limits"><b>What we do not do:</b> promise rankings, traffic or AI citations. Nobody can. We show what we measured, what we changed, and what moved. The skills behind this pack are the free ones on this site: <a href="/seo-crawl/">seo-crawl</a>, <a href="/keyword-guard/">keyword-guard</a> and the <a href="/workflows/grow-search-traffic/">search traffic workflow</a>.</p>
+  </div>
+</section>
+
 <section aria-labelledby="how-title">
   <div class="wrap">
     <p class="eyebrow">How it works</p>
@@ -211,6 +283,19 @@
       <li><b>Build and test</b><p>We write the skills and run them on your real tasks, the same way every skill on this site is tested.</p></li>
       <li><b>Hand over</b><p>You get the repo, install steps and a walkthrough. The skills are yours to keep and change.</p></li>
     </ol>
+  </div>
+</section>
+
+<section id="diy" aria-labelledby="diy-title">
+  <div class="wrap">
+    <p class="eyebrow">Prefer to do it yourself?</p>
+    <h2 class="title" id="diy-title">Everything here is free to use.</h2>
+    <p class="section-lead">The skills and workflows behind our work are open on this site. If you have the time, build your own. If you get stuck, send us a note.</p>
+    <ul class="diy">
+      <li><a href="/workflows/build-a-skill/"><b>Build a skill</b><span>Draft it, tune it, package it. The same steps we follow.</span></a></li>
+      <li><a href="/workflows/grow-search-traffic/"><b>Grow search traffic</b><span>The free skills behind the search pack.</span></a></li>
+      <li><a href="/skills/"><b>Browse every skill</b><span>Each with its install command, version and known limits.</span></a></li>
+    </ul>
   </div>
 </section>
 
@@ -233,7 +318,19 @@
       </details>
       <details>
         <summary>Why pay when the skills on this site are free?</summary>
-        <p>The free skills cover general work. A custom skill knows your workflow, your rules and your tools, and someone has tested it on your tasks. The free skills stay free.</p>
+        <p>You can build skills yourself with the free tools on this site, and some teams do. We are for teams who would rather not spend the time: we learn how your team works, test on your real tasks, and keep the skills working as agents change. The free skills stay free.</p>
+      </details>
+      <details>
+        <summary>Do you guarantee rankings or AI citations?</summary>
+        <p>No, and be wary of anyone who does. We report what we measured, what we changed and what moved, with dates, and we say plainly when something could not be measured.</p>
+      </details>
+      <details>
+        <summary>What is the free pilot?</summary>
+        <p>One skill for one job your team repeats, built and tested on your real examples at no charge, for the first few teams. In return we ask for a short write-up that you approve, or keep anonymous.</p>
+      </details>
+      <details>
+        <summary>Which tools does the search pack use?</summary>
+        <p>Our own free skills for the crawl and page checks, and OpenSEO, an open-source tool by a different team, for keyword, ranking and AI-answer data. It needs a DataForSEO key or an OpenSEO account, which you hold and pay for directly.</p>
       </details>
       <details>
         <summary>Can we see what your work looks like first?</summary>
