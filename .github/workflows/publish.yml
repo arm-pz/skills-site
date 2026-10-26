@@ -159,28 +159,28 @@ jobs:
           PUSHED: ${{ steps.deploy.outputs.pushed }}
         run: |
           set -euo pipefail
-          title="Deploy pending: skills.caffeinity.com is behind main"
+          title="Deploy pending: skillsmith.tech is behind main"
           want=$(cat dist/version.json)
-          live=$(curl -fsS "https://skills.caffeinity.com/version.json?v=$GITHUB_RUN_ID" || true)
+          live=$(curl -fsS "https://skillsmith.tech/version.json?v=$GITHUB_RUN_ID" || true)
           if [ "$PUSHED" = "true" ]; then
             for i in $(seq 1 20); do
               [ "$live" = "$want" ] && break
               sleep 30
-              live=$(curl -fsS "https://skills.caffeinity.com/version.json?v=$GITHUB_RUN_ID-$i" || true)
+              live=$(curl -fsS "https://skillsmith.tech/version.json?v=$GITHUB_RUN_ID-$i" || true)
             done
           fi
           open=$(gh issue list --state open --search "\"$title\" in:title" --json number --jq '.[0].number // empty')
           if [ "$live" = "$want" ]; then
             echo "- live site matches main" >> "$GITHUB_STEP_SUMMARY"
             [ -z "$open" ] || gh issue close "$open" --comment "Live site now matches main ($want)."
-            [ "$PUSHED" = "true" ] && CACHE_BUST="$GITHUB_RUN_ID" node tools/agent-skills/verify.mjs https://skills.caffeinity.com
+            [ "$PUSHED" = "true" ] && CACHE_BUST="$GITHUB_RUN_ID" node tools/agent-skills/verify.mjs https://skillsmith.tech
             exit 0
           fi
           echo "- live site is behind main" >> "$GITHUB_STEP_SUMMARY"
           [ -n "$open" ] && exit 0
           printf '%s\n' \
-            "The build on main differs from what skills.caffeinity.com serves, after waiting for Cloudflare." "" \
-            "1. Cloudflare dashboard > Workers & Pages > the project serving skills.caffeinity.com > Deployments:" \
+            "The build on main differs from what skillsmith.tech serves, after waiting for Cloudflare." "" \
+            "1. Cloudflare dashboard > Workers & Pages > the project serving skillsmith.tech > Deployments:" \
             "   is the latest \`deploy\` branch build failed or missing? Is the project connected to this repo's \`deploy\` branch?" \
             "2. Fallback, from your machine (no secrets in CI):" "" \
             '```' "git pull && bash tools/agent-skills/deploy.sh" '```' "" \

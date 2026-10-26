@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Skill to Mod — Turn a Skill Into a Claude Code Mod</title>
 <meta name="description" content="An open-source AI agent skill that checks whether a skill should be a Claude Code mod, then builds, validates and tests the plugin and shows what it can touch.">
-<link rel="canonical" href="https://skills.caffeinity.com/skill-to-mod/">
+<link rel="canonical" href="https://skillsmith.tech/skill-to-mod/">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Caffeinity Skills">
+<meta property="og:site_name" content="Skillsmith">
 <meta property="og:title" content="Skill to Mod — Turn a Skill Into a Claude Code Mod">
 <meta property="og:description" content="An open-source AI agent skill that checks whether a skill should be a Claude Code mod, then builds, validates and tests the plugin and shows what it can touch.">
-<meta property="og:url" content="https://skills.caffeinity.com/skill-to-mod/">
+<meta property="og:url" content="https://skillsmith.tech/skill-to-mod/">
 <meta name="twitter:card" content="summary">
 <meta name="color-scheme" content="light dark">
 <link rel="stylesheet" href="/fonts/fonts.css">
@@ -161,7 +161,7 @@
   "alternateName": "Skill to Mod",
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "Any",
-  "url": "https://skills.caffeinity.com/skill-to-mod/",
+  "url": "https://skillsmith.tech/skill-to-mod/",
   "description": "An open-source AI agent skill that checks whether a skill should be a Claude Code mod, then builds, validates and tests the plugin and shows what it can touch.",
   "codeRepository": "https://github.com/arm-pz/skill-to-mod",
   "license": "https://spdx.org/licenses/MIT.html",
@@ -170,14 +170,32 @@
   "publisher": {"@type": "Organization", "name": "Caffeinity", "url": "https://caffeinity.com/"}
 }
 </script>
+<!-- gen:quality-css:start -->
+<style>
+  .qb{--qb-line:var(--rule,var(--line,color-mix(in srgb,currentColor 14%,transparent)));padding:clamp(48px,6vw,80px) 0;border-top:1px solid var(--qb-line)}
+  .qb-kicker{font-family:var(--mono);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim,var(--muted))}
+  .qb h2{font-family:var(--serif);font-weight:400;font-size:clamp(30px,3.6vw,44px);line-height:1.08;letter-spacing:-.015em;margin-top:10px}
+  .qb-lead{color:var(--dim,var(--muted));max-width:62ch;margin-top:12px;font-size:16px}
+  .qb a{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.22em}
+  .qb-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:0 36px;margin-top:28px}
+  .qb-grid>div{border-top:1px solid var(--qb-line);padding:16px 0 18px}
+  .qb dt{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim,var(--muted))}
+  .qb dd{margin:6px 0 0;font-size:16px;line-height:1.5}
+  .qb dd small{display:block;color:var(--dim,var(--muted));font-size:14px;margin-top:2px}
+  .qb .qb-wide{grid-column:1/-1}
+  .qb ul{margin:6px 0 0;padding-left:20px;display:grid;gap:4px}
+  .qb .qb-flag{font-weight:600}
+  .qb .qb-flag.fail{color:var(--ember,var(--accent))}
+</style>
+<!-- gen:quality-css:end -->
 </head>
 <body>
 
 <nav class="nav" aria-label="Site">
   <div class="wrap">
-    <a class="brand" href="/"><b>∧</b>caffeinity skills</a>
+    <a class="brand" href="/"><b>∧</b>skillsmith</a>
     <div class="nav-links">
-      <a href="/">All skills</a>
+      <a href="/skills/">All skills</a>
       <a href="https://github.com/arm-pz/skill-to-mod" target="_blank" rel="noopener">Source</a>
     </div>
   </div>
@@ -224,6 +242,24 @@ By hand: pane / band / status line (see plugin-authoring and Anthropic's sample 
     </div>
   </div>
 </section>
+
+<!-- gen:quality:start -->
+<section class="qb" aria-labelledby="qb-h">
+  <div class="wrap">
+    <p class="qb-kicker">Quality record</p>
+    <h2 id="qb-h">Know what you are installing.</h2>
+    <p class="qb-lead">Version, date and limits are read from the repo on every sync, and the check runs every night. Real-world runs are listed only with their evidence.</p>
+    <dl class="qb-grid">
+      <div><dt>Version</dt><dd>Unversioned<small>commit e7cb2d8</small></dd></div>
+      <div><dt>Updated</dt><dd><a href="https://github.com/arm-pz/skill-to-mod/commits" target="_blank" rel="noopener">21 Oct 2026</a><small>last commit to the repo</small></dd></div>
+      <div><dt>Works in</dt><dd>Claude Code, Codex, Cursor, Qoder and any agent that loads a SKILL.md<small>plain text; no API keys</small></dd></div>
+      <div><dt>Nightly check</dt><dd>Passing<small>No failures or warnings. <a href="https://github.com/arm-pz/skills-site/blob/main/.github/workflows/health.yml" target="_blank" rel="noopener">How it is checked</a></small></dd></div>
+      <div><dt>Last real-world run</dt><dd>No public run yet<small>Runs are published only with their evidence.</small></dd></div>
+      <div class="qb-wide"><dt>Known limits</dt><dd>Not built for:<ul><li>Writing a brand-new mod with no source skill (use plugin-authoring)</li><li>Writing a new skill (use draft-skill)</li><li>Improving a skill&#x27;s wording or triggering (use tune-skill)</li><li>Plain skill packaging (use skill-creator)</li></ul></dd></div>
+    </dl>
+  </div>
+</section>
+<!-- gen:quality:end -->
 
 <section class="paper" aria-labelledby="why-h">
   <div class="wrap">
@@ -303,7 +339,7 @@ By hand: pane / band / status line (see plugin-authoring and Anthropic's sample 
 
 <footer>
   <div class="wrap">
-    <span>Skill to Mod is an open agent skill on <a href="/">Caffeinity Skills</a>. Not made or endorsed by Anthropic.</span>
+    <span>Skill to Mod is an open agent skill on <a href="/">Skillsmith</a>, made by <a href="https://caffeinity.com/">Caffeinity</a>. Not made or endorsed by Anthropic.</span>
     <a href="https://github.com/arm-pz/skill-to-mod" target="_blank" rel="noopener">arm-pz/skill-to-mod</a>
   </div>
 </footer>

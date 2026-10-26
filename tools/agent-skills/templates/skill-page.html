@@ -7,7 +7,7 @@
 <meta name="description" content="{{META_DESCRIPTION}}">
 <link rel="canonical" href="{{CANONICAL}}">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Caffeinity Skills">
+<meta property="og:site_name" content="Skillsmith">
 <meta property="og:title" content="{{PAGE_TITLE}}">
 <meta property="og:description" content="{{OG_DESCRIPTION}}">
 <meta property="og:url" content="{{CANONICAL}}">
@@ -130,14 +130,15 @@
 <script type="application/ld+json">
 {{JSON_LD}}
 </script>
+{{QUALITY_CSS}}
 </head>
 <body>
 
 <nav class="nav" aria-label="Site">
   <div class="wrap">
-    <a class="brand" href="/"><b>∧</b>caffeinity skills</a>
+    <a class="brand" href="/"><b>∧</b>skillsmith</a>
     <div class="nav-links">
-      <a href="/">All skills</a>
+      <a href="/skills/">All skills</a>
       <a href="{{REPO_URL}}" target="_blank" rel="noopener">Source</a>
     </div>
   </div>
@@ -155,6 +156,8 @@
     <p class="facts">{{FILE_COUNT}} files and {{LINES}} lines, {{LICENSE_FACT}}. Built from <a href="{{REPO_URL}}" target="_blank" rel="noopener">{{REPO_SLUG}}</a> at <code>{{COMMIT}}</code>.</p>
   </div>
 </header>
+
+{{QUALITY}}
 
 <section class="paper" aria-labelledby="for-h">
   <div class="wrap">
@@ -190,7 +193,7 @@
 
 <footer>
   <div class="wrap">
-    <span>{{TITLE}} is an open {{NOUN}} on <a href="/">Caffeinity Skills</a>.</span>
+    <span>{{TITLE}} is an open {{NOUN}} on <a href="/">Skillsmith</a>, made by <a href="https://caffeinity.com/">Caffeinity</a>.</span>
     <a href="{{REPO_URL}}" target="_blank" rel="noopener">{{REPO_SLUG}}</a>
   </div>
 </footer>

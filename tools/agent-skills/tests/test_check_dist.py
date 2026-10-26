@@ -13,7 +13,7 @@ import skilllib
 
 def entry(name, digest):
     return {"name": name, "description": "x", "type": "archive",
-            "url": f"https://skills.caffeinity.com/agent-skills/{name}.tar.gz",
+            "url": f"https://skillsmith.tech/agent-skills/{name}.tar.gz",
             "digest": f"sha256:{digest}"}
 
 
@@ -53,25 +53,38 @@ class CheckDistTest(unittest.TestCase):
         (self.root / "dist/llms.txt").write_text(skilllib.llms_txt(manifest), encoding="utf-8")
         (self.root / "out/sitemap.xml").write_text(
             '<?xml version="1.0"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
-            '<url><loc>https://skills.caffeinity.com/</loc></url>'
-            '<url><loc>https://skills.caffeinity.com/alpha/</loc></url>'
-            '<url><loc>https://skills.caffeinity.com/beta/</loc></url>'
+            '<url><loc>https://skillsmith.tech/</loc></url>'
+            '<url><loc>https://skillsmith.tech/work/</loc></url>'
+            '<url><loc>https://skillsmith.tech/skills/</loc></url>'
+            '<url><loc>https://skillsmith.tech/mods/</loc></url>'
+            '<url><loc>https://skillsmith.tech/workflows/</loc></url>'
+            '<url><loc>https://skillsmith.tech/alpha/</loc></url>'
+            '<url><loc>https://skillsmith.tech/beta/</loc></url>'
             "</urlset>")
         shutil.copyfile(self.root / "out/sitemap.xml", self.root / "dist/sitemap.xml")
         for name in ("alpha", "beta"):
             (self.root / "dist" / name).mkdir()
             (self.root / "dist" / name / "index.html").write_text(
                 f"<title>{name}</title>")
-        (self.root / "dist/index.html").write_text(
-            '<a href="/alpha/">a</a><a href="/beta/">b</a>'
-            '<div class="skill"></div><div class="skill"></div>'
-            '<script type="application/ld+json">{"numberOfItems": 2}</script>')
+        (self.root / "dist/index.html").write_text('<a href="/skills/">all</a>')
+        for name in ("skills", "mods", "workflows"):
+            (self.root / "dist" / name).mkdir()
+        self.write_section("skills", 2, '<a href="/alpha/">a</a><a href="/beta/">b</a>')
+        self.write_section("mods", 0)
+        (self.root / "dist/workflows/index.html").write_text("<title>workflows</title>")
+        (self.root / "dist/work").mkdir()
+        (self.root / "dist/work/index.html").write_text("<title>work</title>")
         for name in ("404.html", "_headers"):
             (self.root / "dist" / name).write_text("x")
         (self.root / "dist/_redirects").write_text("")
         (self.root / "dist/.well-known/skills.json").write_text("{}")
         (self.root / "dist/fonts").mkdir()
         (self.root / "dist/fonts/fonts.css").write_text("x")
+
+    def write_section(self, name, cards, links=""):
+        (self.root / "dist" / name / "index.html").write_text(
+            links + '<div class="skill"></div>' * cards
+            + '<script type="application/ld+json">{"numberOfItems": %d}</script>' % cards)
 
     def tearDown(self):
         self.tmp.cleanup()
@@ -89,19 +102,20 @@ class CheckDistTest(unittest.TestCase):
         path.write_text(json.dumps(manifest))
         (self.root / "dist/llms.txt").write_text(skilllib.llms_txt(manifest), encoding="utf-8")
         sitemap = (self.root / "out/sitemap.xml").read_text().replace(
-            "</urlset>", "<url><loc>https://skills.caffeinity.com/watch/</loc></url></urlset>")
+            "</urlset>", "<url><loc>https://skillsmith.tech/watch/</loc></url></urlset>")
         (self.root / "out/sitemap.xml").write_text(sitemap)
         (self.root / "dist/sitemap.xml").write_text(sitemap)
         (self.root / "dist/watch").mkdir()
         (self.root / "dist/watch/index.html").write_text("<title>watch</title>")
-        (self.root / "dist/index.html").write_text(
-            '<a href="/alpha/">a</a><a href="/beta/">b</a><a href="/watch/">w</a>'
-            '<div class="skill"></div><div class="skill"></div><div class="skill"></div>'
-            '<script type="application/ld+json">{"numberOfItems": 3}</script>')
+        self.write_section("mods", 1, '<a href="/watch/">w</a>')
         self.assertEqual(check_dist.check(self.root), [])
 
     def test_missing_404_fails(self):
         (self.root / "dist/404.html").unlink()
+        self.assertTrue(check_dist.check(self.root))
+
+    def test_missing_static_page_fails(self):
+        shutil.rmtree(self.root / "dist/work")
         self.assertTrue(check_dist.check(self.root))
 
     def test_digest_mismatch_fails(self):
@@ -112,10 +126,14 @@ class CheckDistTest(unittest.TestCase):
         shutil.rmtree(self.root / "dist/beta")
         self.assertTrue(check_dist.check(self.root))
 
+    def test_broken_reference_on_any_page_fails(self):
+        (self.root / "dist/workflows/index.html").write_text('<a href="/ghost/">g</a>')
+        self.assertTrue(check_dist.check(self.root))
+
     def test_stale_jsonld_count_fails(self):
-        html = (self.root / "dist/index.html").read_text().replace(
+        html = (self.root / "dist/skills/index.html").read_text().replace(
             '"numberOfItems": 2', '"numberOfItems": 1')
-        (self.root / "dist/index.html").write_text(html)
+        (self.root / "dist/skills/index.html").write_text(html)
         self.assertTrue(check_dist.check(self.root))
 
     def test_alias_redirect_must_match_and_resolve(self):
@@ -131,7 +149,7 @@ class CheckDistTest(unittest.TestCase):
 
     def test_llms_txt_must_match_the_manifest(self):
         text = (self.root / "dist/llms.txt").read_text(encoding="utf-8")
-        self.assertIn("- [alpha](https://skills.caffeinity.com/alpha/): A.", text)
+        self.assertIn("- [alpha](https://skillsmith.tech/alpha/): A.", text)
         self.assertIn("/plugin install caffeinity@caffeinity-skills", text)
         self.assertIn("codex plugin marketplace add arm-pz/caffeinity-skills", text)
         (self.root / "dist/llms.txt").write_text(text + "stale\n", encoding="utf-8")

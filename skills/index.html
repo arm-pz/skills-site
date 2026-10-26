@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All AI agent skills for Claude Code and Codex | Skillsmith</title>
+<meta name="description" content="Every Skillsmith agent skill by job: authoring, SEO, launch checks, writing, outbound, careers and learning, each with a one-line install.">
+<link rel="canonical" href="https://skillsmith.tech/skills/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Skillsmith">
+<meta property="og:title" content="All AI agent skills for Claude Code and Codex | Skillsmith">
+<meta property="og:description" content="Every Skillsmith agent skill by job: authoring, SEO, launch checks, writing, outbound, careers and learning, each with a one-line install.">
+<meta property="og:url" content="https://skillsmith.tech/skills/">
+<meta name="twitter:card" content="summary">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="preload" href="/fonts/files/cY9AfjOCX1hbuyalUrK4397yjA.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/files/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+  /* Light paper by default; the skill pages' dark shell when the reader prefers dark. */
+  :root{
+    --bg:#f2eee5;
+    --surface:#fffdf8;
+    --sunk:#e9e3d6;
+    --ink:#17141b;
+    --muted:#5c5562;
+    --line:rgba(23,20,27,.12);
+    --accent:#ff6a3d;
+    --accent-ink:#1a0c06;
+    --accent-text:#ad3a12;
+    --brass:#8f5226;
+    --serif:'Newsreader',Georgia,serif;
+    --sans:'Instrument Sans',system-ui,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --ease:cubic-bezier(.4,0,.2,1);
+    --gutter:clamp(16px,5vw,56px);
+    --radius:18px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#121016;--surface:#1d1a23;--sunk:#27232e;--ink:#ede8de;--muted:#a59eae;
+      --line:rgba(237,232,222,.12);--accent-text:#ff8a62;--brass:#d39b6a;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#121016;--surface:#1d1a23;--sunk:#27232e;--ink:#ede8de;--muted:#a59eae;
+    --line:rgba(237,232,222,.12);--accent-text:#ff8a62;--brass:#d39b6a;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.22em}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+  ::selection{background:var(--accent);color:var(--accent-ink)}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 var(--gutter)}
+  code{font-family:var(--mono);font-size:.86em}
+  .eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  h2.title{font-family:var(--serif);font-weight:400;font-size:clamp(38px,5.4vw,68px);line-height:1;letter-spacing:-.022em;margin-top:14px}
+  .section-lead{color:var(--muted);max-width:56ch;margin-top:16px;font-size:18px}
+
+  /* nav: links left, mark centre, one accent pill right */
+  .nav .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;height:72px}
+  .nav-links{display:flex;gap:22px;font-size:15px}
+  .nav-links a,.nav .gh{text-decoration:none;color:var(--muted);transition:color 150ms var(--ease)}
+  .nav-links a[aria-current]{color:var(--ink)}
+  .brand{font-family:var(--serif);font-size:21px;text-decoration:none;justify-self:center;white-space:nowrap}
+  .brand b{color:var(--accent);font-weight:400;margin-right:6px}
+  .nav-cta{justify-self:end;display:flex;align-items:center;gap:20px}
+  .pill{background:var(--accent);color:var(--accent-ink);text-decoration:none;font-weight:600;font-size:14.5px;padding:9px 16px;border-radius:999px;transition:transform 150ms var(--ease)}
+
+  /* hero */
+  .hero{text-align:center;padding:clamp(56px,9vw,120px) 0 clamp(40px,6vw,72px)}
+  h1{font-family:var(--serif);font-weight:400;font-size:clamp(54px,9.4vw,124px);line-height:.95;letter-spacing:-.03em;max-width:12ch;margin:0 auto}
+  h1 em{color:var(--accent-text);font-style:italic}
+  .lead{font-size:clamp(18px,1.7vw,21px);line-height:1.5;max-width:46ch;margin:28px auto 0;color:var(--muted)}
+  .cta{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:36px}
+  .cmd{display:inline-flex;align-items:center;gap:12px;max-width:100%;background:var(--ink);color:var(--bg);border:0;border-radius:12px;padding:15px 18px;font:500 14.5px/1.3 var(--mono);cursor:pointer;text-align:left;transition:transform 150ms var(--ease)}
+  .cmd span{overflow-wrap:anywhere}
+  .cmd .copy{flex:none;font-family:var(--sans);font-size:12.5px;font-weight:600;opacity:.7}
+  .btn2{display:inline-flex;align-items:center;border-radius:12px;padding:15px 20px;background:var(--surface);box-shadow:inset 0 0 0 1px var(--line);text-decoration:none;font-weight:600;font-size:15px}
+  .stats{margin-top:26px;font-family:var(--mono);font-size:13.5px;color:var(--brass)}
+
+  /* card wall: every skill and mod drifting under the hero; hover or focus pauses it */
+  .wall{display:grid;gap:12px;padding:0 0 clamp(24px,4vw,48px);-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+  .wall-row{overflow:hidden}
+  .wall-track{display:flex;width:max-content;animation:drift 220s linear infinite}
+  .wall-rev .wall-track{animation-direction:reverse;animation-duration:260s}
+  .wall:hover .wall-track,.wall:focus-within .wall-track{animation-play-state:paused}
+  .wcard{flex:none;width:236px;min-height:104px;margin-right:12px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;background:var(--surface);border-radius:var(--radius);box-shadow:0 0 0 1px var(--line);padding:18px 20px;text-decoration:none}
+  .wcard b{font-family:var(--serif);font-weight:400;font-size:23px;line-height:1.1;letter-spacing:-.01em;overflow-wrap:anywhere}
+  .wcard code{font-size:11.5px;color:var(--muted)}
+  @keyframes drift{to{transform:translateX(-50%)}}
+
+  /* workflows: the ecosystem as routes */
+  .flows{padding:clamp(56px,8vw,104px) 0}
+  .flow-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:16px;margin-top:40px}
+  .flow{background:var(--surface);border-radius:var(--radius);padding:24px 24px 22px;box-shadow:0 0 0 1px var(--line);scroll-margin-top:24px}
+  .flow-id{font-family:var(--mono);font-size:13px;color:var(--accent-text);font-weight:600}
+  .flow h3{font-family:var(--serif);font-weight:400;font-size:25px;line-height:1.15;letter-spacing:-.01em;margin-top:6px}
+  .flow-steps{list-style:none;counter-reset:step;margin-top:16px;display:grid;gap:8px}
+  .flow-steps li{counter-increment:step;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;font-size:15px;line-height:1.4}
+  .flow-steps li::before{content:counter(step);flex:none;width:22px;height:22px;border-radius:50%;background:var(--sunk);font:600 12px/22px var(--mono);text-align:center;color:var(--muted);transform:translateY(-1px)}
+  .flow-steps a{font-family:var(--mono);font-size:13.5px;font-weight:500;text-decoration-color:var(--line)}
+  .flow-steps .or,.flow-steps .opt{font-size:13px;color:var(--muted)}
+  .flow-steps .opt{font-family:var(--mono);font-size:11.5px;border:1px solid var(--line);border-radius:999px;padding:0 7px}
+  .flow-note{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
+  .router{margin-top:16px;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;align-items:center;background:var(--ink);color:var(--bg);border-radius:var(--radius);padding:22px 24px}
+  .router b{font-family:var(--serif);font-weight:400;font-size:24px;grid-row:span 2}
+  .router p{font-size:15px;opacity:.85}
+  .router code{font-size:13px;opacity:1}
+
+  /* catalogue */
+  .catalogue{padding:clamp(40px,6vw,72px) 0 clamp(64px,9vw,120px);border-top:1px solid var(--line)}
+  .find{margin-top:20px;max-width:720px;position:sticky;top:0;z-index:2;background:var(--bg);padding:12px 0 2px}
+  .find input{width:100%;font:400 19px/1.3 var(--sans);color:var(--ink);background:var(--surface);border:0;border-radius:14px;padding:18px 20px;box-shadow:0 0 0 1px var(--line),0 10px 30px -18px rgba(0,0,0,.35);transition:box-shadow 150ms var(--ease)}
+  .find input::placeholder{color:var(--muted)}
+  .find input:focus{outline:none;box-shadow:0 0 0 2px var(--accent),0 10px 30px -18px rgba(0,0,0,.35)}
+  .find-status{margin-top:10px;font-size:14px;color:var(--muted);min-height:1.5em}
+  .jump{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .jump a{font-size:14px;text-decoration:none;padding:6px 12px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--line);transition:background 150ms var(--ease)}
+  .sk-group{padding:clamp(40px,5vw,64px) 0 0;scroll-margin-top:110px}
+  .sk-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 24px;padding-bottom:14px;margin-bottom:18px;border-bottom:1px solid var(--line)}
+  .sk-head h2{font-family:var(--serif);font-weight:400;font-size:clamp(30px,3.4vw,40px);line-height:1.05;letter-spacing:-.015em}
+  .sk-head p{font-family:var(--mono);font-size:12.5px;color:var(--muted)}
+  .sk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,272px),1fr));gap:14px}
+  .skill{display:flex;flex-direction:column;background:var(--surface);border-radius:var(--radius);padding:22px;box-shadow:0 0 0 1px var(--line);scroll-margin-top:96px;transition:box-shadow 150ms var(--ease),transform 150ms var(--ease)}
+  #start-here .skill{grid-column:1/-1;max-width:760px}
+  .chips{display:flex;flex-wrap:wrap;gap:6px}
+  .chip{font-family:var(--mono);font-size:11.5px;line-height:1;padding:5px 8px;border-radius:999px;background:var(--sunk);color:var(--muted)}
+  .chip-hot{background:color-mix(in srgb,var(--accent) 18%,transparent);color:var(--accent-text)}
+  .skill h3{font-family:var(--serif);font-weight:400;font-size:26px;line-height:1.1;letter-spacing:-.01em;margin-top:14px}
+  .skill h3 a{text-decoration:none}
+  .sk-blurb{font-size:15.5px;line-height:1.55;margin-top:10px;color:var(--muted);display:-webkit-box;-webkit-line-clamp:3;line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .sk-stats{font-family:var(--mono);font-size:12.5px;color:var(--brass);margin-top:12px}
+  .sk-install{display:block;margin-top:auto;padding-top:16px}
+  .skill .sk-install{font-size:12.5px;overflow-wrap:break-word}
+  .skill .sk-install::before{content:"$ ";color:var(--muted)}
+  .sk-links{display:flex;gap:18px;margin-top:12px;font-size:14px;font-weight:600}
+  .sk-links a{text-decoration-color:var(--line)}
+  .empty{padding:56px 0 0;font-family:var(--serif);font-size:clamp(24px,2.6vw,30px);max-width:30ch}
+  [hidden]{display:none!important}
+
+  /* install: one card per agent */
+  .install{padding:clamp(56px,8vw,104px) 0;border-top:1px solid var(--line)}
+  .install-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:16px;margin-top:40px}
+  .inst{background:var(--surface);border-radius:var(--radius);box-shadow:0 0 0 1px var(--line);padding:24px;display:flex;flex-direction:column;gap:12px}
+  .inst h3{font-family:var(--serif);font-weight:400;font-size:26px;line-height:1.1}
+  .inst p{font-size:15px;color:var(--muted)}
+  .inst .cmd{width:100%;justify-content:space-between;font-size:13px;padding:12px 14px}
+  .inst-note a{color:var(--ink)}
+
+  /* proof: an app shell, one tab per real run, with what it found and what changed */
+  .shell{margin-top:40px;background:var(--sunk);border-radius:22px;padding:8px;box-shadow:0 0 0 1px var(--line),0 30px 60px -40px rgba(0,0,0,.45)}
+  .shell-bar{display:flex;align-items:center;gap:14px;padding:8px 10px 10px}
+  .shell-bar .dots{display:flex;gap:6px;flex:none}
+  .shell-bar .dots i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+  .shell-bar .dots i:first-child{background:var(--accent)}
+  .tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+  .tabs button{flex:none;font:500 13px/1 var(--mono);color:var(--muted);background:transparent;border:0;border-radius:10px;padding:9px 12px;cursor:pointer;transition:background 150ms var(--ease),color 150ms var(--ease)}
+  .tabs button[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:0 0 0 1px var(--line)}
+  .pane{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:8px}
+  .pane+.pane{margin-top:8px}
+  .pane-col{background:var(--surface);border-radius:16px;padding:22px 24px;display:flex;flex-direction:column;gap:12px}
+  .pane-label{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .pane h3{font-family:var(--serif);font-weight:400;font-size:clamp(24px,2.4vw,30px);line-height:1.12;letter-spacing:-.01em}
+  .pane pre{font-family:var(--mono);font-size:12.5px;line-height:1.6;background:var(--bg);border-radius:10px;padding:12px 14px;overflow-x:auto;white-space:pre}
+  .pane p{font-size:15px;color:var(--muted)}
+  .ba{display:grid;gap:6px}
+  .ba span{font-family:var(--mono);font-size:11.5px;font-weight:600;color:var(--muted)}
+  .ba.after span{color:var(--accent-text)}
+  .ba.after pre{box-shadow:inset 3px 0 0 var(--accent)}
+  .pane .verdict{font-family:var(--mono);font-size:12.5px;font-weight:600;color:var(--accent-text);margin-top:auto}
+  .shell-progress{height:3px;margin:8px 10px 2px;border-radius:3px;background:var(--line);overflow:hidden}
+  .shell-progress b{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--ink) calc(100% - 18px),var(--accent) 0);transition:width 300ms var(--ease)}
+
+  /* proof: real runs from this release */
+  .proof{padding:clamp(56px,8vw,104px) 0;border-top:1px solid var(--line)}
+  .runs{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,360px),1fr));gap:16px;margin-top:40px}
+  .run{background:var(--surface);border-radius:var(--radius);box-shadow:0 0 0 1px var(--line);overflow:hidden;display:flex;flex-direction:column}
+  .run-bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12.5px;color:var(--muted)}
+  .run-bar i{width:9px;height:9px;border-radius:50%;background:var(--sunk);display:inline-block}
+  .run-bar i:first-child{background:var(--accent)}
+  .run-bar span{margin-left:6px}
+  .run-body{padding:18px 18px 20px;display:flex;flex-direction:column;gap:12px;flex:1}
+  .run h3{font-family:var(--serif);font-weight:400;font-size:23px;line-height:1.15}
+  .run pre{font-family:var(--mono);font-size:12.5px;line-height:1.6;background:var(--sunk);border-radius:10px;padding:12px 14px;overflow-x:auto;white-space:pre}
+  .run p{font-size:15px;color:var(--muted)}
+  .run .verdict{font-family:var(--mono);font-size:12.5px;font-weight:600;color:var(--accent-text)}
+
+  /* outcomes: the front door, one card per workflow */
+  .outcomes{padding:clamp(56px,8vw,104px) 0;border-top:1px solid var(--line)}
+  .outcome-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:12px;margin-top:36px}
+  .outcome{display:flex;flex-direction:column;justify-content:space-between;gap:14px;min-height:128px;background:var(--surface);border-radius:var(--radius);box-shadow:0 0 0 1px var(--line);padding:20px 22px;text-decoration:none;transition:box-shadow 150ms var(--ease),transform 150ms var(--ease)}
+  .outcome b{font-family:var(--serif);font-weight:400;font-size:25px;line-height:1.12;letter-spacing:-.01em}
+  .outcome span{font-family:var(--mono);font-size:12px;color:var(--muted)}
+  .more-link{display:inline-block;margin-top:24px;font-weight:600}
+
+  /* flagships: three skills, each with the run that earned the spot */
+  .flags{padding:clamp(56px,8vw,104px) 0;border-top:1px solid var(--line)}
+  .flag-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:16px;margin-top:40px}
+  .flag{display:flex;flex-direction:column;gap:12px;background:var(--surface);border-radius:var(--radius);box-shadow:0 0 0 1px var(--line);padding:24px}
+  .flag-tag{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-text)}
+  .flag h3{font-family:var(--serif);font-weight:400;font-size:30px;line-height:1.08;letter-spacing:-.015em}
+  .flag h3 a{text-decoration:none}
+  .flag-blurb{color:var(--muted);font-size:15.5px;display:-webkit-box;-webkit-line-clamp:4;line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+  .flag-run{font-size:15px;padding-top:12px;border-top:1px solid var(--line)}
+  .flag-run b{font-weight:600}
+  .flag .cmd{margin-top:auto;width:100%;justify-content:space-between;font-size:12.5px;padding:12px 14px}
+
+  /* work band */
+  .band{padding:clamp(48px,7vw,88px) 0;border-top:1px solid var(--line)}
+  .band-box{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px 40px;align-items:center;background:var(--ink);color:var(--bg);border-radius:22px;padding:clamp(28px,4vw,48px)}
+  .band-box h2{font-family:var(--serif);font-weight:400;font-size:clamp(30px,3.6vw,44px);line-height:1.05;letter-spacing:-.02em}
+  .band-box p{opacity:.8;margin-top:10px;max-width:56ch}
+  .band-box .pill{font-size:15.5px;padding:13px 22px;white-space:nowrap;justify-self:start}
+
+  /* section pages: /skills/, /mods/, /workflows/ */
+  .page-hero{padding:clamp(48px,7vw,96px) 0 clamp(24px,4vw,40px)}
+  .page-hero h1{font-size:clamp(46px,7vw,92px);max-width:16ch;margin:14px 0 0}
+  .page-hero .lead{margin:22px 0 0;max-width:60ch}
+  .page-hero .stats{margin-top:18px}
+  .flow-sum{font-size:15px;color:var(--muted);margin-top:8px}
+  .flow h3 a{text-decoration:none}
+  .flow-go{display:inline-block;margin-top:14px;font-size:14px;font-weight:600}
+  .aside{margin-top:40px;color:var(--muted);max-width:64ch}
+  .aside a{color:var(--ink);font-weight:600}
+
+  /* close + footer */
+  .close{padding:clamp(56px,8vw,96px) 0;border-top:1px solid var(--line)}
+  .close-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:24px clamp(32px,5vw,64px);margin-top:28px}
+  .close-grid p{color:var(--muted);font-size:16px}
+  .close-grid b{display:block;color:var(--ink);font-weight:600;margin-bottom:6px}
+  .close-grid a{color:var(--ink)}
+  footer{overflow:hidden}
+  .wordmark{font-family:var(--serif);font-weight:400;font-size:clamp(72px,19vw,300px);line-height:.82;letter-spacing:-.045em;text-align:center;padding-top:24px;white-space:nowrap}
+  .wordmark b{color:var(--accent);font-weight:400}
+  footer .meta{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-top:28px;padding-bottom:36px;font-size:14px;color:var(--muted)}
+  footer .meta a{text-decoration:none}
+
+  @media (hover:hover) and (pointer:fine){
+    .nav-links a:hover,.nav .gh:hover,footer .meta a:hover{color:var(--ink)}
+    .pill:hover,.cmd:hover{transform:translateY(-1px)}
+    .jump a:hover{background:var(--surface)}
+    .skill:hover{box-shadow:0 0 0 1px var(--line),0 18px 40px -24px rgba(0,0,0,.45);transform:translateY(-2px)}
+    .skill h3 a:hover,.flow-steps a:hover,.flow h3 a:hover,.flag h3 a:hover{color:var(--accent-text)}
+    .outcome:hover{box-shadow:0 0 0 1px var(--accent);transform:translateY(-2px)}
+  }
+  @media (max-width:860px){
+    .nav .wrap{grid-template-columns:auto 1fr;height:auto;padding-top:14px;padding-bottom:12px;row-gap:10px}
+    .nav-links{grid-column:1/-1;grid-row:2;overflow-x:auto;scrollbar-width:none}
+    .nav-links a{white-space:nowrap}
+    .brand{justify-self:start}
+    .band-box{grid-template-columns:1fr}
+    .router{grid-template-columns:1fr}
+    .router b{grid-row:auto}
+  }
+  @media (max-width:520px){
+    .nav .gh{display:none}
+    .cmd{font-size:13px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{transition:none!important;animation:none!important}
+    .wall-row{overflow-x:auto}
+    html{scroll-behavior:auto}
+  }
+</style>
+<!-- gen:jsonld-skills:start -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Skillsmith agent skills",
+  "url": "https://skillsmith.tech/skills/",
+  "numberOfItems": 45,
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "caffeinity-routing",
+      "url": "https://skillsmith.tech/caffeinity-routing/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "draft-skill",
+      "url": "https://skillsmith.tech/draft-skill/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "prompts-to-skill",
+      "url": "https://skillsmith.tech/prompts-to-skill/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "name": "tune-skill",
+      "url": "https://skillsmith.tech/tune-skill/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 5,
+      "name": "prompts-to-skill-release",
+      "url": "https://skillsmith.tech/prompts-to-skill-release/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 6,
+      "name": "skill-to-mod",
+      "url": "https://skillsmith.tech/skill-to-mod/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 7,
+      "name": "skill-launch",
+      "url": "https://skillsmith.tech/skill-launch/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 8,
+      "name": "tune-and-polish",
+      "url": "https://skillsmith.tech/tune-and-polish/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 9,
+      "name": "findable",
+      "url": "https://skillsmith.tech/findable/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 10,
+      "name": "publish-pipeline",
+      "url": "https://skillsmith.tech/publish-pipeline/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 11,
+      "name": "upstream-check",
+      "url": "https://skillsmith.tech/upstream-check/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 12,
+      "name": "findable-polish",
+      "url": "https://skillsmith.tech/findable-polish/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 13,
+      "name": "upstream-polish",
+      "url": "https://skillsmith.tech/upstream-polish/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 14,
+      "name": "skill-estate",
+      "url": "https://skillsmith.tech/skill-estate/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 15,
+      "name": "site-prompt",
+      "url": "https://skillsmith.tech/site-prompt/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 16,
+      "name": "production-code",
+      "url": "https://skillsmith.tech/production-code/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 17,
+      "name": "web-preflight",
+      "url": "https://skillsmith.tech/web-preflight/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 18,
+      "name": "pre-ship-security-red-team",
+      "url": "https://skillsmith.tech/pre-ship-security-red-team/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 19,
+      "name": "pre-ship-performance-audit",
+      "url": "https://skillsmith.tech/pre-ship-performance-audit/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 20,
+      "name": "release-gate-chair",
+      "url": "https://skillsmith.tech/release-gate-chair/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 21,
+      "name": "release-gate-ledger",
+      "url": "https://skillsmith.tech/release-gate-ledger/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 22,
+      "name": "release-gate-validator",
+      "url": "https://skillsmith.tech/release-gate-validator/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 23,
+      "name": "paper-trail",
+      "url": "https://skillsmith.tech/paper-trail/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 24,
+      "name": "seo-crawl",
+      "url": "https://skillsmith.tech/seo-crawl/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 25,
+      "name": "keyword-guard",
+      "url": "https://skillsmith.tech/keyword-guard/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 26,
+      "name": "keyword-resolver",
+      "url": "https://skillsmith.tech/keyword-resolver/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 27,
+      "name": "seo-polish",
+      "url": "https://skillsmith.tech/seo-polish/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 28,
+      "name": "wordsmith",
+      "url": "https://skillsmith.tech/wordsmith/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 29,
+      "name": "platform-content",
+      "url": "https://skillsmith.tech/platform-content/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 30,
+      "name": "sales-copy",
+      "url": "https://skillsmith.tech/sales-copy/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 31,
+      "name": "cold-email-list-gate",
+      "url": "https://skillsmith.tech/cold-email-list-gate/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 32,
+      "name": "cold-email-ops",
+      "url": "https://skillsmith.tech/cold-email-ops/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 33,
+      "name": "recruiter-lens",
+      "url": "https://skillsmith.tech/recruiter-lens/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 34,
+      "name": "applicant-kit",
+      "url": "https://skillsmith.tech/applicant-kit/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 35,
+      "name": "application-pilot",
+      "url": "https://skillsmith.tech/application-pilot/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 36,
+      "name": "career-track",
+      "url": "https://skillsmith.tech/career-track/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 37,
+      "name": "research-brief",
+      "url": "https://skillsmith.tech/research-brief/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 38,
+      "name": "data-readout",
+      "url": "https://skillsmith.tech/data-readout/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 39,
+      "name": "crash-test",
+      "url": "https://skillsmith.tech/crash-test/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 40,
+      "name": "do-better",
+      "url": "https://skillsmith.tech/do-better/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 41,
+      "name": "strategy-memo",
+      "url": "https://skillsmith.tech/strategy-memo/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 42,
+      "name": "solo-income-blueprint",
+      "url": "https://skillsmith.tech/solo-income-blueprint/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 43,
+      "name": "topic-primer",
+      "url": "https://skillsmith.tech/topic-primer/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 44,
+      "name": "study-system",
+      "url": "https://skillsmith.tech/study-system/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 45,
+      "name": "course-builder",
+      "url": "https://skillsmith.tech/course-builder/"
+    }
+  ]
+}
+</script>
+<!-- gen:jsonld-skills:end -->
+</head>
+<body>
+
+<nav class="nav" aria-label="Site">
+  <div class="wrap">
+    <div class="nav-links">
+      <a href="/skills/" aria-current="page">Skills</a>
+      <a href="/workflows/">Workflows</a>
+      <a href="/mods/">Mods</a>
+      <a href="/work/">Work with us</a>
+    </div>
+    <a class="brand" href="/"><b>∧</b>skillsmith</a>
+    <div class="nav-cta">
+      <a class="gh" href="https://github.com/arm-pz" target="_blank" rel="noopener">GitHub</a>
+      <a class="pill" href="/caffeinity-routing/">Start here</a>
+    </div>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="wrap">
+    <p class="eyebrow">Skills</p>
+    <h1>Every skill, by job.</h1>
+    <p class="lead">Plain-markdown skills your agent reads and follows. Each page shows the exact install command, every file it installs, its version, its last update and what it is not built for.</p>
+    <!-- gen:stats:start --><p class="stats">45 skills and 7 mods · 11 workflows · 9 categories · 0 API keys</p><!-- gen:stats:end -->
+  </div>
+</header>
+
+<main class="catalogue" id="skills">
+  <div class="wrap skills">
+    <div class="find" role="search">
+      <label class="eyebrow" for="q" style="display:block;margin-bottom:10px">What should your agent get better at?</label>
+      <input id="q" type="search" placeholder="Try resume, SEO, cold email or launch" autocomplete="off" spellcheck="false">
+      <p class="find-status" id="find-status" role="status" aria-live="polite"></p>
+    </div>
+    <nav class="jump" aria-label="Skill groups">
+      <!-- gen:jump:start -->
+      <a href="#start-here">Start Here</a>
+      <a href="#skill-authoring">Skill Authoring</a>
+      <a href="#publish-discover">Publish &amp; Discover</a>
+      <a href="#ship-checks">Build &amp; Ship</a>
+      <a href="#seo-search">SEO &amp; Search</a>
+      <a href="#writing-growth">Writing &amp; Content</a>
+      <a href="#outbound">Outbound</a>
+      <a href="#career">Career</a>
+      <a href="#thinking-learning">Thinking &amp; Learning</a>
+      <!-- gen:jump:end -->
+    </nav>
+    <!-- gen:skills:start -->
+    <section class="sk-group" id="start-here" aria-labelledby="start-here-h">
+      <div class="sk-head">
+        <h2 id="start-here-h">Start Here</h2>
+        <p>1 skill · routing · eleven brews</p>
+      </div>
+      <div class="sk-grid">
+        <article class="skill" id="caffeinity-routing" data-search="caffeinity-routing caffeinity routing routing start here. tell it the outcome you want and it picks one of eleven brews (workflows), lists the skills in order with what each hands the next, and names the ones you have not installed instead of improvising their work.">
+          <p class="chips"><span class="chip">routing</span></p>
+          <h3><a href="/caffeinity-routing/">Caffeinity Routing</a></h3>
+          <p class="sk-blurb">Start here. Tell it the outcome you want and it picks one of eleven brews (workflows), lists the skills in order with what each hands the next, and names the ones you have not installed instead of improvising their work.</p>
+          <p class="sk-stats">4 files · 384 lines · 9 KB</p>
+          <code class="sk-install">npx skills add arm-pz/caffeinity-skills --skill caffeinity-routing</code>
+          <p class="sk-links">
+            <a href="/caffeinity-routing/">Install page</a>
+            <a href="https://github.com/arm-pz/caffeinity-skills" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="sk-group" id="skill-authoring" aria-labelledby="skill-authoring-h">
+      <div class="sk-head">
+        <h2 id="skill-authoring-h">Skill Authoring</h2>
+        <p>7 skills · draft · tune · release · mods</p>
+      </div>
+      <div class="sk-grid">
+        <article class="skill" id="draft-skill" data-search="draft-skill draft skill authoring creates a new agent skill from a plain idea: confirms the purpose before writing anything, checks the installed siblings for overlap, splits scripts from references from assets, writes a description that actually triggers, then validates it with check_skill.py. written from scratch, so it carries no text from qoder&#x27;s built-in skill-creator, which ships without a licence permitting redistribution.">
+          <p class="chips"><span class="chip">authoring</span><span class="chip chip-hot">tested 24 Oct 2026</span></p>
+          <h3><a href="/draft-skill/">Draft Skill</a></h3>
+          <p class="sk-blurb">Creates a new agent skill from a plain idea: confirms the purpose before writing anything, checks the installed siblings for overlap, splits scripts from references from assets, writes a description that actually triggers, then validates it with check_skill.py. Written from scratch, so it carries no text from Qoder's built-in skill-creator, which ships without a licence permitting redistribution.</p>
+          <p class="sk-stats">2 files · 112 lines · 8 workflow steps · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/draft-skill</code>
+          <p class="sk-links">
+            <a href="/draft-skill/">Install page</a>
+            <a href="https://github.com/arm-pz/draft-skill" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="prompts-to-skill" data-search="prompts-to-skill prompts to skill authoring turns a list of your own prompts into a finished, tested skill, one skill per prompt: an intent interview, an overlap check against what is already installed, a draft written with draft-skill, trigger test cases that include near-misses, and a tune-skill gate at the end. it needs draft-skill and tune-skill and stops with a clear message if either is missing.">
+          <p class="chips"><span class="chip">authoring</span></p>
+          <h3><a href="/prompts-to-skill/">Prompts To Skill</a></h3>
+          <p class="sk-blurb">Turns a list of your own prompts into a finished, tested skill, one skill per prompt: an intent interview, an overlap check against what is already installed, a draft written with draft-skill, trigger test cases that include near-misses, and a tune-skill gate at the end. It needs draft-skill and tune-skill and stops with a clear message if either is missing.</p>
+          <p class="sk-stats">3 files · 141 lines · depends on draft-skill + tune-skill · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/prompts-to-skill</code>
+          <p class="sk-links">
+            <a href="/prompts-to-skill/">Install page</a>
+            <a href="https://github.com/arm-pz/prompts-to-skill" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="tune-skill" data-search="tune-skill tune skill authoring audits and fine-tunes a skill that already exists: the description that never fires, overlap with installed siblings, stale names and counts, handoff contracts that do not hand off. ships check_skill.py, a deterministic validator over frontmatter, folder and heading agreement, description length and reference paths that do not exist. not for creating one from scratch; that is draft-skill.">
+          <p class="chips"><span class="chip">authoring</span><span class="chip chip-hot">tested 24 Oct 2026</span></p>
+          <h3><a href="/tune-skill/">Tune Skill</a></h3>
+          <p class="sk-blurb">Audits and fine-tunes a skill that already exists: the description that never fires, overlap with installed siblings, stale names and counts, handoff contracts that do not hand off. Ships check_skill.py, a deterministic validator over frontmatter, folder and heading agreement, description length and reference paths that do not exist. Not for creating one from scratch; that is draft-skill.</p>
+          <p class="sk-stats">4 files · 268 lines · 1 validator script · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/tune-skill</code>
+          <p class="sk-links">
+            <a href="/tune-skill/">Install page</a>
+            <a href="https://github.com/arm-pz/tune-skill" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="prompts-to-skill-release" data-search="prompts-to-skill-release prompts to skill release release packages a finished skill for release: runs its trigger test cases and records which passed and which did not, sets the version and changelog, builds the archive, writes the readme, and ends with a per-platform install checklist. failed tests stay in the report instead of being dropped from it.">
+          <p class="chips"><span class="chip">release</span></p>
+          <h3><a href="/prompts-to-skill-release/">Prompts To Skill Release</a></h3>
+          <p class="sk-blurb">Packages a finished skill for release: runs its trigger test cases and records which passed and which did not, sets the version and CHANGELOG, builds the archive, writes the README, and ends with a per-platform install checklist. Failed tests stay in the report instead of being dropped from it.</p>
+          <p class="sk-stats">3 files · 113 lines · 5 release sections · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/prompts-to-skill-release</code>
+          <p class="sk-links">
+            <a href="/prompts-to-skill-release/">Install page</a>
+            <a href="https://github.com/arm-pz/prompts-to-skill-release" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="skill-to-mod" data-search="skill-to-mod skill to mod authoring checks whether a skill should become a claude code mod, then builds the plugin with your skill unchanged and a thin trigger, validates and tests it, and lists what it can touch. says no when a skill should stay a skill.">
+          <p class="chips"><span class="chip">authoring</span></p>
+          <h3><a href="/skill-to-mod/">Skill to Mod</a></h3>
+          <p class="sk-blurb">Checks whether a skill should become a Claude Code mod, then builds the plugin with your skill unchanged and a thin trigger, validates and tests it, and lists what it can touch. Says no when a skill should stay a skill.</p>
+          <p class="sk-stats">12 files · 1,790 lines · 3 trigger patterns · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/skill-to-mod --skill skill-to-mod</code>
+          <p class="sk-links">
+            <a href="/skill-to-mod/">Install page</a>
+            <a href="https://github.com/arm-pz/skill-to-mod" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="skill-launch" data-search="skill-launch skill launch authoring the full pipeline from idea to launched skill: draft-skill writes it, tune-skill gates it through the validator, findable-polish polishes its discovery surfaces. six chain skills went through this loop in one day — and every public change still needs your go-ahead.">
+          <p class="chips"><span class="chip">authoring</span><span class="chip chip-hot">chain</span></p>
+          <h3><a href="/skill-launch/">Skill Launch</a></h3>
+          <p class="sk-blurb">The full pipeline from idea to launched skill: Draft-Skill writes it, Tune-Skill gates it through the validator, Findable-Polish polishes its discovery surfaces. Six chain skills went through this loop in one day — and every public change still needs your go-ahead.</p>
+          <p class="sk-stats">3 files · 110 lines · 3 gated phases · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/skill-launch --skill skill-launch</code>
+          <p class="sk-links">
+            <a href="/skill-launch/">Install page</a>
+            <a href="https://github.com/arm-pz/skill-launch" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="tune-and-polish" data-search="tune-and-polish tune and polish authoring for a skill that both misfires and hides: tune-skill fixes the triggering description, sibling overlaps and stale counts, gated on check_skill.py with zero fails; then findable-polish audits and polishes the readme, about and site copy against real queries. listings are written from the final description, never before.">
+          <p class="chips"><span class="chip">authoring</span><span class="chip chip-hot">chain</span></p>
+          <h3><a href="/tune-and-polish/">Tune And Polish</a></h3>
+          <p class="sk-blurb">For a skill that both misfires and hides: Tune-Skill fixes the triggering description, sibling overlaps and stale counts, gated on check_skill.py with zero FAILs; then Findable-Polish audits and polishes the README, About and site copy against real queries. Listings are written from the final description, never before.</p>
+          <p class="sk-stats">3 files · 89 lines · 2 gated phases · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/tune-and-polish --skill tune-and-polish</code>
+          <p class="sk-links">
+            <a href="/tune-and-polish/">Install page</a>
+            <a href="https://github.com/arm-pz/tune-and-polish" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="sk-group" id="publish-discover" aria-labelledby="publish-discover-h">
+      <div class="sk-head">
+        <h2 id="publish-discover-h">Publish &amp; Discover</h2>
+        <p>6 skills · discovery · pipeline · drift</p>
+      </div>
+      <div class="sk-grid">
+        <article class="skill" id="findable" data-search="findable findable discovery sets up discovery for a github repo, skill, plugin or mcp server so it gets found by what it does, not only by its name. it audits where you rank today, works out the queries strangers type, then drafts the about text, topics, readme opening, release notes, site page and directory plan — real numbers only, and nothing public changes without your go-ahead.">
+          <p class="chips"><span class="chip">discovery</span><span class="chip chip-hot">tested 24 Oct 2026</span></p>
+          <h3><a href="/findable/">Findable</a></h3>
+          <p class="sk-blurb">Sets up discovery for a GitHub repo, skill, plugin or MCP server so it gets found by what it does, not only by its name. It audits where you rank today, works out the queries strangers type, then drafts the About text, topics, README opening, release notes, site page and directory plan — real numbers only, and nothing public changes without your go-ahead.</p>
+          <p class="sk-stats">8 workflow steps · 10 kit sections · 4 reference guides · 1 listing validator · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/findable --skill findable</code>
+          <p class="sk-links">
+            <a href="/findable/">Install page</a>
+            <a href="https://github.com/arm-pz/findable" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="publish-pipeline" data-search="publish-pipeline publish pipeline publishing turns a pile of skill repos into a published site: a committed manifest decides what is public, discovery opens a pull request, and a green merge deploys generated pages, both discovery indexes, a sitemap and a verified build.">
+          <p class="chips"><span class="chip">publishing</span></p>
+          <h3><a href="/publish-pipeline/">Publish Pipeline</a></h3>
+          <p class="sk-blurb">Turns a pile of skill repos into a published site: a committed manifest decides what is public, discovery opens a pull request, and a green merge deploys generated pages, both discovery indexes, a sitemap and a verified build.</p>
+          <p class="sk-stats">9 files · 1,272 lines · 22 KB</p>
+          <code class="sk-install">npx skills add arm-pz/publish-pipeline</code>
+          <p class="sk-links">
+            <a href="/publish-pipeline/">Install page</a>
+            <a href="https://github.com/arm-pz/publish-pipeline" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="upstream-check" data-search="upstream-check upstream check publishing finds local commits that never reached github, pushes only clean fast-forwards after a secret screen, then checks that the site index, the homepage, the marketplace and the readmes agree with the repos that actually ship a skill.md.">
+          <p class="chips"><span class="chip">publishing</span><span class="chip chip-hot">tested 24 Oct 2026</span></p>
+          <h3><a href="/upstream-check/">Upstream Check</a></h3>
+          <p class="sk-blurb">Finds local commits that never reached GitHub, pushes only clean fast-forwards after a secret screen, then checks that the site index, the homepage, the marketplace and the READMEs agree with the repos that actually ship a SKILL.md.</p>
+          <p class="sk-stats">3 files · 354 lines · 8 KB</p>
+          <code class="sk-install">npx skills add arm-pz/upstream-check</code>
+          <p class="sk-links">
+            <a href="/upstream-check/">Install page</a>
+            <a href="https://github.com/arm-pz/upstream-check" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="findable-polish" data-search="findable-polish findable polish discovery chains findable and wordsmith: audits a readme, skill page or landing copy against the queries a real stranger types, then writes two or three alternatives per finding that fix it without inventing a fact. proven on its own repo: seven live searches, zero hits, six named gaps, fixes applied the same day.">
+          <p class="chips"><span class="chip">discovery</span><span class="chip chip-hot">chain</span></p>
+          <h3><a href="/findable-polish/">Findable Polish</a></h3>
+          <p class="sk-blurb">Chains Findable and Wordsmith: audits a README, skill page or landing copy against the queries a real stranger types, then writes two or three alternatives per finding that fix it without inventing a fact. Proven on its own repo: seven live searches, zero hits, six named gaps, fixes applied the same day.</p>
+          <p class="sk-stats">3 files · 125 lines · 2 chained skills · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/findable-polish --skill findable-polish</code>
+          <p class="sk-links">
+            <a href="/findable-polish/">Install page</a>
+            <a href="https://github.com/arm-pz/findable-polish" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="upstream-polish" data-search="upstream-polish upstream polish publishing chains upstream-check — fetch-based push verdicts, fast-forward only, screened for credential-shaped lines — with wordsmith rewriting drifted descriptions, topics and readme rows, so repos and listings tell the same story again. an unreadable source is inconclusive, never counted as empty.">
+          <p class="chips"><span class="chip">publishing</span><span class="chip chip-hot">chain</span></p>
+          <h3><a href="/upstream-polish/">Upstream Polish</a></h3>
+          <p class="sk-blurb">Chains Upstream-Check — fetch-based push verdicts, fast-forward only, screened for credential-shaped lines — with Wordsmith rewriting drifted descriptions, topics and README rows, so repos and listings tell the same story again. An unreadable source is inconclusive, never counted as empty.</p>
+          <p class="sk-stats">3 files · 122 lines · 7 verdicts · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/upstream-polish --skill upstream-polish</code>
+          <p class="sk-links">
+            <a href="/upstream-polish/">Install page</a>
+            <a href="https://github.com/arm-pz/upstream-polish" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="skill-estate" data-search="skill-estate skill estate publishing the whole-collection sweep: inventory every skill repo, reconcile the site, marketplace and readme, tune the family, close workflow gaps, wire self-publishing, add trigger tests and listings, and leave a maintenance loop. each phase is handed to the skill that owns it.">
+          <p class="chips"><span class="chip">publishing</span></p>
+          <h3><a href="/skill-estate/">Skill Estate</a></h3>
+          <p class="sk-blurb">The whole-collection sweep: inventory every skill repo, reconcile the site, marketplace and README, tune the family, close workflow gaps, wire self-publishing, add trigger tests and listings, and leave a maintenance loop. Each phase is handed to the skill that owns it.</p>
+          <p class="sk-stats">4 files · 175 lines · 5 KB</p>
+          <code class="sk-install">npx skills add arm-pz/caffeinity-skills --skill skill-estate</code>
+          <p class="sk-links">
+            <a href="/skill-estate/">Install page</a>
+            <a href="https://github.com/arm-pz/caffeinity-skills" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="sk-group" id="ship-checks" aria-labelledby="ship-checks-h">
+      <div class="sk-head">
+        <h2 id="ship-checks-h">Build &amp; Ship</h2>
+        <p>9 skills · build · exposure · security · speed · go/no-go</p>
+      </div>
+      <div class="sk-grid">
+        <article class="skill" id="site-prompt" data-search="site-prompt site prompt build turns a website topic into one self-contained, paste-and-build prompt: it builds and verifies the site in a scratch folder first, then embeds every file verbatim with a pinned stack and the checks that actually ran.">
+          <p class="chips"><span class="chip">build</span></p>
+          <h3><a href="/site-prompt/">Site Prompt</a></h3>
+          <p class="sk-blurb">Turns a website topic into one self-contained, paste-and-build prompt: it builds and verifies the site in a scratch folder first, then embeds every file verbatim with a pinned stack and the checks that actually ran.</p>
+          <p class="sk-stats">8 files · 869 lines · 17 KB</p>
+          <code class="sk-install">npx skills add arm-pz/site-prompt</code>
+          <p class="sk-links">
+            <a href="/site-prompt/">Install page</a>
+            <a href="https://github.com/arm-pz/site-prompt" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="production-code" data-search="production-code production code build delivers code as a finished artifact rather than a snippet: complete scripts, bug fixes with the root cause, reviews, api integrations and sql, each with the run instructions and the edge cases handled.">
+          <p class="chips"><span class="chip">build</span></p>
+          <h3><a href="/production-code/">Production Code</a></h3>
+          <p class="sk-blurb">Delivers code as a finished artifact rather than a snippet: complete scripts, bug fixes with the root cause, reviews, API integrations and SQL, each with the run instructions and the edge cases handled.</p>
+          <p class="sk-stats">4 files · 320 lines · 9 KB</p>
+          <code class="sk-install">npx skills add arm-pz/production-code</code>
+          <p class="sk-links">
+            <a href="/production-code/">Install page</a>
+            <a href="https://github.com/arm-pz/production-code" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="web-preflight" data-search="web-preflight web preflight release checks a site you own before you ship it, without pretending a status code is a finding. a 200 on /.env that matches the app shell is catch-all routing, a blanket 403 is an unanswered question, and a check that never ran becomes inconclusive — never a pass.">
+          <p class="chips"><span class="chip">release</span><span class="chip chip-hot">tested 24 Oct 2026</span></p>
+          <h3><a href="/web-preflight/">Web Preflight</a></h3>
+          <p class="sk-blurb">Checks a site you own before you ship it, without pretending a status code is a finding. A 200 on /.env that matches the app shell is catch-all routing, a blanket 403 is an unanswered question, and a check that never ran becomes INCONCLUSIVE — never a pass.</p>
+          <p class="sk-stats">4 verdicts · 19 fixed paths · 9 behavioral tests · ~215 lines · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/web-preflight</code>
+          <p class="sk-links">
+            <a href="/web-preflight/">Install page</a>
+            <a href="https://github.com/arm-pz/web-preflight" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="pre-ship-security-red-team" data-search="pre-ship-security-red-team pre ship security red team release red-teams a web app you own before launch, in an isolated local environment. three parallel read-only subagents run fourteen authorization and abuse checks across three groups (identity and authorization; ui and api bypass; browser, network, cache and ai), each with captured evidence, then the fix is rerun against the same check. a check that cannot fail is falsified first, and findings stay on the record even when the pass clears.">
+          <p class="chips"><span class="chip">release</span></p>
+          <h3><a href="/pre-ship-security-red-team/">Pre Ship Security Red Team</a></h3>
+          <p class="sk-blurb">Red-teams a web app you own before launch, in an isolated local environment. Three parallel read-only subagents run fourteen authorization and abuse checks across three groups (identity and authorization; UI and API bypass; browser, network, cache and AI), each with captured evidence, then the fix is rerun against the same check. A check that cannot fail is falsified first, and findings stay on the record even when the pass clears.</p>
+          <p class="sk-stats">3 subagents · 14 checks · 9 files · local environments only</p>
+          <code class="sk-install">npx skills add arm-pz/pre-ship-security-red-team</code>
+          <p class="sk-links">
+            <a href="/pre-ship-security-red-team/">Install page</a>
+            <a href="https://github.com/arm-pz/pre-ship-security-red-team" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="pre-ship-performance-audit" data-search="pre-ship-performance-audit pre ship performance audit performance audits and fixes a web app&#x27;s real-world speed before launch: four read-only subagents sweep twenty known slow-downs across images, bundles, database queries and servers, then the same mobile lighthouse protocol, three runs per page, proves each fix before and after. never removes a feature for a score, never invents a baseline, and asks before touching dependencies, the database or the deploy region.">
+          <p class="chips"><span class="chip">performance</span></p>
+          <h3><a href="/pre-ship-performance-audit/">Pre Ship Performance Audit</a></h3>
+          <p class="sk-blurb">Audits and fixes a web app's real-world speed before launch: four read-only subagents sweep twenty known slow-downs across images, bundles, database queries and servers, then the same mobile Lighthouse protocol, three runs per page, proves each fix before and after. Never removes a feature for a score, never invents a baseline, and asks before touching dependencies, the database or the deploy region.</p>
+          <p class="sk-stats">4 subagents · 20 slow-downs · 6 phases · ~120 lines · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/pre-ship-performance-audit</code>
+          <p class="sk-links">
+            <a href="/pre-ship-performance-audit/">Install page</a>
+            <a href="https://github.com/arm-pz/pre-ship-performance-audit" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="release-gate-chair" data-search="release-gate-chair release gate · chair release one answer to “can we deploy?”: runs web-preflight, the security red team and the performance audit in order, keeps three separate verdicts, and computes hold or ready with a script instead of judgement.">
+          <p class="chips"><span class="chip">release</span></p>
+          <h3><a href="/release-gate-chair/">Release Gate · Chair</a></h3>
+          <p class="sk-blurb">One answer to “can we deploy?”: runs web-preflight, the security red team and the performance audit in order, keeps three separate verdicts, and computes HOLD or ready with a script instead of judgement.</p>
+          <p class="sk-stats">4 files · 391 lines · 8 KB</p>
+          <code class="sk-install">npx skills add arm-pz/release-gate-chair</code>
+          <p class="sk-links">
+            <a href="/release-gate-chair/">Install page</a>
+            <a href="https://github.com/arm-pz/release-gate-chair" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="release-gate-ledger" data-search="release-gate-ledger release gate · ledger release the release gate where each lane writes its own rows into one ledger through a validating recorder, so a malformed or missing verdict is rejected the moment it is written.">
+          <p class="chips"><span class="chip">release</span></p>
+          <h3><a href="/release-gate-ledger/">Release Gate · Ledger</a></h3>
+          <p class="sk-blurb">The release gate where each lane writes its own rows into one ledger through a validating recorder, so a malformed or missing verdict is rejected the moment it is written.</p>
+          <p class="sk-stats">8 files · 530 lines · 9 KB</p>
+          <code class="sk-install">npx skills add arm-pz/release-gate-ledger</code>
+          <p class="sk-links">
+            <a href="/release-gate-ledger/">Install page</a>
+            <a href="https://github.com/arm-pz/release-gate-ledger" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="release-gate-validator" data-search="release-gate-validator release gate · validator release the cheapest release gate: turns three pre-launch reports that already exist into one posture, hold or ready, without running any lane or sending a single request.">
+          <p class="chips"><span class="chip">release</span></p>
+          <h3><a href="/release-gate-validator/">Release Gate · Validator</a></h3>
+          <p class="sk-blurb">The cheapest release gate: turns three pre-launch reports that already exist into one posture, HOLD or ready, without running any lane or sending a single request.</p>
+          <p class="sk-stats">6 files · 583 lines · 10 KB</p>
+          <code class="sk-install">npx skills add arm-pz/release-gate-validator</code>
+          <p class="sk-links">
+            <a href="/release-gate-validator/">Install page</a>
+            <a href="https://github.com/arm-pz/release-gate-validator" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="paper-trail" data-search="paper-trail paper trail release privacy policy, terms, refund and cookie pages written only from facts you confirm, then checked for placeholders, missing sections and emails nobody supplied. says when a lawyer should look.">
+          <p class="chips"><span class="chip">release</span></p>
+          <h3><a href="/paper-trail/">Paper Trail</a></h3>
+          <p class="sk-blurb">Privacy policy, terms, refund and cookie pages written only from facts you confirm, then checked for placeholders, missing sections and emails nobody supplied. Says when a lawyer should look.</p>
+          <p class="sk-stats">6 files · 381 lines · 8 KB</p>
+          <code class="sk-install">npx skills add arm-pz/caffeinity-skills --skill paper-trail</code>
+          <p class="sk-links">
+            <a href="/paper-trail/">Install page</a>
+            <a href="https://github.com/arm-pz/caffeinity-skills" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="sk-group" id="seo-search" aria-labelledby="seo-search-h">
+      <div class="sk-head">
+        <h2 id="seo-search-h">SEO &amp; Search</h2>
+        <p>4 skills · crawl · cannibalization · rewrites</p>
+      </div>
+      <div class="sk-grid">
+        <article class="skill" id="seo-crawl" data-search="seo-crawl seo crawl seo crawls a site you own and returns deterministic, evidence-backed technical seo findings, with blocked or unrun checks reported inconclusive rather than a pass.">
+          <p class="chips"><span class="chip">seo</span><span class="chip chip-hot">tested 24 Oct 2026</span></p>
+          <h3><a href="/seo-crawl/">SEO Crawl</a></h3>
+          <p class="sk-blurb">Crawls a site you own and returns deterministic, evidence-backed technical SEO findings, with blocked or unrun checks reported INCONCLUSIVE rather than a pass.</p>
+          <p class="sk-stats">14 files · 1,885 lines · 19 KB</p>
+          <code class="sk-install">npx skills add arm-pz/seo-crawl</code>
+          <p class="sk-links">
+            <a href="/seo-crawl/">Install page</a>
+            <a href="https://github.com/arm-pz/seo-crawl" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="keyword-guard" data-search="keyword-guard keyword guard seo plans topic clusters and kills keyword cannibalization so exactly one page wins each query. the cannibalization audit is a mandatory blocker before any content change — with a sitemap fallback for when you have no search console access.">
+          <p class="chips"><span class="chip">seo</span></p>
+          <h3><a href="/keyword-guard/">Keyword Guard</a></h3>
+          <p class="sk-blurb">Plans topic clusters and kills keyword cannibalization so exactly one page wins each query. The cannibalization audit is a mandatory blocker before any content change — with a sitemap fallback for when you have no Search Console access.</p>
+          <p class="sk-stats">6 phases · 3 reference checklists · ~300 lines · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/keyword-guard</code>
+          <p class="sk-links">
+            <a href="/keyword-guard/">Install page</a>
+            <a href="https://github.com/arm-pz/keyword-guard" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="keyword-resolver" data-search="keyword-resolver keyword resolver seo resolves keyword cannibalization with keyword-guard, then rewrites titles, h1s and meta descriptions with wordsmith. one query, one owner — the ownership audit blocks until the map is settled, and a sitemap fallback is named as a fallback when you have no search console.">
+          <p class="chips"><span class="chip">seo</span><span class="chip chip-hot">chain</span></p>
+          <h3><a href="/keyword-resolver/">Keyword Resolver</a></h3>
+          <p class="sk-blurb">Resolves keyword cannibalization with Keyword-Guard, then rewrites titles, H1s and meta descriptions with Wordsmith. One query, one owner — the ownership audit blocks until the map is settled, and a sitemap fallback is named as a fallback when you have no Search Console.</p>
+          <p class="sk-stats">3 files · 127 lines · 2 chained skills · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/keyword-resolver --skill keyword-resolver</code>
+          <p class="sk-links">
+            <a href="/keyword-resolver/">Install page</a>
+            <a href="https://github.com/arm-pz/keyword-resolver" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="seo-polish" data-search="seo-polish seo polish seo seo-crawl&#x27;s measured findings, an optional seo-audit diagnosis, then wordsmith drafts optimized alternatives for every high and medium finding: titles, meta descriptions, headings and internal-link anchors.">
+          <p class="chips"><span class="chip">seo</span><span class="chip chip-hot">chain</span></p>
+          <h3><a href="/seo-polish/">Seo Polish</a></h3>
+          <p class="sk-blurb">seo-crawl's measured findings, an optional seo-audit diagnosis, then Wordsmith drafts optimized alternatives for every High and Medium finding: titles, meta descriptions, headings and internal-link anchors.</p>
+          <p class="sk-stats">3 files · 85 lines · 5 audit layers · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/seo-polish --skill seo-polish</code>
+          <p class="sk-links">
+            <a href="/seo-polish/">Install page</a>
+            <a href="https://github.com/arm-pz/seo-polish" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="sk-group" id="writing-growth" aria-labelledby="writing-growth-h">
+      <div class="sk-head">
+        <h2 id="writing-growth-h">Writing &amp; Content</h2>
+        <p>3 skills · editing · platforms · sales copy</p>
+      </div>
+      <div class="sk-grid">
+        <article class="skill" id="wordsmith" data-search="wordsmith wordsmith editorial teaches your agent to edit, not just generate: 44 commands across 5 disciplines that tighten, rewrite, critique and proofread while keeping the author&#x27;s meaning, hedges and voice intact.">
+          <p class="chips"><span class="chip">editorial</span></p>
+          <h3><a href="/wordsmith/">Wordsmith</a></h3>
+          <p class="sk-blurb">Teaches your agent to edit, not just generate: 44 commands across 5 disciplines that tighten, rewrite, critique and proofread while keeping the author's meaning, hedges and voice intact.</p>
+          <p class="sk-stats">44 commands · 5 disciplines · ~1,200 lines · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/wordsmith</code>
+          <p class="sk-links">
+            <a href="/wordsmith/">Install page</a>
+            <a href="https://github.com/arm-pz/wordsmith" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="platform-content" data-search="platform-content platform content content writes platform-native content packs from one brief: x threads, linkedin posts, youtube and tiktok scripts, instagram captions, newsletters and blog articles, each shaped to how that platform is actually read.">
+          <p class="chips"><span class="chip">content</span></p>
+          <h3><a href="/platform-content/">Platform Content</a></h3>
+          <p class="sk-blurb">Writes platform-native content packs from one brief: X threads, LinkedIn posts, YouTube and TikTok scripts, Instagram captions, newsletters and blog articles, each shaped to how that platform is actually read.</p>
+          <p class="sk-stats">3 files · 453 lines · 11 KB</p>
+          <code class="sk-install">npx skills add arm-pz/platform-content</code>
+          <p class="sk-links">
+            <a href="/platform-content/">Install page</a>
+            <a href="https://github.com/arm-pz/platform-content" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="sales-copy" data-search="sales-copy sales copy content writes buyer-facing conversion assets: long-form sales pages, landing pages, launch and abandoned-cart email sequences and ad variations, built on the offer and the objections you can actually back.">
+          <p class="chips"><span class="chip">content</span></p>
+          <h3><a href="/sales-copy/">Sales Copy</a></h3>
+          <p class="sk-blurb">Writes buyer-facing conversion assets: long-form sales pages, landing pages, launch and abandoned-cart email sequences and ad variations, built on the offer and the objections you can actually back.</p>
+          <p class="sk-stats">3 files · 595 lines · 13 KB</p>
+          <code class="sk-install">npx skills add arm-pz/sales-copy</code>
+          <p class="sk-links">
+            <a href="/sales-copy/">Install page</a>
+            <a href="https://github.com/arm-pz/sales-copy" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="sk-group" id="outbound" aria-labelledby="outbound-h">
+      <div class="sk-head">
+        <h2 id="outbound-h">Outbound</h2>
+        <p>2 skills · list gates · deliverability</p>
+      </div>
+      <div class="sk-grid">
+        <article class="skill" id="cold-email-list-gate" data-search="cold-email-list-gate cold email list gate outbound gate a cold-email lead list before it loads: sample ten rows, check company, title, size, and mailbox against the icp, compare data providers on the same criteria, and return a go or hold decision with the fail pattern and the re-run…">
+          <p class="chips"><span class="chip">outbound</span></p>
+          <h3><a href="/cold-email-list-gate/">Cold Email List Gate</a></h3>
+          <p class="sk-blurb">Gate a cold-email lead list before it loads: sample ten rows, check company, title, size, and mailbox against the ICP, compare data providers on the same criteria, and return a GO or HOLD decision with the fail pattern and the re-run…</p>
+          <p class="sk-stats">2 files · 96 lines · 2 KB</p>
+          <code class="sk-install">npx skills add arm-pz/cold-email-list-gate</code>
+          <p class="sk-links">
+            <a href="/cold-email-list-gate/">Install page</a>
+            <a href="https://github.com/arm-pz/cold-email-list-gate" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="cold-email-ops" data-search="cold-email-ops cold email ops outbound plan and audit a cold-email program at volume and keep it from degrading: computes inbox and domain capacity from a monthly send target, sets per-domain reply-rate floors, burn-replacement cadence, shadow-ban tests, and automation error…">
+          <p class="chips"><span class="chip">outbound</span></p>
+          <h3><a href="/cold-email-ops/">Cold Email Ops</a></h3>
+          <p class="sk-blurb">Plan and audit a cold-email program at volume and keep it from degrading: computes inbox and domain capacity from a monthly send target, sets per-domain reply-rate floors, burn-replacement cadence, shadow-ban tests, and automation error…</p>
+          <p class="sk-stats">4 files · 393 lines · 8 KB</p>
+          <code class="sk-install">npx skills add arm-pz/cold-email-ops</code>
+          <p class="sk-links">
+            <a href="/cold-email-ops/">Install page</a>
+            <a href="https://github.com/arm-pz/cold-email-ops" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="sk-group" id="career" aria-labelledby="career-h">
+      <div class="sk-head">
+        <h2 id="career-h">Career</h2>
+        <p>4 skills · screening · applications · growth</p>
+      </div>
+      <div class="sk-grid">
+        <article class="skill" id="recruiter-lens" data-search="recruiter-lens recruiter lens career reviews resumes, cvs and linkedin profiles the way recruiters actually screen them: first-impression scans, ats compatibility, rejection-pattern diagnosis, and interview prep. 13 commands through 5 filters, and it never invents a metric.">
+          <p class="chips"><span class="chip">career</span></p>
+          <h3><a href="/recruiter-lens/">Recruiter Lens</a></h3>
+          <p class="sk-blurb">Reviews resumes, CVs and LinkedIn profiles the way recruiters actually screen them: first-impression scans, ATS compatibility, rejection-pattern diagnosis, and interview prep. 13 commands through 5 filters, and it never invents a metric.</p>
+          <p class="sk-stats">13 commands · 5 filters · ~2,500 lines · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/recruiter-lens</code>
+          <p class="sk-links">
+            <a href="/recruiter-lens/">Install page</a>
+            <a href="https://github.com/arm-pz/recruiter-lens" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="applicant-kit" data-search="applicant-kit applicant kit career writes the better version: decoded job description, tailored resume, bullets rewritten as action-task-result-impact, honest keyword placement, five summaries, a linkedin rewrite and twenty interview answers, all built from real experience. recruiter-lens judges; applicant-kit produces. nothing invented.">
+          <p class="chips"><span class="chip">career</span></p>
+          <h3><a href="/applicant-kit/">Applicant Kit</a></h3>
+          <p class="sk-blurb">Writes the better version: decoded job description, tailored resume, bullets rewritten as action-task-result-impact, honest keyword placement, five summaries, a LinkedIn rewrite and twenty interview answers, all built from real experience. recruiter-lens judges; applicant-kit produces. Nothing invented.</p>
+          <p class="sk-stats">7 modes · 6 produce + 1 hand-off · ~320 lines · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/applicant-kit --skill applicant-kit</code>
+          <p class="sk-links">
+            <a href="/applicant-kit/">Install page</a>
+            <a href="https://github.com/arm-pz/applicant-kit" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="application-pilot" data-search="application-pilot application pilot career runs the job search around the applications: turns role criteria into a live shortlist, scores each role for fit with evidence, keeps a reviewable tracker with submission and follow-up dates, flags roles that have gone quiet, drafts the follow-up and the interview briefing, and reads the funnel weekly. applicant-kit writes the packet; application-pilot keeps the search alive. it never submits anything, and never claims a status it did not see.">
+          <p class="chips"><span class="chip">career</span></p>
+          <h3><a href="/application-pilot/">Application Pilot</a></h3>
+          <p class="sk-blurb">Runs the job search around the applications: turns role criteria into a live shortlist, scores each role for fit with evidence, keeps a reviewable tracker with submission and follow-up dates, flags roles that have gone quiet, drafts the follow-up and the interview briefing, and reads the funnel weekly. applicant-kit writes the packet; application-pilot keeps the search alive. It never submits anything, and never claims a status it did not see.</p>
+          <p class="sk-stats">8 modes · 9 ground rules · 5 files · no CLI, no telemetry</p>
+          <code class="sk-install">npx skills add arm-pz/application-pilot --skill application-pilot</code>
+          <p class="sk-links">
+            <a href="/application-pilot/">Install page</a>
+            <a href="https://github.com/arm-pz/application-pilot" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="career-track" data-search="career-track career track career for the moves around a career: a positioning line you can repeat, the case for the next level, review and promotion narratives, salary negotiation scripts and a ninety-day plan.">
+          <p class="chips"><span class="chip">career</span></p>
+          <h3><a href="/career-track/">Career Track</a></h3>
+          <p class="sk-blurb">For the moves around a career: a positioning line you can repeat, the case for the next level, review and promotion narratives, salary negotiation scripts and a ninety-day plan.</p>
+          <p class="sk-stats">3 files · 382 lines · 12 KB</p>
+          <code class="sk-install">npx skills add arm-pz/career-track</code>
+          <p class="sk-links">
+            <a href="/career-track/">Install page</a>
+            <a href="https://github.com/arm-pz/career-track" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="sk-group" id="thinking-learning" aria-labelledby="thinking-learning-h">
+      <div class="sk-head">
+        <h2 id="thinking-learning-h">Thinking &amp; Learning</h2>
+        <p>9 skills · research · decisions · teaching</p>
+      </div>
+      <div class="sk-grid">
+        <article class="skill" id="research-brief" data-search="research-brief research brief research answers “what is known about this” with a sourced brief: overviews, competitor and industry analysis, fact checks with conflicts flagged, every claim tied to a dated source and every unknown named.">
+          <p class="chips"><span class="chip">research</span></p>
+          <h3><a href="/research-brief/">Research Brief</a></h3>
+          <p class="sk-blurb">Answers “what is known about this” with a sourced brief: overviews, competitor and industry analysis, fact checks with conflicts flagged, every claim tied to a dated source and every unknown named.</p>
+          <p class="sk-stats">4 files · 520 lines · 14 KB</p>
+          <code class="sk-install">npx skills add arm-pz/research-brief</code>
+          <p class="sk-links">
+            <a href="/research-brief/">Install page</a>
+            <a href="https://github.com/arm-pz/research-brief" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="data-readout" data-search="data-readout data readout research turns the numbers you already own into a readout you can act on: it opens the real file first, then gives findings with the business implication of each, chart specs and the caveats that matter.">
+          <p class="chips"><span class="chip">research</span></p>
+          <h3><a href="/data-readout/">Data Readout</a></h3>
+          <p class="sk-blurb">Turns the numbers you already own into a readout you can act on: it opens the real file first, then gives findings with the business implication of each, chart specs and the caveats that matter.</p>
+          <p class="sk-stats">4 files · 406 lines · 12 KB</p>
+          <code class="sk-install">npx skills add arm-pz/data-readout</code>
+          <p class="sk-links">
+            <a href="/data-readout/">Install page</a>
+            <a href="https://github.com/arm-pz/data-readout" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="crash-test" data-search="crash-test crash test decisions crash-tests a decision before you build it. four fixed roles draft the same task in separate contexts and attack each other&#x27;s drafts anonymously; the chair merges what survived on evidence, not votes, keeps a dissent log for what it could not settle, and grounds the winner&#x27;s claims about your files against the source before adopting them.">
+          <p class="chips"><span class="chip">decisions</span></p>
+          <h3><a href="/crash-test/">Crash Test</a></h3>
+          <p class="sk-blurb">Crash-tests a decision before you build it. Four fixed roles draft the same task in separate contexts and attack each other's drafts anonymously; the chair merges what survived on evidence, not votes, keeps a dissent log for what it could not settle, and grounds the winner's claims about your files against the source before adopting them.</p>
+          <p class="sk-stats">4 roles · ~9 calls · 1 opt-in Operator seat · 2 modes · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/crash-test --skill crash-test</code>
+          <p class="sk-links">
+            <a href="/crash-test/">Install page</a>
+            <a href="https://github.com/arm-pz/crash-test" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="do-better" data-search="do-better do better arena when an answer is bad, don&#x27;t ask twice: n sub-agents (100 by default, 16 with --quick) get the exact same task with different strategy cards, then attack, defend and judge each other in a single-elimination bracket until one solution survives.">
+          <p class="chips"><span class="chip">arena</span></p>
+          <h3><a href="/do-better/">Do Better</a></h3>
+          <p class="sk-blurb">When an answer is bad, don't ask twice: N sub-agents (100 by default, 16 with --quick) get the exact same task with different strategy cards, then attack, defend and judge each other in a single-elimination bracket until one solution survives.</p>
+          <p class="sk-stats">2,160 strategy cards · 7 rounds at full size · ~1,700 lines · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/do-better</code>
+          <p class="sk-links">
+            <a href="/do-better/">Install page</a>
+            <a href="https://github.com/arm-pz/do-better" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="strategy-memo" data-search="strategy-memo strategy memo decisions turns a business question into a decision document: situation analysis, a recommendation written as ranked options, the risks, and a roadmap someone can execute.">
+          <p class="chips"><span class="chip">decisions</span></p>
+          <h3><a href="/strategy-memo/">Strategy Memo</a></h3>
+          <p class="sk-blurb">Turns a business question into a decision document: situation analysis, a recommendation written as ranked options, the risks, and a roadmap someone can execute.</p>
+          <p class="sk-stats">3 files · 384 lines · 9 KB</p>
+          <code class="sk-install">npx skills add arm-pz/strategy-memo</code>
+          <p class="sk-links">
+            <a href="/strategy-memo/">Install page</a>
+            <a href="https://github.com/arm-pz/strategy-memo" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="solo-income-blueprint" data-search="solo-income-blueprint solo income blueprint decisions turns “i want to make money online” into one plan: a business model that fits your skills, time and budget, one offer, a demand check, a minimal tool stack and a seven-day launch.">
+          <p class="chips"><span class="chip">decisions</span></p>
+          <h3><a href="/solo-income-blueprint/">Solo Income Blueprint</a></h3>
+          <p class="sk-blurb">Turns “I want to make money online” into one plan: a business model that fits your skills, time and budget, one offer, a demand check, a minimal tool stack and a seven-day launch.</p>
+          <p class="sk-stats">3 files · 328 lines · 7 KB</p>
+          <code class="sk-install">npx skills add arm-pz/solo-income-blueprint</code>
+          <p class="sk-links">
+            <a href="/solo-income-blueprint/">Install page</a>
+            <a href="https://github.com/arm-pz/solo-income-blueprint" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="topic-primer" data-search="topic-primer topic primer learning a world-class teacher for any topic, from zero background toward expert depth. eight modes: foundations, full curriculum, concept-by-concept lessons, adaptive tutoring, expert mental models, mistake prevention, strict exams, and eli5. one question at a time, then it waits.">
+          <p class="chips"><span class="chip">learning</span></p>
+          <h3><a href="/topic-primer/">Topic Primer</a></h3>
+          <p class="sk-blurb">A world-class teacher for any topic, from zero background toward expert depth. Eight modes: foundations, full curriculum, concept-by-concept lessons, adaptive tutoring, expert mental models, mistake prevention, strict exams, and ELI5. One question at a time, then it waits.</p>
+          <p class="sk-stats">8 modes · 68 lines · 0 API keys</p>
+          <code class="sk-install">npx skills add arm-pz/topic-primer</code>
+          <p class="sk-links">
+            <a href="/topic-primer/">Install page</a>
+            <a href="https://github.com/arm-pz/topic-primer" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="study-system" data-search="study-system study system learning builds the system around a skill you are acquiring: the minimum components, a beginner-to-practitioner roadmap, deliberate practice, spaced repetition and an honest mastery check.">
+          <p class="chips"><span class="chip">learning</span></p>
+          <h3><a href="/study-system/">Study System</a></h3>
+          <p class="sk-blurb">Builds the system around a skill you are acquiring: the minimum components, a beginner-to-practitioner roadmap, deliberate practice, spaced repetition and an honest mastery check.</p>
+          <p class="sk-stats">3 files · 373 lines · 11 KB</p>
+          <code class="sk-install">npx skills add arm-pz/study-system</code>
+          <p class="sk-links">
+            <a href="/study-system/">Install page</a>
+            <a href="https://github.com/arm-pz/study-system" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+        <article class="skill" id="course-builder" data-search="course-builder course builder learning a course for a class or cohort: measurable outcomes, modules in prerequisite order, an assessment for every outcome and a time budget that fits, checked by a script before the first session.">
+          <p class="chips"><span class="chip">learning</span></p>
+          <h3><a href="/course-builder/">Course Builder</a></h3>
+          <p class="sk-blurb">A course for a class or cohort: measurable outcomes, modules in prerequisite order, an assessment for every outcome and a time budget that fits, checked by a script before the first session.</p>
+          <p class="sk-stats">5 files · 301 lines · 6 KB</p>
+          <code class="sk-install">npx skills add arm-pz/caffeinity-skills --skill course-builder</code>
+          <p class="sk-links">
+            <a href="/course-builder/">Install page</a>
+            <a href="https://github.com/arm-pz/caffeinity-skills" target="_blank" rel="noopener">Source</a>
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- gen:skills:end -->
+    <p class="empty" id="empty" hidden>Nothing matches that yet. <a href="https://github.com/arm-pz" target="_blank" rel="noopener">Ask for it on GitHub</a>.</p>
+    <p class="aside">Looking for something that runs inside Claude Code, like a hook that holds <code>git push</code>? That is a <a href="/mods/">mod</a>. Want the skills chained for one outcome? See the <a href="/workflows/">workflows</a>.</p>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="wordmark" aria-hidden="true">caffeinity<b>.</b></p>
+    <div class="meta">
+      <span>Skillsmith is made by <a href="https://caffeinity.com/">Caffeinity</a>: open agent skills by Abdul Rahman P Z. Each skill lives in its own <a href="https://github.com/arm-pz">arm-pz</a> repo; the plugin marketplace is <a href="https://github.com/arm-pz/caffeinity-skills">arm-pz/caffeinity-skills</a>.</span>
+      <a href="/work/">Custom skills for your team</a>
+      <a href="https://github.com/arm-pz" target="_blank" rel="noopener">github.com/arm-pz</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var q=document.getElementById('q'),status=document.getElementById('find-status'),empty=document.getElementById('empty');
+  var cards=[].slice.call(document.querySelectorAll('.skill')),groups=[].slice.call(document.querySelectorAll('.sk-group'));
+  function filter(){
+    if(!q)return;
+    var terms=q.value.toLowerCase().split(/\s+/).filter(Boolean),shown=0;
+    cards.forEach(function(c){
+      var hay=c.getAttribute('data-search'),on=terms.every(function(t){return hay.indexOf(t)!==-1;});
+      c.hidden=!on;if(on)shown++;
+    });
+    groups.forEach(function(g){g.hidden=!g.querySelector('.skill:not([hidden])');});
+    empty.hidden=shown>0;
+    status.textContent=terms.length?(shown+' of '+cards.length+(shown===1?' matches':' match')):'';
+  }
+  if(q)q.addEventListener('input',filter);
+  var tabs=[].slice.call(document.querySelectorAll('.tabs [role="tab"]')),bar=document.querySelector('.shell-progress b');
+  function show(i,focus){
+    tabs.forEach(function(t,j){
+      var on=i===j;t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden=!on;
+    });
+    if(bar)bar.style.width=((i+1)/tabs.length*100)+'%';
+    if(focus)tabs[i].focus();
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){show(i);});
+    t.addEventListener('keydown',function(e){
+      var k={ArrowRight:1,ArrowLeft:-1}[e.key];
+      if(k){e.preventDefault();show((i+k+tabs.length)%tabs.length,true);}
+    });
+  });
+  if(tabs.length)show(0);
+  [].forEach.call(document.querySelectorAll('[data-copy]'),function(b){
+    b.addEventListener('click',function(){
+      var label=b.querySelector('.copy');
+      if(!navigator.clipboard){return;}
+      navigator.clipboard.writeText(b.getAttribute('data-copy')).then(function(){
+        label.textContent='Copied';setTimeout(function(){label.textContent='Copy';},1600);
+      },function(){});
+    });
+  });
+})();
+</script>
+</body>
+</body>
+</html>

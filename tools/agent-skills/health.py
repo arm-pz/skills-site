@@ -73,12 +73,13 @@ def main(argv=None):
         regressed = run.returncode != 0
         if args.report:
             with open(args.report, "w", encoding="utf-8") as fh:
-                fh.write("Nightly `regress.py` over every skill published on skills.caffeinity.com.\n\n")
+                fh.write("Nightly `regress.py` over every skill published on skillsmith.tech.\n\n")
                 fh.write("```\n" + run.stdout + "```\n\n")
                 fh.write("Fix each regression in its repo with tune-skill; the next nightly run "
                          "records the fix. If a regression is intended, accept it with "
-                         "`python tools/agent-skills/health.py --accept-all` and commit "
-                         "`site/health.json`.\n")
+                         "`python tools/agent-skills/health.py --accept-all`, regenerate the pages "
+                         "with `python tools/agent-skills/gen_page.py --write`, and commit "
+                         "`site/health.json` with them.\n")
         if args.accept_all or (args.accept and not regressed and "0 improvements" not in run.stdout):
             subprocess.run(cmd + ["--write"], check=True, capture_output=True)
             print(f"baseline updated: {baseline.relative_to(root)}")

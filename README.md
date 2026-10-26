@@ -2,13 +2,14 @@
 
 A static site and publish pipeline for a catalog of agent skills. Each skill
 (a SKILL.md repo) or Claude Code mod gets its own landing page with a one-line
-install command; the hub lists them all with a live filter; and a
+install command; `/skills/`, `/mods/` and `/workflows/` list them by type (every workflow
+also gets its own page); the homepage leads with outcomes; and a
 `/.well-known/agent-skills/index.json` discovery index lets anyone run
 `npx skills add https://your-domain`. One GitHub Actions workflow keeps the
 manifest in step with GitHub and tests, builds and verifies the site, then
 commits the build to a `deploy` branch that Cloudflare Pages pulls through its
 own GitHub app, so CI holds no Cloudflare credentials. Plain HTML, CSS and Python, no
-framework. It is the source of [skills.caffeinity.com](https://skills.caffeinity.com/).
+framework. It is the source of [skillsmith.tech](https://skillsmith.tech/), formerly skills.caffeinity.com.
 
 Fork it for your own skills: list them in `site/skills.json`, then follow
 [Run locally](#run-locally). Every page is self-contained, and the shared design

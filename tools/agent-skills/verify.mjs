@@ -3,7 +3,7 @@
 // require a root SKILL.md with name + description frontmatter.
 //
 //   node verify.mjs local                     # check ./out
-//   node verify.mjs https://skills.caffeinity.com   # check a deployed host
+//   node verify.mjs https://skillsmith.tech   # check a deployed host
 
 import { createHash } from "node:crypto";
 import { gunzipSync } from "node:zlib";

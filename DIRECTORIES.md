@@ -8,7 +8,7 @@ submit. Nothing here is submitted automatically: every entry below goes out unde
 
 | Surface | How | Where |
 | --- | --- | --- |
-| This site's discovery index | `/.well-known/agent-skills/index.json`, so `npx skills add https://skills.caffeinity.com` lists every skill | built by `publish.yml` |
+| This site's discovery index | `/.well-known/agent-skills/index.json`, so `npx skills add https://skillsmith.tech` lists every skill | built by `publish.yml` |
 | `/llms.txt` | install commands and every skill, for agents and AI search | built by `publish.yml` |
 | Sitemap and JSON-LD | sitemap, ItemList, WebSite and Organization data on the hub | built by `publish.yml` |
 | Claude Code marketplace | `/plugin marketplace add arm-pz/caffeinity-skills` | arm-pz/caffeinity-skills |
@@ -51,12 +51,12 @@ padding them is the kind of signal directories delist for.
 > SEO, writing and content, cold outbound, job search, research and decisions, learning and
 > course design. Every skill is plain markdown with its own repo, page and trigger tests; no API
 > keys. Install: `/plugin marketplace add arm-pz/caffeinity-skills` then
-> `/plugin install caffeinity@caffeinity-skills`. Browse: https://skills.caffeinity.com
+> `/plugin install caffeinity@caffeinity-skills`. Browse: https://skillsmith.tech
 
 ### Awesome-list line
 
 ```
-- [Caffeinity skills](https://github.com/arm-pz/caffeinity-skills) - 44 agent skills wired into ten workflows (skill authoring, release gates, SEO, outbound, job search, research, learning), with a router skill, workflow agents and trigger tests. Site: https://skills.caffeinity.com
+- [Caffeinity skills](https://github.com/arm-pz/caffeinity-skills) - 44 agent skills wired into ten workflows (skill authoring, release gates, SEO, outbound, job search, research, learning), with a router skill, workflow agents and trigger tests. Site: https://skillsmith.tech
 ```
 
 ## After submitting

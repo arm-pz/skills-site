@@ -148,6 +148,21 @@ def measure(repo, files, path):
     }, blob
 
 
+def quality(files, path, sha, date):
+    """What a page's quality block shows, read from the files at one commit."""
+    point = entry_point(files, path)
+    text = files[point].decode("utf-8", "replace") if point else ""
+    if point and point.endswith("plugin.json"):
+        data = json.loads(text)
+        version, description = data.get("version"), data.get("description", "")
+    else:
+        version = skilllib.frontmatter_version(text)
+        description = skilllib.parse_frontmatter(text).get("description", "") if text else ""
+    _, _, _, nots = gen_page.split_description(description)
+    return {"version": str(version) if version else None, "commit": sha[:7],
+            "updated": date, "notFor": nots}
+
+
 def candidate_entry(name, path, group, tag, source, order):
     title = skilllib.title_case(name)
     return {

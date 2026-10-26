@@ -1,6 +1,6 @@
 # PROJECT.md: the caffeinity skills ecosystem
 
-What exists, where it lives, how a skill gets from a repo to skills.caffeinity.com and the profile
+What exists, where it lives, how a skill gets from a repo to skillsmith.tech and the profile
 README, and how the skills keep checking each other. Written 2026-10-23, updated 2026-10-24. When this file and a repo
 disagree, the repo wins; fix this file.
 
@@ -9,7 +9,7 @@ disagree, the repo wins; fix this file.
 | Repo | Role |
 | --- | --- |
 | `arm-pz/<skill>` (one per skill) | The skills themselves: one `SKILL.md` per repo, at `SKILL.md`, `<repo>/SKILL.md` or `skills/<repo>/SKILL.md`. Installed with `npx skills add arm-pz/<repo>`. |
-| `arm-pz/skills-site` (this repo) | skills.caffeinity.com: the hub, one page per skill, both discovery indexes, archives, sitemap, and all the automation below. `site/skills.json` is the single list of what is published. |
+| `arm-pz/skills-site` (this repo) | skillsmith.tech (formerly skills.caffeinity.com, which now redirects to it): the hub, one page per skill, both discovery indexes, archives, sitemap, and all the automation below. `site/skills.json` is the single list of what is published. |
 | `arm-pz/caffeinity-skills` | Plugin marketplace for Claude Code (`.claude-plugin/marketplace.json`) and Codex (`.agents/plugins/marketplace.json`). Holds the mods (`mods/*`), `plugins/caffeinity-routing` (the start-here router), three skills that live only here (`plugins/paper-trail`, `plugins/course-builder`, `plugins/skill-estate`) and `plugins/caffeinity`: every skill plus eleven workflow agents in one install, generated hourly by `scripts/build_plugin.py`. |
 | `arm-pz/arm-pz` | The GitHub profile README. Its skills block is generated from `site/skills.json`. |
 | `arm-pz/ship-sentinel` | A Claude Code mod (no SKILL.md) that holds `git push` and deploys until the check skills have run. Listed on the site as a mod. |
@@ -49,12 +49,51 @@ push a public arm-pz repo with one SKILL.md and a repo About
 | --- | --- | --- |
 | add | public, non-fork repo passes the shape test, has an About, is not denied | entry + generated page; group and tag guessed from keywords (fix the guess in `site/skills.json` by hand; sync keeps it) |
 | refresh | a generated page's repo HEAD moved | file list, stats, commit and description re-measured; blurb, title and group kept |
+| quality | any page's repo HEAD moved | `quality` re-read: version (SKILL.md frontmatter or plugin.json), commit, commit date, and the description's "Not for" list |
 | rename | the old repo name now redirects (findable may recommend a rename) | entry, page folder and workflows follow; the old name becomes an alias; `_redirects` 301s the old page and archive URLs |
 | remove | GitHub answers Not Found, or the repo went private | entry and generated page dropped. A failed or unreadable API call stops the run instead |
 | hold | empty About, failed shape test | reported in the run summary; nothing published |
 
-Bespoke (hand-written) pages are never edited by any of this. After a rename the run summary says
-when a bespoke page's copy may still use the old name.
+Bespoke (hand-written) pages are never edited by any of this, except the region between
+`<!-- gen:quality:start -->` and `<!-- gen:quality:end -->` (and its CSS between the
+`gen:quality-css` markers), which `gen_page.py` rewrites on every page. After a rename the run summary
+says when a bespoke page's copy may still use the old name.
+
+### Site structure
+
+| Path | What | Made by |
+| --- | --- | --- |
+| `/` | Outcome-led front door: hero, one card per workflow, three featured skills, proof runs, install, custom work | `index.html` shell; `gen_home.py` fills its regions |
+| `/skills/` | Every skill by group, with search | `skills/index.html` shell + `gen_home.py` |
+| `/mods/` | Every Claude Code mod | `mods/index.html` shell + `gen_home.py` |
+| `/workflows/` and `/workflows/<slug>/` | Every workflow, then one page each with its steps and one install block | `workflows/index.html` shell + `gen_home.py`; the per-workflow pages are fully generated from `templates/workflow-page.html` |
+| `/work/` | Custom skills service | hand-written |
+| `/<name>/` | One page per skill or mod; item URLs stay flat whatever their type | `gen_page.py` (generated) or hand-written (bespoke) |
+
+The hub shells are hand-written; only the text between `<!-- gen:NAME:start -->` and
+`<!-- gen:NAME:end -->` is generated, and `gen_home.py --check` fails on drift. Section names are
+reserved in `skilllib.RESERVED` (including `subagents` and `harnesses` for later), so no skill can
+take one. The three homepage flagships are the entries with `featured: 1`, `2` and `3`; a featured
+entry must have a `tested` run.
+
+Naming: the site is **Skillsmith**, made by **Caffeinity**. Headers, titles and `og:site_name` say
+Skillsmith; the footer keeps the caffeinity wordmark and a "made by Caffeinity" line. Skill names,
+the `caffeinity-skills` marketplace and the `caffeinity` plugin keep their names, because install
+commands depend on them.
+
+### Quality record
+
+Every skill and mod page carries the same block: version, last commit date, which agents it works in,
+the nightly check result from `site/health.json`, the last real-world run, and its known limits. All
+of it is generated except the real-world run, which is the hand-kept `tested` field on an entry:
+
+```json
+"tested": {"date": "2026-10-24", "target": "skills.caffeinity.com",
+           "result": "One sentence on what it found.", "evidence": "/#proof"}
+```
+
+Add one only with evidence a visitor can open (a site path or an https URL). Without it the page says
+"No public run yet".
 
 Want it faster than an hour? Give a skill repo a fine-grained token that can dispatch to
 `arm-pz/skills-site` and send `repository_dispatch` with `event_type: skill-updated`. Not required.
@@ -101,7 +140,7 @@ night. Skills that live elsewhere but are handed off to are listed in `EXTERNAL`
 `tools/agent-skills/health.py`.
 
 To accept an intended change (a new WARN you decided to keep):
-`python tools/agent-skills/health.py --accept-all`, then commit `site/health.json`.
+`python tools/agent-skills/health.py --accept-all` and `python tools/agent-skills/gen_page.py --write`, then commit `site/health.json` and the pages.
 
 ## The brews (workflows across skills)
 
@@ -134,7 +173,9 @@ solo-launcher, skill-maintainer and estate-lead (Brew 1 · Pour-over to Brew 11 
 ### Changing a workflow
 
 1. Edit `references/workflows.md` in caffeinity-routing and `workflows` in `site/skills.json`
-   together; never renumber (other skills cite Brew 3 · Espresso and Brew 4 · Cold brew).
+   together; never renumber (other skills cite Brew 3 · Espresso and Brew 4 · Cold brew). Each
+   workflow in the manifest also needs a `slug` (its page, `/workflows/<slug>/`, named by the
+   outcome: `land-a-job`) and a one-sentence `summary`; changing a slug changes a public URL.
 2. Run `python -I plugins/caffeinity-routing/tests/test_route_check.py` and
    `python scripts/build_plugin.py --agents-only` in caffeinity-skills; add the agent to
    `plugins/caffeinity/agents.json` for a new workflow.
@@ -149,7 +190,9 @@ solo-launcher, skill-maintainer and estate-lead (Brew 1 · Pour-over to Brew 11 
    the hour; check the run summary for its guessed group, and move it in `site/skills.json` if needed.
 2. **Rename a repo** (findable's name decision): rename on GitHub. The redirect does the rest.
 3. **Retire a skill:** delete or privatize the repo, or add it to `site/deny.json` with a reason.
-4. **Hand-written page:** set `page: bespoke` and write `<name>/index.html`. Generators never touch it.
+4. **Hand-written page:** set `page: bespoke` and write `<name>/index.html`, with the two quality marker
+   pairs (one before `</head>`, one where the block should sit); `gen_page.py --check` fails without them.
+   Generators touch nothing else on it.
 5. **Before a push you are unsure of:** `python <tune-skill>/scripts/regress.py <folder-with-your-skills> --baseline health.json`.
 
 ## Running it locally
@@ -163,6 +206,14 @@ bash tools/agent-skills/make_dist.sh
 python tools/agent-skills/check_dist.py && node tools/agent-skills/verify.mjs local
 python -m http.server 8080 --directory dist
 ```
+
+## Domains
+
+`skillsmith.tech` is the canonical address (`skilllib.SITE`); every canonical tag, the sitemap,
+`llms.txt`, the discovery index and the deploy check use it. The `skills-site` Pages project also
+serves `www.skillsmith.tech` and `skills.caffeinity.com`, and two Cloudflare Redirect Rules send both
+to `https://skillsmith.tech` with the path kept (301). Keep both hostnames attached to the Pages
+project: the redirects only fire on hostnames Cloudflare serves.
 
 ## Known gaps
 

@@ -49,9 +49,11 @@ jobs:
         run: |
           set -euo pipefail
           [ -n "$(git status --porcelain site/health.json)" ] || exit 0
+          # Every skill page shows its nightly result, so the pages move with the baseline.
+          python tools/agent-skills/gen_page.py --write
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add site/health.json
+          git add -A site/health.json $(python tools/agent-skills/gen_page.py --list)
           git commit -m "health: record skill improvements"
           git pull --rebase origin main
           git push origin HEAD:main

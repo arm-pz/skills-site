@@ -7,6 +7,7 @@ import sys
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
+import gen_home
 import skilllib
 
 REF_RE = re.compile(r'(?:href|src)="(/[^"#?]*)"')
@@ -32,6 +33,8 @@ def check(root="."):
 
     for name in STATIC:
         need((dist / name).is_file(), f"missing dist/{name}")
+    for name in skilllib.STATIC_PAGES:
+        need((dist / name / "index.html").is_file(), f"missing dist/{name}/index.html")
     need((dist / ".well-known/skills.json").is_file(),
          "missing dist/.well-known/skills.json")
 
@@ -71,7 +74,9 @@ def check(root="."):
     if sitemap_path.is_file():
         ns = "{http://www.sitemaps.org/schemas/sitemap/0.9}"
         locs = {el.text for el in ET.parse(sitemap_path).getroot().iter(ns + "loc")}
-        expected = {f"{skilllib.SITE}/"} | {f"{skilllib.SITE}/{s['name']}/" for s in pages}
+        expected = ({f"{skilllib.SITE}/"} | {f"{skilllib.SITE}/{s['name']}/" for s in pages}
+                    | {f"{skilllib.SITE}/{name}/" for name in skilllib.STATIC_PAGES}
+                    | {f"{skilllib.SITE}/workflows/{f['slug']}/" for f in manifest.get("workflows", [])})
         need(locs == expected, f"sitemap URLs differ: missing {expected - locs}, "
                                f"extra {locs - expected}")
 
@@ -90,33 +95,31 @@ def check(root="."):
             need((path / "index.html").is_file() if target.endswith("/") else path.is_file(),
                  f"redirect target {target} does not exist")
 
-    hub_path = dist / "index.html"
-    need(hub_path.is_file(), "missing dist/index.html")
-    if hub_path.is_file():
-        hub = hub_path.read_text(encoding="utf-8")
-        cards = hub.count('class="skill"')
-        need(cards == len(pages), f"hub has {cards} cards, expected {len(pages)}")
-        ld = LD_RE.search(hub)
-        need(ld is not None, "hub has no ItemList JSON-LD")
-        if ld:
-            data = json.loads(ld.group(1))
-            need(data.get("numberOfItems") == len(pages),
-                 f"JSON-LD numberOfItems is {data.get('numberOfItems')}, "
-                 f"expected {len(pages)}")
-        for ref in REF_RE.findall(hub):
+    for rel, cards in (("skills/index.html", gen_home.skills_only(manifest)),
+                       ("mods/index.html", gen_home.mods_only(manifest))):
+        path = dist / rel
+        if path.is_file():
+            text = path.read_text(encoding="utf-8")
+            count = text.count('class="skill"')
+            need(count == len(cards), f"{rel} has {count} cards, expected {len(cards)}")
+            ld = LD_RE.search(text)
+            need(ld is not None, f"{rel} has no ItemList JSON-LD")
+            if ld:
+                data = json.loads(ld.group(1))
+                need(data.get("numberOfItems") == len(cards),
+                     f"{rel}: JSON-LD numberOfItems is {data.get('numberOfItems')}, "
+                     f"expected {len(cards)}")
+    for flow in manifest.get("workflows", []):
+        need((dist / "workflows" / flow["slug"] / "index.html").is_file(),
+             f"missing dist/workflows/{flow['slug']}/index.html")
+
+    need((dist / "index.html").is_file(), "missing dist/index.html")
+    for page in sorted(dist.rglob("*.html")):
+        for ref in REF_RE.findall(page.read_text(encoding="utf-8")):
             target = dist / ref.lstrip("/")
             if ref.endswith("/") or target.is_dir():
                 target = target / "index.html"
-            need(target.is_file(), f"hub reference {ref} does not resolve")
-
-    for skill in pages:
-        page = dist / skill["name"] / "index.html"
-        if page.is_file():
-            for ref in REF_RE.findall(page.read_text(encoding="utf-8")):
-                target = dist / ref.lstrip("/")
-                if ref.endswith("/") or target.is_dir():
-                    target = target / "index.html"
-                need(target.is_file(), f"{skill['name']}: reference {ref} does not resolve")
+            need(target.is_file(), f"{page.relative_to(dist).as_posix()}: reference {ref} does not resolve")
 
     return errors
 

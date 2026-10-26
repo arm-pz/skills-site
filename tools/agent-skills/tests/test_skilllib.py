@@ -122,6 +122,35 @@ class ManifestTest(unittest.TestCase):
         with self.assertRaises(skilllib.ManifestError):
             skilllib.validate_manifest(data)
 
+    def test_quality_and_tested_shapes(self):
+        data = self.manifest()
+        data["skills"][0]["quality"] = {"version": None, "commit": "abcdef1",
+                                        "updated": "2026-10-24", "notFor": []}
+        data["skills"][0]["tested"] = {"date": "2026-10-24", "target": "t", "result": "r",
+                                       "evidence": "/#proof"}
+        skilllib.validate_manifest(data)
+        for key, bad in (("quality", {"commit": "abc"}),
+                         ("tested", {"date": "24 Oct", "target": "t", "result": "r", "evidence": "/"}),
+                         ("tested", {"date": "2026-10-24", "target": "t", "result": "r",
+                                     "evidence": "javascript:alert(1)"})):
+            broken = self.manifest()
+            broken["skills"][0][key] = bad
+            with self.assertRaises(skilllib.ManifestError):
+                skilllib.validate_manifest(broken)
+
+    def test_frontmatter_version(self):
+        self.assertEqual(skilllib.frontmatter_version("---\nname: a\nversion: 1.0.0\n---\n"), "1.0.0")
+        self.assertEqual(skilllib.frontmatter_version(
+            '---\nname: a\nmetadata:\n  author: x\n  version: "2.1.0"\n---\n'), "2.1.0")
+        self.assertIsNone(skilllib.frontmatter_version("---\nname: a\n---\nversion: 9\n"))
+        self.assertIsNone(skilllib.frontmatter_version("no frontmatter"))
+
+    def test_static_page_name_fails(self):
+        data = self.manifest()
+        data["skills"][0]["name"] = "work"
+        with self.assertRaises(skilllib.ManifestError):
+            skilllib.validate_manifest(data)
+
     def test_generated_needs_page_source(self):
         data = self.manifest()
         data["skills"][0]["page"] = "generated"
@@ -165,9 +194,52 @@ class ManifestTest(unittest.TestCase):
         with self.assertRaises(skilllib.ManifestError):
             skilllib.validate_manifest(data)
 
+    def test_workflow_needs_a_unique_slug_and_a_summary(self):
+        flow = {"id": "pour-over", "number": 1, "name": "Pour-over", "title": "Demo",
+                "slug": "demo-flow", "summary": "Does it.", "steps": [{"skills": ["demo"]}]}
+        for bad in ({"slug": "Demo Flow"}, {"summary": " "}):
+            data = self.manifest()
+            data["workflows"] = [dict(flow, **bad)]
+            with self.assertRaises(skilllib.ManifestError):
+                skilllib.validate_manifest(data)
+        data = self.manifest()
+        data["workflows"] = [flow, dict(flow, id="bloom", number=2)]
+        with self.assertRaises(skilllib.ManifestError):
+            skilllib.validate_manifest(data)
+
+    def test_featured_needs_a_tested_run_and_its_own_spot(self):
+        data = self.manifest()
+        data["skills"][0]["featured"] = 1
+        with self.assertRaises(skilllib.ManifestError):
+            skilllib.validate_manifest(data)
+        data["skills"][0]["tested"] = {"date": "2026-10-24", "target": "t", "result": "r",
+                                       "evidence": "/#proof"}
+        skilllib.validate_manifest(data)
+        data["skills"][0]["featured"] = 4
+        with self.assertRaises(skilllib.ManifestError):
+            skilllib.validate_manifest(data)
+
+    def test_pairs_with_needs_https_and_a_cost_line(self):
+        pair = {"name": "Tool", "url": "https://example.com", "for": "data.", "needs": "A key."}
+        data = self.manifest()
+        data["skills"][0]["pairsWith"] = [pair]
+        skilllib.validate_manifest(data)
+        for bad in ({"url": "http://example.com"}, {"needs": ""}):
+            data["skills"][0]["pairsWith"] = [dict(pair, **bad)]
+            with self.assertRaises(skilllib.ManifestError):
+                skilllib.validate_manifest(data)
+
+    def test_section_names_are_reserved(self):
+        for name in ("skills", "subagents", "harnesses"):
+            data = self.manifest()
+            data["skills"][0]["name"] = name
+            with self.assertRaises(skilllib.ManifestError):
+                skilllib.validate_manifest(data)
+
     def test_workflow_steps_must_have_pages(self):
         data = self.manifest()
-        data["workflows"] = [{"id": "pour-over", "number": 1, "name": "Pour-over", "title": "Demo", "steps": [{"skills": ["demo"]}]}]
+        data["workflows"] = [{"id": "pour-over", "number": 1, "name": "Pour-over", "title": "Demo",
+                              "slug": "demo-flow", "summary": "Does it.", "steps": [{"skills": ["demo"]}]}]
         skilllib.validate_manifest(data)
         data["workflows"][0]["steps"].append({"skills": ["ghost"]})
         with self.assertRaises(skilllib.ManifestError):
