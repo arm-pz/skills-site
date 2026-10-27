@@ -49,8 +49,10 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           GH: gh
         run: python tools/agent-skills/build.py
-      - name: sitemap
-        run: python tools/agent-skills/gen_sitemap.py --write
+      - name: sitemap and llms
+        run: |
+          python tools/agent-skills/gen_sitemap.py --write
+          python tools/agent-skills/gen_llms.py --write
       - name: dist
         run: bash tools/agent-skills/make_dist.sh
       - name: gate
@@ -88,8 +90,10 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           GH: gh
         run: python tools/agent-skills/build.py
-      - name: sitemap
-        run: python tools/agent-skills/gen_sitemap.py --write
+      - name: sitemap and llms
+        run: |
+          python tools/agent-skills/gen_sitemap.py --write
+          python tools/agent-skills/gen_llms.py --write
       - name: dist
         run: bash tools/agent-skills/make_dist.sh
       - name: gate

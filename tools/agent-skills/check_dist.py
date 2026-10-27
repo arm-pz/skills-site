@@ -75,6 +75,18 @@ def check(root="."):
         need(locs == expected, f"sitemap URLs differ: missing {expected - locs}, "
                                f"extra {locs - expected}")
 
+    llms_path = dist / "llms.txt"
+    out_llms = root / "out" / "llms.txt"
+    need(llms_path.is_file(), "missing dist/llms.txt")
+    need(out_llms.is_file(), "missing out/llms.txt")
+    if llms_path.is_file() and out_llms.is_file():
+        need(llms_path.read_bytes() == out_llms.read_bytes(),
+             "dist/llms.txt differs from out/llms.txt")
+        llms = llms_path.read_text(encoding="utf-8")
+        for skill in pages:
+            url = f"{skilllib.SITE}/{skill['name']}/"
+            need(url in llms, f"llms.txt does not link {url}")
+
     hub_path = dist / "index.html"
     need(hub_path.is_file(), "missing dist/index.html")
     if hub_path.is_file():

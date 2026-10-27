@@ -57,6 +57,11 @@ class CheckDistTest(unittest.TestCase):
             '<url><loc>https://skills.caffeinity.com/beta/</loc></url>'
             "</urlset>")
         shutil.copyfile(self.root / "out/sitemap.xml", self.root / "dist/sitemap.xml")
+        llms = ("# Skills\n\n"
+                "- [Alpha](https://skills.caffeinity.com/alpha/)\n"
+                "- [Beta](https://skills.caffeinity.com/beta/)\n")
+        (self.root / "out/llms.txt").write_text(llms)
+        shutil.copyfile(self.root / "out/llms.txt", self.root / "dist/llms.txt")
         for name in ("alpha", "beta"):
             (self.root / "dist" / name).mkdir()
             (self.root / "dist" / name / "index.html").write_text(
@@ -87,6 +92,10 @@ class CheckDistTest(unittest.TestCase):
 
     def test_missing_page_fails(self):
         shutil.rmtree(self.root / "dist/beta")
+        self.assertTrue(check_dist.check(self.root))
+
+    def test_missing_llms_fails(self):
+        (self.root / "dist/llms.txt").unlink()
         self.assertTrue(check_dist.check(self.root))
 
     def test_stale_jsonld_count_fails(self):
