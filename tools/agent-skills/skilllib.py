@@ -498,3 +498,18 @@ def sha256_hex(blob):
 
 def title_case(name):
     return " ".join(word.capitalize() for word in name.split("-"))
+
+
+# Search results cut titles at about 60 characters (seo-crawl flags longer
+# ones), so a generated page title takes the longest suffix that still fits.
+TITLE_MAX = 60
+SKILL_TITLE_SUFFIXES = ("AI Agent Skill for Claude Code and Codex", "AI Agent Skill for Claude Code",
+                        "Agent Skill for Claude Code", "AI Agent Skill")
+
+
+def skill_page_title(title):
+    for suffix in SKILL_TITLE_SUFFIXES:
+        candidate = f"{title} — {suffix}"
+        if len(candidate) <= TITLE_MAX:
+            return candidate
+    return f"{title} — {SKILL_TITLE_SUFFIXES[-1]}"

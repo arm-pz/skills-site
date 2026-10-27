@@ -246,5 +246,16 @@ class ManifestTest(unittest.TestCase):
             skilllib.validate_manifest(data)
 
 
+
+class SkillPageTitleTest(unittest.TestCase):
+    def test_short_title_keeps_full_suffix(self):
+        self.assertEqual(skilllib.skill_page_title("Seo Crawl"), "Seo Crawl — AI Agent Skill for Claude Code and Codex")
+
+    def test_long_title_drops_to_a_suffix_that_fits(self):
+        for title in ("Release Gate · Validator", "Solo Income Blueprint", "Caffeinity Routing"):
+            out = skilllib.skill_page_title(title)
+            self.assertLessEqual(len(out), skilllib.TITLE_MAX, out)
+            self.assertTrue(out.startswith(f"{title} — "))
+
 if __name__ == "__main__":
     unittest.main()

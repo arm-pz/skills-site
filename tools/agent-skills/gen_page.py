@@ -240,7 +240,7 @@ def render_page(entry, manifest=None, health=None):
     mod = entry.get("kind") == "mod"
     noun = "Claude Code mod" if mod else "agent skill"
     page_title = entry.get("pageTitle") or (f"{entry['title']} — Claude Code mod" if mod else
-                                            f"{entry['title']} — AI Agent Skill for Claude Code and Codex")
+                                            skilllib.skill_page_title(entry["title"]))
     purpose, when, says, nots = split_description(source["description"])
     related = related_html(entry, manifest)
     if not related:
