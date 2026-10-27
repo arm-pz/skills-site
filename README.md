@@ -3,7 +3,8 @@
 The source of [skills.caffeinity.com](https://skills.caffeinity.com): one
 single-file landing page per agent skill, plus a hub index, downloadable
 archives and machine-readable discovery indexes at `/.well-known/agent-skills/`
-and `/agent-skills/`. Pages, cards and indexes are generated from
+and `/agent-skills/`, plus a plain-text catalog for agents at `/llms.txt`.
+Pages, cards and indexes are generated from
 `site/skills.json`; the site itself is plain HTML, CSS and self-hosted fonts,
 deployed to Cloudflare Pages.
 
@@ -14,6 +15,7 @@ self-contained, and the shared design tokens live in one `:root` block.
 
     python tools/agent-skills/build.py          # needs the GitHub CLI, `gh auth login`
     python tools/agent-skills/gen_sitemap.py --write
+    python tools/agent-skills/gen_llms.py --write
     bash tools/agent-skills/make_dist.sh
     python -m http.server 8080 --directory dist
 
@@ -26,6 +28,7 @@ build first:
 
     python tools/agent-skills/build.py
     python tools/agent-skills/gen_sitemap.py --write
+    python tools/agent-skills/gen_llms.py --write
     bash tools/agent-skills/make_dist.sh
     npx wrangler pages deploy dist --project-name <your-project>
 

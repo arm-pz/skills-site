@@ -11,9 +11,10 @@ SCHEMA = 1
 SITE = "https://skills.caffeinity.com"
 INDEX_SCHEMA = "https://schemas.agentskills.io/discovery/0.2.0/schema.json"
 NAME_RE = re.compile(r"^[a-z0-9-]{1,64}$")
-GROUP_IDS = ("writing-growth", "career", "thinking-learning", "skill-authoring", "ship-checks")
+GROUP_IDS = ("writing-growth", "career", "thinking-learning", "skill-authoring", "ship-checks",
+             "outbound")
 TAGS = ("editorial", "seo", "discovery", "career", "learning", "arena",
-        "decisions", "authoring", "release", "performance")
+        "decisions", "authoring", "release", "performance", "outbound")
 PAGE_KINDS = ("bespoke", "generated", "none")
 REPO_META = {"README.md", "LICENSE", "LICENSE.md", "CHANGELOG.md", "CONTRIBUTING.md"}
 REPO_META_DIRS = {".claude-plugin", ".github", ".git", "tests"}

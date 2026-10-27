@@ -15,6 +15,10 @@ import skilllib
 GH = os.environ.get("GH", "gh")
 OWNER = "arm-pz"
 KEYWORDS = {
+    # First because agent skills often mention SEO or writing only in their
+    # "not for" clause, which would otherwise claim them for writing-growth.
+    "outbound": ["cold", "outbound", "deliverability", "inbox", "prospect",
+                 "mailbox"],
     "career": ["resume", "cv", "linkedin", "recruiter", "applicant", "job",
                "interview", "career"],
     "writing-growth": ["seo", "keyword", "search", "content", "copy", "edit",
@@ -43,6 +47,8 @@ def assign_tag(group, name, description):
     tokens = words(name, description)
     if group == "career":
         return "career"
+    if group == "outbound":
+        return "outbound"
     if group == "writing-growth":
         if tokens & {"seo", "keyword"}:
             return "seo"
