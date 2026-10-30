@@ -11,7 +11,7 @@ SCHEMA = 1
 SITE = "https://skillsmith.tech"
 # Hand-written pages served at /<name>/, beside the hub and the skill pages. /workflows/ also
 # holds one generated page per workflow. RESERVED are section names kept for what comes next.
-STATIC_PAGES = ["work", "skills", "mods", "workflows"]
+STATIC_PAGES = ["work", "skills", "mods", "workflows", "seo"]
 RESERVED = STATIC_PAGES + ["agents", "subagents", "harnesses"]
 INDEX_SCHEMA = "https://schemas.agentskills.io/discovery/0.2.0/schema.json"
 NAME_RE = re.compile(r"^[a-z0-9-]{1,64}$")
