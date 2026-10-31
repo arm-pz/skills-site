@@ -254,6 +254,13 @@
       "digest": "sha256:fed5f737c5fa42f83fc42e0a07c02d53589934405472f3a38127faf615643c3b"
     },
     {
+      "name": "session-retrace",
+      "description": "Agent skill that finds a past AI coding conversation from a fuzzy memory — Qoder, Claude Code, Codex, Gemini CLI. Searches the transcripts already on disk, ranks sessions with verbatim evidence, prints the chosen chat, redacts tokens. Read-only, local, no index.",
+      "type": "archive",
+      "url": "https://skillsmith.tech/agent-skills/session-retrace.tar.gz",
+      "digest": "sha256:d377941d28bb7aafbd22629ef1411f9b2f3716ee1115d320029be39b260215ed"
+    },
+    {
       "name": "site-prompt",
       "description": "Agent skill that turns a website topic or landing-page brief into one self-contained build prompt: subject-native concept, final copy, every source file embedded verbatim, and a replay check that compares the rebuilt tree byte for byte. Portable SKILL.md; tested in Qoder.",
       "type": "archive",
