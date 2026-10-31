@@ -2555,6 +2555,121 @@
           "for marketing the course (use sales-copy)"
         ]
       }
+    },
+    {
+      "name": "choose-effort",
+      "repo": "arm-pz/choose-effort",
+      "path": ".",
+      "group": "ship-checks",
+      "tag": "build",
+      "title": "Choose Effort",
+      "pageTitle": "Choose Effort — AI Agent Skill for Claude Code and Codex",
+      "blurb": "Asks the user how much effort a Claude Code task deserves before heavy work starts, then recommends an effort level, whether to fan out to subagents, goal mode, workflows or agent teams, how to set it, and when to check /usage.",
+      "stats": "2 files · 67 lines · 2 KB",
+      "install": "npx skills add arm-pz/choose-effort",
+      "page": "generated",
+      "order": 910,
+      "pageSource": {
+        "description": "Asks the user how much effort a Claude Code task deserves before heavy work starts, then recommends an effort level, whether to fan out to subagents, goal mode, workflows or agent teams, how to set it, and when to check /usage. Use when the user is about to start a large, long or unattended Claude Code task, asks what effort level to use or whether to use xhigh or max, asks how to use less usage from now on, or is about to start /goal, a workflow or an agent team. Not for working out why usage already drained (use diagnose-usage), or for plan limits, prices and which models support which levels (use product-self-knowledge).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 48,
+            "bytes": 3589
+          },
+          {
+            "path": "references/trigger-cases.md",
+            "lines": 19,
+            "bytes": 1992
+          }
+        ],
+        "fileCount": 2,
+        "lines": 67,
+        "bytes": 2521,
+        "license": "MIT",
+        "commit": "5670432c1e2e350bd12902e90c9b19504a9d4026",
+        "sha256": "36c4c17bdfb8b551c911adc8bb23a4596b40275c77a05b645ea93d965e798f59"
+      }
+    },
+    {
+      "name": "diagnose-usage",
+      "repo": "arm-pz/diagnose-usage",
+      "path": ".",
+      "group": "ship-checks",
+      "tag": "build",
+      "title": "Diagnose Usage",
+      "pageTitle": "Diagnose Usage — AI Agent Skill for Claude Code and Codex",
+      "blurb": "Diagnoses why a Claude Code session or day burned through usage limits faster than expected, and says what to change.",
+      "stats": "3 files · 85 lines · 4 KB",
+      "install": "npx skills add arm-pz/diagnose-usage",
+      "page": "generated",
+      "order": 911,
+      "pageSource": {
+        "description": "Diagnoses why a Claude Code session or day burned through usage limits faster than expected, and says what to change. Reads the user's own /usage breakdown, checks the known heavy-session causes (high effort levels, subagents inheriting effort, goal mode, workflows, agent teams, long SDK jobs), and returns up to three ranked culprits with one fix each, plus when to send /feedback. Use when the user says Claude Code usage is draining fast, they hit or are nearing their limit sooner than expected, one session cost far more than expected, or asks what /usage shows or how to cut burn in a session that already ran. Not for choosing an effort level before work starts or using less going forward (use choose-effort), or for plan limits, prices and API billing (use product-self-knowledge).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 34,
+            "bytes": 3441
+          },
+          {
+            "path": "references/burn-sources.md",
+            "lines": 30,
+            "bytes": 2849
+          },
+          {
+            "path": "references/trigger-cases.md",
+            "lines": 21,
+            "bytes": 2247
+          }
+        ],
+        "fileCount": 3,
+        "lines": 85,
+        "bytes": 3800,
+        "license": "MIT",
+        "commit": "a4d5e805dcf0521fdb70bd7c31c209d0a2b6bd77",
+        "sha256": "5c00b32a1ab313ce25faac6fb2cc3be637a5698b282df63c3a5382819c08dc8d"
+      }
+    },
+    {
+      "name": "seo-sweep",
+      "repo": "arm-pz/seo-sweep",
+      "path": ".",
+      "group": "publish-discover",
+      "tag": "discovery",
+      "title": "Seo Sweep",
+      "pageTitle": "Seo Sweep — AI Agent Skill for Claude Code and Codex",
+      "blurb": "Runs the Skillsmith SEO skills on a site you own, in order, fixes what they find in the site's code, proves each fix with a re-crawl, and turns every defect a skill shows along the way into a tested fix to that skill, chaining seo-crawl…",
+      "stats": "3 files · 184 lines · 5 KB",
+      "install": "npx skills add arm-pz/seo-sweep",
+      "page": "generated",
+      "order": 912,
+      "pageSource": {
+        "description": "Runs the Skillsmith SEO skills on a site you own, in order, fixes what they find in the site's code, proves each fix with a re-crawl, and turns every defect a skill shows along the way into a tested fix to that skill, chaining seo-crawl, findable, keyword-guard, wordsmith and get-indexed. Use when the user asks to \"fix the SEO\", \"run the SEO skills on my site\", \"why doesn't my site show up when I search its name\", \"my brand search shows other domains\", \"use the skillsmith skills on this site\", or wants a site's search problems fixed and the skills improved as they run, even if they never say \"audit\". Not for only submitting pages to search engines (use get-indexed), a report-only audit with rewrite options (use seo-polish), resolving cannibalization alone (use keyword-resolver), repo or skill discoverability alone (use findable), or writing a new skill (use draft-skill).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 97,
+            "bytes": 6950
+          },
+          {
+            "path": "references/improve-skills.md",
+            "lines": 48,
+            "bytes": 3365
+          },
+          {
+            "path": "references/report-template.md",
+            "lines": 39,
+            "bytes": 1194
+          }
+        ],
+        "fileCount": 3,
+        "lines": 184,
+        "bytes": 5233,
+        "license": "MIT",
+        "commit": "e8d76dd9e4ecbe1b64d1f8377d084ae03cb32d28",
+        "sha256": "fed5f737c5fa42f83fc42e0a07c02d53589934405472f3a38127faf615643c3b"
+      }
     }
   ],
   "workflows": [

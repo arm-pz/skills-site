@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnose Usage — AI Agent Skill for Claude Code and Codex</title>
+<meta name="description" content="Diagnoses why a Claude Code session or day burned through usage limits faster than expected, and says what to change. Reads the user&#x27;s own /usage…">
+<link rel="canonical" href="https://skillsmith.tech/diagnose-usage/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Skillsmith">
+<meta property="og:title" content="Diagnose Usage — AI Agent Skill for Claude Code and Codex">
+<meta property="og:description" content="Diagnoses why a Claude Code session or day burned through usage limits faster than expected, and says what to change. Reads the user&#x27;s own /usage breakdown, checks the known heavy-session causes (high effort levels, subagents inheriting effort, goal mode, workflows, agent teams, long SDK jobs), and returns up to three ranked culprits with one fix each, plus when to send /feedback. Use when the user says Claude Code usage is draining fast, they hit or are nearing their limit sooner than expected, one session cost far more than expected, or asks what /usage shows or how to cut burn in a session that already ran. Not for choosing an effort level before work starts or using less going forward (use choose-effort), or for plan limits, prices and API billing (use product-self-knowledge).">
+<meta property="og:url" content="https://skillsmith.tech/diagnose-usage/">
+<meta name="twitter:card" content="summary">
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="preload" href="/fonts/files/cY9AfjOCX1hbuyalUrK4397yjA.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/files/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+  /* Light paper like the hub; the dark shell when the reader prefers dark. The "paper" band is
+     the text your agent reads, set one shade deeper than the page. */
+  :root{
+    --bg:#f2eee5;
+    --surface:#fffdf8;
+    --ink:#17141b;
+    --muted:#5c5562;
+    --accent:#ff6a3d;
+    --accent-ink:#1a0c06;
+    --paper:#e9e3d6;
+    --paper-surface:#fffdf8;
+    --paper-ink:#1c1820;
+    --paper-muted:#57515e;
+    --line:rgba(23,20,27,.12);
+    --line-strong:rgba(23,20,27,.3);
+    --serif:'Newsreader',Georgia,serif;
+    --sans:'Instrument Sans',system-ui,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --ease:cubic-bezier(.23,1,.32,1);
+    --gutter:clamp(16px,5vw,56px);
+  }
+  @media (prefers-color-scheme:dark){
+    :root{--bg:#121016;--surface:#1d1a23;--ink:#ede8de;--muted:#a59eae;
+          --paper:#ebe5d7;--paper-surface:#e0d9c8;--line:rgba(237,232,222,.12);--line-strong:rgba(237,232,222,.3)}
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.22em}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
+  ::selection{background:var(--accent);color:var(--accent-ink)}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 var(--gutter)}
+  code,.mono{font-family:var(--mono);font-size:.88em}
+  .sr-only{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+  /* nav */
+  .nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;height:72px}
+  .brand{font-family:var(--serif);font-size:20px;text-decoration:none}
+  .brand b{color:var(--accent);font-weight:400;margin-right:6px}
+  .nav-links{display:flex;gap:28px;font-size:15px;color:var(--muted)}
+  .nav-links a{text-decoration:none;transition:color 160ms var(--ease)}
+
+  /* hero: the title is the poster, the command is the action */
+  .hero{padding:clamp(56px,10vw,128px) 0 clamp(56px,8vw,104px)}
+  .hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(52px,9vw,124px);line-height:.98;letter-spacing:-.025em;max-width:11ch}
+  .hero .lead{font-size:clamp(19px,1.8vw,23px);line-height:1.45;max-width:36ch;margin-top:28px;color:var(--ink)}
+  .console{margin-top:44px;max-width:760px;background:var(--surface);border-radius:10px;padding:10px 10px 10px 22px;display:flex;align-items:center;gap:16px}
+  .console code{flex:1;min-width:0;font-size:15.5px;line-height:1.5;overflow-wrap:break-word;color:var(--ink)}
+  .console code::before{content:"$ ";color:var(--muted)}
+  .copy{flex:none;position:relative;display:grid;font:600 15px/1 var(--sans);color:var(--accent-ink);background:var(--accent);border:0;border-radius:7px;padding:15px 20px;cursor:pointer;transition:transform 160ms var(--ease)}
+  .copy:active{transform:scale(.97)}
+  .copy span{grid-area:1/1;text-align:center;transition:opacity 200ms var(--ease),transform 200ms var(--ease),filter 200ms var(--ease)}
+  .copy .done{opacity:0;transform:scale(.8);filter:blur(3px)}
+  .copy.is-done .idle{opacity:0;transform:scale(.8);filter:blur(3px)}
+  .copy.is-done .done{opacity:1;transform:none;filter:none}
+  .facts{margin-top:20px;font-size:15px;color:var(--muted);max-width:760px}
+  .facts a{color:var(--ink)}
+
+  /* paper: what the skill is for */
+  .paper{background:var(--paper);color:var(--paper-ink);padding:clamp(64px,9vw,120px) 0}
+  .paper ::selection{background:var(--paper-ink);color:var(--paper)}
+  h2{font-family:var(--serif);font-weight:400;font-size:clamp(34px,4.4vw,52px);line-height:1.05;letter-spacing:-.015em;max-width:16ch}
+  .paper .body{font-family:var(--serif);font-size:clamp(21px,2vw,25px);line-height:1.5;max-width:34em;margin-top:32px}
+  .uses{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(32px,5vw,72px);margin-top:clamp(48px,6vw,80px)}
+  .uses h3{font-size:17px;font-weight:600;margin-bottom:14px}
+  .uses ul{list-style:none}
+  .uses li{padding:12px 0;border-top:1px solid rgba(28,24,32,.14)}
+  .say li{font-family:var(--serif);font-size:21px;line-height:1.35}
+  .say li::before{content:"\201C"}
+  .say li::after{content:"\201D"}
+  .not li{color:var(--paper-muted)}
+
+  /* shell: what ships */
+  .ships{padding:clamp(64px,9vw,120px) 0}
+  .ships .intro{color:var(--muted);max-width:44ch;margin-top:20px}
+  .files{width:100%;max-width:880px;border-collapse:collapse;margin-top:40px;font-size:15px}
+  .files td{padding:13px 0;border-top:1px solid var(--line)}
+  .files td:first-child{font-family:var(--mono);font-size:14px;overflow-wrap:anywhere;padding-right:20px}
+  .files td.n{text-align:right;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .files tfoot td{font-family:var(--sans);font-size:15px;font-weight:600;color:var(--ink);border-top-color:var(--line-strong)}
+
+  /* related + source */
+  .more{background:var(--surface);padding:clamp(64px,8vw,104px) 0}
+  .related{list-style:none;margin-top:36px}
+  .related a{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:8px 40px;align-items:baseline;text-decoration:none;padding:24px 0;border-top:1px solid var(--line)}
+  .related strong{font-family:var(--serif);font-weight:400;font-size:clamp(24px,2.4vw,30px);line-height:1.15;transition:color 160ms var(--ease)}
+  .related span{color:var(--muted);font-size:16px;line-height:1.55;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .source{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:20px 40px;margin-top:clamp(56px,7vw,88px)}
+  .source p{max-width:52ch;color:var(--muted)}
+  .source p a{color:var(--ink)}
+  .btn{display:inline-block;font-weight:600;font-size:15px;text-decoration:none;color:var(--bg);background:var(--ink);border-radius:7px;padding:14px 22px;transition:transform 160ms var(--ease)}
+  .btn:active{transform:scale(.97)}
+
+  footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-top:28px;padding-bottom:36px;font-size:14px;color:var(--muted)}
+  footer a{text-decoration:none}
+
+  @media (hover:hover) and (pointer:fine){
+    .nav-links a:hover,footer a:hover{color:var(--ink)}
+    .related a:hover strong{color:var(--accent)}
+  }
+  @media (max-width:640px){
+    .related a{grid-template-columns:1fr}
+    .nav-links a:first-child{display:none}
+    .console{flex-direction:column;align-items:stretch;padding:18px}
+    .copy{padding:15px}
+    .files td.bytes{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{transition:none!important;animation:none!important}
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "diagnose-usage",
+  "alternateName": "Diagnose Usage",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any",
+  "url": "https://skillsmith.tech/diagnose-usage/",
+  "description": "Diagnoses why a Claude Code session or day burned through usage limits faster than expected, and says what to change. Reads the user's own /usage breakdown, checks the known heavy-session causes (high effort levels, subagents inheriting effort, goal mode, workflows, agent teams, long SDK jobs), and returns up to three ranked culprits with one fix each, plus when to send /feedback. Use when the user says Claude Code usage is draining fast, they hit or are nearing their limit sooner than expected, one session cost far more than expected, or asks what /usage shows or how to cut burn in a session that already ran. Not for choosing an effort level before work starts or using less going forward (use choose-effort), or for plan limits, prices and API billing (use product-self-knowledge).",
+  "codeRepository": "https://github.com/arm-pz/diagnose-usage",
+  "license": "https://spdx.org/licenses/MIT.html",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Caffeinity",
+    "url": "https://caffeinity.com/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+<!-- gen:quality-css:start -->
+<style>
+  .qb{--qb-line:var(--rule,var(--line,color-mix(in srgb,currentColor 14%,transparent)));padding:clamp(48px,6vw,80px) 0;border-top:1px solid var(--qb-line)}
+  .qb-kicker{font-family:var(--mono);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim,var(--muted))}
+  .qb h2{font-family:var(--serif);font-weight:400;font-size:clamp(30px,3.6vw,44px);line-height:1.08;letter-spacing:-.015em;margin-top:10px}
+  .qb-lead{color:var(--dim,var(--muted));max-width:62ch;margin-top:12px;font-size:16px}
+  .qb a{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.22em}
+  .qb-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:0 36px;margin-top:28px}
+  .qb-grid>div{border-top:1px solid var(--qb-line);padding:16px 0 18px}
+  .qb dt{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim,var(--muted))}
+  .qb dd{margin:6px 0 0;font-size:16px;line-height:1.5}
+  .qb dd small{display:block;color:var(--dim,var(--muted));font-size:14px;margin-top:2px}
+  .qb .qb-wide{grid-column:1/-1}
+  .qb ul{margin:6px 0 0;padding-left:20px;display:grid;gap:4px}
+  .qb .qb-flag{font-weight:600}
+  .qb .qb-flag.fail{color:var(--ember,var(--accent))}
+</style>
+<!-- gen:quality-css:end -->
+</head>
+<body>
+
+<nav class="nav" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="/"><b>∧</b>skillsmith</a>
+    <div class="nav-links">
+      <a href="/skills/">All skills</a>
+      <a href="https://github.com/arm-pz/diagnose-usage" target="_blank" rel="noopener">Source</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Diagnose Usage</h1>
+    <p class="lead">Diagnoses why a Claude Code session or day burned through usage limits faster than expected, and says what to change.</p>
+    <div class="console">
+      <code id="cmd">npx skills add arm-pz/diagnose-usage</code>
+      <button class="copy" id="copy" type="button" aria-describedby="cmd"><span class="idle">Copy install command</span><span class="done" aria-hidden="true">Copied</span></button>
+      <span class="sr-only" id="copy-status" role="status" aria-live="polite"></span>
+    </div>
+    <p class="facts">3 files and 85 lines, free under MIT. Built from <a href="https://github.com/arm-pz/diagnose-usage" target="_blank" rel="noopener">arm-pz/diagnose-usage</a> at <code>a4d5e80</code>.</p>
+  </div>
+</header>
+
+<!-- gen:quality:start -->
+<section class="qb" aria-labelledby="qb-h">
+  <div class="wrap">
+    <p class="qb-kicker">Quality record</p>
+    <h2 id="qb-h">Know what you are installing.</h2>
+    <p class="qb-lead">Version, date and limits are read from the repo on every sync, and the check runs every night. Real-world runs are listed only with their evidence.</p>
+    <dl class="qb-grid">
+      <div><dt>Version</dt><dd>Unversioned<small>commit a4d5e80</small></dd></div>
+      <div><dt>Updated</dt><dd>Not recorded yet</dd></div>
+      <div><dt>Works in</dt><dd>Claude Code, Codex, Cursor, Qoder and any agent that loads a SKILL.md<small>plain text; no API keys</small></dd></div>
+      <div><dt>Nightly check</dt><dd>Not checked yet<small>It joins the nightly check after its first run. <a href="https://github.com/arm-pz/skills-site/blob/main/.github/workflows/health.yml" target="_blank" rel="noopener">How it is checked</a></small></dd></div>
+      <div><dt>Last real-world run</dt><dd>No public run yet<small>Runs are published only with their evidence.</small></dd></div>
+      <div class="qb-wide"><dt>Known limits</dt><dd>Not built for:<ul><li>Choosing an effort level before work starts or using less going forward (use choose-effort)</li><li>For plan limits, prices and API billing (use product-self-knowledge)</li></ul></dd></div>
+    </dl>
+  </div>
+</section>
+<!-- gen:quality:end -->
+
+<section class="paper" aria-labelledby="for-h">
+  <div class="wrap">
+    <h2 id="for-h">What it is for</h2>
+    <p class="body">Diagnoses why a Claude Code session or day burned through usage limits faster than expected, and says what to change. Reads the user&#x27;s own /usage breakdown, checks the known heavy-session causes (high effort levels, subagents inheriting effort, goal mode, workflows, agent teams, long SDK jobs), and returns up to three ranked culprits with one fix each, plus when to send /feedback.</p>
+    <div class="uses">
+    <div class="uses-col when">
+      <h3>Reach for it when</h3>
+      <ul><li>The user says Claude Code usage is draining fast, they hit or are nearing their limit sooner than expected, one session cost far more than expected, or asks what /usage shows or how to cut burn in a session that already ran.</li></ul>
+    </div>
+    <div class="uses-col not">
+      <h3>Not for</h3>
+      <ul><li>Choosing an effort level before work starts or using less going forward (use choose-effort)</li><li>For plan limits, prices and API billing (use product-self-knowledge)</li></ul>
+    </div>
+    </div>
+  </div>
+</section>
+
+<section class="ships" aria-labelledby="ships-h">
+  <div class="wrap">
+    <h2 id="ships-h">Every file it installs</h2>
+    <p class="intro">Measured from the packed archive at commit <code>a4d5e80</code>. A skill is plain text your agent reads, so this list is all of it.</p>
+    <table class="files">
+      <thead class="sr-only"><tr><th>File</th><th>Lines</th><th>Bytes</th></tr></thead>
+      <tbody>
+        <tr><td>SKILL.md</td><td class="n">34</td><td class="n bytes">3,441 B</td></tr>
+        <tr><td>references/burn-sources.md</td><td class="n">30</td><td class="n bytes">2,849 B</td></tr>
+        <tr><td>references/trigger-cases.md</td><td class="n">21</td><td class="n bytes">2,247 B</td></tr>
+      </tbody>
+      <tfoot><tr><td>3 files</td><td class="n">85</td><td class="n bytes">4 KB</td></tr></tfoot>
+    </table>
+  </div>
+</section>
+
+<section class="more" aria-labelledby="more-h">
+  <div class="wrap">
+    <h2 id="more-h">More in Build &amp; Ship</h2>
+    <ul class="related">
+      <li><a href="/site-prompt/"><strong>Site Prompt</strong><span>Turns a website topic into one self-contained, paste-and-build prompt: it builds and verifies the site in a scratch folder first, then embeds every file verbatim with a pinned stack and the checks that actually ran.</span></a></li>
+      <li><a href="/production-code/"><strong>Production Code</strong><span>Delivers code as a finished artifact rather than a snippet: complete scripts, bug fixes with the root cause, reviews, API integrations and SQL, each with the run instructions and the edge cases handled.</span></a></li>
+      <li><a href="/web-preflight/"><strong>Web Preflight</strong><span>Checks a site you own before you ship it, without pretending a status code is a finding. A 200 on /.env that matches the app shell is catch-all routing, a blanket 403 is an unanswered question, and a check that never ran becomes INCONCLUSIVE — never a pass.</span></a></li>
+    </ul>
+    <div class="source">
+      <p>Read it before you install it: the skill lives at <code>.</code> in <a href="https://github.com/arm-pz/diagnose-usage" target="_blank" rel="noopener">arm-pz/diagnose-usage</a>.</p>
+      <a class="btn" href="https://github.com/arm-pz/diagnose-usage" target="_blank" rel="noopener">Open the repo</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>Diagnose Usage is an open agent skill on <a href="/">Skillsmith</a>, made by <a href="https://caffeinity.com/">Caffeinity</a>.</span>
+    <a href="https://github.com/arm-pz/diagnose-usage" target="_blank" rel="noopener">arm-pz/diagnose-usage</a>
+    <p class="kural" style="flex-basis:100%;margin:0;padding:6px 0 24px;font-size:13px;line-height:1.6;opacity:.75"><span lang="ta" style="font-family:'Noto Sans Tamil','Tamil Sangam MN','Nirmala UI',Latha,sans-serif">யாம் பெற்ற இன்பம் பெறுக இவ்வையகம்</span> · <span>“May this world attain the same bliss that I have attained.”</span></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var cmd=document.getElementById('cmd'),btn=document.getElementById('copy'),status=document.getElementById('copy-status'),timer;
+  function ok(){btn.classList.add('is-done');status.textContent='Copied to clipboard.';clearTimeout(timer);timer=setTimeout(function(){btn.classList.remove('is-done');},1600);}
+  function fail(){var r=document.createRange();r.selectNodeContents(cmd);var s=window.getSelection();s.removeAllRanges();s.addRange(r);status.textContent='Clipboard unavailable. The command is selected; press Ctrl+C.';}
+  btn.addEventListener('click',function(){var t=cmd.textContent;if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,fail);}else{fail();}});
+})();
+</script>
+</body>
+</html>
