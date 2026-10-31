@@ -97,7 +97,8 @@ def draft_blurb(description):
 
 
 def gh(*args, check=True):
-    result = subprocess.run([GH, *args], capture_output=True, text=True)
+    result = subprocess.run([GH, *args], capture_output=True, text=True,
+                            encoding="utf-8", errors="replace")
     if check and result.returncode != 0:
         raise SystemExit(f"gh {' '.join(args)} failed: {result.stderr.strip()}")
     return result.stdout
@@ -294,7 +295,7 @@ def main(argv=None):
         return 0
     if not args.dry_run and subprocess.run(
             ["git", "status", "--porcelain"], cwd=root, capture_output=True,
-            text=True).stdout.strip():
+            text=True, encoding="utf-8", errors="replace").stdout.strip():
         raise SystemExit("working tree is dirty; discovery must run from a clean checkout")
 
     deferred = []

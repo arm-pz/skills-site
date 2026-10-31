@@ -44,7 +44,8 @@ def plan(current, topics, homepage):
 
 
 def gh(*args, data=None):
-    p = subprocess.run(["gh", *args], input=data, capture_output=True, text=True)
+    p = subprocess.run(["gh", *args], input=data, capture_output=True, text=True,
+                       encoding="utf-8", errors="replace")
     if p.returncode:
         raise RuntimeError(p.stderr.strip() or p.stdout.strip())
     return p.stdout

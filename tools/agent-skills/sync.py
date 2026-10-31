@@ -34,7 +34,8 @@ OWNER = discover.OWNER
 
 
 def gh_json(*args):
-    out = subprocess.run([discover.GH, *args], capture_output=True, text=True)
+    out = subprocess.run([discover.GH, *args], capture_output=True, text=True,
+                         encoding="utf-8", errors="replace")
     if out.returncode != 0:
         return None, out.stderr.strip()
     try:
