@@ -122,6 +122,13 @@ def plan(root, manifest, deny):
                 continue
             if state == "renamed":
                 known.add(full.split("/", 1)[1])
+                # The site publishes OWNER's repos only (skilllib.validate_manifest).
+                # A move to another account is the owner's call, so hold the entry
+                # as it is instead of failing the whole sync on it.
+                if full.split("/", 1)[0].lower() != OWNER.lower():
+                    actions.append(("hold", entry["name"], f"moved to {full}, outside {OWNER}; "
+                                    "the entry is kept as it was until the site decides to list it"))
+                    continue
                 actions.append(("rename", entry["name"], full))
                 continue
         if repo not in heads:
