@@ -1,6 +1,6 @@
 # Skillsmith
 
-> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: 52 skills mapped into 11 workflows (build a skill, get found, gate a release, grow search traffic, land a job, decide, learn, run outbound, launch a product). Plain markdown, no API keys.
+> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: 55 skills mapped into 11 workflows (build a skill, get found, gate a release, grow search traffic, land a job, decide, learn, run outbound, launch a product). Plain markdown, no API keys.
 
 ## Install
 
@@ -35,6 +35,7 @@ Sections: [skills](https://skillsmith.tech/skills/), [workflows](https://skillsm
 - [findable-polish](https://skillsmith.tech/findable-polish/): Chains Findable and Wordsmith: audits a README, skill page or landing copy against the queries a real stranger types, then writes two or three alternatives per finding that fix it without inventing a fact.
 - [upstream-polish](https://skillsmith.tech/upstream-polish/): Chains Upstream-Check — fetch-based push verdicts, fast-forward only, screened for credential-shaped lines — with Wordsmith rewriting drifted descriptions, topics and README rows, so repos and listings tell the same story again.
 - [skill-estate](https://skillsmith.tech/skill-estate/): The whole-collection sweep: inventory every skill repo, reconcile the site, marketplace and README, tune the family, close workflow gaps, wire self-publishing, add trigger tests and listings, and leave a maintenance loop.
+- [seo-sweep](https://skillsmith.tech/seo-sweep/): Runs the Skillsmith SEO skills on a site you own, in order, fixes what they find in the site's code, proves each fix with a re-crawl, and turns every defect a skill shows along the way into a tested fix to that skill, chaining seo-crawl…
 
 ## Build & Ship
 
@@ -52,6 +53,8 @@ Sections: [skills](https://skillsmith.tech/skills/), [workflows](https://skillsm
 - [web-preflight-mod](https://skillsmith.tech/web-preflight-mod/): Reminds Claude Code to run web-preflight (exposed .env files, source maps, admin and debug surfaces) before a production deploy.
 - [pre-ship-security-red-team-mod](https://skillsmith.tech/pre-ship-security-red-team-mod/): Holds production deploys in Claude Code until the pre-ship security red team has run since your last edit.
 - [pre-ship-performance-audit-mod](https://skillsmith.tech/pre-ship-performance-audit-mod/): Reminds Claude Code to run the pre-ship performance audit before a production deploy.
+- [choose-effort](https://skillsmith.tech/choose-effort/): Asks the user how much effort a Claude Code task deserves before heavy work starts, then recommends an effort level, whether to fan out to subagents, goal mode, workflows or agent teams, how to set it, and when to check /usage.
+- [diagnose-usage](https://skillsmith.tech/diagnose-usage/): Diagnoses why a Claude Code session or day burned through usage limits faster than expected, and says what to change.
 
 ## SEO & Search
 

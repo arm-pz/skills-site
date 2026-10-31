@@ -30,6 +30,13 @@
       "digest": "sha256:b5f3dbdde6922ee2865f2b2e28ebbd051965b5663367b51e5dccb80f95c3310c"
     },
     {
+      "name": "choose-effort",
+      "description": "Claude Code skill that asks how heavy a task is before you start, then recommends an effort level, whether to use subagents, /goal, workflows or agent teams, the /effort command to set it, and when to check /usage.",
+      "type": "archive",
+      "url": "https://skillsmith.tech/agent-skills/choose-effort.tar.gz",
+      "digest": "sha256:36c4c17bdfb8b551c911adc8bb23a4596b40275c77a05b645ea93d965e798f59"
+    },
+    {
       "name": "cold-email-list-gate",
       "description": "Agent skill that gates a cold-email lead list before it loads: samples ten rows against your ICP, returns GO or HOLD with the fail pattern, cause, required fix and re-run condition. Never buys, scrapes or enriches. For Claude Code, Cursor, Qoder.",
       "type": "archive",
@@ -63,6 +70,13 @@
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/data-readout.tar.gz",
       "digest": "sha256:6cb1c2c4c3dea6fd98eebe98362e328ef6e38bee4469279845241c0a56ce2aa2"
+    },
+    {
+      "name": "diagnose-usage",
+      "description": "Claude Code skill that works out why your usage limit drained fast. Reads your /usage paste, checks the heavy-session causes Anthropic named (effort level, subagents, /goal, workflows, agent teams, SDK jobs) and ranks up to three culprits with one fix each.",
+      "type": "archive",
+      "url": "https://skillsmith.tech/agent-skills/diagnose-usage.tar.gz",
+      "digest": "sha256:5c00b32a1ab313ce25faac6fb2cc3be637a5698b282df63c3a5382819c08dc8d"
     },
     {
       "name": "do-better",
@@ -231,6 +245,13 @@
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/seo-polish.tar.gz",
       "digest": "sha256:81b0c0dcb4165dded15702a0a0833df8f3a928a8257db679c83c7f5b42bd2c64"
+    },
+    {
+      "name": "seo-sweep",
+      "description": "Agent skill that fixes a site's SEO end to end: checks indexing, crawls, audits brand and task searches, settles which page owns each query, changes the site's code, proves every fix with a re-crawl, and turns skill defects into tested fixes. Works in Claude Code, Codex and Cursor.",
+      "type": "archive",
+      "url": "https://skillsmith.tech/agent-skills/seo-sweep.tar.gz",
+      "digest": "sha256:fed5f737c5fa42f83fc42e0a07c02d53589934405472f3a38127faf615643c3b"
     },
     {
       "name": "site-prompt",
