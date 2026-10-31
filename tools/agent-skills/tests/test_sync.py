@@ -48,7 +48,8 @@ class FakeGitHub:
         if repo in self.repos:
             return {"full_name": f"arm-pz/{repo}", "private": False}, None
         if repo in self.renamed:
-            return {"full_name": f"arm-pz/{self.renamed[repo]}", "private": False}, None
+            new = self.renamed[repo]
+            return {"full_name": new if "/" in new else f"arm-pz/{new}", "private": False}, None
         return None, "gh: Not Found (HTTP 404)"
 
     def install(self, test):
@@ -130,6 +131,15 @@ class SyncTest(unittest.TestCase):
         self.assertEqual(self.manifest["workflows"][0]["steps"][0]["skills"], ["new-keeper"])
         self.assertIn("/keeper/ /new-keeper/ 301", skilllib.redirects(self.manifest))
         self.assertTrue(any("copy may still say 'keeper'" in n for n in notes))
+
+    def test_move_to_another_owner_is_held_and_the_rest_still_syncs(self):
+        gh = FakeGitHub({"fresh": "About."}, {"fresh": skill_files("fresh")},
+                        renamed={"keeper": "someone-else/keeper"})
+        actions, notes = self.run_sync(gh)
+        self.assertEqual(actions, {("hold", "keeper"), ("add", "fresh")})
+        keeper = next(s for s in self.manifest["skills"] if s["name"] == "keeper")
+        self.assertEqual(keeper["repo"], "arm-pz/keeper")
+        self.assertTrue(any("moved to someone-else/keeper" in n for n in notes))
 
     def test_rename_keeps_entry_name_when_skill_folder_kept_it(self):
         self.manifest["skills"][0]["path"] = "skills/keeper"

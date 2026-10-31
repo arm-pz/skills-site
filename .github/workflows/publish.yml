@@ -90,7 +90,12 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           GH: gh
-        run: python tools/agent-skills/sync.py --write --summary "$GITHUB_STEP_SUMMARY" | tee "$RUNNER_TEMP/sync.txt"
+        # pipefail: without it a sync.py crash is hidden by tee and the job
+        # reports success (it did, every run from 29 Oct to 31 Oct 2026)
+        shell: bash
+        run: |
+          set -o pipefail
+          python tools/agent-skills/sync.py --write --summary "$GITHUB_STEP_SUMMARY" | tee "$RUNNER_TEMP/sync.txt"
       - name: unit tests
         run: python -m unittest discover -s tools/agent-skills/tests -v
       - name: generated surfaces are current
