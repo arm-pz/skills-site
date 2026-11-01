@@ -2754,6 +2754,51 @@
           "summarizing the conversation already open, or durable project memory (use the workspace memory index)"
         ]
       }
+    },
+    {
+      "name": "get-indexed",
+      "repo": "arm-pz/get-indexed",
+      "path": ".",
+      "group": "publish-discover",
+      "tag": "discovery",
+      "title": "Get Indexed",
+      "pageTitle": "Get Indexed — AI Agent Skill for Claude Code and Codex",
+      "blurb": "Tells search engines about a site's new and changed pages through every channel that has an API, and lists the few steps that still need a person.",
+      "stats": "4 files · 509 lines · 9 KB",
+      "install": "npx skills add arm-pz/get-indexed",
+      "page": "generated",
+      "order": 914,
+      "pageSource": {
+        "description": "Tells search engines about a site's new and changed pages through every channel that has an API, and lists the few steps that still need a person. Sends live pages that are new since the last run to IndexNow (Bing, Yandex, Seznam, Naver), resubmits the sitemap to Google Search Console, reads Google's index status, and ends with a short hand-submit list for Google's Request indexing button and Brave's form, which have no API. Use when the user asks to \"submit my URLs\", \"get my site indexed\", \"ping search engines\", \"automate URL submission\", \"set up IndexNow\", \"my pages are discovered but not indexed\", or \"why isn't Google or Brave showing my new pages\", even if they never mention IndexNow or sitemaps. Not for pages that cannot be indexed because of noindex, robots, redirects or broken links (use seo-crawl), ranking or brand-search problems (use findable or seo-sweep), or writing page copy (use wordsmith).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 81,
+            "bytes": 5420
+          },
+          {
+            "path": "package.json",
+            "lines": 17,
+            "bytes": 379
+          },
+          {
+            "path": "references/setup.md",
+            "lines": 75,
+            "bytes": 4059
+          },
+          {
+            "path": "scripts/get-indexed.mjs",
+            "lines": 336,
+            "bytes": 15783
+          }
+        ],
+        "fileCount": 4,
+        "lines": 509,
+        "bytes": 9252,
+        "license": "MIT",
+        "commit": "becffb2423a099348da2440f3d3dfd517372ed96",
+        "sha256": "9c3daa47e0373add3426e983204159b1fa7e2ad54d18afb7e1e4bb1f9c67dc35"
+      }
     }
   ],
   "workflows": [
