@@ -107,6 +107,13 @@
       "digest": "sha256:c6d9a3f648f5822a7b273d8568b52b03cb1ec7e7d4555afbc964bf4dfc5e1627"
     },
     {
+      "name": "get-indexed",
+      "description": "Agent skill that submits a site's new and changed pages to IndexNow (Bing, Yandex) and Google Search Console, checks Google's index status, skips pages that are not live, and lists the steps with no API. Plans before it sends. Works in Claude Code, Codex and Cursor.",
+      "type": "archive",
+      "url": "https://skillsmith.tech/agent-skills/get-indexed.tar.gz",
+      "digest": "sha256:9c3daa47e0373add3426e983204159b1fa7e2ad54d18afb7e1e4bb1f9c67dc35"
+    },
+    {
       "name": "keyword-guard",
       "description": "Agent skill that plans SEO topic clusters and ends keyword cannibalization, so one page wins each query. It maps query ownership before any title, H1 or content change, from Search Console or a sitemap when you lack GSC access. Covers on-page, link-authority and hreflang checks. White-hat, no API keys. Runs in Claude Code, Cursor, Qoder.",
       "type": "archive",

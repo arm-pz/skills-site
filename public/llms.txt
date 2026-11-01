@@ -1,6 +1,6 @@
 # Skillsmith
 
-> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: 56 skills mapped into 11 workflows (build a skill, get found, gate a release, grow search traffic, land a job, decide, learn, run outbound, launch a product). Plain markdown, no API keys.
+> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: 57 skills mapped into 11 workflows (build a skill, get found, gate a release, grow search traffic, land a job, decide, learn, run outbound, launch a product). Plain markdown, no API keys.
 
 ## Install
 
@@ -36,6 +36,7 @@ Sections: [skills](https://skillsmith.tech/skills/), [workflows](https://skillsm
 - [upstream-polish](https://skillsmith.tech/upstream-polish/): Chains Upstream-Check — fetch-based push verdicts, fast-forward only, screened for credential-shaped lines — with Wordsmith rewriting drifted descriptions, topics and README rows, so repos and listings tell the same story again.
 - [skill-estate](https://skillsmith.tech/skill-estate/): The whole-collection sweep: inventory every skill repo, reconcile the site, marketplace and README, tune the family, close workflow gaps, wire self-publishing, add trigger tests and listings, and leave a maintenance loop.
 - [seo-sweep](https://skillsmith.tech/seo-sweep/): Runs the Skillsmith SEO skills on a site you own, in order, fixes what they find in the site's code, proves each fix with a re-crawl, and turns every defect a skill shows along the way into a tested fix to that skill, chaining seo-crawl…
+- [get-indexed](https://skillsmith.tech/get-indexed/): Tells search engines about a site's new and changed pages through every channel that has an API, and lists the few steps that still need a person.
 
 ## Build & Ship
 
