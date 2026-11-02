@@ -2,6 +2,13 @@
   "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
   "skills": [
     {
+      "name": "ai-team-blueprint",
+      "description": "Agent skill that plans your first AI team: asks 5 questions, picks one use case, then writes 3-5 agent roles with paste-ready prompts, handoffs, a lean tool stack, QA plan and 7-day launch plan. Human approval gates built in. For Claude Code and Claude.ai.",
+      "type": "archive",
+      "url": "https://skillsmith.tech/agent-skills/ai-team-blueprint.tar.gz",
+      "digest": "sha256:11d5c3d77e47336b3d81ddc5549ba41d750621ee0a95099162f1f4256bb37a8d"
+    },
+    {
       "name": "applicant-kit",
       "description": "Agent skill that writes the better version of your application material: decoded JD table, action-task-result-impact bullets, honest keyword placement, five resume summaries, a LinkedIn rewrite, 20 interview answers. Only experience you already have; nothing invented. Sibling recruiter-lens does the judging. For Claude Code, Cursor, Codex, Qoder.",
       "type": "archive",

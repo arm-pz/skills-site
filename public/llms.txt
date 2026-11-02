@@ -1,6 +1,6 @@
 # Skillsmith
 
-> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: 58 skills mapped into 11 workflows (build a skill, get found, gate a release, grow search traffic, land a job, decide, learn, run outbound, launch a product). Plain markdown, no API keys.
+> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: 59 skills mapped into 11 workflows (build a skill, get found, gate a release, grow search traffic, land a job, decide, learn, run outbound, launch a product). Plain markdown, no API keys.
 
 ## Install
 
@@ -71,6 +71,7 @@ Sections: [skills](https://skillsmith.tech/skills/), [workflows](https://skillsm
 - [wordsmith](https://skillsmith.tech/wordsmith/): Teaches your agent to edit, not just generate: 44 commands across 5 disciplines that tighten, rewrite, critique and proofread while keeping the author's meaning, hedges and voice intact.
 - [platform-content](https://skillsmith.tech/platform-content/): Writes platform-native content packs from one brief: X threads, LinkedIn posts, YouTube and TikTok scripts, Instagram captions, newsletters and blog articles, each shaped to how that platform is actually read.
 - [sales-copy](https://skillsmith.tech/sales-copy/): Writes buyer-facing conversion assets: long-form sales pages, landing pages, launch and abandoned-cart email sequences and ad variations, built on the offer and the objections you can actually back.
+- [ai-team-blueprint](https://skillsmith.tech/ai-team-blueprint/): Guide a solo operator or small business from "I want an AI team" to a ready-to-run v1 blueprint for a team of 3 to 5 Claude agents.
 
 ## Outbound
 
