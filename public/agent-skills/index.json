@@ -51,6 +51,13 @@
       "digest": "sha256:7a4cb9267d8147ee32c6d8317043c747ee59c2a4a508fc0f0f3e4e4a785803eb"
     },
     {
+      "name": "consistent-code-review",
+      "description": "Agent skill for repeatable code review. Same findings on unchanged code, each with file, line and snippet, and every re-run reconciled against a hashed baseline report. Hands fixes to production-code. Works with Claude Code, Codex and Cursor.",
+      "type": "archive",
+      "url": "https://skillsmith.tech/agent-skills/consistent-code-review.tar.gz",
+      "digest": "sha256:b6958883ccca55b9f963fdb1f2a63e2d0602814af64af50cd936431e93fbfd38"
+    },
+    {
       "name": "course-builder",
       "description": "Claude Code plugin marketplace and index of arm-pz agent skills: editorial, teaching, recruiting, SEO planning, release preflight, sub-agent tournaments and repo discovery. Install with npx skills add arm-pz/caffeinity-skills.",
       "type": "archive",
@@ -160,7 +167,7 @@
       "description": "Agent skill that delivers code as a finished artefact: scripts, bug fixes with the root cause, reviews, API integrations, SQL with index reasoning, automations, authorised collection, docs and architecture notes. Ships setup, error handling and a report of what was actually run.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/production-code.tar.gz",
-      "digest": "sha256:6fac09c18057101ae7b53a2511e5f9ce3387cd92f2f988daece86a4378ccf935"
+      "digest": "sha256:447d13087b0f1271dfc30b06ecc498070133e195e53c3e5cdbaeedd1dd909419"
     },
     {
       "name": "prompts-to-skill",

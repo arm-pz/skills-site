@@ -1,6 +1,6 @@
 # Skillsmith
 
-> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: 57 skills mapped into 11 workflows (build a skill, get found, gate a release, grow search traffic, land a job, decide, learn, run outbound, launch a product). Plain markdown, no API keys.
+> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: 58 skills mapped into 11 workflows (build a skill, get found, gate a release, grow search traffic, land a job, decide, learn, run outbound, launch a product). Plain markdown, no API keys.
 
 ## Install
 
@@ -57,6 +57,7 @@ Sections: [skills](https://skillsmith.tech/skills/), [workflows](https://skillsm
 - [choose-effort](https://skillsmith.tech/choose-effort/): Asks the user how much effort a Claude Code task deserves before heavy work starts, then recommends an effort level, whether to fan out to subagents, goal mode, workflows or agent teams, how to set it, and when to check /usage.
 - [diagnose-usage](https://skillsmith.tech/diagnose-usage/): Diagnoses why a Claude Code session or day burned through usage limits faster than expected, and says what to change.
 - [session-retrace](https://skillsmith.tech/session-retrace/): Find a past AI coding conversation from a fuzzy memory — "the session where we fixed the redirect" — across Qoder, Claude Code, Codex and Gemini CLI.
+- [consistent-code-review](https://skillsmith.tech/consistent-code-review/): Perform a deterministic, evidence-backed code review that produces the same findings on re-runs of unchanged code, reconciled against a previous report when one is supplied.
 
 ## SEO & Search
 
