@@ -2839,6 +2839,16 @@
         "license": "MIT",
         "commit": "03ecc1bb825d33d350657d37933ca8880665123e",
         "sha256": "b6958883ccca55b9f963fdb1f2a63e2d0602814af64af50cd936431e93fbfd38"
+      },
+      "quality": {
+        "version": null,
+        "commit": "03ecc1b",
+        "updated": "2026-11-02",
+        "notFor": [
+          "architectural redesign, live security red-teaming (use pre-ship-security-red-team)",
+          "live performance scoring (use pre-ship-performance-audit)",
+          "writing code and applying fixes (use production-code)"
+        ]
       }
     }
   ],
