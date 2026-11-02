@@ -81,8 +81,10 @@ def build(manifest, out_dir, tarball_fetch, about_fetch, legacy_dir):
         })
         print(f"{name:<32} {len(blob):>7} B  {digest[:12]}...")
 
-    if len(entries) != len(skilllib.archived(manifest)):
-        raise SystemExit("shrink guard: built entries do not match the manifest")
+    built = sorted(entry["name"] for entry in entries)
+    wanted = sorted(skill["name"] for skill in skilllib.archived(manifest))
+    if built != wanted:
+        raise SystemExit(f"shrink guard: built {built} but the manifest wants {wanted}")
     entries.sort(key=lambda entry: entry["name"])
     index = {"$schema": skilllib.INDEX_SCHEMA, "skills": entries}
     with open(out_dir / "index.json", "w", encoding="utf-8", newline="\n") as fh:

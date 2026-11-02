@@ -9,11 +9,12 @@ import subprocess
 import sys
 from pathlib import Path
 
+import gen_home
 import gen_page
 import skilllib
 
 GH = os.environ.get("GH", "gh")
-OWNER = "arm-pz"
+OWNER = skilllib.OWNER
 KEYWORDS = {
     # First because agent skills often mention SEO or writing only in their
     # "not for" clause, which would otherwise claim them for another group.
@@ -38,7 +39,21 @@ def words(*parts):
     return set(re.findall(r"[a-z0-9]+", " ".join(parts).lower()))
 
 
+def topic_text(description):
+    """The part of a description that is about this skill.
+
+    A house description ends with "Not for ..., use <other-skill>", which names the
+    neighbours it hands off to. Matching keywords against that clause lets another
+    skill's subject claim this one: consistent-code-review was tagged `performance`
+    off its own "live performance scoring (use pre-ship-performance-audit)" line.
+    Only the purpose sentences decide the group and the tag.
+    """
+    purpose, _, _, _ = gen_page.split_description(description or "")
+    return purpose or (description or "")
+
+
 def assign_group(name, description):
+    description = topic_text(description)
     tokens = words(name, description)
     text = f"{name} {description}".lower()
     for group, keywords in KEYWORDS.items():
@@ -48,7 +63,7 @@ def assign_group(name, description):
 
 
 def assign_tag(group, name, description):
-    tokens = words(name, description)
+    tokens = words(name, topic_text(description))
     if group in ("career", "outbound"):
         return group
     if group == "seo-search":
@@ -126,15 +141,19 @@ def measure(repo, files, path):
     if point is None:
         raise KeyError(f"no SKILL.md or .claude-plugin/plugin.json at {path}")
     text = files[point].decode("utf-8", "replace")
-    fm = (skilllib.parse_frontmatter(text) if point.endswith("SKILL.md")
-          else {"description": json.loads(text)["description"]})
+    if point.endswith("SKILL.md"):
+        description = skilllib.parse_frontmatter(text).get("description")
+    else:
+        description = json.loads(text).get("description")
+    if not (description or "").strip():
+        raise skilllib.ManifestError(f"{point} has no description")
     selected = skilllib.select_skill_files(files, path)
     blob = skilllib.pack(selected)
     commit = json.loads(gh("api", f"repos/{OWNER}/{repo}/commits/HEAD"))["sha"]
     license_id = gen_page.detect_license(
         files.get("LICENSE", b"").decode("utf-8", "replace"))
     return {
-        "description": " ".join(fm["description"].split()),
+        "description": " ".join(description.split()),
         "files": [{"path": name,
                    "lines": data.count(b"\n"),
                    "bytes": len(data)}
@@ -163,6 +182,12 @@ def quality(files, path, sha, date):
             "updated": date, "notFor": nots}
 
 
+def stats_line(source):
+    count = source["fileCount"]
+    return (f'{count} file{"" if count == 1 else "s"} · {source["lines"]:,} lines · '
+            f'{max(1, round(source["bytes"] / 1024))} KB')
+
+
 def candidate_entry(name, path, group, tag, source, order):
     title = skilllib.title_case(name)
     return {
@@ -174,8 +199,7 @@ def candidate_entry(name, path, group, tag, source, order):
         "title": title,
         "pageTitle": skilllib.skill_page_title(title),
         "blurb": draft_blurb(source["description"]),
-        "stats": (f'{source["fileCount"]} files · {source["lines"]:,} lines · '
-                  f'{max(1, round(source["bytes"] / 1024))} KB'),
+        "stats": stats_line(source),
         "install": f"npx skills add {OWNER}/{name}",
         "page": "generated",
         "order": order,
@@ -284,7 +308,7 @@ def main(argv=None):
             group = assign_group(name, source["description"])
             tag = assign_tag(group, name, source["description"])
             deferred.append((name, layout, group, tag, source))
-        except SystemExit as err:
+        except (SystemExit, skilllib.ManifestError) as err:
             print(f"DROPPED {name}: {err}", file=sys.stderr)
 
     if not deferred:
@@ -313,7 +337,8 @@ def main(argv=None):
     branch = f"proposal/{dt.date.today().isoformat()}"
     names = [e["name"] for e in entries]
     subprocess.run(["git", "switch", "-c", branch], cwd=root, check=True)
-    paths = ["site/skills.json", "index.html", *written]
+    paths = ["site/skills.json", *gen_home.HUB_PAGES, *written,
+             *(f"workflows/{f['slug']}/index.html" for f in manifest.get("workflows", []))]
     subprocess.run(["git", "add", *paths], cwd=root, check=True)
     subprocess.run(["git", "commit", "-m",
                     f"propose {len(names)} skill(s): {', '.join(names)}"],

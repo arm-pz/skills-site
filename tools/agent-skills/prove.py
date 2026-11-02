@@ -56,7 +56,11 @@ def main(argv=None):
         xml = fetch(f"{site}/sitemap.xml", args.bust)
         ns = "{http://www.sitemaps.org/schemas/sitemap/0.9}"
         locs = {el.text for el in ET.fromstring(xml).iter(ns + "loc")}
-        expected = {f"{skilllib.SITE}/"} | {f"{skilllib.SITE}/{s['name']}/" for s in pages}
+        expected = ({f"{skilllib.SITE}/"}
+                    | {f"{skilllib.SITE}/{s['name']}/" for s in pages}
+                    | {f"{skilllib.SITE}/{n}/" for n in skilllib.STATIC_PAGES}
+                    | {f"{skilllib.SITE}/workflows/{f['slug']}/"
+                       for f in manifest.get("workflows", [])})
         if locs != expected:
             problems.append(f"sitemap: missing {expected - locs}, extra {locs - expected}")
     except Exception as err:

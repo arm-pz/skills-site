@@ -1,5 +1,6 @@
 """Shared manifest, frontmatter, shape-test and packing helpers."""
 
+import datetime as dt
 import gzip
 import io
 import json
@@ -9,6 +10,7 @@ from pathlib import Path
 
 SCHEMA = 1
 SITE = "https://skillsmith.tech"
+OWNER = "arm-pz"
 # Hand-written pages served at /<name>/, beside the hub and the skill pages. /workflows/ also
 # holds one generated page per workflow. RESERVED are section names kept for what comes next.
 STATIC_PAGES = ["work", "skills", "mods", "workflows", "seo"]
@@ -34,6 +36,17 @@ class ManifestError(ValueError):
 def _req(cond, message):
     if not cond:
         raise ManifestError(message)
+
+
+def valid_date(value):
+    """A real calendar date, so a typo is caught here and not by human_date's month index."""
+    if not isinstance(value, str):
+        return False
+    try:
+        dt.date.fromisoformat(value)
+    except ValueError:
+        return False
+    return len(value) == 10
 
 
 def valid_name(name):
@@ -149,9 +162,8 @@ def validate_manifest(data):
                  f"{name}: quality.version must be a string or null")
             _req(isinstance(quality.get("commit"), str) and re.fullmatch(r"[a-f0-9]{7}", quality["commit"]),
                  f"{name}: quality.commit must be 7 lowercase hex")
-            _req(isinstance(quality.get("updated"), str)
-                 and re.fullmatch(r"\d{4}-\d{2}-\d{2}", quality["updated"]),
-                 f"{name}: quality.updated must be YYYY-MM-DD")
+            _req(valid_date(quality.get("updated")),
+                 f"{name}: quality.updated must be a real date as YYYY-MM-DD")
             _req(isinstance(quality.get("notFor"), list)
                  and all(isinstance(n, str) for n in quality["notFor"]),
                  f"{name}: quality.notFor must be a list of strings")
@@ -162,9 +174,8 @@ def validate_manifest(data):
         tested = s.get("tested")
         if tested is not None:
             _req(isinstance(tested, dict), f"{name}: tested must be an object")
-            _req(isinstance(tested.get("date"), str)
-                 and re.fullmatch(r"\d{4}-\d{2}-\d{2}", tested["date"]),
-                 f"{name}: tested.date must be YYYY-MM-DD")
+            _req(valid_date(tested.get("date")),
+                 f"{name}: tested.date must be a real date as YYYY-MM-DD")
             for key in ("target", "result", "evidence"):
                 _req(isinstance(tested.get(key), str) and tested[key].strip(),
                      f"{name}: tested.{key} required")
@@ -233,9 +244,9 @@ def validate_manifest(data):
         steps = f.get("steps")
         _req(isinstance(steps, list) and steps, f"{f['id']}: steps must be a non-empty list")
         for st in steps:
-            names = st.get("skills") if isinstance(st, dict) else None
-            _req(isinstance(names, list) and names, f"{f['id']}: each step needs skills")
-            for n in names:
+            step_names = st.get("skills") if isinstance(st, dict) else None
+            _req(isinstance(step_names, list) and step_names, f"{f['id']}: each step needs skills")
+            for n in step_names:
                 _req(n in paged, f"{f['id']}: step skill {n!r} has no page on the site")
     return data
 
@@ -378,7 +389,7 @@ def shape_failures(repo, files, denied=frozenset(), is_fork=False):
 
     if is_fork:
         fails.append("clause 7: repository is a fork")
-    if repo in denied or f"arm-pz/{repo}" in denied:
+    if repo in denied or f"{OWNER}/{repo}" in denied:
         fails.append("clause 8: repository is denied")
     return fails
 
@@ -494,6 +505,13 @@ def brew_label(flow):
 def sha256_hex(blob):
     import hashlib
     return hashlib.sha256(blob).hexdigest()
+
+
+def human_date(iso):
+    """2026-11-02 -> '2 Nov 2026'. Dates reach here already validated by valid_date."""
+    year, month, day = iso.split("-")
+    months = "Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split()
+    return f"{int(day)} {months[int(month) - 1]} {year}"
 
 
 def title_case(name):

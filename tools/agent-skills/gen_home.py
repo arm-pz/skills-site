@@ -15,6 +15,7 @@ import sys
 from pathlib import Path
 
 import skilllib
+from skilllib import human_date
 
 HUB_PAGES = ["index.html", "skills/index.html", "mods/index.html", "workflows/index.html"]
 FLOW_TEMPLATE = Path(__file__).resolve().parent / "templates" / "workflow-page.html"
@@ -90,12 +91,6 @@ def count_label(cards):
     if mods:
         parts.append(f"{mods} mod" + ("" if mods == 1 else "s"))
     return " and ".join(parts)
-
-
-def human_date(iso):
-    year, month, day = iso.split("-")
-    months = "Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split()
-    return f"{int(day)} {months[int(month) - 1]} {year}"
 
 
 def groups_with(manifest, cards):

@@ -37,7 +37,12 @@ def gh_json(*args):
     out = subprocess.run([discover.GH, *args], capture_output=True, text=True)
     if out.returncode != 0:
         return None, out.stderr.strip()
-    return json.loads(out.stdout), None
+    try:
+        return json.loads(out.stdout), None
+    except json.JSONDecodeError as err:
+        # Every caller branches on data is None; a zero-exit non-JSON body must not
+        # escape as a traceback and skip resolve()'s "unreadable is never gone" rule.
+        return None, f"gh {' '.join(args)} returned unreadable JSON: {err}"
 
 
 def live_repos():
@@ -65,7 +70,9 @@ def has_skill_md(name):
     """Cheap pre-check from the git tree, so non-skill repos are never downloaded."""
     data, err = gh_json("api", f"repos/{OWNER}/{name}/git/trees/HEAD?recursive=1")
     if data is None:
-        return "Git Repository is empty" not in err and "Not Found" not in err
+        if "Git Repository is empty" in err or "Not Found" in err:
+            return False
+        raise SystemExit(f"cannot read the tree of {OWNER}/{name}: {err}")
     return any(i["path"] == "SKILL.md" or i["path"].endswith("/SKILL.md") for i in data.get("tree", []))
 
 
@@ -187,7 +194,8 @@ def apply(root, manifest, actions):
             new_name = name if path.endswith(f"skills/{name}") or path == name else new_repo
             entry["repo"] = detail
             entry["path"] = path
-            entry["install"] = entry.get("install", "").replace(f"{OWNER}/{name}", detail)
+            if entry.get("install"):
+                entry["install"] = entry["install"].replace(f"{OWNER}/{name}", detail)
             if new_name != name:
                 entry["name"] = new_name
                 entry["aliases"] = sorted(set(entry.get("aliases", [])) | {name})
@@ -197,7 +205,10 @@ def apply(root, manifest, actions):
                 if entry["page"] == "bespoke":
                     notes.append(f"{new_name}: bespoke page moved from /{name}/; its copy may still say '{name}'")
             if entry["page"] == "generated":
-                entry["pageSource"], _ = discover.measure(new_repo, files, path)
+                try:
+                    entry["pageSource"], _ = discover.measure(new_repo, files, path)
+                except skilllib.ManifestError as err:
+                    notes.append(f"{entry['name']}: renamed, but {err}; page not re-measured")
             by_name[entry["name"]] = entry
         elif kind == "refresh":
             entry = by_name[name]
@@ -207,11 +218,14 @@ def apply(root, manifest, actions):
             if discover.entry_point(files, path) is None:
                 notes.append(f"{name}: no SKILL.md or plugin.json at {path} any more; page not refreshed")
                 continue
+            try:
+                source, _ = discover.measure(short, files, path)
+            except skilllib.ManifestError as err:
+                notes.append(f"{name}: {err}; page not refreshed")
+                continue
             entry["path"] = path
-            entry["pageSource"], _ = discover.measure(short, files, path)
-            entry["stats"] = (f'{entry["pageSource"]["fileCount"]} files · '
-                              f'{entry["pageSource"]["lines"]:,} lines · '
-                              f'{max(1, round(entry["pageSource"]["bytes"] / 1024))} KB')
+            entry["pageSource"] = source
+            entry["stats"] = discover.stats_line(source)
         elif kind == "quality":
             entry = by_name[name]
             sha, date = detail
@@ -220,7 +234,11 @@ def apply(root, manifest, actions):
         elif kind == "add":
             files = detail
             path = locate(name, files)
-            source, _ = discover.measure(name, files, path)
+            try:
+                source, _ = discover.measure(name, files, path)
+            except skilllib.ManifestError as err:
+                notes.append(f"{name}: {err}; not added")
+                continue
             group = discover.assign_group(name, source["description"])
             tag = discover.assign_tag(group, name, source["description"])
             order = max([s["order"] for s in by_name.values()] + [0]) + 1

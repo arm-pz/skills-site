@@ -2820,7 +2820,7 @@
       "title": "Consistent Code Review",
       "pageTitle": "Consistent Code Review — AI Agent Skill for Claude Code",
       "blurb": "Perform a deterministic, evidence-backed code review that produces the same findings on re-runs of unchanged code, reconciled against a previous report when one is supplied.",
-      "stats": "1 files · 152 lines · 4 KB",
+      "stats": "1 file · 152 lines · 4 KB",
       "install": "npx skills add arm-pz/consistent-code-review",
       "page": "generated",
       "order": 915,

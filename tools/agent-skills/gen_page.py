@@ -9,6 +9,7 @@ import sys
 from pathlib import Path
 
 import skilllib
+from skilllib import human_date
 
 TEMPLATE = Path(__file__).resolve().parent / "templates" / "skill-page.html"
 QUALITY_START = "<!-- gen:quality:start -->"
@@ -132,12 +133,6 @@ def related_html(entry, manifest):
         f'<span>{esc(s["blurb"])}</span></a></li>' for s in siblings)
     return (f'    <h2 id="more-h">More in {esc(group)}</h2>\n'
             f'    <ul class="related">\n{rows}\n    </ul>')
-
-
-def human_date(iso):
-    year, month, day = iso.split("-")
-    months = "Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split()
-    return f"{int(day)} {months[int(month) - 1]} {year}"
 
 
 def health_html(entry, health):
@@ -285,6 +280,7 @@ def render_page(entry, manifest=None, health=None):
         "REPO_URL": esc(repo_url),
         "REPO_SLUG": esc(entry["repo"]),
         "FILE_COUNT": str(source["fileCount"]),
+        "FILE_WORD": "file" if source["fileCount"] == 1 else "files",
         "LINES": f'{source["lines"]:,}',
         "KB": str(kb),
         "LICENSE_FACT": esc(f"free under {license_id}" if osi else "see LICENSE for terms"),
@@ -304,6 +300,7 @@ def render_page(entry, manifest=None, health=None):
     if leftover:
         raise SystemExit(f"template tokens left unreplaced: {leftover}")
     return template
+
 
 def generated(manifest):
     return [s for s in manifest["skills"] if s["page"] == "generated"]

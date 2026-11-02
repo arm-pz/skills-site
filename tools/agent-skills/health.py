@@ -29,8 +29,13 @@ EXTERNAL = [
 
 
 def unpack(files, dest):
+    """Write a tarball's files under dest. A path that escapes dest is dropped, not written."""
+    root = dest.resolve()
     for rel, data in files.items():
-        path = dest / rel
+        path = (dest / rel).resolve()
+        if path != root and root not in path.parents:
+            print(f"skipped {rel!r}: outside {dest}", file=sys.stderr)
+            continue
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_bytes(data)
 
@@ -82,7 +87,11 @@ def main(argv=None):
                          "with `python tools/agent-skills/gen_page.py --write`, and commit "
                          "`site/health.json` with them.\n")
         if args.accept_all or (args.accept and not regressed and "0 improvements" not in run.stdout):
-            subprocess.run(cmd + ["--write"], check=True, capture_output=True)
+            written = subprocess.run(cmd + ["--write"], capture_output=True, text=True)
+            if written.returncode != 0:
+                print(written.stderr, end="", file=sys.stderr)
+                print("baseline write failed", file=sys.stderr)
+                return 1
             print(f"baseline updated: {baseline.relative_to(root)}")
             return 0
     return 1 if regressed else 0

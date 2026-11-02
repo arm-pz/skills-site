@@ -153,7 +153,7 @@
       <button class="copy" id="copy" type="button" aria-describedby="cmd"><span class="idle">Copy install command</span><span class="done" aria-hidden="true">Copied</span></button>
       <span class="sr-only" id="copy-status" role="status" aria-live="polite"></span>
     </div>
-    <p class="facts">{{FILE_COUNT}} files and {{LINES}} lines, {{LICENSE_FACT}}. Built from <a href="{{REPO_URL}}" target="_blank" rel="noopener">{{REPO_SLUG}}</a> at <code>{{COMMIT}}</code>.</p>
+    <p class="facts">{{FILE_COUNT}} {{FILE_WORD}} and {{LINES}} lines, {{LICENSE_FACT}}. Built from <a href="{{REPO_URL}}" target="_blank" rel="noopener">{{REPO_SLUG}}</a> at <code>{{COMMIT}}</code>.</p>
   </div>
 </header>
 
@@ -176,7 +176,7 @@
       <tbody>
 {{FILES_TABLE}}
       </tbody>
-      <tfoot><tr><td>{{FILE_COUNT}} files</td><td class="n">{{LINES}}</td><td class="n bytes">{{KB}} KB</td></tr></tfoot>
+      <tfoot><tr><td>{{FILE_COUNT}} {{FILE_WORD}}</td><td class="n">{{LINES}}</td><td class="n bytes">{{KB}} KB</td></tr></tfoot>
     </table>
   </div>
 </section>

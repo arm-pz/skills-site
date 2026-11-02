@@ -1,6 +1,7 @@
 """Write out/sitemap.xml from the manifest with per-path git dates."""
 
 import argparse
+import datetime as dt
 import subprocess
 import sys
 from pathlib import Path
@@ -44,8 +45,9 @@ def main(argv=None):
     root = Path(args.root)
     manifest = skilllib.load_manifest(root)
     skilllib.validate_manifest(manifest)
-    head = subprocess.run(["git", "log", "-1", "--format=%cs"], cwd=root,
-                          capture_output=True, text=True).stdout.strip() or "2026-10-21"
+    head = (subprocess.run(["git", "log", "-1", "--format=%cs"], cwd=root,
+                           capture_output=True, text=True).stdout.strip()
+            or dt.datetime.now(dt.timezone.utc).date().isoformat())
     xml = render(manifest, lambda path: git_date(root, path, head))
     out = root / "out"
     out.mkdir(exist_ok=True)
