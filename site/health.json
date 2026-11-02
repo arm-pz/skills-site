@@ -18,12 +18,6 @@
         "description is 1007 characters, close to the 1024 limit"
       ]
     },
-    "caffeinity-routing": {
-      "description_sha": "1b687fdf56e1",
-      "fail": [],
-      "note": [],
-      "warn": []
-    },
     "career-track": {
       "description_sha": "f461156023cd",
       "fail": [],
@@ -280,6 +274,12 @@
     },
     "wordsmith": {
       "description_sha": "0843918c51b4",
+      "fail": [],
+      "note": [],
+      "warn": []
+    },
+    "workflow-router": {
+      "description_sha": "1b687fdf56e1",
       "fail": [],
       "note": [],
       "warn": []
