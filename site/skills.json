@@ -2849,6 +2849,12 @@
           "live performance scoring (use pre-ship-performance-audit)",
           "writing code and applying fixes (use production-code)"
         ]
+      },
+      "tested": {
+        "date": "2026-11-02",
+        "target": "skills-site pipeline (2,535 lines)",
+        "result": "Found the keyword rule that tags a skill from its \"Not for\" clause, which had mis-tagged this skill's own page.",
+        "evidence": "https://github.com/arm-pz/skills-site/commit/db04809"
       }
     }
   ],
