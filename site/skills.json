@@ -2905,6 +2905,16 @@
         "license": "MIT",
         "commit": "b6e76d450f0c0a48fcb1c67de6410afc11e97531",
         "sha256": "11d5c3d77e47336b3d81ddc5549ba41d750621ee0a95099162f1f4256bb37a8d"
+      },
+      "quality": {
+        "version": null,
+        "commit": "b6e76d4",
+        "updated": "2026-11-02",
+        "notFor": [
+          "writing agent code against the Claude API or Agent SDK (use claude-api)",
+          "building a single skill (use draft-skill)",
+          "running agents on a task right now, or picking one AI tool for a one-off task"
+        ]
       }
     }
   ],
