@@ -2816,7 +2816,7 @@
       "repo": "arm-pz/consistent-code-review",
       "path": "skills/consistent-code-review",
       "group": "ship-checks",
-      "tag": "performance",
+      "tag": "build",
       "title": "Consistent Code Review",
       "pageTitle": "Consistent Code Review — AI Agent Skill for Claude Code",
       "blurb": "Perform a deterministic, evidence-backed code review that produces the same findings on re-runs of unchanged code, reconciled against a previous report when one is supplied.",
