@@ -858,21 +858,21 @@
       "title": "Production Code",
       "pageTitle": "Production Code — AI Agent Skill for Claude Code and Codex",
       "blurb": "Delivers code as a finished artifact rather than a snippet: complete scripts, bug fixes with the root cause, reviews, API integrations and SQL, each with the run instructions and the edge cases handled.",
-      "stats": "4 files · 320 lines · 9 KB",
+      "stats": "4 files · 325 lines · 10 KB",
       "install": "npx skills add arm-pz/production-code",
       "page": "generated",
       "pageSource": {
-        "description": "Production-ready code delivered as a complete artifact: scripts, bug fixes with the root cause, code reviews, API integrations, SQL of any complexity, automation jobs, scrapers, data analysis in pandas or R, technical documentation and architecture write-ups, each with setup steps, error handling and a plain-English explanation of every section. Use whenever someone describes something they want code to do, pastes an error or a snippet to fix or review, asks for a query, a scraper, an automation or a system design, even if they never say write code or name a language. Not for auditing a live web app before launch (use pre-ship-performance-audit, pre-ship-security-red-team), or for the business decision behind the build (use strategy-memo).",
+        "description": "Production-ready code delivered as a complete artifact: scripts, bug fixes with the root cause, API integrations, SQL of any complexity, automation jobs, scrapers, data analysis in pandas or R, technical documentation and architecture write-ups, each with setup steps, error handling and a plain-English explanation of every section. Use whenever someone describes something they want code to do, pastes an error or a snippet to fix, asks for a query, a scraper, an automation or a system design, even if they never say write code or name a language. Not for auditing a live web app before launch (use pre-ship-performance-audit, pre-ship-security-red-team), for the business decision behind the build (use strategy-memo), or for reviewing code or a diff without changing it (use consistent-code-review, which this skill calls for its review mode).",
         "files": [
           {
             "path": "SKILL.md",
-            "lines": 104,
-            "bytes": 7477
+            "lines": 107,
+            "bytes": 8173
           },
           {
             "path": "references/deliverable-formats.md",
-            "lines": 89,
-            "bytes": 6832
+            "lines": 91,
+            "bytes": 7002
           },
           {
             "path": "references/security-notes.md",
@@ -886,20 +886,21 @@
           }
         ],
         "fileCount": 4,
-        "lines": 320,
-        "bytes": 9719,
+        "lines": 325,
+        "bytes": 10013,
         "license": "MIT",
-        "commit": "2625da94c7667019df2c01cb59085d6c2ac06973",
-        "sha256": "6fac09c18057101ae7b53a2511e5f9ce3387cd92f2f988daece86a4378ccf935"
+        "commit": "43f64e6b77fffc534319501ebc734bade3e342e9",
+        "sha256": "447d13087b0f1271dfc30b06ecc498070133e195e53c3e5cdbaeedd1dd909419"
       },
       "order": 402,
       "quality": {
         "version": null,
-        "commit": "2625da9",
-        "updated": "2026-10-18",
+        "commit": "43f64e6",
+        "updated": "2026-11-02",
         "notFor": [
           "auditing a live web app before launch (use pre-ship-performance-audit, pre-ship-security-red-team)",
-          "for the business decision behind the build (use strategy-memo)"
+          "for the business decision behind the build (use strategy-memo)",
+          "for reviewing code or a diff without changing it (use consistent-code-review, which this skill calls for its review mode)"
         ]
       }
     },
@@ -2808,6 +2809,36 @@
           "ranking or brand-search problems (use findable or seo-sweep)",
           "writing page copy (use wordsmith)"
         ]
+      }
+    },
+    {
+      "name": "consistent-code-review",
+      "repo": "arm-pz/consistent-code-review",
+      "path": "skills/consistent-code-review",
+      "group": "ship-checks",
+      "tag": "performance",
+      "title": "Consistent Code Review",
+      "pageTitle": "Consistent Code Review — AI Agent Skill for Claude Code",
+      "blurb": "Perform a deterministic, evidence-backed code review that produces the same findings on re-runs of unchanged code, reconciled against a previous report when one is supplied.",
+      "stats": "1 files · 152 lines · 4 KB",
+      "install": "npx skills add arm-pz/consistent-code-review",
+      "page": "generated",
+      "order": 915,
+      "pageSource": {
+        "description": "Perform a deterministic, evidence-backed code review that produces the same findings on re-runs of unchanged code, reconciled against a previous report when one is supplied. Use whenever the user asks to review code, a diff, a PR or a file, says \"check for bugs\" or \"find bugs\", complains that earlier reviews invented different bugs on the same code, or wants a review they can compare across runs, even if they never say \"consistent\" or \"deterministic\". Not for architectural redesign, live security red-teaming (use pre-ship-security-red-team), live performance scoring (use pre-ship-performance-audit), or writing code and applying fixes (use production-code).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 152,
+            "bytes": 8980
+          }
+        ],
+        "fileCount": 1,
+        "lines": 152,
+        "bytes": 4035,
+        "license": "MIT",
+        "commit": "03ecc1bb825d33d350657d37933ca8880665123e",
+        "sha256": "b6958883ccca55b9f963fdb1f2a63e2d0602814af64af50cd936431e93fbfd38"
       }
     }
   ],
