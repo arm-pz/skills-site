@@ -29,7 +29,7 @@ skill that sets up and repairs this kind of pipeline.
 
 ## Deploy
 
-CI holds no Cloudflare credentials; Cloudflare pulls. Every hour, and on every
+CI holds no Cloudflare credentials; Cloudflare pulls. Every 15 minutes, and on every
 push to `main`, `.github/workflows/publish.yml` runs `sync.py`, which brings
 `site/skills.json` in line with GitHub (new skill repos, moved repo HEADs,
 renames, removals), rebuilds the site, gates it with `check_dist.py` and
@@ -83,7 +83,7 @@ Git-connected project a manual upload is overwritten by the next `deploy` push.
 ## The skills it hosts
 
 `site/skills.json` is the single publication decision. Every public arm-pz repo
-with one SKILL.md and an About is added to it by the hourly sync; `site/deny.json`
+with one SKILL.md and an About is added to it by the sync (every 15 minutes); `site/deny.json`
 keeps out third-party-origin repos and bundles that would publish a skill twice.
 Each entry has a hand-written page under `<name>/index.html` or a generated page
 built from its repo, and every page links to its source repo under

@@ -1,6 +1,6 @@
 name: publish
 
-# Anything live on GitHub reaches main without a human merge: every hour
+# Anything live on GitHub reaches main without a human merge: every 15 minutes
 # sync.py adds new skill repos, refreshes generated pages whose repo moved,
 # follows renames (with 301s) and drops repos that went away. The build and
 # every gate must pass before the sync is committed. The gated dist/ is then
@@ -14,7 +14,7 @@ on:
     branches: [main]
   pull_request:
   schedule:
-    - cron: "17 * * * *"
+    - cron: "2,17,32,47 * * * *"
   workflow_dispatch:
   repository_dispatch:
     types: [skill-updated]
@@ -96,6 +96,39 @@ jobs:
         run: |
           set -o pipefail
           python tools/agent-skills/sync.py --write --summary "$GITHUB_STEP_SUMMARY" | tee "$RUNNER_TEMP/sync.txt"
+      - name: flag held skills
+        # A hold publishes nothing and needs a person, so the run summary alone is too quiet.
+        # One issue stays open while any hold remains: its body is edited (no notification)
+        # when the list changes, and it closes itself once the sync holds nothing.
+        # An issue API failure must not stop the deploy, so this step cannot fail the job.
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          title="Sync: skills held back from the site"
+          held=$(grep '^hold ' "$RUNNER_TEMP/sync.txt" || true)
+          open=$(gh issue list --state open --limit 200 --json number,title \
+            --jq ".[] | select(.title == \"$title\") | .number" | head -1)
+          if [ -z "$held" ]; then
+            [ -z "$open" ] || gh issue close "$open" --comment "The sync holds nothing now."
+            exit 0
+          fi
+          {
+            echo "The publish sync found skill repos it will not publish until a person fixes them:"
+            echo
+            echo '```'
+            echo "$held"
+            echo '```'
+            echo
+            echo "Fix the repo (or \`site/skills.json\` / \`tools/agent-skills/discover.py\` as the reason says);"
+            echo "the next run, within 15 minutes, publishes it. This issue closes itself when nothing is held."
+          } > "$RUNNER_TEMP/held.md"
+          if [ -z "$open" ]; then
+            gh issue create --title "$title" --body-file "$RUNNER_TEMP/held.md"
+          elif [ "$(gh issue view "$open" --json body --jq .body)" != "$(cat "$RUNNER_TEMP/held.md")" ]; then
+            gh issue edit "$open" --body-file "$RUNNER_TEMP/held.md"
+          fi
       - name: unit tests
         run: python -m unittest discover -s tools/agent-skills/tests -v
       - name: generated surfaces are current

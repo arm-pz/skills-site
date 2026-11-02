@@ -30,7 +30,7 @@ profile README are all generated from it.
 
 ```
 push a public arm-pz repo with one SKILL.md and a repo About
-  └─ within the hour: skills-site  publish.yml  (cron 17 * * * *)
+  └─ within 15 minutes: skills-site  publish.yml  (cron 2,17,32,47 * * * *)
        sync.py --write   add · refresh · rename · remove · hold
        unit tests → build → sitemap + _redirects → dist + version.json → check_dist → verify
        commit the sync to main as github-actions[bot]
@@ -52,7 +52,7 @@ push a public arm-pz repo with one SKILL.md and a repo About
 | quality | any page's repo HEAD moved | `quality` re-read: version (SKILL.md frontmatter or plugin.json), commit, commit date, and the description's "Not for" list |
 | rename | the old repo name now redirects (findable may recommend a rename) | entry, page folder and workflows follow; the old name becomes an alias; `_redirects` 301s the old page and archive URLs |
 | remove | GitHub answers Not Found, or the repo went private | entry and generated page dropped. A failed or unreadable API call stops the run instead |
-| hold | empty About, failed shape test | reported in the run summary; nothing published |
+| hold | empty About, failed shape test | nothing published; reported in the run summary and in one "Sync: skills held back from the site" issue, which closes itself when nothing is held |
 
 Bespoke (hand-written) pages are never edited by any of this, except the region between
 `<!-- gen:quality:start -->` and `<!-- gen:quality:end -->` (and its CSS between the
@@ -96,7 +96,7 @@ of it is generated except the real-world run, which is the hand-kept `tested` fi
 Add one only with evidence a visitor can open (a site path or an https URL). Without it the page says
 "No public run yet".
 
-Want it faster than an hour? Give a skill repo a fine-grained token that can dispatch to
+Want it faster than 15 minutes? Give a skill repo a fine-grained token that can dispatch to
 `arm-pz/skills-site` and send `repository_dispatch` with `event_type: skill-updated`. Not required.
 
 ### Secrets
@@ -131,7 +131,7 @@ health.yml (nightly)  ──regression──▶  "Skill health" issue
         │                         (or skill-maintainer on demand)
         │                                     ▼
   next night records the      tune-skill fix ─▶ PR in the skill's repo ─▶ merge
-  improvement in health.json  ◀──────────── sync.py refreshes the page within the hour
+  improvement in health.json  ◀──────────── sync.py refreshes the page within 15 minutes
 ```
 
 A weekly scheduled Claude Code session (Mondays) runs Brew 10 · Descale over every published skill and opens one
@@ -188,7 +188,7 @@ solo-launcher, skill-maintainer and estate-lead (Brew 1 · Pour-over to Brew 11 
 
 1. **New skill:** Brew 1 · Pour-over. draft-skill (or prompts-to-skill), then tune-skill, then
    prompts-to-skill-release. Make the repo public, fill in its About. The site picks it up within
-   the hour; check the run summary for its guessed group, and move it in `site/skills.json` if needed.
+   15 minutes; check the run summary for its guessed group, and move it in `site/skills.json` if needed.
 2. **Rename a repo** (findable's name decision): rename on GitHub. The redirect does the rest.
 3. **Retire a skill:** delete or privatize the repo, or add it to `site/deny.json` with a reason.
 4. **Hand-written page:** set `page: bespoke` and write `<name>/index.html`, with the two quality marker
