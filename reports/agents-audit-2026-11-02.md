@@ -49,7 +49,8 @@ The linter in the new agent-audit skill measured it: 33 WARN across the eleven a
 - `plugins/caffeinity/agents.json`: skill-builder's handoff fixed; estate-lead's cap raised.
 - `scripts/build_evals.py`: `agent` and `not_agents` cases graded on the Agent tool, and a check
   that every agent has one. `evals/triggers.json`: 11 delegation cases, 2 near misses, 6 cases
-  for the uncovered skills, 3 for agent-audit (77 in all).
+  for the uncovered skills, 3 for agent-audit, and 1 for ai-team-blueprint (bundled by the
+  rebuild on 3 November), which agent-audit's "Not for" list now names (78 in all).
 - New plugin `plugins/agent-audit`: the audit above as a reusable skill, with
   `scripts/check_agent.py` (a stdlib linter for Claude Code agent files) and a self-test wired
   into the PR check.
