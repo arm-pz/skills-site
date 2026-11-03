@@ -195,7 +195,7 @@ class ManifestTest(unittest.TestCase):
             skilllib.validate_manifest(data)
 
     def test_workflow_needs_a_unique_slug_and_a_summary(self):
-        flow = {"id": "pour-over", "number": 1, "name": "Pour-over", "title": "Demo",
+        flow = {"id": "build-a-skill", "number": 1, "name": "build-a-skill", "title": "Demo",
                 "slug": "demo-flow", "summary": "Does it.", "steps": [{"skills": ["demo"]}]}
         for bad in ({"slug": "Demo Flow"}, {"summary": " "}):
             data = self.manifest()
@@ -238,7 +238,7 @@ class ManifestTest(unittest.TestCase):
 
     def test_workflow_steps_must_have_pages(self):
         data = self.manifest()
-        data["workflows"] = [{"id": "pour-over", "number": 1, "name": "Pour-over", "title": "Demo",
+        data["workflows"] = [{"id": "build-a-skill", "number": 1, "name": "build-a-skill", "title": "Demo",
                               "slug": "demo-flow", "summary": "Does it.", "steps": [{"skills": ["demo"]}]}]
         skilllib.validate_manifest(data)
         data["workflows"][0]["steps"].append({"skills": ["ghost"]})
@@ -252,7 +252,7 @@ class SkillPageTitleTest(unittest.TestCase):
         self.assertEqual(skilllib.skill_page_title("Seo Crawl"), "Seo Crawl — AI Agent Skill for Claude Code and Codex")
 
     def test_long_title_drops_to_a_suffix_that_fits(self):
-        for title in ("Release Gate · Validator", "Solo Income Blueprint", "Caffeinity Routing"):
+        for title in ("Release Gate · Validator", "Solo Income Blueprint", "Workflow Router"):
             out = skilllib.skill_page_title(title)
             self.assertLessEqual(len(out), skilllib.TITLE_MAX, out)
             self.assertTrue(out.startswith(f"{title} — "))
