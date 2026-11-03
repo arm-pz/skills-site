@@ -160,7 +160,7 @@ def render_workflows(manifest):
     for flow in manifest.get("workflows", []):
         url = f'/workflows/{esc(flow["slug"])}/'
         lines.append(f'    <article class="flow" id="{esc(flow["id"])}">')
-        lines.append(f'      <p class="flow-id">{esc(skilllib.brew_label(flow))}</p>')
+        lines.append(f'      <p class="flow-id">{esc(skilllib.workflow_label(flow))}</p>')
         lines.append(f'      <h3><a href="{url}">{esc(flow["title"])}</a></h3>')
         lines.append(f'      <p class="flow-sum">{esc(flow["summary"])}</p>')
         lines.append('      <ol class="flow-steps">')
@@ -184,7 +184,7 @@ def render_outcomes(manifest):
         n = len(set(flow_skills(flow)))
         lines += [f'      <a class="outcome" href="/workflows/{esc(flow["slug"])}/">',
                   f'        <b>{esc(flow["title"])}</b>',
-                  f'        <span>{n} skill{"" if n == 1 else "s"} · {esc(skilllib.brew_label(flow))}</span>',
+                  f'        <span>{n} skill{"" if n == 1 else "s"} · {esc(skilllib.workflow_label(flow))}</span>',
                   '      </a>']
     return "\n".join(lines)
 
@@ -344,7 +344,7 @@ def render_flow_page(flow, manifest):
         "DESCRIPTION": attr(flow["summary"]),
         "CANONICAL": attr(canonical),
         "JSON_LD": json.dumps(ld, indent=2, ensure_ascii=False).replace("</", "<\\/"),
-        "BREW": esc(skilllib.brew_label(flow)),
+        "WORKFLOW_LABEL": esc(skilllib.workflow_label(flow)),
         "TITLE": esc(flow["title"]),
         "SUMMARY": esc(flow["summary"]),
         "INSTALL": esc(flow_install(flow, manifest)),

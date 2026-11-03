@@ -62,4 +62,4 @@ padding them is the kind of signal directories delist for.
 ## After submitting
 
 Change the status column above, and re-check in two weeks: search the directory for the skill,
-note whether it is listed and how it is described. `findable` (Brew 2 · Bloom) does this re-check per repo.
+note whether it is listed and how it is described. `findable` (Workflow 2 (get-found)) does this re-check per repo.

@@ -5,7 +5,7 @@
     {
       "id": "start-here",
       "title": "Start Here",
-      "descriptor": "routing · eleven brews",
+      "descriptor": "routing · eleven workflows",
       "order": 1
     },
     {
@@ -59,19 +59,19 @@
   ],
   "skills": [
     {
-      "name": "caffeinity-routing",
+      "name": "workflow-router",
       "repo": "arm-pz/caffeinity-skills",
-      "path": "plugins/caffeinity-routing/skills/caffeinity-routing",
+      "path": "plugins/workflow-router/skills/workflow-router",
       "group": "start-here",
       "tag": "routing",
-      "title": "Caffeinity Routing",
-      "pageTitle": "Caffeinity Routing — AI Agent Skill for Claude Code",
-      "blurb": "Start here. Tell it the outcome you want and it picks one of eleven brews (workflows), lists the skills in order with what each hands the next, and names the ones you have not installed instead of improvising their work.",
+      "title": "Workflow Router",
+      "pageTitle": "Workflow Router — AI Agent Skill for Claude Code",
+      "blurb": "Start here. Tell it the outcome you want and it picks one of eleven workflows, lists the skills in order with what each hands the next, and names the ones you have not installed instead of improvising their work.",
       "stats": "4 files · 384 lines · 9 KB",
-      "install": "npx skills add arm-pz/caffeinity-skills --skill caffeinity-routing",
+      "install": "npx skills add arm-pz/caffeinity-skills --skill workflow-router",
       "page": "generated",
       "pageSource": {
-        "description": "Picks which caffeinity skills to run, in what order, for a goal that spans more than one of them, and says what each step hands the next: build and publish a skill, get a project found, pass a release gate, grow organic search traffic, run a job search, make a decision, learn a skill, run cold outbound, launch a one-person product, or set up and keep the skills themselves healthy. Checks which of those skills are installed and names the missing ones instead of improvising their work. Use whenever someone asks which skill to use, what to run first, how the skills fit together, or describes a multi-step outcome such as \"take this idea to a published skill\" or \"get my site ready to ship and ranking\", even if they never name a skill. Not for a request one skill already owns (load that skill directly), and not for doing a step's work itself: the named skill does it.",
+        "description": "Picks which caffeinity skills to run, in what order, for a goal that spans more than one of them, and says what each step hands the next: build and publish a skill, get a project found, decide whether a site is safe to launch (a release gate), grow organic search traffic, land a job, make a decision, learn a skill, run cold outbound, launch a one-person product, keep your skills healthy, or audit all your skills. Checks which of those skills are installed and names the missing ones instead of improvising their work. Use whenever someone asks which skill to use, what to run first, how the skills fit together, or describes a multi-step outcome such as \"take this idea to a published skill\" or \"get my site ready to ship and ranking\", even if they never name a skill. Not for a request one skill already owns (load that skill directly), and not for doing a step's work itself: the named skill does it.",
         "files": [
           {
             "path": "SKILL.md",
@@ -110,7 +110,10 @@
           "a request one skill already owns (load that skill directly)",
           "not for doing a step's work itself: the named skill does it"
         ]
-      }
+      },
+      "aliases": [
+        "caffeinity-routing"
+      ]
     },
     {
       "name": "draft-skill",
@@ -142,7 +145,7 @@
       },
       "tested": {
         "date": "2026-10-24",
-        "target": "caffeinity-routing",
+        "target": "workflow-router (then named caffeinity-routing)",
         "result": "Drafted the missing routing skill five others pointed at; it passed tune-skill's validator with 0 failures.",
         "evidence": "/#proof"
       }
@@ -733,7 +736,7 @@
       "install": "npx skills add arm-pz/caffeinity-skills --skill skill-estate",
       "page": "generated",
       "pageSource": {
-        "description": "Takes a whole collection of agent skill repos from scattered to published, consistent and self-maintaining, in gated phases: inventory every repo, reconcile site, marketplace and README listings, test and tune the family, close workflow gaps, wire publishing so new skill repos go live on their own, bundle a plugin with agents, add trigger tests and directory listings, and leave a maintenance loop and a map. Each phase hands off to the skill that owns it and ends in PRs. Use when someone's skills site and GitHub disagree, wants all their skill repos audited or cleaned up, wants new skills to publish themselves, or wants that cleanup repeated on another org, even if they never say estate. Not for one skill (use tune-skill), one listing (use findable), the site pipeline alone (use publish-pipeline), or weekly upkeep (use caffeinity-routing's Descale brew).",
+        "description": "Takes a whole collection of agent skill repos from scattered to published, consistent and self-maintaining, in gated phases: inventory every repo, reconcile site, marketplace and README listings, test and tune the family, close workflow gaps, wire publishing so new skill repos go live on their own, bundle a plugin with agents, add trigger tests and directory listings, and leave a maintenance loop and a map. Each phase hands off to the skill that owns it and ends in PRs. Use when someone's skills site and GitHub disagree, wants all their skill repos audited or cleaned up, wants new skills to publish themselves, or wants that cleanup repeated on another org, even if they never say estate. Not for one skill (use tune-skill), one listing (use findable), the site pipeline alone (use publish-pipeline), or weekly upkeep (use workflow-router's Workflow 10 (maintain-skills)).",
         "files": [
           {
             "path": "SKILL.md",
@@ -772,7 +775,7 @@
           "one skill (use tune-skill)",
           "one listing (use findable)",
           "the site pipeline alone (use publish-pipeline)",
-          "weekly upkeep (use caffeinity-routing's Descale brew)"
+          "weekly upkeep (use workflow-router's Workflow 10 (maintain-skills))"
         ]
       }
     },
@@ -2920,9 +2923,8 @@
   ],
   "workflows": [
     {
-      "id": "pour-over",
+      "id": "build-a-skill",
       "number": 1,
-      "name": "Pour-over",
       "title": "Build a skill and make it installable",
       "slug": "build-a-skill",
       "summary": "Go from an idea or a pile of prompts to a tested skill anyone can install: draft it, tune its trigger, then package and release it.",
@@ -2953,9 +2955,8 @@
       "note": "skill-launch runs the first steps as one chain."
     },
     {
-      "id": "bloom",
+      "id": "get-found",
       "number": 2,
-      "name": "Bloom",
       "title": "Get a repo, skill or plugin found",
       "slug": "get-found",
       "summary": "Make a repo, skill or plugin show up for what it does: fix how it is described and listed, publish it, then check every listing matches what is live.",
@@ -2979,9 +2980,8 @@
       "note": "findable-polish and upstream-polish add the rewrite."
     },
     {
-      "id": "espresso",
+      "id": "launch-safely",
       "number": 3,
-      "name": "Espresso",
       "title": "Decide whether a site is safe to launch",
       "slug": "launch-safely",
       "summary": "Get one honest answer to \"can we ship?\": check for exposed files, red-team the app, audit its speed, then let a release gate weigh the three verdicts.",
@@ -3012,9 +3012,8 @@
       "note": "ship-sentinel holds git push and deploys until the gate has run."
     },
     {
-      "id": "cold-brew",
+      "id": "grow-search-traffic",
       "number": 4,
-      "name": "Cold brew",
       "title": "Grow organic search traffic",
       "slug": "grow-search-traffic",
       "summary": "Grow organic traffic on a site you own: crawl it for technical problems, give each query one page that wins it, then tighten the copy.",
@@ -3058,9 +3057,8 @@
       ]
     },
     {
-      "id": "french-press",
+      "id": "land-a-job",
       "number": 5,
-      "name": "French press",
       "title": "Land a job",
       "slug": "land-a-job",
       "summary": "Run a job search without inventing credentials: see your resume the way recruiters screen it, write the tailored version, then manage the applications.",
@@ -3090,9 +3088,8 @@
       "note": "It never submits an application for you."
     },
     {
-      "id": "cupping",
+      "id": "make-a-decision",
       "number": 6,
-      "name": "Cupping",
       "title": "Make a decision",
       "slug": "make-a-decision",
       "summary": "Turn a hard question into a decision you can defend: gather sourced evidence, read your own numbers, attack the options, then write the memo.",
@@ -3122,9 +3119,8 @@
       ]
     },
     {
-      "id": "slow-drip",
+      "id": "learn-a-skill",
       "number": 7,
-      "name": "Slow drip",
       "title": "Learn a skill",
       "slug": "learn-a-skill",
       "summary": "Learn any topic from zero: get taught concept by concept, then build the practice system that makes it stick.",
@@ -3149,9 +3145,8 @@
       "note": "course-builder applies when the learner is a class or cohort, not one person."
     },
     {
-      "id": "nitro",
+      "id": "run-cold-outbound",
       "number": 8,
-      "name": "Nitro",
       "title": "Run cold outbound",
       "slug": "run-cold-outbound",
       "summary": "Send cold email that lands: check the lead list before it loads, size and protect the sending setup, then write the copy.",
@@ -3174,9 +3169,8 @@
       ]
     },
     {
-      "id": "moka-pot",
+      "id": "launch-a-product",
       "number": 9,
-      "name": "Moka pot",
       "title": "Launch a one-person product",
       "slug": "launch-a-product",
       "summary": "Take a one-person product from plan to launch: pick the offer, build the site and code, write the policy pages, pass the release gate, then announce it.",
@@ -3212,13 +3206,12 @@
           ]
         }
       ],
-      "note": "Step five is the whole of Brew 3 · Espresso; paper-trail gives the gate the policy pages to check."
+      "note": "Step five is the whole of Workflow 3 (launch-safely); paper-trail gives the gate the policy pages to check."
     },
     {
-      "id": "descale",
+      "id": "maintain-skills",
       "number": 10,
-      "name": "Descale",
-      "title": "Maintain the skill family",
+      "title": "Keep your skills healthy",
       "slug": "maintain-skills",
       "summary": "Keep a family of skills healthy after release: tune what drifted, re-release what changed, and confirm every listing still matches.",
       "steps": [
@@ -3242,10 +3235,9 @@
       "note": "The nightly health job opens the issue this starts from; a weekly scheduled session runs it and opens PRs."
     },
     {
-      "id": "estate-roast",
+      "id": "audit-a-skill-estate",
       "number": 11,
-      "name": "Estate roast",
-      "title": "Stand up or audit a skill estate",
+      "title": "Audit all your skills",
       "slug": "audit-a-skill-estate",
       "summary": "Inventory and repair a whole collection of skills in one gated run, from repos and listings to the workflows that connect them.",
       "steps": [
@@ -3255,7 +3247,7 @@
           ]
         }
       ],
-      "note": "One run over the whole collection in eight gated phases; Brew 10 · Descale keeps it healthy afterwards."
+      "note": "One run over the whole collection in eight gated phases; Workflow 10 (maintain-skills) keeps it healthy afterwards."
     }
   ]
 }

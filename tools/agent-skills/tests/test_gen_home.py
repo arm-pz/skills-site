@@ -24,7 +24,7 @@ MANIFEST = {
          "tag": "release", "title": "Beta", "blurb": "Ships.", "stats": "2 files",
          "install": "npx skills add arm-pz/beta", "page": "none", "order": 2},
     ],
-    "workflows": [{"id": "pour-over", "number": 1, "name": "Pour-over", "title": "Edit a page",
+    "workflows": [{"id": "edit-a-page", "number": 1, "title": "Edit a page",
                    "slug": "edit-a-page", "summary": "Edit it & ship it.",
                    "steps": [{"skills": ["alpha"]}, {"skills": ["alpha"], "optional": True}],
                    "note": "One & done."}],
@@ -93,10 +93,10 @@ class GenHomeTest(unittest.TestCase):
         out = render()
         self.assertIn('<a href="/alpha/">alpha</a> <span class="opt">optional</span>', out)
         self.assertIn("One &amp; done.", out)
-        self.assertIn('<p class="flow-id">Brew 1 · Pour-over</p>', out)
+        self.assertIn('<p class="flow-id">Workflow 1</p>', out)
         self.assertIn('<h3><a href="/workflows/edit-a-page/">Edit a page</a></h3>', out)
         self.assertIn('<a class="outcome" href="/workflows/edit-a-page/">', out)
-        self.assertIn("1 skill · Brew 1 · Pour-over", out)
+        self.assertIn("1 skill · Workflow 1", out)
 
     def test_flagships_need_a_featured_skill_and_show_its_run(self):
         self.assertNotIn('class="flag"', render())
