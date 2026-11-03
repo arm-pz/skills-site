@@ -2082,6 +2082,12 @@
         "notFor": [
           "prose editing (wordsmith, if installed) or producing the final .docx or .pdf (the file skills)"
         ]
+      },
+      "tested": {
+        "date": "2026-11-03",
+        "target": "a 10-year .NET/AWS resume against a Big Four AI consulting role",
+        "result": "Caught a job title the candidate does not hold and three tools claimed hands-on that were surface-level; the ATS parse went from 7/10 to 9/10 once titles moved to their own lines.",
+        "evidence": "/#proof"
       }
     },
     {
@@ -2103,6 +2109,12 @@
         "notFor": [
           "running the search itself (finding roles, the application tracker, follow-ups, interview briefings): use the application-pilot skill"
         ]
+      },
+      "tested": {
+        "date": "2026-11-03",
+        "target": "a 10-year .NET/AWS resume against a Big Four AI consulting role",
+        "result": "Wrote the tailored resume, five summaries and a 20-question answer pack; Python, RAG and ML frameworks stayed named gaps and were never added.",
+        "evidence": "/#proof"
       }
     },
     {
@@ -2124,6 +2136,12 @@
         "notFor": [
           "judging (scans, ATS checks, critique, rejection reasons, gap analysis): use recruiter-lens"
         ]
+      },
+      "tested": {
+        "date": "2026-11-03",
+        "target": "a 10-year .NET/AWS resume against a Big Four AI consulting role",
+        "result": "Scored fit at 49/100 with evidence (apply with gaps named) and held the tracker row at ready, never marking it submitted.",
+        "evidence": "/#proof"
       }
     },
     {

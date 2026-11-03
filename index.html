@@ -553,7 +553,7 @@
 
 <section class="proof" id="proof" aria-labelledby="proof-h">
   <div class="wrap">
-    <p class="eyebrow">Shown running · 23 and 24 October 2026</p>
+    <p class="eyebrow">Shown running · 23 October to 3 November 2026</p>
     <h2 class="title" id="proof-h">Tested on real targets, this site first.</h2>
     <p class="section-lead">Each tab is a real run: what the skill found, and what changed because of it. Nothing here is a mock-up; where a fix is still waiting on a decision, the tab says so.</p>
     <div class="shell">
@@ -567,6 +567,7 @@
           <button type="button" role="tab" id="tab-findable" aria-controls="pane-findable" aria-selected="false" tabindex="-1">findable</button>
           <button type="button" role="tab" id="tab-upstream-check" aria-controls="pane-upstream-check" aria-selected="false" tabindex="-1">upstream-check</button>
           <button type="button" role="tab" id="tab-draft-skill" aria-controls="pane-draft-skill" aria-selected="false" tabindex="-1">draft-skill</button>
+          <button type="button" role="tab" id="tab-land-a-job" aria-controls="pane-land-a-job" aria-selected="false" tabindex="-1">land-a-job</button>
         </div>
       </div>
       <div class="pane" role="tabpanel" id="pane-seo-crawl" aria-labelledby="tab-seo-crawl">
@@ -714,6 +715,30 @@ router  (did not exist)</pre></div>
 <pre>caffeinity-routing  11 brews
 check_skill.py      0 fail · 0 warn</pre></div>
           <p class="verdict">new; now eleven brews</p>
+        </div>
+      </div>
+      <div class="pane" role="tabpanel" id="pane-land-a-job" aria-labelledby="tab-land-a-job">
+        <div class="pane-col">
+          <p class="pane-label">recruiter-lens → applicant-kit → application-pilot · one real application</p>
+          <h3>A stretch role, applied for honestly</h3>
+<pre>fit score     49/100 (rubric estimate)
+verdict       apply with gaps named
+JD gaps kept  Python, RAG, ML frameworks</pre>
+          <p>A 10-year .NET/AWS resume against a Big Four AI consulting role. recruiter-lens flagged a title the candidate does not hold and three tools listed as hands-on that were only familiar; applicant-kit rewrote the resume without them and built a 20-question answer pack, marking "story needed" where the resume had nothing to draw on.</p>
+        </div>
+        <div class="pane-col">
+          <p class="pane-label">Before → after</p>
+          <div class="ba"><span>before</span>
+<pre>title      not the one held
+claims     3 tools overstated
+ATS parse  7/10, titles merged
+           with company lines</pre></div>
+          <div class="ba after"><span>after</span>
+<pre>title      the real one
+claims     the 3 tools removed
+ATS parse  9/10
+tracker    ready, not submitted</pre></div>
+          <p class="verdict">3 November; the candidate submits, not the skill</p>
         </div>
       </div>
       <div class="shell-progress" aria-hidden="true"><b></b></div>
