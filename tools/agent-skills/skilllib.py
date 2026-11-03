@@ -224,9 +224,9 @@ def validate_manifest(data):
     numbers = set()
     slugs = set()
     for f in flows:
-        # A workflow is a brew: an id slug ("cold-brew"), its number and name ("Brew 4 · Cold brew").
+        # A workflow: an id slug ("grow-search-traffic"), its number and name ("Workflow 4 · grow-search-traffic").
         _req(isinstance(f, dict) and re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", str(f.get("id"))),
-             "workflow id must be a lowercase slug such as cold-brew")
+             "workflow id must be a lowercase slug such as grow-search-traffic")
         _req(f["id"] not in seen, f"duplicate workflow {f['id']}")
         seen.add(f["id"])
         _req(isinstance(f.get("number"), int) and f["number"] > 0 and f["number"] not in numbers,
@@ -490,16 +490,16 @@ def llms_txt(manifest):
         out.append("")
     flows = manifest.get("workflows", [])
     if flows:
-        out += ["## Brews (workflows)", ""]
+        out += ["## Workflows", ""]
         for f in flows:
             steps = " -> ".join(" or ".join(st["skills"]) for st in f["steps"])
-            out.append(f"- [{f['title']}]({SITE}/workflows/{f['slug']}/) ({brew_label(f)}): {steps}")
+            out.append(f"- [{f['title']}]({SITE}/workflows/{f['slug']}/) ({workflow_label(f)}): {steps}")
         out.append("")
     return "\n".join(out)
 
 
-def brew_label(flow):
-    return f"Brew {flow['number']} · {flow['name']}"
+def workflow_label(flow):
+    return f"Workflow {flow['number']} · {flow['name']}"
 
 
 def sha256_hex(blob):
