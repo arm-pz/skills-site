@@ -104,7 +104,7 @@
       "order": 101,
       "quality": {
         "version": null,
-        "commit": "11be9ad",
+        "commit": "4427024",
         "updated": "2026-11-04",
         "notFor": [
           "a request one skill already owns (load that skill directly)",
@@ -399,7 +399,7 @@
       "order": 208,
       "quality": {
         "version": "0.1.0",
-        "commit": "11be9ad",
+        "commit": "4427024",
         "updated": "2026-11-04",
         "notFor": []
       }
@@ -491,7 +491,7 @@
       "order": 209,
       "quality": {
         "version": "0.1.0",
-        "commit": "11be9ad",
+        "commit": "4427024",
         "updated": "2026-11-04",
         "notFor": []
       }
@@ -766,7 +766,7 @@
       "order": 307,
       "quality": {
         "version": null,
-        "commit": "11be9ad",
+        "commit": "4427024",
         "updated": "2026-11-04",
         "notFor": [
           "one skill (use tune-skill)",
@@ -1259,7 +1259,7 @@
       "order": 411,
       "quality": {
         "version": null,
-        "commit": "11be9ad",
+        "commit": "4427024",
         "updated": "2026-11-04",
         "notFor": []
       }
@@ -1356,7 +1356,7 @@
       "order": 412,
       "quality": {
         "version": "0.1.0",
-        "commit": "11be9ad",
+        "commit": "4427024",
         "updated": "2026-11-04",
         "notFor": []
       }
@@ -1443,7 +1443,7 @@
       "order": 413,
       "quality": {
         "version": "0.1.0",
-        "commit": "11be9ad",
+        "commit": "4427024",
         "updated": "2026-11-04",
         "notFor": []
       }
@@ -1560,7 +1560,7 @@
       "order": 414,
       "quality": {
         "version": "0.1.0",
-        "commit": "11be9ad",
+        "commit": "4427024",
         "updated": "2026-11-04",
         "notFor": []
       }
@@ -1637,7 +1637,7 @@
       "order": 415,
       "quality": {
         "version": "0.1.0",
-        "commit": "11be9ad",
+        "commit": "4427024",
         "updated": "2026-11-04",
         "notFor": []
       }
@@ -2548,7 +2548,7 @@
       "order": 909,
       "quality": {
         "version": null,
-        "commit": "11be9ad",
+        "commit": "4427024",
         "updated": "2026-11-04",
         "notFor": [
           "one person's own learning plan (use study-system)",
