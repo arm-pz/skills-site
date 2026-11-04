@@ -6,7 +6,8 @@
     python tools/agent-skills/repo_metadata.py --apply --about   # also set About text findable wrote
 
 Additive only: a topic is added when missing (never removed, GitHub's cap of 20 respected) and the
-homepage is set to the skill's page only when it is empty. The About text changes only with --about,
+homepage is set to the skill's page when it is empty or still points at a retired host
+(LEGACY_HOSTS: the site moved, so those links are ours to update). The About text changes only with --about,
 and only for entries whose `githubAbout` (written by findable, in site/skills.json) differs from it. Run it from your own machine: Claude Code cloud sessions cannot write repo
 settings. Safe to re-run whenever a skill is added.
 """
@@ -21,6 +22,9 @@ import skilllib
 SKILL_TOPICS = ["agent-skills", "claude-code", "claude-skills", "skill-md", "codex", "cursor"]
 MOD_TOPICS = ["claude-code", "claude-code-plugin", "claude-code-mod", "agent-skills"]
 MARKETPLACE = "arm-pz/caffeinity-skills"
+# Hosts the site used to live on. A homepage still pointing at one was set by us before the move
+# to skillsmith.tech, so it is replaced; any other non-empty homepage is the owner's and is kept.
+LEGACY_HOSTS = ("skills.caffeinity.com",)
 MARKETPLACE_TOPICS = ["claude-code-plugin", "plugin-marketplace", "codex-plugin", "agent-skills", "claude-skills"]
 
 
@@ -39,7 +43,9 @@ def wanted(manifest):
 def plan(current, topics, homepage):
     have = list(current.get("topics") or [])
     add = [t for t in topics if t not in have][: max(0, 20 - len(have))]
-    home = homepage if not (current.get("homepage") or "").strip() else None
+    now = (current.get("homepage") or "").strip()
+    stale = any(f"//{host}" in now for host in LEGACY_HOSTS)
+    home = homepage if (not now or stale) and now != homepage else None
     return have, add, home
 
 

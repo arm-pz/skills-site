@@ -32,6 +32,16 @@ class RepoMetadataTest(unittest.TestCase):
                                           ["a", "b"], "https://h/")
         self.assertEqual((add, home), (["a"], None))
 
+    def test_plan_replaces_a_homepage_on_the_retired_host_only(self):
+        _, _, home = repo_metadata.plan({"homepage": "https://skills.caffeinity.com/wordsmith/"},
+                                        [], "https://skillsmith.tech/wordsmith/")
+        self.assertEqual(home, "https://skillsmith.tech/wordsmith/")
+        _, _, home = repo_metadata.plan({"homepage": "https://skillsmith.tech/wordsmith/"},
+                                        [], "https://skillsmith.tech/wordsmith/")
+        self.assertIsNone(home)
+        _, _, home = repo_metadata.plan({"homepage": "https://example.com/"}, [], "https://skillsmith.tech/x/")
+        self.assertIsNone(home)
+
 
 if __name__ == "__main__":
     unittest.main()

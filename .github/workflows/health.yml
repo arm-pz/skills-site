@@ -71,3 +71,45 @@ jobs:
             gh issue create --title "$title" --body-file "$RUNNER_TEMP/health.md"
           fi
           exit 1
+
+  # What Cloudflare serves, which no build gate sees: obfuscated email links, a 302 where a 301
+  # belongs, llms.txt disagreeing with the homepage. Dashboard settings change without a deploy,
+  # so this runs nightly against the live site and keeps one issue open until it is clean.
+  edge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: check the live edge
+        id: edge
+        run: |
+          set +e
+          CACHE_BUST="$GITHUB_RUN_ID" node tools/agent-skills/check_edge.mjs https://skillsmith.tech | tee "$RUNNER_TEMP/edge.txt"
+          echo "code=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
+          exit 0
+      - name: open, update or close the edge issue
+        if: steps.edge.outputs.code != '2'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CODE: ${{ steps.edge.outputs.code }}
+        run: |
+          set -euo pipefail
+          title="Edge drift: skillsmith.tech serves something the build did not"
+          number=$(gh issue list --state open --search "\"$title\" in:title" --json number --jq '.[0].number // empty')
+          if [ "$CODE" = "0" ]; then
+            [ -z "$number" ] || gh issue close "$number" --comment "Edge check clean."
+            exit 0
+          fi
+          { echo '```'; cat "$RUNNER_TEMP/edge.txt"; echo '```'; echo
+            echo "Fixes live in the Cloudflare dashboard (Scrape Shield, Rules > Redirect Rules), not in this repo."; } > "$RUNNER_TEMP/edge.md"
+          if [ -n "$number" ]; then gh issue comment "$number" --body-file "$RUNNER_TEMP/edge.md"
+          else gh issue create --title "$title" --body-file "$RUNNER_TEMP/edge.md"; fi
+          exit 1
