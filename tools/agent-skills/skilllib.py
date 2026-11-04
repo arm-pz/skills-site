@@ -25,8 +25,10 @@ TAGS = ("editorial", "seo", "discovery", "career", "learning", "arena",
 PAGE_KINDS = ("bespoke", "generated", "none")
 # A mod is a Claude Code plugin with no SKILL.md: it gets a page but no archive.
 KINDS = ("skill", "mod")
-REPO_META = {"README.md", "LICENSE", "LICENSE.md", "CHANGELOG.md", "CONTRIBUTING.md"}
-REPO_META_DIRS = {".claude-plugin", ".github", ".git", "tests"}
+REPO_META = {"README.md", "LICENSE", "LICENSE.md", "CHANGELOG.md", "CONTRIBUTING.md",
+             # working files other skills leave at a repo root (findable, copier); never installed
+             "discovery-kit.md", ".copier-answers.yml"}
+REPO_META_DIRS = {".claude-plugin", ".github", ".git", "tests", "discovery"}
 
 
 class ManifestError(ValueError):
@@ -464,9 +466,12 @@ def llms_txt(manifest):
     order = {g["id"]: g["order"] for g in manifest["groups"]}
     pages = sorted((s for s in manifest["skills"] if s["page"] != "none"),
                    key=lambda s: (order[s["group"]], s["order"]))
+    mods = sum(1 for s in pages if s.get("kind") == "mod")
+    plural = lambda n, word: f"{n} {word}" + ("" if n == 1 else "s")
+    headline = plural(len(pages) - mods, "skill") + (f" and {plural(mods, 'mod')}" if mods else "")
     out = ["# Skillsmith", "",
            "> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: "
-           f"{len(pages)} skills mapped into {len(manifest.get('workflows', []))} workflows "
+           f"{headline} mapped into {len(manifest.get('workflows', []))} workflows "
            "(build a skill, get found, gate a release, grow search traffic, land a job, decide, "
            "learn, run outbound, launch a product). Plain markdown, no API keys.", "",
            "## Install", "",

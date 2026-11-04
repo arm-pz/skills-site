@@ -257,5 +257,26 @@ class SkillPageTitleTest(unittest.TestCase):
             self.assertLessEqual(len(out), skilllib.TITLE_MAX, out)
             self.assertTrue(out.startswith(f"{title} — "))
 
+class CountsAndArchiveTest(unittest.TestCase):
+    def test_llms_txt_counts_skills_and_mods_separately(self):
+        manifest = {
+            "groups": [{"id": "g", "order": 1, "title": "G"}],
+            "workflows": [],
+            "skills": [{"name": "a", "page": "generated", "group": "g", "order": 1, "blurb": "Does a thing well."},
+                       {"name": "b", "page": "bespoke", "group": "g", "order": 2, "blurb": "Does b."},
+                       {"name": "m", "page": "generated", "group": "g", "order": 3, "blurb": "A mod.",
+                        "kind": "mod"},
+                       {"name": "legacy", "page": "none", "group": "g", "order": 4, "blurb": "Old."}],
+        }
+        text = skilllib.llms_txt(manifest)
+        self.assertIn("2 skills and 1 mod mapped into", text)
+        self.assertNotIn("3 skills", text)
+
+    def test_root_skill_archive_drops_discovery_working_files(self):
+        files = {"SKILL.md": b"x", "references/a.md": b"x", "README.md": b"x",
+                 "discovery-kit.md": b"x", "discovery/site-page.md": b"x", ".copier-answers.yml": b"x"}
+        self.assertEqual(sorted(skilllib.select_skill_files(files, ".")), ["SKILL.md", "references/a.md"])
+
+
 if __name__ == "__main__":
     unittest.main()
