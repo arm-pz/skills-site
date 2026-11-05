@@ -2931,12 +2931,12 @@
       "page": "generated",
       "order": 917,
       "pageSource": {
-        "description": "Set up a repo so any coding agent (Claude Code, Codex, Cursor) behaves the same wherever it runs - writes 12 working rules at the top of CLAUDE.md or AGENTS.md, adds map sections only where the agent keeps getting things wrong, and installs guardrails it cannot talk past - a type check that fails only on new errors, live-service tests that run only on request, and tests plus type check before every deploy from main. Use when someone wants agent rules for a repo, a better CLAUDE.md or AGENTS.md, says the agent keeps ignoring conventions, hiding behind old type errors or calling real services in tests, or wants their setup to move between harnesses, even if they never say harness. Not for reviewing code (use consistent-code-review), writing features or fixes (use production-code), or turning a skill into a Claude Code plugin (use skill-to-mod).",
+        "description": "Set up a repo so any coding agent (Claude Code, Codex, Cursor) behaves the same wherever it runs - writes 12 working rules at the top of CLAUDE.md or AGENTS.md, adds map sections only where the agent keeps getting things wrong, and installs guardrails it cannot talk past - a type check that fails only on new errors, live-service tests that run only on request, and tests plus type check before every deploy from main. Use when someone wants agent rules for a repo, a better CLAUDE.md or AGENTS.md, says the agent keeps ignoring conventions, hiding behind old type errors or calling real services in tests, or wants their setup to move between harnesses, even if they never say harness. Not for pruning or auditing a setup that already exists (use harness-audit), reviewing code (use consistent-code-review), writing features or fixes (use production-code), or turning a skill into a Claude Code plugin (use skill-to-mod).",
         "files": [
           {
             "path": "SKILL.md",
             "lines": 54,
-            "bytes": 3845
+            "bytes": 3914
           },
           {
             "path": "references/guardrails.md",
@@ -2961,10 +2961,21 @@
         ],
         "fileCount": 5,
         "lines": 210,
-        "bytes": 4868,
+        "bytes": 4893,
         "license": "MIT",
-        "commit": "dfb61d3d4b5d15a94a84f9e8ee4ba88d7e46dc43",
-        "sha256": "d82886ffa17c2236b4e695f25d4fb7d067d48d9f51f47b7495912ad775ce4749"
+        "commit": "d1333019cd722c1a77da6f3262c335d78098c795",
+        "sha256": "b1ee5bcd9529c02dffd14b38bff1cd748110d6b875d4f93d979d20b9d2fbc73e"
+      },
+      "quality": {
+        "version": null,
+        "commit": "d133301",
+        "updated": "2026-11-05",
+        "notFor": [
+          "pruning or auditing a setup that already exists (use harness-audit)",
+          "reviewing code (use consistent-code-review)",
+          "writing features or fixes (use production-code)",
+          "turning a skill into a Claude Code plugin (use skill-to-mod)"
+        ]
       }
     }
   ],
