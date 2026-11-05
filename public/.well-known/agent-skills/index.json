@@ -156,6 +156,13 @@
       "digest": "sha256:1a2467069948aac811b616d24b6ae57708b5b8d1e81b744e0bdb6dc9e8632d4a"
     },
     {
+      "name": "portable-harness",
+      "description": "Agent skill that sets up CLAUDE.md / AGENTS.md rules and CI guardrails so Claude Code, Codex and Cursor behave the same on your repo",
+      "type": "archive",
+      "url": "https://skillsmith.tech/agent-skills/portable-harness.tar.gz",
+      "digest": "sha256:d82886ffa17c2236b4e695f25d4fb7d067d48d9f51f47b7495912ad775ce4749"
+    },
+    {
       "name": "pre-ship-performance-audit",
       "description": "Agent skill that audits and fixes web app performance before launch: four read-only subagents check images, fonts, bundles, database queries and servers, then same-condition mobile Lighthouse medians prove each fix. Works with Claude Code, Cursor and Qoder.",
       "type": "archive",

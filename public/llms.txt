@@ -1,6 +1,6 @@
 # Skillsmith
 
-> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: 59 skills mapped into 11 workflows (build a skill, get found, gate a release, grow search traffic, land a job, decide, learn, run outbound, launch a product). Plain markdown, no API keys.
+> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: 60 skills mapped into 11 workflows (build a skill, get found, gate a release, grow search traffic, land a job, decide, learn, run outbound, launch a product). Plain markdown, no API keys.
 
 ## Install
 
@@ -37,6 +37,7 @@ Sections: [skills](https://skillsmith.tech/skills/), [workflows](https://skillsm
 - [skill-estate](https://skillsmith.tech/skill-estate/): The whole-collection sweep: inventory every skill repo, reconcile the site, marketplace and README, tune the family, close workflow gaps, wire self-publishing, add trigger tests and listings, and leave a maintenance loop.
 - [seo-sweep](https://skillsmith.tech/seo-sweep/): Runs the Skillsmith SEO skills on a site you own, in order, fixes what they find in the site's code, proves each fix with a re-crawl, and turns every defect a skill shows along the way into a tested fix to that skill, chaining seo-crawl…
 - [get-indexed](https://skillsmith.tech/get-indexed/): Tells search engines about a site's new and changed pages through every channel that has an API, and lists the few steps that still need a person.
+- [portable-harness](https://skillsmith.tech/portable-harness/): Set up a repo so any coding agent (Claude Code, Codex, Cursor) behaves the same wherever it runs - writes 12 working rules at the top of CLAUDE.md or AGENTS.md, adds map sections only where the agent keeps getting things wrong, and…
 
 ## Build & Ship
 
