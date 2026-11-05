@@ -2916,6 +2916,56 @@
           "running agents on a task right now, or picking one AI tool for a one-off task"
         ]
       }
+    },
+    {
+      "name": "portable-harness",
+      "repo": "arm-pz/portable-harness",
+      "path": "skills/portable-harness",
+      "group": "publish-discover",
+      "tag": "publishing",
+      "title": "Portable Harness",
+      "pageTitle": "Portable Harness — AI Agent Skill for Claude Code and Codex",
+      "blurb": "Set up a repo so any coding agent (Claude Code, Codex, Cursor) behaves the same wherever it runs - writes 12 working rules at the top of CLAUDE.md or AGENTS.md, adds map sections only where the agent keeps getting things wrong, and…",
+      "stats": "5 files · 210 lines · 5 KB",
+      "install": "npx skills add arm-pz/portable-harness",
+      "page": "generated",
+      "order": 917,
+      "pageSource": {
+        "description": "Set up a repo so any coding agent (Claude Code, Codex, Cursor) behaves the same wherever it runs - writes 12 working rules at the top of CLAUDE.md or AGENTS.md, adds map sections only where the agent keeps getting things wrong, and installs guardrails it cannot talk past - a type check that fails only on new errors, live-service tests that run only on request, and tests plus type check before every deploy from main. Use when someone wants agent rules for a repo, a better CLAUDE.md or AGENTS.md, says the agent keeps ignoring conventions, hiding behind old type errors or calling real services in tests, or wants their setup to move between harnesses, even if they never say harness. Not for reviewing code (use consistent-code-review), writing features or fixes (use production-code), or turning a skill into a Claude Code plugin (use skill-to-mod).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 54,
+            "bytes": 3845
+          },
+          {
+            "path": "references/guardrails.md",
+            "lines": 61,
+            "bytes": 2660
+          },
+          {
+            "path": "references/rules.md",
+            "lines": 24,
+            "bytes": 1122
+          },
+          {
+            "path": "scripts/test_typecheck_gate.py",
+            "lines": 24,
+            "bytes": 974
+          },
+          {
+            "path": "scripts/typecheck_gate.py",
+            "lines": 47,
+            "bytes": 1782
+          }
+        ],
+        "fileCount": 5,
+        "lines": 210,
+        "bytes": 4868,
+        "license": "MIT",
+        "commit": "dfb61d3d4b5d15a94a84f9e8ee4ba88d7e46dc43",
+        "sha256": "d82886ffa17c2236b4e695f25d4fb7d067d48d9f51f47b7495912ad775ce4749"
+      }
     }
   ],
   "workflows": [
