@@ -9,7 +9,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Skillsmith">
 <meta property="og:title" content="Portable Harness — AI Agent Skill for Claude Code and Codex">
-<meta property="og:description" content="Set up a repo so any coding agent (Claude Code, Codex, Cursor) behaves the same wherever it runs - writes 12 working rules at the top of CLAUDE.md or AGENTS.md, adds map sections only where the agent keeps getting things wrong, and installs guardrails it cannot talk past - a type check that fails only on new errors, live-service tests that run only on request, and tests plus type check before every deploy from main. Use when someone wants agent rules for a repo, a better CLAUDE.md or AGENTS.md, says the agent keeps ignoring conventions, hiding behind old type errors or calling real services in tests, or wants their setup to move between harnesses, even if they never say harness. Not for reviewing code (use consistent-code-review), writing features or fixes (use production-code), or turning a skill into a Claude Code plugin (use skill-to-mod).">
+<meta property="og:description" content="Set up a repo so any coding agent (Claude Code, Codex, Cursor) behaves the same wherever it runs - writes 12 working rules at the top of CLAUDE.md or AGENTS.md, adds map sections only where the agent keeps getting things wrong, and installs guardrails it cannot talk past - a type check that fails only on new errors, live-service tests that run only on request, and tests plus type check before every deploy from main. Use when someone wants agent rules for a repo, a better CLAUDE.md or AGENTS.md, says the agent keeps ignoring conventions, hiding behind old type errors or calling real services in tests, or wants their setup to move between harnesses, even if they never say harness. Not for pruning or auditing a setup that already exists (use harness-audit), reviewing code (use consistent-code-review), writing features or fixes (use production-code), or turning a skill into a Claude Code plugin (use skill-to-mod).">
 <meta property="og:url" content="https://skillsmith.tech/portable-harness/">
 <meta name="twitter:card" content="summary">
 <meta name="color-scheme" content="light dark">
@@ -136,7 +136,7 @@
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "Any",
   "url": "https://skillsmith.tech/portable-harness/",
-  "description": "Set up a repo so any coding agent (Claude Code, Codex, Cursor) behaves the same wherever it runs - writes 12 working rules at the top of CLAUDE.md or AGENTS.md, adds map sections only where the agent keeps getting things wrong, and installs guardrails it cannot talk past - a type check that fails only on new errors, live-service tests that run only on request, and tests plus type check before every deploy from main. Use when someone wants agent rules for a repo, a better CLAUDE.md or AGENTS.md, says the agent keeps ignoring conventions, hiding behind old type errors or calling real services in tests, or wants their setup to move between harnesses, even if they never say harness. Not for reviewing code (use consistent-code-review), writing features or fixes (use production-code), or turning a skill into a Claude Code plugin (use skill-to-mod).",
+  "description": "Set up a repo so any coding agent (Claude Code, Codex, Cursor) behaves the same wherever it runs - writes 12 working rules at the top of CLAUDE.md or AGENTS.md, adds map sections only where the agent keeps getting things wrong, and installs guardrails it cannot talk past - a type check that fails only on new errors, live-service tests that run only on request, and tests plus type check before every deploy from main. Use when someone wants agent rules for a repo, a better CLAUDE.md or AGENTS.md, says the agent keeps ignoring conventions, hiding behind old type errors or calling real services in tests, or wants their setup to move between harnesses, even if they never say harness. Not for pruning or auditing a setup that already exists (use harness-audit), reviewing code (use consistent-code-review), writing features or fixes (use production-code), or turning a skill into a Claude Code plugin (use skill-to-mod).",
   "codeRepository": "https://github.com/arm-pz/portable-harness",
   "license": "https://spdx.org/licenses/MIT.html",
   "publisher": {
@@ -191,7 +191,7 @@
       <button class="copy" id="copy" type="button" aria-describedby="cmd"><span class="idle">Copy install command</span><span class="done" aria-hidden="true">Copied</span></button>
       <span class="sr-only" id="copy-status" role="status" aria-live="polite"></span>
     </div>
-    <p class="facts">5 files and 210 lines, free under MIT. Built from <a href="https://github.com/arm-pz/portable-harness" target="_blank" rel="noopener">arm-pz/portable-harness</a> at <code>dfb61d3</code>.</p>
+    <p class="facts">5 files and 210 lines, free under MIT. Built from <a href="https://github.com/arm-pz/portable-harness" target="_blank" rel="noopener">arm-pz/portable-harness</a> at <code>d133301</code>.</p>
   </div>
 </header>
 
@@ -202,12 +202,12 @@
     <h2 id="qb-h">Know what you are installing.</h2>
     <p class="qb-lead">Version, date and limits are read from the repo on every sync, and the check runs every night. Real-world runs are listed only with their evidence.</p>
     <dl class="qb-grid">
-      <div><dt>Version</dt><dd>Unversioned<small>commit dfb61d3</small></dd></div>
-      <div><dt>Updated</dt><dd>Not recorded yet</dd></div>
+      <div><dt>Version</dt><dd>Unversioned<small>commit d133301</small></dd></div>
+      <div><dt>Updated</dt><dd><a href="https://github.com/arm-pz/portable-harness/commits" target="_blank" rel="noopener">5 Nov 2026</a><small>last commit to the repo</small></dd></div>
       <div><dt>Works in</dt><dd>Claude Code, Codex, Cursor, Qoder and any agent that loads a SKILL.md<small>plain text; no API keys</small></dd></div>
       <div><dt>Nightly check</dt><dd>Not checked yet<small>It joins the nightly check after its first run. <a href="https://github.com/arm-pz/skills-site/blob/main/.github/workflows/health.yml" target="_blank" rel="noopener">How it is checked</a></small></dd></div>
       <div><dt>Last real-world run</dt><dd>No public run yet<small>Runs are published only with their evidence.</small></dd></div>
-      <div class="qb-wide"><dt>Known limits</dt><dd>Not built for:<ul><li>Reviewing code (use consistent-code-review)</li><li>Writing features or fixes (use production-code)</li><li>Turning a skill into a Claude Code plugin (use skill-to-mod)</li></ul></dd></div>
+      <div class="qb-wide"><dt>Known limits</dt><dd>Not built for:<ul><li>Pruning or auditing a setup that already exists (use harness-audit)</li><li>Reviewing code (use consistent-code-review)</li><li>Writing features or fixes (use production-code)</li><li>Turning a skill into a Claude Code plugin (use skill-to-mod)</li></ul></dd></div>
     </dl>
   </div>
 </section>
@@ -224,7 +224,7 @@
     </div>
     <div class="uses-col not">
       <h3>Not for</h3>
-      <ul><li>Reviewing code (use consistent-code-review)</li><li>Writing features or fixes (use production-code)</li><li>Turning a skill into a Claude Code plugin (use skill-to-mod)</li></ul>
+      <ul><li>Pruning or auditing a setup that already exists (use harness-audit)</li><li>Reviewing code (use consistent-code-review)</li><li>Writing features or fixes (use production-code)</li><li>Turning a skill into a Claude Code plugin (use skill-to-mod)</li></ul>
     </div>
     </div>
   </div>
@@ -233,11 +233,11 @@
 <section class="ships" aria-labelledby="ships-h">
   <div class="wrap">
     <h2 id="ships-h">Every file it installs</h2>
-    <p class="intro">Measured from the packed archive at commit <code>dfb61d3</code>. A skill is plain text your agent reads, so this list is all of it.</p>
+    <p class="intro">Measured from the packed archive at commit <code>d133301</code>. A skill is plain text your agent reads, so this list is all of it.</p>
     <table class="files">
       <thead class="sr-only"><tr><th>File</th><th>Lines</th><th>Bytes</th></tr></thead>
       <tbody>
-        <tr><td>SKILL.md</td><td class="n">54</td><td class="n bytes">3,845 B</td></tr>
+        <tr><td>SKILL.md</td><td class="n">54</td><td class="n bytes">3,914 B</td></tr>
         <tr><td>references/guardrails.md</td><td class="n">61</td><td class="n bytes">2,660 B</td></tr>
         <tr><td>references/rules.md</td><td class="n">24</td><td class="n bytes">1,122 B</td></tr>
         <tr><td>scripts/test_typecheck_gate.py</td><td class="n">24</td><td class="n bytes">974 B</td></tr>

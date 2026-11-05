@@ -160,7 +160,7 @@
       "description": "Agent skill that sets up CLAUDE.md / AGENTS.md rules and CI guardrails so Claude Code, Codex and Cursor behave the same on your repo",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/portable-harness.tar.gz",
-      "digest": "sha256:d82886ffa17c2236b4e695f25d4fb7d067d48d9f51f47b7495912ad775ce4749"
+      "digest": "sha256:b1ee5bcd9529c02dffd14b38bff1cd748110d6b875d4f93d979d20b9d2fbc73e"
     },
     {
       "name": "pre-ship-performance-audit",
