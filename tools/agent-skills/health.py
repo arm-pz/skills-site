@@ -24,6 +24,7 @@ EXTERNAL = [
     "seo-audit", "programmatic-seo",          # coreyhaines31/marketingskills
     "skill-creator", "plugin-authoring",      # built into the agents
     "product-self-knowledge",                 # built into the agents; choose-effort and diagnose-usage hand off to it
+    "claude-api",                             # built into the agents; ai-team-blueprint hands off to it
     "job-application-agent",                  # third-party, denied in site/deny.json
 ]
 
