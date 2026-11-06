@@ -6,14 +6,14 @@
       "description": "Agent skill that plans your first AI team: asks 5 questions, picks one use case, then writes 3-5 agent roles with paste-ready prompts, handoffs, a lean tool stack, QA plan and 7-day launch plan. Human approval gates built in. For Claude Code and Claude.ai.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/ai-team-blueprint.tar.gz",
-      "digest": "sha256:11d5c3d77e47336b3d81ddc5549ba41d750621ee0a95099162f1f4256bb37a8d"
+      "digest": "sha256:99197678c19687fe7a75ee18c884a11983cbc26e264122bf3b790bb9ffeee850"
     },
     {
       "name": "applicant-kit",
       "description": "Agent skill that writes the better version of your application material: decoded JD table, action-task-result-impact bullets, honest keyword placement, five resume summaries, a LinkedIn rewrite, 20 interview answers. Only experience you already have; nothing invented. Sibling recruiter-lens does the judging. For Claude Code, Cursor, Codex, Qoder.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/applicant-kit.tar.gz",
-      "digest": "sha256:060e89f26ed2603df67ded9c9be6a7e3bae4e3954aba8b29a9e914453b69223d"
+      "digest": "sha256:f6bbcc9fbc7631e6ab74f336fb5ff34b058fc88d747546bffc2e87ade712cecf"
     },
     {
       "name": "application-pilot",
@@ -27,70 +27,70 @@
       "description": "Claude Code plugin marketplace and index of arm-pz agent skills: editorial, teaching, recruiting, SEO planning, release preflight, sub-agent tournaments and repo discovery. Install with npx skills add arm-pz/caffeinity-skills.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/caffeinity-routing.tar.gz",
-      "digest": "sha256:c129ba6ab9debbff1cd8a636b0f652b738c130e4419dac5804342a79d9418098"
+      "digest": "sha256:b37fbfb8fade1d915d2b3a12ae7194d6a9cb8aed53519fa0277aeee5c4d704c6"
     },
     {
       "name": "career-track",
       "description": "Agent skill for the moves around a career: a positioning line, the promotion case, review self-assessments, salary scripts, a pivot path, executive presence, a dated network map and ninety-day milestones. Missing numbers stay labelled gaps, never invented.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/career-track.tar.gz",
-      "digest": "sha256:b5f3dbdde6922ee2865f2b2e28ebbd051965b5663367b51e5dccb80f95c3310c"
+      "digest": "sha256:00709a334919880880352d33332c1560d973e03dd45a87f7be8a3ebd05234d00"
     },
     {
       "name": "choose-effort",
       "description": "Claude Code skill that asks how heavy a task is before you start, then recommends an effort level, whether to use subagents, /goal, workflows or agent teams, the /effort command to set it, and when to check /usage.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/choose-effort.tar.gz",
-      "digest": "sha256:36c4c17bdfb8b551c911adc8bb23a4596b40275c77a05b645ea93d965e798f59"
+      "digest": "sha256:27b8aa1625df9e09bc9349af11034705e0c74da3d0e6a579b47b6e01e49f4887"
     },
     {
       "name": "cold-email-list-gate",
       "description": "Agent skill that gates a cold-email lead list before it loads: samples ten rows against your ICP, returns GO or HOLD with the fail pattern, cause, required fix and re-run condition. Never buys, scrapes or enriches. For Claude Code, Cursor, Qoder.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/cold-email-list-gate.tar.gz",
-      "digest": "sha256:efb8fa1bd2c440f9ca6c6b09a8a5d674fe32563407847f6e43ae4bfa204a6b27"
+      "digest": "sha256:ab129156f6c2cf9c5084e2115840db6e12f1e39b5cff39150967ddb9594c8f85"
     },
     {
       "name": "cold-email-ops",
       "description": "Agent skill that plans and audits a cold-email program at volume: inbox and domain capacity from a send target, reply floors, burn replacement, shadow-ban tests, automation error budgets, per-client reporting. Never invents results. For Claude Code, Cursor, Qoder.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/cold-email-ops.tar.gz",
-      "digest": "sha256:7a4cb9267d8147ee32c6d8317043c747ee59c2a4a508fc0f0f3e4e4a785803eb"
+      "digest": "sha256:a190e225dada66418541f83104aed8de4c2503c3488a9b713937b4689a2ed014"
     },
     {
       "name": "consistent-code-review",
       "description": "Agent skill for repeatable code review. Same findings on unchanged code, each with file, line and snippet, and every re-run reconciled against a hashed baseline report. Hands fixes to production-code. Works with Claude Code, Codex and Cursor.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/consistent-code-review.tar.gz",
-      "digest": "sha256:b6958883ccca55b9f963fdb1f2a63e2d0602814af64af50cd936431e93fbfd38"
+      "digest": "sha256:45eeb13f024ea74189d450cb142d3a68b54f7368ea80c0631723851064bd12aa"
     },
     {
       "name": "course-builder",
       "description": "Claude Code plugin marketplace and index of arm-pz agent skills: editorial, teaching, recruiting, SEO planning, release preflight, sub-agent tournaments and repo discovery. Install with npx skills add arm-pz/caffeinity-skills.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/course-builder.tar.gz",
-      "digest": "sha256:f51263530294c91d85bbf58013df1a6f849c25c4209f34837655298799028c86"
+      "digest": "sha256:1e8dfe3ceb472fd5ceab966ed884b027cd7e84f669755fb5a85695facc6efe87"
     },
     {
       "name": "crash-test",
       "description": "Agent skill that crash-tests a decision before you build it. Four fixed roles (Pragmatist, Skeptic, Specialist, Contrarian) draft alone, review each other anonymously, then a chair merges what survives and grounds its claims against your source before adopting. Dissent log included. Optional Operator seat. Zero setup: no server, no keys.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/crash-test.tar.gz",
-      "digest": "sha256:e8abccccc70185e5713ad123cdd6e156cb7004f38bc5418744df5a0977569c7e"
+      "digest": "sha256:ab569772a6bf39fbb14baff39153a6b38f1a671b8d4407920c4bdb120a33deb1"
     },
     {
       "name": "data-readout",
       "description": "Agent skill that turns the numbers you own into a decision: it opens the real file first, then returns an executive summary, findings ranked by impact, statistics with test and effect size, chart build specs, forecast ranges on stated assumptions and A/B calls.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/data-readout.tar.gz",
-      "digest": "sha256:6cb1c2c4c3dea6fd98eebe98362e328ef6e38bee4469279845241c0a56ce2aa2"
+      "digest": "sha256:f56313444cf01ea0a6a4e87335ea7d67f18d339ea43e1861f91824d7bf611951"
     },
     {
       "name": "diagnose-usage",
       "description": "Claude Code skill that works out why your usage limit drained fast. Reads your /usage paste, checks the heavy-session causes Anthropic named (effort level, subagents, /goal, workflows, agent teams, SDK jobs) and ranks up to three culprits with one fix each.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/diagnose-usage.tar.gz",
-      "digest": "sha256:5c00b32a1ab313ce25faac6fb2cc3be637a5698b282df63c3a5382819c08dc8d"
+      "digest": "sha256:40f816a1234ee63e3e1c09e2c05eb4d1f440b436ba54d48be6c499874af98aa7"
     },
     {
       "name": "do-better",
@@ -104,14 +104,14 @@
       "description": "Agent skill that creates a new skill from an idea: confirms the purpose before writing, checks installed siblings for overlap, splits scripts/references/assets, writes a description that triggers, validates with check_skill.py. Qoder, Claude Code.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/draft-skill.tar.gz",
-      "digest": "sha256:fcd8445db42f0fca0af71d756d08c941600628059bf8a5a152ebc30391b7b798"
+      "digest": "sha256:ae6a68d973d7250c840b6fe5abb31723af613f9fb01584908b4b010b568849cb"
     },
     {
       "name": "findable",
       "description": "Agent skill that sets up discovery for a GitHub repo, agent skill, Claude Code plugin or MCP server: audits where you rank today, derives the queries strangers type, drafts About text, topics, README opening, release notes and a site page, lists directories and plans a dated re-check. Never invents stars, rankings or sample output.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/findable.tar.gz",
-      "digest": "sha256:7ae7f847f2c2ed815934bd05a6f76a54dc14a3cebdb7ea736ef3681a0703763a"
+      "digest": "sha256:d06be0b85d7e75148fad69a2e9c0c274461317abf64b23bf7531d8e511188ae1"
     },
     {
       "name": "findable-polish",
@@ -125,14 +125,14 @@
       "description": "Agent skill that submits a site's new and changed pages to IndexNow (Bing, Yandex) and Google Search Console, checks Google's index status, skips pages that are not live, and lists the steps with no API. Plans before it sends. Works in Claude Code, Codex and Cursor.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/get-indexed.tar.gz",
-      "digest": "sha256:9c3daa47e0373add3426e983204159b1fa7e2ad54d18afb7e1e4bb1f9c67dc35"
+      "digest": "sha256:2cd433a1568d52f49394f1cb1ffa6f78dd9cbe5559dbd768855dd38521a7622b"
     },
     {
       "name": "keyword-guard",
       "description": "Agent skill that plans SEO topic clusters and ends keyword cannibalization, so one page wins each query. It maps query ownership before any title, H1 or content change, from Search Console or a sitemap when you lack GSC access. Covers on-page, link-authority and hreflang checks. White-hat, no API keys. Runs in Claude Code, Cursor, Qoder.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/keyword-guard.tar.gz",
-      "digest": "sha256:bc1a7bde2680c75b217d97c8715e15f9f5a221c8476282666e00445dc21f447d"
+      "digest": "sha256:29aefc25c57a6b13fd554c208cb88d68f2bc11dcb1929a967446fb09307234c7"
     },
     {
       "name": "keyword-resolver",
@@ -146,63 +146,63 @@
       "description": "Claude Code plugin marketplace and index of arm-pz agent skills: editorial, teaching, recruiting, SEO planning, release preflight, sub-agent tournaments and repo discovery. Install with npx skills add arm-pz/caffeinity-skills.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/paper-trail.tar.gz",
-      "digest": "sha256:708fa51813888d0fa0d62a22b56e4468f5d0e55b76f3903961ddfc872d14356d"
+      "digest": "sha256:cacb21e2865f9e92d46027f87f225b3e864a21251b0b1e671c628a42ab55daa7"
     },
     {
       "name": "platform-content",
       "description": "Agent skill that writes platform-native audience content from a brief: X threads, LinkedIn posts, video scripts, captions, newsletters, blog articles, podcast outlines, a 30-day calendar and one-to-ten repurposing chains. Hook, body and call to action per asset. No invented performance claims.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/platform-content.tar.gz",
-      "digest": "sha256:1a2467069948aac811b616d24b6ae57708b5b8d1e81b744e0bdb6dc9e8632d4a"
+      "digest": "sha256:641a197cab77d8435d0e104e4f422c49c0ca8c179e853ef791788b7f05069437"
     },
     {
       "name": "portable-harness",
       "description": "Agent skill that sets up CLAUDE.md / AGENTS.md rules and CI guardrails so Claude Code, Codex and Cursor behave the same on your repo",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/portable-harness.tar.gz",
-      "digest": "sha256:b1ee5bcd9529c02dffd14b38bff1cd748110d6b875d4f93d979d20b9d2fbc73e"
+      "digest": "sha256:b6ee1f57be911ad2c60b6ff1b85c3338f3fca826878a69c6f27a958dd084b98f"
     },
     {
       "name": "pre-ship-performance-audit",
       "description": "Agent skill that audits and fixes web app performance before launch: four read-only subagents check images, fonts, bundles, database queries and servers, then same-condition mobile Lighthouse medians prove each fix. Works with Claude Code, Cursor and Qoder.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/pre-ship-performance-audit.tar.gz",
-      "digest": "sha256:09465fff4a776b97621963e78271b1093e4621d34dd3345ca4432e44b1d76701"
+      "digest": "sha256:2cee85bd442dc8e0cc1e91c16363fdaddb2c4ff1fd2c2e98eb017524f4f927c7"
     },
     {
       "name": "pre-ship-security-red-team",
       "description": "Agent skill that red-teams a web app you own before launch: three subagents run 14 authorization and abuse checks (IDOR, role escalation, quota races, open redirects, XSS, SSRF, cache leaks, prompt injection) with captured evidence, then fix and rerun. Local isolated environments only. Claude Code, Cursor, Qoder.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/pre-ship-security-red-team.tar.gz",
-      "digest": "sha256:fc2430013e47d68aba66d8d167b1c65d013b3491625c946b491f32c424f0d6bd"
+      "digest": "sha256:fcb2701ddc8c6f654f6bc2481d6f7584b6249a095be3f5cf547c33c54ca41b76"
     },
     {
       "name": "production-code",
       "description": "Agent skill that delivers code as a finished artefact: scripts, bug fixes with the root cause, reviews, API integrations, SQL with index reasoning, automations, authorised collection, docs and architecture notes. Ships setup, error handling and a report of what was actually run.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/production-code.tar.gz",
-      "digest": "sha256:447d13087b0f1271dfc30b06ecc498070133e195e53c3e5cdbaeedd1dd909419"
+      "digest": "sha256:36f0b266e8f2f276cfc908e3898e8e2e6ea81b7076bb2c8509fd514f63d5c026"
     },
     {
       "name": "prompts-to-skill",
       "description": "Agent skill that turns a list of your own prompts into a finished, tested skill. Intent interview, overlap check against installed skills, draft with draft-skill, trigger test cases, tune-skill gates. Qoder, Claude Code.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/prompts-to-skill.tar.gz",
-      "digest": "sha256:1ea84491f3a1a1fea77fc0f21cef4318833be92d6a5f73eb9224ee9f6054b06e"
+      "digest": "sha256:c01d79dc80b21e15829d6db4cafb692144e468d2938684e9a3e85e435777f22a"
     },
     {
       "name": "prompts-to-skill-release",
       "description": "Agent skill that packages a finished skill for release: runs its trigger test cases and records what passed, sets the version and CHANGELOG, builds the zip, writes the README, gives a per-platform install checklist. Failed tests stay visible.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/prompts-to-skill-release.tar.gz",
-      "digest": "sha256:cdf48916cf420ef17adbf77e7e1531c97136a1ecafe18f5ff0db6ad3581ef0f1"
+      "digest": "sha256:41f6517687fe34ba59fe5411fd1b0fb20696a3f6137499e32df19b690d6d6399"
     },
     {
       "name": "publish-pipeline",
       "description": "Agent skill that sets up and repairs a manifest-driven CI/CD pipeline for a skills site: GitHub Actions checks each PR, discovery proposes eligible new skill repos, and merging deploys to Cloudflare Pages with a generated page per skill. Nothing publishes without review. Works with Qoder and Claude Code.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/publish-pipeline.tar.gz",
-      "digest": "sha256:e76df7824ec98dfe3df85ca85c33d2347e75a327cbfade7f4cb85a1b11c349ae"
+      "digest": "sha256:d928f04c1986f7e9f7f606799367e1cffd5b6f8737d0b65f940d536f0ade594b"
     },
     {
       "name": "publish-release-gate",
@@ -251,21 +251,21 @@
       "description": "Agent skill for sourced research: topic overviews, competitor and industry reads, literature reviews, fact checks, trend scans, due diligence and one-page executive briefs. Claims carry a dated source read in the session, and offline runs report INCONCLUSIVE.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/research-brief.tar.gz",
-      "digest": "sha256:e103862e7f43326163660919d2c9044caacb0f6e6471167f8b10686ca299d990"
+      "digest": "sha256:ce61c0fb9a7162a678aa00cdb0404e0466cde35cfa4ff46fd1520019429644b1"
     },
     {
       "name": "sales-copy",
       "description": "Agent skill for direct-response assets: sales pages, landing pages, launch and cart-recovery email sequences, ad variations, product descriptions, VSL and webinar scripts, upsell flows. Written from the buyer's awareness level. Testimonial structures arrive blank, never invented.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/sales-copy.tar.gz",
-      "digest": "sha256:d0f2205e286d7fe892805ccff4fd27be1b907ca96760b12f3cb9c78dfdb3a2a5"
+      "digest": "sha256:6a8e3fc7a0d20f1e5c4b6dfc771888d7ce001449f4f9ef94b3e819469d253e16"
     },
     {
       "name": "seo-crawl",
       "description": "Agent skill for deterministic, read-only technical SEO crawls: HTTP status and redirects, indexability, canonicals, titles, metas, H1s, internal links, sitemap coverage and static JSON-LD. Findings carry evidence; blocked or unrun checks stay INCONCLUSIVE. Zero-dependency, bounded. Works with Claude Code, Cursor and Qoder.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/seo-crawl.tar.gz",
-      "digest": "sha256:154b53859ee5775614c59d03a9a500d9c220161f3422a5458fd7f512a8baa860"
+      "digest": "sha256:3aead46f426b138af3c0072a2d77f3d11404a91b809bd8da656705cd1e090781"
     },
     {
       "name": "seo-polish",
@@ -279,28 +279,28 @@
       "description": "Agent skill that fixes a site's SEO end to end: checks indexing, crawls, audits brand and task searches, settles which page owns each query, changes the site's code, proves every fix with a re-crawl, and turns skill defects into tested fixes. Works in Claude Code, Codex and Cursor.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/seo-sweep.tar.gz",
-      "digest": "sha256:fed5f737c5fa42f83fc42e0a07c02d53589934405472f3a38127faf615643c3b"
+      "digest": "sha256:f23fff1376f3f7bab0f53912f7b8f446e2eb93b2e56e8e7bc2db40477f39bd61"
     },
     {
       "name": "session-retrace",
       "description": "Agent skill that finds a past AI coding conversation from a fuzzy memory — Qoder, Claude Code, Codex, Gemini CLI. Searches the transcripts already on disk, ranks sessions with verbatim evidence, prints the chosen chat, redacts tokens. Read-only, local, no index.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/session-retrace.tar.gz",
-      "digest": "sha256:d377941d28bb7aafbd22629ef1411f9b2f3716ee1115d320029be39b260215ed"
+      "digest": "sha256:14471874525830a2540092767e7fbf0737675be7896bc38289d92fe30618d799"
     },
     {
       "name": "site-prompt",
       "description": "Agent skill that turns a website topic or landing-page brief into one self-contained build prompt: subject-native concept, final copy, every source file embedded verbatim, and a replay check that compares the rebuilt tree byte for byte. Portable SKILL.md; tested in Qoder.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/site-prompt.tar.gz",
-      "digest": "sha256:ca17882ef70ae7bc37f3df22cf2116017573858d2c3a1186eeb373bacd6980c2"
+      "digest": "sha256:b38ae8b35dd7b185568b3c30ca0b4b5469272a752420e2b3f635f83e3134a08f"
     },
     {
       "name": "skill-estate",
       "description": "Claude Code plugin marketplace and index of arm-pz agent skills: editorial, teaching, recruiting, SEO planning, release preflight, sub-agent tournaments and repo discovery. Install with npx skills add arm-pz/caffeinity-skills.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/skill-estate.tar.gz",
-      "digest": "sha256:3b6d01bf0e34fa13c3bd449e2c544e025dd8f04bd7dff4a7637a6e2e072a8dc7"
+      "digest": "sha256:b56b11f95e76ba757f8583562823353849f1d8a87fc9362a7217f684d7916803"
     },
     {
       "name": "skill-launch",
@@ -314,28 +314,28 @@
       "description": "Agent skill that checks whether a skill should become a Claude Code mod, then builds the plugin: your skill stays unchanged, a thin trigger such as run before git push is added, and the result is validated, tested and listed with what it can touch. Says no when a skill should stay a skill.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/skill-to-mod.tar.gz",
-      "digest": "sha256:fb7df8044df6dede87faf4f85c9112410b30f230cc66738c009d38f403b0cc52"
+      "digest": "sha256:9c71c827d7945c333e58a5f7d155ac7c53edd419ed14a21ade19a5e998eaf5f1"
     },
     {
       "name": "solo-income-blueprint",
       "description": "Agent skill for a one-person business or side business: turns \"make money online\" into one offer, one business model, a demand check and a 7-day launch plan. Interviews first, recommends one model, never promises earnings. Claude Code, Qoder. Not job hunting or SEO.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/solo-income-blueprint.tar.gz",
-      "digest": "sha256:ba9ae1c80338ae23794142971bc4a177c60b2ab0105ed342759930d35b418b2c"
+      "digest": "sha256:e56e75b406a4eb1ca0f14934f6884493a792a388f801fec99d0153dddb5c1b8c"
     },
     {
       "name": "strategy-memo",
       "description": "Agent skill that turns a business question into a decision document: competitive analysis, growth and pricing options ranked with tradeoffs, go-to-market sequence, SWOT, ninety-day to three-year roadmaps, board outline, pivot assessment. Every line labelled supplied, assumed or unknown.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/strategy-memo.tar.gz",
-      "digest": "sha256:10fdad8a16b972d2a21212e8bbbcd25f71d125afca2b3ae6647b4d328bb1a60b"
+      "digest": "sha256:988e7b55c205bd043c828b485bdc7e1cbd0b92c87cc7d30cb3fd7ef6ccf0aa46"
     },
     {
       "name": "study-system",
       "description": "Agent skill for the structure around a skill you are learning: component breakdown, a roadmap with testable gates, deliberate-practice routines, spaced-repetition schedules, a knowledge-gap audit and a mastery verdict that can say you are not ready.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/study-system.tar.gz",
-      "digest": "sha256:67998d85149ba4cf4af0e62db5921c8315f71c6c220089b4a93f8b6e9f6f0c8a"
+      "digest": "sha256:e5bc7563653658439e55cebc08f91b672b52cdeb807c465f6cd1c2cc9c040f0e"
     },
     {
       "name": "topic-primer",
@@ -356,14 +356,14 @@
       "description": "Agent skill that audits and fine-tunes a skill that already exists: triggering descriptions, sibling overlaps, stale names and counts, handoff contracts, minimal evidenced edits. Ships check_skill.py, a deterministic SKILL.md validator. Qoder, Claude Code.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/tune-skill.tar.gz",
-      "digest": "sha256:f7bc49cba606f972551066ec2eb8a24bd7ccf9a57d853914909cd6c6c66986ab"
+      "digest": "sha256:c6de64cdee657913e738aeefd25d29ac2495045c62a22caac87abdabef462a90"
     },
     {
       "name": "upstream-check",
       "description": "Agent skill that finds unpushed local commits and fast-forwards only the safe ones, plus checks published listings against the repos that actually ship a SKILL.md.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/upstream-check.tar.gz",
-      "digest": "sha256:117dcbcfaffd68fe28b74c84a4fece589335f96db3094d26edd6d01a9fb7e59f"
+      "digest": "sha256:60262a9ec32ef76e039c0e1e52152c19483ceb26822cd6b0a865b8850da40239"
     },
     {
       "name": "upstream-polish",
@@ -377,7 +377,7 @@
       "description": "Agent skill for a pre-launch website check on a site you own: before you deploy, it looks for exposed .env, .git, config and debug files. Status codes are signals, not findings: it tells a real /.env leak from an SPA catch-all 200 or a blanket WAF 403, and marks unrun checks INCONCLUSIVE, never a false pass. No exploitation or port scanning.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/web-preflight.tar.gz",
-      "digest": "sha256:96fe8ec1ce4de17c0881b436ecee7e68450c0c2793722654d8f49d7978950a64"
+      "digest": "sha256:525a7b814bfaee848e5632ea81fa22f7100a144446c12195c0f74fedb64801e5"
     },
     {
       "name": "wordsmith",
