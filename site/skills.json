@@ -67,7 +67,7 @@
       "title": "Caffeinity Routing",
       "pageTitle": "Caffeinity Routing — AI Agent Skill for Claude Code",
       "blurb": "Start here. Tell it the outcome you want and it picks one of eleven brews (workflows), lists the skills in order with what each hands the next, and names the ones you have not installed instead of improvising their work.",
-      "stats": "4 files · 384 lines · 9 KB",
+      "stats": "4 files · 385 lines · 9 KB",
       "install": "npx skills add arm-pz/caffeinity-skills --skill caffeinity-routing",
       "page": "generated",
       "pageSource": {
@@ -75,8 +75,8 @@
         "files": [
           {
             "path": "SKILL.md",
-            "lines": 87,
-            "bytes": 6176
+            "lines": 88,
+            "bytes": 6191
           },
           {
             "path": "references/trigger-cases.md",
@@ -95,17 +95,17 @@
           }
         ],
         "fileCount": 4,
-        "lines": 384,
-        "bytes": 9276,
+        "lines": 385,
+        "bytes": 9286,
         "license": "MIT",
-        "commit": "bc79e20af0bb3e5c207165472c86b02d9ea11c34",
-        "sha256": "c129ba6ab9debbff1cd8a636b0f652b738c130e4419dac5804342a79d9418098"
+        "commit": "85576260ebf4788ef0e7c9456f15424a9fb868a7",
+        "sha256": "b37fbfb8fade1d915d2b3a12ae7194d6a9cb8aed53519fa0277aeee5c4d704c6"
       },
       "order": 101,
       "quality": {
-        "version": null,
-        "commit": "bc79e20",
-        "updated": "2026-11-05",
+        "version": "1.0.0",
+        "commit": "8557626",
+        "updated": "2026-11-06",
         "notFor": [
           "a request one skill already owns (load that skill directly)",
           "not for doing a step's work itself: the named skill does it"
@@ -131,9 +131,9 @@
         "qoder"
       ],
       "quality": {
-        "version": null,
-        "commit": "a9eb67f",
-        "updated": "2026-10-24",
+        "version": "1.0.0",
+        "commit": "fbbb4ac",
+        "updated": "2026-11-06",
         "notFor": [
           "turning a batch of existing prompts into a skill (use prompts-to-skill)",
           "tightening a skill that already exists (use tune-skill)",
@@ -160,9 +160,9 @@
       "stats": "3 files · 141 lines · depends on draft-skill + tune-skill · 0 API keys",
       "install": "npx skills add arm-pz/prompts-to-skill",
       "quality": {
-        "version": null,
-        "commit": "bf5b07b",
-        "updated": "2026-10-19",
+        "version": "1.0.0",
+        "commit": "4e5697e",
+        "updated": "2026-11-06",
         "notFor": [
           "editing an existing skill (use tune-skill)",
           "creating a skill from a plain description with no prompts (use draft-skill)",
@@ -183,9 +183,9 @@
       "stats": "4 files · 268 lines · 1 validator script · 0 API keys",
       "install": "npx skills add arm-pz/tune-skill",
       "quality": {
-        "version": null,
-        "commit": "aa1882c",
-        "updated": "2026-10-24",
+        "version": "1.0.0",
+        "commit": "31f7b57",
+        "updated": "2026-11-06",
         "notFor": [
           "creating a skill from scratch (use draft-skill) or from a list of prompts (use prompts-to-skill)",
           "for making a skill run automatically at a moment such as before git push (use skill-to-mod)"
@@ -212,9 +212,9 @@
       "stats": "3 files · 113 lines · 5 release sections · 0 API keys",
       "install": "npx skills add arm-pz/prompts-to-skill-release",
       "quality": {
-        "version": null,
-        "commit": "43957c6",
-        "updated": "2026-10-19",
+        "version": "1.0.0",
+        "commit": "dd0dd57",
+        "updated": "2026-11-06",
         "notFor": [
           "drafting or tuning a skill (use prompts-to-skill or tune-skill)",
           "for repo discoverability copy (use findable)",
@@ -235,9 +235,9 @@
       "stats": "12 files · 1,790 lines · 3 trigger patterns · 0 API keys",
       "install": "npx skills add arm-pz/skill-to-mod --skill skill-to-mod",
       "quality": {
-        "version": null,
-        "commit": "e7cb2d8",
-        "updated": "2026-10-21",
+        "version": "1.0.0",
+        "commit": "8d9b99f",
+        "updated": "2026-11-06",
         "notFor": [
           "writing a brand-new mod with no source skill (use plugin-authoring)",
           "writing a new skill (use draft-skill)",
@@ -393,14 +393,14 @@
         "lines": 1288,
         "bytes": 20897,
         "license": "MIT",
-        "commit": "bc79e20af0bb3e5c207165472c86b02d9ea11c34",
+        "commit": "85576260ebf4788ef0e7c9456f15424a9fb868a7",
         "sha256": "e79c3f9cbd44fd97b950ca333c4a51b40f644416361a221b0754d0fa31e31a28"
       },
       "order": 208,
       "quality": {
         "version": "0.1.0",
-        "commit": "bc79e20",
-        "updated": "2026-11-05",
+        "commit": "8557626",
+        "updated": "2026-11-06",
         "notFor": []
       }
     },
@@ -485,14 +485,14 @@
         "lines": 627,
         "bytes": 10387,
         "license": "MIT",
-        "commit": "bc79e20af0bb3e5c207165472c86b02d9ea11c34",
+        "commit": "85576260ebf4788ef0e7c9456f15424a9fb868a7",
         "sha256": "0261e8afac9fd1c1a6bc03685149f45eae4a09c0c0b6f48f1e61b1ca60093aa9"
       },
       "order": 209,
       "quality": {
         "version": "0.1.0",
-        "commit": "bc79e20",
-        "updated": "2026-11-05",
+        "commit": "8557626",
+        "updated": "2026-11-06",
         "notFor": []
       }
     },
@@ -509,9 +509,9 @@
       "stats": "8 workflow steps · 10 kit sections · 4 reference guides · 1 listing validator · 0 API keys",
       "install": "npx skills add arm-pz/findable --skill findable",
       "quality": {
-        "version": null,
-        "commit": "8831f1d",
-        "updated": "2026-10-24",
+        "version": "1.0.0",
+        "commit": "460170f",
+        "updated": "2026-11-06",
         "notFor": [
           "authoring a new skill (use draft-skill) or tuning a SKILL.md description so an agent triggers it better (use tune-skill)"
         ]
@@ -532,7 +532,7 @@
       "title": "Publish Pipeline",
       "pageTitle": "Publish Pipeline — AI Agent Skill for Claude Code and Codex",
       "blurb": "Turns a pile of skill repos into a published site: a committed manifest decides what is public, discovery opens a pull request, and a green merge deploys generated pages, both discovery indexes, a sitemap and a verified build.",
-      "stats": "9 files · 1,272 lines · 22 KB",
+      "stats": "9 files · 1,273 lines · 22 KB",
       "install": "npx skills add arm-pz/publish-pipeline",
       "page": "generated",
       "order": 302,
@@ -541,8 +541,8 @@
         "files": [
           {
             "path": "SKILL.md",
-            "lines": 237,
-            "bytes": 13280
+            "lines": 238,
+            "bytes": 13295
           },
           {
             "path": "references/design.md",
@@ -586,16 +586,16 @@
           }
         ],
         "fileCount": 9,
-        "lines": 1272,
-        "bytes": 22182,
+        "lines": 1273,
+        "bytes": 22192,
         "license": "MIT",
-        "commit": "b24df390092f4149c77f8d6e142b60e7a56db0d2",
-        "sha256": "e76df7824ec98dfe3df85ca85c33d2347e75a327cbfade7f4cb85a1b11c349ae"
+        "commit": "6ead5bc8eb944440e4d95ee193b0486d6b87341d",
+        "sha256": "d928f04c1986f7e9f7f606799367e1cffd5b6f8737d0b65f940d536f0ade594b"
       },
       "quality": {
-        "version": null,
-        "commit": "b24df39",
-        "updated": "2026-10-24",
+        "version": "1.0.0",
+        "commit": "6ead5bc",
+        "updated": "2026-11-06",
         "notFor": [
           "releasing one skill through the marketplace, tarball or plugin channels (use publish-release-gate)",
           "checking unpushed work or listing drift (use upstream-check)",
@@ -615,15 +615,15 @@
       "order": 303,
       "pageTitle": "Upstream Check — AI Agent Skill for Claude Code and Codex",
       "blurb": "Finds local commits that never reached GitHub, pushes only clean fast-forwards after a secret screen, then checks that the site index, the homepage, the marketplace and the READMEs agree with the repos that actually ship a SKILL.md.",
-      "stats": "3 files · 354 lines · 8 KB",
+      "stats": "3 files · 355 lines · 8 KB",
       "install": "npx skills add arm-pz/upstream-check",
       "pageSource": {
         "description": "Find local work that never reached its remote and push only what is safe, then check whether published listings agree with the repos. Fetches a folder of git clones, classifies every repo as push-ready, level, behind, diverged, no-upstream or no-remote, screens the outgoing diff for credential-shaped lines, and with --push fast-forwards only the clean ones and never forces, uses --no-verify, or touches a diverged repo. A second checker counts a catalogue wherever it is published (site index, homepage, marketplace, READMEs) against the repos that ship a SKILL.md, and names what drifted. Use when the user asks what has not been pushed, whether clones are behind upstream, to push a batch, or why a site and a README list different numbers than GitHub. Not for writing or tuning a skill (use draft-skill or tune-skill), making a repo discoverable (use findable), or deciding whether a build is safe to deploy (use release-gate-chair).",
         "files": [
           {
             "path": "SKILL.md",
-            "lines": 68,
-            "bytes": 6224
+            "lines": 69,
+            "bytes": 6239
           },
           {
             "path": "scripts/drift_check.mjs",
@@ -637,16 +637,16 @@
           }
         ],
         "fileCount": 3,
-        "lines": 354,
-        "bytes": 8029,
+        "lines": 355,
+        "bytes": 8041,
         "license": "MIT",
-        "commit": "6a5e4d828f4ba01138ea5dfd003589fc92e5d743",
-        "sha256": "117dcbcfaffd68fe28b74c84a4fece589335f96db3094d26edd6d01a9fb7e59f"
+        "commit": "37ae047ed97a7c75d84127f6d7f6e07558a1adbc",
+        "sha256": "60262a9ec32ef76e039c0e1e52152c19483ceb26822cd6b0a865b8850da40239"
       },
       "quality": {
-        "version": null,
-        "commit": "6a5e4d8",
-        "updated": "2026-10-24",
+        "version": "1.0.0",
+        "commit": "37ae047",
+        "updated": "2026-11-06",
         "notFor": [
           "writing or tuning a skill (use draft-skill or tune-skill)",
           "making a repo discoverable (use findable)",
@@ -729,7 +729,7 @@
       "title": "Skill Estate",
       "pageTitle": "Skill Estate — AI Agent Skill for Claude Code and Codex",
       "blurb": "The whole-collection sweep: inventory every skill repo, reconcile the site, marketplace and README, tune the family, close workflow gaps, wire self-publishing, add trigger tests and listings, and leave a maintenance loop. Each phase is handed to the skill that owns it.",
-      "stats": "4 files · 175 lines · 5 KB",
+      "stats": "4 files · 176 lines · 5 KB",
       "install": "npx skills add arm-pz/caffeinity-skills --skill skill-estate",
       "page": "generated",
       "pageSource": {
@@ -737,8 +737,8 @@
         "files": [
           {
             "path": "SKILL.md",
-            "lines": 78,
-            "bytes": 5092
+            "lines": 79,
+            "bytes": 5107
           },
           {
             "path": "references/brief.md",
@@ -757,17 +757,17 @@
           }
         ],
         "fileCount": 4,
-        "lines": 175,
-        "bytes": 5483,
+        "lines": 176,
+        "bytes": 5492,
         "license": "MIT",
-        "commit": "bc79e20af0bb3e5c207165472c86b02d9ea11c34",
-        "sha256": "3b6d01bf0e34fa13c3bd449e2c544e025dd8f04bd7dff4a7637a6e2e072a8dc7"
+        "commit": "85576260ebf4788ef0e7c9456f15424a9fb868a7",
+        "sha256": "b56b11f95e76ba757f8583562823353849f1d8a87fc9362a7217f684d7916803"
       },
       "order": 307,
       "quality": {
-        "version": null,
-        "commit": "bc79e20",
-        "updated": "2026-11-05",
+        "version": "1.0.0",
+        "commit": "8557626",
+        "updated": "2026-11-06",
         "notFor": [
           "one skill (use tune-skill)",
           "one listing (use findable)",
@@ -785,7 +785,7 @@
       "title": "Site Prompt",
       "pageTitle": "Site Prompt — AI Agent Skill for Claude Code and Codex",
       "blurb": "Turns a website topic into one self-contained, paste-and-build prompt: it builds and verifies the site in a scratch folder first, then embeds every file verbatim with a pinned stack and the checks that actually ran.",
-      "stats": "8 files · 869 lines · 17 KB",
+      "stats": "8 files · 870 lines · 17 KB",
       "install": "npx skills add arm-pz/site-prompt",
       "page": "generated",
       "pageSource": {
@@ -793,8 +793,8 @@
         "files": [
           {
             "path": "SKILL.md",
-            "lines": 70,
-            "bytes": 5739
+            "lines": 71,
+            "bytes": 5754
           },
           {
             "path": "discovery-kit.md",
@@ -833,17 +833,17 @@
           }
         ],
         "fileCount": 8,
-        "lines": 869,
-        "bytes": 17718,
+        "lines": 870,
+        "bytes": 17726,
         "license": "MIT",
-        "commit": "70389029d0bcb1d983b7e8ff2b276b3aa63b6466",
-        "sha256": "ca17882ef70ae7bc37f3df22cf2116017573858d2c3a1186eeb373bacd6980c2"
+        "commit": "35279415e13317481ee7ad397cdd17ed9a2fa7a0",
+        "sha256": "b38ae8b35dd7b185568b3c30ca0b4b5469272a752420e2b3f635f83e3134a08f"
       },
       "order": 401,
       "quality": {
-        "version": null,
-        "commit": "7038902",
-        "updated": "2026-10-22",
+        "version": "1.0.0",
+        "commit": "3527941",
+        "updated": "2026-11-06",
         "notFor": [
           "building, hosting or reviewing the site itself, not for redesigning an existing page, and not for authoring skills"
         ]
@@ -858,7 +858,7 @@
       "title": "Production Code",
       "pageTitle": "Production Code — AI Agent Skill for Claude Code and Codex",
       "blurb": "Delivers code as a finished artifact rather than a snippet: complete scripts, bug fixes with the root cause, reviews, API integrations and SQL, each with the run instructions and the edge cases handled.",
-      "stats": "4 files · 325 lines · 10 KB",
+      "stats": "4 files · 326 lines · 10 KB",
       "install": "npx skills add arm-pz/production-code",
       "page": "generated",
       "pageSource": {
@@ -866,8 +866,8 @@
         "files": [
           {
             "path": "SKILL.md",
-            "lines": 107,
-            "bytes": 8173
+            "lines": 108,
+            "bytes": 8188
           },
           {
             "path": "references/deliverable-formats.md",
@@ -886,17 +886,17 @@
           }
         ],
         "fileCount": 4,
-        "lines": 325,
-        "bytes": 10013,
+        "lines": 326,
+        "bytes": 10019,
         "license": "MIT",
-        "commit": "43f64e6b77fffc534319501ebc734bade3e342e9",
-        "sha256": "447d13087b0f1271dfc30b06ecc498070133e195e53c3e5cdbaeedd1dd909419"
+        "commit": "b02ff78c251fbc6940dbf66a831ed78e95da432e",
+        "sha256": "36f0b266e8f2f276cfc908e3898e8e2e6ea81b7076bb2c8509fd514f63d5c026"
       },
       "order": 402,
       "quality": {
-        "version": null,
-        "commit": "43f64e6",
-        "updated": "2026-11-02",
+        "version": "1.0.0",
+        "commit": "b02ff78",
+        "updated": "2026-11-06",
         "notFor": [
           "auditing a live web app before launch (use pre-ship-performance-audit, pre-ship-security-red-team)",
           "for the business decision behind the build (use strategy-memo)",
@@ -917,9 +917,9 @@
       "stats": "4 verdicts · 19 fixed paths · 9 behavioral tests · ~215 lines · 0 API keys",
       "install": "npx skills add arm-pz/web-preflight",
       "quality": {
-        "version": null,
-        "commit": "ab528c5",
-        "updated": "2026-10-17",
+        "version": "1.0.0",
+        "commit": "333f12e",
+        "updated": "2026-11-06",
         "notFor": [
           "penetration testing, exploitation, credential testing, broad port scanning, or application-code review",
           "use a dedicated authorized security-testing or code-review workflow instead"
@@ -946,9 +946,9 @@
       "stats": "3 subagents · 14 checks · 9 files · local environments only",
       "install": "npx skills add arm-pz/pre-ship-security-red-team",
       "quality": {
-        "version": null,
-        "commit": "1e3bc2a",
-        "updated": "2026-10-24",
+        "version": "1.0.0",
+        "commit": "8eb6a79",
+        "updated": "2026-11-06",
         "notFor": [
           "production, or for a passive exposure check (use web-preflight)"
         ]
@@ -967,9 +967,9 @@
       "stats": "4 subagents · 20 slow-downs · 6 phases · ~120 lines · 0 API keys",
       "install": "npx skills add arm-pz/pre-ship-performance-audit",
       "quality": {
-        "version": null,
-        "commit": "748a3b5",
-        "updated": "2026-10-24",
+        "version": "1.0.0",
+        "commit": "dd4ba3d",
+        "updated": "2026-11-06",
         "notFor": [
           "authorization and abuse testing (use pre-ship-security-red-team) or exposed secrets and source files (use web-preflight)"
         ]
@@ -1212,7 +1212,7 @@
       "title": "Paper Trail",
       "pageTitle": "Paper Trail — AI Agent Skill for Claude Code and Codex",
       "blurb": "Privacy policy, terms, refund and cookie pages written only from facts you confirm, then checked for placeholders, missing sections and emails nobody supplied. Says when a lawyer should look.",
-      "stats": "6 files · 381 lines · 8 KB",
+      "stats": "6 files · 382 lines · 8 KB",
       "install": "npx skills add arm-pz/caffeinity-skills --skill paper-trail",
       "page": "generated",
       "pageSource": {
@@ -1220,8 +1220,8 @@
         "files": [
           {
             "path": "SKILL.md",
-            "lines": 81,
-            "bytes": 4903
+            "lines": 82,
+            "bytes": 4918
           },
           {
             "path": "references/facts.md",
@@ -1250,17 +1250,17 @@
           }
         ],
         "fileCount": 6,
-        "lines": 381,
-        "bytes": 8594,
+        "lines": 382,
+        "bytes": 8603,
         "license": "MIT",
-        "commit": "bc79e20af0bb3e5c207165472c86b02d9ea11c34",
-        "sha256": "708fa51813888d0fa0d62a22b56e4468f5d0e55b76f3903961ddfc872d14356d"
+        "commit": "85576260ebf4788ef0e7c9456f15424a9fb868a7",
+        "sha256": "cacb21e2865f9e92d46027f87f225b3e864a21251b0b1e671c628a42ab55daa7"
       },
       "order": 411,
       "quality": {
-        "version": null,
-        "commit": "bc79e20",
-        "updated": "2026-11-05",
+        "version": "1.0.0",
+        "commit": "8557626",
+        "updated": "2026-11-06",
         "notFor": []
       }
     },
@@ -1350,14 +1350,14 @@
         "lines": 950,
         "bytes": 15781,
         "license": "MIT",
-        "commit": "bc79e20af0bb3e5c207165472c86b02d9ea11c34",
+        "commit": "85576260ebf4788ef0e7c9456f15424a9fb868a7",
         "sha256": "483f9eaa604c13a11140d9ee8ba44deaf5ae46289fd23c277f366014f623312e"
       },
       "order": 412,
       "quality": {
         "version": "0.1.0",
-        "commit": "bc79e20",
-        "updated": "2026-11-05",
+        "commit": "8557626",
+        "updated": "2026-11-06",
         "notFor": []
       }
     },
@@ -1437,14 +1437,14 @@
         "lines": 872,
         "bytes": 15074,
         "license": "MIT",
-        "commit": "bc79e20af0bb3e5c207165472c86b02d9ea11c34",
+        "commit": "85576260ebf4788ef0e7c9456f15424a9fb868a7",
         "sha256": "196c0f18c29c96eb51d0aa2096766dc642351fe7a571be583eccb7ea17289d9f"
       },
       "order": 413,
       "quality": {
         "version": "0.1.0",
-        "commit": "bc79e20",
-        "updated": "2026-11-05",
+        "commit": "8557626",
+        "updated": "2026-11-06",
         "notFor": []
       }
     },
@@ -1554,14 +1554,14 @@
         "lines": 1588,
         "bytes": 30959,
         "license": "MIT",
-        "commit": "bc79e20af0bb3e5c207165472c86b02d9ea11c34",
+        "commit": "85576260ebf4788ef0e7c9456f15424a9fb868a7",
         "sha256": "9fa3a48b71b2026a6d834903d0a2322ebf5dcc7cf065e441ef8041cf4184a711"
       },
       "order": 414,
       "quality": {
         "version": "0.1.0",
-        "commit": "bc79e20",
-        "updated": "2026-11-05",
+        "commit": "8557626",
+        "updated": "2026-11-06",
         "notFor": []
       }
     },
@@ -1631,14 +1631,14 @@
         "lines": 597,
         "bytes": 11488,
         "license": "MIT",
-        "commit": "bc79e20af0bb3e5c207165472c86b02d9ea11c34",
+        "commit": "85576260ebf4788ef0e7c9456f15424a9fb868a7",
         "sha256": "b8a788d07ff582c241ad3489dd83f30c482caab29d18a419b7c10c4cfd7b1a72"
       },
       "order": 415,
       "quality": {
         "version": "0.1.0",
-        "commit": "bc79e20",
-        "updated": "2026-11-05",
+        "commit": "8557626",
+        "updated": "2026-11-06",
         "notFor": []
       }
     },
@@ -1651,7 +1651,7 @@
       "title": "SEO Crawl",
       "pageTitle": "SEO Crawl — AI Agent Skill for Claude Code and Codex",
       "blurb": "Crawls a site you own and returns deterministic, evidence-backed technical SEO findings, with blocked or unrun checks reported INCONCLUSIVE rather than a pass.",
-      "stats": "14 files · 1,885 lines · 19 KB",
+      "stats": "14 files · 1,886 lines · 19 KB",
       "install": "npx skills add arm-pz/seo-crawl",
       "page": "generated",
       "order": 501,
@@ -1665,8 +1665,8 @@
           },
           {
             "path": "SKILL.md",
-            "lines": 88,
-            "bytes": 5946
+            "lines": 89,
+            "bytes": 5961
           },
           {
             "path": "examples/sample-report.md",
@@ -1730,16 +1730,16 @@
           }
         ],
         "fileCount": 14,
-        "lines": 1885,
-        "bytes": 19128,
+        "lines": 1886,
+        "bytes": 19138,
         "license": "MIT",
-        "commit": "be96031d9a03b8f478f7fbd83eda36d5996de91a",
-        "sha256": "154b53859ee5775614c59d03a9a500d9c220161f3422a5458fd7f512a8baa860"
+        "commit": "9c78758d4db8a7b3787a6d1cced82f2f91706c65",
+        "sha256": "3aead46f426b138af3c0072a2d77f3d11404a91b809bd8da656705cd1e090781"
       },
       "quality": {
-        "version": null,
-        "commit": "be96031",
-        "updated": "2026-10-24",
+        "version": "1.0.0",
+        "commit": "9c78758",
+        "updated": "2026-11-06",
         "notFor": [
           "Search Console clicks, impressions, rankings or keyword volumes",
           "Core Web Vitals, Lighthouse or bundle performance",
@@ -1776,9 +1776,9 @@
       "stats": "6 phases · 3 reference checklists · ~300 lines · 0 API keys",
       "install": "npx skills add arm-pz/keyword-guard",
       "quality": {
-        "version": null,
-        "commit": "e7b1e74",
-        "updated": "2026-10-24",
+        "version": "1.0.0",
+        "commit": "c187c8a",
+        "updated": "2026-11-06",
         "notFor": [
           "crawl and index health (use seo-crawl)",
           "rewriting the copy once ownership is settled (use keyword-resolver)",
@@ -1869,7 +1869,7 @@
       "title": "Platform Content",
       "pageTitle": "Platform Content — AI Agent Skill for Claude Code and Codex",
       "blurb": "Writes platform-native content packs from one brief: X threads, LinkedIn posts, YouTube and TikTok scripts, Instagram captions, newsletters and blog articles, each shaped to how that platform is actually read.",
-      "stats": "3 files · 453 lines · 11 KB",
+      "stats": "3 files · 454 lines · 11 KB",
       "install": "npx skills add arm-pz/platform-content",
       "page": "generated",
       "pageSource": {
@@ -1877,8 +1877,8 @@
         "files": [
           {
             "path": "SKILL.md",
-            "lines": 130,
-            "bytes": 10096
+            "lines": 131,
+            "bytes": 10111
           },
           {
             "path": "references/calendar-repurposing.md",
@@ -1892,17 +1892,17 @@
           }
         ],
         "fileCount": 3,
-        "lines": 453,
-        "bytes": 11229,
+        "lines": 454,
+        "bytes": 11240,
         "license": "MIT",
-        "commit": "55f2308587834f07753e07bbe3dd7597f8484bff",
-        "sha256": "1a2467069948aac811b616d24b6ae57708b5b8d1e81b744e0bdb6dc9e8632d4a"
+        "commit": "ad89265e0832fb65ffa041e7ebe1a513a8b00df0",
+        "sha256": "641a197cab77d8435d0e104e4f422c49c0ca8c179e853ef791788b7f05069437"
       },
       "order": 602,
       "quality": {
-        "version": null,
-        "commit": "55f2308",
-        "updated": "2026-10-18",
+        "version": "1.0.0",
+        "commit": "ad89265",
+        "updated": "2026-11-06",
         "notFor": [
           "copy that sells a product (use sales-copy)",
           "rewriting text the user already wrote (use wordsmith)",
@@ -1920,7 +1920,7 @@
       "title": "Sales Copy",
       "pageTitle": "Sales Copy — AI Agent Skill for Claude Code and Codex",
       "blurb": "Writes buyer-facing conversion assets: long-form sales pages, landing pages, launch and abandoned-cart email sequences and ad variations, built on the offer and the objections you can actually back.",
-      "stats": "3 files · 595 lines · 13 KB",
+      "stats": "3 files · 596 lines · 13 KB",
       "install": "npx skills add arm-pz/sales-copy",
       "page": "generated",
       "pageSource": {
@@ -1928,8 +1928,8 @@
         "files": [
           {
             "path": "SKILL.md",
-            "lines": 168,
-            "bytes": 10752
+            "lines": 169,
+            "bytes": 10767
           },
           {
             "path": "references/assets.md",
@@ -1943,17 +1943,17 @@
           }
         ],
         "fileCount": 3,
-        "lines": 595,
-        "bytes": 13421,
+        "lines": 596,
+        "bytes": 13441,
         "license": "MIT",
-        "commit": "f82e60d2eb192b901f3ade8b1e2e3e842215fe9d",
-        "sha256": "d0f2205e286d7fe892805ccff4fd27be1b907ca96760b12f3cb9c78dfdb3a2a5"
+        "commit": "aef1042c3cb2980f6be0cf9a4e866b57f800f7d9",
+        "sha256": "6a8e3fc7a0d20f1e5c4b6dfc771888d7ce001449f4f9ef94b3e819469d253e16"
       },
       "order": 603,
       "quality": {
-        "version": null,
-        "commit": "f82e60d",
-        "updated": "2026-10-18",
+        "version": "1.0.0",
+        "commit": "aef1042",
+        "updated": "2026-11-06",
         "notFor": [
           "organic audience content (use platform-content)",
           "editing text the user already wrote (use wordsmith)",
@@ -1970,7 +1970,7 @@
       "title": "Cold Email List Gate",
       "pageTitle": "Cold Email List Gate — AI Agent Skill for Claude Code",
       "blurb": "Gate a cold-email lead list before it loads: sample ten rows, check company, title, size, and mailbox against the ICP, compare data providers on the same criteria, and return a GO or HOLD decision with the fail pattern and the re-run…",
-      "stats": "2 files · 96 lines · 2 KB",
+      "stats": "2 files · 97 lines · 2 KB",
       "install": "npx skills add arm-pz/cold-email-list-gate",
       "page": "generated",
       "order": 701,
@@ -1979,8 +1979,8 @@
         "files": [
           {
             "path": "SKILL.md",
-            "lines": 46,
-            "bytes": 2896
+            "lines": 47,
+            "bytes": 2911
           },
           {
             "path": "references/gate-rules.md",
@@ -1989,16 +1989,16 @@
           }
         ],
         "fileCount": 2,
-        "lines": 96,
-        "bytes": 2485,
+        "lines": 97,
+        "bytes": 2497,
         "license": "MIT",
-        "commit": "4104d949e6ddffca3bd0be903518731d0cfb9dba",
-        "sha256": "efb8fa1bd2c440f9ca6c6b09a8a5d674fe32563407847f6e43ae4bfa204a6b27"
+        "commit": "005936836e3878a04497457bcfa3b38cc272a260",
+        "sha256": "ab129156f6c2cf9c5084e2115840db6e12f1e39b5cff39150967ddb9594c8f85"
       },
       "quality": {
-        "version": null,
-        "commit": "4104d94",
-        "updated": "2026-10-22",
+        "version": "1.0.0",
+        "commit": "0059368",
+        "updated": "2026-11-06",
         "notFor": [
           "buying, scraping, or enriching contacts (out of scope)",
           "writing the email copy (wordsmith)",
@@ -2015,7 +2015,7 @@
       "title": "Cold Email Ops",
       "pageTitle": "Cold Email Ops — AI Agent Skill for Claude Code and Codex",
       "blurb": "Plan and audit a cold-email program at volume and keep it from degrading: computes inbox and domain capacity from a monthly send target, sets per-domain reply-rate floors, burn-replacement cadence, shadow-ban tests, and automation error…",
-      "stats": "4 files · 393 lines · 8 KB",
+      "stats": "4 files · 394 lines · 8 KB",
       "install": "npx skills add arm-pz/cold-email-ops",
       "page": "generated",
       "order": 702,
@@ -2024,8 +2024,8 @@
         "files": [
           {
             "path": "SKILL.md",
-            "lines": 93,
-            "bytes": 7848
+            "lines": 94,
+            "bytes": 7863
           },
           {
             "path": "references/benchmarks.md",
@@ -2044,16 +2044,16 @@
           }
         ],
         "fileCount": 4,
-        "lines": 393,
-        "bytes": 8176,
+        "lines": 394,
+        "bytes": 8189,
         "license": "MIT",
-        "commit": "1b3850dd3f4ef67ecc66de3a5004151fff622e71",
-        "sha256": "7a4cb9267d8147ee32c6d8317043c747ee59c2a4a508fc0f0f3e4e4a785803eb"
+        "commit": "4f41071a5aeb734fdcd58265d6c3764cd682ab6f",
+        "sha256": "a190e225dada66418541f83104aed8de4c2503c3488a9b713937b4689a2ed014"
       },
       "quality": {
-        "version": null,
-        "commit": "1b3850d",
-        "updated": "2026-10-22",
+        "version": "1.0.0",
+        "commit": "4f41071",
+        "updated": "2026-11-06",
         "notFor": [
           "pre-load list QA (cold-email-list-gate)",
           "writing or polishing the emails themselves (wordsmith)",
@@ -2097,9 +2097,9 @@
       "stats": "7 modes · 6 produce + 1 hand-off · ~320 lines · 0 API keys",
       "install": "npx skills add arm-pz/applicant-kit --skill applicant-kit",
       "quality": {
-        "version": null,
-        "commit": "0fe7eee",
-        "updated": "2026-10-18",
+        "version": "1.0.0",
+        "commit": "83d6cb0",
+        "updated": "2026-11-06",
         "notFor": [
           "running the search itself (finding roles, the application tracker, follow-ups, interview briefings): use the application-pilot skill"
         ]
@@ -2135,7 +2135,7 @@
       "title": "Career Track",
       "pageTitle": "Career Track — AI Agent Skill for Claude Code and Codex",
       "blurb": "For the moves around a career: a positioning line you can repeat, the case for the next level, review and promotion narratives, salary negotiation scripts and a ninety-day plan.",
-      "stats": "3 files · 382 lines · 12 KB",
+      "stats": "3 files · 383 lines · 12 KB",
       "install": "npx skills add arm-pz/career-track",
       "page": "generated",
       "pageSource": {
@@ -2143,8 +2143,8 @@
         "files": [
           {
             "path": "SKILL.md",
-            "lines": 127,
-            "bytes": 10757
+            "lines": 128,
+            "bytes": 10772
           },
           {
             "path": "references/negotiation.md",
@@ -2158,17 +2158,17 @@
           }
         ],
         "fileCount": 3,
-        "lines": 382,
-        "bytes": 12164,
+        "lines": 383,
+        "bytes": 12173,
         "license": "MIT",
-        "commit": "e3e1851878d701c44fad8bb44addda5377646422",
-        "sha256": "b5f3dbdde6922ee2865f2b2e28ebbd051965b5663367b51e5dccb80f95c3310c"
+        "commit": "e34aa37375675c9f162b0bb64bf0ca7a979023b5",
+        "sha256": "00709a334919880880352d33332c1560d973e03dd45a87f7be8a3ebd05234d00"
       },
       "order": 804,
       "quality": {
-        "version": null,
-        "commit": "e3e1851",
-        "updated": "2026-10-19",
+        "version": "1.0.0",
+        "commit": "e34aa37",
+        "updated": "2026-11-06",
         "notFor": [
           "the application documents themselves: resume and CV judging (use recruiter-lens) or tailored application material and LinkedIn rewrites (use applicant-kit)"
         ]
@@ -2183,7 +2183,7 @@
       "title": "Research Brief",
       "pageTitle": "Research Brief — AI Agent Skill for Claude Code and Codex",
       "blurb": "Answers “what is known about this” with a sourced brief: overviews, competitor and industry analysis, fact checks with conflicts flagged, every claim tied to a dated source and every unknown named.",
-      "stats": "4 files · 520 lines · 14 KB",
+      "stats": "4 files · 521 lines · 14 KB",
       "install": "npx skills add arm-pz/research-brief",
       "page": "generated",
       "pageSource": {
@@ -2191,8 +2191,8 @@
         "files": [
           {
             "path": "SKILL.md",
-            "lines": 135,
-            "bytes": 10262
+            "lines": 136,
+            "bytes": 10277
           },
           {
             "path": "references/due-diligence.md",
@@ -2211,17 +2211,17 @@
           }
         ],
         "fileCount": 4,
-        "lines": 520,
-        "bytes": 13976,
+        "lines": 521,
+        "bytes": 13989,
         "license": "MIT",
-        "commit": "f8556893232b26235046ce01eca4cdeda09b86d2",
-        "sha256": "e103862e7f43326163660919d2c9044caacb0f6e6471167f8b10686ca299d990"
+        "commit": "bca3871b2267e4dac111f1159215bd9ae702f599",
+        "sha256": "ce61c0fb9a7162a678aa00cdb0404e0466cde35cfa4ff46fd1520019429644b1"
       },
       "order": 901,
       "quality": {
-        "version": null,
-        "commit": "f855689",
-        "updated": "2026-10-18",
+        "version": "1.0.0",
+        "commit": "bca3871",
+        "updated": "2026-11-06",
         "notFor": [
           "turning findings into a recommendation and roadmap (use strategy-memo)",
           "for analysing the user's own dataset (use data-readout)",
@@ -2238,7 +2238,7 @@
       "title": "Data Readout",
       "pageTitle": "Data Readout — AI Agent Skill for Claude Code and Codex",
       "blurb": "Turns the numbers you already own into a readout you can act on: it opens the real file first, then gives findings with the business implication of each, chart specs and the caveats that matter.",
-      "stats": "4 files · 406 lines · 12 KB",
+      "stats": "4 files · 407 lines · 12 KB",
       "install": "npx skills add arm-pz/data-readout",
       "page": "generated",
       "pageSource": {
@@ -2246,8 +2246,8 @@
         "files": [
           {
             "path": "SKILL.md",
-            "lines": 126,
-            "bytes": 8682
+            "lines": 127,
+            "bytes": 8697
           },
           {
             "path": "references/analysis-playbook.md",
@@ -2266,17 +2266,17 @@
           }
         ],
         "fileCount": 4,
-        "lines": 406,
-        "bytes": 12496,
+        "lines": 407,
+        "bytes": 12504,
         "license": "MIT",
-        "commit": "9eacca091a1dd4623bcb785c6b5ce108a78c080a",
-        "sha256": "6cb1c2c4c3dea6fd98eebe98362e328ef6e38bee4469279845241c0a56ce2aa2"
+        "commit": "48adefcc768a011ab187440ad24977086f0ebcf3",
+        "sha256": "f56313444cf01ea0a6a4e87335ea7d67f18d339ea43e1861f91824d7bf611951"
       },
       "order": 902,
       "quality": {
-        "version": null,
-        "commit": "9eacca0",
-        "updated": "2026-10-18",
+        "version": "1.0.0",
+        "commit": "48adefc",
+        "updated": "2026-11-06",
         "notFor": [
           "writing the pandas or R code that crunches the file (use production-code)",
           "for market research outside the user's own data (use research-brief) or for the strategic roadmap that follows (use strategy-memo)"
@@ -2296,9 +2296,9 @@
       "stats": "4 roles · ~9 calls · 1 opt-in Operator seat · 2 modes · 0 API keys",
       "install": "npx skills add arm-pz/crash-test --skill crash-test",
       "quality": {
-        "version": null,
-        "commit": "faa73a0",
-        "updated": "2026-10-24",
+        "version": "1.0.0",
+        "commit": "e7db75d",
+        "updated": "2026-11-06",
         "notFor": [
           "factual lookups, small edits, debugging an actual crash, or reviewing code for defects: it examines a decision, not a diff"
         ]
@@ -2334,7 +2334,7 @@
       "title": "Strategy Memo",
       "pageTitle": "Strategy Memo — AI Agent Skill for Claude Code and Codex",
       "blurb": "Turns a business question into a decision document: situation analysis, a recommendation written as ranked options, the risks, and a roadmap someone can execute.",
-      "stats": "3 files · 384 lines · 9 KB",
+      "stats": "3 files · 385 lines · 9 KB",
       "install": "npx skills add arm-pz/strategy-memo",
       "page": "generated",
       "pageSource": {
@@ -2342,8 +2342,8 @@
         "files": [
           {
             "path": "SKILL.md",
-            "lines": 145,
-            "bytes": 10400
+            "lines": 146,
+            "bytes": 10415
           },
           {
             "path": "references/frameworks.md",
@@ -2357,17 +2357,17 @@
           }
         ],
         "fileCount": 3,
-        "lines": 384,
-        "bytes": 9030,
+        "lines": 385,
+        "bytes": 9037,
         "license": "MIT",
-        "commit": "440499df7f23119ef00b5109d95111e08beec895",
-        "sha256": "10fdad8a16b972d2a21212e8bbbcd25f71d125afca2b3ae6647b4d328bb1a60b"
+        "commit": "03eaf9ac2557987630a1dba53b488aba2465eccc",
+        "sha256": "988e7b55c205bd043c828b485bdc7e1cbd0b92c87cc7d30cb3fd7ef6ccf0aa46"
       },
       "order": 905,
       "quality": {
-        "version": null,
-        "commit": "440499d",
-        "updated": "2026-10-18",
+        "version": "1.0.0",
+        "commit": "03eaf9a",
+        "updated": "2026-11-06",
         "notFor": [
           "pressure-testing a decision you already made (use crash-test)",
           "the copy or pages that execute it (use sales-copy, platform-content)",
@@ -2384,7 +2384,7 @@
       "title": "Solo Income Blueprint",
       "pageTitle": "Solo Income Blueprint — AI Agent Skill for Claude Code",
       "blurb": "Turns “I want to make money online” into one plan: a business model that fits your skills, time and budget, one offer, a demand check, a minimal tool stack and a seven-day launch.",
-      "stats": "3 files · 328 lines · 7 KB",
+      "stats": "3 files · 329 lines · 7 KB",
       "install": "npx skills add arm-pz/solo-income-blueprint",
       "page": "generated",
       "pageSource": {
@@ -2392,8 +2392,8 @@
         "files": [
           {
             "path": "SKILL.md",
-            "lines": 118,
-            "bytes": 5721
+            "lines": 119,
+            "bytes": 5736
           },
           {
             "path": "references/playbook.md",
@@ -2407,17 +2407,17 @@
           }
         ],
         "fileCount": 3,
-        "lines": 328,
-        "bytes": 6993,
+        "lines": 329,
+        "bytes": 7001,
         "license": "MIT",
-        "commit": "33491fb84d4567a3b613f2d484fcc40bfe22c2c1",
-        "sha256": "ba9ae1c80338ae23794142971bc4a177c60b2ab0105ed342759930d35b418b2c"
+        "commit": "1520056694c1a219e0fd156b8e2721ebe5ba91f5",
+        "sha256": "e56e75b406a4eb1ca0f14934f6884493a792a388f801fec99d0153dddb5c1b8c"
       },
       "order": 906,
       "quality": {
-        "version": null,
-        "commit": "33491fb",
-        "updated": "2026-10-22",
+        "version": "1.0.0",
+        "commit": "1520056",
+        "updated": "2026-11-06",
         "notFor": [
           "job hunting (application-pilot, applicant-kit)",
           "SEO for an existing site (seo-audit)",
@@ -2457,7 +2457,7 @@
       "title": "Study System",
       "pageTitle": "Study System — AI Agent Skill for Claude Code and Codex",
       "blurb": "Builds the system around a skill you are acquiring: the minimum components, a beginner-to-practitioner roadmap, deliberate practice, spaced repetition and an honest mastery check.",
-      "stats": "3 files · 373 lines · 11 KB",
+      "stats": "3 files · 374 lines · 11 KB",
       "install": "npx skills add arm-pz/study-system",
       "page": "generated",
       "pageSource": {
@@ -2465,8 +2465,8 @@
         "files": [
           {
             "path": "SKILL.md",
-            "lines": 123,
-            "bytes": 10272
+            "lines": 124,
+            "bytes": 10287
           },
           {
             "path": "references/assessment.md",
@@ -2480,17 +2480,17 @@
           }
         ],
         "fileCount": 3,
-        "lines": 373,
-        "bytes": 11531,
+        "lines": 374,
+        "bytes": 11542,
         "license": "MIT",
-        "commit": "82320f687421ae0a334e06dab6b0dbd59aa7ef23",
-        "sha256": "67998d85149ba4cf4af0e62db5921c8315f71c6c220089b4a93f8b6e9f6f0c8a"
+        "commit": "74e14a3a4f5623eff65f7b9ca78be0e96088342e",
+        "sha256": "e5bc7563653658439e55cebc08f91b672b52cdeb807c465f6cd1c2cc9c040f0e"
       },
       "order": 908,
       "quality": {
-        "version": null,
-        "commit": "82320f6",
-        "updated": "2026-10-24",
+        "version": "1.0.0",
+        "commit": "74e14a3",
+        "updated": "2026-11-06",
         "notFor": [
           "being taught the topic itself concept by concept (use topic-primer)",
           "for career positioning and moves (use career-track) or for course content written for a class of students (use course-builder)"
@@ -2506,7 +2506,7 @@
       "title": "Course Builder",
       "pageTitle": "Course Builder — AI Agent Skill for Claude Code and Codex",
       "blurb": "A course for a class or cohort: measurable outcomes, modules in prerequisite order, an assessment for every outcome and a time budget that fits, checked by a script before the first session.",
-      "stats": "5 files · 301 lines · 6 KB",
+      "stats": "5 files · 302 lines · 6 KB",
       "install": "npx skills add arm-pz/caffeinity-skills --skill course-builder",
       "page": "generated",
       "pageSource": {
@@ -2514,8 +2514,8 @@
         "files": [
           {
             "path": "SKILL.md",
-            "lines": 84,
-            "bytes": 4995
+            "lines": 85,
+            "bytes": 5010
           },
           {
             "path": "references/alignment.md",
@@ -2539,17 +2539,17 @@
           }
         ],
         "fileCount": 5,
-        "lines": 301,
-        "bytes": 6078,
+        "lines": 302,
+        "bytes": 6084,
         "license": "MIT",
-        "commit": "bc79e20af0bb3e5c207165472c86b02d9ea11c34",
-        "sha256": "f51263530294c91d85bbf58013df1a6f849c25c4209f34837655298799028c86"
+        "commit": "85576260ebf4788ef0e7c9456f15424a9fb868a7",
+        "sha256": "1e8dfe3ceb472fd5ceab966ed884b027cd7e84f669755fb5a85695facc6efe87"
       },
       "order": 909,
       "quality": {
-        "version": null,
-        "commit": "bc79e20",
-        "updated": "2026-11-05",
+        "version": "1.0.0",
+        "commit": "8557626",
+        "updated": "2026-11-06",
         "notFor": [
           "one person's own learning plan (use study-system)",
           "for being taught the topic (use topic-primer)",
@@ -2566,7 +2566,7 @@
       "title": "Choose Effort",
       "pageTitle": "Choose Effort — AI Agent Skill for Claude Code and Codex",
       "blurb": "Asks the user how much effort a Claude Code task deserves before heavy work starts, then recommends an effort level, whether to fan out to subagents, goal mode, workflows or agent teams, how to set it, and when to check /usage.",
-      "stats": "2 files · 67 lines · 2 KB",
+      "stats": "2 files · 68 lines · 2 KB",
       "install": "npx skills add arm-pz/choose-effort",
       "page": "generated",
       "order": 910,
@@ -2575,8 +2575,8 @@
         "files": [
           {
             "path": "SKILL.md",
-            "lines": 48,
-            "bytes": 3589
+            "lines": 49,
+            "bytes": 3604
           },
           {
             "path": "references/trigger-cases.md",
@@ -2585,16 +2585,16 @@
           }
         ],
         "fileCount": 2,
-        "lines": 67,
-        "bytes": 2521,
+        "lines": 68,
+        "bytes": 2526,
         "license": "MIT",
-        "commit": "5670432c1e2e350bd12902e90c9b19504a9d4026",
-        "sha256": "36c4c17bdfb8b551c911adc8bb23a4596b40275c77a05b645ea93d965e798f59"
+        "commit": "b881ffd292c948a1963d2c98dd2c2db071e8109f",
+        "sha256": "27b8aa1625df9e09bc9349af11034705e0c74da3d0e6a579b47b6e01e49f4887"
       },
       "quality": {
-        "version": null,
-        "commit": "5670432",
-        "updated": "2026-10-29",
+        "version": "1.0.0",
+        "commit": "b881ffd",
+        "updated": "2026-11-06",
         "notFor": [
           "working out why usage already drained (use diagnose-usage)",
           "for plan limits, prices and which models support which levels (use product-self-knowledge)"
@@ -2610,7 +2610,7 @@
       "title": "Diagnose Usage",
       "pageTitle": "Diagnose Usage — AI Agent Skill for Claude Code and Codex",
       "blurb": "Diagnoses why a Claude Code session or day burned through usage limits faster than expected, and says what to change.",
-      "stats": "3 files · 85 lines · 4 KB",
+      "stats": "3 files · 86 lines · 4 KB",
       "install": "npx skills add arm-pz/diagnose-usage",
       "page": "generated",
       "order": 911,
@@ -2619,8 +2619,8 @@
         "files": [
           {
             "path": "SKILL.md",
-            "lines": 34,
-            "bytes": 3441
+            "lines": 35,
+            "bytes": 3456
           },
           {
             "path": "references/burn-sources.md",
@@ -2634,16 +2634,16 @@
           }
         ],
         "fileCount": 3,
-        "lines": 85,
-        "bytes": 3800,
+        "lines": 86,
+        "bytes": 3812,
         "license": "MIT",
-        "commit": "a4d5e805dcf0521fdb70bd7c31c209d0a2b6bd77",
-        "sha256": "5c00b32a1ab313ce25faac6fb2cc3be637a5698b282df63c3a5382819c08dc8d"
+        "commit": "d8df9488a8b19022d2c968402521675f04c1bdb3",
+        "sha256": "40f816a1234ee63e3e1c09e2c05eb4d1f440b436ba54d48be6c499874af98aa7"
       },
       "quality": {
-        "version": null,
-        "commit": "a4d5e80",
-        "updated": "2026-10-29",
+        "version": "1.0.0",
+        "commit": "d8df948",
+        "updated": "2026-11-06",
         "notFor": [
           "choosing an effort level before work starts or using less going forward (use choose-effort)",
           "for plan limits, prices and API billing (use product-self-knowledge)"
@@ -2659,7 +2659,7 @@
       "title": "Seo Sweep",
       "pageTitle": "Seo Sweep — AI Agent Skill for Claude Code and Codex",
       "blurb": "Runs the Skillsmith SEO skills on a site you own, in order, fixes what they find in the site's code, proves each fix with a re-crawl, and turns every defect a skill shows along the way into a tested fix to that skill, chaining seo-crawl…",
-      "stats": "3 files · 184 lines · 5 KB",
+      "stats": "3 files · 185 lines · 5 KB",
       "install": "npx skills add arm-pz/seo-sweep",
       "page": "generated",
       "order": 912,
@@ -2668,8 +2668,8 @@
         "files": [
           {
             "path": "SKILL.md",
-            "lines": 97,
-            "bytes": 6950
+            "lines": 98,
+            "bytes": 6965
           },
           {
             "path": "references/improve-skills.md",
@@ -2683,16 +2683,16 @@
           }
         ],
         "fileCount": 3,
-        "lines": 184,
-        "bytes": 5233,
+        "lines": 185,
+        "bytes": 5243,
         "license": "MIT",
-        "commit": "e8d76dd9e4ecbe1b64d1f8377d084ae03cb32d28",
-        "sha256": "fed5f737c5fa42f83fc42e0a07c02d53589934405472f3a38127faf615643c3b"
+        "commit": "38290e31a393686045593ad49c6290c0d6027323",
+        "sha256": "f23fff1376f3f7bab0f53912f7b8f446e2eb93b2e56e8e7bc2db40477f39bd61"
       },
       "quality": {
-        "version": null,
-        "commit": "e8d76dd",
-        "updated": "2026-10-31",
+        "version": "1.0.0",
+        "commit": "38290e3",
+        "updated": "2026-11-06",
         "notFor": [
           "only submitting pages to search engines (use get-indexed)",
           "a report-only audit with rewrite options (use seo-polish)",
@@ -2711,7 +2711,7 @@
       "title": "Session Retrace",
       "pageTitle": "Session Retrace — AI Agent Skill for Claude Code and Codex",
       "blurb": "Find a past AI coding conversation from a fuzzy memory — \"the session where we fixed the redirect\" — across Qoder, Claude Code, Codex and Gemini CLI.",
-      "stats": "4 files · 804 lines · 12 KB",
+      "stats": "4 files · 805 lines · 12 KB",
       "install": "npx skills add arm-pz/session-retrace",
       "page": "generated",
       "order": 913,
@@ -2720,8 +2720,8 @@
         "files": [
           {
             "path": "SKILL.md",
-            "lines": 54,
-            "bytes": 4744
+            "lines": 55,
+            "bytes": 4759
           },
           {
             "path": "references/test-cases.md",
@@ -2740,16 +2740,16 @@
           }
         ],
         "fileCount": 4,
-        "lines": 804,
-        "bytes": 12589,
+        "lines": 805,
+        "bytes": 12600,
         "license": "MIT",
-        "commit": "1bfa2a7a41bcf15a9b7c4a4e382a3df031d40f36",
-        "sha256": "d377941d28bb7aafbd22629ef1411f9b2f3716ee1115d320029be39b260215ed"
+        "commit": "d65a19ededa5cbb74330be35a0ad22e31eabc137",
+        "sha256": "14471874525830a2540092767e7fbf0737675be7896bc38289d92fe30618d799"
       },
       "quality": {
-        "version": null,
-        "commit": "1bfa2a7",
-        "updated": "2026-10-31",
+        "version": "1.0.0",
+        "commit": "d65a19e",
+        "updated": "2026-11-06",
         "notFor": [
           "searching code or project files (use Grep)",
           "summarizing the conversation already open, or durable project memory (use the workspace memory index)"
@@ -2765,7 +2765,7 @@
       "title": "Get Indexed",
       "pageTitle": "Get Indexed — AI Agent Skill for Claude Code and Codex",
       "blurb": "Tells search engines about a site's new and changed pages through every channel that has an API, and lists the few steps that still need a person.",
-      "stats": "4 files · 509 lines · 9 KB",
+      "stats": "4 files · 510 lines · 9 KB",
       "install": "npx skills add arm-pz/get-indexed",
       "page": "generated",
       "order": 914,
@@ -2774,8 +2774,8 @@
         "files": [
           {
             "path": "SKILL.md",
-            "lines": 81,
-            "bytes": 5420
+            "lines": 82,
+            "bytes": 5435
           },
           {
             "path": "package.json",
@@ -2794,16 +2794,16 @@
           }
         ],
         "fileCount": 4,
-        "lines": 509,
-        "bytes": 9252,
+        "lines": 510,
+        "bytes": 9258,
         "license": "MIT",
-        "commit": "becffb2423a099348da2440f3d3dfd517372ed96",
-        "sha256": "9c3daa47e0373add3426e983204159b1fa7e2ad54d18afb7e1e4bb1f9c67dc35"
+        "commit": "a68bb45dc94efb3eb3795ef2f5a86c3ac8a2714f",
+        "sha256": "2cd433a1568d52f49394f1cb1ffa6f78dd9cbe5559dbd768855dd38521a7622b"
       },
       "quality": {
-        "version": null,
-        "commit": "becffb2",
-        "updated": "2026-10-31",
+        "version": "1.0.0",
+        "commit": "a68bb45",
+        "updated": "2026-11-06",
         "notFor": [
           "pages that cannot be indexed because of noindex, robots, redirects or broken links (use seo-crawl)",
           "ranking or brand-search problems (use findable or seo-sweep)",
@@ -2820,7 +2820,7 @@
       "title": "Consistent Code Review",
       "pageTitle": "Consistent Code Review — AI Agent Skill for Claude Code",
       "blurb": "Perform a deterministic, evidence-backed code review that produces the same findings on re-runs of unchanged code, reconciled against a previous report when one is supplied.",
-      "stats": "1 file · 152 lines · 4 KB",
+      "stats": "1 file · 153 lines · 4 KB",
       "install": "npx skills add arm-pz/consistent-code-review",
       "page": "generated",
       "order": 915,
@@ -2829,21 +2829,21 @@
         "files": [
           {
             "path": "SKILL.md",
-            "lines": 152,
-            "bytes": 8980
+            "lines": 153,
+            "bytes": 8995
           }
         ],
         "fileCount": 1,
-        "lines": 152,
-        "bytes": 4035,
+        "lines": 153,
+        "bytes": 4047,
         "license": "MIT",
-        "commit": "03ecc1bb825d33d350657d37933ca8880665123e",
-        "sha256": "b6958883ccca55b9f963fdb1f2a63e2d0602814af64af50cd936431e93fbfd38"
+        "commit": "2cf9364d72c03963d9265c41301ed992e1a9f98a",
+        "sha256": "45eeb13f024ea74189d450cb142d3a68b54f7368ea80c0631723851064bd12aa"
       },
       "quality": {
-        "version": null,
-        "commit": "03ecc1b",
-        "updated": "2026-11-02",
+        "version": "1.0.0",
+        "commit": "2cf9364",
+        "updated": "2026-11-06",
         "notFor": [
           "architectural redesign, live security red-teaming (use pre-ship-security-red-team)",
           "live performance scoring (use pre-ship-performance-audit)",
@@ -2866,7 +2866,7 @@
       "title": "Ai Team Blueprint",
       "pageTitle": "Ai Team Blueprint — AI Agent Skill for Claude Code and Codex",
       "blurb": "Guide a solo operator or small business from \"I want an AI team\" to a ready-to-run v1 blueprint for a team of 3 to 5 Claude agents.",
-      "stats": "5 files · 219 lines · 6 KB",
+      "stats": "5 files · 220 lines · 6 KB",
       "install": "npx skills add arm-pz/ai-team-blueprint",
       "page": "generated",
       "order": 916,
@@ -2875,8 +2875,8 @@
         "files": [
           {
             "path": "SKILL.md",
-            "lines": 58,
-            "bytes": 5174
+            "lines": 59,
+            "bytes": 5189
           },
           {
             "path": "evals/evals.json",
@@ -2900,16 +2900,16 @@
           }
         ],
         "fileCount": 5,
-        "lines": 219,
-        "bytes": 5852,
+        "lines": 220,
+        "bytes": 5858,
         "license": "MIT",
-        "commit": "b6e76d450f0c0a48fcb1c67de6410afc11e97531",
-        "sha256": "11d5c3d77e47336b3d81ddc5549ba41d750621ee0a95099162f1f4256bb37a8d"
+        "commit": "f7c9cabdd756b4b0e833ec07204794cae9448544",
+        "sha256": "99197678c19687fe7a75ee18c884a11983cbc26e264122bf3b790bb9ffeee850"
       },
       "quality": {
-        "version": null,
-        "commit": "b6e76d4",
-        "updated": "2026-11-02",
+        "version": "1.0.0",
+        "commit": "f7c9cab",
+        "updated": "2026-11-06",
         "notFor": [
           "writing agent code against the Claude API or Agent SDK (use claude-api)",
           "building a single skill (use draft-skill)",
@@ -2926,7 +2926,7 @@
       "title": "Portable Harness",
       "pageTitle": "Portable Harness — AI Agent Skill for Claude Code and Codex",
       "blurb": "Set up a repo so any coding agent (Claude Code, Codex, Cursor) behaves the same wherever it runs - writes 12 working rules at the top of CLAUDE.md or AGENTS.md, adds map sections only where the agent keeps getting things wrong, and…",
-      "stats": "5 files · 210 lines · 5 KB",
+      "stats": "5 files · 211 lines · 5 KB",
       "install": "npx skills add arm-pz/portable-harness",
       "page": "generated",
       "order": 917,
@@ -2935,8 +2935,8 @@
         "files": [
           {
             "path": "SKILL.md",
-            "lines": 54,
-            "bytes": 3914
+            "lines": 55,
+            "bytes": 3929
           },
           {
             "path": "references/guardrails.md",
@@ -2960,16 +2960,16 @@
           }
         ],
         "fileCount": 5,
-        "lines": 210,
-        "bytes": 4893,
+        "lines": 211,
+        "bytes": 4902,
         "license": "MIT",
-        "commit": "d1333019cd722c1a77da6f3262c335d78098c795",
-        "sha256": "b1ee5bcd9529c02dffd14b38bff1cd748110d6b875d4f93d979d20b9d2fbc73e"
+        "commit": "8b900db43f9bc21e0ad0bb6855c5c918b08311c4",
+        "sha256": "b6ee1f57be911ad2c60b6ff1b85c3338f3fca826878a69c6f27a958dd084b98f"
       },
       "quality": {
-        "version": null,
-        "commit": "d133301",
-        "updated": "2026-11-05",
+        "version": "1.0.0",
+        "commit": "8b900db",
+        "updated": "2026-11-06",
         "notFor": [
           "pruning or auditing a setup that already exists (use harness-audit)",
           "reviewing code (use consistent-code-review)",

@@ -179,33 +179,33 @@
         <a class="step-skill" href="/draft-skill/">
           <b>Draft Skill</b>
           <span class="step-blurb">Creates a new agent skill from a plain idea: confirms the purpose before writing anything, checks the installed siblings for overlap, splits scripts from references from assets, writes a description that actually triggers, then validates it with check_skill.py. Written from scratch, so it carries no text from Qoder's built-in skill-creator, which ships without a licence permitting redistribution.</span>
-          <span class="step-facts">unversioned · shown working 24 Oct 2026</span>
+          <span class="step-facts">v1.0.0 · shown working 24 Oct 2026</span>
         </a>
         <a class="step-skill" href="/prompts-to-skill/">
           <b>Prompts To Skill</b>
           <span class="step-blurb">Turns a list of your own prompts into a finished, tested skill, one skill per prompt: an intent interview, an overlap check against what is already installed, a draft written with draft-skill, trigger test cases that include near-misses, and a tune-skill gate at the end. It needs draft-skill and tune-skill and stops with a clear message if either is missing.</span>
-          <span class="step-facts">unversioned</span>
+          <span class="step-facts">v1.0.0</span>
         </a>
       </li>
       <li class="step"><p class="step-n">Step 2</p>
         <a class="step-skill" href="/tune-skill/">
           <b>Tune Skill</b>
           <span class="step-blurb">Audits and fine-tunes a skill that already exists: the description that never fires, overlap with installed siblings, stale names and counts, handoff contracts that do not hand off. Ships check_skill.py, a deterministic validator over frontmatter, folder and heading agreement, description length and reference paths that do not exist. Not for creating one from scratch; that is draft-skill.</span>
-          <span class="step-facts">unversioned · shown working 24 Oct 2026</span>
+          <span class="step-facts">v1.0.0 · shown working 24 Oct 2026</span>
         </a>
       </li>
       <li class="step"><p class="step-n">Step 3</p>
         <a class="step-skill" href="/prompts-to-skill-release/">
           <b>Prompts To Skill Release</b>
           <span class="step-blurb">Packages a finished skill for release: runs its trigger test cases and records which passed and which did not, sets the version and CHANGELOG, builds the archive, writes the README, and ends with a per-platform install checklist. Failed tests stay in the report instead of being dropped from it.</span>
-          <span class="step-facts">unversioned</span>
+          <span class="step-facts">v1.0.0</span>
         </a>
       </li>
       <li class="step"><p class="step-n">Step 4 · optional</p>
         <a class="step-skill" href="/skill-to-mod/">
           <b>Skill to Mod</b>
           <span class="step-blurb">Checks whether a skill should become a Claude Code mod, then builds the plugin with your skill unchanged and a thin trigger, validates and tests it, and lists what it can touch. Says no when a skill should stay a skill.</span>
-          <span class="step-facts">unversioned</span>
+          <span class="step-facts">v1.0.0</span>
         </a>
       </li>
     </ol>
