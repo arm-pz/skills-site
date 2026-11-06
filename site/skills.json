@@ -2977,6 +2977,51 @@
           "turning a skill into a Claude Code plugin (use skill-to-mod)"
         ]
       }
+    },
+    {
+      "name": "harness-audit",
+      "repo": "arm-pz/harness-audit",
+      "path": "skills/harness-audit",
+      "group": "ship-checks",
+      "tag": "build",
+      "title": "Harness Audit",
+      "pageTitle": "Harness Audit — AI Agent Skill for Claude Code and Codex",
+      "blurb": "Audits an existing coding-agent harness (CLAUDE.md, AGENTS.md, rules files, hooks, MCP and tool config, skills) against the project's past Claude Code sessions, then returns a ranked findings report plus proposed diffs applied only after…",
+      "stats": "4 files · 454 lines · 8 KB",
+      "install": "npx skills add arm-pz/harness-audit",
+      "page": "generated",
+      "order": 918,
+      "pageSource": {
+        "description": "Audits an existing coding-agent harness (CLAUDE.md, AGENTS.md, rules files, hooks, MCP and tool config, skills) against the project's past Claude Code sessions, then returns a ranked findings report plus proposed diffs applied only after approval. Flags bloated instruction files, rules with no evidence they help, prose rules nothing enforces, unused or overlapping tools, stale docs, and corrections that recur across sessions without a rule. Use when the user wants to prune, slim down, clean up or garden their agent setup, says CLAUDE.md has grown too long, asks which rules or MCP servers are dead weight, or says the agent keeps repeating mistakes without knowing which, even if they never say harness. Not for writing a new setup, rules, map sections or guardrails for a named problem area (use portable-harness), reviewing application code (use consistent-code-review), or tuning one skill's description (use tune-skill).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 87,
+            "bytes": 5895
+          },
+          {
+            "path": "references/checks.md",
+            "lines": 59,
+            "bytes": 3974
+          },
+          {
+            "path": "scripts/inventory.py",
+            "lines": 147,
+            "bytes": 5596
+          },
+          {
+            "path": "scripts/mine_sessions.py",
+            "lines": 161,
+            "bytes": 6413
+          }
+        ],
+        "fileCount": 4,
+        "lines": 454,
+        "bytes": 8379,
+        "license": "MIT",
+        "commit": "95b980907ee843480af5f235cf02d841fdd589f3",
+        "sha256": "e0e734fa450c6ccfbb05312a21b5edb3375987cb434ad0da435fbac62d80031f"
+      }
     }
   ],
   "workflows": [
