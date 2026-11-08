@@ -296,6 +296,13 @@
       "digest": "sha256:14471874525830a2540092767e7fbf0737675be7896bc38289d92fe30618d799"
     },
     {
+      "name": "setup-claude-advisor",
+      "description": "Agent skill that configures Claude Code for quota-optimised model tiering: Sonnet for the main session, Opus on call via /advisor, Haiku for read-only subagents, and Sonnet for code editing. Audits version and env flags, shows a diff preview, and never writes without explicit confirmation.",
+      "type": "archive",
+      "url": "https://skillsmith.tech/agent-skills/setup-claude-advisor.tar.gz",
+      "digest": "sha256:ade52d67f1e42c0db83bdc858e204713f7cba5e555691705336f0862601e0b23"
+    },
+    {
       "name": "site-prompt",
       "description": "Agent skill that turns a website topic or landing-page brief into one self-contained build prompt: subject-native concept, final copy, every source file embedded verbatim, and a replay check that compares the rebuilt tree byte for byte. Portable SKILL.md; tested in Qoder.",
       "type": "archive",

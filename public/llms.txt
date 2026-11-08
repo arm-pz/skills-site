@@ -1,6 +1,6 @@
 # Skillsmith
 
-> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: 61 skills mapped into 11 workflows (build a skill, get found, gate a release, grow search traffic, land a job, decide, learn, run outbound, launch a product). Plain markdown, no API keys.
+> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: 62 skills mapped into 11 workflows (build a skill, get found, gate a release, grow search traffic, land a job, decide, learn, run outbound, launch a product). Plain markdown, no API keys.
 
 ## Install
 
@@ -60,6 +60,7 @@ Sections: [skills](https://skillsmith.tech/skills/), [workflows](https://skillsm
 - [session-retrace](https://skillsmith.tech/session-retrace/): Find a past AI coding conversation from a fuzzy memory — "the session where we fixed the redirect" — across Qoder, Claude Code, Codex and Gemini CLI.
 - [consistent-code-review](https://skillsmith.tech/consistent-code-review/): Perform a deterministic, evidence-backed code review that produces the same findings on re-runs of unchanged code, reconciled against a previous report when one is supplied.
 - [harness-audit](https://skillsmith.tech/harness-audit/): Audits an existing coding-agent harness (CLAUDE.md, AGENTS.md, rules files, hooks, MCP and tool config, skills) against the project's past Claude Code sessions, then returns a ranked findings report plus proposed diffs applied only after…
+- [setup-claude-advisor](https://skillsmith.tech/setup-claude-advisor/): Configure Claude Code for quota-optimised model tiering: Sonnet as the main session model, Opus as the on-call advisor, Haiku for read-only subagents, and Sonnet for code-editing subagents.
 
 ## SEO & Search
 
