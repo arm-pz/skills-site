@@ -3032,6 +3032,51 @@
           "tuning one skill's description (use tune-skill)"
         ]
       }
+    },
+    {
+      "name": "setup-claude-advisor",
+      "repo": "arm-pz/setup-claude-advisor",
+      "path": ".",
+      "group": "ship-checks",
+      "tag": "build",
+      "title": "Setup Claude Advisor",
+      "pageTitle": "Setup Claude Advisor — AI Agent Skill for Claude Code",
+      "blurb": "Configure Claude Code for quota-optimised model tiering: Sonnet as the main session model, Opus as the on-call advisor, Haiku for read-only subagents, and Sonnet for code-editing subagents.",
+      "stats": "4 files · 368 lines · 7 KB",
+      "install": "npx skills add arm-pz/setup-claude-advisor",
+      "page": "generated",
+      "order": 919,
+      "pageSource": {
+        "description": "Configure Claude Code for quota-optimised model tiering: Sonnet as the main session model, Opus as the on-call advisor, Haiku for read-only subagents, and Sonnet for code-editing subagents. Audits existing subagents, environment variables, and CLI version before proposing changes; writes settings, subagent files, and an advisory rule to CLAUDE.md only after the user approves a diff preview. Use when the user wants to set up the Opus advisor pattern, configure Claude Code model tiers, optimise their $20 plan quota by splitting models across roles, or match a subagent tree that assigns different models to different jobs. Not for diagnosing why usage already drained (use diagnose-usage), choosing an effort level before a task (use choose-effort), or upgrading Claude Code itself.",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 124,
+            "bytes": 6545
+          },
+          {
+            "path": "discovery-kit.md",
+            "lines": 124,
+            "bytes": 5503
+          },
+          {
+            "path": "references/advisor-architecture.md",
+            "lines": 84,
+            "bytes": 3898
+          },
+          {
+            "path": "references/trigger-cases.md",
+            "lines": 36,
+            "bytes": 2706
+          }
+        ],
+        "fileCount": 4,
+        "lines": 368,
+        "bytes": 7051,
+        "license": "MIT",
+        "commit": "2edd56a4d9c32113db2a9cb1f8748c7a9614c9a1",
+        "sha256": "ade52d67f1e42c0db83bdc858e204713f7cba5e555691705336f0862601e0b23"
+      }
     }
   ],
   "workflows": [
