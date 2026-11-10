@@ -7,7 +7,7 @@
 <meta name="description" content="Find local work that never reached its remote and push only what is safe, then check whether published listings agree with the repos. Fetches a folder of…">
 <link rel="canonical" href="https://skillsmith.tech/upstream-check/">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Skillsmith">
+<meta property="og:site_name" content="Skillsmith by Caffeinity">
 <meta property="og:title" content="Upstream Check — AI Agent Skill for Claude Code and Codex">
 <meta property="og:description" content="Find local work that never reached its remote and push only what is safe, then check whether published listings agree with the repos. Fetches a folder of git clones, classifies every repo as push-ready, level, behind, diverged, no-upstream or no-remote, screens the outgoing diff for credential-shaped lines, and with --push fast-forwards only the clean ones and never forces, uses --no-verify, or touches a diverged repo. A second checker counts a catalogue wherever it is published (site index, homepage, marketplace, READMEs) against the repos that ship a SKILL.md, and names what drifted. Use when the user asks what has not been pushed, whether clones are behind upstream, to push a batch, or why a site and a README list different numbers than GitHub. Not for writing or tuning a skill (use draft-skill or tune-skill), making a repo discoverable (use findable), or deciding whether a build is safe to deploy (use release-gate-chair).">
 <meta property="og:url" content="https://skillsmith.tech/upstream-check/">
@@ -126,6 +126,7 @@
   @media (prefers-reduced-motion:reduce){
     *,*::before,*::after{transition:none!important;animation:none!important}
   }
+  .brand-by{font-size:.62em;letter-spacing:.01em;opacity:.65;margin-left:.3em;white-space:nowrap}
 </style>
 <script type="application/ld+json">
 {
@@ -174,7 +175,7 @@
 
 <nav class="nav" aria-label="Site">
   <div class="wrap">
-    <a class="brand" href="/"><b>∧</b>skillsmith</a>
+    <a class="brand" href="/"><b>∧</b>skillsmith <span class="brand-by">by caffeinity</span></a>
     <div class="nav-links">
       <a href="/skills/">All skills</a>
       <a href="https://github.com/arm-pz/upstream-check" target="_blank" rel="noopener">Source</a>
@@ -263,7 +264,7 @@
 
 <footer>
   <div class="wrap">
-    <span>Upstream Check is an open agent skill on <a href="/">Skillsmith</a>, made by <a href="https://caffeinity.com/">Caffeinity</a>.</span>
+    <span>Upstream Check is an open agent skill on <a href="/">Skillsmith by Caffeinity</a>.</span>
     <a href="https://github.com/arm-pz/upstream-check" target="_blank" rel="noopener">arm-pz/upstream-check</a>
     <p class="kural" style="flex-basis:100%;margin:0;padding:18px 0 28px;border-top:1px solid color-mix(in srgb,currentColor 18%,transparent);display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;font-size:14px;line-height:1.5"><span lang="ta" style="font-family:'Noto Sans Tamil','Tamil Sangam MN','Nirmala UI',Latha,sans-serif;font-size:17px;font-weight:500;opacity:1">யாம் பெற்ற இன்பம் பெறுக இவ்வையகம்</span><span style="opacity:.75">“May this world attain the same bliss that I have attained.”</span></p>
   </div>

@@ -128,7 +128,7 @@ class FlowPageTest(unittest.TestCase):
         flow = dict(MANIFEST["workflows"][0], pairsWith=[pair])
         out = gen_home.render_flow_page(flow, MANIFEST)
         self.assertIn("Pairs with · third-party", out)
-        self.assertIn("Not made by Skillsmith. A key.", out)
+        self.assertIn("Not made by Skillsmith by Caffeinity. A key.", out)
 
     def test_write_removes_a_dropped_workflow_and_check_flags_it(self):
         with tempfile.TemporaryDirectory() as tmp:

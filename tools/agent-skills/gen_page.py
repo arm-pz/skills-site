@@ -192,7 +192,7 @@ def quality_html(entry, health=None):
             ("Nightly check", check_dd), ("Last real-world run", tested_dd)]
     pairs = "".join(
         f'\n      <div class="qb-wide"><dt>Pairs with</dt><dd><a href="{esc(p["url"])}" target="_blank" '
-        f'rel="noopener">{esc(p["name"])}</a> for {esc(p["for"])}<small>Third-party, not made by Skillsmith. '
+        f'rel="noopener">{esc(p["name"])}</a> for {esc(p["for"])}<small>Third-party, not made by Skillsmith by Caffeinity. '
         f'{esc(p["needs"])}</small></dd></div>' for p in entry.get("pairsWith", []))
     cells = "\n".join(f"      <div><dt>{k}</dt><dd>{v}</dd></div>" for k, v in rows)
     return (f'{QUALITY_START}\n<section class="qb" aria-labelledby="qb-h">\n  <div class="wrap">\n'

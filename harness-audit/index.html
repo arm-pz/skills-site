@@ -7,7 +7,7 @@
 <meta name="description" content="Audits an existing coding-agent harness (CLAUDE.md, AGENTS.md, rules files, hooks, MCP and tool config, skills) against the project&#x27;s past Claude Code…">
 <link rel="canonical" href="https://skillsmith.tech/harness-audit/">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Skillsmith">
+<meta property="og:site_name" content="Skillsmith by Caffeinity">
 <meta property="og:title" content="Harness Audit — AI Agent Skill for Claude Code and Codex">
 <meta property="og:description" content="Audits an existing coding-agent harness (CLAUDE.md, AGENTS.md, rules files, hooks, MCP and tool config, skills) against the project&#x27;s past Claude Code sessions, then returns a ranked findings report plus proposed diffs applied only after approval. Flags bloated instruction files, rules with no evidence they help, prose rules nothing enforces, unused or overlapping tools, stale docs, and corrections that recur across sessions without a rule. Use when the user wants to prune, slim down, clean up or garden their agent setup, says CLAUDE.md has grown too long, asks which rules or MCP servers are dead weight, or says the agent keeps repeating mistakes without knowing which, even if they never say harness. Not for writing a new setup, rules, map sections or guardrails for a named problem area (use portable-harness), reviewing application code (use consistent-code-review), or tuning one skill&#x27;s description (use tune-skill).">
 <meta property="og:url" content="https://skillsmith.tech/harness-audit/">
@@ -126,6 +126,7 @@
   @media (prefers-reduced-motion:reduce){
     *,*::before,*::after{transition:none!important;animation:none!important}
   }
+  .brand-by{font-size:.62em;letter-spacing:.01em;opacity:.65;margin-left:.3em;white-space:nowrap}
 </style>
 <script type="application/ld+json">
 {
@@ -174,7 +175,7 @@
 
 <nav class="nav" aria-label="Site">
   <div class="wrap">
-    <a class="brand" href="/"><b>∧</b>skillsmith</a>
+    <a class="brand" href="/"><b>∧</b>skillsmith <span class="brand-by">by caffeinity</span></a>
     <div class="nav-links">
       <a href="/skills/">All skills</a>
       <a href="https://github.com/arm-pz/harness-audit" target="_blank" rel="noopener">Source</a>
@@ -264,7 +265,7 @@
 
 <footer>
   <div class="wrap">
-    <span>Harness Audit is an open agent skill on <a href="/">Skillsmith</a>, made by <a href="https://caffeinity.com/">Caffeinity</a>.</span>
+    <span>Harness Audit is an open agent skill on <a href="/">Skillsmith by Caffeinity</a>.</span>
     <a href="https://github.com/arm-pz/harness-audit" target="_blank" rel="noopener">arm-pz/harness-audit</a>
     <p class="kural" style="flex-basis:100%;margin:0;padding:18px 0 28px;border-top:1px solid color-mix(in srgb,currentColor 18%,transparent);display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;font-size:14px;line-height:1.5"><span lang="ta" style="font-family:'Noto Sans Tamil','Tamil Sangam MN','Nirmala UI',Latha,sans-serif;font-size:17px;font-weight:500;opacity:1">யாம் பெற்ற இன்பம் பெறுக இவ்வையகம்</span><span style="opacity:.75">“May this world attain the same bliss that I have attained.”</span></p>
   </div>

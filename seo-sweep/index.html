@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Seo Sweep — AI Agent Skill for Claude Code and Codex</title>
-<meta name="description" content="Runs the Skillsmith SEO skills on a site you own, in order, fixes what they find in the site&#x27;s code, proves each fix with a re-crawl, and turns every…">
+<meta name="description" content="Runs the Skillsmith by Caffeinity SEO skills on a site you own, in order, fixes what they find in the site&#x27;s code, proves each fix with a re-crawl, and…">
 <link rel="canonical" href="https://skillsmith.tech/seo-sweep/">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Skillsmith">
+<meta property="og:site_name" content="Skillsmith by Caffeinity">
 <meta property="og:title" content="Seo Sweep — AI Agent Skill for Claude Code and Codex">
-<meta property="og:description" content="Runs the Skillsmith SEO skills on a site you own, in order, fixes what they find in the site&#x27;s code, proves each fix with a re-crawl, and turns every defect a skill shows along the way into a tested fix to that skill, chaining seo-crawl, findable, keyword-guard, wordsmith and get-indexed. Use when the user asks to &quot;fix the SEO&quot;, &quot;run the SEO skills on my site&quot;, &quot;why doesn&#x27;t my site show up when I search its name&quot;, &quot;my brand search shows other domains&quot;, &quot;use the skillsmith skills on this site&quot;, or wants a site&#x27;s search problems fixed and the skills improved as they run, even if they never say &quot;audit&quot;. Not for only submitting pages to search engines (use get-indexed), a report-only audit with rewrite options (use seo-polish), resolving cannibalization alone (use keyword-resolver), repo or skill discoverability alone (use findable), or writing a new skill (use draft-skill).">
+<meta property="og:description" content="Runs the Skillsmith by Caffeinity SEO skills on a site you own, in order, fixes what they find in the site&#x27;s code, proves each fix with a re-crawl, and turns every defect a skill shows along the way into a tested fix to that skill, chaining seo-crawl, findable, keyword-guard, wordsmith and get-indexed. Use when the user asks to &quot;fix the SEO&quot;, &quot;run the SEO skills on my site&quot;, &quot;why doesn&#x27;t my site show up when I search its name&quot;, &quot;my brand search shows other domains&quot;, &quot;use the skillsmith skills on this site&quot;, or wants a site&#x27;s search problems fixed and the skills improved as they run, even if they never say &quot;audit&quot;. Not for only submitting pages to search engines (use get-indexed), a report-only audit with rewrite options (use seo-polish), resolving cannibalization alone (use keyword-resolver), repo or skill discoverability alone (use findable), or writing a new skill (use draft-skill).">
 <meta property="og:url" content="https://skillsmith.tech/seo-sweep/">
 <meta name="twitter:card" content="summary">
 <meta name="color-scheme" content="light dark">
@@ -126,6 +126,7 @@
   @media (prefers-reduced-motion:reduce){
     *,*::before,*::after{transition:none!important;animation:none!important}
   }
+  .brand-by{font-size:.62em;letter-spacing:.01em;opacity:.65;margin-left:.3em;white-space:nowrap}
 </style>
 <script type="application/ld+json">
 {
@@ -136,7 +137,7 @@
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "Any",
   "url": "https://skillsmith.tech/seo-sweep/",
-  "description": "Runs the Skillsmith SEO skills on a site you own, in order, fixes what they find in the site's code, proves each fix with a re-crawl, and turns every defect a skill shows along the way into a tested fix to that skill, chaining seo-crawl, findable, keyword-guard, wordsmith and get-indexed. Use when the user asks to \"fix the SEO\", \"run the SEO skills on my site\", \"why doesn't my site show up when I search its name\", \"my brand search shows other domains\", \"use the skillsmith skills on this site\", or wants a site's search problems fixed and the skills improved as they run, even if they never say \"audit\". Not for only submitting pages to search engines (use get-indexed), a report-only audit with rewrite options (use seo-polish), resolving cannibalization alone (use keyword-resolver), repo or skill discoverability alone (use findable), or writing a new skill (use draft-skill).",
+  "description": "Runs the Skillsmith by Caffeinity SEO skills on a site you own, in order, fixes what they find in the site's code, proves each fix with a re-crawl, and turns every defect a skill shows along the way into a tested fix to that skill, chaining seo-crawl, findable, keyword-guard, wordsmith and get-indexed. Use when the user asks to \"fix the SEO\", \"run the SEO skills on my site\", \"why doesn't my site show up when I search its name\", \"my brand search shows other domains\", \"use the skillsmith skills on this site\", or wants a site's search problems fixed and the skills improved as they run, even if they never say \"audit\". Not for only submitting pages to search engines (use get-indexed), a report-only audit with rewrite options (use seo-polish), resolving cannibalization alone (use keyword-resolver), repo or skill discoverability alone (use findable), or writing a new skill (use draft-skill).",
   "codeRepository": "https://github.com/arm-pz/seo-sweep",
   "license": "https://spdx.org/licenses/MIT.html",
   "publisher": {
@@ -174,7 +175,7 @@
 
 <nav class="nav" aria-label="Site">
   <div class="wrap">
-    <a class="brand" href="/"><b>∧</b>skillsmith</a>
+    <a class="brand" href="/"><b>∧</b>skillsmith <span class="brand-by">by caffeinity</span></a>
     <div class="nav-links">
       <a href="/skills/">All skills</a>
       <a href="https://github.com/arm-pz/seo-sweep" target="_blank" rel="noopener">Source</a>
@@ -185,7 +186,7 @@
 <header class="hero">
   <div class="wrap">
     <h1>Seo Sweep</h1>
-    <p class="lead">Runs the Skillsmith SEO skills on a site you own, in order, fixes what they find in the site&#x27;s code, proves each fix with a re-crawl, and turns every defect a skill shows along the way into a tested fix to that skill, chaining seo-crawl…</p>
+    <p class="lead">Runs the Skillsmith by Caffeinity SEO skills on a site you own, in order, fixes what they find in the site&#x27;s code, proves each fix with a re-crawl, and turns every defect a skill shows along the way into a tested fix to that skill, chaining seo-crawl…</p>
     <div class="console">
       <code id="cmd">npx skills add arm-pz/seo-sweep</code>
       <button class="copy" id="copy" type="button" aria-describedby="cmd"><span class="idle">Copy install command</span><span class="done" aria-hidden="true">Copied</span></button>
@@ -216,7 +217,7 @@
 <section class="paper" aria-labelledby="for-h">
   <div class="wrap">
     <h2 id="for-h">What it is for</h2>
-    <p class="body">Runs the Skillsmith SEO skills on a site you own, in order, fixes what they find in the site&#x27;s code, proves each fix with a re-crawl, and turns every defect a skill shows along the way into a tested fix to that skill, chaining seo-crawl, findable, keyword-guard, wordsmith and get-indexed.</p>
+    <p class="body">Runs the Skillsmith by Caffeinity SEO skills on a site you own, in order, fixes what they find in the site&#x27;s code, proves each fix with a re-crawl, and turns every defect a skill shows along the way into a tested fix to that skill, chaining seo-crawl, findable, keyword-guard, wordsmith and get-indexed.</p>
     <div class="uses">
     <div class="uses-col when">
       <h3>Reach for it when</h3>
@@ -263,7 +264,7 @@
 
 <footer>
   <div class="wrap">
-    <span>Seo Sweep is an open agent skill on <a href="/">Skillsmith</a>, made by <a href="https://caffeinity.com/">Caffeinity</a>.</span>
+    <span>Seo Sweep is an open agent skill on <a href="/">Skillsmith by Caffeinity</a>.</span>
     <a href="https://github.com/arm-pz/seo-sweep" target="_blank" rel="noopener">arm-pz/seo-sweep</a>
     <p class="kural" style="flex-basis:100%;margin:0;padding:18px 0 28px;border-top:1px solid color-mix(in srgb,currentColor 18%,transparent);display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;font-size:14px;line-height:1.5"><span lang="ta" style="font-family:'Noto Sans Tamil','Tamil Sangam MN','Nirmala UI',Latha,sans-serif;font-size:17px;font-weight:500;opacity:1">யாம் பெற்ற இன்பம் பெறுக இவ்வையகம்</span><span style="opacity:.75">“May this world attain the same bliss that I have attained.”</span></p>
   </div>

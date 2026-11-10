@@ -2725,13 +2725,13 @@
       "tag": "discovery",
       "title": "Seo Sweep",
       "pageTitle": "Seo Sweep — AI Agent Skill for Claude Code and Codex",
-      "blurb": "Runs the Skillsmith SEO skills on a site you own, in order, fixes what they find in the site's code, proves each fix with a re-crawl, and turns every defect a skill shows along the way into a tested fix to that skill, chaining seo-crawl…",
+      "blurb": "Runs the Skillsmith by Caffeinity SEO skills on a site you own, in order, fixes what they find in the site's code, proves each fix with a re-crawl, and turns every defect a skill shows along the way into a tested fix to that skill, chaining seo-crawl…",
       "stats": "3 files · 185 lines · 5 KB",
       "install": "npx skills add arm-pz/seo-sweep",
       "page": "generated",
       "order": 912,
       "pageSource": {
-        "description": "Runs the Skillsmith SEO skills on a site you own, in order, fixes what they find in the site's code, proves each fix with a re-crawl, and turns every defect a skill shows along the way into a tested fix to that skill, chaining seo-crawl, findable, keyword-guard, wordsmith and get-indexed. Use when the user asks to \"fix the SEO\", \"run the SEO skills on my site\", \"why doesn't my site show up when I search its name\", \"my brand search shows other domains\", \"use the skillsmith skills on this site\", or wants a site's search problems fixed and the skills improved as they run, even if they never say \"audit\". Not for only submitting pages to search engines (use get-indexed), a report-only audit with rewrite options (use seo-polish), resolving cannibalization alone (use keyword-resolver), repo or skill discoverability alone (use findable), or writing a new skill (use draft-skill).",
+        "description": "Runs the Skillsmith by Caffeinity SEO skills on a site you own, in order, fixes what they find in the site's code, proves each fix with a re-crawl, and turns every defect a skill shows along the way into a tested fix to that skill, chaining seo-crawl, findable, keyword-guard, wordsmith and get-indexed. Use when the user asks to \"fix the SEO\", \"run the SEO skills on my site\", \"why doesn't my site show up when I search its name\", \"my brand search shows other domains\", \"use the skillsmith skills on this site\", or wants a site's search problems fixed and the skills improved as they run, even if they never say \"audit\". Not for only submitting pages to search engines (use get-indexed), a report-only audit with rewrite options (use seo-polish), resolving cannibalization alone (use keyword-resolver), repo or skill discoverability alone (use findable), or writing a new skill (use draft-skill).",
         "files": [
           {
             "path": "SKILL.md",

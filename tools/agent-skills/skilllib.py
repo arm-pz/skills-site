@@ -464,7 +464,7 @@ def llms_txt(manifest):
     order = {g["id"]: g["order"] for g in manifest["groups"]}
     pages = sorted((s for s in manifest["skills"] if s["page"] != "none"),
                    key=lambda s: (order[s["group"]], s["order"]))
-    out = ["# Skillsmith", "",
+    out = ["# Skillsmith by Caffeinity", "",
            "> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: "
            f"{len(pages)} skills mapped into {len(manifest.get('workflows', []))} workflows "
            "(build a skill, get found, gate a release, grow search traffic, land a job, decide, "
@@ -477,7 +477,7 @@ def llms_txt(manifest):
            "- Any agent, one skill: " + " ".join(f"`{c}`" for c in INSTALL["any"]),
            f"- Discovery index: {SITE}/.well-known/agent-skills/index.json", "",
            f"Sections: [skills]({SITE}/skills/), [workflows]({SITE}/workflows/), [mods]({SITE}/mods/), "
-           f"[custom work]({SITE}/work/). Skillsmith is made by Caffeinity (https://caffeinity.com/).", ""]
+           f"[custom work]({SITE}/work/). Skillsmith by Caffeinity is made by Caffeinity (https://caffeinity.com/).", ""]
     for g in sorted(manifest["groups"], key=lambda g: g["order"]):
         rows = [s for s in pages if s["group"] == g["id"]]
         if not rows:
