@@ -1,10 +1,10 @@
 # Skillsmith by Caffeinity
 
-> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: 63 skills mapped into 11 workflows (build a skill, get found, gate a release, grow search traffic, land a job, decide, learn, run outbound, launch a product). Plain markdown, no API keys.
+> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: 63 skills mapped into 12 workflows (build a skill, get found, gate a release, grow search traffic, land a job, decide, learn, run outbound, launch a product). Plain markdown, no API keys.
 
 ## Install
 
-- Claude Code, every skill plus eleven workflow agents: `/plugin marketplace add arm-pz/caffeinity-skills` then `/plugin install caffeinity@caffeinity-skills`
+- Claude Code, every skill plus twelve workflow agents: `/plugin marketplace add arm-pz/caffeinity-skills` then `/plugin install caffeinity@caffeinity-skills`
 - Codex: `codex plugin marketplace add arm-pz/caffeinity-skills`, then install caffeinity from the Plugins directory
 - Any agent, one skill: `npx skills add arm-pz/<skill>`
 - Discovery index: https://skillsmith.tech/.well-known/agent-skills/index.json
@@ -13,7 +13,7 @@ Sections: [skills](https://skillsmith.tech/skills/), [workflows](https://skillsm
 
 ## Start Here
 
-- [caffeinity-routing](https://skillsmith.tech/caffeinity-routing/): Start here. Tell it the outcome you want and it picks one of eleven brews (workflows), lists the skills in order with what each hands the next, and names the ones you have not installed instead of improvising their work.
+- [caffeinity-routing](https://skillsmith.tech/caffeinity-routing/): Start here. Tell it the outcome you want and it picks one of twelve brews (workflows), lists the skills in order with what each hands the next, and names the ones you have not installed instead of improvising their work.
 
 ## Skill Authoring
 
@@ -104,9 +104,9 @@ Sections: [skills](https://skillsmith.tech/skills/), [workflows](https://skillsm
 ## Brews (workflows)
 
 - [Build a skill and make it installable](https://skillsmith.tech/workflows/build-a-skill/) (Brew 1 · Pour-over): draft-skill or prompts-to-skill -> tune-skill -> prompts-to-skill-release -> skill-to-mod
-- [Get a repo, skill or plugin found](https://skillsmith.tech/workflows/get-found/) (Brew 2 · Bloom): findable -> publish-pipeline -> upstream-check
+- [Get a repo, skill or plugin found](https://skillsmith.tech/workflows/get-found/) (Brew 2 · Bloom): findable -> publish-pipeline -> upstream-check -> get-indexed
 - [Decide whether a site is safe to launch](https://skillsmith.tech/workflows/launch-safely/) (Brew 3 · Espresso): web-preflight -> pre-ship-security-red-team -> pre-ship-performance-audit -> release-gate-chair or release-gate-ledger or release-gate-validator
-- [Grow organic search traffic](https://skillsmith.tech/workflows/grow-search-traffic/) (Brew 4 · Cold brew): seo-crawl -> keyword-guard -> wordsmith -> pre-ship-performance-audit -> platform-content
+- [Grow organic search traffic](https://skillsmith.tech/workflows/grow-search-traffic/) (Brew 4 · Cold brew): seo-crawl -> keyword-guard -> wordsmith -> pre-ship-performance-audit -> platform-content -> get-indexed
 - [Land a job](https://skillsmith.tech/workflows/land-a-job/) (Brew 5 · French press): recruiter-lens -> applicant-kit -> application-pilot -> career-track
 - [Make a decision](https://skillsmith.tech/workflows/make-a-decision/) (Brew 6 · Cupping): research-brief -> data-readout -> crash-test or do-better -> strategy-memo
 - [Learn a skill](https://skillsmith.tech/workflows/learn-a-skill/) (Brew 7 · Slow drip): topic-primer -> study-system -> course-builder
@@ -114,3 +114,4 @@ Sections: [skills](https://skillsmith.tech/skills/), [workflows](https://skillsm
 - [Launch a one-person product](https://skillsmith.tech/workflows/launch-a-product/) (Brew 9 · Moka pot): solo-income-blueprint -> site-prompt -> production-code -> paper-trail -> release-gate-chair -> platform-content
 - [Maintain the skill family](https://skillsmith.tech/workflows/maintain-skills/) (Brew 10 · Descale): tune-skill -> prompts-to-skill-release -> upstream-check
 - [Stand up or audit a skill estate](https://skillsmith.tech/workflows/audit-a-skill-estate/) (Brew 11 · Estate roast): skill-estate
+- [Set up a coding agent for a repo](https://skillsmith.tech/workflows/set-up-a-coding-agent/) (Brew 12 · Dial-in): portable-harness or harness-audit -> setup-claude-advisor -> diagnose-usage -> choose-effort

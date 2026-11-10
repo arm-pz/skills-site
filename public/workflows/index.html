@@ -308,7 +308,7 @@
         <li><a href="/prompts-to-skill-release/">prompts-to-skill-release</a></li>
         <li><a href="/skill-to-mod/">skill-to-mod</a> <span class="opt">optional</span></li>
       </ol>
-      <p class="flow-note">skill-launch runs the first steps as one chain.</p>
+      <p class="flow-note">skill-launch runs the first steps as one chain; tune-skill-mod and skill-release-mod hold pushes and releases until steps two and three have run.</p>
       <a class="flow-go" href="/workflows/build-a-skill/">Open the workflow</a>
     </article>
     <article class="flow" id="bloom">
@@ -319,8 +319,9 @@
         <li><a href="/findable/">findable</a></li>
         <li><a href="/publish-pipeline/">publish-pipeline</a></li>
         <li><a href="/upstream-check/">upstream-check</a></li>
+        <li><a href="/get-indexed/">get-indexed</a> <span class="opt">optional</span></li>
       </ol>
-      <p class="flow-note">findable-polish and upstream-polish add the rewrite.</p>
+      <p class="flow-note">findable-polish and upstream-polish add the rewrite; get-indexed applies when publishing put new or changed pages live.</p>
       <a class="flow-go" href="/workflows/get-found/">Open the workflow</a>
     </article>
     <article class="flow" id="espresso">
@@ -346,8 +347,9 @@
         <li><a href="/wordsmith/">wordsmith</a></li>
         <li><a href="/pre-ship-performance-audit/">pre-ship-performance-audit</a> <span class="opt">optional</span></li>
         <li><a href="/platform-content/">platform-content</a> <span class="opt">optional</span></li>
+        <li><a href="/get-indexed/">get-indexed</a> <span class="opt">optional</span></li>
       </ol>
-      <p class="flow-note">seo-polish and keyword-resolver package parts of this route.</p>
+      <p class="flow-note">seo-polish and keyword-resolver package parts of this route; seo-sweep runs it end to end, fixes the findings in the site's code and proves each fix with a re-crawl.</p>
       <a class="flow-go" href="/workflows/grow-search-traffic/">Open the workflow</a>
     </article>
     <article class="flow" id="french-press">
@@ -422,7 +424,7 @@
         <li><a href="/prompts-to-skill-release/">prompts-to-skill-release</a> <span class="opt">optional</span></li>
         <li><a href="/upstream-check/">upstream-check</a></li>
       </ol>
-      <p class="flow-note">The nightly health job opens the issue this starts from; a weekly scheduled session runs it and opens PRs.</p>
+      <p class="flow-note">The nightly health job opens the issue this starts from; a weekly scheduled session runs it and opens PRs. For one published skill at a time, tune-and-ship takes it from a tune and a fact check through to a release and a confirmed live page.</p>
       <a class="flow-go" href="/workflows/maintain-skills/">Open the workflow</a>
     </article>
     <article class="flow" id="estate-roast">
@@ -434,6 +436,19 @@
       </ol>
       <p class="flow-note">One run over the whole collection in eight gated phases; Brew 10 · Descale keeps it healthy afterwards.</p>
       <a class="flow-go" href="/workflows/audit-a-skill-estate/">Open the workflow</a>
+    </article>
+    <article class="flow" id="dial-in">
+      <p class="flow-id">Brew 12 · Dial-in</p>
+      <h3><a href="/workflows/set-up-a-coding-agent/">Set up a coding agent for a repo</a></h3>
+      <p class="flow-sum">Get a coding agent that follows the repo's rules and stays inside its usage: write or prune the rules and guardrails, tier the models by role, then pick the effort each large task deserves.</p>
+      <ol class="flow-steps">
+        <li><a href="/portable-harness/">portable-harness</a> <span class="or">or</span> <a href="/harness-audit/">harness-audit</a></li>
+        <li><a href="/setup-claude-advisor/">setup-claude-advisor</a> <span class="opt">optional</span></li>
+        <li><a href="/diagnose-usage/">diagnose-usage</a> <span class="opt">optional</span></li>
+        <li><a href="/choose-effort/">choose-effort</a> <span class="opt">optional</span></li>
+      </ol>
+      <p class="flow-note">Step one is one or the other: portable-harness writes a setup, harness-audit prunes one that has grown. The usage steps are for Claude Code.</p>
+      <a class="flow-go" href="/workflows/set-up-a-coding-agent/">Open the workflow</a>
     </article>
     <!-- gen:workflows:end -->
     </div>
