@@ -2736,7 +2736,7 @@
           {
             "path": "SKILL.md",
             "lines": 98,
-            "bytes": 6965
+            "bytes": 6979
           },
           {
             "path": "references/improve-skills.md",
@@ -2751,15 +2751,15 @@
         ],
         "fileCount": 3,
         "lines": 185,
-        "bytes": 5243,
+        "bytes": 5254,
         "license": "MIT",
-        "commit": "38290e31a393686045593ad49c6290c0d6027323",
-        "sha256": "f23fff1376f3f7bab0f53912f7b8f446e2eb93b2e56e8e7bc2db40477f39bd61"
+        "commit": "237bb64617d1e1539995def59d37e0cc1945b622",
+        "sha256": "f3eac9aacd4a4ba623a5e6a8ad3506fd33f499bf21f119a1fa259c0a3476c274"
       },
       "quality": {
         "version": "1.0.0",
-        "commit": "38290e3",
-        "updated": "2026-11-06",
+        "commit": "237bb64",
+        "updated": "2026-11-10",
         "notFor": [
           "only submitting pages to search engines (use get-indexed)",
           "a report-only audit with rewrite options (use seo-polish)",
@@ -3124,7 +3124,7 @@
           {
             "path": "discovery-kit.md",
             "lines": 176,
-            "bytes": 9625
+            "bytes": 9649
           },
           {
             "path": "references/advisor-architecture.md",
@@ -3139,14 +3139,14 @@
         ],
         "fileCount": 4,
         "lines": 477,
-        "bytes": 10388,
+        "bytes": 10391,
         "license": "MIT",
-        "commit": "c65b19ecc8b2af5c05d7081905b4284287fa4223",
-        "sha256": "b1db374b472234efc4819b756af9d43544cebf1b4f212b2cc30ed40f81bb2863"
+        "commit": "d3a41fa4c4d631a17848cdb835e02732b4d85149",
+        "sha256": "7caf4731debcc7f6a749aa5cfd1f71de2962c85c851d0779fdce00a72e3f2821"
       },
       "quality": {
         "version": "0.1.2",
-        "commit": "c65b19e",
+        "commit": "d3a41fa",
         "updated": "2026-11-10",
         "notFor": [
           "diagnosing why usage already drained (use diagnose-usage)",
