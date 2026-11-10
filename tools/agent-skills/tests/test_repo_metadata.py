@@ -31,6 +31,9 @@ class RepoMetadataTest(unittest.TestCase):
         _, add, home = repo_metadata.plan({"topics": [f"t{i}" for i in range(19)], "homepage": "https://mine/"},
                                           ["a", "b"], "https://h/")
         self.assertEqual((add, home), (["a"], None))
+        _, _, home = repo_metadata.plan({"topics": [], "homepage": "https://skills.caffeinity.com/demo/"},
+                                        [], "https://skillsmith.tech/demo/")
+        self.assertEqual(home, "https://skillsmith.tech/demo/")
 
 
 if __name__ == "__main__":
