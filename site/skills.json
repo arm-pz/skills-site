@@ -497,6 +497,73 @@
       }
     },
     {
+      "name": "tune-and-ship",
+      "repo": "arm-pz/caffeinity-skills",
+      "path": "plugins/tune-and-ship/skills/tune-and-ship",
+      "group": "skill-authoring",
+      "tag": "authoring",
+      "title": "Tune And Ship",
+      "pageTitle": "Tune And Ship — AI Agent Skill for Claude Code and Codex",
+      "blurb": "One published skill at a time, all the way through: tuned with tune-skill, every version, flag and price checked against its source, listing polished, released in one PR, then the site page and marketplace copy confirmed live.",
+      "stats": "6 files · 416 lines · 9 KB",
+      "install": "npx skills add arm-pz/caffeinity-skills --skill tune-and-ship",
+      "page": "generated",
+      "pageSource": {
+        "description": "Takes one published skill at a time from as-is to tuned, fact-checked, released and live, then moves to the next one in the catalog. Each run tunes the skill with tune-skill, checks every version number, flag, price and command it states against the primary source, re-reads its siblings' real SKILL.md files, polishes the listing with findable-polish, writes the version and release notes, opens one PR, and after the merge confirms the site page and marketplace copy are live. Use whenever the user wants to fine-tune their other skills, work through the catalog, give a published skill the full treatment, fact-check a skill's claims, or ship a tune instead of drafting it, even if they never say \"ship\". Not for a tune with no release (use tune-skill), drafts with nothing pushed (use tune-and-polish), a new skill (use skill-launch), regressions from the nightly health check (use caffeinity-routing's Descale brew), or a whole collection (use skill-estate).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 133,
+            "bytes": 7191
+          },
+          {
+            "path": "references/fact-check.md",
+            "lines": 53,
+            "bytes": 2714
+          },
+          {
+            "path": "references/first-run.md",
+            "lines": 15,
+            "bytes": 1566
+          },
+          {
+            "path": "references/refresh.md",
+            "lines": 48,
+            "bytes": 2157
+          },
+          {
+            "path": "references/trigger-cases.md",
+            "lines": 41,
+            "bytes": 3111
+          },
+          {
+            "path": "scripts/queue.py",
+            "lines": 126,
+            "bytes": 4911
+          }
+        ],
+        "fileCount": 6,
+        "lines": 416,
+        "bytes": 8802,
+        "license": "MIT",
+        "commit": "7f63acbf6410f31f1a877c9af9e34ed9bae35ac4",
+        "sha256": "f1304d4562cee98a474722cbfee835c0c4d8dc642d31fe1419e06a642bab73ba"
+      },
+      "order": 210,
+      "quality": {
+        "version": "0.1.0",
+        "commit": "7f63acb",
+        "updated": "2026-11-10",
+        "notFor": [
+          "a tune with no release (use tune-skill)",
+          "drafts with nothing pushed (use tune-and-polish)",
+          "a new skill (use skill-launch)",
+          "regressions from the nightly health check (use caffeinity-routing's Descale brew)",
+          "a whole collection (use skill-estate)"
+        ]
+      }
+    },
+    {
       "name": "findable",
       "repo": "arm-pz/findable",
       "path": "skills/findable",
