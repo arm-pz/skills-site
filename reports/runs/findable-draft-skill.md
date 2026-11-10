@@ -68,3 +68,40 @@ On 2026-11-10, search the seven target queries and `draft ai skill` again; recor
 absence) for the page and the repo next to this baseline.
 
 `check_listing.py`: About 262/350, 13 topics, title 63 characters, meta 155 characters: OK.
+
+## Re-check, 2026-11-10
+
+Same eight queries, through Claude's web search (not Google; the owner's own Google check is the one
+that counts).
+
+| Query | Found? | Who ranks instead |
+| --- | --- | --- |
+| draft ai skill | no | TypingMind "Draft" skills, Thomson Reuters CoCounsel, skill directories (killer-skills, skillselion, claudskills) |
+| draft an AI skill | no | Appian, Creatio and Astera docs; claudemarketplaces |
+| create a SKILL.md from an idea | no | skill-forge, skills.sh, skillsdirectory, claudepluginhub, tessl |
+| write a new Claude Code skill | no | skills.sh, skillselion, smithery, playbooks, claudskills |
+| AI agent skill generator | no | arXiv SkillGenBench, apify, tessl, skills.sh, agentskill.sh |
+| how to write a skill description that triggers | no | dev.to and blog guides, agentskills.io |
+| scaffold a Codex skill | no | OpenAI Codex docs, skillselion, playbooks |
+| make a Cursor agent skill | no | Cursor docs, skills.cat, mcp.directory |
+
+What changed since the baseline: the site moved to skillsmith.tech (skills.caffeinity.com now 301s,
+canonicals and sitemap point at the new domain), so whatever Google had indexed restarts there. Neither
+domain appears for `skillsmith.tech draft-skill` or `skills.caffeinity.com draft-skill`, so the site
+is not indexed by this engine yet. The repo's About text and topics were not applied
+(`repo_metadata.py --apply --about` has not run): About still opens "Agent skill that creates…", 10
+topics, 0 stars.
+
+What the results show: directories own these queries (skills.sh, skillselion, claudskills, tessl,
+agentskill.sh, skillsdirectory, claudepluginhub, mcp.directory, playbooks). They list skills from
+GitHub, which is the cheapest way in.
+
+New collision: "Skillsmith" is already used by an MCP Market tool that "drafts, validates, and
+packages Claude Skills" (mcpmarket.com/tools/skills/skillsmith-1), by a skillsmith in the aiwg npm
+package, and by a Skywork skill hub. Same job as draft-skill under the new brand name; the owner
+decides whether to qualify it ("Skillsmith by Caffeinity" everywhere) or rename.
+
+Next fixes, in order: (1) owner runs `repo_metadata.py --apply --about` (now also moves homepages off
+skills.caffeinity.com); (2) Search Console: verify skillsmith.tech, submit its sitemap, use Change of
+Address from the old property, request indexing of /draft-skill/; (3) submit to agentskill.sh,
+skillsdirectory and claudepluginhub (DIRECTORIES.md); (4) re-check on 2026-12-01.

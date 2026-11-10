@@ -6,7 +6,7 @@
     python tools/agent-skills/repo_metadata.py --apply --about   # also set About text findable wrote
 
 Additive only: a topic is added when missing (never removed, GitHub's cap of 20 respected) and the
-homepage is set to the skill's page only when it is empty. The About text changes only with --about,
+homepage is set to the skill's page only when it is empty or still points at skills.caffeinity.com. The About text changes only with --about,
 and only for entries whose `githubAbout` (written by findable, in site/skills.json) differs from it. Run it from your own machine: Claude Code cloud sessions cannot write repo
 settings. Safe to re-run whenever a skill is added.
 """
@@ -21,6 +21,7 @@ import skilllib
 SKILL_TOPICS = ["agent-skills", "claude-code", "claude-skills", "skill-md", "codex", "cursor"]
 MOD_TOPICS = ["claude-code", "claude-code-plugin", "claude-code-mod", "agent-skills"]
 MARKETPLACE = "arm-pz/caffeinity-skills"
+MOVED_FROM = ("https://skills.caffeinity.com", "http://skills.caffeinity.com")
 MARKETPLACE_TOPICS = ["claude-code-plugin", "plugin-marketplace", "codex-plugin", "agent-skills", "claude-skills"]
 
 
@@ -39,7 +40,9 @@ def wanted(manifest):
 def plan(current, topics, homepage):
     have = list(current.get("topics") or [])
     add = [t for t in topics if t not in have][: max(0, 20 - len(have))]
-    home = homepage if not (current.get("homepage") or "").strip() else None
+    old = (current.get("homepage") or "").strip()
+    # Empty, or still on the domain the site moved away from (it now answers with a 301).
+    home = homepage if not old or old.startswith(MOVED_FROM) else None
     return have, add, home
 
 
