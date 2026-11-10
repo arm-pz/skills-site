@@ -98,14 +98,14 @@
         "lines": 385,
         "bytes": 9286,
         "license": "MIT",
-        "commit": "e71938bd7a1c6be44f2382bb5b1485010bbb5bfb",
+        "commit": "13b989691fc663828edad5c0778def37e753047b",
         "sha256": "b37fbfb8fade1d915d2b3a12ae7194d6a9cb8aed53519fa0277aeee5c4d704c6"
       },
       "order": 101,
       "quality": {
         "version": "1.0.0",
-        "commit": "e71938b",
-        "updated": "2026-11-08",
+        "commit": "13b9896",
+        "updated": "2026-11-10",
         "notFor": [
           "a request one skill already owns (load that skill directly)",
           "not for doing a step's work itself: the named skill does it"
@@ -393,14 +393,14 @@
         "lines": 1288,
         "bytes": 20897,
         "license": "MIT",
-        "commit": "e71938bd7a1c6be44f2382bb5b1485010bbb5bfb",
+        "commit": "13b989691fc663828edad5c0778def37e753047b",
         "sha256": "e79c3f9cbd44fd97b950ca333c4a51b40f644416361a221b0754d0fa31e31a28"
       },
       "order": 208,
       "quality": {
         "version": "0.1.0",
-        "commit": "e71938b",
-        "updated": "2026-11-08",
+        "commit": "13b9896",
+        "updated": "2026-11-10",
         "notFor": []
       }
     },
@@ -485,14 +485,14 @@
         "lines": 627,
         "bytes": 10387,
         "license": "MIT",
-        "commit": "e71938bd7a1c6be44f2382bb5b1485010bbb5bfb",
+        "commit": "13b989691fc663828edad5c0778def37e753047b",
         "sha256": "0261e8afac9fd1c1a6bc03685149f45eae4a09c0c0b6f48f1e61b1ca60093aa9"
       },
       "order": 209,
       "quality": {
         "version": "0.1.0",
-        "commit": "e71938b",
-        "updated": "2026-11-08",
+        "commit": "13b9896",
+        "updated": "2026-11-10",
         "notFor": []
       }
     },
@@ -760,14 +760,14 @@
         "lines": 176,
         "bytes": 5492,
         "license": "MIT",
-        "commit": "e71938bd7a1c6be44f2382bb5b1485010bbb5bfb",
+        "commit": "13b989691fc663828edad5c0778def37e753047b",
         "sha256": "b56b11f95e76ba757f8583562823353849f1d8a87fc9362a7217f684d7916803"
       },
       "order": 307,
       "quality": {
         "version": "1.0.0",
-        "commit": "e71938b",
-        "updated": "2026-11-08",
+        "commit": "13b9896",
+        "updated": "2026-11-10",
         "notFor": [
           "one skill (use tune-skill)",
           "one listing (use findable)",
@@ -1253,14 +1253,14 @@
         "lines": 382,
         "bytes": 8603,
         "license": "MIT",
-        "commit": "e71938bd7a1c6be44f2382bb5b1485010bbb5bfb",
+        "commit": "13b989691fc663828edad5c0778def37e753047b",
         "sha256": "cacb21e2865f9e92d46027f87f225b3e864a21251b0b1e671c628a42ab55daa7"
       },
       "order": 411,
       "quality": {
         "version": "1.0.0",
-        "commit": "e71938b",
-        "updated": "2026-11-08",
+        "commit": "13b9896",
+        "updated": "2026-11-10",
         "notFor": []
       }
     },
@@ -1350,14 +1350,14 @@
         "lines": 950,
         "bytes": 15781,
         "license": "MIT",
-        "commit": "e71938bd7a1c6be44f2382bb5b1485010bbb5bfb",
+        "commit": "13b989691fc663828edad5c0778def37e753047b",
         "sha256": "483f9eaa604c13a11140d9ee8ba44deaf5ae46289fd23c277f366014f623312e"
       },
       "order": 412,
       "quality": {
         "version": "0.1.0",
-        "commit": "e71938b",
-        "updated": "2026-11-08",
+        "commit": "13b9896",
+        "updated": "2026-11-10",
         "notFor": []
       }
     },
@@ -1437,14 +1437,14 @@
         "lines": 872,
         "bytes": 15074,
         "license": "MIT",
-        "commit": "e71938bd7a1c6be44f2382bb5b1485010bbb5bfb",
+        "commit": "13b989691fc663828edad5c0778def37e753047b",
         "sha256": "196c0f18c29c96eb51d0aa2096766dc642351fe7a571be583eccb7ea17289d9f"
       },
       "order": 413,
       "quality": {
         "version": "0.1.0",
-        "commit": "e71938b",
-        "updated": "2026-11-08",
+        "commit": "13b9896",
+        "updated": "2026-11-10",
         "notFor": []
       }
     },
@@ -1554,14 +1554,14 @@
         "lines": 1588,
         "bytes": 30959,
         "license": "MIT",
-        "commit": "e71938bd7a1c6be44f2382bb5b1485010bbb5bfb",
+        "commit": "13b989691fc663828edad5c0778def37e753047b",
         "sha256": "9fa3a48b71b2026a6d834903d0a2322ebf5dcc7cf065e441ef8041cf4184a711"
       },
       "order": 414,
       "quality": {
         "version": "0.1.0",
-        "commit": "e71938b",
-        "updated": "2026-11-08",
+        "commit": "13b9896",
+        "updated": "2026-11-10",
         "notFor": []
       }
     },
@@ -1631,14 +1631,14 @@
         "lines": 597,
         "bytes": 11488,
         "license": "MIT",
-        "commit": "e71938bd7a1c6be44f2382bb5b1485010bbb5bfb",
+        "commit": "13b989691fc663828edad5c0778def37e753047b",
         "sha256": "b8a788d07ff582c241ad3489dd83f30c482caab29d18a419b7c10c4cfd7b1a72"
       },
       "order": 415,
       "quality": {
         "version": "0.1.0",
-        "commit": "e71938b",
-        "updated": "2026-11-08",
+        "commit": "13b9896",
+        "updated": "2026-11-10",
         "notFor": []
       }
     },
@@ -2542,14 +2542,14 @@
         "lines": 302,
         "bytes": 6084,
         "license": "MIT",
-        "commit": "e71938bd7a1c6be44f2382bb5b1485010bbb5bfb",
+        "commit": "13b989691fc663828edad5c0778def37e753047b",
         "sha256": "1e8dfe3ceb472fd5ceab966ed884b027cd7e84f669755fb5a85695facc6efe87"
       },
       "order": 909,
       "quality": {
         "version": "1.0.0",
-        "commit": "e71938b",
-        "updated": "2026-11-08",
+        "commit": "13b9896",
+        "updated": "2026-11-10",
         "notFor": [
           "one person's own learning plan (use study-system)",
           "for being taught the topic (use topic-primer)",
@@ -3042,48 +3042,49 @@
       "title": "Setup Claude Advisor",
       "pageTitle": "Setup Claude Advisor — AI Agent Skill for Claude Code",
       "blurb": "Configure Claude Code for quota-optimised model tiering: Sonnet as the main session model, Opus as the on-call advisor, Haiku for read-only subagents, and Sonnet for code-editing subagents.",
-      "stats": "4 files · 371 lines · 7 KB",
+      "stats": "4 files · 455 lines · 9 KB",
       "install": "npx skills add arm-pz/setup-claude-advisor",
       "page": "generated",
       "order": 919,
       "pageSource": {
-        "description": "Configure Claude Code for quota-optimised model tiering: Sonnet as the main session model, Opus as the on-call advisor, Haiku for read-only subagents, and Sonnet for code-editing subagents. Audits existing subagents, environment variables, and CLI version before proposing changes; writes settings, subagent files, and an advisory rule to CLAUDE.md only after the user approves a diff preview. Use when the user wants to set up the Opus advisor pattern, configure Claude Code model tiers, optimise their $20 plan quota by splitting models across roles, or match a subagent tree that assigns different models to different jobs. Not for diagnosing why usage already drained (use diagnose-usage), choosing an effort level before a task (use choose-effort), or upgrading Claude Code itself.",
+        "description": "Configure Claude Code for quota-optimised model tiering: Sonnet as the main session model, Opus as the on-call advisor, Haiku for read-only subagents, and Sonnet for code-editing subagents. Audits existing subagents, environment variables, and CLI version before proposing changes; writes settings, subagent files, and an advisory rule to CLAUDE.md only after the user approves a diff preview. Use whenever the user wants to set up the Opus advisor pattern, configure Claude Code model tiers, optimise their $20 plan quota by splitting models across roles, or match a subagent tree that assigns different models to different jobs, even if they never say \"advisor\" or \"tiering\". Not for diagnosing why usage already drained (use diagnose-usage), choosing an effort level before a task (use choose-effort), plan limits and prices (use product-self-knowledge), or upgrading Claude Code itself.",
         "files": [
           {
             "path": "SKILL.md",
-            "lines": 127,
-            "bytes": 7061
+            "lines": 133,
+            "bytes": 8509
           },
           {
             "path": "discovery-kit.md",
-            "lines": 124,
-            "bytes": 5523
+            "lines": 154,
+            "bytes": 7333
           },
           {
             "path": "references/advisor-architecture.md",
-            "lines": 84,
-            "bytes": 3952
+            "lines": 121,
+            "bytes": 6189
           },
           {
             "path": "references/trigger-cases.md",
-            "lines": 36,
-            "bytes": 2689
+            "lines": 47,
+            "bytes": 4148
           }
         ],
         "fileCount": 4,
-        "lines": 371,
-        "bytes": 7266,
+        "lines": 455,
+        "bytes": 9526,
         "license": "MIT",
-        "commit": "12186428ada6342ab90ee8f9a313196f554a01a6",
-        "sha256": "8b99a707d7f61640ba8ba78698194d68ed77393cc90e78e11d0cdb9b1759c1b4"
+        "commit": "fdb0d8443c4f5ccaa2006d782bdec352f46d06a5",
+        "sha256": "73b16acd4974fb3bbf4ae6a676a103c3d1bb2fd8aa37c79a866661d26ddf3b32"
       },
       "quality": {
-        "version": "0.1.1",
-        "commit": "1218642",
+        "version": "0.1.2",
+        "commit": "fdb0d84",
         "updated": "2026-11-10",
         "notFor": [
           "diagnosing why usage already drained (use diagnose-usage)",
           "choosing an effort level before a task (use choose-effort)",
+          "plan limits and prices (use product-self-knowledge)",
           "upgrading Claude Code itself"
         ]
       }

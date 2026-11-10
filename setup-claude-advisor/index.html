@@ -9,7 +9,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Skillsmith">
 <meta property="og:title" content="Setup Claude Advisor — AI Agent Skill for Claude Code">
-<meta property="og:description" content="Configure Claude Code for quota-optimised model tiering: Sonnet as the main session model, Opus as the on-call advisor, Haiku for read-only subagents, and Sonnet for code-editing subagents. Audits existing subagents, environment variables, and CLI version before proposing changes; writes settings, subagent files, and an advisory rule to CLAUDE.md only after the user approves a diff preview. Use when the user wants to set up the Opus advisor pattern, configure Claude Code model tiers, optimise their $20 plan quota by splitting models across roles, or match a subagent tree that assigns different models to different jobs. Not for diagnosing why usage already drained (use diagnose-usage), choosing an effort level before a task (use choose-effort), or upgrading Claude Code itself.">
+<meta property="og:description" content="Configure Claude Code for quota-optimised model tiering: Sonnet as the main session model, Opus as the on-call advisor, Haiku for read-only subagents, and Sonnet for code-editing subagents. Audits existing subagents, environment variables, and CLI version before proposing changes; writes settings, subagent files, and an advisory rule to CLAUDE.md only after the user approves a diff preview. Use whenever the user wants to set up the Opus advisor pattern, configure Claude Code model tiers, optimise their $20 plan quota by splitting models across roles, or match a subagent tree that assigns different models to different jobs, even if they never say &quot;advisor&quot; or &quot;tiering&quot;. Not for diagnosing why usage already drained (use diagnose-usage), choosing an effort level before a task (use choose-effort), plan limits and prices (use product-self-knowledge), or upgrading Claude Code itself.">
 <meta property="og:url" content="https://skillsmith.tech/setup-claude-advisor/">
 <meta name="twitter:card" content="summary">
 <meta name="color-scheme" content="light dark">
@@ -136,7 +136,7 @@
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "Any",
   "url": "https://skillsmith.tech/setup-claude-advisor/",
-  "description": "Configure Claude Code for quota-optimised model tiering: Sonnet as the main session model, Opus as the on-call advisor, Haiku for read-only subagents, and Sonnet for code-editing subagents. Audits existing subagents, environment variables, and CLI version before proposing changes; writes settings, subagent files, and an advisory rule to CLAUDE.md only after the user approves a diff preview. Use when the user wants to set up the Opus advisor pattern, configure Claude Code model tiers, optimise their $20 plan quota by splitting models across roles, or match a subagent tree that assigns different models to different jobs. Not for diagnosing why usage already drained (use diagnose-usage), choosing an effort level before a task (use choose-effort), or upgrading Claude Code itself.",
+  "description": "Configure Claude Code for quota-optimised model tiering: Sonnet as the main session model, Opus as the on-call advisor, Haiku for read-only subagents, and Sonnet for code-editing subagents. Audits existing subagents, environment variables, and CLI version before proposing changes; writes settings, subagent files, and an advisory rule to CLAUDE.md only after the user approves a diff preview. Use whenever the user wants to set up the Opus advisor pattern, configure Claude Code model tiers, optimise their $20 plan quota by splitting models across roles, or match a subagent tree that assigns different models to different jobs, even if they never say \"advisor\" or \"tiering\". Not for diagnosing why usage already drained (use diagnose-usage), choosing an effort level before a task (use choose-effort), plan limits and prices (use product-self-knowledge), or upgrading Claude Code itself.",
   "codeRepository": "https://github.com/arm-pz/setup-claude-advisor",
   "license": "https://spdx.org/licenses/MIT.html",
   "publisher": {
@@ -191,7 +191,7 @@
       <button class="copy" id="copy" type="button" aria-describedby="cmd"><span class="idle">Copy install command</span><span class="done" aria-hidden="true">Copied</span></button>
       <span class="sr-only" id="copy-status" role="status" aria-live="polite"></span>
     </div>
-    <p class="facts">4 files and 371 lines, free under MIT. Built from <a href="https://github.com/arm-pz/setup-claude-advisor" target="_blank" rel="noopener">arm-pz/setup-claude-advisor</a> at <code>1218642</code>.</p>
+    <p class="facts">4 files and 455 lines, free under MIT. Built from <a href="https://github.com/arm-pz/setup-claude-advisor" target="_blank" rel="noopener">arm-pz/setup-claude-advisor</a> at <code>fdb0d84</code>.</p>
   </div>
 </header>
 
@@ -202,12 +202,12 @@
     <h2 id="qb-h">Know what you are installing.</h2>
     <p class="qb-lead">Version, date and limits are read from the repo on every sync, and the check runs every night. Real-world runs are listed only with their evidence.</p>
     <dl class="qb-grid">
-      <div><dt>Version</dt><dd>0.1.1<small>commit 1218642</small></dd></div>
+      <div><dt>Version</dt><dd>0.1.2<small>commit fdb0d84</small></dd></div>
       <div><dt>Updated</dt><dd><a href="https://github.com/arm-pz/setup-claude-advisor/commits" target="_blank" rel="noopener">10 Nov 2026</a><small>last commit to the repo</small></dd></div>
       <div><dt>Works in</dt><dd>Claude Code, Codex, Cursor, Qoder and any agent that loads a SKILL.md<small>plain text; no API keys</small></dd></div>
       <div><dt>Nightly check</dt><dd>Not checked yet<small>It joins the nightly check after its first run. <a href="https://github.com/arm-pz/skills-site/blob/main/.github/workflows/health.yml" target="_blank" rel="noopener">How it is checked</a></small></dd></div>
       <div><dt>Last real-world run</dt><dd>No public run yet<small>Runs are published only with their evidence.</small></dd></div>
-      <div class="qb-wide"><dt>Known limits</dt><dd>Not built for:<ul><li>Diagnosing why usage already drained (use diagnose-usage)</li><li>Choosing an effort level before a task (use choose-effort)</li><li>Upgrading Claude Code itself</li></ul></dd></div>
+      <div class="qb-wide"><dt>Known limits</dt><dd>Not built for:<ul><li>Diagnosing why usage already drained (use diagnose-usage)</li><li>Choosing an effort level before a task (use choose-effort)</li><li>Plan limits and prices (use product-self-knowledge)</li><li>Upgrading Claude Code itself</li></ul></dd></div>
     </dl>
   </div>
 </section>
@@ -216,15 +216,11 @@
 <section class="paper" aria-labelledby="for-h">
   <div class="wrap">
     <h2 id="for-h">What it is for</h2>
-    <p class="body">Configure Claude Code for quota-optimised model tiering: Sonnet as the main session model, Opus as the on-call advisor, Haiku for read-only subagents, and Sonnet for code-editing subagents. Audits existing subagents, environment variables, and CLI version before proposing changes; writes settings, subagent files, and an advisory rule to CLAUDE.md only after the user approves a diff preview.</p>
+    <p class="body">Configure Claude Code for quota-optimised model tiering: Sonnet as the main session model, Opus as the on-call advisor, Haiku for read-only subagents, and Sonnet for code-editing subagents. Audits existing subagents, environment variables, and CLI version before proposing changes; writes settings, subagent files, and an advisory rule to CLAUDE.md only after the user approves a diff preview. Use whenever the user wants to set up the Opus advisor pattern, configure Claude Code model tiers, optimise their $20 plan quota by splitting models across roles, or match a subagent tree that assigns different models to different jobs, even if they never say &quot;advisor&quot; or &quot;tiering&quot;.</p>
     <div class="uses">
-    <div class="uses-col when">
-      <h3>Reach for it when</h3>
-      <ul><li>The user wants to set up the Opus advisor pattern, configure Claude Code model tiers, optimise their $20 plan quota by splitting models across roles, or match a subagent tree that assigns different models to different jobs.</li></ul>
-    </div>
     <div class="uses-col not">
       <h3>Not for</h3>
-      <ul><li>Diagnosing why usage already drained (use diagnose-usage)</li><li>Choosing an effort level before a task (use choose-effort)</li><li>Upgrading Claude Code itself</li></ul>
+      <ul><li>Diagnosing why usage already drained (use diagnose-usage)</li><li>Choosing an effort level before a task (use choose-effort)</li><li>Plan limits and prices (use product-self-knowledge)</li><li>Upgrading Claude Code itself</li></ul>
     </div>
     </div>
   </div>
@@ -233,16 +229,16 @@
 <section class="ships" aria-labelledby="ships-h">
   <div class="wrap">
     <h2 id="ships-h">Every file it installs</h2>
-    <p class="intro">Measured from the packed archive at commit <code>1218642</code>. A skill is plain text your agent reads, so this list is all of it.</p>
+    <p class="intro">Measured from the packed archive at commit <code>fdb0d84</code>. A skill is plain text your agent reads, so this list is all of it.</p>
     <table class="files">
       <thead class="sr-only"><tr><th>File</th><th>Lines</th><th>Bytes</th></tr></thead>
       <tbody>
-        <tr><td>SKILL.md</td><td class="n">127</td><td class="n bytes">7,061 B</td></tr>
-        <tr><td>discovery-kit.md</td><td class="n">124</td><td class="n bytes">5,523 B</td></tr>
-        <tr><td>references/advisor-architecture.md</td><td class="n">84</td><td class="n bytes">3,952 B</td></tr>
-        <tr><td>references/trigger-cases.md</td><td class="n">36</td><td class="n bytes">2,689 B</td></tr>
+        <tr><td>SKILL.md</td><td class="n">133</td><td class="n bytes">8,509 B</td></tr>
+        <tr><td>discovery-kit.md</td><td class="n">154</td><td class="n bytes">7,333 B</td></tr>
+        <tr><td>references/advisor-architecture.md</td><td class="n">121</td><td class="n bytes">6,189 B</td></tr>
+        <tr><td>references/trigger-cases.md</td><td class="n">47</td><td class="n bytes">4,148 B</td></tr>
       </tbody>
-      <tfoot><tr><td>4 files</td><td class="n">371</td><td class="n bytes">7 KB</td></tr></tfoot>
+      <tfoot><tr><td>4 files</td><td class="n">455</td><td class="n bytes">9 KB</td></tr></tfoot>
     </table>
   </div>
 </section>
