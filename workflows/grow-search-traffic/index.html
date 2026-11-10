@@ -146,6 +146,12 @@
       "position": 5,
       "name": "Platform Content",
       "url": "https://skillsmith.tech/platform-content/"
+    },
+    {
+      "@type": "HowToStep",
+      "position": 6,
+      "name": "Get Indexed",
+      "url": "https://skillsmith.tech/get-indexed/"
     }
   ],
   "publisher": {
@@ -217,9 +223,16 @@
           <span class="step-facts">v1.0.0</span>
         </a>
       </li>
+      <li class="step"><p class="step-n">Step 6 · optional</p>
+        <a class="step-skill" href="/get-indexed/">
+          <b>Get Indexed</b>
+          <span class="step-blurb">Tells search engines about a site's new and changed pages through every channel that has an API, and lists the few steps that still need a person.</span>
+          <span class="step-facts">v1.0.0</span>
+        </a>
+      </li>
     </ol>
-    <p class="note">seo-polish and keyword-resolver package parts of this route.</p>
-    <div class="pair"><p class="step-n">Pairs with · third-party</p><p><a href="https://github.com/every-app/open-seo" target="_blank" rel="noopener"><b>OpenSEO</b></a> for keyword volumes, rankings, backlinks, competitor and AI-visibility data, read by your agent through its MCP server.</p><p class="pair-needs">Not made by Skillsmith by Caffeinity. Open source (MIT); needs a DataForSEO API key (pay per use) or an openseo.so account.</p></div>
+    <p class="note">seo-polish and keyword-resolver package parts of this route; seo-sweep runs it end to end, fixes the findings in the site's code and proves each fix with a re-crawl.</p>
+    <div class="pair"><p class="step-n">Pairs with · third-party</p><p><a href="https://github.com/every-app/open-seo" target="_blank" rel="noopener"><b>OpenSEO</b></a> for keyword volumes, rankings, backlinks, competitor and AI-visibility data, read by your agent through its MCP server.</p><p class="pair-needs">Not made by Skillsmith. Open source (MIT); needs a DataForSEO API key (pay per use) or an openseo.so account.</p></div>
   </div>
 </section>
 
@@ -231,12 +244,14 @@
 npx skills add arm-pz/keyword-guard               # step 2
 npx skills add arm-pz/wordsmith                   # step 3
 npx skills add arm-pz/pre-ship-performance-audit  # step 4, optional
-npx skills add arm-pz/platform-content            # step 5, optional</pre>
+npx skills add arm-pz/platform-content            # step 5, optional
+npx skills add arm-pz/get-indexed                 # step 6, optional</pre>
       <button class="copy" id="copy" type="button" data-copy="npx skills add arm-pz/seo-crawl                   # step 1
 npx skills add arm-pz/keyword-guard               # step 2
 npx skills add arm-pz/wordsmith                   # step 3
 npx skills add arm-pz/pre-ship-performance-audit  # step 4, optional
-npx skills add arm-pz/platform-content            # step 5, optional">Copy all</button>
+npx skills add arm-pz/platform-content            # step 5, optional
+npx skills add arm-pz/get-indexed                 # step 6, optional">Copy all</button>
       <span class="sr-only" id="copy-status" role="status" aria-live="polite"></span>
     </div>
     <p class="alt">In Claude Code you can take every skill at once instead: <code>/plugin marketplace add arm-pz/caffeinity-skills</code>, then <code>/plugin install caffeinity@caffeinity-skills</code>. Not sure this is the right workflow? Install <a href="/caffeinity-routing/">caffeinity-routing</a> and describe the outcome; it picks one.</p>
@@ -257,6 +272,7 @@ npx skills add arm-pz/platform-content            # step 5, optional">Copy all</
       <li><a href="/workflows/launch-a-product/">Launch a one-person product</a></li>
       <li><a href="/workflows/maintain-skills/">Maintain the skill family</a></li>
       <li><a href="/workflows/audit-a-skill-estate/">Stand up or audit a skill estate</a></li>
+      <li><a href="/workflows/set-up-a-coding-agent/">Set up a coding agent for a repo</a></li>
     </ul>
     <p class="work">Need this fitted to your team's own tools and rules? <a href="/work/">We build custom skills</a>.</p>
   </div>

@@ -5,7 +5,7 @@
     {
       "id": "start-here",
       "title": "Start Here",
-      "descriptor": "routing · eleven brews",
+      "descriptor": "routing · twelve brews",
       "order": 1
     },
     {
@@ -66,7 +66,7 @@
       "tag": "routing",
       "title": "Caffeinity Routing",
       "pageTitle": "Caffeinity Routing — AI Agent Skill for Claude Code",
-      "blurb": "Start here. Tell it the outcome you want and it picks one of eleven brews (workflows), lists the skills in order with what each hands the next, and names the ones you have not installed instead of improvising their work.",
+      "blurb": "Start here. Tell it the outcome you want and it picks one of twelve brews (workflows), lists the skills in order with what each hands the next, and names the ones you have not installed instead of improvising their work.",
       "stats": "4 files · 415 lines · 10 KB",
       "install": "npx skills add arm-pz/caffeinity-skills --skill caffeinity-routing",
       "page": "generated",
@@ -3189,7 +3189,7 @@
           "optional": true
         }
       ],
-      "note": "skill-launch runs the first steps as one chain."
+      "note": "skill-launch runs the first steps as one chain; tune-skill-mod and skill-release-mod hold pushes and releases until steps two and three have run."
     },
     {
       "id": "bloom",
@@ -3213,9 +3213,15 @@
           "skills": [
             "upstream-check"
           ]
+        },
+        {
+          "skills": [
+            "get-indexed"
+          ],
+          "optional": true
         }
       ],
-      "note": "findable-polish and upstream-polish add the rewrite."
+      "note": "findable-polish and upstream-polish add the rewrite; get-indexed applies when publishing put new or changed pages live."
     },
     {
       "id": "espresso",
@@ -3284,9 +3290,15 @@
             "platform-content"
           ],
           "optional": true
+        },
+        {
+          "skills": [
+            "get-indexed"
+          ],
+          "optional": true
         }
       ],
-      "note": "seo-polish and keyword-resolver package parts of this route.",
+      "note": "seo-polish and keyword-resolver package parts of this route; seo-sweep runs it end to end, fixes the findings in the site's code and proves each fix with a re-crawl.",
       "pairsWith": [
         {
           "name": "OpenSEO",
@@ -3478,7 +3490,7 @@
           ]
         }
       ],
-      "note": "The nightly health job opens the issue this starts from; a weekly scheduled session runs it and opens PRs."
+      "note": "The nightly health job opens the issue this starts from; a weekly scheduled session runs it and opens PRs. For one published skill at a time, tune-and-ship takes it from a tune and a fact check through to a release and a confirmed live page."
     },
     {
       "id": "estate-roast",
@@ -3495,6 +3507,41 @@
         }
       ],
       "note": "One run over the whole collection in eight gated phases; Brew 10 · Descale keeps it healthy afterwards."
+    },
+    {
+      "id": "dial-in",
+      "number": 12,
+      "name": "Dial-in",
+      "title": "Set up a coding agent for a repo",
+      "slug": "set-up-a-coding-agent",
+      "summary": "Get a coding agent that follows the repo's rules and stays inside its usage: write or prune the rules and guardrails, tier the models by role, then pick the effort each large task deserves.",
+      "steps": [
+        {
+          "skills": [
+            "portable-harness",
+            "harness-audit"
+          ]
+        },
+        {
+          "skills": [
+            "setup-claude-advisor"
+          ],
+          "optional": true
+        },
+        {
+          "skills": [
+            "diagnose-usage"
+          ],
+          "optional": true
+        },
+        {
+          "skills": [
+            "choose-effort"
+          ],
+          "optional": true
+        }
+      ],
+      "note": "Step one is one or the other: portable-harness writes a setup, harness-audit prunes one that has grown. The usage steps are for Claude Code."
     }
   ]
 }
