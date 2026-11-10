@@ -7,7 +7,7 @@
 <meta name="description" content="Runs the three pre-launch passes in order — web-preflight for external exposure, pre-ship-security-red-team for application behaviour in an isolated…">
 <link rel="canonical" href="https://skillsmith.tech/release-gate-chair/">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Skillsmith">
+<meta property="og:site_name" content="Skillsmith by Caffeinity">
 <meta property="og:title" content="Release Gate · Chair — AI Agent Skill for Claude Code">
 <meta property="og:description" content="Runs the three pre-launch passes in order — web-preflight for external exposure, pre-ship-security-red-team for application behaviour in an isolated environment, pre-ship-performance-audit for measured speed — records each lane&#x27;s own verdict and findings into one ledger, and computes a single release posture (HOLD or ready) with a script rather than judgement. Use when someone asks &quot;is this safe to launch&quot;, &quot;ready to ship&quot;, &quot;should we deploy&quot;, &quot;give me a go/no-go&quot;, or before any deploy of a site or client app you own or are authorized to test. Three verdicts stay separate; a pass in one lane never covers another. Variant: this fork runs the lanes itself and copies their finding tables verbatim; it is the default release gate. Not for a single-lane check (invoke that skill directly), for reports that already exist (use release-gate-validator), for penetration testing of production, or for performing the deploy.">
 <meta property="og:url" content="https://skillsmith.tech/release-gate-chair/">
@@ -126,6 +126,7 @@
   @media (prefers-reduced-motion:reduce){
     *,*::before,*::after{transition:none!important;animation:none!important}
   }
+  .brand-by{font-size:.62em;letter-spacing:.01em;opacity:.65;margin-left:.3em;white-space:nowrap}
 </style>
 <script type="application/ld+json">
 {
@@ -174,7 +175,7 @@
 
 <nav class="nav" aria-label="Site">
   <div class="wrap">
-    <a class="brand" href="/"><b>∧</b>skillsmith</a>
+    <a class="brand" href="/"><b>∧</b>skillsmith <span class="brand-by">by caffeinity</span></a>
     <div class="nav-links">
       <a href="/skills/">All skills</a>
       <a href="https://github.com/arm-pz/release-gate-chair" target="_blank" rel="noopener">Source</a>
@@ -264,7 +265,7 @@
 
 <footer>
   <div class="wrap">
-    <span>Release Gate · Chair is an open agent skill on <a href="/">Skillsmith</a>, made by <a href="https://caffeinity.com/">Caffeinity</a>.</span>
+    <span>Release Gate · Chair is an open agent skill on <a href="/">Skillsmith by Caffeinity</a>.</span>
     <a href="https://github.com/arm-pz/release-gate-chair" target="_blank" rel="noopener">arm-pz/release-gate-chair</a>
     <p class="kural" style="flex-basis:100%;margin:0;padding:18px 0 28px;border-top:1px solid color-mix(in srgb,currentColor 18%,transparent);display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;font-size:14px;line-height:1.5"><span lang="ta" style="font-family:'Noto Sans Tamil','Tamil Sangam MN','Nirmala UI',Latha,sans-serif;font-size:17px;font-weight:500;opacity:1">யாம் பெற்ற இன்பம் பெறுக இவ்வையகம்</span><span style="opacity:.75">“May this world attain the same bliss that I have attained.”</span></p>
   </div>
