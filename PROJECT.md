@@ -10,7 +10,7 @@ disagree, the repo wins; fix this file.
 | --- | --- |
 | `arm-pz/<skill>` (one per skill) | The skills themselves: one `SKILL.md` per repo, at `SKILL.md`, `<repo>/SKILL.md` or `skills/<repo>/SKILL.md`. Installed with `npx skills add arm-pz/<repo>`. |
 | `arm-pz/skills-site` (this repo) | skillsmith.tech (formerly skills.caffeinity.com, which now redirects to it): the hub, one page per skill, both discovery indexes, archives, sitemap, and all the automation below. `site/skills.json` is the single list of what is published. |
-| `arm-pz/caffeinity-skills` | Plugin marketplace for Claude Code (`.claude-plugin/marketplace.json`) and Codex (`.agents/plugins/marketplace.json`). Holds the mods (`mods/*`), `plugins/caffeinity-routing` (the start-here router), four skills that live only here (`plugins/paper-trail`, `plugins/course-builder`, `plugins/skill-estate`, `plugins/tune-and-ship`) and `plugins/caffeinity`: every skill plus eleven workflow agents in one install, generated hourly by `scripts/build_plugin.py`. |
+| `arm-pz/caffeinity-skills` | Plugin marketplace for Claude Code (`.claude-plugin/marketplace.json`) and Codex (`.agents/plugins/marketplace.json`). Holds the mods (`mods/*`), `plugins/caffeinity-routing` (the start-here router), five skills that live only here (`plugins/paper-trail`, `plugins/course-builder`, `plugins/skill-estate`, `plugins/tune-and-ship`, `plugins/agent-audit`) and `plugins/caffeinity`: every skill plus twelve workflow agents in one install, generated hourly by `scripts/build_plugin.py`. |
 | `arm-pz/arm-pz` | The GitHub profile README. Its skills block is generated from `site/skills.json`. |
 | `arm-pz/ship-sentinel` | A Claude Code mod (no SKILL.md) that holds `git push` and deploys until the check skills have run. Listed on the site as a mod. |
 | `caffeinity-skills/mods/*` | Six more mods made with skill-to-mod (release-gate, web-preflight, security red team, performance audit, tune-skill, skill-release). Each has a generated page measured from its `.claude-plugin/plugin.json`, refreshed by the sync like any skill. Mods get pages, not archives or discovery-index entries. |
@@ -22,7 +22,7 @@ disagree, the repo wins; fix this file.
 
 Everything else under arm-pz (apps, sites, forks) has no SKILL.md and is ignored by the pipeline.
 
-**The skill inventory is `site/skills.json`**: name, repo, group, page kind, blurb, and the eleven
+**The skill inventory is `site/skills.json`**: name, repo, group, page kind, blurb, and the twelve
 workflows. Do not copy it into other files; the hub, both indexes, the sitemap, the pages and the
 profile README are all generated from it.
 
@@ -145,8 +145,8 @@ To accept an intended change (a new WARN you decided to keep):
 
 ## The brews (workflows across skills)
 
-Eleven brews. Each has a number, a coffee name and a plain goal ("Brew 3 · Espresso: Decide
-whether a site is safe to launch"); older notes call them W1 to W11, and `route_check.py` still
+Twelve brews. Each has a number, a coffee name and a plain goal ("Brew 3 · Espresso: Decide
+whether a site is safe to launch"); older notes call them W1 to W12, and `route_check.py` still
 accepts those ids. Defined once in `site/skills.json` (`workflows`) and in
 `caffeinity-skills/plugins/caffeinity-routing/skills/caffeinity-routing/references/workflows.md`
 (the router's copy, with each step's input and output). They must name the same skills in the same
@@ -155,20 +155,21 @@ order; check with `route_check.py`.
 | # | Goal | Route |
 | --- | --- | --- |
 | Brew 1 · Pour-over | Build a skill and make it installable | draft-skill or prompts-to-skill → tune-skill → prompts-to-skill-release → skill-to-mod (optional) |
-| Brew 2 · Bloom | Get a repo, skill or plugin found | findable → publish-pipeline → upstream-check |
+| Brew 2 · Bloom | Get a repo, skill or plugin found | findable → publish-pipeline → upstream-check → get-indexed (optional) |
 | Brew 3 · Espresso | Decide whether a site is safe to launch | web-preflight → pre-ship-security-red-team → pre-ship-performance-audit → release-gate-chair / -ledger / -validator |
-| Brew 4 · Cold brew | Grow organic search traffic | seo-crawl → keyword-guard → wordsmith → pre-ship-performance-audit (optional) → platform-content (optional) |
+| Brew 4 · Cold brew | Grow organic search traffic | seo-crawl → keyword-guard → wordsmith → pre-ship-performance-audit (optional) → platform-content (optional) → get-indexed (optional) |
 | Brew 5 · French press | Land a job | recruiter-lens → applicant-kit → application-pilot → career-track (optional) |
 | Brew 6 · Cupping | Make a decision | research-brief → data-readout (optional) → crash-test or do-better → strategy-memo |
 | Brew 7 · Slow drip | Learn a skill | topic-primer → study-system → course-builder (optional, for a class) |
 | Brew 8 · Nitro | Run cold outbound | cold-email-list-gate → cold-email-ops → sales-copy |
 | Brew 9 · Moka pot | Launch a one-person product | solo-income-blueprint → site-prompt → production-code → paper-trail → release-gate-chair → platform-content |
-| Brew 10 · Descale | Maintain the skill family | tune-skill (regress.py) → prompts-to-skill-release (optional) → upstream-check |
+| Brew 10 · Descale | Maintain the skill family | tune-skill (regress.py) → prompts-to-skill-release (optional) → upstream-check; tune-and-ship for one published skill at a time |
 | Brew 11 · Estate roast | Stand up or audit a skill estate | skill-estate: the whole sweep this project was, in eight gated phases (inventory, listings, tune, gaps, publish and bundle, trigger tests, discovery, maintenance loop) |
+| Brew 12 · Dial-in | Set up a coding agent for a repo | portable-harness or harness-audit → setup-claude-advisor (optional) → diagnose-usage (optional) → choose-effort (optional) |
 
 Each workflow has an agent in the `caffeinity` plugin: skill-builder, discovery-lead,
 release-gatekeeper, seo-lead, job-search-coach, decision-analyst, learning-coach, outbound-lead,
-solo-launcher, skill-maintainer and estate-lead (Brew 1 · Pour-over to Brew 11 · Estate roast). Codex has no subagents; there the
+solo-launcher, skill-maintainer, estate-lead and harness-lead (Brew 1 · Pour-over to Brew 12 · Dial-in). Codex has no subagents; there the
 `caffeinity-routing` skill names the workflow and the next skill.
 
 ### Changing a workflow
@@ -182,7 +183,8 @@ solo-launcher, skill-maintainer and estate-lead (Brew 1 · Pour-over to Brew 11 
    `plugins/caffeinity/agents.json` for a new workflow.
 3. A skill that lives in caffeinity-skills needs an `install` of
    `npx skills add arm-pz/caffeinity-skills --skill <name>` in the manifest and an entry in
-   `IN_MARKETPLACE` in `route_check.py`.
+   `IN_MARKETPLACE` in `route_check.py`, whether or not a workflow names it yet; the routing
+   self-check fails when the set and `plugins/*/skills/` disagree.
 
 ## Adding or changing a skill
 

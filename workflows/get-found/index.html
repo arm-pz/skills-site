@@ -133,6 +133,12 @@
       "position": 3,
       "name": "Upstream Check",
       "url": "https://skillsmith.tech/upstream-check/"
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "name": "Get Indexed",
+      "url": "https://skillsmith.tech/get-indexed/"
     }
   ],
   "publisher": {
@@ -190,8 +196,15 @@
           <span class="step-facts">v1.0.0 · shown working 24 Oct 2026</span>
         </a>
       </li>
+      <li class="step"><p class="step-n">Step 4 · optional</p>
+        <a class="step-skill" href="/get-indexed/">
+          <b>Get Indexed</b>
+          <span class="step-blurb">Tells search engines about a site's new and changed pages through every channel that has an API, and lists the few steps that still need a person.</span>
+          <span class="step-facts">v1.0.0</span>
+        </a>
+      </li>
     </ol>
-    <p class="note">findable-polish and upstream-polish add the rewrite.</p>
+    <p class="note">findable-polish and upstream-polish add the rewrite; get-indexed applies when publishing put new or changed pages live.</p>
   </div>
 </section>
 
@@ -201,10 +214,12 @@
     <div class="console">
       <pre id="cmds">npx skills add arm-pz/findable --skill findable  # step 1
 npx skills add arm-pz/publish-pipeline           # step 2
-npx skills add arm-pz/upstream-check             # step 3</pre>
+npx skills add arm-pz/upstream-check             # step 3
+npx skills add arm-pz/get-indexed                # step 4, optional</pre>
       <button class="copy" id="copy" type="button" data-copy="npx skills add arm-pz/findable --skill findable  # step 1
 npx skills add arm-pz/publish-pipeline           # step 2
-npx skills add arm-pz/upstream-check             # step 3">Copy all</button>
+npx skills add arm-pz/upstream-check             # step 3
+npx skills add arm-pz/get-indexed                # step 4, optional">Copy all</button>
       <span class="sr-only" id="copy-status" role="status" aria-live="polite"></span>
     </div>
     <p class="alt">In Claude Code you can take every skill at once instead: <code>/plugin marketplace add arm-pz/caffeinity-skills</code>, then <code>/plugin install caffeinity@caffeinity-skills</code>. Not sure this is the right workflow? Install <a href="/caffeinity-routing/">caffeinity-routing</a> and describe the outcome; it picks one.</p>
@@ -225,6 +240,7 @@ npx skills add arm-pz/upstream-check             # step 3">Copy all</button>
       <li><a href="/workflows/launch-a-product/">Launch a one-person product</a></li>
       <li><a href="/workflows/maintain-skills/">Maintain the skill family</a></li>
       <li><a href="/workflows/audit-a-skill-estate/">Stand up or audit a skill estate</a></li>
+      <li><a href="/workflows/set-up-a-coding-agent/">Set up a coding agent for a repo</a></li>
     </ul>
     <p class="work">Need this fitted to your team's own tools and rules? <a href="/work/">We build custom skills</a>.</p>
   </div>
