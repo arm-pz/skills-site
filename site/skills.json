@@ -3042,7 +3042,7 @@
       "title": "Setup Claude Advisor",
       "pageTitle": "Setup Claude Advisor — AI Agent Skill for Claude Code",
       "blurb": "Configure Claude Code for quota-optimised model tiering: Sonnet as the main session model, Opus as the on-call advisor, Haiku for read-only subagents, and Sonnet for code-editing subagents.",
-      "stats": "4 files · 368 lines · 7 KB",
+      "stats": "4 files · 371 lines · 7 KB",
       "install": "npx skills add arm-pz/setup-claude-advisor",
       "page": "generated",
       "order": 919,
@@ -3051,36 +3051,36 @@
         "files": [
           {
             "path": "SKILL.md",
-            "lines": 124,
-            "bytes": 6545
+            "lines": 127,
+            "bytes": 7061
           },
           {
             "path": "discovery-kit.md",
             "lines": 124,
-            "bytes": 5503
+            "bytes": 5523
           },
           {
             "path": "references/advisor-architecture.md",
             "lines": 84,
-            "bytes": 3898
+            "bytes": 3952
           },
           {
             "path": "references/trigger-cases.md",
             "lines": 36,
-            "bytes": 2706
+            "bytes": 2689
           }
         ],
         "fileCount": 4,
-        "lines": 368,
-        "bytes": 7051,
+        "lines": 371,
+        "bytes": 7266,
         "license": "MIT",
-        "commit": "2edd56a4d9c32113db2a9cb1f8748c7a9614c9a1",
-        "sha256": "ade52d67f1e42c0db83bdc858e204713f7cba5e555691705336f0862601e0b23"
+        "commit": "12186428ada6342ab90ee8f9a313196f554a01a6",
+        "sha256": "8b99a707d7f61640ba8ba78698194d68ed77393cc90e78e11d0cdb9b1759c1b4"
       },
       "quality": {
-        "version": "0.1.0",
-        "commit": "2edd56a",
-        "updated": "2026-11-08",
+        "version": "0.1.1",
+        "commit": "1218642",
+        "updated": "2026-11-10",
         "notFor": [
           "diagnosing why usage already drained (use diagnose-usage)",
           "choosing an effort level before a task (use choose-effort)",
