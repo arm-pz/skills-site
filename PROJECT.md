@@ -77,8 +77,8 @@ reserved in `skilllib.RESERVED` (including `subagents` and `harnesses` for later
 take one. The three homepage flagships are the entries with `featured: 1`, `2` and `3`; a featured
 entry must have a `tested` run.
 
-Naming: the site is **Skillsmith**, made by **Caffeinity**. Headers, titles and `og:site_name` say
-Skillsmith; the footer keeps the caffeinity wordmark and a "made by Caffeinity" line. Skill names,
+Naming: the site is **Skillsmith by Caffeinity**, made by **Caffeinity**. Headers, titles and `og:site_name` say
+Skillsmith by Caffeinity; the footer keeps the caffeinity wordmark and a "made by Caffeinity" line. Skill names,
 the `caffeinity-skills` marketplace and the `caffeinity` plugin keep their names, because install
 commands depend on them.
 

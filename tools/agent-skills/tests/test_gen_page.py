@@ -54,7 +54,7 @@ class QualityBlockTest(unittest.TestCase):
                 "needs": "Needs an API key."}
         out = gen_page.quality_html(dict(ENTRY, pairsWith=[pair]))
         self.assertIn('<a href="https://example.com/tool" target="_blank" rel="noopener">Tool &amp; Co</a> for rankings.', out)
-        self.assertIn("Third-party, not made by Skillsmith. Needs an API key.", out)
+        self.assertIn("Third-party, not made by Skillsmith by Caffeinity. Needs an API key.", out)
         self.assertNotIn("Pairs with", gen_page.quality_html(ENTRY))
 
     def test_failing_check_and_mod(self):

@@ -229,11 +229,11 @@ def item_list(name, path, cards):
 
 
 def render_jsonld_skills(manifest):
-    return item_list("Skillsmith agent skills", "/skills/", skills_only(manifest))
+    return item_list("Skillsmith by Caffeinity agent skills", "/skills/", skills_only(manifest))
 
 
 def render_jsonld_mods(manifest):
-    return item_list("Skillsmith mods for Claude Code", "/mods/", mods_only(manifest))
+    return item_list("Skillsmith by Caffeinity mods for Claude Code", "/mods/", mods_only(manifest))
 
 
 REGIONS = {
@@ -308,7 +308,7 @@ def flow_steps_html(flow, manifest):
 
 def flow_title(title):
     """The longest title that still fits the 60 characters search results show."""
-    for candidate in (f"{title}: AI agent workflow | Skillsmith", f"{title} | Skillsmith"):
+    for candidate in (f"{title}: AI agent workflow | Skillsmith by Caffeinity", f"{title} | Skillsmith by Caffeinity"):
         if len(candidate) <= 60:
             return candidate
     return title
@@ -323,7 +323,7 @@ def render_flow_page(flow, manifest):
     pairs = "".join(
         f'\n    <div class="pair"><p class="step-n">Pairs with · third-party</p>'
         f'<p><a href="{attr(p["url"])}" target="_blank" rel="noopener"><b>{esc(p["name"])}</b></a> for {esc(p["for"])}</p>'
-        f'<p class="pair-needs">Not made by Skillsmith. {esc(p["needs"])}</p></div>'
+        f'<p class="pair-needs">Not made by Skillsmith by Caffeinity. {esc(p["needs"])}</p></div>'
         for p in flow.get("pairsWith", []))
     by_name = {s["name"]: s for s in manifest["skills"]}
     ld = {
