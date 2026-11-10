@@ -286,7 +286,7 @@
       "description": "Agent skill that fixes a site's SEO end to end: checks indexing, crawls, audits brand and task searches, settles which page owns each query, changes the site's code, proves every fix with a re-crawl, and turns skill defects into tested fixes. Works in Claude Code, Codex and Cursor.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/seo-sweep.tar.gz",
-      "digest": "sha256:f23fff1376f3f7bab0f53912f7b8f446e2eb93b2e56e8e7bc2db40477f39bd61"
+      "digest": "sha256:f3eac9aacd4a4ba623a5e6a8ad3506fd33f499bf21f119a1fa259c0a3476c274"
     },
     {
       "name": "session-retrace",
@@ -300,7 +300,7 @@
       "description": "Agent skill that configures Claude Code for quota-optimised model tiering: Sonnet for the main session, Opus on call via /advisor, Haiku for read-only subagents, and Sonnet for code editing. Audits version and env flags, shows a diff preview, and never writes without explicit confirmation.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/setup-claude-advisor.tar.gz",
-      "digest": "sha256:b1db374b472234efc4819b756af9d43544cebf1b4f212b2cc30ed40f81bb2863"
+      "digest": "sha256:7caf4731debcc7f6a749aa5cfd1f71de2962c85c851d0779fdce00a72e3f2821"
     },
     {
       "name": "site-prompt",

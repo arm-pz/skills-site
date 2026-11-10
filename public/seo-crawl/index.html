@@ -7,7 +7,7 @@
 <meta name="description" content="Use when you need evidence about the technical SEO state of a site you own or are authorized to crawl, covering HTTP statuses and redirects, indexability…">
 <link rel="canonical" href="https://skillsmith.tech/seo-crawl/">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="Skillsmith">
+<meta property="og:site_name" content="Skillsmith by Caffeinity">
 <meta property="og:title" content="SEO Crawl — AI Agent Skill for Claude Code and Codex">
 <meta property="og:description" content="Use when you need evidence about the technical SEO state of a site you own or are authorized to crawl, covering HTTP statuses and redirects, indexability (meta and header robots), robots.txt, canonical tags, titles, meta descriptions, H1s, internal links, sitemap coverage, and static JSON-LD. Runs a bounded, read-only crawl and returns deterministic findings JSON with stable IDs and explicit INCONCLUSIVE checks, so an SEO audit or content change starts from measured evidence instead of guesses. Trigger phrases include &quot;crawl the site for SEO&quot;, &quot;check sitemap coverage&quot;, &quot;find broken internal links&quot;, &quot;why is this page not indexed&quot;, &quot;check titles and metas&quot;, &quot;canonical audit&quot;, and &quot;pre-audit crawl&quot;. Not for Search Console clicks, impressions, rankings or keyword volumes; Core Web Vitals, Lighthouse or bundle performance; release security and exposed files; content rewriting or keyword strategy.">
 <meta property="og:url" content="https://skillsmith.tech/seo-crawl/">
@@ -126,6 +126,7 @@
   @media (prefers-reduced-motion:reduce){
     *,*::before,*::after{transition:none!important;animation:none!important}
   }
+  .brand-by{font-size:.62em;letter-spacing:.01em;opacity:.65;margin-left:.3em;white-space:nowrap}
 </style>
 <script type="application/ld+json">
 {
@@ -174,7 +175,7 @@
 
 <nav class="nav" aria-label="Site">
   <div class="wrap">
-    <a class="brand" href="/"><b>∧</b>skillsmith</a>
+    <a class="brand" href="/"><b>∧</b>skillsmith <span class="brand-by">by caffeinity</span></a>
     <div class="nav-links">
       <a href="/skills/">All skills</a>
       <a href="https://github.com/arm-pz/seo-crawl" target="_blank" rel="noopener">Source</a>
@@ -208,7 +209,7 @@
       <div><dt>Nightly check</dt><dd>Passing<small>No failures or warnings. <a href="https://github.com/arm-pz/skills-site/blob/main/.github/workflows/health.yml" target="_blank" rel="noopener">How it is checked</a></small></dd></div>
       <div><dt>Last real-world run</dt><dd>24 Oct 2026, on skills.caffeinity.com<small>Found one broken internal link across 24 pages; the re-crawl after the fix came back clean. <a href="/#proof">See the run</a></small></dd></div>
       <div class="qb-wide"><dt>Known limits</dt><dd>Not built for:<ul><li>Search Console clicks, impressions, rankings or keyword volumes</li><li>Core Web Vitals, Lighthouse or bundle performance</li><li>Release security and exposed files</li><li>Content rewriting or keyword strategy</li></ul></dd></div>
-      <div class="qb-wide"><dt>Pairs with</dt><dd><a href="https://github.com/every-app/open-seo" target="_blank" rel="noopener">OpenSEO</a> for keyword volumes, rankings, backlinks, competitor and AI-visibility data, read by your agent through its MCP server.<small>Third-party, not made by Skillsmith. Open source (MIT); needs a DataForSEO API key (pay per use) or an openseo.so account.</small></dd></div>
+      <div class="qb-wide"><dt>Pairs with</dt><dd><a href="https://github.com/every-app/open-seo" target="_blank" rel="noopener">OpenSEO</a> for keyword volumes, rankings, backlinks, competitor and AI-visibility data, read by your agent through its MCP server.<small>Third-party, not made by Skillsmith by Caffeinity. Open source (MIT); needs a DataForSEO API key (pay per use) or an openseo.so account.</small></dd></div>
     </dl>
   </div>
 </section>
@@ -279,7 +280,7 @@
 
 <footer>
   <div class="wrap">
-    <span>SEO Crawl is an open agent skill on <a href="/">Skillsmith</a>, made by <a href="https://caffeinity.com/">Caffeinity</a>.</span>
+    <span>SEO Crawl is an open agent skill on <a href="/">Skillsmith by Caffeinity</a>.</span>
     <a href="https://github.com/arm-pz/seo-crawl" target="_blank" rel="noopener">arm-pz/seo-crawl</a>
     <p class="kural" style="flex-basis:100%;margin:0;padding:18px 0 28px;border-top:1px solid color-mix(in srgb,currentColor 18%,transparent);display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;font-size:14px;line-height:1.5"><span lang="ta" style="font-family:'Noto Sans Tamil','Tamil Sangam MN','Nirmala UI',Latha,sans-serif;font-size:17px;font-weight:500;opacity:1">யாம் பெற்ற இன்பம் பெறுக இவ்வையகம்</span><span style="opacity:.75">“May this world attain the same bliss that I have attained.”</span></p>
   </div>
