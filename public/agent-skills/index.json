@@ -300,7 +300,7 @@
       "description": "Agent skill that configures Claude Code for quota-optimised model tiering: Sonnet for the main session, Opus on call via /advisor, Haiku for read-only subagents, and Sonnet for code editing. Audits version and env flags, shows a diff preview, and never writes without explicit confirmation.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/setup-claude-advisor.tar.gz",
-      "digest": "sha256:73b16acd4974fb3bbf4ae6a676a103c3d1bb2fd8aa37c79a866661d26ddf3b32"
+      "digest": "sha256:b1db374b472234efc4819b756af9d43544cebf1b4f212b2cc30ed40f81bb2863"
     },
     {
       "name": "site-prompt",
@@ -364,6 +364,13 @@
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/tune-and-polish.tar.gz",
       "digest": "sha256:775eff57ff71cdd800188347e0fa4cfcdab1ed176fcf05fe9ffdf40bb8261d7e"
+    },
+    {
+      "name": "tune-and-ship",
+      "description": "Claude Code plugin marketplace and index of arm-pz agent skills: editorial, teaching, recruiting, SEO planning, release preflight, sub-agent tournaments and repo discovery. Install with npx skills add arm-pz/caffeinity-skills.",
+      "type": "archive",
+      "url": "https://skillsmith.tech/agent-skills/tune-and-ship.tar.gz",
+      "digest": "sha256:f1304d4562cee98a474722cbfee835c0c4d8dc642d31fe1419e06a642bab73ba"
     },
     {
       "name": "tune-skill",

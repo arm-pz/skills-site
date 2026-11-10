@@ -1,6 +1,6 @@
 # Skillsmith
 
-> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: 62 skills mapped into 11 workflows (build a skill, get found, gate a release, grow search traffic, land a job, decide, learn, run outbound, launch a product). Plain markdown, no API keys.
+> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: 63 skills mapped into 11 workflows (build a skill, get found, gate a release, grow search traffic, land a job, decide, learn, run outbound, launch a product). Plain markdown, no API keys.
 
 ## Install
 
@@ -26,6 +26,7 @@ Sections: [skills](https://skillsmith.tech/skills/), [workflows](https://skillsm
 - [tune-and-polish](https://skillsmith.tech/tune-and-polish/): For a skill that both misfires and hides: Tune-Skill fixes the triggering description, sibling overlaps and stale counts, gated on check_skill.py with zero FAILs; then Findable-Polish audits and polishes the README, About and site copy against real queries.
 - [tune-skill-mod](https://skillsmith.tech/tune-skill-mod/): Arms when Claude edits a SKILL.md, then holds git push, PRs and releases until tune-skill has validated the change.
 - [skill-release-mod](https://skillsmith.tech/skill-release-mod/): Holds gh release create and npm publish in Claude Code until prompts-to-skill-release has run the skill's test cases since your last edit.
+- [tune-and-ship](https://skillsmith.tech/tune-and-ship/): One published skill at a time, all the way through: tuned with tune-skill, every version, flag and price checked against its source, listing polished, released in one PR, then the site page and marketplace copy confirmed live.
 
 ## Publish & Discover
 
