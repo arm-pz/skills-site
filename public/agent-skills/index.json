@@ -27,7 +27,7 @@
       "description": "Claude Code plugin marketplace and index of arm-pz agent skills: editorial, teaching, recruiting, SEO planning, release preflight, sub-agent tournaments and repo discovery. Install with npx skills add arm-pz/caffeinity-skills.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/caffeinity-routing.tar.gz",
-      "digest": "sha256:b37fbfb8fade1d915d2b3a12ae7194d6a9cb8aed53519fa0277aeee5c4d704c6"
+      "digest": "sha256:d1a45fffe54e35945e75344c35f15dafe8d8c7f5748fba2d32f36ce588790bc4"
     },
     {
       "name": "career-track",
