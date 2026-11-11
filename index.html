@@ -17,255 +17,7 @@
 <link rel="stylesheet" href="/fonts/fonts.css">
 <link rel="preload" href="/fonts/files/cY9AfjOCX1hbuyalUrK4397yjA.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/files/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2" as="font" type="font/woff2" crossorigin>
-<style>
-  /* Light paper by default; the skill pages' dark shell when the reader prefers dark. */
-  :root{
-    --bg:#f2eee5;
-    --surface:#fffdf8;
-    --sunk:#e9e3d6;
-    --ink:#17141b;
-    --muted:#5c5562;
-    --line:rgba(23,20,27,.12);
-    --accent:#ff6a3d;
-    --accent-ink:#1a0c06;
-    --accent-text:#ad3a12;
-    --brass:#8f5226;
-    --serif:'Newsreader',Georgia,serif;
-    --sans:'Instrument Sans',system-ui,sans-serif;
-    --mono:'IBM Plex Mono',ui-monospace,monospace;
-    --ease:cubic-bezier(.4,0,.2,1);
-    --gutter:clamp(16px,5vw,56px);
-    --radius:18px;
-  }
-  @media (prefers-color-scheme:dark){
-    :root:not([data-theme="light"]){
-      --bg:#121016;--surface:#1d1a23;--sunk:#27232e;--ink:#ede8de;--muted:#a59eae;
-      --line:rgba(237,232,222,.12);--accent-text:#ff8a62;--brass:#d39b6a;
-    }
-  }
-  :root[data-theme="dark"]{
-    --bg:#121016;--surface:#1d1a23;--sunk:#27232e;--ink:#ede8de;--muted:#a59eae;
-    --line:rgba(237,232,222,.12);--accent-text:#ff8a62;--brass:#d39b6a;
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-  a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.22em}
-  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
-  ::selection{background:var(--accent);color:var(--accent-ink)}
-  .wrap{max-width:1240px;margin:0 auto;padding:0 var(--gutter)}
-  code{font-family:var(--mono);font-size:.86em}
-  .eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-  h2.title{font-family:var(--serif);font-weight:400;font-size:clamp(38px,5.4vw,68px);line-height:1;letter-spacing:-.022em;margin-top:14px}
-  .section-lead{color:var(--muted);max-width:56ch;margin-top:16px;font-size:18px}
-
-  /* nav: links left, mark centre, one accent pill right */
-  .nav .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;height:72px}
-  .nav-links{display:flex;gap:22px;font-size:15px}
-  .nav-links a,.nav .gh{text-decoration:none;color:var(--muted);transition:color 150ms var(--ease)}
-  .nav-links a[aria-current]{color:var(--ink)}
-  .brand{font-family:var(--serif);font-size:21px;text-decoration:none;justify-self:center;white-space:nowrap}
-  .brand b{color:var(--accent);font-weight:400;margin-right:6px}
-  .nav-cta{justify-self:end;display:flex;align-items:center;gap:20px}
-  .pill{background:var(--accent);color:var(--accent-ink);text-decoration:none;font-weight:600;font-size:14.5px;padding:9px 16px;border-radius:999px;transition:transform 150ms var(--ease)}
-
-  /* hero */
-  .hero{text-align:center;padding:clamp(56px,9vw,120px) 0 clamp(40px,6vw,72px)}
-  h1{font-family:var(--serif);font-weight:400;font-size:clamp(54px,9.4vw,124px);line-height:.95;letter-spacing:-.03em;max-width:12ch;margin:0 auto}
-  h1 em{color:var(--accent-text);font-style:italic}
-  .lead{font-size:clamp(18px,1.7vw,21px);line-height:1.5;max-width:46ch;margin:28px auto 0;color:var(--muted)}
-  .cta{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:36px}
-  .cmd{display:inline-flex;align-items:center;gap:12px;max-width:100%;background:var(--ink);color:var(--bg);border:0;border-radius:12px;padding:15px 18px;font:500 14.5px/1.3 var(--mono);cursor:pointer;text-align:left;transition:transform 150ms var(--ease)}
-  .cmd span{overflow-wrap:anywhere}
-  .cmd .copy{flex:none;font-family:var(--sans);font-size:12.5px;font-weight:600;opacity:.7}
-  .btn2{display:inline-flex;align-items:center;border-radius:12px;padding:15px 20px;background:var(--surface);box-shadow:inset 0 0 0 1px var(--line);text-decoration:none;font-weight:600;font-size:15px}
-  .stats{margin-top:26px;font-family:var(--mono);font-size:13.5px;color:var(--brass)}
-
-  /* card wall: every skill and mod drifting under the hero; hover or focus pauses it */
-  .wall{display:grid;gap:12px;padding:0 0 clamp(24px,4vw,48px);-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
-  .wall-row{overflow:hidden}
-  .wall-track{display:flex;width:max-content;animation:drift 220s linear infinite}
-  .wall-rev .wall-track{animation-direction:reverse;animation-duration:260s}
-  .wall:hover .wall-track,.wall:focus-within .wall-track{animation-play-state:paused}
-  .wcard{flex:none;width:236px;min-height:104px;margin-right:12px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;background:var(--surface);border-radius:var(--radius);box-shadow:0 0 0 1px var(--line);padding:18px 20px;text-decoration:none}
-  .wcard b{font-family:var(--serif);font-weight:400;font-size:23px;line-height:1.1;letter-spacing:-.01em;overflow-wrap:anywhere}
-  .wcard code{font-size:11.5px;color:var(--muted)}
-  @keyframes drift{to{transform:translateX(-50%)}}
-
-  /* workflows: the ecosystem as routes */
-  .flows{padding:clamp(56px,8vw,104px) 0}
-  .flow-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:16px;margin-top:40px}
-  .flow{background:var(--surface);border-radius:var(--radius);padding:24px 24px 22px;box-shadow:0 0 0 1px var(--line);scroll-margin-top:24px}
-  .flow-id{font-family:var(--mono);font-size:13px;color:var(--accent-text);font-weight:600}
-  .flow h3{font-family:var(--serif);font-weight:400;font-size:25px;line-height:1.15;letter-spacing:-.01em;margin-top:6px}
-  .flow-steps{list-style:none;counter-reset:step;margin-top:16px;display:grid;gap:8px}
-  .flow-steps li{counter-increment:step;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;font-size:15px;line-height:1.4}
-  .flow-steps li::before{content:counter(step);flex:none;width:22px;height:22px;border-radius:50%;background:var(--sunk);font:600 12px/22px var(--mono);text-align:center;color:var(--muted);transform:translateY(-1px)}
-  .flow-steps a{font-family:var(--mono);font-size:13.5px;font-weight:500;text-decoration-color:var(--line)}
-  .flow-steps .or,.flow-steps .opt{font-size:13px;color:var(--muted)}
-  .flow-steps .opt{font-family:var(--mono);font-size:11.5px;border:1px solid var(--line);border-radius:999px;padding:0 7px}
-  .flow-note{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
-  .router{margin-top:16px;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;align-items:center;background:var(--ink);color:var(--bg);border-radius:var(--radius);padding:22px 24px}
-  .router b{font-family:var(--serif);font-weight:400;font-size:24px;grid-row:span 2}
-  .router p{font-size:15px;opacity:.85}
-  .router code{font-size:13px;opacity:1}
-
-  /* catalogue */
-  .catalogue{padding:clamp(40px,6vw,72px) 0 clamp(64px,9vw,120px);border-top:1px solid var(--line)}
-  .find{margin-top:20px;max-width:720px;position:sticky;top:0;z-index:2;background:var(--bg);padding:12px 0 2px}
-  .find input{width:100%;font:400 19px/1.3 var(--sans);color:var(--ink);background:var(--surface);border:0;border-radius:14px;padding:18px 20px;box-shadow:0 0 0 1px var(--line),0 10px 30px -18px rgba(0,0,0,.35);transition:box-shadow 150ms var(--ease)}
-  .find input::placeholder{color:var(--muted)}
-  .find input:focus{outline:none;box-shadow:0 0 0 2px var(--accent),0 10px 30px -18px rgba(0,0,0,.35)}
-  .find-status{margin-top:10px;font-size:14px;color:var(--muted);min-height:1.5em}
-  .jump{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-  .jump a{font-size:14px;text-decoration:none;padding:6px 12px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--line);transition:background 150ms var(--ease)}
-  .sk-group{padding:clamp(40px,5vw,64px) 0 0;scroll-margin-top:110px}
-  .sk-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 24px;padding-bottom:14px;margin-bottom:18px;border-bottom:1px solid var(--line)}
-  .sk-head h2{font-family:var(--serif);font-weight:400;font-size:clamp(30px,3.4vw,40px);line-height:1.05;letter-spacing:-.015em}
-  .sk-head p{font-family:var(--mono);font-size:12.5px;color:var(--muted)}
-  .sk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,272px),1fr));gap:14px}
-  .skill{display:flex;flex-direction:column;background:var(--surface);border-radius:var(--radius);padding:22px;box-shadow:0 0 0 1px var(--line);scroll-margin-top:96px;transition:box-shadow 150ms var(--ease),transform 150ms var(--ease)}
-  #start-here .skill{grid-column:1/-1;max-width:760px}
-  .chips{display:flex;flex-wrap:wrap;gap:6px}
-  .chip{font-family:var(--mono);font-size:11.5px;line-height:1;padding:5px 8px;border-radius:999px;background:var(--sunk);color:var(--muted)}
-  .chip-hot{background:color-mix(in srgb,var(--accent) 18%,transparent);color:var(--accent-text)}
-  .skill h3{font-family:var(--serif);font-weight:400;font-size:26px;line-height:1.1;letter-spacing:-.01em;margin-top:14px}
-  .skill h3 a{text-decoration:none}
-  .sk-blurb{font-size:15.5px;line-height:1.55;margin-top:10px;color:var(--muted);display:-webkit-box;-webkit-line-clamp:3;line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-  .sk-stats{font-family:var(--mono);font-size:12.5px;color:var(--brass);margin-top:12px}
-  .sk-install{display:block;margin-top:auto;padding-top:16px}
-  .skill .sk-install{font-size:12.5px;overflow-wrap:break-word}
-  .skill .sk-install::before{content:"$ ";color:var(--muted)}
-  .sk-links{display:flex;gap:18px;margin-top:12px;font-size:14px;font-weight:600}
-  .sk-links a{text-decoration-color:var(--line)}
-  .empty{padding:56px 0 0;font-family:var(--serif);font-size:clamp(24px,2.6vw,30px);max-width:30ch}
-  [hidden]{display:none!important}
-
-  /* install: one card per agent */
-  .install{padding:clamp(56px,8vw,104px) 0;border-top:1px solid var(--line)}
-  .install-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:16px;margin-top:40px}
-  .inst{background:var(--surface);border-radius:var(--radius);box-shadow:0 0 0 1px var(--line);padding:24px;display:flex;flex-direction:column;gap:12px}
-  .inst h3{font-family:var(--serif);font-weight:400;font-size:26px;line-height:1.1}
-  .inst p{font-size:15px;color:var(--muted)}
-  .inst .cmd{width:100%;justify-content:space-between;font-size:13px;padding:12px 14px}
-  .inst-note a{color:var(--ink)}
-
-  /* proof: an app shell, one tab per real run, with what it found and what changed */
-  .shell{margin-top:40px;background:var(--sunk);border-radius:22px;padding:8px;box-shadow:0 0 0 1px var(--line),0 30px 60px -40px rgba(0,0,0,.45)}
-  .shell-bar{display:flex;align-items:center;gap:14px;padding:8px 10px 10px}
-  .shell-bar .dots{display:flex;gap:6px;flex:none}
-  .shell-bar .dots i{width:10px;height:10px;border-radius:50%;background:var(--line)}
-  .shell-bar .dots i:first-child{background:var(--accent)}
-  .tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
-  .tabs button{flex:none;font:500 13px/1 var(--mono);color:var(--muted);background:transparent;border:0;border-radius:10px;padding:9px 12px;cursor:pointer;transition:background 150ms var(--ease),color 150ms var(--ease)}
-  .tabs button[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:0 0 0 1px var(--line)}
-  .pane{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:8px}
-  .pane+.pane{margin-top:8px}
-  .pane-col{background:var(--surface);border-radius:16px;padding:22px 24px;display:flex;flex-direction:column;gap:12px}
-  .pane-label{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-  .pane h3{font-family:var(--serif);font-weight:400;font-size:clamp(24px,2.4vw,30px);line-height:1.12;letter-spacing:-.01em}
-  .pane pre{font-family:var(--mono);font-size:12.5px;line-height:1.6;background:var(--bg);border-radius:10px;padding:12px 14px;overflow-x:auto;white-space:pre}
-  .pane p{font-size:15px;color:var(--muted)}
-  .ba{display:grid;gap:6px}
-  .ba span{font-family:var(--mono);font-size:11.5px;font-weight:600;color:var(--muted)}
-  .ba.after span{color:var(--accent-text)}
-  .ba.after pre{box-shadow:inset 3px 0 0 var(--accent)}
-  .pane .verdict{font-family:var(--mono);font-size:12.5px;font-weight:600;color:var(--accent-text);margin-top:auto}
-  .shell-progress{height:3px;margin:8px 10px 2px;border-radius:3px;background:var(--line);overflow:hidden}
-  .shell-progress b{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--ink) calc(100% - 18px),var(--accent) 0);transition:width 300ms var(--ease)}
-
-  /* proof: real runs from this release */
-  .proof{padding:clamp(56px,8vw,104px) 0;border-top:1px solid var(--line)}
-  .runs{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,360px),1fr));gap:16px;margin-top:40px}
-  .run{background:var(--surface);border-radius:var(--radius);box-shadow:0 0 0 1px var(--line);overflow:hidden;display:flex;flex-direction:column}
-  .run-bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12.5px;color:var(--muted)}
-  .run-bar i{width:9px;height:9px;border-radius:50%;background:var(--sunk);display:inline-block}
-  .run-bar i:first-child{background:var(--accent)}
-  .run-bar span{margin-left:6px}
-  .run-body{padding:18px 18px 20px;display:flex;flex-direction:column;gap:12px;flex:1}
-  .run h3{font-family:var(--serif);font-weight:400;font-size:23px;line-height:1.15}
-  .run pre{font-family:var(--mono);font-size:12.5px;line-height:1.6;background:var(--sunk);border-radius:10px;padding:12px 14px;overflow-x:auto;white-space:pre}
-  .run p{font-size:15px;color:var(--muted)}
-  .run .verdict{font-family:var(--mono);font-size:12.5px;font-weight:600;color:var(--accent-text)}
-
-  /* outcomes: the front door, one card per workflow */
-  .outcomes{padding:clamp(56px,8vw,104px) 0;border-top:1px solid var(--line)}
-  .outcome-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:12px;margin-top:36px}
-  .outcome{display:flex;flex-direction:column;justify-content:space-between;gap:14px;min-height:128px;background:var(--surface);border-radius:var(--radius);box-shadow:0 0 0 1px var(--line);padding:20px 22px;text-decoration:none;transition:box-shadow 150ms var(--ease),transform 150ms var(--ease)}
-  .outcome b{font-family:var(--serif);font-weight:400;font-size:25px;line-height:1.12;letter-spacing:-.01em}
-  .outcome span{font-family:var(--mono);font-size:12px;color:var(--muted)}
-  .more-link{display:inline-block;margin-top:24px;font-weight:600}
-
-  /* flagships: three skills, each with the run that earned the spot */
-  .flags{padding:clamp(56px,8vw,104px) 0;border-top:1px solid var(--line)}
-  .flag-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:16px;margin-top:40px}
-  .flag{display:flex;flex-direction:column;gap:12px;background:var(--surface);border-radius:var(--radius);box-shadow:0 0 0 1px var(--line);padding:24px}
-  .flag-tag{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-text)}
-  .flag h3{font-family:var(--serif);font-weight:400;font-size:30px;line-height:1.08;letter-spacing:-.015em}
-  .flag h3 a{text-decoration:none}
-  .flag-blurb{color:var(--muted);font-size:15.5px;display:-webkit-box;-webkit-line-clamp:4;line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
-  .flag-run{font-size:15px;padding-top:12px;border-top:1px solid var(--line)}
-  .flag-run b{font-weight:600}
-  .flag .cmd{margin-top:auto;width:100%;justify-content:space-between;font-size:12.5px;padding:12px 14px}
-
-  /* work band */
-  .band{padding:clamp(48px,7vw,88px) 0;border-top:1px solid var(--line)}
-  .band-box{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px 40px;align-items:center;background:var(--ink);color:var(--bg);border-radius:22px;padding:clamp(28px,4vw,48px)}
-  .band-box h2{font-family:var(--serif);font-weight:400;font-size:clamp(30px,3.6vw,44px);line-height:1.05;letter-spacing:-.02em}
-  .band-box p{opacity:.8;margin-top:10px;max-width:56ch}
-  .band-box .pill{font-size:15.5px;padding:13px 22px;white-space:nowrap;justify-self:start}
-
-  /* section pages: /skills/, /mods/, /workflows/ */
-  .page-hero{padding:clamp(48px,7vw,96px) 0 clamp(24px,4vw,40px)}
-  .page-hero h1{font-size:clamp(46px,7vw,92px);max-width:16ch;margin:14px 0 0}
-  .page-hero .lead{margin:22px 0 0;max-width:60ch}
-  .page-hero .stats{margin-top:18px}
-  .flow-sum{font-size:15px;color:var(--muted);margin-top:8px}
-  .flow h3 a{text-decoration:none}
-  .flow-go{display:inline-block;margin-top:14px;font-size:14px;font-weight:600}
-  .aside{margin-top:40px;color:var(--muted);max-width:64ch}
-  .aside a{color:var(--ink);font-weight:600}
-
-  /* close + footer */
-  .close{padding:clamp(56px,8vw,96px) 0;border-top:1px solid var(--line)}
-  .close-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:24px clamp(32px,5vw,64px);margin-top:28px}
-  .close-grid p{color:var(--muted);font-size:16px}
-  .close-grid b{display:block;color:var(--ink);font-weight:600;margin-bottom:6px}
-  .close-grid a{color:var(--ink)}
-  footer{overflow:hidden}
-  .wordmark{font-family:var(--serif);font-weight:400;font-size:clamp(72px,19vw,300px);line-height:.82;letter-spacing:-.045em;text-align:center;padding-top:24px;white-space:nowrap}
-  .wordmark b{color:var(--accent);font-weight:400}
-  footer .meta{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-top:28px;padding-bottom:36px;font-size:14px;color:var(--muted)}
-  footer .meta a{text-decoration:none}
-
-  @media (hover:hover) and (pointer:fine){
-    .nav-links a:hover,.nav .gh:hover,footer .meta a:hover{color:var(--ink)}
-    .pill:hover,.cmd:hover{transform:translateY(-1px)}
-    .jump a:hover{background:var(--surface)}
-    .skill:hover{box-shadow:0 0 0 1px var(--line),0 18px 40px -24px rgba(0,0,0,.45);transform:translateY(-2px)}
-    .skill h3 a:hover,.flow-steps a:hover,.flow h3 a:hover,.flag h3 a:hover{color:var(--accent-text)}
-    .outcome:hover{box-shadow:0 0 0 1px var(--accent);transform:translateY(-2px)}
-  }
-  @media (max-width:860px){
-    .nav .wrap{grid-template-columns:auto 1fr;height:auto;padding-top:14px;padding-bottom:12px;row-gap:10px}
-    .nav-links{grid-column:1/-1;grid-row:2;overflow-x:auto;scrollbar-width:none}
-    .nav-links a{white-space:nowrap}
-    .brand{justify-self:start}
-    .band-box{grid-template-columns:1fr}
-    .router{grid-template-columns:1fr}
-    .router b{grid-row:auto}
-  }
-  @media (max-width:520px){
-    .nav .gh{display:none}
-    .cmd{font-size:13px}
-  }
-  @media (prefers-reduced-motion:reduce){
-    *,*::before,*::after{transition:none!important;animation:none!important}
-    .wall-row{overflow-x:auto}
-    html{scroll-behavior:auto}
-  }
-  .brand-by{font-size:.62em;letter-spacing:.01em;opacity:.65;margin-left:.3em;white-space:nowrap}
-</style>
+<link rel="stylesheet" href="/assets/site.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -309,254 +61,229 @@
 
 <nav class="nav" aria-label="Site">
   <div class="wrap">
+    <a class="brand" href="/"><b>∧</b>skillsmith <span class="brand-by">by caffeinity</span></a>
     <div class="nav-links">
       <a href="/skills/">Skills</a>
       <a href="/workflows/">Workflows</a>
       <a href="/mods/">Mods</a>
       <a href="/work/">Work with us</a>
     </div>
-    <a class="brand" href="/"><b>∧</b>skillsmith <span class="brand-by">by caffeinity</span></a>
     <div class="nav-cta">
       <a class="gh" href="https://github.com/arm-pz" target="_blank" rel="noopener">GitHub</a>
-      <a class="pill" href="/caffeinity-routing/">Start here</a>
+      <a class="btn btn-accent btn-sm" href="/caffeinity-routing/">Start here</a>
     </div>
   </div>
 </nav>
 
 <header class="hero">
-  <div class="wrap">
-    <h1>Agent skills that <em>finish</em> the job.</h1>
-    <p class="lead">Tested, plain-markdown skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md. Each one does a concrete job, like screening a resume, checking a site before launch or finding the page that should rank, and shows its evidence.</p>
-    <div class="cta">
-      <button class="cmd" type="button" data-copy="npx skills add arm-pz/caffeinity-skills --skill caffeinity-routing" aria-label="Copy the install command for caffeinity-routing"><span>$ npx skills add arm-pz/caffeinity-skills --skill caffeinity-routing</span><span class="copy" aria-hidden="true">Copy</span></button>
-      <a class="btn2" href="#outcomes">Pick an outcome</a>
-    </div>
+  <div class="hero-copy">
+    <h1>Agent skills that finish the job.</h1>
+    <p class="lead">Plain-markdown skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md. Each does one concrete job and shows its evidence.</p>
+    <button class="cmd" type="button" data-copy="npx skills add arm-pz/caffeinity-skills --skill caffeinity-routing" aria-label="Copy the install command for caffeinity-routing"><span>npx skills add arm-pz/caffeinity-skills --skill caffeinity-routing</span><span class="copy" aria-hidden="true">Copy</span></button>
+    <p class="small hero-note">Installs the router: describe an outcome and it picks the skills. Or <a href="/skills/">browse every skill</a>.</p>
     <!-- gen:stats:start --><p class="stats">56 skills and 7 mods · 12 workflows · 9 categories · 0 API keys</p><!-- gen:stats:end -->
+  </div>
+  <div class="menu roast" id="outcomes">
+    <h2 id="outcomes-h">What do you need done?</h2>
+    <p class="menu-sub">Twelve workflows, each a chain of skills that hand work to the next. We call them brews.</p>
+    <div class="brews">
+      <!-- gen:outcomes:start -->
+      <details class="brew" name="brew" open>
+        <summary><b>Build a skill and make it installable</b><i aria-hidden="true"></i><span>Pour-over</span></summary>
+        <div class="brew-body">
+          <p>Go from an idea or a pile of prompts to a tested skill anyone can install: draft it, tune its trigger, then package and release it.</p>
+          <ol class="recipe">
+            <li><a href="/draft-skill/">draft-skill</a> <span class="or">or</span> <a href="/prompts-to-skill/">prompts-to-skill</a></li>
+            <li><a href="/tune-skill/">tune-skill</a></li>
+            <li><a href="/prompts-to-skill-release/">prompts-to-skill-release</a></li>
+            <li><a href="/skill-to-mod/">skill-to-mod</a> <span class="opt">optional</span></li>
+          </ol>
+          <a class="outcome" href="/workflows/build-a-skill/">Open Brew 1 · Pour-over</a>
+        </div>
+      </details>
+      <details class="brew" name="brew">
+        <summary><b>Get a repo, skill or plugin found</b><i aria-hidden="true"></i><span>Bloom</span></summary>
+        <div class="brew-body">
+          <p>Make a repo, skill or plugin show up for what it does: fix how it is described and listed, publish it, then check every listing matches what is live.</p>
+          <ol class="recipe">
+            <li><a href="/findable/">findable</a></li>
+            <li><a href="/publish-pipeline/">publish-pipeline</a></li>
+            <li><a href="/upstream-check/">upstream-check</a></li>
+            <li><a href="/get-indexed/">get-indexed</a> <span class="opt">optional</span></li>
+          </ol>
+          <a class="outcome" href="/workflows/get-found/">Open Brew 2 · Bloom</a>
+        </div>
+      </details>
+      <details class="brew" name="brew">
+        <summary><b>Decide whether a site is safe to launch</b><i aria-hidden="true"></i><span>Espresso</span></summary>
+        <div class="brew-body">
+          <p>Get one honest answer to "can we ship?": check for exposed files, red-team the app, audit its speed, then let a release gate weigh the three verdicts.</p>
+          <ol class="recipe">
+            <li><a href="/web-preflight/">web-preflight</a></li>
+            <li><a href="/pre-ship-security-red-team/">pre-ship-security-red-team</a></li>
+            <li><a href="/pre-ship-performance-audit/">pre-ship-performance-audit</a></li>
+            <li><a href="/release-gate-chair/">release-gate-chair</a> <span class="or">or</span> <a href="/release-gate-ledger/">release-gate-ledger</a> <span class="or">or</span> <a href="/release-gate-validator/">release-gate-validator</a></li>
+          </ol>
+          <a class="outcome" href="/workflows/launch-safely/">Open Brew 3 · Espresso</a>
+        </div>
+      </details>
+      <details class="brew" name="brew">
+        <summary><b>Grow organic search traffic</b><i aria-hidden="true"></i><span>Cold brew</span></summary>
+        <div class="brew-body">
+          <p>Grow organic traffic on a site you own: crawl it for technical problems, give each query one page that wins it, then tighten the copy.</p>
+          <ol class="recipe">
+            <li><a href="/seo-crawl/">seo-crawl</a></li>
+            <li><a href="/keyword-guard/">keyword-guard</a></li>
+            <li><a href="/wordsmith/">wordsmith</a></li>
+            <li><a href="/pre-ship-performance-audit/">pre-ship-performance-audit</a> <span class="opt">optional</span></li>
+            <li><a href="/platform-content/">platform-content</a> <span class="opt">optional</span></li>
+            <li><a href="/get-indexed/">get-indexed</a> <span class="opt">optional</span></li>
+          </ol>
+          <a class="outcome" href="/workflows/grow-search-traffic/">Open Brew 4 · Cold brew</a>
+        </div>
+      </details>
+      <details class="brew" name="brew">
+        <summary><b>Land a job</b><i aria-hidden="true"></i><span>French press</span></summary>
+        <div class="brew-body">
+          <p>Run a job search without inventing credentials: see your resume the way recruiters screen it, write the tailored version, then manage the applications.</p>
+          <ol class="recipe">
+            <li><a href="/recruiter-lens/">recruiter-lens</a></li>
+            <li><a href="/applicant-kit/">applicant-kit</a></li>
+            <li><a href="/application-pilot/">application-pilot</a></li>
+            <li><a href="/career-track/">career-track</a> <span class="opt">optional</span></li>
+          </ol>
+          <a class="outcome" href="/workflows/land-a-job/">Open Brew 5 · French press</a>
+        </div>
+      </details>
+      <details class="brew" name="brew">
+        <summary><b>Make a decision</b><i aria-hidden="true"></i><span>Cupping</span></summary>
+        <div class="brew-body">
+          <p>Turn a hard question into a decision you can defend: gather sourced evidence, read your own numbers, attack the options, then write the memo.</p>
+          <ol class="recipe">
+            <li><a href="/research-brief/">research-brief</a></li>
+            <li><a href="/data-readout/">data-readout</a> <span class="opt">optional</span></li>
+            <li><a href="/crash-test/">crash-test</a> <span class="or">or</span> <a href="/do-better/">do-better</a></li>
+            <li><a href="/strategy-memo/">strategy-memo</a></li>
+          </ol>
+          <a class="outcome" href="/workflows/make-a-decision/">Open Brew 6 · Cupping</a>
+        </div>
+      </details>
+      <details class="brew" name="brew">
+        <summary><b>Learn a skill</b><i aria-hidden="true"></i><span>Slow drip</span></summary>
+        <div class="brew-body">
+          <p>Learn any topic from zero: get taught concept by concept, then build the practice system that makes it stick.</p>
+          <ol class="recipe">
+            <li><a href="/topic-primer/">topic-primer</a></li>
+            <li><a href="/study-system/">study-system</a></li>
+            <li><a href="/course-builder/">course-builder</a> <span class="opt">optional</span></li>
+          </ol>
+          <a class="outcome" href="/workflows/learn-a-skill/">Open Brew 7 · Slow drip</a>
+        </div>
+      </details>
+      <details class="brew" name="brew">
+        <summary><b>Run cold outbound</b><i aria-hidden="true"></i><span>Nitro</span></summary>
+        <div class="brew-body">
+          <p>Send cold email that lands: check the lead list before it loads, size and protect the sending setup, then write the copy.</p>
+          <ol class="recipe">
+            <li><a href="/cold-email-list-gate/">cold-email-list-gate</a></li>
+            <li><a href="/cold-email-ops/">cold-email-ops</a></li>
+            <li><a href="/sales-copy/">sales-copy</a></li>
+          </ol>
+          <a class="outcome" href="/workflows/run-cold-outbound/">Open Brew 8 · Nitro</a>
+        </div>
+      </details>
+      <details class="brew" name="brew">
+        <summary><b>Launch a one-person product</b><i aria-hidden="true"></i><span>Moka pot</span></summary>
+        <div class="brew-body">
+          <p>Take a one-person product from plan to launch: pick the offer, build the site and code, write the policy pages, pass the release gate, then announce it.</p>
+          <ol class="recipe">
+            <li><a href="/solo-income-blueprint/">solo-income-blueprint</a></li>
+            <li><a href="/site-prompt/">site-prompt</a></li>
+            <li><a href="/production-code/">production-code</a></li>
+            <li><a href="/paper-trail/">paper-trail</a></li>
+            <li><a href="/release-gate-chair/">release-gate-chair</a></li>
+            <li><a href="/platform-content/">platform-content</a></li>
+          </ol>
+          <a class="outcome" href="/workflows/launch-a-product/">Open Brew 9 · Moka pot</a>
+        </div>
+      </details>
+      <details class="brew" name="brew">
+        <summary><b>Maintain the skill family</b><i aria-hidden="true"></i><span>Descale</span></summary>
+        <div class="brew-body">
+          <p>Keep a family of skills healthy after release: tune what drifted, re-release what changed, and confirm every listing still matches.</p>
+          <ol class="recipe">
+            <li><a href="/tune-skill/">tune-skill</a></li>
+            <li><a href="/prompts-to-skill-release/">prompts-to-skill-release</a> <span class="opt">optional</span></li>
+            <li><a href="/upstream-check/">upstream-check</a></li>
+          </ol>
+          <a class="outcome" href="/workflows/maintain-skills/">Open Brew 10 · Descale</a>
+        </div>
+      </details>
+      <details class="brew" name="brew">
+        <summary><b>Stand up or audit a skill estate</b><i aria-hidden="true"></i><span>Estate roast</span></summary>
+        <div class="brew-body">
+          <p>Inventory and repair a whole collection of skills in one gated run, from repos and listings to the workflows that connect them.</p>
+          <ol class="recipe">
+            <li><a href="/skill-estate/">skill-estate</a></li>
+          </ol>
+          <a class="outcome" href="/workflows/audit-a-skill-estate/">Open Brew 11 · Estate roast</a>
+        </div>
+      </details>
+      <details class="brew" name="brew">
+        <summary><b>Set up a coding agent for a repo</b><i aria-hidden="true"></i><span>Dial-in</span></summary>
+        <div class="brew-body">
+          <p>Get a coding agent that follows the repo's rules and stays inside its usage: write or prune the rules and guardrails, tier the models by role, then pick the effort each large task deserves.</p>
+          <ol class="recipe">
+            <li><a href="/portable-harness/">portable-harness</a> <span class="or">or</span> <a href="/harness-audit/">harness-audit</a></li>
+            <li><a href="/setup-claude-advisor/">setup-claude-advisor</a> <span class="opt">optional</span></li>
+            <li><a href="/diagnose-usage/">diagnose-usage</a> <span class="opt">optional</span></li>
+            <li><a href="/choose-effort/">choose-effort</a> <span class="opt">optional</span></li>
+          </ol>
+          <a class="outcome" href="/workflows/set-up-a-coding-agent/">Open Brew 12 · Dial-in</a>
+        </div>
+      </details>
+      <!-- gen:outcomes:end -->
+    </div>
   </div>
 </header>
 
-<!-- gen:wall:start -->
-<div class="wall" aria-label="Every skill and mod">
-  <div class="wall-row"><div class="wall-track">
-    <a class="wcard" href="/caffeinity-routing/"><b>caffeinity-routing</b><code>arm-pz/caffeinity-skills</code></a>
-    <a class="wcard" href="/prompts-to-skill/"><b>prompts-to-skill</b><code>arm-pz/prompts-to-skill</code></a>
-    <a class="wcard" href="/prompts-to-skill-release/"><b>prompts-to-skill-release</b><code>arm-pz/prompts-to-skill-release</code></a>
-    <a class="wcard" href="/skill-launch/"><b>skill-launch</b><code>arm-pz/skill-launch</code></a>
-    <a class="wcard" href="/tune-skill-mod/"><b>tune-skill-mod</b><code>arm-pz/caffeinity-skills</code></a>
-    <a class="wcard" href="/tune-and-ship/"><b>tune-and-ship</b><code>arm-pz/caffeinity-skills</code></a>
-    <a class="wcard" href="/publish-pipeline/"><b>publish-pipeline</b><code>arm-pz/publish-pipeline</code></a>
-    <a class="wcard" href="/findable-polish/"><b>findable-polish</b><code>arm-pz/findable-polish</code></a>
-    <a class="wcard" href="/skill-estate/"><b>skill-estate</b><code>arm-pz/caffeinity-skills</code></a>
-    <a class="wcard" href="/get-indexed/"><b>get-indexed</b><code>arm-pz/get-indexed</code></a>
-    <a class="wcard" href="/site-prompt/"><b>site-prompt</b><code>arm-pz/site-prompt</code></a>
-    <a class="wcard" href="/web-preflight/"><b>web-preflight</b><code>arm-pz/web-preflight</code></a>
-    <a class="wcard" href="/pre-ship-performance-audit/"><b>pre-ship-performance-audit</b><code>arm-pz/pre-ship-performance-audit</code></a>
-    <a class="wcard" href="/release-gate-ledger/"><b>release-gate-ledger</b><code>arm-pz/release-gate-ledger</code></a>
-    <a class="wcard" href="/ship-sentinel/"><b>ship-sentinel</b><code>arm-pz/ship-sentinel</code></a>
-    <a class="wcard" href="/release-gate-mod/"><b>release-gate-mod</b><code>arm-pz/caffeinity-skills</code></a>
-    <a class="wcard" href="/pre-ship-security-red-team-mod/"><b>pre-ship-security-red-team-mod</b><code>arm-pz/caffeinity-skills</code></a>
-    <a class="wcard" href="/choose-effort/"><b>choose-effort</b><code>arm-pz/choose-effort</code></a>
-    <a class="wcard" href="/session-retrace/"><b>session-retrace</b><code>arm-pz/session-retrace</code></a>
-    <a class="wcard" href="/harness-audit/"><b>harness-audit</b><code>arm-pz/harness-audit</code></a>
-    <a class="wcard" href="/seo-crawl/"><b>seo-crawl</b><code>arm-pz/seo-crawl</code></a>
-    <a class="wcard" href="/keyword-resolver/"><b>keyword-resolver</b><code>arm-pz/keyword-resolver</code></a>
-    <a class="wcard" href="/wordsmith/"><b>wordsmith</b><code>arm-pz/wordsmith</code></a>
-    <a class="wcard" href="/sales-copy/"><b>sales-copy</b><code>arm-pz/sales-copy</code></a>
-    <a class="wcard" href="/cold-email-list-gate/"><b>cold-email-list-gate</b><code>arm-pz/cold-email-list-gate</code></a>
-    <a class="wcard" href="/recruiter-lens/"><b>recruiter-lens</b><code>arm-pz/recruiter-lens</code></a>
-    <a class="wcard" href="/application-pilot/"><b>application-pilot</b><code>arm-pz/application-pilot</code></a>
-    <a class="wcard" href="/research-brief/"><b>research-brief</b><code>arm-pz/research-brief</code></a>
-    <a class="wcard" href="/crash-test/"><b>crash-test</b><code>arm-pz/crash-test</code></a>
-    <a class="wcard" href="/strategy-memo/"><b>strategy-memo</b><code>arm-pz/strategy-memo</code></a>
-    <a class="wcard" href="/topic-primer/"><b>topic-primer</b><code>arm-pz/topic-primer</code></a>
-    <a class="wcard" href="/course-builder/"><b>course-builder</b><code>arm-pz/caffeinity-skills</code></a>
-    <a class="wcard" href="/caffeinity-routing/" aria-hidden="true" tabindex="-1"><b>caffeinity-routing</b><code>arm-pz/caffeinity-skills</code></a>
-    <a class="wcard" href="/prompts-to-skill/" aria-hidden="true" tabindex="-1"><b>prompts-to-skill</b><code>arm-pz/prompts-to-skill</code></a>
-    <a class="wcard" href="/prompts-to-skill-release/" aria-hidden="true" tabindex="-1"><b>prompts-to-skill-release</b><code>arm-pz/prompts-to-skill-release</code></a>
-    <a class="wcard" href="/skill-launch/" aria-hidden="true" tabindex="-1"><b>skill-launch</b><code>arm-pz/skill-launch</code></a>
-    <a class="wcard" href="/tune-skill-mod/" aria-hidden="true" tabindex="-1"><b>tune-skill-mod</b><code>arm-pz/caffeinity-skills</code></a>
-    <a class="wcard" href="/tune-and-ship/" aria-hidden="true" tabindex="-1"><b>tune-and-ship</b><code>arm-pz/caffeinity-skills</code></a>
-    <a class="wcard" href="/publish-pipeline/" aria-hidden="true" tabindex="-1"><b>publish-pipeline</b><code>arm-pz/publish-pipeline</code></a>
-    <a class="wcard" href="/findable-polish/" aria-hidden="true" tabindex="-1"><b>findable-polish</b><code>arm-pz/findable-polish</code></a>
-    <a class="wcard" href="/skill-estate/" aria-hidden="true" tabindex="-1"><b>skill-estate</b><code>arm-pz/caffeinity-skills</code></a>
-    <a class="wcard" href="/get-indexed/" aria-hidden="true" tabindex="-1"><b>get-indexed</b><code>arm-pz/get-indexed</code></a>
-    <a class="wcard" href="/site-prompt/" aria-hidden="true" tabindex="-1"><b>site-prompt</b><code>arm-pz/site-prompt</code></a>
-    <a class="wcard" href="/web-preflight/" aria-hidden="true" tabindex="-1"><b>web-preflight</b><code>arm-pz/web-preflight</code></a>
-    <a class="wcard" href="/pre-ship-performance-audit/" aria-hidden="true" tabindex="-1"><b>pre-ship-performance-audit</b><code>arm-pz/pre-ship-performance-audit</code></a>
-    <a class="wcard" href="/release-gate-ledger/" aria-hidden="true" tabindex="-1"><b>release-gate-ledger</b><code>arm-pz/release-gate-ledger</code></a>
-    <a class="wcard" href="/ship-sentinel/" aria-hidden="true" tabindex="-1"><b>ship-sentinel</b><code>arm-pz/ship-sentinel</code></a>
-    <a class="wcard" href="/release-gate-mod/" aria-hidden="true" tabindex="-1"><b>release-gate-mod</b><code>arm-pz/caffeinity-skills</code></a>
-    <a class="wcard" href="/pre-ship-security-red-team-mod/" aria-hidden="true" tabindex="-1"><b>pre-ship-security-red-team-mod</b><code>arm-pz/caffeinity-skills</code></a>
-    <a class="wcard" href="/choose-effort/" aria-hidden="true" tabindex="-1"><b>choose-effort</b><code>arm-pz/choose-effort</code></a>
-    <a class="wcard" href="/session-retrace/" aria-hidden="true" tabindex="-1"><b>session-retrace</b><code>arm-pz/session-retrace</code></a>
-    <a class="wcard" href="/harness-audit/" aria-hidden="true" tabindex="-1"><b>harness-audit</b><code>arm-pz/harness-audit</code></a>
-    <a class="wcard" href="/seo-crawl/" aria-hidden="true" tabindex="-1"><b>seo-crawl</b><code>arm-pz/seo-crawl</code></a>
-    <a class="wcard" href="/keyword-resolver/" aria-hidden="true" tabindex="-1"><b>keyword-resolver</b><code>arm-pz/keyword-resolver</code></a>
-    <a class="wcard" href="/wordsmith/" aria-hidden="true" tabindex="-1"><b>wordsmith</b><code>arm-pz/wordsmith</code></a>
-    <a class="wcard" href="/sales-copy/" aria-hidden="true" tabindex="-1"><b>sales-copy</b><code>arm-pz/sales-copy</code></a>
-    <a class="wcard" href="/cold-email-list-gate/" aria-hidden="true" tabindex="-1"><b>cold-email-list-gate</b><code>arm-pz/cold-email-list-gate</code></a>
-    <a class="wcard" href="/recruiter-lens/" aria-hidden="true" tabindex="-1"><b>recruiter-lens</b><code>arm-pz/recruiter-lens</code></a>
-    <a class="wcard" href="/application-pilot/" aria-hidden="true" tabindex="-1"><b>application-pilot</b><code>arm-pz/application-pilot</code></a>
-    <a class="wcard" href="/research-brief/" aria-hidden="true" tabindex="-1"><b>research-brief</b><code>arm-pz/research-brief</code></a>
-    <a class="wcard" href="/crash-test/" aria-hidden="true" tabindex="-1"><b>crash-test</b><code>arm-pz/crash-test</code></a>
-    <a class="wcard" href="/strategy-memo/" aria-hidden="true" tabindex="-1"><b>strategy-memo</b><code>arm-pz/strategy-memo</code></a>
-    <a class="wcard" href="/topic-primer/" aria-hidden="true" tabindex="-1"><b>topic-primer</b><code>arm-pz/topic-primer</code></a>
-    <a class="wcard" href="/course-builder/" aria-hidden="true" tabindex="-1"><b>course-builder</b><code>arm-pz/caffeinity-skills</code></a>
-  </div></div>
-  <div class="wall-row wall-rev"><div class="wall-track">
-    <a class="wcard" href="/draft-skill/"><b>draft-skill</b><code>arm-pz/draft-skill</code></a>
-    <a class="wcard" href="/tune-skill/"><b>tune-skill</b><code>arm-pz/tune-skill</code></a>
-    <a class="wcard" href="/skill-to-mod/"><b>skill-to-mod</b><code>arm-pz/skill-to-mod</code></a>
-    <a class="wcard" href="/tune-and-polish/"><b>tune-and-polish</b><code>arm-pz/tune-and-polish</code></a>
-    <a class="wcard" href="/skill-release-mod/"><b>skill-release-mod</b><code>arm-pz/caffeinity-skills</code></a>
-    <a class="wcard" href="/findable/"><b>findable</b><code>arm-pz/findable</code></a>
-    <a class="wcard" href="/upstream-check/"><b>upstream-check</b><code>arm-pz/upstream-check</code></a>
-    <a class="wcard" href="/upstream-polish/"><b>upstream-polish</b><code>arm-pz/upstream-polish</code></a>
-    <a class="wcard" href="/seo-sweep/"><b>seo-sweep</b><code>arm-pz/seo-sweep</code></a>
-    <a class="wcard" href="/portable-harness/"><b>portable-harness</b><code>arm-pz/portable-harness</code></a>
-    <a class="wcard" href="/production-code/"><b>production-code</b><code>arm-pz/production-code</code></a>
-    <a class="wcard" href="/pre-ship-security-red-team/"><b>pre-ship-security-red-team</b><code>arm-pz/pre-ship-security-red-team</code></a>
-    <a class="wcard" href="/release-gate-chair/"><b>release-gate-chair</b><code>arm-pz/release-gate-chair</code></a>
-    <a class="wcard" href="/release-gate-validator/"><b>release-gate-validator</b><code>arm-pz/release-gate-validator</code></a>
-    <a class="wcard" href="/paper-trail/"><b>paper-trail</b><code>arm-pz/caffeinity-skills</code></a>
-    <a class="wcard" href="/web-preflight-mod/"><b>web-preflight-mod</b><code>arm-pz/caffeinity-skills</code></a>
-    <a class="wcard" href="/pre-ship-performance-audit-mod/"><b>pre-ship-performance-audit-mod</b><code>arm-pz/caffeinity-skills</code></a>
-    <a class="wcard" href="/diagnose-usage/"><b>diagnose-usage</b><code>arm-pz/diagnose-usage</code></a>
-    <a class="wcard" href="/consistent-code-review/"><b>consistent-code-review</b><code>arm-pz/consistent-code-review</code></a>
-    <a class="wcard" href="/setup-claude-advisor/"><b>setup-claude-advisor</b><code>arm-pz/setup-claude-advisor</code></a>
-    <a class="wcard" href="/keyword-guard/"><b>keyword-guard</b><code>arm-pz/keyword-guard</code></a>
-    <a class="wcard" href="/seo-polish/"><b>seo-polish</b><code>arm-pz/seo-polish</code></a>
-    <a class="wcard" href="/platform-content/"><b>platform-content</b><code>arm-pz/platform-content</code></a>
-    <a class="wcard" href="/ai-team-blueprint/"><b>ai-team-blueprint</b><code>arm-pz/ai-team-blueprint</code></a>
-    <a class="wcard" href="/cold-email-ops/"><b>cold-email-ops</b><code>arm-pz/cold-email-ops</code></a>
-    <a class="wcard" href="/applicant-kit/"><b>applicant-kit</b><code>arm-pz/applicant-kit</code></a>
-    <a class="wcard" href="/career-track/"><b>career-track</b><code>arm-pz/career-track</code></a>
-    <a class="wcard" href="/data-readout/"><b>data-readout</b><code>arm-pz/data-readout</code></a>
-    <a class="wcard" href="/do-better/"><b>do-better</b><code>arm-pz/do-better</code></a>
-    <a class="wcard" href="/solo-income-blueprint/"><b>solo-income-blueprint</b><code>arm-pz/solo-income-blueprint</code></a>
-    <a class="wcard" href="/study-system/"><b>study-system</b><code>arm-pz/study-system</code></a>
-    <a class="wcard" href="/draft-skill/" aria-hidden="true" tabindex="-1"><b>draft-skill</b><code>arm-pz/draft-skill</code></a>
-    <a class="wcard" href="/tune-skill/" aria-hidden="true" tabindex="-1"><b>tune-skill</b><code>arm-pz/tune-skill</code></a>
-    <a class="wcard" href="/skill-to-mod/" aria-hidden="true" tabindex="-1"><b>skill-to-mod</b><code>arm-pz/skill-to-mod</code></a>
-    <a class="wcard" href="/tune-and-polish/" aria-hidden="true" tabindex="-1"><b>tune-and-polish</b><code>arm-pz/tune-and-polish</code></a>
-    <a class="wcard" href="/skill-release-mod/" aria-hidden="true" tabindex="-1"><b>skill-release-mod</b><code>arm-pz/caffeinity-skills</code></a>
-    <a class="wcard" href="/findable/" aria-hidden="true" tabindex="-1"><b>findable</b><code>arm-pz/findable</code></a>
-    <a class="wcard" href="/upstream-check/" aria-hidden="true" tabindex="-1"><b>upstream-check</b><code>arm-pz/upstream-check</code></a>
-    <a class="wcard" href="/upstream-polish/" aria-hidden="true" tabindex="-1"><b>upstream-polish</b><code>arm-pz/upstream-polish</code></a>
-    <a class="wcard" href="/seo-sweep/" aria-hidden="true" tabindex="-1"><b>seo-sweep</b><code>arm-pz/seo-sweep</code></a>
-    <a class="wcard" href="/portable-harness/" aria-hidden="true" tabindex="-1"><b>portable-harness</b><code>arm-pz/portable-harness</code></a>
-    <a class="wcard" href="/production-code/" aria-hidden="true" tabindex="-1"><b>production-code</b><code>arm-pz/production-code</code></a>
-    <a class="wcard" href="/pre-ship-security-red-team/" aria-hidden="true" tabindex="-1"><b>pre-ship-security-red-team</b><code>arm-pz/pre-ship-security-red-team</code></a>
-    <a class="wcard" href="/release-gate-chair/" aria-hidden="true" tabindex="-1"><b>release-gate-chair</b><code>arm-pz/release-gate-chair</code></a>
-    <a class="wcard" href="/release-gate-validator/" aria-hidden="true" tabindex="-1"><b>release-gate-validator</b><code>arm-pz/release-gate-validator</code></a>
-    <a class="wcard" href="/paper-trail/" aria-hidden="true" tabindex="-1"><b>paper-trail</b><code>arm-pz/caffeinity-skills</code></a>
-    <a class="wcard" href="/web-preflight-mod/" aria-hidden="true" tabindex="-1"><b>web-preflight-mod</b><code>arm-pz/caffeinity-skills</code></a>
-    <a class="wcard" href="/pre-ship-performance-audit-mod/" aria-hidden="true" tabindex="-1"><b>pre-ship-performance-audit-mod</b><code>arm-pz/caffeinity-skills</code></a>
-    <a class="wcard" href="/diagnose-usage/" aria-hidden="true" tabindex="-1"><b>diagnose-usage</b><code>arm-pz/diagnose-usage</code></a>
-    <a class="wcard" href="/consistent-code-review/" aria-hidden="true" tabindex="-1"><b>consistent-code-review</b><code>arm-pz/consistent-code-review</code></a>
-    <a class="wcard" href="/setup-claude-advisor/" aria-hidden="true" tabindex="-1"><b>setup-claude-advisor</b><code>arm-pz/setup-claude-advisor</code></a>
-    <a class="wcard" href="/keyword-guard/" aria-hidden="true" tabindex="-1"><b>keyword-guard</b><code>arm-pz/keyword-guard</code></a>
-    <a class="wcard" href="/seo-polish/" aria-hidden="true" tabindex="-1"><b>seo-polish</b><code>arm-pz/seo-polish</code></a>
-    <a class="wcard" href="/platform-content/" aria-hidden="true" tabindex="-1"><b>platform-content</b><code>arm-pz/platform-content</code></a>
-    <a class="wcard" href="/ai-team-blueprint/" aria-hidden="true" tabindex="-1"><b>ai-team-blueprint</b><code>arm-pz/ai-team-blueprint</code></a>
-    <a class="wcard" href="/cold-email-ops/" aria-hidden="true" tabindex="-1"><b>cold-email-ops</b><code>arm-pz/cold-email-ops</code></a>
-    <a class="wcard" href="/applicant-kit/" aria-hidden="true" tabindex="-1"><b>applicant-kit</b><code>arm-pz/applicant-kit</code></a>
-    <a class="wcard" href="/career-track/" aria-hidden="true" tabindex="-1"><b>career-track</b><code>arm-pz/career-track</code></a>
-    <a class="wcard" href="/data-readout/" aria-hidden="true" tabindex="-1"><b>data-readout</b><code>arm-pz/data-readout</code></a>
-    <a class="wcard" href="/do-better/" aria-hidden="true" tabindex="-1"><b>do-better</b><code>arm-pz/do-better</code></a>
-    <a class="wcard" href="/solo-income-blueprint/" aria-hidden="true" tabindex="-1"><b>solo-income-blueprint</b><code>arm-pz/solo-income-blueprint</code></a>
-    <a class="wcard" href="/study-system/" aria-hidden="true" tabindex="-1"><b>study-system</b><code>arm-pz/study-system</code></a>
-  </div></div>
-</div>
-<!-- gen:wall:end -->
-
-<section class="outcomes" id="outcomes" aria-labelledby="outcomes-h">
-  <div class="wrap">
-    <p class="eyebrow">Workflows</p>
-    <h2 class="title" id="outcomes-h">What do you need done?</h2>
-    <p class="section-lead">Each workflow chains skills that hand work to each other. Pick the outcome; its page lists the skills in order with one block to install them all.</p>
-    <div class="outcome-grid">
-      <!-- gen:outcomes:start -->
-      <a class="outcome" href="/workflows/build-a-skill/">
-        <b>Build a skill and make it installable</b>
-        <span>5 skills · Brew 1 · Pour-over</span>
-      </a>
-      <a class="outcome" href="/workflows/get-found/">
-        <b>Get a repo, skill or plugin found</b>
-        <span>4 skills · Brew 2 · Bloom</span>
-      </a>
-      <a class="outcome" href="/workflows/launch-safely/">
-        <b>Decide whether a site is safe to launch</b>
-        <span>6 skills · Brew 3 · Espresso</span>
-      </a>
-      <a class="outcome" href="/workflows/grow-search-traffic/">
-        <b>Grow organic search traffic</b>
-        <span>6 skills · Brew 4 · Cold brew</span>
-      </a>
-      <a class="outcome" href="/workflows/land-a-job/">
-        <b>Land a job</b>
-        <span>4 skills · Brew 5 · French press</span>
-      </a>
-      <a class="outcome" href="/workflows/make-a-decision/">
-        <b>Make a decision</b>
-        <span>5 skills · Brew 6 · Cupping</span>
-      </a>
-      <a class="outcome" href="/workflows/learn-a-skill/">
-        <b>Learn a skill</b>
-        <span>3 skills · Brew 7 · Slow drip</span>
-      </a>
-      <a class="outcome" href="/workflows/run-cold-outbound/">
-        <b>Run cold outbound</b>
-        <span>3 skills · Brew 8 · Nitro</span>
-      </a>
-      <a class="outcome" href="/workflows/launch-a-product/">
-        <b>Launch a one-person product</b>
-        <span>6 skills · Brew 9 · Moka pot</span>
-      </a>
-      <a class="outcome" href="/workflows/maintain-skills/">
-        <b>Maintain the skill family</b>
-        <span>3 skills · Brew 10 · Descale</span>
-      </a>
-      <a class="outcome" href="/workflows/audit-a-skill-estate/">
-        <b>Stand up or audit a skill estate</b>
-        <span>1 skill · Brew 11 · Estate roast</span>
-      </a>
-      <a class="outcome" href="/workflows/set-up-a-coding-agent/">
-        <b>Set up a coding agent for a repo</b>
-        <span>5 skills · Brew 12 · Dial-in</span>
-      </a>
-      <!-- gen:outcomes:end -->
-    </div>
-    <a class="more-link" href="/workflows/">Every workflow, step by step</a>
-  </div>
-</section>
-
 <section class="flags" aria-labelledby="flags-h">
   <div class="wrap">
-    <p class="eyebrow">Start with these</p>
-    <h2 class="title" id="flags-h">Three skills, shown working.</h2>
-    <p class="section-lead">Each one earned its place with a real run you can open. The rest are on the <a href="/skills/">skills page</a>, every one with its version, last update and known limits.</p>
-    <div class="flag-grid">
+    <h2 id="flags-h">Three skills, shown working.</h2>
+    <p class="sub">Each one earned its place with a real run you can open. The rest are on the <a href="/skills/">skills page</a>, every one with its version, last update and known limits.</p>
+    <div class="flag-list">
       <!-- gen:flagships:start -->
       <article class="flag">
-        <p class="flag-tag">release</p>
-        <h3><a href="/web-preflight/">Web Preflight</a></h3>
-        <p class="flag-blurb">Checks a site you own before you ship it, without pretending a status code is a finding. A 200 on /.env that matches the app shell is catch-all routing, a blanket 403 is an unanswered question, and a check that never ran becomes INCONCLUSIVE — never a pass.</p>
-        <p class="flag-run"><b>Shown working, 24 Oct 2026, on skills.caffeinity.com.</b> Probed 19 sensitive paths; nothing exposed and every security header in place: PASS. <a href="/#proof">See the run</a></p>
+        <div>
+          <h3><a href="/web-preflight/">Web Preflight</a></h3>
+          <p class="flag-tag">release · v1.0.0</p>
+        </div>
+        <div>
+          <p class="flag-blurb">Checks a site you own before you ship it, without pretending a status code is a finding. A 200 on /.env that matches the app shell is catch-all routing, a blanket 403 is an unanswered question, and a check that never ran becomes INCONCLUSIVE — never a pass.</p>
+          <p class="flag-run"><b>Shown working, 24 Oct 2026, on skills.caffeinity.com.</b> Probed 19 sensitive paths; nothing exposed and every security header in place: PASS. <a href="/#proof">See the run</a></p>
+        </div>
         <button class="cmd" type="button" data-copy="npx skills add arm-pz/web-preflight" aria-label="Copy the install command for web-preflight"><span>npx skills add arm-pz/web-preflight</span><span class="copy" aria-hidden="true">Copy</span></button>
       </article>
       <article class="flag">
-        <p class="flag-tag">seo</p>
-        <h3><a href="/seo-crawl/">SEO Crawl</a></h3>
-        <p class="flag-blurb">Crawls a site you own and returns deterministic, evidence-backed technical SEO findings, with blocked or unrun checks reported INCONCLUSIVE rather than a pass.</p>
-        <p class="flag-run"><b>Shown working, 24 Oct 2026, on skills.caffeinity.com.</b> Found one broken internal link across 24 pages; the re-crawl after the fix came back clean. <a href="/#proof">See the run</a></p>
+        <div>
+          <h3><a href="/seo-crawl/">SEO Crawl</a></h3>
+          <p class="flag-tag">seo · v1.0.0</p>
+        </div>
+        <div>
+          <p class="flag-blurb">Crawls a site you own and returns deterministic, evidence-backed technical SEO findings, with blocked or unrun checks reported INCONCLUSIVE rather than a pass.</p>
+          <p class="flag-run"><b>Shown working, 24 Oct 2026, on skills.caffeinity.com.</b> Found one broken internal link across 24 pages; the re-crawl after the fix came back clean. <a href="/#proof">See the run</a></p>
+        </div>
         <button class="cmd" type="button" data-copy="npx skills add arm-pz/seo-crawl" aria-label="Copy the install command for seo-crawl"><span>npx skills add arm-pz/seo-crawl</span><span class="copy" aria-hidden="true">Copy</span></button>
       </article>
       <article class="flag">
-        <p class="flag-tag">authoring</p>
-        <h3><a href="/tune-skill/">Tune Skill</a></h3>
-        <p class="flag-blurb">Audits and fine-tunes a skill that already exists: the description that never fires, overlap with installed siblings, stale names and counts, handoff contracts that do not hand off. Ships check_skill.py, a deterministic validator over frontmatter, folder and heading agreement, description length and reference paths that do not exist. Not for creating one from scratch; that is draft-skill.</p>
-        <p class="flag-run"><b>Shown working, 24 Oct 2026, on the 42 skills in this catalogue.</b> Caught one skill that strict installers could not load; fixed in that skill and in tune-skill. <a href="/#proof">See the run</a></p>
+        <div>
+          <h3><a href="/tune-skill/">Tune Skill</a></h3>
+          <p class="flag-tag">authoring · v1.0.0</p>
+        </div>
+        <div>
+          <p class="flag-blurb">Audits and fine-tunes a skill that already exists: the description that never fires, overlap with installed siblings, stale names and counts, handoff contracts that do not hand off. Ships check_skill.py, a deterministic validator over frontmatter, folder and heading agreement, description length and reference paths that do not exist. Not for creating one from scratch; that is draft-skill.</p>
+          <p class="flag-run"><b>Shown working, 24 Oct 2026, on the 42 skills in this catalogue.</b> Caught one skill that strict installers could not load; fixed in that skill and in tune-skill. <a href="/#proof">See the run</a></p>
+        </div>
         <button class="cmd" type="button" data-copy="npx skills add arm-pz/tune-skill" aria-label="Copy the install command for tune-skill"><span>npx skills add arm-pz/tune-skill</span><span class="copy" aria-hidden="true">Copy</span></button>
       </article>
       <!-- gen:flagships:end -->
@@ -564,14 +291,11 @@
   </div>
 </section>
 
-<section class="proof" id="proof" aria-labelledby="proof-h">
+<section class="proof roast" id="proof" aria-labelledby="proof-h">
   <div class="wrap">
-    <p class="eyebrow">Shown running · 23 and 24 October 2026</p>
-    <h2 class="title" id="proof-h">Tested on real targets, this site first.</h2>
-    <p class="section-lead">Each tab is a real run: what the skill found, and what changed because of it. Nothing here is a mock-up; where a fix is still waiting on a decision, the tab says so.</p>
+    <h2 id="proof-h">Tested on real targets, this site first.</h2>
+    <p class="sub">Seven real runs from 23 and 24 October 2026: what each skill found, and what changed because of it. Nothing here is a mock-up; where a fix is still waiting on a decision, the tab says so.</p>
     <div class="shell">
-      <div class="shell-bar">
-        <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
         <div class="tabs" role="tablist" aria-label="Real runs">
           <button type="button" role="tab" id="tab-seo-crawl" aria-controls="pane-seo-crawl" aria-selected="true">seo-crawl</button>
           <button type="button" role="tab" id="tab-web-preflight" aria-controls="pane-web-preflight" aria-selected="false" tabindex="-1">web-preflight</button>
@@ -581,7 +305,6 @@
           <button type="button" role="tab" id="tab-upstream-check" aria-controls="pane-upstream-check" aria-selected="false" tabindex="-1">upstream-check</button>
           <button type="button" role="tab" id="tab-draft-skill" aria-controls="pane-draft-skill" aria-selected="false" tabindex="-1">draft-skill</button>
         </div>
-      </div>
       <div class="pane" role="tabpanel" id="pane-seo-crawl" aria-labelledby="tab-seo-crawl">
         <div class="pane-col">
           <p class="pane-label">seo-crawl · skills.caffeinity.com</p>
@@ -729,22 +452,20 @@ check_skill.py      0 fail · 0 warn</pre></div>
           <p class="verdict">new; now eleven brews</p>
         </div>
       </div>
-      <div class="shell-progress" aria-hidden="true"><b></b></div>
     </div>
   </div>
 </section>
 
 <section class="install" id="install" aria-labelledby="install-h">
   <div class="wrap">
-    <p class="eyebrow">Install</p>
-    <h2 class="title" id="install-h">Everything, in the agent you use.</h2>
-    <p class="section-lead">One plugin carries every skill on this site plus twelve agents, one per workflow. Or take a single skill into any agent that reads a SKILL.md.</p>
+    <h2 id="install-h">Everything, in the agent you use.</h2>
+    <p class="sub">One plugin carries every skill on this site plus twelve agents, one per workflow. Or take a single skill into any agent that reads a SKILL.md.</p>
     <div class="install-grid">
       <article class="inst">
         <h3>Claude Code</h3>
         <p>Every skill, plus the twelve agents: <code>skill-builder</code>, <code>release-gatekeeper</code>, <code>seo-lead</code> and the rest.</p>
-        <button class="cmd" type="button" data-copy="/plugin marketplace add arm-pz/caffeinity-skills" aria-label="Copy the marketplace command"><span>/plugin marketplace add arm-pz/caffeinity-skills</span><span class="copy" aria-hidden="true">Copy</span></button>
-        <button class="cmd" type="button" data-copy="/plugin install caffeinity@caffeinity-skills" aria-label="Copy the plugin install command"><span>/plugin install caffeinity@caffeinity-skills</span><span class="copy" aria-hidden="true">Copy</span></button>
+        <button class="cmd slash" type="button" data-copy="/plugin marketplace add arm-pz/caffeinity-skills" aria-label="Copy the marketplace command"><span>/plugin marketplace add arm-pz/caffeinity-skills</span><span class="copy" aria-hidden="true">Copy</span></button>
+        <button class="cmd slash" type="button" data-copy="/plugin install caffeinity@caffeinity-skills" aria-label="Copy the plugin install command"><span>/plugin install caffeinity@caffeinity-skills</span><span class="copy" aria-hidden="true">Copy</span></button>
       </article>
       <article class="inst">
         <h3>Codex</h3>
@@ -761,85 +482,33 @@ check_skill.py      0 fail · 0 warn</pre></div>
   </div>
 </section>
 
-<section class="band" aria-labelledby="band-h">
+<section class="band ember" aria-labelledby="band-h">
   <div class="wrap">
-    <div class="band-box">
-      <div>
-        <h2 id="band-h">Need skills for your team's own work?</h2>
-        <p>We build custom skills and workflows, tested on your real tasks, for the agents your team already uses.</p>
-      </div>
-      <a class="pill" href="/work/">Work with us</a>
+    <div>
+      <h2 id="band-h">Need skills for your team's own work?</h2>
+      <p>We build custom skills and workflows, tested on your real tasks, for the agents your team already uses.</p>
     </div>
+    <a class="btn" href="/work/">Work with us</a>
   </div>
 </section>
 
-<section class="close" aria-labelledby="close-h">
+<footer class="roast">
   <div class="wrap">
-    <h2 class="title" id="close-h">Open text you can read before you install.</h2>
     <div class="close-grid">
-      <p><b>Plain markdown</b>A skill is a SKILL.md plus references and, sometimes, a script. Every card links to its source on GitHub.</p>
-      <p><b>One line to install</b>Each card carries the exact command. <code>npx skills add</code> works with any agent that reads skills; mods install inside Claude Code.</p>
+      <p><b>Plain markdown</b>A skill is a SKILL.md plus references and, sometimes, a script. Every skill links to its source on GitHub.</p>
+      <p><b>One line to install</b><code>npx skills add</code> works with any agent that reads skills; mods install inside Claude Code.</p>
       <p><b>Something wrong?</b>Every skill has its own repo. <a href="https://github.com/arm-pz" target="_blank" rel="noopener">Open an issue</a> on the one that let you down.</p>
     </div>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap">
     <p class="wordmark" aria-hidden="true">caffeinity<b>.</b></p>
     <div class="meta">
       <span>Skillsmith by <a href="https://caffeinity.com/">Caffeinity</a>: open agent skills by Abdul Rahman P Z. Each skill lives in its own <a href="https://github.com/arm-pz">arm-pz</a> repo; the plugin marketplace is <a href="https://github.com/arm-pz/caffeinity-skills">arm-pz/caffeinity-skills</a>. Not connected to the Skillsmith registry at skillsmith.app or SkillSmith at skillsmith.com.</span>
       <a href="/work/">Custom skills for your team</a>
       <a href="https://github.com/arm-pz" target="_blank" rel="noopener">github.com/arm-pz</a>
     </div>
-    <p class="kural" style="flex-basis:100%;margin:0;padding:18px 0 28px;border-top:1px solid color-mix(in srgb,currentColor 18%,transparent);display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;font-size:14px;line-height:1.5"><span lang="ta" style="font-family:'Noto Sans Tamil','Tamil Sangam MN','Nirmala UI',Latha,sans-serif;font-size:17px;font-weight:500;opacity:1">யாம் பெற்ற இன்பம் பெறுக இவ்வையகம்</span><span style="opacity:.75">“May this world attain the same bliss that I have attained.”</span></p>
+    <p class="kural"><span lang="ta">யாம் பெற்ற இன்பம் பெறுக இவ்வையகம்</span><span>“May this world attain the same bliss that I have attained.”</span></p>
   </div>
 </footer>
 
-<script>
-(function(){
-  var q=document.getElementById('q'),status=document.getElementById('find-status'),empty=document.getElementById('empty');
-  var cards=[].slice.call(document.querySelectorAll('.skill')),groups=[].slice.call(document.querySelectorAll('.sk-group'));
-  function filter(){
-    if(!q)return;
-    var terms=q.value.toLowerCase().split(/\s+/).filter(Boolean),shown=0;
-    cards.forEach(function(c){
-      var hay=c.getAttribute('data-search'),on=terms.every(function(t){return hay.indexOf(t)!==-1;});
-      c.hidden=!on;if(on)shown++;
-    });
-    groups.forEach(function(g){g.hidden=!g.querySelector('.skill:not([hidden])');});
-    empty.hidden=shown>0;
-    status.textContent=terms.length?(shown+' of '+cards.length+(shown===1?' matches':' match')):'';
-  }
-  if(q)q.addEventListener('input',filter);
-  var tabs=[].slice.call(document.querySelectorAll('.tabs [role="tab"]')),bar=document.querySelector('.shell-progress b');
-  function show(i,focus){
-    tabs.forEach(function(t,j){
-      var on=i===j;t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1;
-      document.getElementById(t.getAttribute('aria-controls')).hidden=!on;
-    });
-    if(bar)bar.style.width=((i+1)/tabs.length*100)+'%';
-    if(focus)tabs[i].focus();
-  }
-  tabs.forEach(function(t,i){
-    t.addEventListener('click',function(){show(i);});
-    t.addEventListener('keydown',function(e){
-      var k={ArrowRight:1,ArrowLeft:-1}[e.key];
-      if(k){e.preventDefault();show((i+k+tabs.length)%tabs.length,true);}
-    });
-  });
-  if(tabs.length)show(0);
-  [].forEach.call(document.querySelectorAll('[data-copy]'),function(b){
-    b.addEventListener('click',function(){
-      var label=b.querySelector('.copy');
-      if(!navigator.clipboard){return;}
-      navigator.clipboard.writeText(b.getAttribute('data-copy')).then(function(){
-        label.textContent='Copied';setTimeout(function(){label.textContent='Copy';},1600);
-      },function(){});
-    });
-  });
-})();
-</script>
-</body>
+<script src="/assets/site.js" defer></script>
 </body>
 </html>

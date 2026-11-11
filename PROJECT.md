@@ -63,13 +63,30 @@ says when a bespoke page's copy may still use the old name.
 
 | Path | What | Made by |
 | --- | --- | --- |
-| `/` | Outcome-led front door: hero, one card per workflow, three featured skills, proof runs, install, custom work | `index.html` shell; `gen_home.py` fills its regions |
+| `/` | Outcome-led front door: the claim beside the brew menu (one row per workflow, opening to its recipe), three featured skills, proof runs, install, custom work | `index.html` shell; `gen_home.py` fills its regions |
 | `/skills/` | Every skill by group, with search | `skills/index.html` shell + `gen_home.py` |
 | `/mods/` | Every Claude Code mod | `mods/index.html` shell + `gen_home.py` |
 | `/workflows/` and `/workflows/<slug>/` | Every workflow, then one page each with its steps and one install block | `workflows/index.html` shell + `gen_home.py`; the per-workflow pages are fully generated from `templates/workflow-page.html` |
 | `/work/` | Custom skills service | hand-written |
 | `/seo/` | The AI-driven SEO landing page (three.js keyboard) | built in [arm-pz/seopage](https://github.com/arm-pz/seopage): change it there, run `npm run build:seo`, copy `dist-seo/` over `seo/`; never edit `seo/` here |
 | `/<name>/` | One page per skill or mod; item URLs stay flat whatever their type | `gen_page.py` (generated) or hand-written (bespoke) |
+
+### Design system
+
+One look across every page type, in two stylesheets under `assets/` (copied to `dist/assets/` by `make_dist.sh`):
+
+| File | Used by | Holds |
+| --- | --- | --- |
+| `assets/site.css` | the hub shells, `/work/`, `404.html`, both templates | tokens, type scale, nav, footer, buttons, every hub component |
+| `assets/skill.css` | the hand-written skill pages, loaded after their inline `<style>` | the same palette mapped onto those pages' token names (`--ink` is the ground there), plus nav, buttons, footer |
+| `assets/site.js` | pages that link it | copy buttons (`data-copy`), the `/skills/` filter, the proof tabs |
+
+Rules the pages follow: the ground is porcelain and the type espresso; a section that needs weight changes
+its whole ground (`.roast`, `.ember`, `.tone`) instead of drawing a box, and those classes re-point the
+tokens so anything inside follows. The brand orange is for the one action on a screen and the ember band.
+Five type sizes, Newsreader for display and Instrument Sans for everything else; IBM Plex Mono only for
+commands and code. Radius is 6px on controls and 0 on fields. Change a colour in `assets/site.css` and
+mirror it in `assets/skill.css`; do not add raw hex values to a page.
 
 The hub shells are hand-written; only the text between `<!-- gen:NAME:start -->` and
 `<!-- gen:NAME:end -->` is generated, and `gen_home.py --check` fails on drift. Section names are

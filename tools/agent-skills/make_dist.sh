@@ -17,12 +17,13 @@ if [ -d dist ]; then
     exit 1
   fi
 fi
-mkdir -p dist/agent-skills dist/.well-known/agent-skills dist/fonts
+mkdir -p dist/agent-skills dist/.well-known/agent-skills dist/fonts dist/assets
 
 for f in 404.html _headers favicon.ico favicon.svg robots.txt index.html; do
   cp "$f" dist/
 done
 cp -r fonts/. dist/fonts/
+cp -r assets/. dist/assets/
 cp .well-known/skills.json dist/.well-known/skills.json
 
 cp out/*.tar.gz dist/agent-skills/

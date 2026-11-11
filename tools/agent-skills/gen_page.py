@@ -20,20 +20,21 @@ HEALTH_URL = "https://github.com/arm-pz/skills-site/blob/main/.github/workflows/
 AGENTS = "Claude Code, Codex, Cursor, Qoder and any agent that loads a SKILL.md"
 # Hand-written pages come in a dark and a light palette; the fallbacks cover both.
 QUALITY_CSS = """<style>
-  .qb{--qb-line:var(--rule,var(--line,color-mix(in srgb,currentColor 14%,transparent)));padding:clamp(48px,6vw,80px) 0;border-top:1px solid var(--qb-line)}
-  .qb-kicker{font-family:var(--mono);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim,var(--muted))}
-  .qb h2{font-family:var(--serif);font-weight:400;font-size:clamp(30px,3.6vw,44px);line-height:1.08;letter-spacing:-.015em;margin-top:10px}
-  .qb-lead{color:var(--dim,var(--muted));max-width:62ch;margin-top:12px;font-size:16px}
-  .qb a{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.22em}
-  .qb-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:0 36px;margin-top:28px}
-  .qb-grid>div{border-top:1px solid var(--qb-line);padding:16px 0 18px}
-  .qb dt{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim,var(--muted))}
-  .qb dd{margin:6px 0 0;font-size:16px;line-height:1.5}
-  .qb dd small{display:block;color:var(--dim,var(--muted));font-size:14px;margin-top:2px}
+  .qb{--qb-line:var(--rule,var(--line,color-mix(in srgb,currentColor 14%,transparent)));--qb-dim:var(--dim,var(--muted));padding:clamp(64px,9vw,128px) 0}
+  .qb h2{font-family:var(--serif);font-weight:400;font-size:clamp(34px,4.3vw,60px);line-height:1;letter-spacing:-.024em;margin:0}
+  .qb-lead{color:var(--qb-dim);max-width:58ch;margin-top:18px;font-size:17px}
+  .qb a{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em}
+  .qb-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:0 clamp(28px,4vw,64px);margin-top:clamp(32px,4vw,56px)}
+  .qb-grid>div{border-top:2px solid currentColor;padding:14px 0 30px}
+  .qb dt{font-size:14px;font-weight:600;line-height:1.3;color:var(--qb-dim)}
+  .qb dd{margin:8px 0 0;font-family:var(--serif);font-size:24px;line-height:1.15;letter-spacing:-.01em}
+  .qb dd small{display:block;font-family:var(--sans);letter-spacing:0;color:var(--qb-dim);font-size:15px;line-height:1.5;margin-top:8px}
   .qb .qb-wide{grid-column:1/-1}
-  .qb ul{margin:6px 0 0;padding-left:20px;display:grid;gap:4px}
-  .qb .qb-flag{font-weight:600}
-  .qb .qb-flag.fail{color:var(--ember,var(--accent))}
+  .qb .qb-wide dd{font-family:var(--sans);font-size:17px;line-height:1.55;letter-spacing:0;max-width:78ch}
+  .qb ul{list-style:none;margin:8px 0 0;padding:0}
+  .qb li{padding:10px 0;border-top:1px solid var(--qb-line)}
+  .qb .qb-flag{font-weight:400}
+  .qb .qb-flag.fail{box-shadow:inset 0 -.14em 0 var(--ember,var(--accent))}
 </style>"""
 OSI = {"MIT", "Apache-2.0", "AGPL-3.0", "GPL-3.0", "MPL-2.0",
        "BSD-3-Clause", "BSD-2-Clause", "ISC", "Unlicense"}
@@ -196,7 +197,6 @@ def quality_html(entry, health=None):
         f'{esc(p["needs"])}</small></dd></div>' for p in entry.get("pairsWith", []))
     cells = "\n".join(f"      <div><dt>{k}</dt><dd>{v}</dd></div>" for k, v in rows)
     return (f'{QUALITY_START}\n<section class="qb" aria-labelledby="qb-h">\n  <div class="wrap">\n'
-            f'    <p class="qb-kicker">Quality record</p>\n'
             f'    <h2 id="qb-h">Know what you are installing.</h2>\n'
             f'    <p class="qb-lead">Version, date and limits are read from the repo on every sync, and the '
             f'check runs every night. Real-world runs are listed only with their evidence.</p>\n'
@@ -269,6 +269,8 @@ def render_page(entry, manifest=None, health=None):
         "CANONICAL": esc(canonical),
         "JSON_LD": json_ld,
         "NAME": esc(name),
+        "SECTION": "Mods" if mod else "Skills",
+        "SECTION_URL": "/mods/" if mod else "/skills/",
         "TITLE": esc(entry["title"]),
         "BLURB": esc(entry.get("blurb") or meta_description(source["description"])),
         "PURPOSE": esc(purpose or source["description"]),
