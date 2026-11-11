@@ -69,13 +69,16 @@ def card(skill):
         chips.append("tested " + esc(human_date(skill["tested"]["date"])))
     chip_html = "".join(f'<span class="chip{" chip-hot" if c != chips[0] else ""}">{c}</span>'
                         for c in chips)
+    install = install_of(skill)
     return [
         f'      <article class="skill" id="{name}" data-search="{search}">',
         f'        <p class="chips">{chip_html}</p>',
         f'        <h3><a href="/{name}/">{esc(skill["title"])}</a></h3>',
         f'        <p class="sk-blurb">{esc(skill["blurb"])}</p>',
         f'        <p class="sk-stats">{esc(skill["stats"])}</p>',
-        f'        <code class="sk-install">{esc(install_of(skill))}</code>',
+        f'        <button class="cmd sk-install" type="button" data-copy="{attr(install)}" '
+        f'aria-label="Copy the install command for {name}"><span>{esc(install)}</span>'
+        f'<span class="copy" aria-hidden="true">Copy</span></button>',
         '        <p class="sk-links">',
         f'          <a href="/{name}/">Install page</a>',
         f'          <a href="{repo}" target="_blank" rel="noopener">Source</a>',
@@ -130,27 +133,6 @@ def render_mods(manifest):
     return "\n".join(lines)
 
 
-def render_wall(manifest):
-    """Two drifting rows of small cards: every skill and mod at a glance, linking to its page.
-
-    Each row holds its cards twice so the CSS loop is seamless; the copy is hidden from
-    assistive tech and the tab order.
-    """
-    cards = visible(manifest)
-    rows = [cards[0::2], cards[1::2]]
-    lines = ['<div class="wall" aria-label="Every skill and mod">']
-    for i, row in enumerate(rows):
-        lines.append(f'  <div class="wall-row{" wall-rev" if i else ""}"><div class="wall-track">')
-        for copy in (False, True):
-            hide = ' aria-hidden="true" tabindex="-1"' if copy else ""
-            for s in row:
-                lines.append(f'    <a class="wcard" href="/{esc(s["name"])}/"{hide}><b>{esc(s["name"])}</b>'
-                             f'<code>{esc(s["repo"])}</code></a>')
-        lines.append('  </div></div>')
-    lines.append('</div>')
-    return "\n".join(lines)
-
-
 def flow_skills(flow):
     return [n for step in flow["steps"] for n in step["skills"]]
 
@@ -178,14 +160,30 @@ def render_workflows(manifest):
 
 
 def render_outcomes(manifest):
-    """The homepage's front door: one card per workflow, named by its outcome."""
+    """The homepage's brew menu: one row per workflow, named by its outcome.
+
+    Each row is a <details> that opens to the recipe (the skills in order) and a link to the
+    workflow's page. They share a name, so browsers that support it keep one open at a time;
+    the first starts open so the menu shows what a row holds.
+    """
     lines = []
-    for flow in manifest.get("workflows", []):
-        n = len(set(flow_skills(flow)))
-        lines += [f'      <a class="outcome" href="/workflows/{esc(flow["slug"])}/">',
-                  f'        <b>{esc(flow["title"])}</b>',
-                  f'        <span>{n} skill{"" if n == 1 else "s"} · {esc(skilllib.brew_label(flow))}</span>',
-                  '      </a>']
+    for i, flow in enumerate(manifest.get("workflows", [])):
+        url = f'/workflows/{esc(flow["slug"])}/'
+        lines += [f'      <details class="brew" name="brew"{" open" if i == 0 else ""}>',
+                  f'        <summary><b>{esc(flow["title"])}</b><i aria-hidden="true"></i>'
+                  f'<span>{esc(flow["name"])}</span></summary>',
+                  '        <div class="brew-body">',
+                  f'          <p>{esc(flow["summary"])}</p>',
+                  '          <ol class="recipe">']
+        for step in flow["steps"]:
+            links = " <span class=\"or\">or</span> ".join(
+                f'<a href="/{esc(n)}/">{esc(n)}</a>' for n in step["skills"])
+            opt = ' <span class="opt">optional</span>' if step.get("optional") else ""
+            lines.append(f'            <li>{links}{opt}</li>')
+        lines += ['          </ol>',
+                  f'          <a class="outcome" href="{url}">Open {esc(skilllib.brew_label(flow))}</a>',
+                  '        </div>',
+                  '      </details>']
     return "\n".join(lines)
 
 
@@ -197,13 +195,19 @@ def render_flagships(manifest):
         name = esc(skill["name"])
         evidence = attr(tested["evidence"])
         external = ' target="_blank" rel="noopener"' if tested["evidence"].startswith("https://") else ""
-        lines += [f'      <article class="flag">',
-                  f'        <p class="flag-tag">{esc(skill["tag"])}</p>',
-                  f'        <h3><a href="/{name}/">{esc(skill["title"])}</a></h3>',
-                  f'        <p class="flag-blurb">{esc(skill["blurb"])}</p>',
-                  f'        <p class="flag-run"><b>Shown working, {esc(human_date(tested["date"]))}, '
+        version = (skill.get("quality") or {}).get("version")
+        version = f" · v{esc(version)}" if version else ""
+        lines += ['      <article class="flag">',
+                  '        <div>',
+                  f'          <h3><a href="/{name}/">{esc(skill["title"])}</a></h3>',
+                  f'          <p class="flag-tag">{esc(skill["tag"])}{version}</p>',
+                  '        </div>',
+                  '        <div>',
+                  f'          <p class="flag-blurb">{esc(skill["blurb"])}</p>',
+                  f'          <p class="flag-run"><b>Shown working, {esc(human_date(tested["date"]))}, '
                   f'on {esc(tested["target"])}.</b> {esc(tested["result"])} '
                   f'<a href="{evidence}"{external}>See the run</a></p>',
+                  '        </div>',
                   f'        <button class="cmd" type="button" data-copy="{attr(install_of(skill))}" '
                   f'aria-label="Copy the install command for {name}"><span>{esc(install_of(skill))}</span>'
                   f'<span class="copy" aria-hidden="true">Copy</span></button>',
@@ -240,7 +244,6 @@ REGIONS = {
     "skills": render_skills,
     "jump": render_jump,
     "mods": render_mods,
-    "wall": render_wall,
     "workflows": render_workflows,
     "outcomes": render_outcomes,
     "flagships": render_flagships,

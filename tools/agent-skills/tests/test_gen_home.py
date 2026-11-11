@@ -96,7 +96,9 @@ class GenHomeTest(unittest.TestCase):
         self.assertIn('<p class="flow-id">Brew 1 · Pour-over</p>', out)
         self.assertIn('<h3><a href="/workflows/edit-a-page/">Edit a page</a></h3>', out)
         self.assertIn('<a class="outcome" href="/workflows/edit-a-page/">', out)
-        self.assertIn("1 skill · Brew 1 · Pour-over", out)
+        self.assertIn('<summary><b>Edit a page</b><i aria-hidden="true"></i><span>Pour-over</span></summary>', out)
+        self.assertIn('<details class="brew" name="brew" open>', out)
+        self.assertIn("Open Brew 1 · Pour-over</a>", out)
 
     def test_flagships_need_a_featured_skill_and_show_its_run(self):
         self.assertNotIn('class="flag"', render())

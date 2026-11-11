@@ -19,15 +19,15 @@
 <style>
   /* Same tokens as the generated skill page: light paper, dark when the reader prefers dark. */
   :root{
-    --bg:#f2eee5;
-    --surface:#fffdf8;
-    --ink:#17141b;
-    --muted:#5c5562;
+    --bg:#eeefe9;
+    --surface:#f9f9f5;
+    --ink:#1d1613;
+    --muted:#5d544e;
     --accent:#ff6a3d;
-    --accent-ink:#1a0c06;
-    --paper:#e9e3d6;
-    --paper-ink:#1c1820;
-    --paper-muted:#57515e;
+    --accent-ink:#1d0d06;
+    --paper:#e0e2d9;
+    --paper-ink:#1d1613;
+    --paper-muted:#5d544e;
     --held:#ff8a63;
     --serif:'Newsreader',Georgia,serif;
     --sans:'Instrument Sans',system-ui,sans-serif;
@@ -36,7 +36,7 @@
     --gutter:clamp(16px,5vw,56px);
   }
   @media (prefers-color-scheme:dark){
-    :root{--bg:#121016;--surface:#1d1a23;--ink:#ede8de;--muted:#a59eae;--paper:#ebe5d7}
+    :root{--bg:#16110f;--surface:#211a17;--ink:#efe9dd;--muted:#b3a79c;--paper:#efe9dd}
   }
   *{margin:0;padding:0;box-sizing:border-box}
   body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
@@ -158,6 +158,23 @@
     *,*::before,*::after{transition:none!important;animation:none!important}
   }
   .brand-by{font-size:.62em;letter-spacing:.01em;opacity:.65;margin-left:.3em;white-space:nowrap}
+  /* shared skin: same nav, radius and espresso footer as /assets/site.css */
+  .nav .wrap{height:68px}
+  .brand{font-size:22px}
+  .brand-by{opacity:1;color:var(--muted)}
+  .nav-links{gap:26px;font-size:15.5px}
+  .hero h1{font-size:clamp(46px,6.9vw,104px);line-height:.96;letter-spacing:-.03em}
+  h2{font-size:clamp(34px,4.3vw,60px);line-height:1;letter-spacing:-.024em}
+  .console,pre{border-radius:6px}
+  .copy,.btn,.tabs button{border-radius:6px}
+  .more{background:var(--paper)}
+  .related{display:grid;gap:2px;border-radius:6px;overflow:hidden}
+  .related a{border-top:0;background:var(--surface);padding:22px clamp(18px,2.2vw,28px)}
+  .related a:hover strong{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.16em}
+  footer{background:#1d1613;color:#f1ece2}
+  footer .wrap{color:#b9ada1}
+  footer a{color:#f1ece2}
+  @media (prefers-color-scheme:dark){footer{background:#0d0908}.more{background:var(--surface)}.related a{background:var(--bg)}}
 </style>
 <script type="application/ld+json">
 {
@@ -178,20 +195,21 @@
 </script>
 <!-- gen:quality-css:start -->
 <style>
-  .qb{--qb-line:var(--rule,var(--line,color-mix(in srgb,currentColor 14%,transparent)));padding:clamp(48px,6vw,80px) 0;border-top:1px solid var(--qb-line)}
-  .qb-kicker{font-family:var(--mono);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim,var(--muted))}
-  .qb h2{font-family:var(--serif);font-weight:400;font-size:clamp(30px,3.6vw,44px);line-height:1.08;letter-spacing:-.015em;margin-top:10px}
-  .qb-lead{color:var(--dim,var(--muted));max-width:62ch;margin-top:12px;font-size:16px}
-  .qb a{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.22em}
-  .qb-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:0 36px;margin-top:28px}
-  .qb-grid>div{border-top:1px solid var(--qb-line);padding:16px 0 18px}
-  .qb dt{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim,var(--muted))}
-  .qb dd{margin:6px 0 0;font-size:16px;line-height:1.5}
-  .qb dd small{display:block;color:var(--dim,var(--muted));font-size:14px;margin-top:2px}
+  .qb{--qb-line:var(--rule,var(--line,color-mix(in srgb,currentColor 14%,transparent)));--qb-dim:var(--dim,var(--muted));padding:clamp(64px,9vw,128px) 0}
+  .qb h2{font-family:var(--serif);font-weight:400;font-size:clamp(34px,4.3vw,60px);line-height:1;letter-spacing:-.024em;margin:0}
+  .qb-lead{color:var(--qb-dim);max-width:58ch;margin-top:18px;font-size:17px}
+  .qb a{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em}
+  .qb-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:0 clamp(28px,4vw,64px);margin-top:clamp(32px,4vw,56px)}
+  .qb-grid>div{border-top:2px solid currentColor;padding:14px 0 30px}
+  .qb dt{font-size:14px;font-weight:600;line-height:1.3;color:var(--qb-dim)}
+  .qb dd{margin:8px 0 0;font-family:var(--serif);font-size:24px;line-height:1.15;letter-spacing:-.01em}
+  .qb dd small{display:block;font-family:var(--sans);letter-spacing:0;color:var(--qb-dim);font-size:15px;line-height:1.5;margin-top:8px}
   .qb .qb-wide{grid-column:1/-1}
-  .qb ul{margin:6px 0 0;padding-left:20px;display:grid;gap:4px}
-  .qb .qb-flag{font-weight:600}
-  .qb .qb-flag.fail{color:var(--ember,var(--accent))}
+  .qb .qb-wide dd{font-family:var(--sans);font-size:17px;line-height:1.55;letter-spacing:0;max-width:78ch}
+  .qb ul{list-style:none;margin:8px 0 0;padding:0}
+  .qb li{padding:10px 0;border-top:1px solid var(--qb-line)}
+  .qb .qb-flag{font-weight:400}
+  .qb .qb-flag.fail{box-shadow:inset 0 -.14em 0 var(--ember,var(--accent))}
 </style>
 <!-- gen:quality-css:end -->
 </head>
@@ -201,7 +219,7 @@
   <div class="wrap">
     <a class="brand" href="/"><b>∧</b>skillsmith <span class="brand-by">by caffeinity</span></a>
     <div class="nav-links">
-      <a href="/skills/">All skills</a>
+      <a href="/mods/">All mods</a>
       <a href="https://github.com/arm-pz/ship-sentinel" target="_blank" rel="noopener">Source</a>
     </div>
   </div>
@@ -242,7 +260,6 @@
 <!-- gen:quality:start -->
 <section class="qb" aria-labelledby="qb-h">
   <div class="wrap">
-    <p class="qb-kicker">Quality record</p>
     <h2 id="qb-h">Know what you are installing.</h2>
     <p class="qb-lead">Version, date and limits are read from the repo on every sync, and the check runs every night. Real-world runs are listed only with their evidence.</p>
     <dl class="qb-grid">
