@@ -1,0 +1,13 @@
+{
+  "name": "skillsmith-fx",
+  "private": true,
+  "description": "Builds /assets/motion.js (GSAP scroll choreography) and /assets/forge.js (the three.js hero).",
+  "scripts": {
+    "build": "esbuild --bundle --format=esm --minify --target=es2020 --legal-comments=none --outdir=../../assets src/forge.js && esbuild --bundle --format=esm --minify --target=es2020 --legal-comments=none --outdir=../../assets --external:./forge.js src/motion.js"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0",
+    "gsap": "^3.13.0",
+    "three": "^0.180.0"
+  }
+}
