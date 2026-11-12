@@ -25,10 +25,10 @@ body{background-image:none;font-size:17px;line-height:1.55;-webkit-font-smoothin
 .nav{background:var(--ink);-webkit-backdrop-filter:none;backdrop-filter:none;border-bottom:0}
 .nav .wrap{height:auto;min-height:64px;gap:8px 24px}
 .brand-row{display:flex;align-items:baseline;gap:10px;min-width:0;font-size:15px;color:var(--dim);white-space:nowrap}
-.brand-row .brand{font-size:22px;font-weight:400;letter-spacing:0;gap:6px;color:var(--paper)}
-.brand .caret{font-family:var(--serif);font-size:22px;transform:none}
+.brand-row .brand{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:20px;font-weight:500;letter-spacing:-.03em;gap:0;color:var(--paper)}
+.brand .caret{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:21px;font-weight:500;color:#ff6a3d;transform:none;margin-right:.06em}
 .brand-row .crumb{color:var(--dim);transition:color .2s}
-.brand-row .crumb::before,.brand-row .here::before{content:"/";margin-right:10px;opacity:.5}
+.brand-row .crumb::before,.brand-row .here::before{content:"/";margin-right:10px;color:#ff6a3d}
 .brand-row .here{color:var(--paper);overflow:hidden;text-overflow:ellipsis}
 .nav-links{gap:24px;font-size:15px}
 .nav-links .src{border:0;background:var(--raised);border-radius:6px;padding:8px 12px;font-weight:600}

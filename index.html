@@ -18,6 +18,7 @@
 <link rel="preload" href="/fonts/files/cY9AfjOCX1hbuyalUrK4397yjA.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/files/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/site.css">
+<script>if(!matchMedia("(prefers-reduced-motion:reduce)").matches)document.documentElement.classList.add("fx")</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -57,11 +58,11 @@
 }
 </script>
 </head>
-<body>
+<body class="home">
 
 <nav class="nav" aria-label="Site">
   <div class="wrap">
-    <a class="brand" href="/"><b>∧</b>skillsmith <span class="brand-by">by caffeinity</span></a>
+    <a class="brand" href="/"><b>/</b>skillsmith <span class="brand-by">by caffeinity</span></a>
     <div class="nav-links">
       <a href="/skills/">Skills</a>
       <a href="/workflows/">Workflows</a>
@@ -75,18 +76,71 @@
   </div>
 </nav>
 
-<header class="hero">
-  <div class="hero-copy">
-    <h1>Agent skills that finish the job.</h1>
-    <p class="lead">Plain-markdown skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md. Each does one concrete job and shows its evidence.</p>
-    <button class="cmd" type="button" data-copy="npx skills add arm-pz/caffeinity-skills --skill caffeinity-routing" aria-label="Copy the install command for caffeinity-routing"><span>npx skills add arm-pz/caffeinity-skills --skill caffeinity-routing</span><span class="copy" aria-hidden="true">Copy</span></button>
-    <p class="small hero-note">Installs the router: describe an outcome and it picks the skills. Or <a href="/skills/">browse every skill</a>.</p>
-    <!-- gen:stats:start --><p class="stats">56 skills and 7 mods · 12 workflows · 9 categories · 0 API keys</p><!-- gen:stats:end -->
+<div class="stage roast">
+  <div class="stage-fx" aria-hidden="true"><canvas id="forge"></canvas></div>
+
+  <header class="hero">
+    <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow" data-r><i></i>Open agent skills, tested on real targets</p>
+      <h1>Agent skills that <em>finish</em> the job.</h1>
+      <p class="lead" data-r>Plain-markdown skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md. Each does one concrete job and shows its evidence.</p>
+      <div class="hero-act" data-r>
+        <button class="cmd" type="button" data-copy="npx skills add arm-pz/caffeinity-skills --skill caffeinity-routing" aria-label="Copy the install command for caffeinity-routing"><span>npx skills add arm-pz/caffeinity-skills --skill caffeinity-routing</span><span class="copy" aria-hidden="true">Copy</span></button>
+        <p class="small hero-note">Installs the router: describe an outcome and it picks the skills. Or <a href="/skills/">browse every skill</a>.</p>
+      </div>
+    </div>
+    <figure class="rig" data-rig>
+      <div class="rig-stack">
+        <div class="rig-file" aria-hidden="true">
+          <p class="rig-bar"><span>SKILL.md</span><span class="rig-repo">arm-pz/web-preflight</span></p>
+<pre class="rig-src"><span class="n">1</span><span class="k">---</span>
+<span class="n">2</span><span class="k">name:</span> web-preflight
+<span class="n">3</span><span class="k">description:</span> Checks a site you own
+<span class="n">4</span>  before you ship it. A check that never
+<span class="n">5</span>  ran is INCONCLUSIVE, never a pass.
+<span class="n">6</span><span class="k">---</span>
+<span class="n">7</span><span class="h"># Web Preflight</span>
+<span class="n">8</span>Probe the paths that leak, read the
+<span class="n">9</span>headers, then give one verdict.</pre>
+        </div>
+        <div class="rig-term">
+          <p class="rig-bar"><i></i><i></i><i></i><span>agent · real run · 24 Oct 2026</span></p>
+<pre class="rig-out"><span class="p">/web-preflight skillsmith.tech</span>
+<span class="d">reading SKILL.md · 4 checks</span>
+http → https        <span class="ok">301</span>
+HSTS, CSP           <span class="ok">present</span>
+X-Frame, nosniff    <span class="ok">present</span>
+<span class="d">probing 19 sensitive paths</span>
+.env .git maps admin  <span class="ok">404 × 19</span>
+catch-all routing     <span class="ok">none</span>
+<span class="v">verdict  PASS</span></pre>
+        </div>
+        <a class="rig-stamp" href="#proof"><b>PASS</b><span>nothing exposed · see the run</span></a>
+      </div>
+      <figcaption class="sr-only">A real run of the web-preflight skill on this site, 24 October 2026: 19 sensitive paths probed, nothing exposed, every security header present. Verdict: pass.</figcaption>
+    </figure>
+    </div>
+    <div class="wrap hero-rail" data-r>
+      <!-- gen:stats:start --><p class="stats">56 skills and 7 mods · 12 workflows · 9 categories · 0 API keys</p><!-- gen:stats:end -->
+      <a class="cue" href="#outcomes">Scroll<i aria-hidden="true"></i></a>
+    </div>
+  </header>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Claude Code</span><b>/</b><span><em>Codex</em></span><b>/</b><span>Cursor</span><b>/</b><span><em>Gemini CLI</em></span><b>/</b><span>Qoder</span><b>/</b><span><em>any agent that reads a SKILL.md</em></span><b>/</b>
+    </div>
   </div>
-  <div class="menu roast" id="outcomes">
-    <h2 id="outcomes-h">What do you need done?</h2>
-    <p class="menu-sub">Twelve workflows, each a chain of skills that hand work to the next. We call them brews.</p>
-    <div class="brews">
+
+  <section class="menu" id="outcomes" aria-labelledby="outcomes-h">
+    <div class="wrap menu-grid">
+      <div class="menu-head">
+        <h2 id="outcomes-h">What do you need <em>done?</em></h2>
+        <p class="menu-sub">Twelve workflows, each a chain of skills that hand work to the next. We call them brews.</p>
+        <a class="text-link" href="/workflows/">See every workflow</a>
+      </div>
+      <div class="brews">
       <!-- gen:outcomes:start -->
       <details class="brew" name="brew" open>
         <summary><b>Build a skill and make it installable</b><i aria-hidden="true"></i><span>Pour-over</span></summary>
@@ -243,14 +297,17 @@
         </div>
       </details>
       <!-- gen:outcomes:end -->
+      </div>
     </div>
-  </div>
-</header>
+  </section>
+</div>
 
 <section class="flags" aria-labelledby="flags-h">
   <div class="wrap">
-    <h2 id="flags-h">Three skills, shown working.</h2>
-    <p class="sub">Each one earned its place with a real run you can open. The rest are on the <a href="/skills/">skills page</a>, every one with its version, last update and known limits.</p>
+    <div class="sec-head">
+      <h2 id="flags-h">Three skills, shown <em>working.</em></h2>
+      <p class="sub">Each one earned its place with a real run you can open. The rest are on the <a href="/skills/">skills page</a>, every one with its version, last update and known limits.</p>
+    </div>
     <div class="flag-list">
       <!-- gen:flagships:start -->
       <article class="flag">
@@ -296,6 +353,7 @@
     <h2 id="proof-h">Tested on real targets, this site first.</h2>
     <p class="sub">Seven real runs from 23 and 24 October 2026: what each skill found, and what changed because of it. Nothing here is a mock-up; where a fix is still waiting on a decision, the tab says so.</p>
     <div class="shell">
+        <div class="shell-bar" aria-hidden="true"><i></i><i></i><i></i><span>real runs · 23–24 Oct 2026</span></div>
         <div class="tabs" role="tablist" aria-label="Real runs">
           <button type="button" role="tab" id="tab-seo-crawl" aria-controls="pane-seo-crawl" aria-selected="true">seo-crawl</button>
           <button type="button" role="tab" id="tab-web-preflight" aria-controls="pane-web-preflight" aria-selected="false" tabindex="-1">web-preflight</button>
@@ -483,9 +541,10 @@ check_skill.py      0 fail · 0 warn</pre></div>
 </section>
 
 <section class="band ember" aria-labelledby="band-h">
+  <span class="band-mark" aria-hidden="true"></span>
   <div class="wrap">
     <div>
-      <h2 id="band-h">Need skills for your team's own work?</h2>
+      <h2 id="band-h">Need skills for your team's <em>own</em> work?</h2>
       <p>We build custom skills and workflows, tested on your real tasks, for the agents your team already uses.</p>
     </div>
     <a class="btn" href="/work/">Work with us</a>

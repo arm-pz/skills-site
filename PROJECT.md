@@ -80,12 +80,18 @@ One look across every page type, in two stylesheets under `assets/` (copied to `
 | `assets/site.css` | the hub shells, `/work/`, `404.html`, both templates | tokens, type scale, nav, footer, buttons, every hub component |
 | `assets/skill.css` | the hand-written skill pages, loaded after their inline `<style>` | the same palette mapped onto those pages' token names (`--ink` is the ground there), plus nav, buttons, footer |
 | `assets/site.js` | pages that link it | copy buttons (`data-copy`), the `/skills/` filter, the proof tabs |
+| `assets/motion.js` | fetched by `site.js` | GSAP + ScrollTrigger: hero entrance, word-by-word headings, stacking flagship cards, parallax marks, the agents strip, pointer-lit cards. Skipped under `prefers-reduced-motion` |
+| `assets/forge.js` | fetched by `motion.js` on `/` only | the three.js floor under the hero: a perspective dot grid that ripples out from under the agent session each time a replayed check passes (orange) or fails (red). The session itself (SKILL.md, terminal, verdict stamp) is `tools/fx/src/rig.js`: on `/` it replays the real runs from the proof section (its rest state is HTML in `index.html`); on every page that loads `site.js` it is built from that page's own content (a skill's install and files, a workflow's route, a catalogue's tested skills, the 404's real request). Hand-written skill pages keep their own heroes Needs WebGL; without it the hero keeps a CSS glow |
+
+`motion.js` and `forge.js` are built files: edit `tools/fx/src/`, then `cd tools/fx && npm install && npm run build`
+and commit the output (both are self-hosted, so the CSP stays `script-src 'self'`). No page depends on
+either: content is in the HTML and every rule in `site.css` holds without them.
 
 Rules the pages follow: the ground is porcelain and the type espresso; a section that needs weight changes
 its whole ground (`.roast`, `.ember`, `.tone`) instead of drawing a box, and those classes re-point the
 tokens so anything inside follows. The brand orange is for the one action on a screen and the ember band.
 Five type sizes, Newsreader for display and Instrument Sans for everything else; IBM Plex Mono only for
-commands and code. Radius is 6px on controls and 0 on fields. Change a colour in `assets/site.css` and
+commands and code. Controls are pills, command blocks 10px, cards 22px. Change a colour in `assets/site.css` and
 mirror it in `assets/skill.css`; do not add raw hex values to a page.
 
 The hub shells are hand-written; only the text between `<!-- gen:NAME:start -->` and

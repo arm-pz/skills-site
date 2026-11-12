@@ -1,5 +1,6 @@
 /* Skillsmith by Caffeinity: copy buttons, the skill filter and the proof tabs.
-   Every page works without it; this only adds the conveniences. */
+   Every page works without it; this only adds the conveniences. The last lines fetch
+   /assets/motion.js (built from tools/fx), which adds the scroll motion and the homepage forge. */
 (function(){
   var live=document.createElement('span');
   live.className='sr-only';live.setAttribute('role','status');live.setAttribute('aria-live','polite');
@@ -64,4 +65,8 @@
     });
   });
   if(tabs.length)show(0);
+
+  var me=document.currentScript,motion=document.createElement('script');
+  motion.type='module';motion.src=(me&&me.src?me.src.replace(/site\.js.*$/,''):'/assets/')+'motion.js';
+  document.head.appendChild(motion);
 })();
