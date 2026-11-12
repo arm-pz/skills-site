@@ -3155,6 +3155,211 @@
           "upgrading Claude Code itself"
         ]
       }
+    },
+    {
+      "name": "insights-to-prompts",
+      "repo": "arm-pz/insights-to-prompts",
+      "path": ".",
+      "group": "ship-checks",
+      "tag": "build",
+      "title": "Insights To Prompts",
+      "pageTitle": "Insights To Prompts — AI Agent Skill for Claude Code",
+      "blurb": "Turn a Claude Code /insights report into before/after rewrites of the prompts that caused friction — both the prompts you type in sessions and the prompt text inside your own skills.",
+      "stats": "5 files · 419 lines · 8 KB",
+      "install": "npx skills add arm-pz/insights-to-prompts",
+      "page": "generated",
+      "order": 920,
+      "pageSource": {
+        "description": "Turn a Claude Code /insights report into before/after rewrites of the prompts that caused friction — both the prompts you type in sessions and the prompt text inside your own skills. Reads ~/.claude/usage-data (report.html, cached facets) plus session transcripts with a bundled script, ranks friction that better wording could have prevented, and rewrites the worst offenders. Use when the user says \"improve my prompts from insights\", \"what am I prompting badly\", \"turn my insights report into better prompts\", \"coach my Claude Code prompting\", or \"why does Claude keep misreading me\". Not for adding rules to CLAUDE.md, hooks or settings (use harness-audit), rewriting one prompt pasted in chat with no report behind it (use a sharpen-prompt skill), or building a new skill from prompts (use prompts-to-skill).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 52,
+            "bytes": 4349
+          },
+          {
+            "path": "references/digest-format.md",
+            "lines": 13,
+            "bytes": 1279
+          },
+          {
+            "path": "references/rewrite-rules.md",
+            "lines": 42,
+            "bytes": 2287
+          },
+          {
+            "path": "references/skill-prompts.md",
+            "lines": 21,
+            "bytes": 1247
+          },
+          {
+            "path": "scripts/extract_insights.py",
+            "lines": 291,
+            "bytes": 12068
+          }
+        ],
+        "fileCount": 5,
+        "lines": 419,
+        "bytes": 8079,
+        "license": "MIT",
+        "commit": "432793c40c0ac38b7853273bd7d0ca4495298d6c",
+        "sha256": "5fa13a45a0887b5bd6fea5049eee84b9acc608d08aa119c174619e7bf7616e56"
+      }
+    },
+    {
+      "name": "prompts-to-workflow",
+      "repo": "arm-pz/prompts-to-workflow",
+      "path": ".",
+      "group": "career",
+      "tag": "career",
+      "title": "Prompts To Workflow",
+      "pageTitle": "Prompts To Workflow — AI Agent Skill for Claude Code",
+      "blurb": "Turns a pasted batch of prompts that together do one multi-step job into a workflow, then decides how to split it into skills.",
+      "stats": "6 files · 500 lines · 10 KB",
+      "install": "npx skills add arm-pz/prompts-to-workflow",
+      "page": "generated",
+      "order": 921,
+      "pageSource": {
+        "description": "Turns a pasted batch of prompts that together do one multi-step job into a workflow, then decides how to split it into skills. Maps the prompts to ordered steps with inputs, outputs and gates, checks every step against the live skillsmith.tech catalog and its brews, reuses existing skills such as tune-and-polish, wordsmith or findable where they fit, drafts a thin chain skill that runs the steps, and writes a brief for each new skill only where nothing covers a step. Use whenever the user pastes prompts or a prompt log and asks to make it a workflow or a brew, split it into skills, work out which skills they already have, or stop doing these steps by hand, even if they never say \"workflow\". Not for prompts that each become their own skill (use prompts-to-skill), a single idea (use draft-skill or skill-launch), an outcome described without prompts (use caffeinity-routing), or an existing skill (use tune-and-polish).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 95,
+            "bytes": 7815
+          },
+          {
+            "path": "evals/evals.json",
+            "lines": 52,
+            "bytes": 1138
+          },
+          {
+            "path": "references/split-rules.md",
+            "lines": 60,
+            "bytes": 4226
+          },
+          {
+            "path": "references/trigger-cases.md",
+            "lines": 38,
+            "bytes": 3655
+          },
+          {
+            "path": "references/workflow-map.md",
+            "lines": 90,
+            "bytes": 3804
+          },
+          {
+            "path": "scripts/catalog.py",
+            "lines": 165,
+            "bytes": 6042
+          }
+        ],
+        "fileCount": 6,
+        "lines": 500,
+        "bytes": 10016,
+        "license": "MIT",
+        "commit": "80fe19254260c5ca21ec71b6661180f2e96db499",
+        "sha256": "61aea39bf7ac54c409acdff08f2a933dec058890cdb6c5917d39591c99f71529"
+      }
+    },
+    {
+      "name": "ship-second-brain",
+      "repo": "arm-pz/ship-second-brain",
+      "path": "skills/ship-second-brain",
+      "group": "ship-checks",
+      "tag": "release",
+      "title": "Ship Second Brain",
+      "pageTitle": "Ship Second Brain — AI Agent Skill for Claude Code and Codex",
+      "blurb": "Builds and maintains a team second brain in one markdown folder: raw issues, PRs, specs and call notes saved first, cut into one-idea notes with a source and confidence (seen, verified, opinion), linked, verified against the source, summed…",
+      "stats": "3 files · 409 lines · 7 KB",
+      "install": "npx skills add arm-pz/ship-second-brain",
+      "page": "generated",
+      "order": 922,
+      "pageSource": {
+        "description": "Builds and maintains a team second brain in one markdown folder: raw issues, PRs, specs and call notes saved first, cut into one-idea notes with a source and confidence (seen, verified, opinion), linked, verified against the source, summed up in today.md, and checked by an answer test, with misses in gaps.md. Use whenever a question or task touches such a vault (a folder with raw/ and notes carrying confidence front matter): what did we decide about X and where is it written down, a new spec or source that says something different from a verified note, ingest PRs or issues, file call notes, verify or upgrade notes, clean up or delete files, run the answer test, stop re-explaining context every session. Even if they never say second brain. Not for a one-off summary of one document, a shareable doc built from the vault (use docs), or a database or Notion setup.",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 113,
+            "bytes": 6565
+          },
+          {
+            "path": "references/note-format.md",
+            "lines": 88,
+            "bytes": 2693
+          },
+          {
+            "path": "scripts/check_vault.py",
+            "lines": 208,
+            "bytes": 7992
+          }
+        ],
+        "fileCount": 3,
+        "lines": 409,
+        "bytes": 6771,
+        "license": "MIT",
+        "commit": "28e5c6424dd7df9efa1ce9ba96d45031dafa77fb",
+        "sha256": "8cee69d4d4dc947f6e6f44cf80b1a64b9c45ee6151d37d3175ba196f22501285"
+      }
+    },
+    {
+      "name": "straight-prose",
+      "repo": "arm-pz/straight-prose",
+      "path": ".",
+      "group": "skill-authoring",
+      "tag": "authoring",
+      "title": "Straight Prose",
+      "pageTitle": "Straight Prose — AI Agent Skill for Claude Code and Codex",
+      "blurb": "Writes and edits prose so it reads like a specific person wrote it and carries no stock AI patterns such as inflated significance, promotional wording, vague attribution, negative parallelisms, forced threes, em dashes, chatbot…",
+      "stats": "7 files · 506 lines · 13 KB",
+      "install": "npx skills add arm-pz/straight-prose",
+      "page": "generated",
+      "order": 923,
+      "pageSource": {
+        "description": "Writes and edits prose so it reads like a specific person wrote it and carries no stock AI patterns such as inflated significance, promotional wording, vague attribution, negative parallelisms, forced threes, em dashes, chatbot pleasantries and over-formatting. Applies the rules while drafting, edits existing text without changing the author's voice or dialect, or audits a draft and lists each pattern with its line, using a scanner script for the mechanical ones. Use whenever the user asks to remove AI slop or de-slop a draft, asks \"does this sound like AI\" or \"why does this read like ChatGPT\", wants writing \"in my voice\" or \"less like a chatbot\", or pastes anti-slop style rules to apply, even if they never say \"slop\". Not for general editing such as tone changes, shortening, proofreading or fact-checking (use wordsmith), for resumes and CVs (use recruiter-lens or applicant-kit), or for getting text past an AI detector.",
+        "files": [
+          {
+            "path": ".gitignore",
+            "lines": 4,
+            "bytes": 35
+          },
+          {
+            "path": "SKILL.md",
+            "lines": 160,
+            "bytes": 11615
+          },
+          {
+            "path": "evals/evals.json",
+            "lines": 29,
+            "bytes": 2208
+          },
+          {
+            "path": "evals/trigger-cases.md",
+            "lines": 47,
+            "bytes": 4467
+          },
+          {
+            "path": "references/sourcing.md",
+            "lines": 43,
+            "bytes": 2506
+          },
+          {
+            "path": "scripts/slop_scan.py",
+            "lines": 153,
+            "bytes": 7567
+          },
+          {
+            "path": "scripts/test_slop_scan.py",
+            "lines": 70,
+            "bytes": 3871
+          }
+        ],
+        "fileCount": 7,
+        "lines": 506,
+        "bytes": 12817,
+        "license": "MIT",
+        "commit": "216bf851d8b413bec9ca3ad0ae8b3316606f6d8a",
+        "sha256": "f9188c638eb6da4209daa2a307121c42e3e9f1190bee201c8d930247f67af7c9"
+      }
     }
   ],
   "workflows": [
