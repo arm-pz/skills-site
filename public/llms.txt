@@ -1,6 +1,6 @@
 # Skillsmith by Caffeinity
 
-> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: 63 skills mapped into 12 workflows (build a skill, get found, gate a release, grow search traffic, land a job, decide, learn, run outbound, launch a product). Plain markdown, no API keys.
+> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: 67 skills mapped into 12 workflows (build a skill, get found, gate a release, grow search traffic, land a job, decide, learn, run outbound, launch a product). Plain markdown, no API keys.
 
 ## Install
 
@@ -27,6 +27,7 @@ Sections: [skills](https://skillsmith.tech/skills/), [workflows](https://skillsm
 - [tune-skill-mod](https://skillsmith.tech/tune-skill-mod/): Arms when Claude edits a SKILL.md, then holds git push, PRs and releases until tune-skill has validated the change.
 - [skill-release-mod](https://skillsmith.tech/skill-release-mod/): Holds gh release create and npm publish in Claude Code until prompts-to-skill-release has run the skill's test cases since your last edit.
 - [tune-and-ship](https://skillsmith.tech/tune-and-ship/): One published skill at a time, all the way through: tuned with tune-skill, every version, flag and price checked against its source, listing polished, released in one PR, then the site page and marketplace copy confirmed live.
+- [straight-prose](https://skillsmith.tech/straight-prose/): Writes and edits prose so it reads like a specific person wrote it and carries no stock AI patterns such as inflated significance, promotional wording, vague attribution, negative parallelisms, forced threes, em dashes, chatbot…
 
 ## Publish & Discover
 
@@ -62,6 +63,8 @@ Sections: [skills](https://skillsmith.tech/skills/), [workflows](https://skillsm
 - [consistent-code-review](https://skillsmith.tech/consistent-code-review/): Perform a deterministic, evidence-backed code review that produces the same findings on re-runs of unchanged code, reconciled against a previous report when one is supplied.
 - [harness-audit](https://skillsmith.tech/harness-audit/): Audits an existing coding-agent harness (CLAUDE.md, AGENTS.md, rules files, hooks, MCP and tool config, skills) against the project's past Claude Code sessions, then returns a ranked findings report plus proposed diffs applied only after…
 - [setup-claude-advisor](https://skillsmith.tech/setup-claude-advisor/): Configure Claude Code for quota-optimised model tiering: Sonnet as the main session model, Opus as the on-call advisor, Haiku for read-only subagents, and Sonnet for code-editing subagents.
+- [insights-to-prompts](https://skillsmith.tech/insights-to-prompts/): Turn a Claude Code /insights report into before/after rewrites of the prompts that caused friction — both the prompts you type in sessions and the prompt text inside your own skills.
+- [ship-second-brain](https://skillsmith.tech/ship-second-brain/): Builds and maintains a team second brain in one markdown folder: raw issues, PRs, specs and call notes saved first, cut into one-idea notes with a source and confidence (seen, verified, opinion), linked, verified against the source, summed…
 
 ## SEO & Search
 
@@ -88,6 +91,7 @@ Sections: [skills](https://skillsmith.tech/skills/), [workflows](https://skillsm
 - [applicant-kit](https://skillsmith.tech/applicant-kit/): Writes the better version: decoded job description, tailored resume, bullets rewritten as action-task-result-impact, honest keyword placement, five summaries, a LinkedIn rewrite and twenty interview answers, all built from real experience.
 - [application-pilot](https://skillsmith.tech/application-pilot/): Runs the job search around the applications: turns role criteria into a live shortlist, scores each role for fit with evidence, keeps a reviewable tracker with submission and follow-up dates, flags roles that have gone quiet, drafts the follow-up and the interview briefing, and reads the funnel weekly.
 - [career-track](https://skillsmith.tech/career-track/): For the moves around a career: a positioning line you can repeat, the case for the next level, review and promotion narratives, salary negotiation scripts and a ninety-day plan.
+- [prompts-to-workflow](https://skillsmith.tech/prompts-to-workflow/): Turns a pasted batch of prompts that together do one multi-step job into a workflow, then decides how to split it into skills.
 
 ## Thinking & Learning
 
