@@ -60,6 +60,7 @@ class CheckDistTest(unittest.TestCase):
             '<url><loc>https://skillsmith.tech/workflows/</loc></url>'
             '<url><loc>https://skillsmith.tech/seo/</loc></url>'
             '<url><loc>https://skillsmith.tech/check/</loc></url>'
+            '<url><loc>https://skillsmith.tech/prose/</loc></url>'
             '<url><loc>https://skillsmith.tech/alpha/</loc></url>'
             '<url><loc>https://skillsmith.tech/beta/</loc></url>'
             "</urlset>")
@@ -80,6 +81,8 @@ class CheckDistTest(unittest.TestCase):
         (self.root / "dist/seo/index.html").write_text("<title>seo</title>")
         (self.root / "dist/check").mkdir()
         (self.root / "dist/check/index.html").write_text("<title>check</title>")
+        (self.root / "dist/prose").mkdir()
+        (self.root / "dist/prose/index.html").write_text("<title>prose</title>")
         for name in ("404.html", "_headers"):
             (self.root / "dist" / name).write_text("x")
         (self.root / "dist/_redirects").write_text("")

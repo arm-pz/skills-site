@@ -1,4 +1,4 @@
-/* Skill Check page: fetches a SKILL.md from GitHub's public API (or takes pasted text), runs
+/* Skill Check page: fetches a public SKILL.md from GitHub (or takes pasted text), runs
    /check/check-core.js on it in the browser and renders the findings. Nothing is sent to us. */
 (function(){
   /* Payment links. Leave a value empty and its order buttons open an email instead.
@@ -28,6 +28,7 @@
   var $=function(id){return document.getElementById(id);};
   var form=$("form"),src=$("src"),text=$("text"),statusEl=$("status"),picker=$("picker"),result=$("result");
   if(!form||!window.SkillCheck)return;
+  var skipWhy="";
 
   function el(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e;}
   function say(msg,isErr){statusEl.textContent=msg||"";statusEl.className=isErr?"err":"";}
@@ -47,16 +48,46 @@
   function gh(path,raw){
     return fetch("https://api.github.com"+path,{headers:{Accept:raw?"application/vnd.github.raw+json":"application/vnd.github+json"}}).then(function(r){
       if(r.status===403||r.status===429)throw new Error("GitHub's hourly limit for anonymous lookups is used up on this network. Paste the file below instead; that needs no network.");
-      if(r.status===404)throw new Error("GitHub could not find that. Check the link, and that the repo is public. For a private skill, paste the file below.");
+      if(r.status===404){var nf=new Error("GitHub could not find that. Check the link, and that the repo is public. For a private skill, paste the file below.");nf.notFound=true;throw nf;}
       if(!r.ok)throw new Error("GitHub answered with an error ("+r.status+"). Try again, or paste the file below.");
       return raw?r.text():r.json();
     },function(){throw new Error("Could not reach GitHub from this browser. Paste the file below instead.");});
   }
 
+  /* Two routes that have no hourly limit, so a busy network or a shared office address never
+     leaves the page stuck: jsDelivr's public mirror for the file list, raw.githubusercontent.com
+     for the file itself. GitHub's API stays first for the list because it is never stale. */
+  function plain(url,asText){
+    return fetch(url).then(function(r){
+      if(!r.ok){var e=new Error("status "+r.status);e.status=r.status;throw e;}
+      return asText?r.text():r.json();
+    });
+  }
+  function enc(p){return p.split("/").map(encodeURIComponent).join("/");}
+  function listFiles(t){
+    var repo=encodeURIComponent(t.owner)+"/"+encodeURIComponent(t.repo);
+    return gh("/repos/"+repo+"/git/trees/"+encodeURIComponent(t.ref||"HEAD")+"?recursive=1").catch(function(apiErr){
+      if(apiErr.notFound)throw apiErr;
+      return plain("https://data.jsdelivr.com/v1/packages/gh/"+repo+"@"+encodeURIComponent(t.ref||"HEAD")+"?structure=flat").then(function(d){
+        /* The mirror can lag a push and can leave files out, so a file it does not list is
+           unknown, never missing: the "referenced files exist" check is skipped on this route. */
+        return {mirror:true,truncated:true,tree:(d.files||[]).map(function(f){return {type:"blob",path:String(f.name).replace(/^\//,"")};})};
+      },function(e){
+        if(e.status===404)throw new Error("Could not find that repo. Check the link, and that the repo is public. For a private skill, paste the file below.");
+        throw apiErr;
+      });
+    });
+  }
+  function readFile(t,path){
+    var repo=encodeURIComponent(t.owner)+"/"+encodeURIComponent(t.repo);
+    return plain("https://raw.githubusercontent.com/"+repo+"/"+encodeURIComponent(t.ref||"HEAD")+"/"+enc(path),true).catch(function(){
+      return gh("/repos/"+repo+"/contents/"+enc(path)+(t.ref?"?ref="+encodeURIComponent(t.ref):""),true);
+    });
+  }
+
   function fromGitHub(t){
     clear();say("Looking in "+t.owner+"/"+t.repo+" ...");
-    var enc=function(p){return p.split("/").map(encodeURIComponent).join("/");};
-    return gh("/repos/"+encodeURIComponent(t.owner)+"/"+encodeURIComponent(t.repo)+"/git/trees/"+encodeURIComponent(t.ref||"HEAD")+"?recursive=1").then(function(tree){
+    return listFiles(t).then(function(tree){
       var files={},skills=[];
       (tree.tree||[]).forEach(function(n){
         if(n.type!=="blob")return;
@@ -68,18 +99,27 @@
         skills=/(^|\/)SKILL\.md$/.test(want)?skills.filter(function(p){return p===want;})
           :skills.filter(function(p){return p===want+"/SKILL.md"||p.indexOf(want+"/")===0;});
       }
-      if(!skills.length){say("No SKILL.md found there. Check the link, or paste the file below.",true);return;}
-      function run(path){
+      function run(path,known){
         say("Reading "+path+" ...");picker.hidden=true;
         var dir=path==="SKILL.md"?"":path.slice(0,-"/SKILL.md".length);
-        return gh("/repos/"+encodeURIComponent(t.owner)+"/"+encodeURIComponent(t.repo)+"/contents/"+enc(path)+(t.ref?"?ref="+encodeURIComponent(t.ref):""),true).then(function(body){
+        return (known!=null?Promise.resolve(known):readFile(t,path)).then(function(body){
           var opts={folder:dir?dir.split("/").pop():t.repo};
           if(!tree.truncated)opts.exists=function(ref){return !!files[(dir?dir+"/":"")+ref];};
           var label=t.owner+"/"+t.repo+(dir?"/"+dir:"");
+          skipWhy=tree.mirror?"GitHub's lookup limit is used up on this network":tree.truncated?"this repo is too large to list in one request":"";
           render(window.SkillCheck.check(body,opts),label,"https://github.com/"+t.owner+"/"+t.repo+(dir?"/tree/"+(t.ref||"HEAD")+"/"+dir:""));
           say("");
         }).catch(function(e){say(e.message,true);});
       }
+      if(!skills.length&&tree.mirror){
+        /* The mirror listed no skill. Ask for the file itself at the places a skill usually sits. */
+        var guesses=want?(/(^|\/)SKILL\.md$/.test(want)?[want]:[want+"/SKILL.md",want+"/skills/"+want.split("/").pop()+"/SKILL.md"]):["SKILL.md",t.repo+"/SKILL.md","skills/"+t.repo+"/SKILL.md"];
+        var repoPath=encodeURIComponent(t.owner)+"/"+encodeURIComponent(t.repo)+"/"+encodeURIComponent(t.ref||"HEAD")+"/";
+        return guesses.reduce(function(prev,g){
+          return prev.catch(function(){return plain("https://raw.githubusercontent.com/"+repoPath+enc(g),true).then(function(body){return run(g,body);});});
+        },Promise.reject()).catch(function(){say("No SKILL.md found there. Check the link, or paste the file below.",true);});
+      }
+      if(!skills.length){say("No SKILL.md found there. Check the link, or paste the file below.",true);return;}
       if(skills.length===1)return run(skills[0]);
       say(skills.length+" skills found. Pick one to check."+(skills.length>300?" Showing the first 300.":""));
       picker.textContent="";
@@ -123,7 +163,9 @@
     if(!r.fatal&&r.note)add(r.note,"NOTE");
     if(list.children.length)result.appendChild(list);
 
-    if(r.skipped.length)result.appendChild(el("p","skipped","Not checked, because pasted text has no folder: "+r.skipped.join("; ")+". Use a GitHub link to check "+(r.skipped.length===1?"it":"them")+"."));
+    if(r.skipped.length)result.appendChild(el("p","skipped",label&&skipWhy
+      ?"Not checked, because "+skipWhy+": "+r.skipped.join("; ")+"."+(/limit/.test(skipWhy)?" Try again in an hour to check "+(r.skipped.length===1?"it":"them")+".":"")
+      :"Not checked, because pasted text has no folder: "+r.skipped.join("; ")+". Use a GitHub link to check "+(r.skipped.length===1?"it":"them")+"."));
 
     var actions=el("div","result-actions");
     var copy=el("button","btn btn-quiet","Copy the report");copy.type="button";

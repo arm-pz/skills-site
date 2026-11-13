@@ -68,6 +68,8 @@ says when a bespoke page's copy may still use the old name.
 | `/mods/` | Every Claude Code mod | `mods/index.html` shell + `gen_home.py` |
 | `/workflows/` and `/workflows/<slug>/` | Every workflow, then one page each with its steps and one install block | `workflows/index.html` shell + `gen_home.py`; the per-workflow pages are fully generated from `templates/workflow-page.html` |
 | `/work/` | Custom skills service | hand-written |
+| `/check/` | Skill Check: validates a SKILL.md in the browser. `check-core.js` is a port of tune-skill's `check_skill.py`; `tests/check_parity.mjs` compares the two. GitHub's API lists the files, with jsDelivr's mirror and raw.githubusercontent.com as the route when the anonymous limit is used up (all three are in `_headers` `connect-src`) | hand-written |
+| `/prose/` | Prose Check: marks stock AI writing patterns in a pasted draft, in the browser, with no network request. `prose-core.js` is a port of straight-prose's `slop_scan.py`; `tests/prose_parity.mjs` compares the two and `tests/prose_cases.mjs` runs with the unit tests | hand-written |
 | `/seo/` | The AI-driven SEO landing page (three.js keyboard) | built in [arm-pz/seopage](https://github.com/arm-pz/seopage): change it there, run `npm run build:seo`, copy `dist-seo/` over `seo/`; never edit `seo/` here |
 | `/<name>/` | One page per skill or mod; item URLs stay flat whatever their type | `gen_page.py` (generated) or hand-written (bespoke) |
 

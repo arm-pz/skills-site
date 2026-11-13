@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prose Check: find the AI writing patterns in a draft | Skillsmith by Caffeinity</title>
+<meta name="description" content="Paste a draft and see every stock AI writing pattern marked in place: em dashes, 'not just X, but Y', chatbot phrases, placeholders. Free, runs in your browser, no sign-up.">
+<link rel="canonical" href="https://skillsmith.tech/prose/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Skillsmith by Caffeinity">
+<meta property="og:title" content="Prose Check: does your draft read like a chatbot wrote it?">
+<meta property="og:description" content="Paste a draft. Every stock AI writing pattern is marked where it sits, with the reason and the fix. Your text never leaves your browser.">
+<meta property="og:url" content="https://skillsmith.tech/prose/">
+<meta name="twitter:card" content="summary">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="preload" href="/fonts/files/cY9AfjOCX1hbuyalUrK4397yjA.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/files/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+/* Prose Check only. Everything else comes from /assets/site.css. */
+.page-hero h1{max-width:20ch}
+/* the hero terminal on other pages shows a skill being built; this page is about prose */
+.page-hero .rig{display:none}
+.checker{display:grid;gap:14px;margin-top:clamp(28px,4vw,44px);max-width:920px}
+.checker label{font-size:14px;font-weight:600;color:var(--muted);display:block;margin-bottom:8px}
+.checker .row{display:flex;gap:10px 18px;flex-wrap:wrap;align-items:center}
+.checker textarea{width:100%;min-height:260px;resize:vertical;font:400 16px/1.55 var(--sans);color:var(--ink);background:var(--surface);border:0;border-radius:var(--r);padding:16px 18px;box-shadow:inset 0 0 0 1px var(--line)}
+.checker textarea:focus{outline:none;box-shadow:inset 0 0 0 2px var(--accent)}
+.checker button.link,.finding button.link{background:none;border:0;font:inherit;font-size:14px;color:var(--muted);text-decoration:underline;cursor:pointer;padding:0}
+.checker .opt{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:400;color:var(--muted);margin:0;cursor:pointer}
+.checker .opt input{width:16px;height:16px;accent-color:var(--accent)}
+#status{font-size:15px;color:var(--muted);min-height:1.5em}
+#status.err{color:var(--ink);font-weight:600}
+#result{margin-top:clamp(28px,4vw,48px);max-width:920px;scroll-margin-top:16px}
+.verdict{font-family:var(--serif);font-size:clamp(30px,3.6vw,48px);line-height:1.05;letter-spacing:-.02em}
+.clean{color:var(--muted);margin-top:14px;max-width:62ch}
+.facts{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:14px;font-size:15px;color:var(--muted)}
+.facts b{color:var(--ink);font-weight:600}
+.draft{margin-top:24px;background:var(--surface);border-radius:var(--r);padding:14px 0;max-height:min(70vh,640px);overflow:auto;font-size:16px;line-height:1.7}
+.ln{display:grid;grid-template-columns:52px minmax(0,1fr);padding-right:18px}
+.ln .no{font:400 12px/2.25 var(--mono);color:var(--muted);text-align:right;padding-right:14px;user-select:none;-webkit-user-select:none;opacity:.7}
+.ln .tx{white-space:pre-wrap;overflow-wrap:anywhere}
+.ln.whole{box-shadow:inset 3px 0 0 var(--accent)}
+.ln.whole.on{background:color-mix(in srgb,var(--accent) 18%,transparent)}
+.draft mark,.legend mark{color:inherit;border-radius:3px;padding:1px 2px;margin:0 -2px;background:color-mix(in srgb,var(--accent) 26%,transparent);box-shadow:inset 0 -2px 0 var(--accent)}
+.draft mark.soft,.legend mark.soft{background:none;box-shadow:none;border-bottom:2px dotted var(--muted);border-radius:0;padding:0;margin:0}
+.draft.focused mark:not(.on):not(.soft){background:none;box-shadow:inset 0 -1px 0 var(--line)}
+.draft mark.on{background:var(--accent);color:var(--accent-ink)}
+.legend{font-size:14.5px;color:var(--muted);margin-top:12px}
+.legend mark{margin:0}
+.findings{list-style:none;margin-top:24px;display:grid;gap:8px}
+.finding{background:var(--surface);border-radius:var(--r);padding:18px 20px}
+.finding .head{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}
+.finding .lvl{font:600 12px/1 var(--mono);letter-spacing:.04em;padding:5px 8px;border-radius:6px;background:var(--accent);color:var(--accent-ink)}
+.finding .msg{font-weight:600;margin-right:auto}
+.finding button.link[aria-pressed=true]{color:var(--ink);font-weight:600}
+.finding p{font-size:15.5px;color:var(--muted);margin-top:8px;max-width:70ch}
+.finding p b{color:var(--ink);font-weight:600}
+.finding .where q{font-family:var(--mono);font-size:13.5px;color:var(--ink);background:var(--sunk);border-radius:5px;padding:2px 6px;quotes:none;white-space:pre-wrap;overflow-wrap:anywhere}
+.skipped{font-size:14.5px;color:var(--muted);margin-top:16px;max-width:70ch}
+.result-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.hint{margin-top:10px;max-width:70ch}
+.upsell{margin-top:28px;padding:22px 24px;border-radius:var(--r-lg);background:var(--roast);color:var(--roast-ink);display:flex;flex-wrap:wrap;gap:16px 28px;align-items:center;justify-content:space-between}
+.upsell p{max-width:52ch;font-size:16px}
+.upsell b{display:block;font-family:var(--serif);font-weight:400;font-size:24px;line-height:1.15;margin-bottom:6px}
+.checks{list-style:none;columns:2;column-gap:48px;margin-top:clamp(24px,3vw,40px);max-width:980px}
+.checks li{break-inside:avoid;padding:12px 0;border-top:1px solid var(--line);font-size:16px}
+.checks li b{font-weight:600}
+.cannot{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:clamp(28px,4vw,48px)}
+.cannot div{background:var(--surface);padding:22px}
+.cannot b{display:block;font-family:var(--serif);font-weight:400;font-size:24px;line-height:1.15}
+.cannot span{display:block;font-size:15.5px;color:var(--muted);margin-top:10px}
+.plan .cmd{margin-top:auto}
+@media (max-width:820px){.checks{columns:1}.cannot{grid-template-columns:1fr}.plans{grid-template-columns:1fr}.ln{grid-template-columns:38px minmax(0,1fr);padding-right:12px}.ln .no{padding-right:10px}}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="/"><b>/</b>skillsmith <span class="brand-by">by caffeinity</span></a>
+    <div class="nav-links">
+      <a href="/skills/">Skills</a>
+      <a href="/workflows/">Workflows</a>
+      <a href="/mods/">Mods</a>
+      <a href="/work/">Work with us</a>
+    </div>
+    <div class="nav-cta">
+      <a class="gh" href="https://github.com/arm-pz" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-accent btn-sm" href="#skill">Get the skill</a>
+    </div>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="wrap">
+    <h1>Does your draft read like a chatbot wrote it?</h1>
+    <p class="lead">Readers have learned the phrases a language model reaches for, and they stop trusting a page when they spot them. Prose Check marks each one in your draft and says how to rewrite it. Free, no sign-up, and your text never leaves your browser.</p>
+  </div>
+</header>
+
+<section class="tone" id="check" aria-labelledby="check-title">
+  <div class="wrap">
+    <h2 id="check-title">Check a draft.</h2>
+    <form class="checker" id="form" novalidate>
+      <div>
+        <label for="text">Your draft, as plain text or Markdown</label>
+        <textarea id="text" name="text" placeholder="Paste an email, a post, a README, a cover letter…"></textarea>
+      </div>
+      <div class="row">
+        <button class="btn btn-accent" type="submit" id="go">Check the draft</button>
+        <button type="button" class="link" id="sample">load an example with problems</button>
+        <button type="button" class="link" id="clear">clear</button>
+        <label class="opt" for="plain"><input type="checkbox" id="plain"> It is going somewhere plain-text, so flag curly quotes too</label>
+      </div>
+      <p id="status" role="status" aria-live="polite"></p>
+    </form>
+    <div id="result" hidden></div>
+    <noscript><p class="sub">Prose Check needs JavaScript, because the check runs in your browser instead of on a server. The same scan runs offline with <code>python scripts/slop_scan.py</code> from <a href="/straight-prose/">straight-prose</a>.</p></noscript>
+  </div>
+</section>
+
+<section aria-labelledby="what-title">
+  <div class="wrap">
+    <h2 id="what-title">What it marks.</h2>
+    <p class="sub">The same scan as <code>slop_scan.py</code>, the open script inside <a href="/straight-prose/">straight-prose</a>. A test compares this page's code with that script on 3,000 files, half of them real documentation and half generated edge cases, and the two agree on every one.</p>
+    <ul class="checks">
+      <li><b>Em dashes.</b> Every one, since a model uses them far more than most writers do.</li>
+      <li><b>Stock vocabulary.</b> Delve, tapestry, pivotal, robust, foster, showcase, "serves as" and about twenty more.</li>
+      <li><b>Promotional wording.</b> Renowned, stunning, world-class, nestled, groundbreaking.</li>
+      <li><b>Inflated significance.</b> "Marks a turning point", "plays a pivotal role", "sets the stage".</li>
+      <li><b>Vague attribution.</b> "Experts say", "studies show", "many believe", with nobody named.</li>
+      <li><b>Chatbot phrases.</b> "Great question", "I hope this helps", "Let me know if you'd like".</li>
+      <li><b>Contrast formulas.</b> "Not just X, but Y", "it's not X, it's Y", "no X, no Y, just Z".</li>
+      <li><b>Trailing "-ing" analysis.</b> A fact followed by ", highlighting" or ", underscoring" something.</li>
+      <li><b>Canned openers.</b> A line that starts "In conclusion", "Overall" or "Additionally".</li>
+      <li><b>Vague relationships.</b> "Associated with" and "linked with" where the real link is known.</li>
+      <li><b>Placeholders.</b> [Your Name], XX/XX/XXXX, INSERT_URL, lorem ipsum.</li>
+      <li><b>Tool markup.</b> Citation tokens and <code>utm_</code> tracking left behind by a chat tool.</li>
+      <li><b>Chat formatting.</b> Title-Case Headings, emoji bullets, rules between sections, and lists where every bullet opens with a bold label.</li>
+      <li><b>Curly quotes.</b> Only when you tick the plain-text box.</li>
+    </ul>
+    <p class="small" style="margin-top:20px;max-width:70ch">Code blocks, inline code and YAML frontmatter are skipped. The scan matches English wording only.</p>
+  </div>
+</section>
+
+<section class="tone" aria-labelledby="cannot-title">
+  <div class="wrap">
+    <h2 id="cannot-title">What a script cannot see.</h2>
+    <p class="sub">A clean scan proves little. The patterns that do the most damage are the ones no word list catches, and they need a reader.</p>
+    <div class="cannot">
+      <div><b>Groups of three</b><span>Three adjectives, three benefits, a three-part ending. The page puts a dotted line under each list of exactly three so you can ask whether three is the real count. It cannot answer that for you.</span></div>
+      <div><b>Inflated claims in fresh words</b><span>The list holds the common phrases. A sentence can overstate an ordinary fact without using any of them.</span></div>
+      <div><b>A changed voice</b><span>An edit that swaps your spelling, your rhythm or your level of formality for a smoother one reads as someone else's writing.</span></div>
+      <div><b>Sentences that say nothing</b><span>Polished, balanced, and empty. If you can delete a sentence and lose no information, the scan will not tell you.</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="skill" aria-labelledby="skill-title">
+  <div class="wrap">
+    <h2 id="skill-title">Fix it once, or stop it at the source.</h2>
+    <p class="sub">This page finds the patterns after they are written. The skill it comes from keeps your agent from writing them, and edits a finished draft without flattening your voice.</p>
+
+    <div class="plans">
+      <article class="plan">
+        <span class="tag">This page</span>
+        <h3>Prose Check</h3>
+        <p class="price">$0</p>
+        <p class="for">Paste, read the marks, fix the sentences yourself.</p>
+        <ul>
+          <li>No sign-up and no limit on drafts</li>
+          <li>Runs in your browser; nothing is uploaded</li>
+          <li>A fix prompt you can paste into any chat model</li>
+        </ul>
+        <a class="btn btn-quiet" href="#check">Check a draft</a>
+      </article>
+
+      <article class="plan roast">
+        <span class="tag">In your agent</span>
+        <h3>straight-prose</h3>
+        <p class="price">$0 <small>open source</small></p>
+        <p class="for">The skill behind this page. Your own agent runs it.</p>
+        <ul>
+          <li>Applies the rules while it drafts, so the patterns never land</li>
+          <li>Edits only the sentences that carry a pattern and keeps your voice</li>
+          <li>Audits a draft line by line, including what the scan cannot see</li>
+          <li>Works in Claude Code, Cursor, Codex and any agent that reads a SKILL.md</li>
+        </ul>
+        <button class="cmd" type="button" data-copy="npx skills add arm-pz/straight-prose" aria-label="Copy the install command"><span>npx skills add arm-pz/straight-prose</span><span class="copy" aria-hidden="true">Copy</span></button>
+      </article>
+
+      <article class="plan">
+        <span class="tag">Done for you</span>
+        <h3>Hand edit</h3>
+        <p class="price">$29 <small>up to 1,500 words</small></p>
+        <p class="for">A person edits one piece and sends it back.</p>
+        <ul>
+          <li>Every flagged sentence rewritten to say its point</li>
+          <li>A read for what the scan cannot see</li>
+          <li>Your spelling, rhythm and formality kept</li>
+          <li>A short list of what changed and why</li>
+          <li>Back within two working days of payment</li>
+          <li>Full refund if we find nothing worth changing</li>
+        </ul>
+        <a class="btn btn-quiet" data-order="edit" href="mailto:hello@skillsmith.tech?subject=Hand%20edit%20(%2429)&amp;body=Paste%20the%20draft%20here%2C%20or%20attach%20it%20(up%20to%201%2C500%20words)%3A%20%0A%0AWho%20reads%20it%2C%20and%20anything%20we%20should%20leave%20alone%3A%20%0A">Order a hand edit</a>
+      </article>
+    </div>
+    <p class="small" style="margin-top:20px">Prices in USD, before any local taxes. Ordering opens an email to us; we reply with a secure payment link, and the clock starts when you pay. A style guide for a whole team is <a href="/work/">custom work</a>.</p>
+  </div>
+</section>
+
+<section class="tone" aria-labelledby="faq-title">
+  <div class="wrap">
+    <h2 id="faq-title">Before you paste.</h2>
+    <div class="faq">
+      <details>
+        <summary>Where does my draft go?</summary>
+        <p>Nowhere. The scan is a script that runs in this page, and your text is never sent to us, stored or logged. You can read the script at <a href="/prose/prose-core.js">/prose/prose-core.js</a>, and you can turn off your connection after the page loads and it still works.</p>
+      </details>
+      <details>
+        <summary>Is this an AI detector?</summary>
+        <p>No. It does not guess who or what wrote the text, and it gives no percentage. It marks specific wording that readers have come to associate with machine writing. People write these patterns too, and a person who writes them gets the same marks.</p>
+      </details>
+      <details>
+        <summary>Will fixing the marks get my text past an AI detector?</summary>
+        <p>That is not what this is for, and we have not tested it against any detector. The aim is a draft that says what it means in your own voice.</p>
+      </details>
+      <details>
+        <summary>Do I have to fix every mark?</summary>
+        <p>No. A mark is a reason to look. "Robust" may be the right word for a statistical method, "rather than" is often plain English, and your house style may ask for title-case headings. Rewrite where the sentence is hiding an empty claim, and leave the rest.</p>
+      </details>
+      <details>
+        <summary>I got no marks. Is the draft good?</summary>
+        <p>It is free of the listed wording, and no more than that. Read it once for groups of three, for claims bigger than their evidence, and for sentences you could delete without losing anything.</p>
+      </details>
+      <details>
+        <summary>Does it work in other languages?</summary>
+        <p>The word lists are English only. The formatting checks (em dashes, placeholders, tool markup, emoji bullets) work in any language.</p>
+      </details>
+      <details>
+        <summary>What do I get for $29?</summary>
+        <p>One email with your piece edited, and a short list of what changed and why. We change the sentences that carry a pattern and leave the rest in your words. If we find nothing worth changing, we refund the full amount without being asked. If you are unhappy with what you get back, reply within 14 days and we refund you.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="contact ember" id="contact" aria-labelledby="contact-title">
+  <div class="wrap">
+    <div>
+      <h2 id="contact-title">Send us the draft that sounds wrong.</h2>
+      <p>Tell us who reads it and what to leave alone. One piece of up to 1,500 words is $29, back in two working days, refunded if we find nothing to change.</p>
+      <p><a class="mail" data-order="edit" href="mailto:hello@skillsmith.tech?subject=Hand%20edit%20(%2429)">hello@skillsmith.tech</a></p>
+    </div>
+  </div>
+</section>
+
+<footer class="roast">
+  <div class="wrap">
+    <div class="meta">
+      <span>Skillsmith by <a href="https://caffeinity.com/">Caffeinity</a>: open agent skills by Abdul Rahman P Z, and custom skills built to order.</span>
+      <a href="/check/">Check a SKILL.md, free</a>
+      <a href="https://github.com/arm-pz" target="_blank" rel="noopener">github.com/arm-pz</a>
+    </div>
+    <p class="kural"><span lang="ta">யாம் பெற்ற இன்பம் பெறுக இவ்வையகம்</span><span>“May this world attain the same bliss that I have attained.”</span></p>
+  </div>
+</footer>
+<script src="/assets/site.js" defer></script>
+<script src="/prose/prose-core.js" defer></script>
+<script src="/prose/prose.js" defer></script>
+</body>
+</html>
