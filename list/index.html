@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>List Gate: is this lead list safe to load? | Skillsmith by Caffeinity</title>
+<meta name="description" content="Check a cold-email lead list before it loads: role addresses, duplicates, typo domains, malformed rows and off-target titles, with a go or hold verdict. The CSV is read in your browser and never uploaded.">
+<link rel="canonical" href="https://skillsmith.tech/list/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Skillsmith by Caffeinity">
+<meta property="og:title" content="Is this lead list safe to load?">
+<meta property="og:description" content="Check a cold-email lead list before it loads: role addresses, duplicates, typo domains, malformed rows and off-target titles, with a go or hold verdict. The CSV is read in your browser and never uploaded.">
+<meta property="og:url" content="https://skillsmith.tech/list/">
+<meta name="twitter:card" content="summary">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="preload" href="/fonts/files/cY9AfjOCX1hbuyalUrK4397yjA.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/files/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/tool.css">
+</head>
+<body>
+
+<nav class="nav" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="/"><b>/</b>skillsmith <span class="brand-by">by caffeinity</span></a>
+    <div class="nav-links">
+      <a href="/skills/">Skills</a>
+      <a href="/workflows/">Workflows</a>
+      <a href="/checks/">Free tools</a>
+      <a href="/work/">Work with us</a>
+    </div>
+    <div class="nav-cta">
+      <a class="gh" href="https://github.com/arm-pz" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-accent btn-sm" href="/cold-email-list-gate/">Get the skill</a>
+    </div>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="wrap">
+    <h1>Is this lead list safe to load?</h1>
+    <p class="lead">A bad filter reaches thousands of inboxes before anyone notices. List Gate reads every row of your CSV before it goes into a sending tool and gives one answer: go, or hold. The file is read in your browser and never uploaded.</p>
+  </div>
+</header>
+
+<section class="tone" id="check" aria-labelledby="check-title">
+  <div class="wrap">
+    <h2 id="check-title">Gate a list.</h2>
+    <form class="checker" id="form" novalidate>
+      <div>
+        <label for="file">A CSV file, one contact per row</label>
+        <input type="file" id="file" name="file" accept=".csv,.tsv,.txt,text/csv">
+      </div>
+      <div>
+        <label for="text">or paste the rows</label>
+        <textarea class="code" id="text" name="text" spellcheck="false" placeholder="first_name,email,title,company&#10;Asha,asha@northwind.example,Head of Sales,Northwind"></textarea>
+      </div>
+      <div>
+        <label for="titles">Titles you are targeting (optional, comma separated)</label>
+        <input type="text" id="titles" name="titles" placeholder="sales, revenue, founder" autocomplete="off">
+      </div>
+      <div class="row">
+        <button class="btn btn-accent" type="submit">Check the list</button>
+        <button type="button" class="link" id="sample">load an example with problems</button>
+      </div>
+      <p id="status" role="status" aria-live="polite"></p>
+    </form>
+    <div id="result" hidden></div>
+    <noscript><p class="sub">List Gate needs JavaScript, because the list is read in your browser instead of on a server. The <a href="/cold-email-list-gate/">cold-email-list-gate</a> skill runs the same gate in your own agent.</p></noscript>
+  </div>
+</section>
+
+<section aria-labelledby="what-title">
+  <div class="wrap">
+    <h2 id="what-title">What it checks.</h2>
+    <p class="sub">The mailbox half of <a href="/cold-email-list-gate/">cold-email-list-gate</a>, run on every row, plus the ten-row sample the skill asks a person to read. The verdict uses the skill's rule: two wrong in ten is a pattern, so hold and fix the source.</p>
+    <ul class="checks">
+      <li><b>Malformed addresses.</b> A missing @, a space, two dots, or an empty cell.</li>
+      <li><b>Typo domains.</b> gmial.com, hotmal.com, a .con ending. These bounce, and bounces hurt your sending domain.</li>
+      <li><b>Role addresses.</b> info@, sales@, support@ and others that reach a shared inbox, not a person.</li>
+      <li><b>Duplicates.</b> The same address more than once.</li>
+      <li><b>Off-target titles.</b> When you give the titles you are targeting, every row whose title holds none of them.</li>
+      <li><b>Things to know.</b> Rows with no first name, a high share of free mail providers, and companies with five or more contacts.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="tone" aria-labelledby="faq-title">
+  <div class="wrap">
+    <h2 id="faq-title">Before you load a file.</h2>
+    <div class="faq">
+      <details>
+        <summary>Where does my list go?</summary>
+        <p>Nowhere. Your browser reads the file from your own disk and the script in this page checks it. The rows are not sent to us or to anyone else, which matters because a lead list is other people's personal data. You can read the script at <a href='/list/list-core.js'>/list/list-core.js</a>.</p>
+      </details>
+      <details>
+        <summary>Does it verify that each mailbox exists?</summary>
+        <p>No. That takes a verification service that contacts each mail server. This check finds what is wrong on the page before you pay for verification, and the result says so.</p>
+      </details>
+      <details>
+        <summary>It says hold. Can I just delete the bad rows?</summary>
+        <p>You can download the clean rows, but the skill's advice is to fix the filter or the provider that built the list. When one row in five is wrong, the rows you cannot see are wrong in the same way.</p>
+      </details>
+      <details>
+        <summary>Why does it ask for target titles?</summary>
+        <p>Fit is half the gate. Without your titles it can only check the addresses, and the verdict is marked as mailboxes only. Company and size fit still need you to read the sample.</p>
+      </details>
+      <details>
+        <summary>Is cold email legal where I am?</summary>
+        <p>That depends on your country and on who you write to, and this tool does not check it. Find out before you send.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer class="roast">
+  <div class="wrap">
+    <div class="meta">
+      <span>Skillsmith by <a href="https://caffeinity.com/">Caffeinity</a>: open agent skills by Abdul Rahman P Z, and custom skills built to order.</span>
+      <a href="/checks/">All free tools</a>
+      <a href="https://github.com/arm-pz" target="_blank" rel="noopener">github.com/arm-pz</a>
+    </div>
+    <p class="kural"><span lang="ta">யாம் பெற்ற இன்பம் பெறுக இவ்வையகம்</span><span>“May this world attain the same bliss that I have attained.”</span></p>
+  </div>
+</footer>
+<script src="/assets/site.js" defer></script>
+<script src="/assets/tool.js" defer></script>
+<script src="/list/list-core.js" defer></script>
+<script src="/list/list.js" defer></script>
+</body>
+</html>
