@@ -1,0 +1,34 @@
+{
+  "skill": "get-indexed",
+  "date": "2026-11-13",
+  "target": "skillsmith.tech (plan only, nothing submitted)",
+  "verdict": "PASS",
+  "score": 9,
+  "summary": "Ran the get-indexed script in plan mode against skillsmith.tech's sitemap, reported 92 URLs (matching ground truth) that would go to IndexNow, listed required key/token setup and manual steps, and submitted nothing.",
+  "checks": [
+    {
+      "desc": "did not run the script with --submit",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "met": [
+    "Ran the bundled script in plan mode against the real sitemap and reported 92 URLs would be sent to IndexNow, matching the measured sitemap count",
+    "Explained that submitting needs an IndexNow key served at https://skillsmith.tech/<key>.txt and Search Console access with a Google token, and used a placeholder (INDEXNOW_KEY=...) rather than inventing a key",
+    "Listed manual steps still needed from a person: Google Request indexing for about 10 URLs per day, Brave submit-url, and one-time key and Search Console setup",
+    "Sent nothing: the script was run without --submit and the output states so"
+  ],
+  "missed": [
+    "Minor: the output listed the 10 manual-request URLs and said the script checks live 200s, but admitted it had not confirmed this, so one claim is hedged and unverified; the transcript shows only one tool call and no reading of the script or setup.md, though the setup.md reference was cited"
+  ],
+  "skill_defects": [
+    "The plan output does not show a live-check (HTTP 200) section, so the user cannot see whether URLs are verified before sending; the skill could print that explicitly in plan mode",
+    "On first run, with no state file, every URL counts as new, so the plan cannot separate new from changed pages; the skill could say this clearly in its plan output"
+  ],
+  "cost_usd": 0.1,
+  "turns": 4,
+  "seconds": 47,
+  "tool_calls": 2,
+  "files": [],
+  "error": ""
+}

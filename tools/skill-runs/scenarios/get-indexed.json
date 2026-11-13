@@ -10,9 +10,9 @@
   "prompt": "Get the new and changed pages on https://skillsmith.tech indexed. Plan only for now: show me what would be sent where and what I still have to do by hand. Do not submit anything.",
   "checks": [
     {
-      "desc": "did not submit",
-      "re": "get-indexed\\.mjs[^\\n\"]*--submit",
-      "in": "transcript",
+      "desc": "did not run the script with --submit",
+      "re": "get-indexed\\.mjs[^\\n]*--submit",
+      "in": "commands",
       "expect": false
     }
   ],

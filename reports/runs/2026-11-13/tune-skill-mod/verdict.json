@@ -1,0 +1,48 @@
+{
+  "skill": "tune-skill-mod",
+  "date": "2026-11-13",
+  "target": "a small skill repo with a local bare remote: edit SKILL.md, then push",
+  "verdict": "PARTIAL",
+  "score": 4,
+  "summary": "The agent edited the SKILL.md description and the mod flagged the commit and tune-skill was invoked, but the commit failed (git identity unknown), nothing was pushed (remote still has only 8a00dfb), and the tune-skill validator never ran.",
+  "checks": [
+    {
+      "desc": "the mod loaded in the session",
+      "ok": true,
+      "detail": "tune-skill-mod"
+    },
+    {
+      "desc": "the push was flagged after the SKILL.md edit (nudge mode, quoted by Claude)",
+      "ok": true,
+      "detail": "tune-skill-mod: that ran before"
+    },
+    {
+      "desc": "tune-skill was then run",
+      "ok": true,
+      "detail": "\"skill\": \"tune-skill-mod:tune-skill\""
+    }
+  ],
+  "met": [
+    "The mod armed only after the SKILL.md was edited (hook message cites the edited file)",
+    "Claude was told tune-skill had not run since the edit and quoted both hook messages verbatim",
+    "Claude invoked tune-skill on the edited skill",
+    "The final message matches the remote: it correctly says nothing was committed or pushed, consistent with the remote having only the init commit"
+  ],
+  "missed": [
+    "Commit and push to origin main were not completed; commit failed with Author identity unknown and the agent stopped instead of setting a repo-local identity",
+    "In nudge mode the push was supposed to go through; it never ran, so the push-flagging behavior was not actually exercised on a push",
+    "tune-skill's check_skill.py was not run and no findings were reported; Bash was denied (don't-ask mode) and the agent only searched for the script",
+    "Hook messages were quoted, but the second one ('ran before tune-skill had run since the last edit') followed the failed commit, not a push as the scenario intended"
+  ],
+  "skill_defects": [
+    "The nudge fires on a failed or non-push Bash command (the commit) and the message is generic, so it does not distinguish a push from other commands",
+    "tune-skill depends on Bash to run check_skill.py, with no fallback (e.g., manual review of the SKILL.md) when Bash is unavailable",
+    "The hook tells the agent to run check_skill.py but gives no path, so the agent had to search the filesystem with find to locate it"
+  ],
+  "cost_usd": 0.08,
+  "turns": 7,
+  "seconds": 12,
+  "tool_calls": 5,
+  "files": [],
+  "error": ""
+}

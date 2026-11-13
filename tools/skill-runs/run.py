@@ -53,7 +53,8 @@ ALLOW = ["Read", "Write", "Edit", "Glob", "Grep", "Skill", "TodoWrite", "Agent",
          "Bash(git diff:*)", "Bash(git log:*)", "Bash(git add:*)", "Bash(git commit:*)", "Bash(curl -sI:*)",
          "Bash(curl -s:*)", "Bash(node:*)", "Bash(npx:*)", "Bash(sed:*)", "Bash(awk:*)", "Bash(jq:*)",
          "Bash(cut:*)", "Bash(tr:*)", "Bash(uniq:*)", "Bash(echo:*)", "Bash(printf:*)", "Bash(cp:*)",
-         "Bash(mv:*)", "Bash(touch:*)", "Bash(diff:*)", "Bash(cd:*)", "Bash(test:*)", "Bash(xargs:*)"]
+         "Bash(mv:*)", "Bash(touch:*)", "Bash(diff:*)", "Bash(cd:*)", "Bash(test:*)", "Bash(xargs:*)",
+         "Bash(for:*)", "Bash(while:*)", "Bash(if:*)", "Bash(export:*)", "Bash(true:*)", "Bash(ls -a:*)"]
 DENY = [
     "Bash(git push:*)", "Bash(gh:*)", "Bash(npm publish:*)", "Bash(npx wrangler:*)",
     "Bash(wrangler:*)", "Bash(curl -X POST:*)", "Bash(curl --request POST:*)",
@@ -101,6 +102,9 @@ def child_env(home):
     env["HOME"] = str(home)
     env.setdefault("CHROME_PATH", "/opt/pw-browsers/chromium")  # Lighthouse and Playwright use the preinstalled browser
     env.setdefault("PW_MODULE", PW_MODULE)  # ground-truth scripts import Playwright from here
+    for k, v in (("GIT_AUTHOR_NAME", "skill-run"), ("GIT_COMMITTER_NAME", "skill-run"),
+                 ("GIT_AUTHOR_EMAIL", "run@example.com"), ("GIT_COMMITTER_EMAIL", "run@example.com")):
+        env[k] = v  # a neutral identity: the run's HOME has no git config
     env["SKILL_RUNS"] = str(HERE)  # setup and ground_truth reach helpers as $SKILL_RUNS/...
     return env
 
@@ -147,7 +151,9 @@ def run_check(c, output, transcript, proj, written="", env=None):
         ok = (proj / c["file"]).exists()
         detail = c["file"]
     else:
-        if where == "any":
+        if where == "commands":  # only what the run executed, not text it read
+            text = "\n".join(tool_log([json.loads(l) for l in transcript.splitlines() if l.strip()]))
+        elif where == "any":
             text = output + "\n" + written
         elif where == "output":
             text = output

@@ -1,0 +1,2 @@
+--- commits on the bare remote:
+8a00dfb init

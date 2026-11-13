@@ -1,151 +1,158 @@
-# Reconcile: landing page + 3-email checklist sequence
+# Reconcile: landing page and checklist email sequence
 
-## Assumptions (from brief.md)
-- Landing page: **problem-aware to solution-aware** traffic. They know month-end is slow, may not know matching can be automated. Goal: start a 14-day free trial (no card).
-- Emails: **problem-aware**. They downloaded a month-end checklist, so they are tidying up the process by hand. Goal of each email: one click to the trial.
-- Proof used: the onboarding survey stat (n=24, our own survey) and the Hana Ito quote, verbatim.
-- Not claimed: QuickBooks, SOC 2, AI, any guaranteed result.
+## Part 1. Landing page
 
----
+**Asset:** landing page, traffic from the site and the checklist follow-up emails.
+**Awareness assumed:** problem-aware (they know month-end is slow; they may not know a tool does the matching). Written for solution-aware readers too.
+**Goal:** start the 14-day free trial (no card).
+**Proof used:** onboarding survey (n=24, median 3.5 days to 1 day), Hana Ito quote (verbatim, supplied), 31 paying customers.
 
-# PART 1: LANDING PAGE
+### Headline options (different angles)
+- A (time): Month-end close in a day, not three and a half.
+- B (problem): Your Stripe payout didn't match the invoices. You'll find out in three weeks.
+- C (mechanism): Stripe and GoCardless payouts, matched to Xero invoices. Automatically.
+- D (buyer): Month-end reconciliation for UK SaaS finance teams of one to three.
 
-## Headline set (test these angles)
-- **A (time):** Month-end close in a day, not three and a half.
-- **B (specific pain):** Stop finding last month's payout mismatches this month.
-- **C (mechanism):** Stripe and GoCardless payouts, matched to Xero invoices. Automatically.
-- **D (buyer's voice):** Your team shouldn't spend 2–4 days a month ticking off payouts.
+**Recommended:** C as the headline, with the time claim in the subheadline.
 
-Recommended lead: **A** with the survey caveat in the subhead, or **C** if traffic is cold.
+### Subheadline
+Reconcile matches your Stripe and GoCardless payouts to your Xero invoices, so your team isn't doing it by hand. Customers' median close time fell from 3.5 days to 1 (our onboarding survey, 24 customers).
 
-## Subheadline
-Reconcile matches your Stripe and GoCardless payouts to invoices in Xero, so a 1–3 person finance team isn't doing it by hand every month.
-
-**[Start your 14-day free trial]** (No card needed.)
-
-## Body
+**[Start free trial]**  14 days. No card.
 
 ### The problem
-Month-end reconciliation takes two to four days when you do it by hand. Stripe pays out a lump sum, net of fees. A refund comes off a different day's balance. A customer pays half an invoice. GoCardless collects on its own schedule. Each one has to be traced back to an invoice in Xero, one line at a time.
+If you run finance at a SaaS company with a few hundred to a few thousand invoices a month, you know the routine. Payouts land in the bank as one lump. Stripe and GoCardless have taken fees. Some customers were refunded. Some paid part of an invoice. Someone has to work out which lines in Xero each payout covers.
 
-The worse part is when you find the problems. A mismatch from a fee, a refund or a partial payment tends to surface weeks later, when someone finally gets to that stretch of the ledger. By then nobody remembers what happened.
+By hand, that's two to four days of every month. And the awkward ones, the payout that's short because of a fee or a refund, tend to be found weeks after they happened, when nobody remembers why.
 
 ### What Reconcile does
-Reconcile connects to Stripe, GoCardless and Xero, and matches each payout to the invoices it covers. That includes payouts where fees, refunds or partial payments make the totals differ.
+It connects to Stripe, GoCardless and Xero, and matches each payout to the invoices it covers. That's the whole job. It's meant to replace the spreadsheet step, not your accounting system.
 
-It's built for finance teams of one to three people at UK SaaS companies sending roughly 200 to 5,000 invoices a month. That's the whole audience, and the product is tuned for it.
+[How mismatches are shown (fees, refunds, partial payments) — supply this]
 
-### How it goes
-1. Connect Stripe and/or GoCardless, and Xero.
-2. Reconcile matches payouts to invoices.
-3. You review what's left, rather than everything.
-
-### What customers report
-In our onboarding survey (24 customers, run by us), the median customer cut month-end close from **3.5 days to 1 day**. Your result depends on your invoice volume and how messy your payouts are.
+### What changes
+- The matching stops being a two-to-four-day task.
+- Month-end close, for the median customer in our onboarding survey, went from 3.5 days to 1. (24 responses; that's our own survey, not an independent study, and your result depends on your volumes and how messy your payouts are.)
 
 > "We closed October in a day for the first time."
 > Hana Ito, Finance Lead, Stackwise
 
-31 companies pay for Reconcile today.
+### Who it's for
+UK SaaS companies sending roughly 200 to 5,000 invoices a month, with a finance team of one to three people. If that's you, Reconcile was built for your month-end. If you're on QuickBooks, it won't work for you yet: we integrate with Xero only.
 
 ### Price
-- **£149/month**: up to 1,000 invoices
-- **£349/month**: up to 5,000 invoices
+- **£149/month**, up to 1,000 invoices
+- **£349/month**, up to 5,000 invoices
 
-14-day free trial. No card required.
+Both start with a 14-day free trial. No card needed.
 
-### What it doesn't do (yet)
-Reconcile works with Xero only. There's no QuickBooks integration at the moment. We're also not SOC 2 certified; our audit is in progress. If either is a requirement for you, better to know before you start a trial.
-
-### FAQ
-**How long does setup take?** [setup time: supply this]
-
-**What happens at the end of the trial?** [post-trial behaviour: supply this. Does it stop, or ask for payment details?]
-
-**What if I go over my invoice limit?** [overage policy: supply this]
-
-**Is my data safe?** [security facts we can state: supply this. We are not SOC 2 certified; audit in progress.]
+### Questions
+**Which accounting software?** Xero. There is no QuickBooks integration yet.
+**Which payment providers?** Stripe and GoCardless.
+**Is it SOC 2 certified?** Not yet. Our audit is in progress. [Security details you can share (data handling, access scope) — supply this]
+**Do I need a card to try it?** No.
+**What happens after 14 days?** [What happens at trial end — supply this]
+**What if we're over 5,000 invoices?** [Pricing above 5,000 — supply this]
 
 ### Close
-Your next month-end is coming either way. Run it through Reconcile for the trial and compare it with how long the last one took.
+Run one month's payouts through it and see how much of the matching it does before you decide anything.
 
-**[Start your 14-day free trial]** (No card needed.)
+**[Start free trial]**  14 days. No card.
+
+### Gaps
+- Trial sign-up URL.
+- How Reconcile surfaces mismatched payouts. The brief names this as the pain but not how the product handles it, so no claim is made.
+- Setup time and what a trial needs (Xero admin access? historic data?).
+- Trial-end behaviour, plan over 5,000 invoices, cancellation terms.
+- Security details beyond "SOC 2 in progress".
+- Confirm the survey wording supports "median" and "close time" as written, and the survey date.
+- Headshot or logo for Hana Ito / Stackwise (only if permission covers it).
+
+### Test note
+Metric: trial sign-ups per landing-page visitor. First hypothesis: leading with the mechanism (headline C) versus the problem (headline B) for cold traffic. The checklist-email traffic is already problem-aware, so segment it separately.
 
 ---
 
-# PART 2: EMAIL SEQUENCE (checklist downloaders)
+## Part 2. Email sequence: checklist downloaders
 
-Sender: [sender name: supply this, ideally a real person at Ledgerline]. Timing suggestion: Day 0 / Day 3 / Day 7 after download [timing: confirm]. Every email has one link: the trial.
+**Awareness:** problem-aware. They downloaded a month-end checklist, so they own the pain and are partway to looking for a fix.
+**Goal:** start the free trial. One CTA per email: **Start free trial**.
+**Send timing:** Email 1 on download day or the day after; Email 2 about 3 days later; Email 3 about 4 days after that. [Confirm cadence]
+**From:** [sender name — supply this]
 
-## Email 1: Day 0, deliver and frame
-**Subject:** Your month-end checklist
-**Preview:** And the part no checklist covers.
+### Email 1: the checklist, and the part it can't fix
+
+**Subject:** The slowest line on the month-end checklist
+**Preview:** It's usually the same one.
 
 Hi [first name],
 
-Here's the checklist you asked for: [checklist link: supply this].
+You downloaded our month-end checklist, so I'll assume close takes longer than you'd like.
 
-One thing worth saying up front: a checklist makes month-end more orderly. It doesn't make it shorter. For most SaaS finance teams, the longest step is matching Stripe and GoCardless payouts to invoices in Xero, and a checklist can only say "do this" beside it.
+On most checklists the slow line is the same: match payouts to invoices. Stripe and GoCardless pay out net of fees and refunds, and partial payments make it worse. Done by hand, it's two to four days of the month, and the payout that doesn't add up often isn't noticed until weeks later.
 
-That's the step we built Reconcile to do. If you'd like to see whether it fits how you work, there's a 14-day free trial, no card.
+That's the one step a checklist can only tell you to do. Reconcile does it: it matches Stripe and GoCardless payouts to invoices in Xero automatically.
 
-[Start the free trial]
+There's a 14-day free trial, no card.
 
-[sender name]
+[Start free trial]
+
+[Sender name]
 Ledgerline
 
-## Email 2: Day 3, the problem they have
-**Subject:** The mismatch you find in week three
-**Preview:** Fees, refunds and partial payments.
+### Email 2: the evidence
+
+**Subject:** 3.5 days to 1
+**Preview:** What 24 customers told us at onboarding.
 
 Hi [first name],
 
-The payouts that cause trouble at month-end are rarely the clean ones. They're the ones where a fee was netted off, a refund went out on a different day, or a customer paid part of an invoice.
+A number, with its limits stated.
 
-By hand, those get found when you reach that line, often weeks after they happened. By then you're reconstructing what went on from memory and exports.
+When we surveyed customers at onboarding (24 responses), the median month-end close had gone from 3.5 days to 1. It's our own survey and a small sample, so treat it as a guide, not a promise. Your volumes and how messy your payouts are will change it.
 
-Reconcile matches payouts to Xero invoices automatically, so you spend your time on the exceptions instead of on every line.
+One of those customers, Hana Ito, Finance Lead at Stackwise, put it this way:
 
-In our onboarding survey (24 customers, our own numbers), the median customer went from 3.5 days to 1 day on month-end close. One of them, Hana Ito at Stackwise, put it this way: "We closed October in a day for the first time."
+"We closed October in a day for the first time."
 
-Your own result will depend on your volume and how messy your payouts are. The trial is the quickest way to find out.
+Reconcile is for UK SaaS teams sending roughly 200 to 5,000 invoices a month, with one to three people in finance, on Xero. If that's you, a trial is the quickest way to see what it does with your own payouts.
 
-[Try it on your own data, free for 14 days]
+[Start free trial]
 
-[sender name]
+[Sender name]
 
-## Email 3: Day 7, the offer and the honest limits
-**Subject:** £149 a month, or free for 14 days first
-**Preview:** Plus two things we don't do.
+P.S. It works with Xero only. We don't have a QuickBooks integration yet.
+
+### Email 3: the practical close
+
+**Subject:** What it costs, and what a trial involves
+**Preview:** Two plans, 14 days, no card.
 
 Hi [first name],
 
-Last note from me. Here is the plain version:
+Last one from me. Here are the plain facts.
 
-- Reconcile matches Stripe and GoCardless payouts to invoices in Xero.
-- £149/month up to 1,000 invoices. £349/month up to 5,000.
-- 14-day free trial, no card.
+- £149/month for up to 1,000 invoices
+- £349/month for up to 5,000 invoices
+- 14-day free trial, no card required
 
-Two things to know before you start: it works with Xero only (no QuickBooks yet), and we're not SOC 2 certified; the audit is in progress. If either rules us out, I'd rather you hear it now.
+A sensible test: run one month of payouts through it, compare against how long your last close took, and decide from that. If the matching doesn't save you time, you've lost a short setup and nothing else. [Setup time — supply this]
 
-If not, run one month-end through the trial and see how long it takes compared with your last one.
+If you have a question first, reply to this email. [Confirm replies are monitored]
 
-[Start the free trial]
+[Start free trial]
 
-[sender name]
-P.S. Questions before you start? Reply to this email. [reply-to monitored: confirm]
+[Sender name]
+
+### Sequence gaps
+- Sender name, reply-to handling, checklist title (to reference it by name), unsubscribe/footer.
+- Sign-up URL and any tracking parameters.
+- Cadence confirmation.
+
+### Test note
+Metric: trial starts per delivered sequence. First hypothesis: Email 2's survey number with its caveats versus a version leading with the quote alone. Open rates are a secondary check on subject lines only.
 
 ---
 
-# GAPS (fill before shipping)
-- Setup time, post-trial behaviour, overage policy, security statement (FAQ).
-- Sender name, send timing, reply-to, checklist link and title.
-- Trial URL and button destination.
-- **Confirm the mechanism wording:** the brief says Reconcile matches payouts automatically. I wrote that fees, refunds and partial payments are handled in matching, and that you "review what's left." Check both against the product. I did *not* claim it flags mismatches in real time because the brief doesn't say so. If it does, that's a stronger headline (B).
-- Confirm "31 companies pay" is current at publish date.
-- Confirm Hana Ito and Stackwise have approved page and email use (brief says allowed).
-- The 3.5 to 1 day figure is a median from a self-run survey, n=24, so it's labelled that way. Don't drop the label.
-- One CTA is used throughout. A "talk to us" option would be a strategy decision.
-
-# TEST NOTE
-Metric: trial sign-ups per landing page visit. First test: headline A (time) vs B (late-found mismatches). For emails: trial clicks per send on Email 2, since that's where the proof sits.
+## Claims check
+Not claimed anywhere: QuickBooks support, SOC 2 certification, AI or machine learning, guaranteed results, urgency or scarcity. The 3.5-to-1 figure is always attributed to the onboarding survey (n=24).

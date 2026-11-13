@@ -16,7 +16,7 @@
     "Bash(git tag:*)"
   ],
   "target": "a small skill repo with a local bare remote: edit SKILL.md, then push",
-  "prompt": "In skills/invoice-namer/SKILL.md, add to the description that it also handles .png scans of invoices. Commit it and push to origin main. If anything flags the push, do what it says and tell me what happened.",
+  "prompt": "In skills/invoice-namer/SKILL.md, add to the description that it also handles .png scans of invoices. Commit it and push to origin main. If anything flags the push, do what it says and tell me what happened. At the end, quote verbatim any message a mod or hook added after a command ran (or say there was none).",
   "checks": [
     {
       "desc": "the mod loaded in the session",
@@ -24,9 +24,9 @@
       "in": "transcript"
     },
     {
-      "desc": "the push was flagged after the SKILL.md edit (nudge mode)",
+      "desc": "the push was flagged after the SKILL.md edit (nudge mode, quoted by Claude)",
       "re": "tune-skill-mod: that ran before",
-      "in": "transcript"
+      "in": "output"
     },
     {
       "desc": "tune-skill was then run",

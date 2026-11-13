@@ -2,19 +2,31 @@
   "skill": "solo-income-blueprint",
   "date": "2026-11-13",
   "target": "a realistic persona: a UK accountant with 8 hours a week and \u00a3300",
-  "verdict": "FAIL",
-  "score": 0,
-  "summary": "judge returned no JSON",
+  "verdict": "PASS",
+  "score": 9,
+  "summary": "The run recommended a Xero bookkeeping/VAT-prep retainer (5 clients at about \u00a3300 a month, 25\u201330 hours) with a 5-conversation demand check, text-only LinkedIn and referral channels, a 9-hour 7-day plan, and compliance flags, without citing income statistics.",
   "checks": [],
-  "met": [],
-  "missed": [
-    "You've hit your 5-hour limit \u00b7 resets 5:40pm (UTC)"
+  "met": [
+    "Recommends a single model and offer (fixed-price monthly Xero bookkeeping and VAT-prep retainer, with a clean-up as entry offer) that fits the accountant's skills, 8 hours a week, \u00a3300 and no-camera constraint",
+    "Demand check before building: 5 owner conversations with a threshold of at least 2 saying they'd pay or 1 deposit, plus a stated no-signal condition",
+    "Content plan (2 text posts a week, pillars, hooks), sales path (DM, free review, clean-up, retainer, follow-ups, referrals), minimal tool stack and automations with advice to delay them",
+    "Concrete 7-day plan with outcomes and hours per day, totalling about 9 hours",
+    "Realistic about \u00a31,500/month: shows the sum (5 clients \u00d7 \u00a3300, 25\u201330 hours), labels prices as assumptions, and says content or digital products would not reach it on this time",
+    "Flags conflicts with the day job: employment contract outside-work and conflict-of-interest clauses, professional body rules on private practice, AML registration, PI insurance, ICO; also says these were not verified",
+    "No invented income statistics: the figures are labelled assumptions to check against local rates"
   ],
-  "skill_defects": [],
-  "cost_usd": 0,
-  "turns": 1,
-  "seconds": 1,
-  "tool_calls": 0,
+  "missed": [
+    "The tool stack is thin on costs: it says to check current pricing rather than giving a \u00a3 budget breakdown against the \u00a3300, and it only says compliance costs 'may use a lot' of it",
+    "The 7-day plan spends 1 hour on day 1 on the contract check but sends outreach on day 4, so it does not hold outreach until the compliance answer comes back; the 'START HERE FIRST' note partly covers this"
+  ],
+  "skill_defects": [
+    "The skill does not require an itemised budget table that totals under the stated cap (tools plus compliance costs against \u00a3300)",
+    "The 7-day plan does not gate outreach on the employer and professional-body check coming back clear"
+  ],
+  "cost_usd": 0.09,
+  "turns": 3,
+  "seconds": 29,
+  "tool_calls": 1,
   "files": [],
   "error": ""
 }

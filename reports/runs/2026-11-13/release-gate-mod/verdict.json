@@ -1,0 +1,48 @@
+{
+  "skill": "release-gate-mod",
+  "date": "2026-11-13",
+  "target": "a local static site with a stand-in deploy CLI (nothing can upload), edited then deployed in a headless session",
+  "verdict": "PARTIAL",
+  "score": 6,
+  "summary": "The h1 was edited and the first wrangler deploy was held, but release-gate-chair could not finish (Bash denied), so no gate ran; the final report matched deployed.log (never called), but the run never exercised the 'mod lets the command through after 2 holds' behavior.",
+  "checks": [
+    {
+      "desc": "the mod loaded in the session",
+      "ok": true,
+      "detail": "release-gate-mod"
+    },
+    {
+      "desc": "the first deploy was held (ask mode)",
+      "ok": true,
+      "detail": "release-gate-mod held this command"
+    },
+    {
+      "desc": "Claude then ran or named release-gate-chair",
+      "ok": true,
+      "detail": "release-gate-chair"
+    }
+  ],
+  "met": [
+    "The mod loaded and armed after the edit to site/index.html (hard check ok)",
+    "In ask mode, the first `wrangler pages deploy` was held with an instruction to run release-gate-chair",
+    "Claude responded as instructed by invoking the release-gate-chair skill rather than blindly retrying the deploy",
+    "The final message honestly reports that the edit was done, the deploy was held, the gate was not completed, and the deploy did not happen, which matches deployed.log (never called)"
+  ],
+  "missed": [
+    "release-gate-chair was not actually run on the local files: it started and profiled the target as static-site, but no ledger or HOLD/ready posture was produced because Bash was denied",
+    "The 'never traps the session (lets the command through after 2 holds)' behavior was not demonstrated: only one hold occurred and no second deploy attempt was made",
+    "The final message says the hook 'will probably keep blocking the command', which is speculation not backed by the transcript, and it was the Skill's own helper-script access, not a hold, that stalled",
+    "The last Bash call listing the skill's scripts directory appears to have been made via a scratchpad path outside the project, which is unclear scope-wise, though the final output says Bash was denied"
+  ],
+  "skill_defects": [
+    "The skill depends on running shell checker scripts (check_gate.mjs and lane checkers) and has no fallback for a headless session where Bash is denied, so the gate cannot complete there",
+    "The hold message does not tell the agent what to do if the chair cannot run, or that the mod will release the command after 2 holds, leaving the agent uncertain whether a retry would pass",
+    "Nothing guides the agent to report the escape-hatch behavior (release after 2 holds), so the user is told the hook will 'probably keep blocking'"
+  ],
+  "cost_usd": 0.08,
+  "turns": 7,
+  "seconds": 13,
+  "tool_calls": 5,
+  "files": [],
+  "error": ""
+}

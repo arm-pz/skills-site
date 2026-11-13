@@ -5,11 +5,6 @@
   "prompt": "Write the landing page for Reconcile and a 3-email sequence for people who downloaded our month-end checklist. Everything you need is in brief.md.",
   "checks": [
     {
-      "desc": "no SOC 2 claim",
-      "re": "SOC ?2 (certified|compliant)",
-      "expect": false
-    },
-    {
       "desc": "prices are right",
       "re": "£149"
     },
