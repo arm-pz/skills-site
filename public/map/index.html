@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workflow Map: say the goal, see the route | Skillsmith by Caffeinity</title>
+<meta name="description" content="Type what you want to get done and see the matching workflow drawn as a graph: which agent skills to run, in what order, with the install lines. Free, runs in your browser.">
+<link rel="canonical" href="https://skillsmith.tech/map/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Skillsmith by Caffeinity">
+<meta property="og:title" content="Say what you want done. See the route.">
+<meta property="og:description" content="Type what you want to get done and see the matching workflow drawn as a graph: which agent skills to run, in what order, with the install lines. Free, runs in your browser.">
+<meta property="og:url" content="https://skillsmith.tech/map/">
+<meta name="twitter:card" content="summary">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="preload" href="/fonts/files/cY9AfjOCX1hbuyalUrK4397yjA.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/files/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/tool.css">
+</head>
+<body>
+
+<nav class="nav" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="/"><b>/</b>skillsmith <span class="brand-by">by caffeinity</span></a>
+    <div class="nav-links">
+      <a href="/skills/">Skills</a>
+      <a href="/workflows/">Workflows</a>
+      <a href="/checks/">Free tools</a>
+      <a href="/work/">Work with us</a>
+    </div>
+    <div class="nav-cta">
+      <a class="gh" href="https://github.com/arm-pz" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-accent btn-sm" href="/workflows/">All workflows</a>
+    </div>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="wrap">
+    <h1>Say what you want done. See the route.</h1>
+    <p class="lead">We publish twelve workflows, each a chain of open skills that hand work from one to the next. Type your goal in your own words and the page draws the chain that fits, with the lines to install it.</p>
+  </div>
+</header>
+
+<section class="tone" id="check" aria-labelledby="check-title">
+  <div class="wrap">
+    <h2 id="check-title">Map a goal.</h2>
+    <form class="checker" id="form" novalidate>
+      <div>
+        <label for="goal">What are you trying to get done?</label>
+        <div class="row">
+          <input type="text" id="goal" name="goal" placeholder="Is my site safe to launch on Friday?" autocomplete="off">
+          <button class="btn btn-accent" type="submit">Map it</button>
+        </div>
+      </div>
+      <p class="hint">or pick one:</p>
+      <div class="chips" id="chips"></div>
+      <p id="status" role="status" aria-live="polite"></p>
+    </form>
+    <div id="result" hidden></div>
+    <noscript><p class="sub">Workflow Map needs JavaScript. Every workflow is also listed, with its steps, on the <a href="/workflows/">workflows page</a>.</p></noscript>
+  </div>
+</section>
+
+<section aria-labelledby="faq-title">
+  <div class="wrap">
+    <h2 id="faq-title">Before you type.</h2>
+    <div class="faq">
+      <details>
+        <summary>How does it choose a route?</summary>
+        <p>By matching words. It compares what you typed with each workflow's title, its summary, the skills in it and a short list of everyday words for the same job. There is no language model behind it, so it shows you which words matched and offers the next closest route.</p>
+      </details>
+      <details>
+        <summary>Where does what I type go?</summary>
+        <p>Nowhere. The page loads the list of workflows once and does the matching in your browser.</p>
+      </details>
+      <details>
+        <summary>Do I have to run every skill in the route?</summary>
+        <p>No. Steps marked optional can be skipped, and each skill works on its own. The order matters when you do run them, because each one hands its output to the next.</p>
+      </details>
+      <details>
+        <summary>How do I run a workflow once the skills are installed?</summary>
+        <p>Ask your agent for the outcome in plain words. The caffeinity-routing skill names the workflow and the next skill; in Claude Code, each workflow also has its own agent in the caffeinity plugin.</p>
+      </details>
+      <details>
+        <summary>None of the routes fit my work.</summary>
+        <p>Then it is probably a skill nobody has written yet. We build custom skills at a fixed price; see <a href='/work/'>custom work</a>.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer class="roast">
+  <div class="wrap">
+    <div class="meta">
+      <span>Skillsmith by <a href="https://caffeinity.com/">Caffeinity</a>: open agent skills by Abdul Rahman P Z, and custom skills built to order.</span>
+      <a href="/checks/">All free tools</a>
+      <a href="https://github.com/arm-pz" target="_blank" rel="noopener">github.com/arm-pz</a>
+    </div>
+    <p class="kural"><span lang="ta">யாம் பெற்ற இன்பம் பெறுக இவ்வையகம்</span><span>“May this world attain the same bliss that I have attained.”</span></p>
+  </div>
+</footer>
+<script src="/assets/site.js" defer></script>
+<script src="/assets/tool.js" defer></script>
+<script src="/map/map-core.js" defer></script>
+<script src="/map/map.js" defer></script>
+</body>
+</html>

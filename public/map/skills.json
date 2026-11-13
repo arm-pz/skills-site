@@ -1,0 +1,3792 @@
+{
+  "schema": 1,
+  "site": "https://skillsmith.tech",
+  "groups": [
+    {
+      "id": "start-here",
+      "title": "Start Here",
+      "descriptor": "routing · twelve brews",
+      "order": 1
+    },
+    {
+      "id": "skill-authoring",
+      "title": "Skill Authoring",
+      "descriptor": "draft · tune · release · mods",
+      "order": 2
+    },
+    {
+      "id": "publish-discover",
+      "title": "Publish & Discover",
+      "descriptor": "discovery · pipeline · drift",
+      "order": 3
+    },
+    {
+      "id": "ship-checks",
+      "title": "Build & Ship",
+      "descriptor": "build · exposure · security · speed · go/no-go",
+      "order": 4
+    },
+    {
+      "id": "seo-search",
+      "title": "SEO & Search",
+      "descriptor": "crawl · cannibalization · rewrites",
+      "order": 5
+    },
+    {
+      "id": "writing-growth",
+      "title": "Writing & Content",
+      "descriptor": "editing · platforms · sales copy",
+      "order": 6
+    },
+    {
+      "id": "outbound",
+      "title": "Outbound",
+      "descriptor": "list gates · deliverability",
+      "order": 7
+    },
+    {
+      "id": "career",
+      "title": "Career",
+      "descriptor": "screening · applications · growth",
+      "order": 8
+    },
+    {
+      "id": "thinking-learning",
+      "title": "Thinking & Learning",
+      "descriptor": "research · decisions · teaching",
+      "order": 9
+    }
+  ],
+  "skills": [
+    {
+      "name": "caffeinity-routing",
+      "repo": "arm-pz/caffeinity-skills",
+      "path": "plugins/caffeinity-routing/skills/caffeinity-routing",
+      "group": "start-here",
+      "tag": "routing",
+      "title": "Caffeinity Routing",
+      "pageTitle": "Caffeinity Routing — AI Agent Skill for Claude Code",
+      "blurb": "Start here. Tell it the outcome you want and it picks one of twelve brews (workflows), lists the skills in order with what each hands the next, and names the ones you have not installed instead of improvising their work.",
+      "stats": "4 files · 415 lines · 10 KB",
+      "install": "npx skills add arm-pz/caffeinity-skills --skill caffeinity-routing",
+      "page": "generated",
+      "pageSource": {
+        "description": "Picks which caffeinity skills to run, in what order, for a goal that spans more than one of them, and says what each step hands the next: build and publish a skill, get a project found, pass a release gate, grow organic search traffic, run a job search, make a decision, learn a skill, run cold outbound, launch a one-person product, set up a coding agent for a repo, or set up and keep the skills themselves healthy. Checks which of those skills are installed and names the missing ones instead of improvising their work. Use whenever someone asks which skill to use, what to run first, how the skills fit together, or describes a multi-step outcome such as \"take this idea to a published skill\" or \"get my site ready to ship and ranking\", even if they never name a skill. Not for a request one skill already owns (load that skill directly), and not for doing a step's work itself: the named skill does it.",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 90,
+            "bytes": 6692
+          },
+          {
+            "path": "references/trigger-cases.md",
+            "lines": 30,
+            "bytes": 2888
+          },
+          {
+            "path": "references/workflows.md",
+            "lines": 151,
+            "bytes": 13095
+          },
+          {
+            "path": "scripts/route_check.py",
+            "lines": 144,
+            "bytes": 5774
+          }
+        ],
+        "fileCount": 4,
+        "lines": 415,
+        "bytes": 10535,
+        "license": "MIT",
+        "commit": "af1c5977a397b6760e7ea27fd27cafb6b2e7ad8e",
+        "sha256": "d1a45fffe54e35945e75344c35f15dafe8d8c7f5748fba2d32f36ce588790bc4"
+      },
+      "order": 101,
+      "quality": {
+        "version": "1.1.0",
+        "commit": "af1c597",
+        "updated": "2026-11-12",
+        "notFor": [
+          "a request one skill already owns (load that skill directly)",
+          "not for doing a step's work itself: the named skill does it"
+        ]
+      }
+    },
+    {
+      "name": "draft-skill",
+      "repo": "arm-pz/draft-skill",
+      "path": ".",
+      "group": "skill-authoring",
+      "tag": "authoring",
+      "title": "Draft Skill",
+      "page": "bespoke",
+      "order": 201,
+      "blurb": "Creates a new agent skill from a plain idea: confirms the purpose before writing anything, checks the installed siblings for overlap, splits scripts from references from assets, writes a description that actually triggers, then validates it with check_skill.py. Written from scratch, so it carries no text from Qoder's built-in skill-creator, which ships without a licence permitting redistribution.",
+      "stats": "2 files · 112 lines · 8 workflow steps · 0 API keys",
+      "install": "npx skills add arm-pz/draft-skill",
+      "githubAbout": "AI agent skill that drafts a new SKILL.md from a plain idea: confirms the purpose first, checks your installed skills for overlap, writes a description that actually triggers, and validates it with a script. Open source, for Claude Code, Codex, Cursor and Qoder.",
+      "githubTopics": [
+        "skill-creation",
+        "prompt-engineering",
+        "qoder"
+      ],
+      "quality": {
+        "version": "1.0.0",
+        "commit": "fbbb4ac",
+        "updated": "2026-11-06",
+        "notFor": [
+          "turning a batch of existing prompts into a skill (use prompts-to-skill)",
+          "tightening a skill that already exists (use tune-skill)",
+          "releasing a finished one (use prompts-to-skill-release)"
+        ]
+      },
+      "tested": {
+        "date": "2026-10-24",
+        "target": "caffeinity-routing",
+        "result": "Drafted the missing routing skill five others pointed at; it passed tune-skill's validator with 0 failures.",
+        "evidence": "/#proof"
+      }
+    },
+    {
+      "name": "prompts-to-skill",
+      "repo": "arm-pz/prompts-to-skill",
+      "path": ".",
+      "group": "skill-authoring",
+      "tag": "authoring",
+      "title": "Prompts To Skill",
+      "page": "bespoke",
+      "order": 202,
+      "blurb": "Turns a list of your own prompts into a finished, tested skill, one skill per prompt: an intent interview, an overlap check against what is already installed, a draft written with draft-skill, trigger test cases that include near-misses, and a tune-skill gate at the end. It needs draft-skill and tune-skill and stops with a clear message if either is missing.",
+      "stats": "3 files · 141 lines · depends on draft-skill + tune-skill · 0 API keys",
+      "install": "npx skills add arm-pz/prompts-to-skill",
+      "quality": {
+        "version": "1.0.0",
+        "commit": "4e5697e",
+        "updated": "2026-11-06",
+        "notFor": [
+          "editing an existing skill (use tune-skill)",
+          "creating a skill from a plain description with no prompts (use draft-skill)",
+          "finding existing skills for a task"
+        ]
+      }
+    },
+    {
+      "name": "tune-skill",
+      "repo": "arm-pz/tune-skill",
+      "path": ".",
+      "group": "skill-authoring",
+      "tag": "authoring",
+      "title": "Tune Skill",
+      "page": "bespoke",
+      "order": 203,
+      "blurb": "Audits and fine-tunes a skill that already exists: the description that never fires, overlap with installed siblings, stale names and counts, handoff contracts that do not hand off. Ships check_skill.py, a deterministic validator over frontmatter, folder and heading agreement, description length and reference paths that do not exist. Not for creating one from scratch; that is draft-skill.",
+      "stats": "4 files · 268 lines · 1 validator script · 0 API keys",
+      "install": "npx skills add arm-pz/tune-skill",
+      "quality": {
+        "version": "1.0.0",
+        "commit": "31f7b57",
+        "updated": "2026-11-06",
+        "notFor": [
+          "creating a skill from scratch (use draft-skill) or from a list of prompts (use prompts-to-skill)",
+          "for making a skill run automatically at a moment such as before git push (use skill-to-mod)"
+        ]
+      },
+      "tested": {
+        "date": "2026-10-24",
+        "target": "the 42 skills in this catalogue",
+        "result": "Caught one skill that strict installers could not load; fixed in that skill and in tune-skill.",
+        "evidence": "/#proof"
+      },
+      "featured": 3
+    },
+    {
+      "name": "prompts-to-skill-release",
+      "repo": "arm-pz/prompts-to-skill-release",
+      "path": ".",
+      "group": "skill-authoring",
+      "tag": "release",
+      "title": "Prompts To Skill Release",
+      "page": "bespoke",
+      "order": 204,
+      "blurb": "Packages a finished skill for release: runs its trigger test cases and records which passed and which did not, sets the version and CHANGELOG, builds the archive, writes the README, and ends with a per-platform install checklist. Failed tests stay in the report instead of being dropped from it.",
+      "stats": "3 files · 113 lines · 5 release sections · 0 API keys",
+      "install": "npx skills add arm-pz/prompts-to-skill-release",
+      "quality": {
+        "version": "1.0.0",
+        "commit": "dd0dd57",
+        "updated": "2026-11-06",
+        "notFor": [
+          "drafting or tuning a skill (use prompts-to-skill or tune-skill)",
+          "for repo discoverability copy (use findable)",
+          "for pushing existing clones (use upstream-check)"
+        ]
+      }
+    },
+    {
+      "name": "skill-to-mod",
+      "repo": "arm-pz/skill-to-mod",
+      "path": "skills/skill-to-mod",
+      "group": "skill-authoring",
+      "tag": "authoring",
+      "title": "Skill to Mod",
+      "page": "bespoke",
+      "order": 205,
+      "blurb": "Checks whether a skill should become a Claude Code mod, then builds the plugin with your skill unchanged and a thin trigger, validates and tests it, and lists what it can touch. Says no when a skill should stay a skill.",
+      "stats": "12 files · 1,790 lines · 3 trigger patterns · 0 API keys",
+      "install": "npx skills add arm-pz/skill-to-mod --skill skill-to-mod",
+      "quality": {
+        "version": "1.0.0",
+        "commit": "8d9b99f",
+        "updated": "2026-11-06",
+        "notFor": [
+          "writing a brand-new mod with no source skill (use plugin-authoring)",
+          "writing a new skill (use draft-skill)",
+          "improving a skill's wording or triggering (use tune-skill)",
+          "plain skill packaging (use skill-creator)"
+        ]
+      }
+    },
+    {
+      "name": "skill-launch",
+      "repo": "arm-pz/skill-launch",
+      "path": ".",
+      "group": "skill-authoring",
+      "tag": "authoring",
+      "title": "Skill Launch",
+      "page": "bespoke",
+      "order": 206,
+      "blurb": "The full pipeline from idea to launched skill: Draft-Skill writes it, Tune-Skill gates it through the validator, Findable-Polish polishes its discovery surfaces. Six chain skills went through this loop in one day — and every public change still needs your go-ahead.",
+      "stats": "3 files · 110 lines · 3 gated phases · 0 API keys",
+      "install": "npx skills add arm-pz/skill-launch --skill skill-launch",
+      "chain": true,
+      "quality": {
+        "version": "0.1.0",
+        "commit": "1e181b9",
+        "updated": "2026-10-19",
+        "notFor": [
+          "editing existing skills (use tune-and-polish)",
+          "not for a batch of prompts the user already wrote (use prompts-to-skill)"
+        ]
+      }
+    },
+    {
+      "name": "tune-and-polish",
+      "repo": "arm-pz/tune-and-polish",
+      "path": ".",
+      "group": "skill-authoring",
+      "tag": "authoring",
+      "title": "Tune And Polish",
+      "page": "bespoke",
+      "order": 207,
+      "blurb": "For a skill that both misfires and hides: Tune-Skill fixes the triggering description, sibling overlaps and stale counts, gated on check_skill.py with zero FAILs; then Findable-Polish audits and polishes the README, About and site copy against real queries. Listings are written from the final description, never before.",
+      "stats": "3 files · 89 lines · 2 gated phases · 0 API keys",
+      "install": "npx skills add arm-pz/tune-and-polish --skill tune-and-polish",
+      "chain": true,
+      "quality": {
+        "version": "1.0.0",
+        "commit": "9cb6260",
+        "updated": "2026-10-19",
+        "notFor": [
+          "creating skills from scratch (use draft-skill)",
+          "not for a triggering-only or listing-only request, which belong to tune-skill and findable-polish alone"
+        ]
+      }
+    },
+    {
+      "name": "tune-skill-mod",
+      "repo": "arm-pz/caffeinity-skills",
+      "path": "mods/tune-skill-mod",
+      "kind": "mod",
+      "group": "skill-authoring",
+      "tag": "authoring",
+      "title": "Tune Skill Mod",
+      "pageTitle": "Tune Skill Mod — Claude Code mod",
+      "blurb": "Arms when Claude edits a SKILL.md, then holds git push, PRs and releases until tune-skill has validated the change. Edits to any other file are ignored.",
+      "stats": "16 files · 1,288 lines · 20 KB",
+      "install": "/plugin install tune-skill-mod --marketplace arm-pz/caffeinity-skills",
+      "page": "generated",
+      "pageSource": {
+        "description": "After Claude edits a SKILL.md, holds git push and releases until tune-skill has validated the change.",
+        "files": [
+          {
+            "path": ".claude-plugin/plugin.json",
+            "lines": 35,
+            "bytes": 960
+          },
+          {
+            "path": "README.md",
+            "lines": 53,
+            "bytes": 2289
+          },
+          {
+            "path": "hooks/hooks.json",
+            "lines": 6,
+            "bytes": 130
+          },
+          {
+            "path": "hooks/register.js",
+            "lines": 186,
+            "bytes": 7049
+          },
+          {
+            "path": "skills/tune-skill/.claude-plugin/plugin.json",
+            "lines": 9,
+            "bytes": 377
+          },
+          {
+            "path": "skills/tune-skill/LICENSE",
+            "lines": 21,
+            "bytes": 1073
+          },
+          {
+            "path": "skills/tune-skill/README.md",
+            "lines": 83,
+            "bytes": 3236
+          },
+          {
+            "path": "skills/tune-skill/SKILL.md",
+            "lines": 82,
+            "bytes": 5914
+          },
+          {
+            "path": "skills/tune-skill/references/audit-checklist.md",
+            "lines": 64,
+            "bytes": 4104
+          },
+          {
+            "path": "skills/tune-skill/references/test-cases.md",
+            "lines": 39,
+            "bytes": 1987
+          },
+          {
+            "path": "skills/tune-skill/references/trigger-cases.md",
+            "lines": 78,
+            "bytes": 6697
+          },
+          {
+            "path": "skills/tune-skill/scripts/check_skill.py",
+            "lines": 193,
+            "bytes": 7117
+          },
+          {
+            "path": "skills/tune-skill/scripts/regress.py",
+            "lines": 160,
+            "bytes": 6689
+          },
+          {
+            "path": "skills/tune-skill/scripts/test_check_skill.py",
+            "lines": 71,
+            "bytes": 3008
+          },
+          {
+            "path": "skills/tune-skill/scripts/test_regress.py",
+            "lines": 73,
+            "bytes": 3816
+          },
+          {
+            "path": "tests/tune-skill-mod.test.ts",
+            "lines": 135,
+            "bytes": 5868
+          }
+        ],
+        "fileCount": 16,
+        "lines": 1288,
+        "bytes": 20897,
+        "license": "MIT",
+        "commit": "af1c5977a397b6760e7ea27fd27cafb6b2e7ad8e",
+        "sha256": "e79c3f9cbd44fd97b950ca333c4a51b40f644416361a221b0754d0fa31e31a28"
+      },
+      "order": 208,
+      "quality": {
+        "version": "0.1.0",
+        "commit": "af1c597",
+        "updated": "2026-11-12",
+        "notFor": []
+      }
+    },
+    {
+      "name": "skill-release-mod",
+      "repo": "arm-pz/caffeinity-skills",
+      "path": "mods/skill-release-mod",
+      "kind": "mod",
+      "group": "skill-authoring",
+      "tag": "release",
+      "title": "Skill Release Mod",
+      "pageTitle": "Skill Release Mod — Claude Code mod",
+      "blurb": "Holds gh release create and npm publish in Claude Code until prompts-to-skill-release has run the skill's test cases since your last edit.",
+      "stats": "12 files · 627 lines · 10 KB",
+      "install": "/plugin install skill-release-mod --marketplace arm-pz/caffeinity-skills",
+      "page": "generated",
+      "pageSource": {
+        "description": "Holds gh release create and npm publish until prompts-to-skill-release has run its test cases since the last edit.",
+        "files": [
+          {
+            "path": ".claude-plugin/plugin.json",
+            "lines": 34,
+            "bytes": 975
+          },
+          {
+            "path": "README.md",
+            "lines": 52,
+            "bytes": 2095
+          },
+          {
+            "path": "hooks/hooks.json",
+            "lines": 6,
+            "bytes": 147
+          },
+          {
+            "path": "hooks/register.js",
+            "lines": 166,
+            "bytes": 6199
+          },
+          {
+            "path": "skills/prompts-to-skill-release/.claude-plugin/plugin.json",
+            "lines": 9,
+            "bytes": 439
+          },
+          {
+            "path": "skills/prompts-to-skill-release/LICENSE",
+            "lines": 21,
+            "bytes": 1073
+          },
+          {
+            "path": "skills/prompts-to-skill-release/README.md",
+            "lines": 60,
+            "bytes": 2223
+          },
+          {
+            "path": "skills/prompts-to-skill-release/SKILL.md",
+            "lines": 46,
+            "bytes": 3971
+          },
+          {
+            "path": "skills/prompts-to-skill-release/references/readme-template.md",
+            "lines": 28,
+            "bytes": 583
+          },
+          {
+            "path": "skills/prompts-to-skill-release/references/release-steps.md",
+            "lines": 39,
+            "bytes": 1968
+          },
+          {
+            "path": "skills/prompts-to-skill-release/references/trigger-cases.md",
+            "lines": 57,
+            "bytes": 4682
+          },
+          {
+            "path": "tests/skill-release-mod.test.ts",
+            "lines": 109,
+            "bytes": 4915
+          }
+        ],
+        "fileCount": 12,
+        "lines": 627,
+        "bytes": 10387,
+        "license": "MIT",
+        "commit": "af1c5977a397b6760e7ea27fd27cafb6b2e7ad8e",
+        "sha256": "0261e8afac9fd1c1a6bc03685149f45eae4a09c0c0b6f48f1e61b1ca60093aa9"
+      },
+      "order": 209,
+      "quality": {
+        "version": "0.1.0",
+        "commit": "af1c597",
+        "updated": "2026-11-12",
+        "notFor": []
+      }
+    },
+    {
+      "name": "tune-and-ship",
+      "repo": "arm-pz/caffeinity-skills",
+      "path": "plugins/tune-and-ship/skills/tune-and-ship",
+      "group": "skill-authoring",
+      "tag": "authoring",
+      "title": "Tune And Ship",
+      "pageTitle": "Tune And Ship — AI Agent Skill for Claude Code and Codex",
+      "blurb": "One published skill at a time, all the way through: tuned with tune-skill, every version, flag and price checked against its source, listing polished, released in one PR, then the site page and marketplace copy confirmed live.",
+      "stats": "6 files · 416 lines · 9 KB",
+      "install": "npx skills add arm-pz/caffeinity-skills --skill tune-and-ship",
+      "page": "generated",
+      "pageSource": {
+        "description": "Takes one published skill at a time from as-is to tuned, fact-checked, released and live, then moves to the next one in the catalog. Each run tunes the skill with tune-skill, checks every version number, flag, price and command it states against the primary source, re-reads its siblings' real SKILL.md files, polishes the listing with findable-polish, writes the version and release notes, opens one PR, and after the merge confirms the site page and marketplace copy are live. Use whenever the user wants to fine-tune their other skills, work through the catalog, give a published skill the full treatment, fact-check a skill's claims, or ship a tune instead of drafting it, even if they never say \"ship\". Not for a tune with no release (use tune-skill), drafts with nothing pushed (use tune-and-polish), a new skill (use skill-launch), regressions from the nightly health check (use caffeinity-routing's Descale brew), or a whole collection (use skill-estate).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 133,
+            "bytes": 7191
+          },
+          {
+            "path": "references/fact-check.md",
+            "lines": 53,
+            "bytes": 2714
+          },
+          {
+            "path": "references/first-run.md",
+            "lines": 15,
+            "bytes": 1566
+          },
+          {
+            "path": "references/refresh.md",
+            "lines": 48,
+            "bytes": 2157
+          },
+          {
+            "path": "references/trigger-cases.md",
+            "lines": 41,
+            "bytes": 3111
+          },
+          {
+            "path": "scripts/queue.py",
+            "lines": 126,
+            "bytes": 4911
+          }
+        ],
+        "fileCount": 6,
+        "lines": 416,
+        "bytes": 8802,
+        "license": "MIT",
+        "commit": "af1c5977a397b6760e7ea27fd27cafb6b2e7ad8e",
+        "sha256": "f1304d4562cee98a474722cbfee835c0c4d8dc642d31fe1419e06a642bab73ba"
+      },
+      "order": 210,
+      "quality": {
+        "version": "0.1.0",
+        "commit": "af1c597",
+        "updated": "2026-11-12",
+        "notFor": [
+          "a tune with no release (use tune-skill)",
+          "drafts with nothing pushed (use tune-and-polish)",
+          "a new skill (use skill-launch)",
+          "regressions from the nightly health check (use caffeinity-routing's Descale brew)",
+          "a whole collection (use skill-estate)"
+        ]
+      }
+    },
+    {
+      "name": "findable",
+      "repo": "arm-pz/findable",
+      "path": "skills/findable",
+      "group": "publish-discover",
+      "tag": "discovery",
+      "title": "Findable",
+      "page": "bespoke",
+      "order": 301,
+      "blurb": "Sets up discovery for a GitHub repo, skill, plugin or MCP server so it gets found by what it does, not only by its name. It audits where you rank today, works out the queries strangers type, then drafts the About text, topics, README opening, release notes, site page and directory plan — real numbers only, and nothing public changes without your go-ahead.",
+      "stats": "8 workflow steps · 10 kit sections · 4 reference guides · 1 listing validator · 0 API keys",
+      "install": "npx skills add arm-pz/findable --skill findable",
+      "quality": {
+        "version": "1.0.0",
+        "commit": "460170f",
+        "updated": "2026-11-06",
+        "notFor": [
+          "authoring a new skill (use draft-skill) or tuning a SKILL.md description so an agent triggers it better (use tune-skill)"
+        ]
+      },
+      "tested": {
+        "date": "2026-10-24",
+        "target": "arm-pz/tune-skill",
+        "result": "Found the repo in 0 of 5 target searches and a same-name rival; drafted the discovery kit.",
+        "evidence": "/#proof"
+      }
+    },
+    {
+      "name": "publish-pipeline",
+      "repo": "arm-pz/publish-pipeline",
+      "path": ".",
+      "group": "publish-discover",
+      "tag": "publishing",
+      "title": "Publish Pipeline",
+      "pageTitle": "Publish Pipeline — AI Agent Skill for Claude Code and Codex",
+      "blurb": "Turns a pile of skill repos into a published site: a committed manifest decides what is public, discovery opens a pull request, and a green merge deploys generated pages, both discovery indexes, a sitemap and a verified build.",
+      "stats": "9 files · 1,273 lines · 22 KB",
+      "install": "npx skills add arm-pz/publish-pipeline",
+      "page": "generated",
+      "order": 302,
+      "pageSource": {
+        "description": "Sets up, audits and repairs a manifest-driven CI/CD pipeline that publishes a collection of agent skills to a Cloudflare Pages site, with a generated page per skill. Use when someone asks for CI/CD or automation for a skills site, wants a new skill repo to appear on the site with its own page, asks why a skill is missing or its page is stale, or needs a red publish run diagnosed and a bad deploy rolled back. It installs one GitHub Actions workflow with check and publish jobs, a review-PR or auto-sync publication gate, generated hub rows, discovery indexes, sitemap and pages, and gates on both sides of the deploy. Not for releasing one skill through the marketplace, tarball or plugin channels (use publish-release-gate), checking unpushed work or listing drift (use upstream-check), deciding whether a build is safe to launch (use release-gate-chair), or writing and tuning a skill (use draft-skill or tune-skill).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 238,
+            "bytes": 13295
+          },
+          {
+            "path": "references/design.md",
+            "lines": 66,
+            "bytes": 6491
+          },
+          {
+            "path": "references/generated-page.md",
+            "lines": 53,
+            "bytes": 2617
+          },
+          {
+            "path": "references/gotchas.md",
+            "lines": 67,
+            "bytes": 4267
+          },
+          {
+            "path": "references/manifest.md",
+            "lines": 195,
+            "bytes": 8735
+          },
+          {
+            "path": "references/shape-test.md",
+            "lines": 116,
+            "bytes": 5248
+          },
+          {
+            "path": "references/verification.md",
+            "lines": 77,
+            "bytes": 4111
+          },
+          {
+            "path": "references/workflow.md",
+            "lines": 216,
+            "bytes": 9667
+          },
+          {
+            "path": "scripts/validate_manifest.py",
+            "lines": 245,
+            "bytes": 11049
+          }
+        ],
+        "fileCount": 9,
+        "lines": 1273,
+        "bytes": 22192,
+        "license": "MIT",
+        "commit": "6ead5bc8eb944440e4d95ee193b0486d6b87341d",
+        "sha256": "d928f04c1986f7e9f7f606799367e1cffd5b6f8737d0b65f940d536f0ade594b"
+      },
+      "quality": {
+        "version": "1.0.0",
+        "commit": "6ead5bc",
+        "updated": "2026-11-06",
+        "notFor": [
+          "releasing one skill through the marketplace, tarball or plugin channels (use publish-release-gate)",
+          "checking unpushed work or listing drift (use upstream-check)",
+          "deciding whether a build is safe to launch (use release-gate-chair)",
+          "writing and tuning a skill (use draft-skill or tune-skill)"
+        ]
+      }
+    },
+    {
+      "name": "upstream-check",
+      "repo": "arm-pz/upstream-check",
+      "path": ".",
+      "group": "publish-discover",
+      "tag": "publishing",
+      "title": "Upstream Check",
+      "page": "generated",
+      "order": 303,
+      "pageTitle": "Upstream Check — AI Agent Skill for Claude Code and Codex",
+      "blurb": "Finds local commits that never reached GitHub, pushes only clean fast-forwards after a secret screen, then checks that the site index, the homepage, the marketplace and the READMEs agree with the repos that actually ship a SKILL.md.",
+      "stats": "3 files · 355 lines · 8 KB",
+      "install": "npx skills add arm-pz/upstream-check",
+      "pageSource": {
+        "description": "Find local work that never reached its remote and push only what is safe, then check whether published listings agree with the repos. Fetches a folder of git clones, classifies every repo as push-ready, level, behind, diverged, no-upstream or no-remote, screens the outgoing diff for credential-shaped lines, and with --push fast-forwards only the clean ones and never forces, uses --no-verify, or touches a diverged repo. A second checker counts a catalogue wherever it is published (site index, homepage, marketplace, READMEs) against the repos that ship a SKILL.md, and names what drifted. Use when the user asks what has not been pushed, whether clones are behind upstream, to push a batch, or why a site and a README list different numbers than GitHub. Not for writing or tuning a skill (use draft-skill or tune-skill), making a repo discoverable (use findable), or deciding whether a build is safe to deploy (use release-gate-chair).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 69,
+            "bytes": 6239
+          },
+          {
+            "path": "scripts/drift_check.mjs",
+            "lines": 149,
+            "bytes": 7712
+          },
+          {
+            "path": "scripts/upstream_check.mjs",
+            "lines": 137,
+            "bytes": 6963
+          }
+        ],
+        "fileCount": 3,
+        "lines": 355,
+        "bytes": 8041,
+        "license": "MIT",
+        "commit": "37ae047ed97a7c75d84127f6d7f6e07558a1adbc",
+        "sha256": "60262a9ec32ef76e039c0e1e52152c19483ceb26822cd6b0a865b8850da40239"
+      },
+      "quality": {
+        "version": "1.0.0",
+        "commit": "37ae047",
+        "updated": "2026-11-06",
+        "notFor": [
+          "writing or tuning a skill (use draft-skill or tune-skill)",
+          "making a repo discoverable (use findable)",
+          "deciding whether a build is safe to deploy (use release-gate-chair)"
+        ]
+      },
+      "tested": {
+        "date": "2026-10-24",
+        "target": "this site's listings",
+        "result": "Found three skills installable but not listed; all are listed now.",
+        "evidence": "/#proof"
+      }
+    },
+    {
+      "name": "findable-polish",
+      "repo": "arm-pz/findable-polish",
+      "path": ".",
+      "group": "publish-discover",
+      "tag": "discovery",
+      "title": "Findable Polish",
+      "page": "bespoke",
+      "order": 304,
+      "blurb": "Chains Findable and Wordsmith: audits a README, skill page or landing copy against the queries a real stranger types, then writes two or three alternatives per finding that fix it without inventing a fact. Proven on its own repo: seven live searches, zero hits, six named gaps, fixes applied the same day.",
+      "stats": "3 files · 125 lines · 2 chained skills · 0 API keys",
+      "install": "npx skills add arm-pz/findable-polish --skill findable-polish",
+      "chain": true,
+      "quality": {
+        "version": "1.0.0",
+        "commit": "9d9173b",
+        "updated": "2026-10-19",
+        "notFor": [
+          "tuning SKILL.md trigger language (use tune-skill)",
+          "not for code review, and not for resume optimization (use recruiter-lens)"
+        ]
+      }
+    },
+    {
+      "name": "upstream-polish",
+      "repo": "arm-pz/upstream-polish",
+      "path": ".",
+      "group": "publish-discover",
+      "tag": "publishing",
+      "title": "Upstream Polish",
+      "page": "bespoke",
+      "order": 305,
+      "blurb": "Chains Upstream-Check — fetch-based push verdicts, fast-forward only, screened for credential-shaped lines — with Wordsmith rewriting drifted descriptions, topics and README rows, so repos and listings tell the same story again. An unreadable source is inconclusive, never counted as empty.",
+      "stats": "3 files · 122 lines · 7 verdicts · 0 API keys",
+      "install": "npx skills add arm-pz/upstream-polish --skill upstream-polish",
+      "chain": true,
+      "quality": {
+        "version": "1.0.0",
+        "commit": "e2165b1",
+        "updated": "2026-10-19",
+        "notFor": [
+          "creating skills from scratch (use draft-skill) or tuning trigger language only (use tune-skill)"
+        ]
+      }
+    },
+    {
+      "name": "publish-release-gate",
+      "repo": null,
+      "path": null,
+      "group": "publish-discover",
+      "tag": "publishing",
+      "title": "Publish Release Gate",
+      "page": "none",
+      "order": 306,
+      "legacy": {
+        "archive": "publish-release-gate.tar.gz",
+        "sha256": "e59de0f296ca432a63929f92cdc55f2db0fde0d22594d2b661466cf4d55ba3a0",
+        "description": "Publishes a skill through three distribution channels: marketplace plugin, agent discovery protocol, and tarball delivery via Cloudflare Pages custom domain."
+      }
+    },
+    {
+      "name": "skill-estate",
+      "repo": "arm-pz/caffeinity-skills",
+      "path": "plugins/skill-estate/skills/skill-estate",
+      "group": "publish-discover",
+      "tag": "publishing",
+      "title": "Skill Estate",
+      "pageTitle": "Skill Estate — AI Agent Skill for Claude Code and Codex",
+      "blurb": "The whole-collection sweep: inventory every skill repo, reconcile the site, marketplace and README, tune the family, close workflow gaps, wire self-publishing, add trigger tests and listings, and leave a maintenance loop. Each phase is handed to the skill that owns it.",
+      "stats": "4 files · 176 lines · 5 KB",
+      "install": "npx skills add arm-pz/caffeinity-skills --skill skill-estate",
+      "page": "generated",
+      "pageSource": {
+        "description": "Takes a whole collection of agent skill repos from scattered to published, consistent and self-maintaining, in gated phases: inventory every repo, reconcile site, marketplace and README listings, test and tune the family, close workflow gaps, wire publishing so new skill repos go live on their own, bundle a plugin with agents, add trigger tests and directory listings, and leave a maintenance loop and a map. Each phase hands off to the skill that owns it and ends in PRs. Use when someone's skills site and GitHub disagree, wants all their skill repos audited or cleaned up, wants new skills to publish themselves, or wants that cleanup repeated on another org, even if they never say estate. Not for one skill (use tune-skill), one listing (use findable), the site pipeline alone (use publish-pipeline), or weekly upkeep (use caffeinity-routing's Descale brew).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 79,
+            "bytes": 5107
+          },
+          {
+            "path": "references/brief.md",
+            "lines": 26,
+            "bytes": 1800
+          },
+          {
+            "path": "references/phases.md",
+            "lines": 43,
+            "bytes": 4141
+          },
+          {
+            "path": "references/trigger-cases.md",
+            "lines": 28,
+            "bytes": 2009
+          }
+        ],
+        "fileCount": 4,
+        "lines": 176,
+        "bytes": 5492,
+        "license": "MIT",
+        "commit": "af1c5977a397b6760e7ea27fd27cafb6b2e7ad8e",
+        "sha256": "b56b11f95e76ba757f8583562823353849f1d8a87fc9362a7217f684d7916803"
+      },
+      "order": 307,
+      "quality": {
+        "version": "1.0.0",
+        "commit": "af1c597",
+        "updated": "2026-11-12",
+        "notFor": [
+          "one skill (use tune-skill)",
+          "one listing (use findable)",
+          "the site pipeline alone (use publish-pipeline)",
+          "weekly upkeep (use caffeinity-routing's Descale brew)"
+        ]
+      }
+    },
+    {
+      "name": "site-prompt",
+      "repo": "arm-pz/site-prompt",
+      "path": ".",
+      "group": "ship-checks",
+      "tag": "build",
+      "title": "Site Prompt",
+      "pageTitle": "Site Prompt — AI Agent Skill for Claude Code and Codex",
+      "blurb": "Turns a website topic into one self-contained, paste-and-build prompt: it builds and verifies the site in a scratch folder first, then embeds every file verbatim with a pinned stack and the checks that actually ran.",
+      "stats": "8 files · 870 lines · 17 KB",
+      "install": "npx skills add arm-pz/site-prompt",
+      "page": "generated",
+      "pageSource": {
+        "description": "Writes one self-contained, paste-and-build prompt for a website from a topic. Narrows the topic to a concrete subject, derives the concept from that subject's world, builds and verifies the site in a scratch folder, then embeds every file verbatim with a pinned stack, final copy, code-native visuals and the checks that were actually run. Use when the user asks for a website prompt, one-shot build prompt, mega-prompt or SELENE-style prompt for a new site, landing page or one-pager. Not for building, hosting or reviewing the site itself, not for redesigning an existing page, and not for authoring skills.",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 71,
+            "bytes": 5754
+          },
+          {
+            "path": "discovery-kit.md",
+            "lines": 163,
+            "bytes": 9130
+          },
+          {
+            "path": "discovery/site-page.md",
+            "lines": 65,
+            "bytes": 3121
+          },
+          {
+            "path": "references/prompt-format.md",
+            "lines": 81,
+            "bytes": 4534
+          },
+          {
+            "path": "references/stack-presets.md",
+            "lines": 58,
+            "bytes": 3589
+          },
+          {
+            "path": "references/subject-brief.md",
+            "lines": 90,
+            "bytes": 6431
+          },
+          {
+            "path": "references/verification.md",
+            "lines": 83,
+            "bytes": 5189
+          },
+          {
+            "path": "scripts/replay-prompt.mjs",
+            "lines": 259,
+            "bytes": 9467
+          }
+        ],
+        "fileCount": 8,
+        "lines": 870,
+        "bytes": 17726,
+        "license": "MIT",
+        "commit": "35279415e13317481ee7ad397cdd17ed9a2fa7a0",
+        "sha256": "b38ae8b35dd7b185568b3c30ca0b4b5469272a752420e2b3f635f83e3134a08f"
+      },
+      "order": 401,
+      "quality": {
+        "version": "1.0.0",
+        "commit": "3527941",
+        "updated": "2026-11-06",
+        "notFor": [
+          "building, hosting or reviewing the site itself, not for redesigning an existing page, and not for authoring skills"
+        ]
+      }
+    },
+    {
+      "name": "production-code",
+      "repo": "arm-pz/production-code",
+      "path": "skills/production-code",
+      "group": "ship-checks",
+      "tag": "build",
+      "title": "Production Code",
+      "pageTitle": "Production Code — AI Agent Skill for Claude Code and Codex",
+      "blurb": "Delivers code as a finished artifact rather than a snippet: complete scripts, bug fixes with the root cause, reviews, API integrations and SQL, each with the run instructions and the edge cases handled.",
+      "stats": "4 files · 326 lines · 10 KB",
+      "install": "npx skills add arm-pz/production-code",
+      "page": "generated",
+      "pageSource": {
+        "description": "Production-ready code delivered as a complete artifact: scripts, bug fixes with the root cause, API integrations, SQL of any complexity, automation jobs, scrapers, data analysis in pandas or R, technical documentation and architecture write-ups, each with setup steps, error handling and a plain-English explanation of every section. Use whenever someone describes something they want code to do, pastes an error or a snippet to fix, asks for a query, a scraper, an automation or a system design, even if they never say write code or name a language. Not for auditing a live web app before launch (use pre-ship-performance-audit, pre-ship-security-red-team), for the business decision behind the build (use strategy-memo), or for reviewing code or a diff without changing it (use consistent-code-review, which this skill calls for its review mode).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 108,
+            "bytes": 8188
+          },
+          {
+            "path": "references/deliverable-formats.md",
+            "lines": 91,
+            "bytes": 7002
+          },
+          {
+            "path": "references/security-notes.md",
+            "lines": 60,
+            "bytes": 4997
+          },
+          {
+            "path": "references/verification.md",
+            "lines": 67,
+            "bytes": 4394
+          }
+        ],
+        "fileCount": 4,
+        "lines": 326,
+        "bytes": 10019,
+        "license": "MIT",
+        "commit": "b02ff78c251fbc6940dbf66a831ed78e95da432e",
+        "sha256": "36f0b266e8f2f276cfc908e3898e8e2e6ea81b7076bb2c8509fd514f63d5c026"
+      },
+      "order": 402,
+      "quality": {
+        "version": "1.0.0",
+        "commit": "b02ff78",
+        "updated": "2026-11-06",
+        "notFor": [
+          "auditing a live web app before launch (use pre-ship-performance-audit, pre-ship-security-red-team)",
+          "for the business decision behind the build (use strategy-memo)",
+          "for reviewing code or a diff without changing it (use consistent-code-review, which this skill calls for its review mode)"
+        ]
+      }
+    },
+    {
+      "name": "web-preflight",
+      "repo": "arm-pz/web-preflight",
+      "path": ".",
+      "group": "ship-checks",
+      "tag": "release",
+      "title": "Web Preflight",
+      "page": "bespoke",
+      "order": 403,
+      "blurb": "Checks a site you own before you ship it, without pretending a status code is a finding. A 200 on /.env that matches the app shell is catch-all routing, a blanket 403 is an unanswered question, and a check that never ran becomes INCONCLUSIVE — never a pass.",
+      "stats": "4 verdicts · 19 fixed paths · 9 behavioral tests · ~215 lines · 0 API keys",
+      "install": "npx skills add arm-pz/web-preflight",
+      "quality": {
+        "version": "1.0.0",
+        "commit": "333f12e",
+        "updated": "2026-11-06",
+        "notFor": [
+          "penetration testing, exploitation, credential testing, broad port scanning, or application-code review",
+          "use a dedicated authorized security-testing or code-review workflow instead"
+        ]
+      },
+      "tested": {
+        "date": "2026-10-24",
+        "target": "skills.caffeinity.com",
+        "result": "Probed 19 sensitive paths; nothing exposed and every security header in place: PASS.",
+        "evidence": "/#proof"
+      },
+      "featured": 1
+    },
+    {
+      "name": "pre-ship-security-red-team",
+      "repo": "arm-pz/pre-ship-security-red-team",
+      "path": ".",
+      "group": "ship-checks",
+      "tag": "release",
+      "title": "Pre Ship Security Red Team",
+      "page": "bespoke",
+      "order": 404,
+      "blurb": "Red-teams a web app you own before launch, in an isolated local environment. Three parallel read-only subagents run fourteen authorization and abuse checks across three groups (identity and authorization; UI and API bypass; browser, network, cache and AI), each with captured evidence, then the fix is rerun against the same check. A check that cannot fail is falsified first, and findings stay on the record even when the pass clears.",
+      "stats": "3 subagents · 14 checks · 9 files · local environments only",
+      "install": "npx skills add arm-pz/pre-ship-security-red-team",
+      "quality": {
+        "version": "1.0.0",
+        "commit": "8eb6a79",
+        "updated": "2026-11-06",
+        "notFor": [
+          "production, or for a passive exposure check (use web-preflight)"
+        ]
+      }
+    },
+    {
+      "name": "pre-ship-performance-audit",
+      "repo": "arm-pz/pre-ship-performance-audit",
+      "path": ".",
+      "group": "ship-checks",
+      "tag": "performance",
+      "title": "Pre Ship Performance Audit",
+      "page": "bespoke",
+      "order": 405,
+      "blurb": "Audits and fixes a web app's real-world speed before launch: four read-only subagents sweep twenty known slow-downs across images, bundles, database queries and servers, then the same mobile Lighthouse protocol, three runs per page, proves each fix before and after. Never removes a feature for a score, never invents a baseline, and asks before touching dependencies, the database or the deploy region.",
+      "stats": "4 subagents · 20 slow-downs · 6 phases · ~120 lines · 0 API keys",
+      "install": "npx skills add arm-pz/pre-ship-performance-audit",
+      "quality": {
+        "version": "1.0.0",
+        "commit": "dd4ba3d",
+        "updated": "2026-11-06",
+        "notFor": [
+          "authorization and abuse testing (use pre-ship-security-red-team) or exposed secrets and source files (use web-preflight)"
+        ]
+      }
+    },
+    {
+      "name": "release-gate-chair",
+      "repo": "arm-pz/release-gate-chair",
+      "path": ".",
+      "group": "ship-checks",
+      "tag": "release",
+      "title": "Release Gate · Chair",
+      "pageTitle": "Release Gate · Chair — AI Agent Skill for Claude Code",
+      "blurb": "One answer to “can we deploy?”: runs web-preflight, the security red team and the performance audit in order, keeps three separate verdicts, and computes HOLD or ready with a script instead of judgement.",
+      "stats": "4 files · 391 lines · 8 KB",
+      "install": "npx skills add arm-pz/release-gate-chair",
+      "page": "generated",
+      "pageSource": {
+        "description": "Runs the three pre-launch passes in order — web-preflight for external exposure, pre-ship-security-red-team for application behaviour in an isolated environment, pre-ship-performance-audit for measured speed — records each lane's own verdict and findings into one ledger, and computes a single release posture (HOLD or ready) with a script rather than judgement. Use when someone asks \"is this safe to launch\", \"ready to ship\", \"should we deploy\", \"give me a go/no-go\", or before any deploy of a site or client app you own or are authorized to test. Three verdicts stay separate; a pass in one lane never covers another. Variant: this fork runs the lanes itself and copies their finding tables verbatim; it is the default release gate. Not for a single-lane check (invoke that skill directly), for reports that already exist (use release-gate-validator), for penetration testing of production, or for performing the deploy.",
+        "files": [
+          {
+            "path": ".gitignore",
+            "lines": 3,
+            "bytes": 28
+          },
+          {
+            "path": "SKILL.md",
+            "lines": 131,
+            "bytes": 6484
+          },
+          {
+            "path": "references/ledger.md",
+            "lines": 73,
+            "bytes": 4171
+          },
+          {
+            "path": "scripts/check_gate.mjs",
+            "lines": 184,
+            "bytes": 8721
+          }
+        ],
+        "fileCount": 4,
+        "lines": 391,
+        "bytes": 7790,
+        "license": "MIT",
+        "commit": "6dbcbf7ad5a97fa02ef83eb05f8d0bfeb0b1c479",
+        "sha256": "820da9183f46d247f9f3d04fe345e498d9814999df2e08688aaa574f9b3c0751"
+      },
+      "order": 406,
+      "quality": {
+        "version": "0.1.0",
+        "commit": "6dbcbf7",
+        "updated": "2026-10-24",
+        "notFor": [
+          "a single-lane check (invoke that skill directly)",
+          "for reports that already exist (use release-gate-validator)",
+          "for penetration testing of production, or for performing the deploy"
+        ]
+      }
+    },
+    {
+      "name": "release-gate-ledger",
+      "repo": "arm-pz/release-gate-ledger",
+      "path": ".",
+      "group": "ship-checks",
+      "tag": "release",
+      "title": "Release Gate · Ledger",
+      "pageTitle": "Release Gate · Ledger — AI Agent Skill for Claude Code",
+      "blurb": "The release gate where each lane writes its own rows into one ledger through a validating recorder, so a malformed or missing verdict is rejected the moment it is written.",
+      "stats": "8 files · 530 lines · 9 KB",
+      "install": "npx skills add arm-pz/release-gate-ledger",
+      "page": "generated",
+      "pageSource": {
+        "description": "Runs the three pre-launch passes in order and has each lane write its own rows into one release-gate ledger through a validating recorder, instead of a chair copying tables after the fact. Produces three separate verdicts and one release posture (HOLD or ready) computed by script. Use when the three lane skills carry the ledger patches below, or when someone asks for the ledger variant of the release gate, for a site or client app you own or are authorized to test; a plain go/no-go belongs to release-gate-chair. Ships the three upstream patches that teach web-preflight, pre-ship-security-red-team and pre-ship-performance-audit to append their own rows — unapplied, because those are published skills. A pass in one lane never covers another. Not for a single-lane check, not for the default go/no-go (use release-gate-chair), not for penetration testing of production, not for performing the deploy.",
+        "files": [
+          {
+            "path": ".gitignore",
+            "lines": 3,
+            "bytes": 28
+          },
+          {
+            "path": "SKILL.md",
+            "lines": 112,
+            "bytes": 5634
+          },
+          {
+            "path": "patches/pre-ship-performance-audit-ledger-handoff.patch",
+            "lines": 25,
+            "bytes": 1201
+          },
+          {
+            "path": "patches/pre-ship-security-red-team-ledger-handoff.patch",
+            "lines": 25,
+            "bytes": 1444
+          },
+          {
+            "path": "patches/web-preflight-ledger-handoff.patch",
+            "lines": 25,
+            "bytes": 1664
+          },
+          {
+            "path": "references/ledger.md",
+            "lines": 73,
+            "bytes": 4171
+          },
+          {
+            "path": "scripts/check_gate.mjs",
+            "lines": 184,
+            "bytes": 8721
+          },
+          {
+            "path": "scripts/gate_record.mjs",
+            "lines": 83,
+            "bytes": 4285
+          }
+        ],
+        "fileCount": 8,
+        "lines": 530,
+        "bytes": 9480,
+        "license": "MIT",
+        "commit": "8e84d64c6a70adb4fb967e6e48d6c461d7eb04ea",
+        "sha256": "6cd3568b8c50b4197c92e26293034e281bf598b698eeefc5b1256f1b404853f4"
+      },
+      "order": 407,
+      "quality": {
+        "version": "0.1.0",
+        "commit": "8e84d64",
+        "updated": "2026-10-24",
+        "notFor": [
+          "a single-lane check, not for the default go/no-go (use release-gate-chair)",
+          "not for penetration testing of production, not for performing the deploy"
+        ]
+      }
+    },
+    {
+      "name": "release-gate-validator",
+      "repo": "arm-pz/release-gate-validator",
+      "path": ".",
+      "group": "ship-checks",
+      "tag": "release",
+      "title": "Release Gate · Validator",
+      "pageTitle": "Release Gate · Validator — AI Agent Skill for Claude Code",
+      "blurb": "The cheapest release gate: turns three pre-launch reports that already exist into one posture, HOLD or ready, without running any lane or sending a single request.",
+      "stats": "6 files · 583 lines · 10 KB",
+      "install": "npx skills add arm-pz/release-gate-validator",
+      "page": "generated",
+      "pageSource": {
+        "description": "Turns three pre-launch reports that already exist into one release posture (HOLD or ready) without running any of them. Ingests the security red team's on-disk results table mechanically, takes the preflight and performance tables as verbatim pastes, and computes the posture with a script. Use when the lanes were run earlier or by someone else, or when a deploy decision is needed now from those reports and re-running three skills is not affordable. Runs no attacks, no probes, no measurements, no subagents. A lane's pass never covers another lane, and an absent lane is reported absent. Not for producing the reports in the first place (use release-gate-chair), and not for deploying.",
+        "files": [
+          {
+            "path": ".gitignore",
+            "lines": 3,
+            "bytes": 28
+          },
+          {
+            "path": "SKILL.md",
+            "lines": 107,
+            "bytes": 5190
+          },
+          {
+            "path": "references/ledger.md",
+            "lines": 73,
+            "bytes": 4171
+          },
+          {
+            "path": "scripts/check_gate.mjs",
+            "lines": 184,
+            "bytes": 8721
+          },
+          {
+            "path": "scripts/gate_ingest.mjs",
+            "lines": 133,
+            "bytes": 6845
+          },
+          {
+            "path": "scripts/gate_record.mjs",
+            "lines": 83,
+            "bytes": 4285
+          }
+        ],
+        "fileCount": 6,
+        "lines": 583,
+        "bytes": 10305,
+        "license": "MIT",
+        "commit": "1b4c4c31fd2032574792cc6a62de12904990254d",
+        "sha256": "33f91264d733601a3be595a3aca6ed831ada4876012a35881c1cddc22f40f849"
+      },
+      "order": 408,
+      "quality": {
+        "version": "0.1.0",
+        "commit": "1b4c4c3",
+        "updated": "2026-10-24",
+        "notFor": [
+          "producing the reports in the first place (use release-gate-chair)",
+          "not for deploying"
+        ]
+      }
+    },
+    {
+      "name": "ship-sentinel",
+      "repo": "arm-pz/ship-sentinel",
+      "path": ".",
+      "kind": "mod",
+      "group": "ship-checks",
+      "tag": "release",
+      "title": "Ship Sentinel",
+      "page": "bespoke",
+      "order": 409,
+      "blurb": "A Claude Code mod that holds git push, PR, publish and deploy commands until your pre-ship check skills have run since the last edit. Ask, block or nudge; fails open and touches no files, network or processes.",
+      "stats": "1 hook module · 173 lines · 4 calls · 0 network",
+      "install": "/plugin install ship-sentinel --marketplace arm-pz/ship-sentinel",
+      "quality": {
+        "version": "0.1.0",
+        "commit": "b3c9290",
+        "updated": "2026-10-21",
+        "notFor": []
+      }
+    },
+    {
+      "name": "release-gate",
+      "repo": null,
+      "path": null,
+      "group": "ship-checks",
+      "tag": "release",
+      "title": "Release Gate",
+      "page": "none",
+      "order": 410,
+      "legacy": {
+        "archive": "release-gate.tar.gz",
+        "sha256": "5fc7b96613384bcd40fd3b65f2a6d63b7a287324dd7b797fc3a919bcf0eca50c",
+        "description": "Runs three pre-launch passes (exposure, app-tests, perf) in sequence and returns one release posture — HOLD or ready — with three separate verdicts and one merged finding register."
+      }
+    },
+    {
+      "name": "paper-trail",
+      "repo": "arm-pz/caffeinity-skills",
+      "path": "plugins/paper-trail/skills/paper-trail",
+      "group": "ship-checks",
+      "tag": "release",
+      "title": "Paper Trail",
+      "pageTitle": "Paper Trail — AI Agent Skill for Claude Code and Codex",
+      "blurb": "Privacy policy, terms, refund and cookie pages written only from facts you confirm, then checked for placeholders, missing sections and emails nobody supplied. Says when a lawyer should look.",
+      "stats": "6 files · 382 lines · 8 KB",
+      "install": "npx skills add arm-pz/caffeinity-skills --skill paper-trail",
+      "page": "generated",
+      "pageSource": {
+        "description": "Drafts the policy pages a small product needs before it takes money or data (privacy policy, terms of service, refund policy, cookie notice) from a fact sheet about what the product actually collects, stores, shares and charges, then checks the drafts for placeholders, missing sections and facts nobody supplied. Use when someone needs a privacy policy, terms, refund or cookie page for a site, app, SaaS, newsletter or digital product, asks what legal pages they need before launch, or wants existing policy pages checked against what the product really does, even if they never say \"legal\". Not legal advice and not for contracts, NDAs or employment documents (use a lawyer), and not for the launch plan itself (use solo-income-blueprint) or the site build (use site-prompt).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 82,
+            "bytes": 4918
+          },
+          {
+            "path": "references/facts.md",
+            "lines": 60,
+            "bytes": 2595
+          },
+          {
+            "path": "references/jurisdictions.md",
+            "lines": 23,
+            "bytes": 2546
+          },
+          {
+            "path": "references/pages.md",
+            "lines": 64,
+            "bytes": 2338
+          },
+          {
+            "path": "references/trigger-cases.md",
+            "lines": 28,
+            "bytes": 2141
+          },
+          {
+            "path": "scripts/check_pages.py",
+            "lines": 125,
+            "bytes": 6005
+          }
+        ],
+        "fileCount": 6,
+        "lines": 382,
+        "bytes": 8603,
+        "license": "MIT",
+        "commit": "af1c5977a397b6760e7ea27fd27cafb6b2e7ad8e",
+        "sha256": "cacb21e2865f9e92d46027f87f225b3e864a21251b0b1e671c628a42ab55daa7"
+      },
+      "order": 411,
+      "quality": {
+        "version": "1.0.0",
+        "commit": "af1c597",
+        "updated": "2026-11-12",
+        "notFor": []
+      }
+    },
+    {
+      "name": "release-gate-mod",
+      "repo": "arm-pz/caffeinity-skills",
+      "path": "mods/release-gate-mod",
+      "kind": "mod",
+      "group": "ship-checks",
+      "tag": "release",
+      "title": "Release Gate Mod",
+      "pageTitle": "Release Gate Mod — Claude Code mod",
+      "blurb": "Holds production deploys and PR merges in Claude Code until the release-gate chair has run web-preflight, the security red team and the performance audit since your last edit. Install this one rather than the three single-check mods.",
+      "stats": "13 files · 950 lines · 15 KB",
+      "install": "/plugin install release-gate-mod --marketplace arm-pz/caffeinity-skills",
+      "page": "generated",
+      "pageSource": {
+        "description": "Holds production deploys and PR merges until the release-gate chair (web-preflight, security red team, performance audit) has run since the last edit.",
+        "files": [
+          {
+            "path": ".claude-plugin/plugin.json",
+            "lines": 35,
+            "bytes": 1021
+          },
+          {
+            "path": "README.md",
+            "lines": 53,
+            "bytes": 2364
+          },
+          {
+            "path": "hooks/hooks.json",
+            "lines": 6,
+            "bytes": 140
+          },
+          {
+            "path": "hooks/register.js",
+            "lines": 176,
+            "bytes": 6742
+          },
+          {
+            "path": "skills/release-gate-chair/.claude-plugin/plugin.json",
+            "lines": 9,
+            "bytes": 364
+          },
+          {
+            "path": "skills/release-gate-chair/.gitignore",
+            "lines": 3,
+            "bytes": 28
+          },
+          {
+            "path": "skills/release-gate-chair/LICENSE",
+            "lines": 21,
+            "bytes": 1073
+          },
+          {
+            "path": "skills/release-gate-chair/README.md",
+            "lines": 76,
+            "bytes": 3316
+          },
+          {
+            "path": "skills/release-gate-chair/SKILL.md",
+            "lines": 131,
+            "bytes": 6493
+          },
+          {
+            "path": "skills/release-gate-chair/references/ledger.md",
+            "lines": 73,
+            "bytes": 4171
+          },
+          {
+            "path": "skills/release-gate-chair/scripts/check_gate.mjs",
+            "lines": 184,
+            "bytes": 8721
+          },
+          {
+            "path": "skills/release-gate-chair/tests/posture.mjs",
+            "lines": 74,
+            "bytes": 6522
+          },
+          {
+            "path": "tests/release-gate-mod.test.ts",
+            "lines": 109,
+            "bytes": 4880
+          }
+        ],
+        "fileCount": 13,
+        "lines": 950,
+        "bytes": 15781,
+        "license": "MIT",
+        "commit": "af1c5977a397b6760e7ea27fd27cafb6b2e7ad8e",
+        "sha256": "483f9eaa604c13a11140d9ee8ba44deaf5ae46289fd23c277f366014f623312e"
+      },
+      "order": 412,
+      "quality": {
+        "version": "0.1.0",
+        "commit": "af1c597",
+        "updated": "2026-11-12",
+        "notFor": []
+      }
+    },
+    {
+      "name": "web-preflight-mod",
+      "repo": "arm-pz/caffeinity-skills",
+      "path": "mods/web-preflight-mod",
+      "kind": "mod",
+      "group": "ship-checks",
+      "tag": "release",
+      "title": "Web Preflight Mod",
+      "pageTitle": "Web Preflight Mod — Claude Code mod",
+      "blurb": "Reminds Claude Code to run web-preflight (exposed .env files, source maps, admin and debug surfaces) before a production deploy.",
+      "stats": "11 files · 872 lines · 15 KB",
+      "install": "/plugin install web-preflight-mod --marketplace arm-pz/caffeinity-skills",
+      "page": "generated",
+      "pageSource": {
+        "description": "Reminds Claude to run web-preflight (exposed .env, source maps, admin and debug surfaces) before a production deploy.",
+        "files": [
+          {
+            "path": ".claude-plugin/plugin.json",
+            "lines": 35,
+            "bytes": 987
+          },
+          {
+            "path": "README.md",
+            "lines": 53,
+            "bytes": 2325
+          },
+          {
+            "path": "hooks/hooks.json",
+            "lines": 6,
+            "bytes": 136
+          },
+          {
+            "path": "hooks/register.js",
+            "lines": 172,
+            "bytes": 6530
+          },
+          {
+            "path": "skills/web-preflight/.claude-plugin/plugin.json",
+            "lines": 10,
+            "bytes": 397
+          },
+          {
+            "path": "skills/web-preflight/LICENSE",
+            "lines": 21,
+            "bytes": 1073
+          },
+          {
+            "path": "skills/web-preflight/README.md",
+            "lines": 51,
+            "bytes": 3340
+          },
+          {
+            "path": "skills/web-preflight/SKILL.md",
+            "lines": 229,
+            "bytes": 15006
+          },
+          {
+            "path": "skills/web-preflight/examples/sample-report-spa.md",
+            "lines": 60,
+            "bytes": 3018
+          },
+          {
+            "path": "skills/web-preflight/tests.md",
+            "lines": 126,
+            "bytes": 5271
+          },
+          {
+            "path": "tests/web-preflight-mod.test.ts",
+            "lines": 109,
+            "bytes": 4878
+          }
+        ],
+        "fileCount": 11,
+        "lines": 872,
+        "bytes": 15074,
+        "license": "MIT",
+        "commit": "af1c5977a397b6760e7ea27fd27cafb6b2e7ad8e",
+        "sha256": "196c0f18c29c96eb51d0aa2096766dc642351fe7a571be583eccb7ea17289d9f"
+      },
+      "order": 413,
+      "quality": {
+        "version": "0.1.0",
+        "commit": "af1c597",
+        "updated": "2026-11-12",
+        "notFor": []
+      }
+    },
+    {
+      "name": "pre-ship-security-red-team-mod",
+      "repo": "arm-pz/caffeinity-skills",
+      "path": "mods/pre-ship-security-red-team-mod",
+      "kind": "mod",
+      "group": "ship-checks",
+      "tag": "release",
+      "title": "Security Red Team Mod",
+      "pageTitle": "Security Red Team Mod — Claude Code mod",
+      "blurb": "Holds production deploys in Claude Code until the pre-ship security red team has run since your last edit.",
+      "stats": "17 files · 1,588 lines · 30 KB",
+      "install": "/plugin install pre-ship-security-red-team-mod --marketplace arm-pz/caffeinity-skills",
+      "page": "generated",
+      "pageSource": {
+        "description": "Holds production deploys until the pre-ship security red team has run since the last edit.",
+        "files": [
+          {
+            "path": ".claude-plugin/plugin.json",
+            "lines": 35,
+            "bytes": 983
+          },
+          {
+            "path": "README.md",
+            "lines": 53,
+            "bytes": 2454
+          },
+          {
+            "path": "hooks/hooks.json",
+            "lines": 6,
+            "bytes": 162
+          },
+          {
+            "path": "hooks/register.js",
+            "lines": 172,
+            "bytes": 6632
+          },
+          {
+            "path": "skills/pre-ship-security-red-team/.claude-plugin/plugin.json",
+            "lines": 9,
+            "bytes": 381
+          },
+          {
+            "path": "skills/pre-ship-security-red-team/LICENSE",
+            "lines": 21,
+            "bytes": 1073
+          },
+          {
+            "path": "skills/pre-ship-security-red-team/README.md",
+            "lines": 93,
+            "bytes": 9294
+          },
+          {
+            "path": "skills/pre-ship-security-red-team/SKILL.md",
+            "lines": 163,
+            "bytes": 12756
+          },
+          {
+            "path": "skills/pre-ship-security-red-team/assets/brief-template.md",
+            "lines": 33,
+            "bytes": 2826
+          },
+          {
+            "path": "skills/pre-ship-security-red-team/assets/negative-control.mjs",
+            "lines": 179,
+            "bytes": 9465
+          },
+          {
+            "path": "skills/pre-ship-security-red-team/assets/results-table.md",
+            "lines": 22,
+            "bytes": 2067
+          },
+          {
+            "path": "skills/pre-ship-security-red-team/references/attacks.md",
+            "lines": 141,
+            "bytes": 10151
+          },
+          {
+            "path": "skills/pre-ship-security-red-team/references/guardrails.md",
+            "lines": 56,
+            "bytes": 4817
+          },
+          {
+            "path": "skills/pre-ship-security-red-team/scripts/check_results.mjs",
+            "lines": 194,
+            "bytes": 8704
+          },
+          {
+            "path": "skills/pre-ship-security-red-team/scripts/scaffold_run.mjs",
+            "lines": 223,
+            "bytes": 9698
+          },
+          {
+            "path": "skills/pre-ship-security-red-team/scripts/shared.mjs",
+            "lines": 79,
+            "bytes": 2635
+          },
+          {
+            "path": "tests/pre-ship-security-red-team-mod.test.ts",
+            "lines": 109,
+            "bytes": 4932
+          }
+        ],
+        "fileCount": 17,
+        "lines": 1588,
+        "bytes": 30959,
+        "license": "MIT",
+        "commit": "af1c5977a397b6760e7ea27fd27cafb6b2e7ad8e",
+        "sha256": "9fa3a48b71b2026a6d834903d0a2322ebf5dcc7cf065e441ef8041cf4184a711"
+      },
+      "order": 414,
+      "quality": {
+        "version": "0.1.0",
+        "commit": "af1c597",
+        "updated": "2026-11-12",
+        "notFor": []
+      }
+    },
+    {
+      "name": "pre-ship-performance-audit-mod",
+      "repo": "arm-pz/caffeinity-skills",
+      "path": "mods/pre-ship-performance-audit-mod",
+      "kind": "mod",
+      "group": "ship-checks",
+      "tag": "performance",
+      "title": "Performance Audit Mod",
+      "pageTitle": "Performance Audit Mod — Claude Code mod",
+      "blurb": "Reminds Claude Code to run the pre-ship performance audit before a production deploy.",
+      "stats": "9 files · 597 lines · 11 KB",
+      "install": "/plugin install pre-ship-performance-audit-mod --marketplace arm-pz/caffeinity-skills",
+      "page": "generated",
+      "pageSource": {
+        "description": "Reminds Claude to run the pre-ship performance audit before a production deploy.",
+        "files": [
+          {
+            "path": ".claude-plugin/plugin.json",
+            "lines": 35,
+            "bytes": 980
+          },
+          {
+            "path": "README.md",
+            "lines": 53,
+            "bytes": 2444
+          },
+          {
+            "path": "hooks/hooks.json",
+            "lines": 6,
+            "bytes": 162
+          },
+          {
+            "path": "hooks/register.js",
+            "lines": 172,
+            "bytes": 6639
+          },
+          {
+            "path": "skills/pre-ship-performance-audit/.claude-plugin/plugin.json",
+            "lines": 10,
+            "bytes": 453
+          },
+          {
+            "path": "skills/pre-ship-performance-audit/LICENSE",
+            "lines": 21,
+            "bytes": 1073
+          },
+          {
+            "path": "skills/pre-ship-performance-audit/README.md",
+            "lines": 62,
+            "bytes": 3758
+          },
+          {
+            "path": "skills/pre-ship-performance-audit/SKILL.md",
+            "lines": 128,
+            "bytes": 11230
+          },
+          {
+            "path": "tests/pre-ship-performance-audit-mod.test.ts",
+            "lines": 110,
+            "bytes": 4894
+          }
+        ],
+        "fileCount": 9,
+        "lines": 597,
+        "bytes": 11488,
+        "license": "MIT",
+        "commit": "af1c5977a397b6760e7ea27fd27cafb6b2e7ad8e",
+        "sha256": "b8a788d07ff582c241ad3489dd83f30c482caab29d18a419b7c10c4cfd7b1a72"
+      },
+      "order": 415,
+      "quality": {
+        "version": "0.1.0",
+        "commit": "af1c597",
+        "updated": "2026-11-12",
+        "notFor": []
+      }
+    },
+    {
+      "name": "seo-crawl",
+      "repo": "arm-pz/seo-crawl",
+      "path": ".",
+      "group": "seo-search",
+      "tag": "seo",
+      "title": "SEO Crawl",
+      "pageTitle": "SEO Crawl — AI Agent Skill for Claude Code and Codex",
+      "blurb": "Crawls a site you own and returns deterministic, evidence-backed technical SEO findings, with blocked or unrun checks reported INCONCLUSIVE rather than a pass.",
+      "stats": "14 files · 1,886 lines · 19 KB",
+      "install": "npx skills add arm-pz/seo-crawl",
+      "page": "generated",
+      "order": 501,
+      "pageSource": {
+        "description": "Use when you need evidence about the technical SEO state of a site you own or are authorized to crawl, covering HTTP statuses and redirects, indexability (meta and header robots), robots.txt, canonical tags, titles, meta descriptions, H1s, internal links, sitemap coverage, and static JSON-LD. Runs a bounded, read-only crawl and returns deterministic findings JSON with stable IDs and explicit INCONCLUSIVE checks, so an SEO audit or content change starts from measured evidence instead of guesses. Trigger phrases include \"crawl the site for SEO\", \"check sitemap coverage\", \"find broken internal links\", \"why is this page not indexed\", \"check titles and metas\", \"canonical audit\", and \"pre-audit crawl\". Not for Search Console clicks, impressions, rankings or keyword volumes; Core Web Vitals, Lighthouse or bundle performance; release security and exposed files; content rewriting or keyword strategy.",
+        "files": [
+          {
+            "path": ".gitignore",
+            "lines": 5,
+            "bytes": 49
+          },
+          {
+            "path": "SKILL.md",
+            "lines": 89,
+            "bytes": 5961
+          },
+          {
+            "path": "examples/sample-report.md",
+            "lines": 187,
+            "bytes": 5737
+          },
+          {
+            "path": "package.json",
+            "lines": 17,
+            "bytes": 322
+          },
+          {
+            "path": "references/checks.md",
+            "lines": 89,
+            "bytes": 6412
+          },
+          {
+            "path": "references/findings-schema.md",
+            "lines": 81,
+            "bytes": 4058
+          },
+          {
+            "path": "scripts/lib/checks.mjs",
+            "lines": 443,
+            "bytes": 13123
+          },
+          {
+            "path": "scripts/lib/crawl.mjs",
+            "lines": 298,
+            "bytes": 8893
+          },
+          {
+            "path": "scripts/lib/fetch.mjs",
+            "lines": 158,
+            "bytes": 4728
+          },
+          {
+            "path": "scripts/lib/parse.mjs",
+            "lines": 178,
+            "bytes": 5371
+          },
+          {
+            "path": "scripts/lib/report.mjs",
+            "lines": 46,
+            "bytes": 1471
+          },
+          {
+            "path": "scripts/lib/robots.mjs",
+            "lines": 117,
+            "bytes": 3393
+          },
+          {
+            "path": "scripts/lib/sitemap.mjs",
+            "lines": 35,
+            "bytes": 1164
+          },
+          {
+            "path": "scripts/seo-crawl.mjs",
+            "lines": 143,
+            "bytes": 3925
+          }
+        ],
+        "fileCount": 14,
+        "lines": 1886,
+        "bytes": 19138,
+        "license": "MIT",
+        "commit": "9c78758d4db8a7b3787a6d1cced82f2f91706c65",
+        "sha256": "3aead46f426b138af3c0072a2d77f3d11404a91b809bd8da656705cd1e090781"
+      },
+      "quality": {
+        "version": "1.0.0",
+        "commit": "9c78758",
+        "updated": "2026-11-06",
+        "notFor": [
+          "Search Console clicks, impressions, rankings or keyword volumes",
+          "Core Web Vitals, Lighthouse or bundle performance",
+          "release security and exposed files",
+          "content rewriting or keyword strategy"
+        ]
+      },
+      "tested": {
+        "date": "2026-10-24",
+        "target": "skills.caffeinity.com",
+        "result": "Found one broken internal link across 24 pages; the re-crawl after the fix came back clean.",
+        "evidence": "/#proof"
+      },
+      "featured": 2,
+      "pairsWith": [
+        {
+          "name": "OpenSEO",
+          "url": "https://github.com/every-app/open-seo",
+          "for": "keyword volumes, rankings, backlinks, competitor and AI-visibility data, read by your agent through its MCP server.",
+          "needs": "Open source (MIT); needs a DataForSEO API key (pay per use) or an openseo.so account."
+        }
+      ]
+    },
+    {
+      "name": "keyword-guard",
+      "repo": "arm-pz/keyword-guard",
+      "path": ".",
+      "group": "seo-search",
+      "tag": "seo",
+      "title": "Keyword Guard",
+      "page": "bespoke",
+      "order": 502,
+      "blurb": "Plans topic clusters and kills keyword cannibalization so exactly one page wins each query. The cannibalization audit is a mandatory blocker before any content change — with a sitemap fallback for when you have no Search Console access.",
+      "stats": "6 phases · 3 reference checklists · ~300 lines · 0 API keys",
+      "install": "npx skills add arm-pz/keyword-guard",
+      "quality": {
+        "version": "1.0.0",
+        "commit": "c187c8a",
+        "updated": "2026-11-06",
+        "notFor": [
+          "crawl and index health (use seo-crawl)",
+          "rewriting the copy once ownership is settled (use keyword-resolver)",
+          "mass page generation (use programmatic-seo)"
+        ]
+      },
+      "pairsWith": [
+        {
+          "name": "OpenSEO",
+          "url": "https://github.com/every-app/open-seo",
+          "for": "keyword volumes, rankings, backlinks, competitor and AI-visibility data, read by your agent through its MCP server.",
+          "needs": "Open source (MIT); needs a DataForSEO API key (pay per use) or an openseo.so account."
+        }
+      ]
+    },
+    {
+      "name": "keyword-resolver",
+      "repo": "arm-pz/keyword-resolver",
+      "path": ".",
+      "group": "seo-search",
+      "tag": "seo",
+      "title": "Keyword Resolver",
+      "page": "bespoke",
+      "order": 503,
+      "blurb": "Resolves keyword cannibalization with Keyword-Guard, then rewrites titles, H1s and meta descriptions with Wordsmith. One query, one owner — the ownership audit blocks until the map is settled, and a sitemap fallback is named as a fallback when you have no Search Console.",
+      "stats": "3 files · 127 lines · 2 chained skills · 0 API keys",
+      "install": "npx skills add arm-pz/keyword-resolver --skill keyword-resolver",
+      "chain": true,
+      "quality": {
+        "version": "1.0.0",
+        "commit": "525a0b4",
+        "updated": "2026-10-24",
+        "notFor": [
+          "technical SEO diagnosis (use seo-audit) or mass page generation (use programmatic-seo)"
+        ]
+      }
+    },
+    {
+      "name": "seo-polish",
+      "repo": "arm-pz/seo-polish",
+      "path": ".",
+      "group": "seo-search",
+      "tag": "seo",
+      "title": "Seo Polish",
+      "page": "bespoke",
+      "order": 504,
+      "blurb": "seo-crawl's measured findings, an optional seo-audit diagnosis, then Wordsmith drafts optimized alternatives for every High and Medium finding: titles, meta descriptions, headings and internal-link anchors.",
+      "stats": "3 files · 85 lines · 5 audit layers · 0 API keys",
+      "install": "npx skills add arm-pz/seo-polish --skill seo-polish",
+      "chain": true,
+      "quality": {
+        "version": "1.0.0",
+        "commit": "6396aa3",
+        "updated": "2026-10-24",
+        "notFor": [
+          "keyword cannibalization resolution (use keyword-resolver) or mass page generation (use programmatic-seo)"
+        ]
+      }
+    },
+    {
+      "name": "wordsmith",
+      "repo": "arm-pz/wordsmith",
+      "path": "skills/wordsmith",
+      "group": "writing-growth",
+      "tag": "editorial",
+      "title": "Wordsmith",
+      "page": "bespoke",
+      "order": 601,
+      "blurb": "Teaches your agent to edit, not just generate: 44 commands across 5 disciplines that tighten, rewrite, critique and proofread while keeping the author's meaning, hedges and voice intact.",
+      "stats": "44 commands · 5 disciplines · ~1,200 lines · 0 API keys",
+      "install": "npx skills add arm-pz/wordsmith",
+      "quality": {
+        "version": "1.0.0",
+        "commit": "7f7f4c7",
+        "updated": "2026-10-12",
+        "notFor": [
+          "resumes, CVs or LinkedIn profiles (use recruiter-lens if installed)",
+          "not for code or code comments, and not for building .docx or .pdf files (write the text here, then use the file skill)"
+        ]
+      }
+    },
+    {
+      "name": "platform-content",
+      "repo": "arm-pz/platform-content",
+      "path": "skills/platform-content",
+      "group": "writing-growth",
+      "tag": "content",
+      "title": "Platform Content",
+      "pageTitle": "Platform Content — AI Agent Skill for Claude Code and Codex",
+      "blurb": "Writes platform-native content packs from one brief: X threads, LinkedIn posts, YouTube and TikTok scripts, Instagram captions, newsletters and blog articles, each shaped to how that platform is actually read.",
+      "stats": "3 files · 454 lines · 11 KB",
+      "install": "npx skills add arm-pz/platform-content",
+      "page": "generated",
+      "pageSource": {
+        "description": "Platform-native content packs: Twitter/X threads, LinkedIn posts, YouTube and TikTok scripts, Instagram captions, newsletter issues, blog articles, podcast outlines, 30-day calendars and repurposing chains, each with hook, body and call to action, built from a brief about your platform, niche, audience and goal. Use whenever someone asks for social or audience content: write me a thread about X, a LinkedIn post that brings leads, turn this into ten posts, plan next month of content, a YouTube script people actually finish, or they bring a blog, newsletter or podcast idea that needs an asset per platform, even if they never say content strategy. Not for copy that sells a product (use sales-copy), rewriting text the user already wrote (use wordsmith), SEO cluster and cannibalization planning (use keyword-guard), or career documents (use career-track).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 131,
+            "bytes": 10111
+          },
+          {
+            "path": "references/calendar-repurposing.md",
+            "lines": 126,
+            "bytes": 5730
+          },
+          {
+            "path": "references/formats.md",
+            "lines": 197,
+            "bytes": 12252
+          }
+        ],
+        "fileCount": 3,
+        "lines": 454,
+        "bytes": 11240,
+        "license": "MIT",
+        "commit": "ad89265e0832fb65ffa041e7ebe1a513a8b00df0",
+        "sha256": "641a197cab77d8435d0e104e4f422c49c0ca8c179e853ef791788b7f05069437"
+      },
+      "order": 602,
+      "quality": {
+        "version": "1.0.0",
+        "commit": "ad89265",
+        "updated": "2026-11-06",
+        "notFor": [
+          "copy that sells a product (use sales-copy)",
+          "rewriting text the user already wrote (use wordsmith)",
+          "SEO cluster and cannibalization planning (use keyword-guard)",
+          "career documents (use career-track)"
+        ]
+      }
+    },
+    {
+      "name": "sales-copy",
+      "repo": "arm-pz/sales-copy",
+      "path": "skills/sales-copy",
+      "group": "writing-growth",
+      "tag": "content",
+      "title": "Sales Copy",
+      "pageTitle": "Sales Copy — AI Agent Skill for Claude Code and Codex",
+      "blurb": "Writes buyer-facing conversion assets: long-form sales pages, landing pages, launch and abandoned-cart email sequences and ad variations, built on the offer and the objections you can actually back.",
+      "stats": "3 files · 596 lines · 13 KB",
+      "install": "npx skills add arm-pz/sales-copy",
+      "page": "generated",
+      "pageSource": {
+        "description": "Direct-response conversion assets: long-form sales pages, launch and abandoned-cart email sequences, Facebook, Google and LinkedIn ad variations, landing pages, product descriptions, video sales letter and webinar scripts, upsell flows and testimonial frameworks, each with headline, subheadline, body and call to action, built from the product, the buyer, their awareness level and the conversion goal. Use whenever someone needs copy that sells: write a sales page, an email sequence for my launch, ad copy for Facebook, my landing page does not convert, a VSL script, recover abandoned carts, or they paste a product brief expecting buyer-facing text, even if they never say copywriting. Not for organic audience content (use platform-content), editing text the user already wrote (use wordsmith), or pricing and go-to-market decisions (use strategy-memo).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 169,
+            "bytes": 10767
+          },
+          {
+            "path": "references/assets.md",
+            "lines": 293,
+            "bytes": 16865
+          },
+          {
+            "path": "references/awareness.md",
+            "lines": 134,
+            "bytes": 7323
+          }
+        ],
+        "fileCount": 3,
+        "lines": 596,
+        "bytes": 13441,
+        "license": "MIT",
+        "commit": "aef1042c3cb2980f6be0cf9a4e866b57f800f7d9",
+        "sha256": "6a8e3fc7a0d20f1e5c4b6dfc771888d7ce001449f4f9ef94b3e819469d253e16"
+      },
+      "order": 603,
+      "quality": {
+        "version": "1.0.0",
+        "commit": "aef1042",
+        "updated": "2026-11-06",
+        "notFor": [
+          "organic audience content (use platform-content)",
+          "editing text the user already wrote (use wordsmith)",
+          "pricing and go-to-market decisions (use strategy-memo)"
+        ]
+      }
+    },
+    {
+      "name": "cold-email-list-gate",
+      "repo": "arm-pz/cold-email-list-gate",
+      "path": ".",
+      "group": "outbound",
+      "tag": "outbound",
+      "title": "Cold Email List Gate",
+      "pageTitle": "Cold Email List Gate — AI Agent Skill for Claude Code",
+      "blurb": "Gate a cold-email lead list before it loads: sample ten rows, check company, title, size, and mailbox against the ICP, compare data providers on the same criteria, and return a GO or HOLD decision with the fail pattern and the re-run…",
+      "stats": "2 files · 97 lines · 2 KB",
+      "install": "npx skills add arm-pz/cold-email-list-gate",
+      "page": "generated",
+      "order": 701,
+      "pageSource": {
+        "description": "Gate a cold-email lead list before it loads: sample ten rows, check company, title, size, and mailbox against the ICP, compare data providers on the same criteria, and return a GO or HOLD decision with the fail pattern and the re-run condition. Use when someone wants a list QA'd, checked, sampled, or approved before a send, asks whether a list is clean or safe to load, or is choosing between data providers for one filter set. Not for buying, scraping, or enriching contacts (out of scope), writing the email copy (wordsmith), or diagnosing a list that already sent (cold-email-ops).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 47,
+            "bytes": 2911
+          },
+          {
+            "path": "references/gate-rules.md",
+            "lines": 50,
+            "bytes": 2380
+          }
+        ],
+        "fileCount": 2,
+        "lines": 97,
+        "bytes": 2497,
+        "license": "MIT",
+        "commit": "005936836e3878a04497457bcfa3b38cc272a260",
+        "sha256": "ab129156f6c2cf9c5084e2115840db6e12f1e39b5cff39150967ddb9594c8f85"
+      },
+      "quality": {
+        "version": "1.0.0",
+        "commit": "0059368",
+        "updated": "2026-11-06",
+        "notFor": [
+          "buying, scraping, or enriching contacts (out of scope)",
+          "writing the email copy (wordsmith)",
+          "diagnosing a list that already sent (cold-email-ops)"
+        ]
+      }
+    },
+    {
+      "name": "cold-email-ops",
+      "repo": "arm-pz/cold-email-ops",
+      "path": ".",
+      "group": "outbound",
+      "tag": "outbound",
+      "title": "Cold Email Ops",
+      "pageTitle": "Cold Email Ops — AI Agent Skill for Claude Code and Codex",
+      "blurb": "Plan and audit a cold-email program at volume and keep it from degrading: computes inbox and domain capacity from a monthly send target, sets per-domain reply-rate floors, burn-replacement cadence, shadow-ban tests, and automation error…",
+      "stats": "4 files · 394 lines · 8 KB",
+      "install": "npx skills add arm-pz/cold-email-ops",
+      "page": "generated",
+      "order": 702,
+      "pageSource": {
+        "description": "Plan and audit a cold-email program at volume and keep it from degrading: computes inbox and domain capacity from a monthly send target, sets per-domain reply-rate floors, burn-replacement cadence, shadow-ban tests, and automation error budgets, and reports prospects-to-lead with per-client averages. Use when someone is scaling outbound, asks how many inboxes or domains they need, why reply rates are falling or a domain might be shadow banned, or reviews an AI outbound stack for failure points. Not for pre-load list QA (cold-email-list-gate), writing or polishing the emails themselves (wordsmith), inbound SEO (seo-audit, programmatic-seo), WhatsApp/RCS messaging (integrate-whatsapp, sent-two-way-messaging), or finding the market/ICP.",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 94,
+            "bytes": 7863
+          },
+          {
+            "path": "references/benchmarks.md",
+            "lines": 70,
+            "bytes": 4381
+          },
+          {
+            "path": "references/report-format.md",
+            "lines": 67,
+            "bytes": 3226
+          },
+          {
+            "path": "scripts/cold_email_math.py",
+            "lines": 163,
+            "bytes": 5709
+          }
+        ],
+        "fileCount": 4,
+        "lines": 394,
+        "bytes": 8189,
+        "license": "MIT",
+        "commit": "4f41071a5aeb734fdcd58265d6c3764cd682ab6f",
+        "sha256": "a190e225dada66418541f83104aed8de4c2503c3488a9b713937b4689a2ed014"
+      },
+      "quality": {
+        "version": "1.0.0",
+        "commit": "4f41071",
+        "updated": "2026-11-06",
+        "notFor": [
+          "pre-load list QA (cold-email-list-gate)",
+          "writing or polishing the emails themselves (wordsmith)",
+          "inbound SEO (seo-audit, programmatic-seo)",
+          "WhatsApp/RCS messaging (integrate-whatsapp, sent-two-way-messaging)",
+          "finding the market/ICP"
+        ]
+      }
+    },
+    {
+      "name": "recruiter-lens",
+      "repo": "arm-pz/recruiter-lens",
+      "path": "skills/recruiter-lens",
+      "group": "career",
+      "tag": "career",
+      "title": "Recruiter Lens",
+      "page": "bespoke",
+      "order": 801,
+      "blurb": "Reviews resumes, CVs and LinkedIn profiles the way recruiters actually screen them: first-impression scans, ATS compatibility, rejection-pattern diagnosis, and interview prep. 13 commands through 5 filters, and it never invents a metric.",
+      "stats": "13 commands · 5 filters · ~2,500 lines · 0 API keys",
+      "install": "npx skills add arm-pz/recruiter-lens",
+      "quality": {
+        "version": "1.0.0",
+        "commit": "5be8412",
+        "updated": "2026-10-18",
+        "notFor": [
+          "prose editing (wordsmith, if installed) or producing the final .docx or .pdf (the file skills)"
+        ]
+      }
+    },
+    {
+      "name": "applicant-kit",
+      "repo": "arm-pz/applicant-kit",
+      "path": "skills/applicant-kit",
+      "group": "career",
+      "tag": "career",
+      "title": "Applicant Kit",
+      "page": "bespoke",
+      "order": 802,
+      "blurb": "Writes the better version: decoded job description, tailored resume, bullets rewritten as action-task-result-impact, honest keyword placement, five summaries, a LinkedIn rewrite and twenty interview answers, all built from real experience. recruiter-lens judges; applicant-kit produces. Nothing invented.",
+      "stats": "7 modes · 6 produce + 1 hand-off · ~320 lines · 0 API keys",
+      "install": "npx skills add arm-pz/applicant-kit --skill applicant-kit",
+      "quality": {
+        "version": "1.0.0",
+        "commit": "83d6cb0",
+        "updated": "2026-11-06",
+        "notFor": [
+          "running the search itself (finding roles, the application tracker, follow-ups, interview briefings): use the application-pilot skill"
+        ]
+      }
+    },
+    {
+      "name": "application-pilot",
+      "repo": "arm-pz/application-pilot",
+      "path": "skills/application-pilot",
+      "group": "career",
+      "tag": "career",
+      "title": "Application Pilot",
+      "page": "bespoke",
+      "order": 803,
+      "blurb": "Runs the job search around the applications: turns role criteria into a live shortlist, scores each role for fit with evidence, keeps a reviewable tracker with submission and follow-up dates, flags roles that have gone quiet, drafts the follow-up and the interview briefing, and reads the funnel weekly. applicant-kit writes the packet; application-pilot keeps the search alive. It never submits anything, and never claims a status it did not see.",
+      "stats": "8 modes · 9 ground rules · 5 files · no CLI, no telemetry",
+      "install": "npx skills add arm-pz/application-pilot --skill application-pilot",
+      "quality": {
+        "version": "1.0.1",
+        "commit": "2350dfb",
+        "updated": "2026-10-19",
+        "notFor": [
+          "judging (scans, ATS checks, critique, rejection reasons, gap analysis): use recruiter-lens"
+        ]
+      }
+    },
+    {
+      "name": "career-track",
+      "repo": "arm-pz/career-track",
+      "path": "skills/career-track",
+      "group": "career",
+      "tag": "career",
+      "title": "Career Track",
+      "pageTitle": "Career Track — AI Agent Skill for Claude Code and Codex",
+      "blurb": "For the moves around a career: a positioning line you can repeat, the case for the next level, review and promotion narratives, salary negotiation scripts and a ninety-day plan.",
+      "stats": "3 files · 383 lines · 12 KB",
+      "install": "npx skills add arm-pz/career-track",
+      "page": "generated",
+      "pageSource": {
+        "description": "Career positioning and the moves around it: personal brand and function-level visibility, promotion and performance-review narratives, executive presence, salary negotiation scripts, career pivots, networking that reaches opportunities before they are posted, interview preparation for the rooms you are already in, and a plan with immediate actions and ninety-day milestones. Use whenever someone wants to move up or across: how do I get promoted, negotiate a raise, am I ready for senior, pivot out of this role, prep for a promotion panel, people do not notice my work, even if they never say career plan. Not for the application documents themselves: resume and CV judging (use recruiter-lens) or tailored application material and LinkedIn rewrites (use applicant-kit).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 128,
+            "bytes": 10772
+          },
+          {
+            "path": "references/negotiation.md",
+            "lines": 107,
+            "bytes": 8975
+          },
+          {
+            "path": "references/planning.md",
+            "lines": 148,
+            "bytes": 11400
+          }
+        ],
+        "fileCount": 3,
+        "lines": 383,
+        "bytes": 12173,
+        "license": "MIT",
+        "commit": "e34aa37375675c9f162b0bb64bf0ca7a979023b5",
+        "sha256": "00709a334919880880352d33332c1560d973e03dd45a87f7be8a3ebd05234d00"
+      },
+      "order": 804,
+      "quality": {
+        "version": "1.0.0",
+        "commit": "e34aa37",
+        "updated": "2026-11-06",
+        "notFor": [
+          "the application documents themselves: resume and CV judging (use recruiter-lens) or tailored application material and LinkedIn rewrites (use applicant-kit)"
+        ]
+      }
+    },
+    {
+      "name": "research-brief",
+      "repo": "arm-pz/research-brief",
+      "path": "skills/research-brief",
+      "group": "thinking-learning",
+      "tag": "research",
+      "title": "Research Brief",
+      "pageTitle": "Research Brief — AI Agent Skill for Claude Code and Codex",
+      "blurb": "Answers “what is known about this” with a sourced brief: overviews, competitor and industry analysis, fact checks with conflicts flagged, every claim tied to a dated source and every unknown named.",
+      "stats": "4 files · 521 lines · 14 KB",
+      "install": "npx skills add arm-pz/research-brief",
+      "page": "generated",
+      "pageSource": {
+        "description": "Decision-grade research: topic overviews, competitor and industry analysis, literature reviews, fact checks with conflicting sources flagged, synthesis of expert positions, trend scans, due diligence on a partner or investment, interpretation of numbers found in public sources and one-page executive briefs, with every claim tied to a dated source read in the session and unknowns named instead of filled in. Use whenever someone asks what is known about a subject: research X for me, who else does this, is this claim true, what is the market size, brief me before I meet them, summarise this literature, even if they never say research. Not for turning findings into a recommendation and roadmap (use strategy-memo), for analysing the user's own dataset (use data-readout), or for being taught a topic step by step (use topic-primer).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 136,
+            "bytes": 10277
+          },
+          {
+            "path": "references/due-diligence.md",
+            "lines": 112,
+            "bytes": 8162
+          },
+          {
+            "path": "references/report-formats.md",
+            "lines": 171,
+            "bytes": 10975
+          },
+          {
+            "path": "references/verification.md",
+            "lines": 102,
+            "bytes": 7392
+          }
+        ],
+        "fileCount": 4,
+        "lines": 521,
+        "bytes": 13989,
+        "license": "MIT",
+        "commit": "bca3871b2267e4dac111f1159215bd9ae702f599",
+        "sha256": "ce61c0fb9a7162a678aa00cdb0404e0466cde35cfa4ff46fd1520019429644b1"
+      },
+      "order": 901,
+      "quality": {
+        "version": "1.0.0",
+        "commit": "bca3871",
+        "updated": "2026-11-06",
+        "notFor": [
+          "turning findings into a recommendation and roadmap (use strategy-memo)",
+          "for analysing the user's own dataset (use data-readout)",
+          "for being taught a topic step by step (use topic-primer)"
+        ]
+      }
+    },
+    {
+      "name": "data-readout",
+      "repo": "arm-pz/data-readout",
+      "path": "skills/data-readout",
+      "group": "thinking-learning",
+      "tag": "research",
+      "title": "Data Readout",
+      "pageTitle": "Data Readout — AI Agent Skill for Claude Code and Codex",
+      "blurb": "Turns the numbers you already own into a readout you can act on: it opens the real file first, then gives findings with the business implication of each, chart specs and the caveats that matter.",
+      "stats": "4 files · 407 lines · 12 KB",
+      "install": "npx skills add arm-pz/data-readout",
+      "page": "generated",
+      "pageSource": {
+        "description": "Raw numbers turned into a decision: dataset interpretation, statistics with the business implication of each finding, chart specifications, pattern and anomaly detection, forecasts built on stated assumptions, segmentation, A/B test significance, dashboard metric selection and report templates, output as an executive summary, findings ranked by impact and the specific actions they support. Use whenever someone brings data, a spreadsheet, a CSV, an analytics export, an A/B result or an unexpected number and asks what it means, what to chart, whether the test won or which metrics to track, even if they never say analysis. Not for writing the pandas or R code that crunches the file (use production-code), for market research outside the user's own data (use research-brief) or for the strategic roadmap that follows (use strategy-memo).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 127,
+            "bytes": 8697
+          },
+          {
+            "path": "references/analysis-playbook.md",
+            "lines": 86,
+            "bytes": 10308
+          },
+          {
+            "path": "references/report-format.md",
+            "lines": 126,
+            "bytes": 6354
+          },
+          {
+            "path": "references/statistical-checks.md",
+            "lines": 68,
+            "bytes": 6645
+          }
+        ],
+        "fileCount": 4,
+        "lines": 407,
+        "bytes": 12504,
+        "license": "MIT",
+        "commit": "48adefcc768a011ab187440ad24977086f0ebcf3",
+        "sha256": "f56313444cf01ea0a6a4e87335ea7d67f18d339ea43e1861f91824d7bf611951"
+      },
+      "order": 902,
+      "quality": {
+        "version": "1.0.0",
+        "commit": "48adefc",
+        "updated": "2026-11-06",
+        "notFor": [
+          "writing the pandas or R code that crunches the file (use production-code)",
+          "for market research outside the user's own data (use research-brief) or for the strategic roadmap that follows (use strategy-memo)"
+        ]
+      }
+    },
+    {
+      "name": "crash-test",
+      "repo": "arm-pz/crash-test",
+      "path": "skills/crash-test",
+      "group": "thinking-learning",
+      "tag": "decisions",
+      "title": "Crash Test",
+      "page": "bespoke",
+      "order": 903,
+      "blurb": "Crash-tests a decision before you build it. Four fixed roles draft the same task in separate contexts and attack each other's drafts anonymously; the chair merges what survived on evidence, not votes, keeps a dissent log for what it could not settle, and grounds the winner's claims about your files against the source before adopting them.",
+      "stats": "4 roles · ~9 calls · 1 opt-in Operator seat · 2 modes · 0 API keys",
+      "install": "npx skills add arm-pz/crash-test --skill crash-test",
+      "quality": {
+        "version": "1.0.0",
+        "commit": "e7db75d",
+        "updated": "2026-11-06",
+        "notFor": [
+          "factual lookups, small edits, debugging an actual crash, or reviewing code for defects: it examines a decision, not a diff"
+        ]
+      }
+    },
+    {
+      "name": "do-better",
+      "repo": "arm-pz/do-better",
+      "path": "skills/do-better",
+      "group": "thinking-learning",
+      "tag": "arena",
+      "title": "Do Better",
+      "page": "bespoke",
+      "order": 904,
+      "blurb": "When an answer is bad, don't ask twice: N sub-agents (100 by default, 16 with --quick) get the exact same task with different strategy cards, then attack, defend and judge each other in a single-elimination bracket until one solution survives.",
+      "stats": "2,160 strategy cards · 7 rounds at full size · ~1,700 lines · 0 API keys",
+      "install": "npx skills add arm-pz/do-better",
+      "quality": {
+        "version": "1.0.0",
+        "commit": "80bf4b7",
+        "updated": "2026-10-24",
+        "notFor": [
+          "stress-testing a decision or plan before building it (use crash-test)"
+        ]
+      }
+    },
+    {
+      "name": "strategy-memo",
+      "repo": "arm-pz/strategy-memo",
+      "path": "skills/strategy-memo",
+      "group": "thinking-learning",
+      "tag": "decisions",
+      "title": "Strategy Memo",
+      "pageTitle": "Strategy Memo — AI Agent Skill for Claude Code and Codex",
+      "blurb": "Turns a business question into a decision document: situation analysis, a recommendation written as ranked options, the risks, and a roadmap someone can execute.",
+      "stats": "3 files · 385 lines · 9 KB",
+      "install": "npx skills add arm-pz/strategy-memo",
+      "page": "generated",
+      "pageSource": {
+        "description": "Business strategy written as a decision document: competitive analysis, market and customer research, business model canvas, growth and pricing strategy, go-to-market plan, SWOT ranked by actionability, ninety-day, one-year and three-year roadmaps, board presentations and pivot assessments, structured as situation analysis, recommendation and execution roadmap. Use whenever someone faces a business decision: should I enter this market, who are my competitors, how should I price this, a go-to-market plan, build me a roadmap, is this worth more investment or a pivot, I need a board deck, even if they never say strategy. Not for pressure-testing a decision you already made (use crash-test), the copy or pages that execute it (use sales-copy, platform-content), or the numbers behind it (use data-readout).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 146,
+            "bytes": 10415
+          },
+          {
+            "path": "references/frameworks.md",
+            "lines": 141,
+            "bytes": 8353
+          },
+          {
+            "path": "references/memo-format.md",
+            "lines": 98,
+            "bytes": 5137
+          }
+        ],
+        "fileCount": 3,
+        "lines": 385,
+        "bytes": 9037,
+        "license": "MIT",
+        "commit": "03eaf9ac2557987630a1dba53b488aba2465eccc",
+        "sha256": "988e7b55c205bd043c828b485bdc7e1cbd0b92c87cc7d30cb3fd7ef6ccf0aa46"
+      },
+      "order": 905,
+      "quality": {
+        "version": "1.0.0",
+        "commit": "03eaf9a",
+        "updated": "2026-11-06",
+        "notFor": [
+          "pressure-testing a decision you already made (use crash-test)",
+          "the copy or pages that execute it (use sales-copy, platform-content)",
+          "the numbers behind it (use data-readout)"
+        ]
+      }
+    },
+    {
+      "name": "solo-income-blueprint",
+      "repo": "arm-pz/solo-income-blueprint",
+      "path": ".",
+      "group": "thinking-learning",
+      "tag": "decisions",
+      "title": "Solo Income Blueprint",
+      "pageTitle": "Solo Income Blueprint — AI Agent Skill for Claude Code",
+      "blurb": "Turns “I want to make money online” into one plan: a business model that fits your skills, time and budget, one offer, a demand check, a minimal tool stack and a seven-day launch.",
+      "stats": "3 files · 329 lines · 7 KB",
+      "install": "npx skills add arm-pz/solo-income-blueprint",
+      "page": "generated",
+      "pageSource": {
+        "description": "Design a realistic one-person online income plan from the user's skills, time and budget: one recommended business model, one offer, a demand check, a content and sales path, automations, a minimal tool stack, and a 7-day launch plan. Use when someone asks how to make money online or with AI tools, what to sell, which business model fits them, how to turn a skill they already have into income, how to get a first paying customer, or wants a step-by-step plan for a side business or one-person business. Not for job hunting (application-pilot, applicant-kit), SEO for an existing site (seo-audit), or privacy and legal pages (paper-trail).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 119,
+            "bytes": 5736
+          },
+          {
+            "path": "references/playbook.md",
+            "lines": 153,
+            "bytes": 7196
+          },
+          {
+            "path": "tests.md",
+            "lines": 57,
+            "bytes": 4000
+          }
+        ],
+        "fileCount": 3,
+        "lines": 329,
+        "bytes": 7001,
+        "license": "MIT",
+        "commit": "1520056694c1a219e0fd156b8e2721ebe5ba91f5",
+        "sha256": "e56e75b406a4eb1ca0f14934f6884493a792a388f801fec99d0153dddb5c1b8c"
+      },
+      "order": 906,
+      "quality": {
+        "version": "1.0.0",
+        "commit": "1520056",
+        "updated": "2026-11-06",
+        "notFor": [
+          "job hunting (application-pilot, applicant-kit)",
+          "SEO for an existing site (seo-audit)",
+          "privacy and legal pages (paper-trail)"
+        ]
+      }
+    },
+    {
+      "name": "topic-primer",
+      "repo": "arm-pz/topic-primer",
+      "path": "skills/topic-primer",
+      "group": "thinking-learning",
+      "tag": "learning",
+      "title": "Topic Primer",
+      "page": "bespoke",
+      "order": 907,
+      "blurb": "A world-class teacher for any topic, from zero background toward expert depth. Eight modes: foundations, full curriculum, concept-by-concept lessons, adaptive tutoring, expert mental models, mistake prevention, strict exams, and ELI5. One question at a time, then it waits.",
+      "stats": "8 modes · 68 lines · 0 API keys",
+      "install": "npx skills add arm-pz/topic-primer",
+      "quality": {
+        "version": "1.0.0",
+        "commit": "0ad10bd",
+        "updated": "2026-10-15",
+        "notFor": [
+          "file-format conversion (use wordsmith)",
+          "resume screening (use recruiter-lens)",
+          "SEO audits (use seo-audit)"
+        ]
+      }
+    },
+    {
+      "name": "study-system",
+      "repo": "arm-pz/study-system",
+      "path": "skills/study-system",
+      "group": "thinking-learning",
+      "tag": "learning",
+      "title": "Study System",
+      "pageTitle": "Study System — AI Agent Skill for Claude Code and Codex",
+      "blurb": "Builds the system around a skill you are acquiring: the minimum components, a beginner-to-practitioner roadmap, deliberate practice, spaced repetition and an honest mastery check.",
+      "stats": "3 files · 374 lines · 11 KB",
+      "install": "npx skills add arm-pz/study-system",
+      "page": "generated",
+      "pageSource": {
+        "description": "A personal system for acquiring a skill: decomposition into the minimum viable components, a beginner-to-practitioner roadmap, the mental models that unlock a subject, Feynman-level explanations, deliberate-practice routines, knowledge-gap audits that surface wrong assumptions, spaced-repetition schedules, application exercises and honest mastery assessments of where the learner actually is. Use whenever someone has a skill already in progress and needs the structure around it, asks how to practise, how long a skill takes, what they are missing, for a study plan or revision schedule, or says they keep forgetting what they read, even if they never say curriculum. Not for being taught the topic itself concept by concept (use topic-primer), for career positioning and moves (use career-track) or for course content written for a class of students (use course-builder).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 124,
+            "bytes": 10287
+          },
+          {
+            "path": "references/assessment.md",
+            "lines": 105,
+            "bytes": 7333
+          },
+          {
+            "path": "references/system-design.md",
+            "lines": 145,
+            "bytes": 10852
+          }
+        ],
+        "fileCount": 3,
+        "lines": 374,
+        "bytes": 11542,
+        "license": "MIT",
+        "commit": "74e14a3a4f5623eff65f7b9ca78be0e96088342e",
+        "sha256": "e5bc7563653658439e55cebc08f91b672b52cdeb807c465f6cd1c2cc9c040f0e"
+      },
+      "order": 908,
+      "quality": {
+        "version": "1.0.0",
+        "commit": "74e14a3",
+        "updated": "2026-11-06",
+        "notFor": [
+          "being taught the topic itself concept by concept (use topic-primer)",
+          "for career positioning and moves (use career-track) or for course content written for a class of students (use course-builder)"
+        ]
+      }
+    },
+    {
+      "name": "course-builder",
+      "repo": "arm-pz/caffeinity-skills",
+      "path": "plugins/course-builder/skills/course-builder",
+      "group": "thinking-learning",
+      "tag": "learning",
+      "title": "Course Builder",
+      "pageTitle": "Course Builder — AI Agent Skill for Claude Code and Codex",
+      "blurb": "A course for a class or cohort: measurable outcomes, modules in prerequisite order, an assessment for every outcome and a time budget that fits, checked by a script before the first session.",
+      "stats": "5 files · 302 lines · 6 KB",
+      "install": "npx skills add arm-pz/caffeinity-skills --skill course-builder",
+      "page": "generated",
+      "pageSource": {
+        "description": "Designs a course for a group of learners (a class, cohort, workshop series, bootcamp or internal training): measurable outcomes, a module sequence with prerequisites, activities and assessments aligned to each outcome, a time budget that fits the hours available, and a rubric, then checks the plan with a script so no outcome goes untaught or unassessed. Use when someone is teaching others and asks for a curriculum, syllabus, course outline, module plan, cohort or workshop structure, or wants an existing course checked for gaps and overload, even if they never say \"curriculum\". Not for one person's own learning plan (use study-system), for being taught the topic (use topic-primer), or for marketing the course (use sales-copy).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 85,
+            "bytes": 5010
+          },
+          {
+            "path": "references/alignment.md",
+            "lines": 58,
+            "bytes": 2433
+          },
+          {
+            "path": "references/outcomes.md",
+            "lines": 28,
+            "bytes": 1458
+          },
+          {
+            "path": "references/trigger-cases.md",
+            "lines": 25,
+            "bytes": 1790
+          },
+          {
+            "path": "scripts/check_course.py",
+            "lines": 106,
+            "bytes": 4527
+          }
+        ],
+        "fileCount": 5,
+        "lines": 302,
+        "bytes": 6084,
+        "license": "MIT",
+        "commit": "af1c5977a397b6760e7ea27fd27cafb6b2e7ad8e",
+        "sha256": "1e8dfe3ceb472fd5ceab966ed884b027cd7e84f669755fb5a85695facc6efe87"
+      },
+      "order": 909,
+      "quality": {
+        "version": "1.0.0",
+        "commit": "af1c597",
+        "updated": "2026-11-12",
+        "notFor": [
+          "one person's own learning plan (use study-system)",
+          "for being taught the topic (use topic-primer)",
+          "for marketing the course (use sales-copy)"
+        ]
+      }
+    },
+    {
+      "name": "choose-effort",
+      "repo": "arm-pz/choose-effort",
+      "path": ".",
+      "group": "ship-checks",
+      "tag": "build",
+      "title": "Choose Effort",
+      "pageTitle": "Choose Effort — AI Agent Skill for Claude Code and Codex",
+      "blurb": "Asks the user how much effort a Claude Code task deserves before heavy work starts, then recommends an effort level, whether to fan out to subagents, goal mode, workflows or agent teams, how to set it, and when to check /usage.",
+      "stats": "2 files · 68 lines · 2 KB",
+      "install": "npx skills add arm-pz/choose-effort",
+      "page": "generated",
+      "order": 910,
+      "pageSource": {
+        "description": "Asks the user how much effort a Claude Code task deserves before heavy work starts, then recommends an effort level, whether to fan out to subagents, goal mode, workflows or agent teams, how to set it, and when to check /usage. Use when the user is about to start a large, long or unattended Claude Code task, asks what effort level to use or whether to use xhigh or max, asks how to use less usage from now on, or is about to start /goal, a workflow or an agent team. Not for working out why usage already drained (use diagnose-usage), or for plan limits, prices and which models support which levels (use product-self-knowledge).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 49,
+            "bytes": 3604
+          },
+          {
+            "path": "references/trigger-cases.md",
+            "lines": 19,
+            "bytes": 1992
+          }
+        ],
+        "fileCount": 2,
+        "lines": 68,
+        "bytes": 2526,
+        "license": "MIT",
+        "commit": "b881ffd292c948a1963d2c98dd2c2db071e8109f",
+        "sha256": "27b8aa1625df9e09bc9349af11034705e0c74da3d0e6a579b47b6e01e49f4887"
+      },
+      "quality": {
+        "version": "1.0.0",
+        "commit": "b881ffd",
+        "updated": "2026-11-06",
+        "notFor": [
+          "working out why usage already drained (use diagnose-usage)",
+          "for plan limits, prices and which models support which levels (use product-self-knowledge)"
+        ]
+      }
+    },
+    {
+      "name": "diagnose-usage",
+      "repo": "arm-pz/diagnose-usage",
+      "path": ".",
+      "group": "ship-checks",
+      "tag": "build",
+      "title": "Diagnose Usage",
+      "pageTitle": "Diagnose Usage — AI Agent Skill for Claude Code and Codex",
+      "blurb": "Diagnoses why a Claude Code session or day burned through usage limits faster than expected, and says what to change.",
+      "stats": "3 files · 86 lines · 4 KB",
+      "install": "npx skills add arm-pz/diagnose-usage",
+      "page": "generated",
+      "order": 911,
+      "pageSource": {
+        "description": "Diagnoses why a Claude Code session or day burned through usage limits faster than expected, and says what to change. Reads the user's own /usage breakdown, checks the known heavy-session causes (high effort levels, subagents inheriting effort, goal mode, workflows, agent teams, long SDK jobs), and returns up to three ranked culprits with one fix each, plus when to send /feedback. Use when the user says Claude Code usage is draining fast, they hit or are nearing their limit sooner than expected, one session cost far more than expected, or asks what /usage shows or how to cut burn in a session that already ran. Not for choosing an effort level before work starts or using less going forward (use choose-effort), or for plan limits, prices and API billing (use product-self-knowledge).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 35,
+            "bytes": 3456
+          },
+          {
+            "path": "references/burn-sources.md",
+            "lines": 30,
+            "bytes": 2849
+          },
+          {
+            "path": "references/trigger-cases.md",
+            "lines": 21,
+            "bytes": 2247
+          }
+        ],
+        "fileCount": 3,
+        "lines": 86,
+        "bytes": 3812,
+        "license": "MIT",
+        "commit": "d8df9488a8b19022d2c968402521675f04c1bdb3",
+        "sha256": "40f816a1234ee63e3e1c09e2c05eb4d1f440b436ba54d48be6c499874af98aa7"
+      },
+      "quality": {
+        "version": "1.0.0",
+        "commit": "d8df948",
+        "updated": "2026-11-06",
+        "notFor": [
+          "choosing an effort level before work starts or using less going forward (use choose-effort)",
+          "for plan limits, prices and API billing (use product-self-knowledge)"
+        ]
+      }
+    },
+    {
+      "name": "seo-sweep",
+      "repo": "arm-pz/seo-sweep",
+      "path": ".",
+      "group": "publish-discover",
+      "tag": "discovery",
+      "title": "Seo Sweep",
+      "pageTitle": "Seo Sweep — AI Agent Skill for Claude Code and Codex",
+      "blurb": "Runs the Skillsmith by Caffeinity SEO skills on a site you own, in order, fixes what they find in the site's code, proves each fix with a re-crawl, and turns every defect a skill shows along the way into a tested fix to that skill, chaining seo-crawl…",
+      "stats": "3 files · 185 lines · 5 KB",
+      "install": "npx skills add arm-pz/seo-sweep",
+      "page": "generated",
+      "order": 912,
+      "pageSource": {
+        "description": "Runs the Skillsmith by Caffeinity SEO skills on a site you own, in order, fixes what they find in the site's code, proves each fix with a re-crawl, and turns every defect a skill shows along the way into a tested fix to that skill, chaining seo-crawl, findable, keyword-guard, wordsmith and get-indexed. Use when the user asks to \"fix the SEO\", \"run the SEO skills on my site\", \"why doesn't my site show up when I search its name\", \"my brand search shows other domains\", \"use the skillsmith skills on this site\", or wants a site's search problems fixed and the skills improved as they run, even if they never say \"audit\". Not for only submitting pages to search engines (use get-indexed), a report-only audit with rewrite options (use seo-polish), resolving cannibalization alone (use keyword-resolver), repo or skill discoverability alone (use findable), or writing a new skill (use draft-skill).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 98,
+            "bytes": 6979
+          },
+          {
+            "path": "references/improve-skills.md",
+            "lines": 48,
+            "bytes": 3365
+          },
+          {
+            "path": "references/report-template.md",
+            "lines": 39,
+            "bytes": 1194
+          }
+        ],
+        "fileCount": 3,
+        "lines": 185,
+        "bytes": 5254,
+        "license": "MIT",
+        "commit": "237bb64617d1e1539995def59d37e0cc1945b622",
+        "sha256": "f3eac9aacd4a4ba623a5e6a8ad3506fd33f499bf21f119a1fa259c0a3476c274"
+      },
+      "quality": {
+        "version": "1.0.0",
+        "commit": "237bb64",
+        "updated": "2026-11-10",
+        "notFor": [
+          "only submitting pages to search engines (use get-indexed)",
+          "a report-only audit with rewrite options (use seo-polish)",
+          "resolving cannibalization alone (use keyword-resolver)",
+          "repo or skill discoverability alone (use findable)",
+          "writing a new skill (use draft-skill)"
+        ]
+      }
+    },
+    {
+      "name": "session-retrace",
+      "repo": "arm-pz/session-retrace",
+      "path": ".",
+      "group": "ship-checks",
+      "tag": "build",
+      "title": "Session Retrace",
+      "pageTitle": "Session Retrace — AI Agent Skill for Claude Code and Codex",
+      "blurb": "Find a past AI coding conversation from a fuzzy memory — \"the session where we fixed the redirect\" — across Qoder, Claude Code, Codex and Gemini CLI.",
+      "stats": "4 files · 805 lines · 12 KB",
+      "install": "npx skills add arm-pz/session-retrace",
+      "page": "generated",
+      "order": 913,
+      "pageSource": {
+        "description": "Find a past AI coding conversation from a fuzzy memory — \"the session where we fixed the redirect\" — across Qoder, Claude Code, Codex and Gemini CLI. Searches the transcript files those tools already keep on disk, ranks sessions with verbatim evidence and a session ID, then prints the chosen chat. Use when the user cannot find an earlier session, asks which chat covered something, asks to search past sessions or conversation history, or wants to reopen a conversation from a rough recollection. Not for searching code or project files (use Grep), summarizing the conversation already open, or durable project memory (use the workspace memory index).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 55,
+            "bytes": 4759
+          },
+          {
+            "path": "references/test-cases.md",
+            "lines": 34,
+            "bytes": 3677
+          },
+          {
+            "path": "references/transcript-format.md",
+            "lines": 74,
+            "bytes": 6242
+          },
+          {
+            "path": "scripts/session_retrace.py",
+            "lines": 642,
+            "bytes": 24313
+          }
+        ],
+        "fileCount": 4,
+        "lines": 805,
+        "bytes": 12600,
+        "license": "MIT",
+        "commit": "d65a19ededa5cbb74330be35a0ad22e31eabc137",
+        "sha256": "14471874525830a2540092767e7fbf0737675be7896bc38289d92fe30618d799"
+      },
+      "quality": {
+        "version": "1.0.0",
+        "commit": "d65a19e",
+        "updated": "2026-11-06",
+        "notFor": [
+          "searching code or project files (use Grep)",
+          "summarizing the conversation already open, or durable project memory (use the workspace memory index)"
+        ]
+      }
+    },
+    {
+      "name": "get-indexed",
+      "repo": "arm-pz/get-indexed",
+      "path": ".",
+      "group": "publish-discover",
+      "tag": "discovery",
+      "title": "Get Indexed",
+      "pageTitle": "Get Indexed — AI Agent Skill for Claude Code and Codex",
+      "blurb": "Tells search engines about a site's new and changed pages through every channel that has an API, and lists the few steps that still need a person.",
+      "stats": "4 files · 510 lines · 9 KB",
+      "install": "npx skills add arm-pz/get-indexed",
+      "page": "generated",
+      "order": 914,
+      "pageSource": {
+        "description": "Tells search engines about a site's new and changed pages through every channel that has an API, and lists the few steps that still need a person. Sends live pages that are new since the last run to IndexNow (Bing, Yandex, Seznam, Naver), resubmits the sitemap to Google Search Console, reads Google's index status, and ends with a short hand-submit list for Google's Request indexing button and Brave's form, which have no API. Use when the user asks to \"submit my URLs\", \"get my site indexed\", \"ping search engines\", \"automate URL submission\", \"set up IndexNow\", \"my pages are discovered but not indexed\", or \"why isn't Google or Brave showing my new pages\", even if they never mention IndexNow or sitemaps. Not for pages that cannot be indexed because of noindex, robots, redirects or broken links (use seo-crawl), ranking or brand-search problems (use findable or seo-sweep), or writing page copy (use wordsmith).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 82,
+            "bytes": 5435
+          },
+          {
+            "path": "package.json",
+            "lines": 17,
+            "bytes": 379
+          },
+          {
+            "path": "references/setup.md",
+            "lines": 75,
+            "bytes": 4059
+          },
+          {
+            "path": "scripts/get-indexed.mjs",
+            "lines": 336,
+            "bytes": 15783
+          }
+        ],
+        "fileCount": 4,
+        "lines": 510,
+        "bytes": 9258,
+        "license": "MIT",
+        "commit": "a68bb45dc94efb3eb3795ef2f5a86c3ac8a2714f",
+        "sha256": "2cd433a1568d52f49394f1cb1ffa6f78dd9cbe5559dbd768855dd38521a7622b"
+      },
+      "quality": {
+        "version": "1.0.0",
+        "commit": "a68bb45",
+        "updated": "2026-11-06",
+        "notFor": [
+          "pages that cannot be indexed because of noindex, robots, redirects or broken links (use seo-crawl)",
+          "ranking or brand-search problems (use findable or seo-sweep)",
+          "writing page copy (use wordsmith)"
+        ]
+      }
+    },
+    {
+      "name": "consistent-code-review",
+      "repo": "arm-pz/consistent-code-review",
+      "path": "skills/consistent-code-review",
+      "group": "ship-checks",
+      "tag": "build",
+      "title": "Consistent Code Review",
+      "pageTitle": "Consistent Code Review — AI Agent Skill for Claude Code",
+      "blurb": "Perform a deterministic, evidence-backed code review that produces the same findings on re-runs of unchanged code, reconciled against a previous report when one is supplied.",
+      "stats": "1 file · 153 lines · 4 KB",
+      "install": "npx skills add arm-pz/consistent-code-review",
+      "page": "generated",
+      "order": 915,
+      "pageSource": {
+        "description": "Perform a deterministic, evidence-backed code review that produces the same findings on re-runs of unchanged code, reconciled against a previous report when one is supplied. Use whenever the user asks to review code, a diff, a PR or a file, says \"check for bugs\" or \"find bugs\", complains that earlier reviews invented different bugs on the same code, or wants a review they can compare across runs, even if they never say \"consistent\" or \"deterministic\". Not for architectural redesign, live security red-teaming (use pre-ship-security-red-team), live performance scoring (use pre-ship-performance-audit), or writing code and applying fixes (use production-code).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 153,
+            "bytes": 8995
+          }
+        ],
+        "fileCount": 1,
+        "lines": 153,
+        "bytes": 4047,
+        "license": "MIT",
+        "commit": "2cf9364d72c03963d9265c41301ed992e1a9f98a",
+        "sha256": "45eeb13f024ea74189d450cb142d3a68b54f7368ea80c0631723851064bd12aa"
+      },
+      "quality": {
+        "version": "1.0.0",
+        "commit": "2cf9364",
+        "updated": "2026-11-06",
+        "notFor": [
+          "architectural redesign, live security red-teaming (use pre-ship-security-red-team)",
+          "live performance scoring (use pre-ship-performance-audit)",
+          "writing code and applying fixes (use production-code)"
+        ]
+      },
+      "tested": {
+        "date": "2026-11-02",
+        "target": "skills-site pipeline (2,535 lines)",
+        "result": "Found the keyword rule that tags a skill from its \"Not for\" clause, which had mis-tagged this skill's own page.",
+        "evidence": "https://github.com/arm-pz/skills-site/commit/db04809"
+      }
+    },
+    {
+      "name": "ai-team-blueprint",
+      "repo": "arm-pz/ai-team-blueprint",
+      "path": ".",
+      "group": "writing-growth",
+      "tag": "content",
+      "title": "Ai Team Blueprint",
+      "pageTitle": "Ai Team Blueprint — AI Agent Skill for Claude Code and Codex",
+      "blurb": "Guide a solo operator or small business from \"I want an AI team\" to a ready-to-run v1 blueprint for a team of 3 to 5 Claude agents.",
+      "stats": "5 files · 220 lines · 6 KB",
+      "install": "npx skills add arm-pz/ai-team-blueprint",
+      "page": "generated",
+      "order": 916,
+      "pageSource": {
+        "description": "Guide a solo operator or small business from \"I want an AI team\" to a ready-to-run v1 blueprint for a team of 3 to 5 Claude agents. Asks five sharp questions, recommends one starting use case, then delivers the team structure, a production prompt per agent, the handoff workflow, a lean tool stack, a QA plan and a 7-day launch plan ending in START HERE FIRST. Use whenever someone wants to set up their first AI agents or multi-agent team, asks which agents they need, how to split work between agents, how to get Claude to take a recurring chunk of their work off their plate, or how to use AI agents for content, lead generation, support, research or operations, even if they never say \"blueprint\" or \"team\". Not for writing agent code against the Claude API or Agent SDK (use claude-api), building a single skill (use draft-skill), running agents on a task right now, or picking one AI tool for a one-off task.",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 59,
+            "bytes": 5189
+          },
+          {
+            "path": "evals/evals.json",
+            "lines": 48,
+            "bytes": 1450
+          },
+          {
+            "path": "evals/test-cases.md",
+            "lines": 22,
+            "bytes": 2363
+          },
+          {
+            "path": "references/blueprint-template.md",
+            "lines": 58,
+            "bytes": 3179
+          },
+          {
+            "path": "references/use-cases.md",
+            "lines": 33,
+            "bytes": 1785
+          }
+        ],
+        "fileCount": 5,
+        "lines": 220,
+        "bytes": 5858,
+        "license": "MIT",
+        "commit": "f7c9cabdd756b4b0e833ec07204794cae9448544",
+        "sha256": "99197678c19687fe7a75ee18c884a11983cbc26e264122bf3b790bb9ffeee850"
+      },
+      "quality": {
+        "version": "1.0.0",
+        "commit": "f7c9cab",
+        "updated": "2026-11-06",
+        "notFor": [
+          "writing agent code against the Claude API or Agent SDK (use claude-api)",
+          "building a single skill (use draft-skill)",
+          "running agents on a task right now, or picking one AI tool for a one-off task"
+        ]
+      }
+    },
+    {
+      "name": "portable-harness",
+      "repo": "arm-pz/portable-harness",
+      "path": "skills/portable-harness",
+      "group": "publish-discover",
+      "tag": "publishing",
+      "title": "Portable Harness",
+      "pageTitle": "Portable Harness — AI Agent Skill for Claude Code and Codex",
+      "blurb": "Set up a repo so any coding agent (Claude Code, Codex, Cursor) behaves the same wherever it runs - writes 12 working rules at the top of CLAUDE.md or AGENTS.md, adds map sections only where the agent keeps getting things wrong, and…",
+      "stats": "5 files · 211 lines · 5 KB",
+      "install": "npx skills add arm-pz/portable-harness",
+      "page": "generated",
+      "order": 917,
+      "pageSource": {
+        "description": "Set up a repo so any coding agent (Claude Code, Codex, Cursor) behaves the same wherever it runs - writes 12 working rules at the top of CLAUDE.md or AGENTS.md, adds map sections only where the agent keeps getting things wrong, and installs guardrails it cannot talk past - a type check that fails only on new errors, live-service tests that run only on request, and tests plus type check before every deploy from main. Use when someone wants agent rules for a repo, a better CLAUDE.md or AGENTS.md, says the agent keeps ignoring conventions, hiding behind old type errors or calling real services in tests, or wants their setup to move between harnesses, even if they never say harness. Not for pruning or auditing a setup that already exists (use harness-audit), reviewing code (use consistent-code-review), writing features or fixes (use production-code), or turning a skill into a Claude Code plugin (use skill-to-mod).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 55,
+            "bytes": 3929
+          },
+          {
+            "path": "references/guardrails.md",
+            "lines": 61,
+            "bytes": 2660
+          },
+          {
+            "path": "references/rules.md",
+            "lines": 24,
+            "bytes": 1122
+          },
+          {
+            "path": "scripts/test_typecheck_gate.py",
+            "lines": 24,
+            "bytes": 974
+          },
+          {
+            "path": "scripts/typecheck_gate.py",
+            "lines": 47,
+            "bytes": 1782
+          }
+        ],
+        "fileCount": 5,
+        "lines": 211,
+        "bytes": 4902,
+        "license": "MIT",
+        "commit": "8b900db43f9bc21e0ad0bb6855c5c918b08311c4",
+        "sha256": "b6ee1f57be911ad2c60b6ff1b85c3338f3fca826878a69c6f27a958dd084b98f"
+      },
+      "quality": {
+        "version": "1.0.0",
+        "commit": "8b900db",
+        "updated": "2026-11-06",
+        "notFor": [
+          "pruning or auditing a setup that already exists (use harness-audit)",
+          "reviewing code (use consistent-code-review)",
+          "writing features or fixes (use production-code)",
+          "turning a skill into a Claude Code plugin (use skill-to-mod)"
+        ]
+      }
+    },
+    {
+      "name": "harness-audit",
+      "repo": "arm-pz/harness-audit",
+      "path": "skills/harness-audit",
+      "group": "ship-checks",
+      "tag": "build",
+      "title": "Harness Audit",
+      "pageTitle": "Harness Audit — AI Agent Skill for Claude Code and Codex",
+      "blurb": "Audits an existing coding-agent harness (CLAUDE.md, AGENTS.md, rules files, hooks, MCP and tool config, skills) against the project's past Claude Code sessions, then returns a ranked findings report plus proposed diffs applied only after…",
+      "stats": "4 files · 454 lines · 8 KB",
+      "install": "npx skills add arm-pz/harness-audit",
+      "page": "generated",
+      "order": 918,
+      "pageSource": {
+        "description": "Audits an existing coding-agent harness (CLAUDE.md, AGENTS.md, rules files, hooks, MCP and tool config, skills) against the project's past Claude Code sessions, then returns a ranked findings report plus proposed diffs applied only after approval. Flags bloated instruction files, rules with no evidence they help, prose rules nothing enforces, unused or overlapping tools, stale docs, and corrections that recur across sessions without a rule. Use when the user wants to prune, slim down, clean up or garden their agent setup, says CLAUDE.md has grown too long, asks which rules or MCP servers are dead weight, or says the agent keeps repeating mistakes without knowing which, even if they never say harness. Not for writing a new setup, rules, map sections or guardrails for a named problem area (use portable-harness), reviewing application code (use consistent-code-review), or tuning one skill's description (use tune-skill).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 87,
+            "bytes": 5895
+          },
+          {
+            "path": "references/checks.md",
+            "lines": 59,
+            "bytes": 3974
+          },
+          {
+            "path": "scripts/inventory.py",
+            "lines": 147,
+            "bytes": 5596
+          },
+          {
+            "path": "scripts/mine_sessions.py",
+            "lines": 161,
+            "bytes": 6413
+          }
+        ],
+        "fileCount": 4,
+        "lines": 454,
+        "bytes": 8379,
+        "license": "MIT",
+        "commit": "95b980907ee843480af5f235cf02d841fdd589f3",
+        "sha256": "e0e734fa450c6ccfbb05312a21b5edb3375987cb434ad0da435fbac62d80031f"
+      },
+      "quality": {
+        "version": null,
+        "commit": "95b9809",
+        "updated": "2026-11-05",
+        "notFor": [
+          "writing a new setup, rules, map sections or guardrails for a named problem area (use portable-harness)",
+          "reviewing application code (use consistent-code-review)",
+          "tuning one skill's description (use tune-skill)"
+        ]
+      }
+    },
+    {
+      "name": "setup-claude-advisor",
+      "repo": "arm-pz/setup-claude-advisor",
+      "path": ".",
+      "group": "ship-checks",
+      "tag": "build",
+      "title": "Setup Claude Advisor",
+      "pageTitle": "Setup Claude Advisor — AI Agent Skill for Claude Code",
+      "blurb": "Configure Claude Code for quota-optimised model tiering: Sonnet as the main session model, Opus as the on-call advisor, Haiku for read-only subagents, and Sonnet for code-editing subagents.",
+      "stats": "4 files · 477 lines · 10 KB",
+      "install": "npx skills add arm-pz/setup-claude-advisor",
+      "page": "generated",
+      "order": 919,
+      "pageSource": {
+        "description": "Configure Claude Code for quota-optimised model tiering: Sonnet as the main session model, Opus as the on-call advisor, Haiku for read-only subagents, and Sonnet for code-editing subagents. Audits existing subagents, environment variables, and CLI version before proposing changes; writes settings, subagent files, and an advisory rule to CLAUDE.md only after the user approves a diff preview. Use whenever the user wants to set up the Opus advisor pattern, configure Claude Code model tiers, optimise their $20 plan quota by splitting models across roles, or match a subagent tree that assigns different models to different jobs, even if they never say \"advisor\" or \"tiering\". Not for diagnosing why usage already drained (use diagnose-usage), choosing an effort level before a task (use choose-effort), plan limits and prices (use product-self-knowledge), or upgrading Claude Code itself.",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 133,
+            "bytes": 8509
+          },
+          {
+            "path": "discovery-kit.md",
+            "lines": 176,
+            "bytes": 9649
+          },
+          {
+            "path": "references/advisor-architecture.md",
+            "lines": 121,
+            "bytes": 6189
+          },
+          {
+            "path": "references/trigger-cases.md",
+            "lines": 47,
+            "bytes": 4148
+          }
+        ],
+        "fileCount": 4,
+        "lines": 477,
+        "bytes": 10391,
+        "license": "MIT",
+        "commit": "d3a41fa4c4d631a17848cdb835e02732b4d85149",
+        "sha256": "7caf4731debcc7f6a749aa5cfd1f71de2962c85c851d0779fdce00a72e3f2821"
+      },
+      "quality": {
+        "version": "0.1.2",
+        "commit": "d3a41fa",
+        "updated": "2026-11-10",
+        "notFor": [
+          "diagnosing why usage already drained (use diagnose-usage)",
+          "choosing an effort level before a task (use choose-effort)",
+          "plan limits and prices (use product-self-knowledge)",
+          "upgrading Claude Code itself"
+        ]
+      }
+    },
+    {
+      "name": "insights-to-prompts",
+      "repo": "arm-pz/insights-to-prompts",
+      "path": ".",
+      "group": "ship-checks",
+      "tag": "build",
+      "title": "Insights To Prompts",
+      "pageTitle": "Insights To Prompts — AI Agent Skill for Claude Code",
+      "blurb": "Turn a Claude Code /insights report into before/after rewrites of the prompts that caused friction — both the prompts you type in sessions and the prompt text inside your own skills.",
+      "stats": "5 files · 419 lines · 8 KB",
+      "install": "npx skills add arm-pz/insights-to-prompts",
+      "page": "generated",
+      "order": 920,
+      "pageSource": {
+        "description": "Turn a Claude Code /insights report into before/after rewrites of the prompts that caused friction — both the prompts you type in sessions and the prompt text inside your own skills. Reads ~/.claude/usage-data (report.html, cached facets) plus session transcripts with a bundled script, ranks friction that better wording could have prevented, and rewrites the worst offenders. Use when the user says \"improve my prompts from insights\", \"what am I prompting badly\", \"turn my insights report into better prompts\", \"coach my Claude Code prompting\", or \"why does Claude keep misreading me\". Not for adding rules to CLAUDE.md, hooks or settings (use harness-audit), rewriting one prompt pasted in chat with no report behind it (use a sharpen-prompt skill), or building a new skill from prompts (use prompts-to-skill).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 52,
+            "bytes": 4349
+          },
+          {
+            "path": "references/digest-format.md",
+            "lines": 13,
+            "bytes": 1279
+          },
+          {
+            "path": "references/rewrite-rules.md",
+            "lines": 42,
+            "bytes": 2287
+          },
+          {
+            "path": "references/skill-prompts.md",
+            "lines": 21,
+            "bytes": 1247
+          },
+          {
+            "path": "scripts/extract_insights.py",
+            "lines": 291,
+            "bytes": 12068
+          }
+        ],
+        "fileCount": 5,
+        "lines": 419,
+        "bytes": 8079,
+        "license": "MIT",
+        "commit": "432793c40c0ac38b7853273bd7d0ca4495298d6c",
+        "sha256": "5fa13a45a0887b5bd6fea5049eee84b9acc608d08aa119c174619e7bf7616e56"
+      },
+      "quality": {
+        "version": null,
+        "commit": "432793c",
+        "updated": "2026-11-05",
+        "notFor": [
+          "adding rules to CLAUDE.md, hooks or settings (use harness-audit)",
+          "rewriting one prompt pasted in chat with no report behind it (use a sharpen-prompt skill)",
+          "building a new skill from prompts (use prompts-to-skill)"
+        ]
+      }
+    },
+    {
+      "name": "prompts-to-workflow",
+      "repo": "arm-pz/prompts-to-workflow",
+      "path": ".",
+      "group": "career",
+      "tag": "career",
+      "title": "Prompts To Workflow",
+      "pageTitle": "Prompts To Workflow — AI Agent Skill for Claude Code",
+      "blurb": "Turns a pasted batch of prompts that together do one multi-step job into a workflow, then decides how to split it into skills.",
+      "stats": "6 files · 500 lines · 10 KB",
+      "install": "npx skills add arm-pz/prompts-to-workflow",
+      "page": "generated",
+      "order": 921,
+      "pageSource": {
+        "description": "Turns a pasted batch of prompts that together do one multi-step job into a workflow, then decides how to split it into skills. Maps the prompts to ordered steps with inputs, outputs and gates, checks every step against the live skillsmith.tech catalog and its brews, reuses existing skills such as tune-and-polish, wordsmith or findable where they fit, drafts a thin chain skill that runs the steps, and writes a brief for each new skill only where nothing covers a step. Use whenever the user pastes prompts or a prompt log and asks to make it a workflow or a brew, split it into skills, work out which skills they already have, or stop doing these steps by hand, even if they never say \"workflow\". Not for prompts that each become their own skill (use prompts-to-skill), a single idea (use draft-skill or skill-launch), an outcome described without prompts (use caffeinity-routing), or an existing skill (use tune-and-polish).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 95,
+            "bytes": 7815
+          },
+          {
+            "path": "evals/evals.json",
+            "lines": 52,
+            "bytes": 1138
+          },
+          {
+            "path": "references/split-rules.md",
+            "lines": 60,
+            "bytes": 4226
+          },
+          {
+            "path": "references/trigger-cases.md",
+            "lines": 38,
+            "bytes": 3655
+          },
+          {
+            "path": "references/workflow-map.md",
+            "lines": 90,
+            "bytes": 3804
+          },
+          {
+            "path": "scripts/catalog.py",
+            "lines": 165,
+            "bytes": 6042
+          }
+        ],
+        "fileCount": 6,
+        "lines": 500,
+        "bytes": 10016,
+        "license": "MIT",
+        "commit": "80fe19254260c5ca21ec71b6661180f2e96db499",
+        "sha256": "61aea39bf7ac54c409acdff08f2a933dec058890cdb6c5917d39591c99f71529"
+      },
+      "quality": {
+        "version": "0.1.0",
+        "commit": "80fe192",
+        "updated": "2026-11-01",
+        "notFor": [
+          "prompts that each become their own skill (use prompts-to-skill)",
+          "a single idea (use draft-skill or skill-launch)",
+          "an outcome described without prompts (use caffeinity-routing)",
+          "an existing skill (use tune-and-polish)"
+        ]
+      }
+    },
+    {
+      "name": "ship-second-brain",
+      "repo": "arm-pz/ship-second-brain",
+      "path": "skills/ship-second-brain",
+      "group": "ship-checks",
+      "tag": "release",
+      "title": "Ship Second Brain",
+      "pageTitle": "Ship Second Brain — AI Agent Skill for Claude Code and Codex",
+      "blurb": "Builds and maintains a team second brain in one markdown folder: raw issues, PRs, specs and call notes saved first, cut into one-idea notes with a source and confidence (seen, verified, opinion), linked, verified against the source, summed…",
+      "stats": "3 files · 409 lines · 7 KB",
+      "install": "npx skills add arm-pz/ship-second-brain",
+      "page": "generated",
+      "order": 922,
+      "pageSource": {
+        "description": "Builds and maintains a team second brain in one markdown folder: raw issues, PRs, specs and call notes saved first, cut into one-idea notes with a source and confidence (seen, verified, opinion), linked, verified against the source, summed up in today.md, and checked by an answer test, with misses in gaps.md. Use whenever a question or task touches such a vault (a folder with raw/ and notes carrying confidence front matter): what did we decide about X and where is it written down, a new spec or source that says something different from a verified note, ingest PRs or issues, file call notes, verify or upgrade notes, clean up or delete files, run the answer test, stop re-explaining context every session. Even if they never say second brain. Not for a one-off summary of one document, a shareable doc built from the vault (use docs), or a database or Notion setup.",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 113,
+            "bytes": 6565
+          },
+          {
+            "path": "references/note-format.md",
+            "lines": 88,
+            "bytes": 2693
+          },
+          {
+            "path": "scripts/check_vault.py",
+            "lines": 208,
+            "bytes": 7992
+          }
+        ],
+        "fileCount": 3,
+        "lines": 409,
+        "bytes": 6771,
+        "license": "MIT",
+        "commit": "28e5c6424dd7df9efa1ce9ba96d45031dafa77fb",
+        "sha256": "8cee69d4d4dc947f6e6f44cf80b1a64b9c45ee6151d37d3175ba196f22501285"
+      },
+      "quality": {
+        "version": "0.1.0",
+        "commit": "28e5c64",
+        "updated": "2026-11-06",
+        "notFor": [
+          "a one-off summary of one document, a shareable doc built from the vault (use docs)",
+          "a database or Notion setup"
+        ]
+      }
+    },
+    {
+      "name": "straight-prose",
+      "repo": "arm-pz/straight-prose",
+      "path": ".",
+      "group": "skill-authoring",
+      "tag": "authoring",
+      "title": "Straight Prose",
+      "pageTitle": "Straight Prose — AI Agent Skill for Claude Code and Codex",
+      "blurb": "Writes and edits prose so it reads like a specific person wrote it and carries no stock AI patterns such as inflated significance, promotional wording, vague attribution, negative parallelisms, forced threes, em dashes, chatbot…",
+      "stats": "7 files · 506 lines · 13 KB",
+      "install": "npx skills add arm-pz/straight-prose",
+      "page": "generated",
+      "order": 923,
+      "pageSource": {
+        "description": "Writes and edits prose so it reads like a specific person wrote it and carries no stock AI patterns such as inflated significance, promotional wording, vague attribution, negative parallelisms, forced threes, em dashes, chatbot pleasantries and over-formatting. Applies the rules while drafting, edits existing text without changing the author's voice or dialect, or audits a draft and lists each pattern with its line, using a scanner script for the mechanical ones. Use whenever the user asks to remove AI slop or de-slop a draft, asks \"does this sound like AI\" or \"why does this read like ChatGPT\", wants writing \"in my voice\" or \"less like a chatbot\", or pastes anti-slop style rules to apply, even if they never say \"slop\". Not for general editing such as tone changes, shortening, proofreading or fact-checking (use wordsmith), for resumes and CVs (use recruiter-lens or applicant-kit), or for getting text past an AI detector.",
+        "files": [
+          {
+            "path": ".gitignore",
+            "lines": 4,
+            "bytes": 35
+          },
+          {
+            "path": "SKILL.md",
+            "lines": 160,
+            "bytes": 11615
+          },
+          {
+            "path": "evals/evals.json",
+            "lines": 29,
+            "bytes": 2208
+          },
+          {
+            "path": "evals/trigger-cases.md",
+            "lines": 47,
+            "bytes": 4467
+          },
+          {
+            "path": "references/sourcing.md",
+            "lines": 43,
+            "bytes": 2506
+          },
+          {
+            "path": "scripts/slop_scan.py",
+            "lines": 153,
+            "bytes": 7567
+          },
+          {
+            "path": "scripts/test_slop_scan.py",
+            "lines": 70,
+            "bytes": 3871
+          }
+        ],
+        "fileCount": 7,
+        "lines": 506,
+        "bytes": 12817,
+        "license": "MIT",
+        "commit": "216bf851d8b413bec9ca3ad0ae8b3316606f6d8a",
+        "sha256": "f9188c638eb6da4209daa2a307121c42e3e9f1190bee201c8d930247f67af7c9"
+      },
+      "quality": {
+        "version": "0.1.0",
+        "commit": "216bf85",
+        "updated": "2026-11-10",
+        "notFor": [
+          "general editing such as tone changes, shortening, proofreading or fact-checking (use wordsmith)",
+          "for resumes and CVs (use recruiter-lens or applicant-kit)",
+          "for getting text past an AI detector"
+        ]
+      }
+    }
+  ],
+  "workflows": [
+    {
+      "id": "pour-over",
+      "number": 1,
+      "name": "Pour-over",
+      "title": "Build a skill and make it installable",
+      "slug": "build-a-skill",
+      "summary": "Go from an idea or a pile of prompts to a tested skill anyone can install: draft it, tune its trigger, then package and release it.",
+      "steps": [
+        {
+          "skills": [
+            "draft-skill",
+            "prompts-to-skill"
+          ]
+        },
+        {
+          "skills": [
+            "tune-skill"
+          ]
+        },
+        {
+          "skills": [
+            "prompts-to-skill-release"
+          ]
+        },
+        {
+          "skills": [
+            "skill-to-mod"
+          ],
+          "optional": true
+        }
+      ],
+      "note": "skill-launch runs the first steps as one chain; tune-skill-mod and skill-release-mod hold pushes and releases until steps two and three have run."
+    },
+    {
+      "id": "bloom",
+      "number": 2,
+      "name": "Bloom",
+      "title": "Get a repo, skill or plugin found",
+      "slug": "get-found",
+      "summary": "Make a repo, skill or plugin show up for what it does: fix how it is described and listed, publish it, then check every listing matches what is live.",
+      "steps": [
+        {
+          "skills": [
+            "findable"
+          ]
+        },
+        {
+          "skills": [
+            "publish-pipeline"
+          ]
+        },
+        {
+          "skills": [
+            "upstream-check"
+          ]
+        },
+        {
+          "skills": [
+            "get-indexed"
+          ],
+          "optional": true
+        }
+      ],
+      "note": "findable-polish and upstream-polish add the rewrite; get-indexed applies when publishing put new or changed pages live."
+    },
+    {
+      "id": "espresso",
+      "number": 3,
+      "name": "Espresso",
+      "title": "Decide whether a site is safe to launch",
+      "slug": "launch-safely",
+      "summary": "Get one honest answer to \"can we ship?\": check for exposed files, red-team the app, audit its speed, then let a release gate weigh the three verdicts.",
+      "steps": [
+        {
+          "skills": [
+            "web-preflight"
+          ]
+        },
+        {
+          "skills": [
+            "pre-ship-security-red-team"
+          ]
+        },
+        {
+          "skills": [
+            "pre-ship-performance-audit"
+          ]
+        },
+        {
+          "skills": [
+            "release-gate-chair",
+            "release-gate-ledger",
+            "release-gate-validator"
+          ]
+        }
+      ],
+      "note": "ship-sentinel holds git push and deploys until the gate has run."
+    },
+    {
+      "id": "cold-brew",
+      "number": 4,
+      "name": "Cold brew",
+      "title": "Grow organic search traffic",
+      "slug": "grow-search-traffic",
+      "summary": "Grow organic traffic on a site you own: crawl it for technical problems, give each query one page that wins it, then tighten the copy.",
+      "steps": [
+        {
+          "skills": [
+            "seo-crawl"
+          ]
+        },
+        {
+          "skills": [
+            "keyword-guard"
+          ]
+        },
+        {
+          "skills": [
+            "wordsmith"
+          ]
+        },
+        {
+          "skills": [
+            "pre-ship-performance-audit"
+          ],
+          "optional": true
+        },
+        {
+          "skills": [
+            "platform-content"
+          ],
+          "optional": true
+        },
+        {
+          "skills": [
+            "get-indexed"
+          ],
+          "optional": true
+        }
+      ],
+      "note": "seo-polish and keyword-resolver package parts of this route; seo-sweep runs it end to end, fixes the findings in the site's code and proves each fix with a re-crawl.",
+      "pairsWith": [
+        {
+          "name": "OpenSEO",
+          "url": "https://github.com/every-app/open-seo",
+          "for": "keyword volumes, rankings, backlinks, competitor and AI-visibility data, read by your agent through its MCP server.",
+          "needs": "Open source (MIT); needs a DataForSEO API key (pay per use) or an openseo.so account."
+        }
+      ]
+    },
+    {
+      "id": "french-press",
+      "number": 5,
+      "name": "French press",
+      "title": "Land a job",
+      "slug": "land-a-job",
+      "summary": "Run a job search without inventing credentials: see your resume the way recruiters screen it, write the tailored version, then manage the applications.",
+      "steps": [
+        {
+          "skills": [
+            "recruiter-lens"
+          ]
+        },
+        {
+          "skills": [
+            "applicant-kit"
+          ]
+        },
+        {
+          "skills": [
+            "application-pilot"
+          ]
+        },
+        {
+          "skills": [
+            "career-track"
+          ],
+          "optional": true
+        }
+      ],
+      "note": "It never submits an application for you."
+    },
+    {
+      "id": "cupping",
+      "number": 6,
+      "name": "Cupping",
+      "title": "Make a decision",
+      "slug": "make-a-decision",
+      "summary": "Turn a hard question into a decision you can defend: gather sourced evidence, read your own numbers, attack the options, then write the memo.",
+      "steps": [
+        {
+          "skills": [
+            "research-brief"
+          ]
+        },
+        {
+          "skills": [
+            "data-readout"
+          ],
+          "optional": true
+        },
+        {
+          "skills": [
+            "crash-test",
+            "do-better"
+          ]
+        },
+        {
+          "skills": [
+            "strategy-memo"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "slow-drip",
+      "number": 7,
+      "name": "Slow drip",
+      "title": "Learn a skill",
+      "slug": "learn-a-skill",
+      "summary": "Learn any topic from zero: get taught concept by concept, then build the practice system that makes it stick.",
+      "steps": [
+        {
+          "skills": [
+            "topic-primer"
+          ]
+        },
+        {
+          "skills": [
+            "study-system"
+          ]
+        },
+        {
+          "skills": [
+            "course-builder"
+          ],
+          "optional": true
+        }
+      ],
+      "note": "course-builder applies when the learner is a class or cohort, not one person."
+    },
+    {
+      "id": "nitro",
+      "number": 8,
+      "name": "Nitro",
+      "title": "Run cold outbound",
+      "slug": "run-cold-outbound",
+      "summary": "Send cold email that lands: check the lead list before it loads, size and protect the sending setup, then write the copy.",
+      "steps": [
+        {
+          "skills": [
+            "cold-email-list-gate"
+          ]
+        },
+        {
+          "skills": [
+            "cold-email-ops"
+          ]
+        },
+        {
+          "skills": [
+            "sales-copy"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "moka-pot",
+      "number": 9,
+      "name": "Moka pot",
+      "title": "Launch a one-person product",
+      "slug": "launch-a-product",
+      "summary": "Take a one-person product from plan to launch: pick the offer, build the site and code, write the policy pages, pass the release gate, then announce it.",
+      "steps": [
+        {
+          "skills": [
+            "solo-income-blueprint"
+          ]
+        },
+        {
+          "skills": [
+            "site-prompt"
+          ]
+        },
+        {
+          "skills": [
+            "production-code"
+          ]
+        },
+        {
+          "skills": [
+            "paper-trail"
+          ]
+        },
+        {
+          "skills": [
+            "release-gate-chair"
+          ]
+        },
+        {
+          "skills": [
+            "platform-content"
+          ]
+        }
+      ],
+      "note": "Step five is the whole of Brew 3 · Espresso; paper-trail gives the gate the policy pages to check."
+    },
+    {
+      "id": "descale",
+      "number": 10,
+      "name": "Descale",
+      "title": "Maintain the skill family",
+      "slug": "maintain-skills",
+      "summary": "Keep a family of skills healthy after release: tune what drifted, re-release what changed, and confirm every listing still matches.",
+      "steps": [
+        {
+          "skills": [
+            "tune-skill"
+          ]
+        },
+        {
+          "skills": [
+            "prompts-to-skill-release"
+          ],
+          "optional": true
+        },
+        {
+          "skills": [
+            "upstream-check"
+          ]
+        }
+      ],
+      "note": "The nightly health job opens the issue this starts from; a weekly scheduled session runs it and opens PRs. For one published skill at a time, tune-and-ship takes it from a tune and a fact check through to a release and a confirmed live page."
+    },
+    {
+      "id": "estate-roast",
+      "number": 11,
+      "name": "Estate roast",
+      "title": "Stand up or audit a skill estate",
+      "slug": "audit-a-skill-estate",
+      "summary": "Inventory and repair a whole collection of skills in one gated run, from repos and listings to the workflows that connect them.",
+      "steps": [
+        {
+          "skills": [
+            "skill-estate"
+          ]
+        }
+      ],
+      "note": "One run over the whole collection in eight gated phases; Brew 10 · Descale keeps it healthy afterwards."
+    },
+    {
+      "id": "dial-in",
+      "number": 12,
+      "name": "Dial-in",
+      "title": "Set up a coding agent for a repo",
+      "slug": "set-up-a-coding-agent",
+      "summary": "Get a coding agent that follows the repo's rules and stays inside its usage: write or prune the rules and guardrails, tier the models by role, then pick the effort each large task deserves.",
+      "steps": [
+        {
+          "skills": [
+            "portable-harness",
+            "harness-audit"
+          ]
+        },
+        {
+          "skills": [
+            "setup-claude-advisor"
+          ],
+          "optional": true
+        },
+        {
+          "skills": [
+            "diagnose-usage"
+          ],
+          "optional": true
+        },
+        {
+          "skills": [
+            "choose-effort"
+          ],
+          "optional": true
+        }
+      ],
+      "note": "Step one is one or the other: portable-harness writes a setup, harness-audit prunes one that has grown. The usage steps are for Claude Code."
+    }
+  ]
+}

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEO Check: what would stop this page ranking? | Skillsmith by Caffeinity</title>
+<meta name="description" content="Paste a page's source and see what would stop it ranking: noindex, title, meta description, canonical, H1, structured data and more, each with its evidence. Free, runs in your browser.">
+<link rel="canonical" href="https://skillsmith.tech/seo-check/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Skillsmith by Caffeinity">
+<meta property="og:title" content="What would stop this page ranking?">
+<meta property="og:description" content="Paste a page's source and see what would stop it ranking: noindex, title, meta description, canonical, H1, structured data and more, each with its evidence. Free, runs in your browser.">
+<meta property="og:url" content="https://skillsmith.tech/seo-check/">
+<meta name="twitter:card" content="summary">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="preload" href="/fonts/files/cY9AfjOCX1hbuyalUrK4397yjA.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/files/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/tool.css">
+</head>
+<body>
+
+<nav class="nav" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="/"><b>/</b>skillsmith <span class="brand-by">by caffeinity</span></a>
+    <div class="nav-links">
+      <a href="/skills/">Skills</a>
+      <a href="/workflows/">Workflows</a>
+      <a href="/checks/">Free tools</a>
+      <a href="/work/">Work with us</a>
+    </div>
+    <div class="nav-cta">
+      <a class="gh" href="https://github.com/arm-pz" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-accent btn-sm" href="/seo-crawl/">Get the skill</a>
+    </div>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="wrap">
+    <h1>What would stop this page ranking?</h1>
+    <p class="lead">Paste a page's source and SEO Check reads it the way a crawler does. Each finding quotes the tag it came from. A check it could not run is listed as not checked and is never counted as a pass.</p>
+  </div>
+</header>
+
+<section class="tone" id="check" aria-labelledby="check-title">
+  <div class="wrap">
+    <h2 id="check-title">Check a page.</h2>
+    <form class="checker" id="form" novalidate>
+      <div>
+        <label for="src">The page's source</label>
+        <textarea class="code" id="src" name="src" spellcheck="false" placeholder="Open the page, press Ctrl+U (Cmd+Option+U on a Mac), select all, copy, and paste here."></textarea>
+      </div>
+      <div>
+        <label for="url">The page's address (optional, used to check the canonical tag and draw the preview)</label>
+        <input class="code" type="text" id="url" name="url" placeholder="yoursite.com/pricing" autocomplete="off" autocapitalize="off" spellcheck="false">
+      </div>
+      <div class="row">
+        <button class="btn btn-accent" type="submit">Check the page</button>
+        <button type="button" class="link" id="sample">load an example with problems</button>
+      </div>
+      <p id="status" role="status" aria-live="polite"></p>
+    </form>
+    <div id="result" hidden></div>
+    <noscript><p class="sub">SEO Check needs JavaScript, because the check runs in your browser instead of on a server. The <a href="/seo-crawl/">seo-crawl</a> skill runs the same checks across a whole site.</p></noscript>
+  </div>
+</section>
+
+<section aria-labelledby="what-title">
+  <div class="wrap">
+    <h2 id="what-title">What it checks.</h2>
+    <p class="sub">The single-page checks from <a href="/seo-crawl/">seo-crawl</a>, the open skill that crawls a whole site. Thresholds such as 60 characters for a title are rules of thumb for what search results display, not limits set by any search engine.</p>
+    <ul class="checks">
+      <li><b>Indexability.</b> A noindex in the meta robots tag, which removes the page from search.</li>
+      <li><b>Title.</b> Present, single, and a length that will not be cut off.</li>
+      <li><b>Meta description.</b> Present and a useful length.</li>
+      <li><b>Canonical tag.</b> Present, single, absolute, and pointing at this page.</li>
+      <li><b>H1.</b> Exactly one.</li>
+      <li><b>Language and viewport.</b> Both set, so the page is read correctly on a phone.</li>
+      <li><b>Sharing tags.</b> Open Graph title, description and image.</li>
+      <li><b>Images.</b> Each has an alt attribute.</li>
+      <li><b>Structured data.</b> Every JSON-LD block parses.</li>
+      <li><b>Links.</b> Links with no real address, which a crawler cannot follow.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="tone" aria-labelledby="faq-title">
+  <div class="wrap">
+    <h2 id="faq-title">Before you paste.</h2>
+    <div class="faq">
+      <details>
+        <summary>Why paste the source instead of typing a URL?</summary>
+        <p>A web page is not allowed to read another site's pages, and this tool has no server to fetch them for you. The upside is that it works on pages nobody else can reach: a local build, a staging site, a page behind a login.</p>
+      </details>
+      <details>
+        <summary>Where does the source go?</summary>
+        <p>Nowhere. It is parsed in your browser as an inert document, so its scripts do not run and nothing in it is loaded or sent.</p>
+      </details>
+      <details>
+        <summary>My site is built with React or another JavaScript framework.</summary>
+        <p>Then the raw source may be an empty shell, and the tool will say so. Paste the rendered HTML instead: open the browser's developer tools, right-click the &lt;html&gt; element and copy its outer HTML.</p>
+      </details>
+      <details>
+        <summary>Will fixing these make my page rank?</summary>
+        <p>No tool can promise that. These are the technical faults that stop a good page being indexed or shown properly. Whether it ranks depends on the content, the competition and links, none of which is in the source.</p>
+      </details>
+      <details>
+        <summary>What does it leave out?</summary>
+        <p>Anything the server sends rather than the page: status codes, redirects, headers, robots.txt, the sitemap. It also has no rankings, clicks or backlinks, and it does not measure speed. The result lists these as not checked.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer class="roast">
+  <div class="wrap">
+    <div class="meta">
+      <span>Skillsmith by <a href="https://caffeinity.com/">Caffeinity</a>: open agent skills by Abdul Rahman P Z, and custom skills built to order.</span>
+      <a href="/checks/">All free tools</a>
+      <a href="https://github.com/arm-pz" target="_blank" rel="noopener">github.com/arm-pz</a>
+    </div>
+    <p class="kural"><span lang="ta">யாம் பெற்ற இன்பம் பெறுக இவ்வையகம்</span><span>“May this world attain the same bliss that I have attained.”</span></p>
+  </div>
+</footer>
+<script src="/assets/site.js" defer></script>
+<script src="/assets/tool.js" defer></script>
+<script src="/seo-check/seo.js" defer></script>
+</body>
+</html>
