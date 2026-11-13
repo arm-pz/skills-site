@@ -220,7 +220,7 @@
     <div class="faq">
       <details>
         <summary>Where does my SKILL.md go?</summary>
-        <p>Nowhere. The check is a script that runs in this page, and pasted text is never sent to us or stored. If you give a GitHub link, your browser asks GitHub's public API for the file directly. You can read the script at <a href="/check/check-core.js">/check/check-core.js</a>.</p>
+        <p>Nowhere. The check is a script that runs in this page, and pasted text is never sent to us or stored. If you give a GitHub link, your browser fetches the public file directly from GitHub, or from jsDelivr's public mirror of GitHub when GitHub's lookup limit is used up. You can read the script at <a href="/check/check-core.js">/check/check-core.js</a>.</p>
       </details>
       <details>
         <summary>Does a clean result mean my skill will trigger?</summary>
@@ -243,8 +243,8 @@
         <p>Yes. Paste the file into your order email with anything sensitive removed. We read it to do the work and do not publish or reuse it. We never need access to your repo, your systems or your API keys.</p>
       </details>
       <details>
-        <summary>GitHub says the rate limit is reached.</summary>
-        <p>GitHub allows 60 anonymous lookups an hour from one network address, and each check uses two. Paste the file instead; that path uses no network at all.</p>
+        <summary>What about GitHub's rate limit?</summary>
+        <p>GitHub allows 60 anonymous lookups an hour from one network address, which a shared office or mobile network can use up. When that happens the page finds the skill through jsDelivr's public mirror instead and the check carries on. One check is skipped on that route, whether the files the body points to exist, and the result says so.</p>
       </details>
     </div>
   </div>
