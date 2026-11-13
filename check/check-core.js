@@ -75,7 +75,7 @@
     out.name=name||null;
     if(!name){fail("no-name","frontmatter has no name");}
     else{
-      if(opts.folder==null)out.skipped.push("name matches its folder");
+      if(opts.folder==null)out.skipped.push("the name matches its folder");
       else if(name!==opts.folder)warn("name-folder","name '"+name+"' differs from folder '"+opts.folder+"'");
       if(!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(name))fail("name-shape","name '"+name+"' should be lowercase words joined by hyphens");
       if(Array.from(name).length>64)fail("name-long","name is longer than 64 characters");
@@ -110,7 +110,7 @@
     while((rm=refRe.exec(body)))refs[rm[1]]=true;
     var refList=Object.keys(refs).sort();
     if(refList.length){
-      if(!opts.exists)out.skipped.push("the "+refList.length+" file"+(refList.length===1?"":"s")+" the body points to exist");
+      if(!opts.exists)out.skipped.push("the "+refList.length+" file"+(refList.length===1?"":"s")+" the body points to "+(refList.length===1?"exists":"exist"));
       else refList.forEach(function(ref){
         if(!opts.exists(ref))warn("missing-ref","body points to "+ref+", which is not in this folder");
       });
