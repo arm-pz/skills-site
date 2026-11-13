@@ -1,0 +1,44 @@
+{
+  "skill": "site-prompt",
+  "date": "2026-11-13",
+  "target": "a one-file build prompt for a local business website",
+  "verdict": "PARTIAL",
+  "score": 4,
+  "summary": "The run wrote site-prompt.md, a Leeds bike shop prompt with a three-file site (index.html, styles.css, main.js) embedded in full except that main.js is cut off mid-line in the saved file, but it never built or ran the site and the prompt's own checks section says 'None'.",
+  "checks": [
+    {
+      "desc": "wrote site-prompt.md",
+      "ok": true,
+      "detail": "site-prompt.md"
+    },
+    {
+      "desc": "embeds file contents",
+      "ok": true,
+      "detail": "<!doctype html"
+    }
+  ],
+  "met": [
+    "Narrowed the broad topic to a concrete subject (Tannery Row Cycles, Kirkstall, Leeds) and derived a 'job tag' builder concept from it",
+    "Embedded the file contents in the prompt with a pinned plain HTML/CSS/JS stack and no dependencies (hard checks: wrote site-prompt.md, embeds file contents)",
+    "Labelled the invented name, address, phone, email, hours and prices as illustrative or concept details on the page and in the prompt, and said so in the final message"
+  ],
+  "missed": [
+    "Did not build and verify the site in a scratch folder before writing the prompt; Bash was denied, nothing was opened or run, and the final output admits the code is untested",
+    "The embedded files are not verbatim from a verified build, and main.js is truncated mid-statement ('e.preve') in the saved file, so the prompt's 'reproduce character for character' instruction cannot be satisfied",
+    "The prompt lists no checks that actually ran (it states 'None'), so the requirement to embed the checks that ran is not met",
+    "Prices and hours are labelled 'illustrative' rather than clearly marked as owner-to-confirm placeholders; they are written into the markup as concrete values the prompt forbids changing ('Do not change the illustrative prices, hours, phone number or email')"
+  ],
+  "skill_defects": [
+    "The skill depends on a build-and-verify step with Bash but has no fallback when Bash is denied, so it still emits a full prompt with unverified code instead of stopping or marking the prompt as a draft",
+    "Nothing in the skill guards against writing a truncated file; it should require a check that the last embedded file ends cleanly before finishing",
+    "The skill's template tells the model to forbid changes to invented business details, which conflicts with marking them as placeholders for the owner to replace"
+  ],
+  "cost_usd": 0.4,
+  "turns": 6,
+  "seconds": 128,
+  "tool_calls": 4,
+  "files": [
+    "site-prompt.md"
+  ],
+  "error": ""
+}

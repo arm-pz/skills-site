@@ -200,7 +200,8 @@ def files_text(folder, names, limit=30000):
             body = f.read_text()
         except UnicodeDecodeError:
             continue
-        body = body[: max(0, limit - used)]
+        if len(body) > limit - used:
+            body = body[: max(0, limit - used)] + "\n[... cut here by the harness, not by the run; the saved file is complete]"
         used += len(body)
         out.append(f"### {rel}\n{body}")
         if used >= limit:
@@ -291,7 +292,7 @@ def run(name, man, day):
                 shutil.copy(f, dest)
         written = files_text(proj, made, limit=400_000)
         checks = [run_check(c, output, transcript, proj, written, env) for c in scn.get("checks", [])]
-        verdict, jcost = judge(scn, output, tools, checks, truth, env, proj, written[:30000])
+        verdict, jcost = judge(scn, output, tools, checks, truth, env, proj, files_text(proj, made, limit=90000))
         cap(verdict, checks)
         art = out_dir / "files"
         for rel in made[:40]:
@@ -340,7 +341,7 @@ def rejudge(name, day):
         (home / ".claude").mkdir()
         shutil.copy(Path.home() / ".claude" / ".credentials.json", home / ".claude")
         verdict, jcost = judge(scn, output, tools, rec["checks"], truth, child_env(home), Path(tmp),
-                               written[:30000])
+                               files_text(out_dir / "files", rec["files"], limit=90000))
     cap(verdict, rec["checks"])
     rec.update(verdict=verdict["verdict"], score=verdict.get("score"), summary=verdict.get("summary", ""),
                met=verdict.get("met", []), missed=verdict.get("missed", []),
