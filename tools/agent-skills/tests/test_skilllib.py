@@ -236,6 +236,20 @@ class ManifestTest(unittest.TestCase):
             with self.assertRaises(skilllib.ManifestError):
                 skilllib.validate_manifest(data)
 
+    def test_only_one_workflow_can_lead(self):
+        flow = {"id": "pour-over", "number": 1, "name": "Pour-over", "title": "Demo",
+                "slug": "demo-flow", "summary": "Does it.", "steps": [{"skills": ["demo"]}]}
+        other = dict(flow, id="bloom", number=2, slug="other-flow")
+        data = self.manifest()
+        data["workflows"] = [dict(flow, lead=True), other]
+        skilllib.validate_manifest(data)
+        data["workflows"] = [dict(flow, lead=True), dict(other, lead=True)]
+        with self.assertRaises(skilllib.ManifestError):
+            skilllib.validate_manifest(data)
+        data["workflows"] = [dict(flow, lead="yes"), other]
+        with self.assertRaises(skilllib.ManifestError):
+            skilllib.validate_manifest(data)
+
     def test_workflow_steps_must_have_pages(self):
         data = self.manifest()
         data["workflows"] = [{"id": "pour-over", "number": 1, "name": "Pour-over", "title": "Demo",

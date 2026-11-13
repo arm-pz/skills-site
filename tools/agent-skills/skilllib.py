@@ -241,6 +241,8 @@ def validate_manifest(data):
         _req(f["slug"] not in slugs, f"{f['id']}: duplicate slug {f['slug']!r}")
         slugs.add(f["slug"])
         _req(isinstance(f.get("summary"), str) and f["summary"].strip(), f"{f['id']}: summary required")
+        # lead puts one workflow first, and open, on the homepage menu; its number does not change.
+        _req(f.get("lead") in (None, True), f"{f['id']}: lead must be true or left out")
         check_pairs(f.get("pairsWith"), f["id"])
         steps = f.get("steps")
         _req(isinstance(steps, list) and steps, f"{f['id']}: steps must be a non-empty list")
@@ -249,6 +251,7 @@ def validate_manifest(data):
             _req(isinstance(step_names, list) and step_names, f"{f['id']}: each step needs skills")
             for n in step_names:
                 _req(n in paged, f"{f['id']}: step skill {n!r} has no page on the site")
+    _req(sum(1 for f in flows if f.get("lead")) <= 1, "only one workflow can lead the homepage")
     return data
 
 
