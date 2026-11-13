@@ -1,0 +1,48 @@
+{
+  "skill": "keyword-guard",
+  "date": "2026-11-13",
+  "target": "skillsmith.tech (sitemap fallback, no Search Console)",
+  "verdict": "PARTIAL",
+  "score": 4,
+  "summary": "The run wrote keyword-map.md using the sitemap fallback and invented no volumes or rankings, but it audited only 13 of the sitemap's URLs (the run says 89, the ground truth has 92) and missed the tune-skill, web-preflight and release-gate overlap families the rubric expects.",
+  "checks": [
+    {
+      "desc": "wrote keyword-map.md",
+      "ok": true,
+      "detail": "keyword-map.md"
+    },
+    {
+      "desc": "names the sitemap fallback",
+      "ok": true,
+      "detail": "sitemap"
+    }
+  ],
+  "met": [
+    "Uses the sitemap fallback and says so explicitly: 'pre-GSC fallback (sitemap + title/H1 intent check)', with a note that there is no Search Console or ranking data.",
+    "Invents no search volumes or rankings, and labels every conflict as predicted rather than measured.",
+    "Assigns exactly one owner per query family with a reason and says what the non-owner pages should do instead, e.g. retitle /keyword-resolver/ and drop 'get found' from /findable/.",
+    "Is honest about its limits: it says only 13 pages were inspected, that the titles quoted may not be the real tags, and that Bash was denied."
+  ],
+  "missed": [
+    "Does not find the rubric's overlap groups: tune-skill / tune-skill-mod / tune-and-polish / tune-and-ship, web-preflight / web-preflight-mod, and the release-gate family (chair/ledger/validator/mod) are all absent from the map. It lists them as 'not audited'.",
+    "Audited only 13 pages, all in the SEO/findability cluster. The skill's cannibalization audit needs live titles and H1s for the whole sitemap. The bulk curl was attempted in Bash and, per the run, denied, and the run never fell back to other means such as WebFetch for the remaining families.",
+    "Does not treat the audit as a blocker before content changes. The map offers 'next steps' and a retitle order, and says nothing about gating content work until ownership is settled.",
+    "Reports 89 sitemap URLs, but the ground truth is 92 pages in the sitemap, so the count is wrong.",
+    "Quotes headings as titles. For example it never notes that /seo/ has a 69-char title, and it does not use the actual title tags, which are the primary signal. Its claim that the /seo-sweep/ title includes 'audit' is unverified.",
+    "Spends time on the SEO cluster, where the owner assignments are plausible but speculative, and reports no `-mod` vs skill collisions, which are the clearest title/H1 duplicates, e.g. 'Tune Skill Mod' vs 'tune-skill'."
+  ],
+  "skill_defects": [
+    "The skill's sitemap fallback does not require extracting <title> and H1 for every sitemap URL by a method that works when Bash or curl is unavailable, so the run stopped at 13 of the pages and left the rest 'not audited'.",
+    "The skill does not say to group pages by name stem (X, X-mod, X-polish, X-and-ship), a cheap way to find overlap families from the URL list alone without fetching.",
+    "The skill does not state that the ownership map is a gate that must be settled before any content or title edits, so the run presented it as advisory next steps.",
+    "The skill does not say that a partial audit should be flagged as incomplete in the verdict rather than shipping an ownership summary that covers only part of the site."
+  ],
+  "cost_usd": 0.25,
+  "turns": 21,
+  "seconds": 65,
+  "tool_calls": 19,
+  "files": [
+    "keyword-map.md"
+  ],
+  "error": ""
+}
