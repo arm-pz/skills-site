@@ -1,8 +1,8 @@
 # course-builder: real-world run, 2026-11-13
 
-**Verdict: PARTIAL** (7/10). The run wrote course.json for a 6-module, 12-hour SQL workshop with 6 outcomes and a two-criterion rubric, and the checker reported 0 FAIL and 0 WARN, but the transcript shows no fix cycle and gives little evidence for CS-data activities or per-outcome teaching.
+**Verdict: PARTIAL** (7/10). The run wrote a 6-module, 12-hour SQL course.json with 6 outcomes and a 2-criterion rubric, ran check_course.py once and reported 0 FAIL/0 WARN, but never fixed anything and left some coverage gaps.
 
-Target: a 6-week SQL evening workshop for customer success managers. Run headless in a clean project with only this skill installed (6 turns, 4 tool calls, 31 s, $0.11).
+Target: a 6-week SQL evening workshop for customer success managers. Run headless in a clean project with only this skill installed (6 turns, 4 tool calls, 31 s, $0.14).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -26,27 +26,27 @@ Design a 6-week evening workshop teaching SQL to 12 customer success managers (2
 
 ## Met
 
-- Outcomes use measurable verbs (write, summarise, join, translate, diagnose, build) with no 'understand' or 'know'
-- Six modules of 2 hours each total 12 hours, sequenced with each depending on the previous one
-- A rubric is included (correctness and explanation, two criteria)
-- Checker was run (python3 scripts/check_course.py) and reported 12 of 12 hours, 0 FAIL, 0 WARN
-- course.json exists and the checker passes
-- Every outcome appears in at least one module and in the final assessment, per the reported mapping
-- Assessments reference CS data (accounts, usage, tickets, renewal risk)
+- Outcomes use measurable verbs (write, calculate, combine, translate, diagnose, build); none use 'understand' or 'know'
+- Linear module sequence M1-M6 with prerequisites, 2 hours each, totalling 12 hours
+- Every outcome appears in a module and in an assessment; O4 is assessed in M2 and O1-O3 are assessed in M1-M3
+- Activities and data use CS contexts: accounts, tickets, usage, renewals, health scores, renewal risk
+- Includes a rubric with Correctness and Explanation criteria and three levels each
+- Hard checks satisfied: course.json exists and check_course.py was run and reported passing
 
 ## Missed
 
-- Checker was run only once, so there was no demonstration of finding and fixing issues; the 'fixes what it finds' item is satisfied only vacuously
-- Churn data is not explicitly used; the activities use accounts, usage, tickets and renewal risk, and the summary does not show learning activities for each module, only assessment evidence
-- Rubric is thin: only two criteria, and the summary says nothing about levels beyond 'what the work shows'
-- The practice dataset was not built, so the CS-data activities have no concrete data behind them
-- The final summary lists O1 through O6 and the assessment mapping, but the transcript does not show whether each module's teaching activities were written into the JSON, only that outcomes map to modules
+- The checker was run once and came back clean, so there was no 'fix what it finds' step; the run only shows a pass, not a fix
+- The rubric is thin: only two criteria, with no scoring weights, and levels are unlabeled (no names or points); it does not cover outcomes like Looker mapping (O4) or debugging (O5)
+- The M6 capstone lists O1, O2, O3 and O6 but its assessment covers only O6, and the rubric does not score O1-O3 directly
+- Some outcomes are taught but assessed only in the final or thinly: O5 is covered by M4's assessment, but the rubric does not grade it, and O4 depends on a short note
+- The practice dataset is referenced throughout but was not built; the final message admits this and defers it
+- The final message states the dialect and homework as open questions, leaving key design inputs assumed rather than set
 
 ## Defects to fix in the skill
 
-- The skill does not require a second checker pass or a recorded fix log, so a clean first run counts as 'fixed what it found'
-- The skill does not require the rubric to have multiple levels or a minimum number of criteria
-- The skill does not prompt for key unknowns (dialect, homework) before drafting, so these became assumptions
+- The skill does not require rubric criteria to map to each outcome, so the rubric can omit O1-O5 while the checker still passes
+- The checker passes a module that lists outcomes in its teaching but assesses only a subset, so assessment gaps within a module are not flagged
+- Nothing in the skill prompts building or specifying the practice dataset, even though every activity depends on it
 
 ## What it did
 

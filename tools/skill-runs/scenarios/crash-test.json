@@ -9,5 +9,6 @@
     "Finds the real risks of dropping the cron (missed webhooks, repos outside the org, renames/deletions, token needed in every repo, deploy-pending check)",
     "Ends with a clear recommendation (e.g. add dispatch, keep a slower cron as backstop) and what to verify first",
     "Invents no file contents"
-  ]
+  ],
+  "skip": "the owner asked not to run this skill (cost)"
 }

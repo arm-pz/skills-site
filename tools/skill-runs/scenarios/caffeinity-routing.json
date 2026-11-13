@@ -1,0 +1,22 @@
+{
+  "skill": "caffeinity-routing",
+  "target": "a multi-step goal across the catalog",
+  "prompt": "I'm launching a small SaaS web app next week. I want it safe to ship, fast, and found on Google afterwards. Which of your skills do I run, in what order, and what does each hand the next?",
+  "checks": [
+    {
+      "desc": "routes through the release gate lanes",
+      "re": "web-preflight"
+    },
+    {
+      "desc": "includes an indexing step",
+      "re": "(get-indexed|seo-crawl|seo-sweep)"
+    }
+  ],
+  "rubric": [
+    "Picks real catalog skills only, in a sensible order (ship checks before launch, SEO after)",
+    "Covers exposure (web-preflight), security (pre-ship-security-red-team), performance (pre-ship-performance-audit) or the release-gate chair that runs all three",
+    "Covers being found (seo-crawl/seo-sweep, get-indexed, findable or keyword-guard)",
+    "States what each step hands the next",
+    "Says which steps need the user's go-ahead"
+  ]
+}

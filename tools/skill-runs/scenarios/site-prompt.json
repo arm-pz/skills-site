@@ -1,0 +1,24 @@
+{
+  "skill": "site-prompt",
+  "target": "a one-file build prompt for a local business website",
+  "prompt": "Write me the paste-and-build prompt for a website for an independent bike repair shop in Leeds (opening hours, services and prices, how to book). Save it as site-prompt.md.",
+  "checks": [
+    {
+      "desc": "wrote site-prompt.md",
+      "file": "site-prompt.md"
+    },
+    {
+      "desc": "embeds file contents",
+      "re": "<!doctype html|<html",
+      "in": "file:site-prompt.md"
+    }
+  ],
+  "max_turns": 100,
+  "budget_usd": 8,
+  "rubric": [
+    "Narrows the topic to a concrete subject and derives the concept from it",
+    "Builds and verifies the site in a scratch folder before writing the prompt",
+    "Embeds every file verbatim with a pinned stack and the checks that actually ran",
+    "Marks invented business details (prices, hours) as placeholders for the owner rather than facts"
+  ]
+}

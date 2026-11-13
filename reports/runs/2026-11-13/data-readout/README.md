@@ -1,8 +1,8 @@
 # data-readout: real-world run, 2026-11-13
 
-**Verdict: PASS** (9/10). The run found B's zero orders on 2026-10-09 on both devices, excluded that day, and reported B beating A overall (4.25% vs 3.89%, +9.4%, p=0.0001), with mobile +22.8% (p<0.0001) and desktop flat (−0.15 pts, p=0.40), all matching ground truth.
+**Verdict: PASS** (9/10). The run found B's zero orders on 2026-10-09 on both devices (4 rows, 8,000 sessions), dropped that day from both arms, and reported B beating A at 4.25% vs 3.89% (p=0.0001), with mobile up 3.01% to 3.70% (p<0.0001) and desktop flat (p=0.40).
 
-Target: a 14-day checkout A/B test export (182,000 sessions, two devices) with one planted tracking outage. Run headless in a clean project with only this skill installed (6 turns, 4 tool calls, 37 s, $0.12).
+Target: a 14-day checkout A/B test export (182,000 sessions, two devices) with one planted tracking outage. Run headless in a clean project with only this skill installed (6 turns, 4 tool calls, 37 s, $0.15).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -26,33 +26,23 @@ We ran a checkout redesign test for two weeks. Export is in checkout_test.csv (v
 
 ## Met
 
-- Identifies B's zero orders on 2026-10-09 on both devices (4 rows, 8,000 sessions, $0 revenue) and treats it as a likely tracking or deploy fault, labelling the cause as inferred and unconfirmed
-- Recomputes without the faulty day: A 3.89% vs B 4.25%, +9.4% relative, p=0.0001, matching the ground truth of z 3.80 and p 0.0001
-- Splits by device: mobile 3.01% to 3.70% (+22.8%, p<0.0001) and desktop 5.29% to 5.14% (p=0.40), matching the ground truth
-- Recommends not killing B, shipping on mobile with a desktop holdout, investigating the 10-09 outage and extending the desktop test; the gaps section lists what it did not compute (revenue-per-session significance, outage cause, novelty and day-of-week effects)
-- Stated numbers match the ground truth or derive from the file (1,923 vs 1,566 mobile orders, 84,500 and 52,000 sessions per arm, 91,000 per arm overall); the pooled all-days figures of 3.89% vs 3.95% and p=0.48 also match
+- Identifies B's zero orders on 2026-10-09 on both mobile and desktop and treats it as a probable tracking or deploy fault, not real behaviour
+- Recomputes without 10-09 for both arms and reports B beating A overall (+0.37 pts, 95% CI +0.18 to +0.55, p=0.0001), and shows the pooled flat result (p=0.48) as the source of the PM's claim
+- Splits by device: mobile +0.69 pts (+22.8% relative, p<0.0001) and desktop −0.15 pts (CI −0.49 to +0.19, p=0.40), so desktop is not significant
+- Recommends not killing B, shipping on mobile with a desktop holdout, investigating the 10-09 cause and extending desktop testing, and conditions the call on whether the 10-09 zeros were a real B failure
+- Lists what it could not compute or verify: cause of the outage, randomisation and SRM, primary metric, revenue-per-session significance, novelty and day-of-week effects
+- Figures shown are derived from the file (56 rows, 91,000 sessions per arm, 84,500 after exclusion); no invented facts
 
 ## Missed
 
-- Does not report the all-days desktop result (B −9.4%, p=0.0026) that appears as significant harm before the outage is removed; it only reports the cleaned desktop figure
-- Several derived figures (revenue per session of $1.51 vs $1.24, AOV, "B above A on all 13 clean days", about $64 vs $41 per order) are not in the ground truth and cannot be verified from the transcript excerpt, though they are plausibly computed from the file
+- Ground-truth significance figure could not be confirmed from the transcript, so the closeness of the p-values to it is unverified
+- The claim that B mobile beats A mobile on all 13 clean days and the AOV figures are stated, but the visible tool call is truncated, so they cannot be traced to a computation
+- Pooled AOV is described as a mix effect without a shown check
 
 ## Defects to fix in the skill
 
-- The skill does not require stating the all-days per-device numbers alongside the cleaned ones, so the apparent desktop harm created by the outage goes unmentioned
-- The 'ship on mobile' recommendation is stated as firm in the summary while the outage cause is still unconfirmed; the skill could require the recommendation to be conditional on the fault being confirmed
-
-## Ground truth
-
-```
-all      all days    A 0.0388 (3535/91000)  B 0.0395 (3594/91000)  lift +1.7%  z 0.71  p 0.4759
-all      excl day 9  A 0.0389 (3285/84500)  B 0.0425 (3594/84500)  lift +9.4%  z 3.80  p 0.0001
-mobile   all days    A 0.0302 (1690/56000)  B 0.0343 (1923/56000)  lift +13.8%  z 3.94  p 0.0001
-mobile   excl day 9  A 0.0301 (1566/52000)  B 0.0370 (1923/52000)  lift +22.8%  z 6.15  p 0.0000
-desktop  all days    A 0.0527 (1845/35000)  B 0.0477 (1671/35000)  lift -9.4%  z -3.01  p 0.0026
-desktop  excl day 9  A 0.0529 (1719/32500)  B 0.0514 (1671/32500)  lift -2.8%  z -0.85  p 0.3971
-day 9, variant B orders: ['0', '0'] (tracking outage planted)
-```
+- The skill does not require a sensitivity check on the exclusion rule (e.g. imputing the missing day) or an explicit sample-ratio check, so these end up only as caveats
+- It offers no guidance on running a significance test for revenue per session, leaving point estimates only
 
 ## What it did
 

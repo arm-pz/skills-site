@@ -4,27 +4,29 @@
   "target": "a large unattended refactor in Claude Code",
   "verdict": "PARTIAL",
   "score": 6,
-  "summary": "The agent asked two clarifying questions, then in the same turn recommended `high` effort, mostly serial execution, batches of 10-15 files, and `/usage` checkpoints, but it did not wait for the answers and the plan is hedged.",
+  "summary": "The skill asked two clarifying questions, then in the same turn recommended `/effort high`, mostly serial execution, batches of 10-15 files and `/usage` checks, but it never waited for the answers and its fallback and permission advice is vague.",
   "checks": [],
   "met": [
     "Asked about stakes (cost of being wrong) and usage appetite before recommending, and noted the task is unattended",
-    "Recommended a specific level (`high`) and a fan-out stance (serial or at most a few agents, split by directory), tied to correctness stakes and the 60% remaining weekly budget",
-    "Said how to set it: `/effort high` typed by the user or `claude --effort high`, with `/effort auto` to undo",
-    "Said when to run `/usage` (after the first batch and at the end) and what to do if it runs hot (drop to `medium` for mechanical files)",
-    "Mentioned only real Claude Code features (`/effort`, `/usage`, subagents, permission modes, `claude --effort`)"
+    "Recommended a specific level (`high`, escalating to `xhigh` for hard files only) and said to keep it serial or use few subagents, justified by the stakes, the 60% of weekly limit remaining, and that subagents inherit session effort",
+    "Said exactly how to set it: type `/effort high` or launch `claude --effort high`, with `/effort auto` to undo",
+    "Said when to run /usage (after the first batch and at the end) and what to do if it runs hot (drop to `medium` for mechanical files)",
+    "Features named (`/effort`, `/usage`, `claude --effort`, subagent effort inheritance, permission modes) are plausible real Claude Code features, and the output admits it hasn't verified which levels the model supports"
   ],
   "missed": [
-    "Asked its questions and gave a full recommendation in the same turn, so the recommendation did not follow the user's answers, and the user had already given stakes and budget in the follow-up",
-    "Contradictory framing: it says it will give the `/effort` command once the user answers, then gives it anyway, and earlier text leans toward `medium` while the final recommendation is `high`",
-    "The `/usage` guidance is vague: 'more than about 1/10 of what you can afford' is not a usable threshold for someone unattended, and it does not say what to do if usage runs hot while the user is away, such as a stop condition",
-    "Did not recommend reading the `/effort` confirmation or model support as a firm step, only a hedge ('I haven't checked which levels your model offers')"
+    "Did not wait for the user's answer: it asked two questions and then gave a full recommendation in the same turn, so the ask-then-recommend sequence was not respected. It also re-asked about stakes after the user had signaled correctness mattered (the scenario's follow-up supplied that)",
+    "The 'runs hot' guidance is thin: the 'about 1/10 of what you can afford' threshold is arbitrary and it gives no concrete action such as pausing, stopping the run, or shrinking batch size. It also doesn't explain how to monitor usage while the user is away in meetings",
+    "Permission-mode advice is vague ('pick a permission mode that lets it run edits and tests') and doesn't name a specific mode or setting for the unattended run",
+    "Output is long and repeats itself (fan-out, git and checkpoint advice each appear twice), which dilutes the answer",
+    "Spent effort on the 'no git repo' environment detail that the user never raised, and stated the working directory path, which was irrelevant to the question"
   ],
   "skill_defects": [
-    "The skill does not distinguish between asking questions and recommending: it lets the agent do both in one turn, producing a response that asks for input and then ignores the need for it",
-    "No guidance on unattended runs for what to do if the budget runs out mid-run, such as a pause or stop rule, so the `/usage` advice is only a one-time checkpoint",
-    "The skill does not tell the agent to use stakes and budget already stated in the user's message instead of re-asking"
+    "The skill should ask its clarifying questions and stop, or if the answers are already in the prompt or follow-up, skip the questions entirely; it currently does both in one turn",
+    "It should give a concrete unattended-run recipe (a named permission mode, a hard stop condition and a usage-check trigger that works while the user is away) instead of generic advice",
+    "It should require concise output without repeating the same points in the pre-answer and recommendation sections",
+    "It should tell the model not to bring in unrelated environment observations (e.g. working directory path) unless they affect the recommendation"
   ],
-  "cost_usd": 0.12,
+  "cost_usd": 0.15,
   "turns": 4,
   "seconds": 22,
   "tool_calls": 1,

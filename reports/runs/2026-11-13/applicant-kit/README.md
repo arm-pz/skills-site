@@ -1,8 +1,8 @@
 # applicant-kit: real-world run, 2026-11-13
 
-**Verdict: PARTIAL** (6/10). The run read the three files and wrote resume-ledgerline.md with the real figures (64 accounts, ~£2.1M ARR, churn 14%→9%, onboarding 19→11 days), but the transcript does not show the file contents, so several rubric items rest only on the agent's own description.
+**Verdict: PARTIAL** (7/10). The run wrote resume-ledgerline.md with the real figures (64 accounts, about £2.1M ARR, churn 14%→9%, onboarding 19→11 days), a caveated churn bullet, an honest carer/SQL-course entry and no management claim, but the new summary says "works in SQL and Gainsight" and states the churn drop without the pricing caveat.
 
-Target: a synthetic CSM resume, the candidate's own fact notes, and a Senior CSM job ad. Run headless in a clean project with only this skill installed (5 turns, 4 tool calls, 16 s, $0.08).
+Target: a synthetic CSM resume, the candidate's own fact notes, and a Senior CSM job ad. Run headless in a clean project with only this skill installed (5 turns, 4 tool calls, 16 s, $0.11).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -28,26 +28,27 @@ Tailor my resume (resume.md) to job.md. My real numbers are in notes.md; use onl
 
 ## Met
 
-- Wrote resume-ledgerline.md after reading resume.md, job.md and notes.md
-- Final summary reports the real numbers: 64 accounts, ~£2.1M ARR, churn 14%→9%, 19→11 days
-- Says the churn bullet credits the pricing change as a contributor, so the drop is not over-claimed
-- Mentoring is described as mentoring only and no people management is claimed
-- SQL kept as basic
-- Gap of Jan 2021 – Feb 2022 added as carer break with SQL course
-- Flags missing data (no expansion figure, no health scores, no payments experience) instead of inventing it
-- Summary replaced with a number-based one
+- Wrote resume-ledgerline.md using only the real figures (64 accounts, ~£2.1M ARR, churn 14%→9%, onboarding 19→11 days)
+- The Brightfold churn bullet notes the Q2 FY23 pricing change also contributed
+- Mentoring is worded as mentoring ("Mentored two new CSMs"), with no people-management claim
+- The 2021 gap appears as an explicit career break as a full-time carer, with the online SQL course
+- The Skills section keeps "SQL (basic)" and leads with Gainsight, Looker and SQL
+- Looker is tied to the onboarding dashboard, and onboarding and time-to-first-invoice sit under the onboarding bullet
+- The generic summary was replaced with a specific one built on numbers
+- No employer, title, date or number appears to have been invented
 
 ## Missed
 
-- The resume file content is not visible in the transcript, so the claims about the placement of keywords (Gainsight, Looker, SQL, onboarding, time-to-value, retention) and the absence of invented facts cannot be verified; only the agent's description is available
-- The agent states it put Gainsight first in skills while also saying nothing describes how it was used, so it is unclear whether Gainsight is true to place as a headline keyword; the summary mentions Gainsight without notes support
-- The reply uses 'time-to-first-invoice' in describing onboarding, and it is not confirmed that this matches the term in notes.md
-- No verification step (re-read of the output file) was performed after the write
+- The summary says "works in SQL and Gainsight", which overstates basic/learning SQL. The run's own notes admit nothing describes how Gainsight was used, so the keyword is placed where it may not be true.
+- The summary states churn fell from 14% to 9% with no mention of the shared pricing-change cause; only the bullet carries that caveat.
+- The summary says "3+ years", which the run did not verify; it was derived rather than taken from notes.md.
+- The weak "Worked with the product team on feature development" bullet was kept unchanged, not rewritten as action + result.
 
 ## Defects to fix in the skill
 
-- The skill has no step to re-read the saved file and check every number and claim against notes.md before reporting
-- The skill does not tell the agent to limit tool-sourced keywords like Gainsight to places the notes support, so the summary mentions a tool with no backing evidence of use
+- The skill does not tell the agent to carry over-claim caveats (pricing-change attribution, SQL level) into the summary as well as the bullets.
+- The skill does not require keyword placement to be checked against notes.md evidence, so Gainsight was added to the summary without support.
+- The skill gives no rule for vague original bullets that have no supporting facts (keep, flag or drop).
 
 ## What it did
 

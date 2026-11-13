@@ -1,0 +1,28 @@
+{
+  "skill": "get-indexed",
+  "install": [
+    "get-indexed"
+  ],
+  "target": "skillsmith.tech (plan only, nothing submitted)",
+  "allow": [
+    "Bash(node:*)"
+  ],
+  "prompt": "Get the new and changed pages on https://skillsmith.tech indexed. Plan only for now: show me what would be sent where and what I still have to do by hand. Do not submit anything.",
+  "checks": [
+    {
+      "desc": "did not submit",
+      "re": "get-indexed\\.mjs[^\\n\"]*--submit",
+      "in": "transcript",
+      "expect": false
+    }
+  ],
+  "ground_truth": "echo \"sitemap URLs: $(curl -s https://skillsmith.tech/sitemap.xml | grep -c '<loc>')\"",
+  "max_turns": 40,
+  "budget_usd": 3,
+  "rubric": [
+    "Runs the bundled script in plan mode against the real sitemap and reports how many URLs it would send to IndexNow",
+    "Explains what is needed to submit (IndexNow key served at /<key>.txt, Search Console access) without inventing a key",
+    "Lists the manual steps that still need a person",
+    "Sends nothing"
+  ]
+}

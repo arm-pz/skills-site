@@ -1,0 +1,25 @@
+{
+  "skill": "keyword-resolver",
+  "install": [
+    "keyword-resolver",
+    "keyword-guard",
+    "wordsmith"
+  ],
+  "target": "skillsmith.tech (sitemap fallback, no Search Console)",
+  "prompt": "The tune-* pages on https://skillsmith.tech (/tune-skill/, /tune-skill-mod/, /tune-and-polish/, /tune-and-ship/) look like they fight for the same searches. Resolve it: decide who owns what, then rewrite their titles, H1s and meta descriptions. Write it to resolution.md; don't change the site.",
+  "checks": [
+    {
+      "desc": "wrote resolution.md",
+      "file": "resolution.md"
+    }
+  ],
+  "ground_truth": "node \"$SKILL_RUNS/truth_seo.mjs\" https://skillsmith.tech",
+  "max_turns": 80,
+  "budget_usd": 6,
+  "rubric": [
+    "Settles the ownership map before rewriting anything (the audit blocks)",
+    "One distinct query per page, grounded in what each page's skill actually does",
+    "Rewritten titles ≤60 chars, descriptions ≤160, H1s distinct, using the live current text as the before",
+    "Invents no search data; names the sitemap fallback"
+  ]
+}

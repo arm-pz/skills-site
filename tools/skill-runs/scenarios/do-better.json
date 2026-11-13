@@ -16,5 +16,6 @@
     "Runs the quick bracket (several agents with different strategies, attack/defend/judge) rather than a single rewrite",
     "Final function accepts all valid formats incl. lowercase, missing space, GIR 0AA, and rejects the invalid ones",
     "Saves the result to postcode.py and states its limits honestly"
-  ]
+  ],
+  "skip": "the owner asked not to run this skill (cost)"
 }

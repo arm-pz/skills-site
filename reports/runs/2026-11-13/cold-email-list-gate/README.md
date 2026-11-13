@@ -1,8 +1,8 @@
 # cold-email-list-gate: real-world run, 2026-11-13
 
-**Verdict: PARTIAL** (7/10). The run returned HOLD after checking all 10 sample rows, correctly finding 4 on ICP and 6 off, with a fail pattern and re-run condition; it misattributed the Ravelin failure, named an unsupported suppression target (Brightfold), and declined to compare provider B on the same criteria.
+**Verdict: PARTIAL** (7/10). Returned HOLD on provider A's 10-row sample with 4 rows on ICP and 6 off, each with a reason, plus a re-run condition and a note on provider B; it also named a suppression row ('Brightfold') that is not in the sample and did not score B against the same criteria.
 
-Target: a 10-row provider sample of a 2,400-row cold-email list against a written ICP. Run headless in a clean project with only this skill installed (7 turns, 5 tool calls, 25 s, $0.09).
+Target: a 10-row provider sample of a 2,400-row cold-email list against a written ICP. Run headless in a clean project with only this skill installed (7 turns, 5 tool calls, 25 s, $0.11).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -25,25 +25,24 @@ We're about to load a 2,400-lead list from provider A. ICP is in icp.md, the 10-
 
 ## Met
 
-- Checked all 10 rows in a table against size, title, mailbox and exclusions
-- Identified exactly 4 on ICP (Ledgerline, Quillbook, Stackwise, Penny Lane) and 6 off, with the right reason for Fernway, Paystack, Tallyhub, Docket and Brightline
-- Returned HOLD (hard check met)
-- Gave a fail pattern (wrong filter, mailbox quality secondary) and a concrete re-run condition (fresh random 10-row sample after fix, re-quote the count)
-- Provider B: noted 8/10, said it is 2 wrong and also HOLD by the same rule, better than A, and asked for actual rows before treating it as a fallback
+- Checked all 10 rows row by row against size, title, mailbox and exclusions
+- Found exactly 4 on ICP (Ledgerline, Quillbook, Stackwise, Penny Lane) and 6 off, with the correct reason for each (Fernway seniority, Paystack info@, Tallyhub customer, Docket 2,600, Brightline recruitment agency, Ravelin gmail plus CX title)
+- Returned HOLD, as the hard check requires
+- Gave the fail pattern (filters not applied, mailbox quality secondary) and a concrete re-run condition (fresh random 10-row sample after the fix, re-quote the 2,400 count)
+- Mentioned provider B's 8/10 and said it implies better than A but still HOLD by the 2-wrong rule
 
 ## Missed
 
-- Ravelin was labelled a gmail failure with a title note ('VP Customer Experience' off-spec); the rubric expects CX not CS title as a distinct reason. This was only mentioned in passing and was not counted as a title failure, and the 'Size fit' and 'Mailbox valid' columns do not capture it.
-- Required change says 'Suppress Brightfold and Tallyhub'; Brightfold is not a row in the sample (the excluded agency was Brightline Talent), which may be an invented or misnamed entry.
-- Provider B was not compared on the same criteria; the run explicitly declined to score it and only restated the README summary, so the implication is thin.
-- Cited a 'Will Breton X article of 18 October 2026' as the source of the benchmark; the transcript shows no read that supports this beyond the skill's reference file, so provenance is unverified.
-- Said the fail pattern is 'wrong filter' while 4 of the 6 failures are individual-row issues; the claim about what the provider's query does ('doesn't enforce the 50-500 band') is inferred beyond the evidence, including a size floor failure that no row demonstrated.
+- Required-change list says to suppress 'Brightfold', which is not among the 10 sample rows (Brightline Talent is the agency); this is an invented or garbled name
+- Provider B was not compared on the same criteria; the response declined to score it and only restated the README summary, which partly meets the item
+- Cites 'Will Breton's X article of 18 October 2026' as the source of the threshold; the transcript shows only a read of gate-rules.md, so the attribution could not be verified here and may be invented
+- Added unsupported assertions such as 'provider A's query doesn't enforce the 50-500 size band' as a cause, which is inference stated as fact
 
 ## Defects to fix in the skill
 
-- The skill does not require comparing the fallback provider on the same criteria or stating a clear implication when only a summary is available, so the run stopped at 'request the rows'.
-- The skill's output template has no title-fit column or per-row note guidance that forces every failing reason to be listed, so secondary failures like Ravelin's CX title are buried.
-- The skill does not instruct the agent to take exclusion names only from the sample/ICP files, which allowed an unsupported name (Brightfold) into the required changes.
+- The skill does not tell the agent to stick to named rows from the sample when listing required changes, which allowed the stray 'Brightfold' name
+- The skill gives no guidance on how to compare provider B when only a summary is available, so the agent defaulted to not scoring it
+- The skill's output embeds a source attribution and benchmark citation without making clear it comes from the reference file, inviting unverifiable claims
 
 ## What it did
 

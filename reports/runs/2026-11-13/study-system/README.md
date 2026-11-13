@@ -1,8 +1,8 @@
 # study-system: real-world run, 2026-11-13
 
-**Verdict: PARTIAL** (7/10). The run wrote a study-system.md with a 5-stage gated roadmap, a weekly 5-hour block (60-min live session, two 45-min recorded speaking drills, two 45-min listening blocks, five 10-min card reviews), a prepaid-tutor commitment mechanism, and a recorded 20-minute conversation as the final check; the transcript shows only the chat summary, not the file contents, so several rubric details cannot be confirmed.
+**Verdict: PARTIAL** (7/10). The run wrote a 26-week, 5 h/week system with five gated stages, a 60/90/90/50-minute weekly routine, an expanding-interval card schedule and a prepaid weekly tutor slot, but it uses the Spanish transfer only thinly and gives no concrete false-friend or EP-versus-Brazilian pronunciation content.
 
-Target: a 6-month conversational-Portuguese plan for a busy adult. Run headless in a clean project with only this skill installed (5 turns, 3 tool calls, 73 s, $0.18).
+Target: a 6-month conversational-Portuguese plan for a busy adult. Run headless in a clean project with only this skill installed (5 turns, 3 tool calls, 73 s, $0.22).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -24,25 +24,26 @@ I want to hold a 20-minute conversation in European Portuguese with my partner's
 
 ## Met
 
-- Roadmap in five stages that each end in a pass/fail conversation task, fitting 5 hours/week (about 130 hours over the period, 90 at 3.5 hours/week)
-- Weekly structure includes speaking practice: a live tutor session and two recorded speaking drills
-- Quitting pattern addressed with concrete mechanisms: prepaid booked weekly session in week 1, 10-minute minimum-day fallback, restart at the current week after a gap, no streak
-- Measurable check for the goal: recorded unscripted 20-minute conversation by mid-May 2027, with stage gates and thresholds such as understood 8 of 10 times
-- Honest about unknowns: reachability marked unknown, no resources invented, thresholds flagged as starting guesses
+- Roadmap fits the constraints: 5 stages over weeks 1–26 with observable gates, and a weekly routine totalling about 4 h 50 min.
+- Deliberate practice with speaking: a weekly 60-min live session, two 45-min recorded speaking drills against a checklist, and an error log (one line per session) that doubles as the gap audit; the 'Open gaps' section lists further gaps to test.
+- Spaced repetition schedule is explicit: a 1d/3d/1wk/2wk/4wk/8wk ladder, an adjustment rule, a load cap and 10 new cards a day at most.
+- Quitting pattern is addressed with concrete mechanisms: a prepaid weekly tutor slot, a 10-minute floor day, a no-catch-up restart rule after a 3+ day gap, and logging sessions done and gates passed with no streaks.
+- Measurable 20-minute check: a recorded unscripted 20-minute conversation in weeks 20–26 with counted language switches, plus dress rehearsals and a fallback of two 10-minute conversations.
+- Nothing invented: the 130 h / 90 h figures are labelled as arithmetic, gate thresholds are labelled as guesses, and no tutor or app is named.
 
 ## Missed
 
-- Spanish transfer is only summarized as 'head start on vocabulary and grammar' with pronunciation and Spanish leakage as the watch item; the final message names no specific false friends and no European vs Brazilian pronunciation details, so this item is only partly shown
-- Spaced-repetition schedule is shown only as five 10-minute daily card reviews; no interval schedule (e.g., expanding intervals) appears in the summary
-- The way to audit gaps is not clearly shown beyond the week-1 baseline and gate failures pointing to drills; no explicit recurring gap-audit routine is described
-- Decomposition into minimum viable components is referenced (component map in section 3) but not visibly demonstrated in the output
-- The final answer does not verify the file's contents; the transcript shows only a Write call, so claims about the file are unverified
+- Spanish transfer is used only generically ('reuse vocab and grammar frame', 'Spanish autopilot'); no actual false friends are listed and no Spanish-to-Portuguese mappings are given.
+- EP vs Brazilian pronunciation is mentioned only as a warning to check that audio and tutors are EP; no concrete EP features beyond a one-line 'vowel reduction, nasal vowels, sibilants'.
+- The 20-minute threshold for language switches is left for the learner to set in week 20, so the final gate is not fully quantified.
+- The week-by-week roadmap is stage-level (weeks 2–6, 7–12, etc.), not week-by-week, and the system omits a stage-4 ramp such as 5/10/15-minute conversation lengths.
+- The anti-quit design rests on external dependencies (tutor, partner, family) with no fallback if the tutor slot lapses, other than the floor day.
 
 ## Defects to fix in the skill
 
-- The skill does not require an explicit spaced-repetition interval schedule or a recurring gap-audit routine, so these can be reduced to 'card reviews' and gate failures
-- The skill does not require using the learner's prior language to name specific transfer pitfalls (false friends, pronunciation contrasts), so the output stays generic
-- The skill's final-summary step does not require the output to show the key components the rubric checks, which makes verification from the response alone hard
+- The skill's design reference pushes generic structure, so the output has no step requiring a concrete cross-language transfer table (false friends, sound mappings) when the learner names a related language.
+- The skill says not to name resources unless verified, which led to no concrete EP resource guidance and left the learner to find tutors and audio themselves.
+- The skill has no requirement to fix a numeric pass threshold for the final goal gate, so the 20-minute check ended with a threshold to be defined later.
 
 ## What it did
 

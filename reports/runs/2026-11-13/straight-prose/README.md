@@ -1,8 +1,8 @@
 # straight-prose: real-world run, 2026-11-13
 
-**Verdict: PASS** (8/10). The agent read draft.md, wrote draft-v2.md, and ran slop_scan, which found nothing; the hedge about unmeasured customer benefit was kept, and the agent removed the opener, the closing line with emoji, 'Experts agree' and 'not just faster, it's smarter'.
+**Verdict: PASS** (8/10). The run wrote draft-v2.md, a roughly 110-word rewrite, and the scan was reported clean. It keeps the 40,000/day, about-3x month-end, up-to-six-hours, 38-minute and 5h50m figures plus the unmeasured-benefit hedge, and drops the chatbot opener, sign-off, emoji and 'not just faster, it's smarter' line.
 
-Target: a 200-word product blog post with stock AI-writing patterns. Run headless in a clean project with only this skill installed (6 turns, 4 tool calls, 11 s, $0.08).
+Target: a 200-word product blog post with stock AI-writing patterns. Run headless in a clean project with only this skill installed (6 turns, 4 tool calls, 11 s, $0.1).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -26,22 +26,21 @@ draft.md reads like a chatbot wrote it. Rewrite it so it sounds like a person on
 
 ## Met
 
-- Wrote draft-v2.md
-- slop_scan --strict reported no findings on draft-v2.md
-- Kept the hedge that faster payment for customers has not been measured
-- Removed the inflated opener, the chatbot sign-off with emoji and offer to answer questions, the vague 'Experts agree' attribution and the negative parallelism
-- Reported that numbers and engine features were unchanged
-- Told the user that the former 'Experts agree' claim now stands as a plain statement and should be checked, rather than hiding the change
+- Removed the inflated opener, the promotional 'journey' sign-off, the emoji and the 'not just … it's' parallelism; the output has no em dashes
+- Dropped the vague 'Experts agree' attribution and told the user that the remaining claim, that late invoices hurt cash flow, is now stated plainly and needs their sign-off
+- Kept the numbers (40,000 invoices/day, about 3x month-end volume, up to six hours late, 38 minutes vs 5h50m) and the hedge that benefit to customers is not yet measured
+- Hard checks pass: draft-v2.md was written, slop_scan --strict was run on it and reported clean, and the hedge is present
+- Plain, concrete prose in a first-person-plural engineering voice, with no template phrasing
 
 ## Missed
 
-- The transcript does not show the draft-v2 text, so the engineer voice, the absence of added facts and the removal of em dashes and forced threes rest on the scanner and the agent's own summary rather than on visible output
-- The agent kept the unsourced late-invoice cash-flow claim as a flat assertion instead of removing or softening it, though it did flag this to the user
+- The original draft.md is not in the transcript, so I could not verify every fact. 'Customers noticed' may be a small added claim, and the cash-flow statement was converted from an attributed claim into an unattributed one
+- The voice is clean but fairly neutral and short; it does not clearly read as one specific engineer, and the feature list is still a three-item series
 
 ## Defects to fix in the skill
 
-- The skill gives no rule for vague-attribution claims: it should say whether to drop the claim, soften it, or keep it and flag it
-- The scanner checks only surface patterns, so nothing in the skill checks whether the rewrite reads like a specific engineer or has added facts
+- The skill does not say what to do with a claim whose vague attribution is stripped: keep it as an unsupported assertion, soften it, or drop it. This run kept it and only flagged it afterward
+- Nothing in the skill checks the rewrite against the source for added facts, such as a diff of numbers and claims, so a phrase like 'Customers noticed' can slip in unchecked
 
 ## What it did
 

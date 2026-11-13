@@ -4,7 +4,7 @@
   "target": "a five-role job-search tracker with one stalled recruiter thread and one upcoming panel",
   "verdict": "PARTIAL",
   "score": 6,
-  "summary": "The run flagged Paystack Labs as 35 days quiet and drafted a follow-up to Amira, flagged Quillbook (59 days) as stale and recommended closing it, skipped rejected Fernway, and made no sends, but it did not produce a Tallyhub panel briefing and changed no tracker rows.",
+  "summary": "The run flagged Paystack Labs (35 days quiet) and drafted a follow-up to Amira, recommended marking Quillbook no-reply, left Fernway alone, and gave a Tallyhub panel plan, but the Tallyhub briefing was not written and the drafts contain unfilled placeholders.",
   "checks": [
     {
       "desc": "flags Paystack Labs as gone quiet",
@@ -18,26 +18,25 @@
     }
   ],
   "met": [
-    "Flags Paystack Labs as overdue (35 days since 10-09, promised next steps within a week) and drafts a follow-up addressed to Amira",
-    "Flags Quillbook (applied 09-15, 59 days) as stale and gives a sensible call: mark no-reply, with an optional last nudge offered",
-    "Does not suggest following up on Fernway; lists it as rejected with nothing to do",
-    "Does not invent facts about Tallyhub; states explicitly what the tracker does and does not contain",
-    "Does not claim anything was sent; says nothing was sent and drafts need approval",
-    "Addresses the Tallyhub panel on 11-18 and lists what it needs to build the briefing"
+    "Flags Paystack Labs as quiet for 35 days since 10-09 and drafts a follow-up to Amira",
+    "Flags Quillbook (applied 09-15, 59 days) as stale and gives a clear call (mark no-reply, offer a last nudge)",
+    "Does not suggest following up on Fernway; notes it was rejected 10-14",
+    "Addresses the Tallyhub panel on 11-18 without inventing facts about Tallyhub; states what the tracker lacks",
+    "Explicitly says nothing was sent and proposes tracker changes (Quillbook to no-reply, add follow_up_due column) pending confirmation"
   ],
   "missed": [
-    "Did not prepare a Tallyhub briefing; it only asked for the JD, resume, and panel details and produced no likely questions, questions to ask, or logistics checklist that could be built from the tracker alone",
-    "Did not update the tracker or propose concrete dated row changes; it only suggested setting Quillbook to no-reply and adding a follow_up_due column pending confirmation, with no dates attached",
-    "Paystack draft is full of placeholders ([date of screen?], [specific point from the screen?]) and is not usable as written",
-    "Added a Ledgerline follow-up as a draft with unfilled placeholders, which is beyond the rubric and not usable",
-    "Said the Paystack window closed 'about 4 weeks ago' while the table says 35 days quiet; minor inconsistency in framing"
+    "No actual Tallyhub briefing was produced; it only listed what it needs (JD, resume, panel details) and described what it would write, so the 'prep me' request was deferred rather than delivered",
+    "Paystack draft contains placeholders ([date of screen?], [specific point from the screen?]), so it is not send-ready",
+    "Proposed tracker changes carry few explicit dates, and the tracker was not actually updated",
+    "Said the Paystack window closed 'about 4 weeks ago' while listing 35 days quiet; minor, but the figure is loosely stated",
+    "Ledgerline draft was added beyond the rubric but is mostly placeholders, so it adds little"
   ],
   "skill_defects": [
-    "The skill appears to require a JD line and a 30-day deliverable in every draft, so with only a tracker as input it produces placeholder-filled drafts instead of sendable short check-ins",
-    "The skill has no fallback for prep mode when the JD and resume are absent; it should produce a generic-but-honest panel prep framework (question themes, questions to ask, logistics checklist) rather than just requesting inputs",
-    "The skill does not tell the agent to propose specific dated tracker edits (such as a last_contact or status update with 2026-11-13) when it does not write directly"
+    "The skill's rule demanding a specific JD line and a 30-day deliverable in every follow-up draft leaves drafts full of placeholders when the tracker has no JD, so it should allow a clean, shorter draft that is usable without that material",
+    "The skill doesn't tell the agent to give a generic-but-useful panel prep (standard question themes, questions to ask, logistics checklist) when the JD and resume are missing, so the briefing was deferred entirely",
+    "The agent should be told to propose concrete dated tracker edits (e.g., next_action_date) rather than only asking for confirmation to change the schema"
   ],
-  "cost_usd": 0.1,
+  "cost_usd": 0.12,
   "turns": 6,
   "seconds": 20,
   "tool_calls": 4,

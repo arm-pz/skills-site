@@ -1,0 +1,16 @@
+{
+  "skill": "harness-audit",
+  "seed_sessions": true,
+  "setup": "git clone -q --depth 1 https://github.com/arm-pz/skills-site site-src",
+  "target": "the skillsmith.tech repo plus real Claude Code session files from this batch",
+  "prompt": "Audit the agent harness for site-src/ (CLAUDE.md, settings, hooks, skills) against my past Claude Code sessions in ~/.claude/projects. Give me ranked findings and proposed diffs, but apply nothing.",
+  "max_turns": 80,
+  "budget_usd": 6,
+  "rubric": [
+    "Inventories the harness files that actually exist in site-src and at user level",
+    "Mines the real session files and says how many it read",
+    "Each finding cites evidence (a file or a session pattern); none invented",
+    "Proposes diffs and applies nothing without approval",
+    "Keeps secrets and personal data out of the report"
+  ]
+}

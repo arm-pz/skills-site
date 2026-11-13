@@ -1,8 +1,8 @@
 # strategy-memo: real-world run, 2026-11-13
 
-**Verdict: PARTIAL** (7/10). The run read situation.md and wrote strategy-memo.md recommending multi-entity (8 vs 10 engineer-weeks) at low-to-medium confidence. The checkable arithmetic holds (4×(£900−£223)≈£2.7k, about 39% of £6.9k MRR; 21% of 58≈12 sign-ups; 58 vs ~20 is about 3x), but the memo's contents and use of runway and growth were not visible.
+**Verdict: PARTIAL** (6/10). The memo recommends multi-entity first (8 vs 10 engineer-weeks) with a pre-sell test, uses most supplied figures and flags gaps honestly, but its headline ~+£2.7k MRR upside rests on an invented assumption and the 90-day plan does not pick a single metric that proves the call right.
 
-Target: a real-shaped build decision for a 3-person fintech startup (QuickBooks vs multi-entity). Run headless in a clean project with only this skill installed (5 turns, 3 tool calls, 42 s, $0.13).
+Target: a real-shaped build decision for a 3-person fintech startup (QuickBooks vs multi-entity). Run headless in a clean project with only this skill installed (5 turns, 3 tool calls, 42 s, $0.17).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -24,22 +24,27 @@ Read situation.md and write me the decision memo for the board: which do we buil
 
 ## Met
 
-- One clear recommendation (multi-entity first) with reasoning a board can check: cheaper build, four paying asks, plan already priced
-- Arithmetic in the summary is internally consistent: +£2.7k MRR is about 39% of £6.9k, and the QuickBooks break-even is about 21% of 58 sign-ups, roughly 12 customers
-- Strongest case for QuickBooks is given in a dissent section (2 churned to QuickBooks, waitlist pace about 3x the Xero launch), along with explicit flip conditions: fewer than 3 of 4 committing, or 12 or more paying from the waitlist
-- 90-day plan with a pre-sell test over about three weeks and pass/fail thresholds that prove the call right or wrong
-- No market facts asserted; missing inputs are listed under Gaps (what the four customers pay now, MRR of the two churned customers) and a research-brief handoff covers QuickBooks market sizing and competitors
+- Makes one clear recommendation (multi-entity first, with a pre-board pre-sell test) and gives reasoning a board can check
+- Uses the supplied numbers: 58 vs ~20 waitlist, 10 vs 8 engineer-weeks, 2 churned to QuickBooks, 4 multi-entity asks, ~£900 plan, 14 months runway, 9% MoM; basic arithmetic (6,900/31 ≈ £223, 2/31 ≈ 6%, 10+8=18) is correct
+- Names the strongest case for QuickBooks in a dedicated Dissent section and lists explicit flip conditions (fewer than 3 of 4 commit, waitlist conversion ≥ ~21%, churned MRR large, further churn)
+- Provides a 90-day plan with owners, milestones and metrics, plus 1-year and 3-year horizons
+- Invents no external market data; market size and competitor coverage are listed as gaps and handed off to research-brief
 
 ## Missed
 
-- The final output never mentions the 14 months runway or 9% MoM growth, so use of those given numbers could not be confirmed
-- The £223 average and £6.9k MRR could not be traced to situation.md from the transcript; if they were derived or assumed rather than given, they risk being invented
-- Owners in the roadmap are left generic ('founders', 'engineer'), and the 1-year and 3-year roadmap goes beyond the requested decision memo
+- The headline upside (~+£2.7k MRR, ~39% of MRR) rests on an assumed £223 current price for the 4 customers (4 × (900−223) ≈ £2,708). It is labelled [assumed], but it drives the recommendation and is not in the situation file
+- The ~21% / ~12-customer flip threshold assumes QuickBooks users pay the same £223 ARPA, which is also an assumption; the comparison is built on it
+- Several 'metrics' in the 90-day plan are unfilled placeholders ('supply this'), and no single metric is named as the one that proves the call right or wrong; the closest is commitments from the 4 (target 3+) versus the ~12 waitlist payers threshold
+- The ~13-week quarter, the month-5 runway threshold of 9 months, and the 'target 3+' are invented parameters, though marked [assumed]
+- Runway (14 months) and 9% MoM growth are restated but not used in any reasoning or calculation
+- The 3-year section is mostly placeholders and adds little; the memo also carries a research-brief handoff block not requested for a board memo
 
 ## Defects to fix in the skill
 
-- The skill does not require the memo to use every provided figure explicitly (runway and growth rate) or to state which figures came from the source file and which were derived
-- The skill adds a multi-horizon roadmap (90 days, 1 year, 3 years) and a research handoff by default, which pads a focused one-decision board memo
+- The skill's template pushes placeholders ('supply this') into the 90-day metric slots instead of requiring one concrete proof metric with a threshold from the supplied data
+- The skill mandates 1-year and 3-year sections even when the situation gives no basis for them, producing filler placeholders in a board memo
+- The skill does not require using every supplied figure (runway, MoM growth) in the argument, so those figures are only restated
+- The skill appends a handoff block to another skill into the memo file, putting non-board content in the deliverable
 
 ## What it did
 

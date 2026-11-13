@@ -1,8 +1,8 @@
 # career-track: real-world run, 2026-11-13
 
-**Verdict: PARTIAL** (7/10). The skill gave a £65k counter (said once) with reasoning, a word-for-word call script anchored on 64 accounts/£2.1M ARR, churn 14%→9% and onboarding 19→11 days, and a non-disclosure line for the £49k, but it did not script a response to a fixed band and its non-salary levers are thin and appear only in one table row.
+**Verdict: PARTIAL** (8/10). The run gave a £65k counter (about +33% on £49k, inside the £58–68k band), a word-for-word call script, anchoring on 64 accounts/£2.1M ARR, churn 14%→9% and onboarding 19→11 days, and a deflection for the £49k question, but it never scripted a reply to 'the band is fixed' and listed non-salary levers only in a table row.
 
-Target: a synthetic CSM's negotiation for a £58–68k Senior CSM offer. Run headless in a clean project with only this skill installed (7 turns, 5 tool calls, 26 s, $0.11).
+Target: a synthetic CSM's negotiation for a £58–68k Senior CSM offer. Run headless in a clean project with only this skill installed (7 turns, 5 tool calls, 26 s, $0.14).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -25,23 +25,23 @@ Ledgerline (job.md) just verbally offered me £58k for the Senior CSM role. Band
 
 ## Met
 
-- Specific counter of £65k inside the band, with reasoning (matches core of ad, supports above £63k midpoint, gaps on SQL/payments/management keep it off the top, room to settle at £62–63k)
-- Word-for-word script covering opening, evidence, the ask, silence, and responses to pushback
-- Anchors on real facts (64 accounts, ~£2.1M ARR, churn 14%→9%, time-to-first-invoice 19→11 days, mentored two CSMs) and explicitly warns not to credit the churn drop solely to the candidate because of the Q2 FY23 pricing change
-- Handles current salary: 'I'd rather focus on the value of the role. What's the budget for it?' and states they aren't obliged to disclose
-- Invents no market data; says explicitly none was looked up, uses only the ad band, and offers to fetch a sourced, dated figure
+- Specific counter of £65k inside the band, with reasoning (matches core of ad, but gaps on SQL, payments and management limit going to the top; settle around £62–63k)
+- Word-for-word script covering opener, evidence, the ask, silence, a 'where does 65k come from' answer, pushback table and call close
+- Anchored on real facts (64 accounts, ~£2.1M ARR, churn 14%→9%, time-to-first-invoice 19→11 days) and explicitly warned not to claim the whole churn drop since the Q2 FY23 pricing change contributed
+- Handled the current salary question with a scripted deflection and noted they are not obliged to disclose it
+- Invented no market data; stated the band comes only from the ad and that a market view would need a sourced, dated figure
 
 ## Missed
 
-- The explicit 'the band is fixed' scenario is only partly covered: the closest rows are '58k is what we offer at this stage' and 'No budget on base'. The first elicits criteria rather than handling a firm band, so there is no direct line for 'the band is fixed, 58 is the number'.
-- Non-salary levers are named only inside the 'No budget on base' row (six-month review, sign-on payment, extra holiday, training budget). Start date, title and equity/bonus are not offered as fallbacks, and bonus/equity/pension only appear as a question to ask, so the coverage is thinner than the rubric expects.
-- The £65k target and the £62–63k settling range are acknowledged as judgment, but the reasoning on why £65k rather than the top of the band is still the model's own call with little quantified support (the +18% on £49k is mentioned only as context).
+- No dedicated script for 'the band is fixed / 58k is firm': the closest are the '58k is what we offer at this stage' and 'No budget on base' rows, which ask what would move it and pivot to other levers
+- Non-salary levers are thin: the table row mentions a six-month review, sign-on payment, extra holiday and training budget, but nothing on title or start date as fallbacks, and bonus/equity appear only as questions to ask
+- The pitch for 65k relies on the user's facts, but the answer to 'why 65k' avoids stating how the figure was chosen and leans on 'within your band'
+- The response never reasons about the +33% jump from £49k to £65k, and the gap between £65k and the £58k offer is not framed against the floor beyond 'write it down'
 
 ## Defects to fix in the skill
 
-- The negotiation reference/skill does not seem to require a scripted response to 'the band is fixed' with a pivot to specific non-base levers (start date, title, review timing, bonus, learning budget) in order of priority, so that fallback is left diffuse.
-- The skill leaves non-salary levers as a single table row rather than a dedicated fallback step with suggested wording for each lever.
-- The output carries extra material (career gap, weak spots, a disclaimer on notice period and contract terms) that dilutes the call script the user asked for.
+- The skill does not require an explicit scripted branch for 'the band is fixed' that moves to a ranked list of non-salary levers (start date, title, review timing, bonus, learning budget) with exact wording for each
+- The skill does not prompt for the candidate's floor and competing offers before producing a target, so the target rests on judgment alone and is left as a placeholder
 
 ## What it did
 

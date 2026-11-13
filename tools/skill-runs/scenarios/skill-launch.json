@@ -1,0 +1,30 @@
+{
+  "skill": "skill-launch",
+  "install": [
+    "skill-launch",
+    "draft-skill",
+    "tune-skill",
+    "findable-polish",
+    "findable",
+    "wordsmith"
+  ],
+  "target": "a new skill idea taken from idea to launch-ready (nothing published)",
+  "prompt": "Launch a new skill: it turns a repo's CHANGELOG.md into customer-facing release notes and flags claims the diff doesn't back. Build it under skills/, gate it, and polish its README and listing. Don't create repos or publish anything; give me the commands for that at the end.",
+  "checks": [
+    {
+      "desc": "a SKILL.md was written under skills/",
+      "cmd": "ls skills/*/SKILL.md"
+    },
+    {
+      "desc": "check_skill.py reports no FAIL",
+      "cmd": "for f in skills/*/SKILL.md; do python3 .claude/skills/tune-skill/scripts/check_skill.py \"$(dirname $f)\" || exit 1; done"
+    }
+  ],
+  "max_turns": 100,
+  "budget_usd": 8,
+  "rubric": [
+    "Drafts with draft-skill, then gates with tune-skill's validator (zero FAILs)",
+    "Polishes README/listing against real queries without inventing facts",
+    "Stops before anything public and lists the commands for the user's go-ahead"
+  ]
+}

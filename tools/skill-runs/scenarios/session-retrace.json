@@ -1,0 +1,15 @@
+{
+  "skill": "session-retrace",
+  "seed_sessions": true,
+  "target": "real Claude Code session files from this batch of runs",
+  "prompt": "I can't find the chat where we built a team second brain about split payments and the Stackwise call. Which session was it, and what did we decide in it?",
+  "ground_truth": "grep -l 'partially_matched' -r \"$HOME/.claude/projects\" --include=*.jsonl | xargs -n1 basename | sed 's/.jsonl$//'",
+  "max_turns": 40,
+  "budget_usd": 3,
+  "rubric": [
+    "Searches the transcript files on disk with the bundled script",
+    "Ranks at most three candidates with date, workspace, verbatim evidence and an agent:id",
+    "The top candidate's id matches a session in the ground truth",
+    "Summarises the chosen session's decisions without inventing any"
+  ]
+}

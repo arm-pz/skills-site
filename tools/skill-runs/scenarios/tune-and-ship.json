@@ -1,0 +1,29 @@
+{
+  "skill": "tune-and-ship",
+  "install": [
+    "tune-and-ship",
+    "tune-skill",
+    "findable-polish",
+    "findable",
+    "wordsmith"
+  ],
+  "setup": "git clone -q --depth 1 https://github.com/arm-pz/choose-effort target",
+  "target": "a clone of arm-pz/choose-effort (tuned and fact-checked locally; release steps not run)",
+  "prompt": "Take the skill in target/ through tune-and-ship: tune it, fact-check every version number, flag and command it states against the primary source, and polish the listing. Stop before anything is released: give me the release notes and the exact commands you would run.",
+  "checks": [
+    {
+      "desc": "check_skill.py reports no FAIL",
+      "cmd": "python3 .claude/skills/tune-skill/scripts/check_skill.py target"
+    }
+  ],
+  "max_turns": 120,
+  "budget_usd": 10,
+  "timeout_s": 3000,
+  "rubric": [
+    "Tunes with tune-skill (zero FAILs)",
+    "Fact-checks concrete claims (effort levels, flags, commands) against primary docs and lists each with its source and verdict",
+    "Polishes the listing from the final description",
+    "Stops before release and lists the exact commands",
+    "Invents no facts"
+  ]
+}

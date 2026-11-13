@@ -1,8 +1,8 @@
 # cold-email-ops: real-world run, 2026-11-13
 
-**Verdict: PARTIAL** (6/10). The plan sizes 60k sends/month at 275 inboxes and 93 domains (about 58 new), with a per-client split and a 1% reply floor, but the burn-replacement cadence, inbox-placement test and automation error budget are thin.
+**Verdict: PARTIAL** (6/10). The run hand-computed 275 inboxes and 93 domains for 60k sends (vs 120 inboxes and about 35 healthy domains on hand) with per-client splits and a 1% domain floor, but it gave no explicit warm-spare count for the 6 burns and no numeric error budget.
 
-Target: a 60,000-sends-a-month cold-email plan across 4 clients. Run headless in a clean project with only this skill installed (6 turns, 4 tool calls, 29 s, $0.13).
+Target: a 60,000-sends-a-month cold-email plan across 4 clients. Run headless in a clean project with only this skill installed (6 turns, 4 tool calls, 29 s, $0.16).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -24,25 +24,26 @@ I run outbound for 4 B2B clients. Next month I want to send 60,000 cold emails t
 
 ## Met
 
-- Capacity arithmetic is correct and the assumptions are stated (10 sends/inbox/day, 3 inboxes/domain, 22 days): 60,000/22 = 2,727/day, 273 inboxes and 91 domains pooled, 275 inboxes and 93 domains split per client, and 93 - 35 healthy = 58 new domains.
-- Capacity is split per client (114/69/55/37 inboxes, 38/23/19/13 domains), and the plan explains why domains are kept separate per client.
-- Sets a 1% reply-rate floor per domain, with replacement scheduled rather than continued monitoring, plus a two-consecutive-week falling-slope watch trigger.
-- Labels some assumptions as its own (warm-up of 2-4 weeks is 'my rule of thumb') and separates skill defaults from user-provided inputs. It also lists missing data as Unknown or INCONCLUSIVE rather than inventing it.
+- Computes inboxes and domains from the 60k target with stated assumptions (10 sends/inbox/day, 3 inboxes/domain, 22 days); per-client totals sum to 275 inboxes / 93 domains and the arithmetic is consistent (e.g. 25k/22 = 1,136/day -> 114 inboxes -> 38 domains)
+- Sets a per-domain reply-rate floor (1%) and states the consequence: a domain below it is scheduled for replacement, not just monitored; also adds a two-week slope watch rule
+- Includes a shadow-ban test (0% bounce, healthy placement, zero replies -> rewrite copy once, retire inboxes after 48 hours with no change)
+- Splits capacity per client in a table and keeps domains separate per client, noting pooled vs separate cost (273/91 vs 275/93)
+- Flags own assumptions: says warm-up 2-4 weeks is its own rule of thumb, discloses that the script was not run and the math was done by hand, labels missing data as Unknown/INCONCLUSIVE
 
 ## Missed
 
-- Burn-replacement cadence is not sized to last month's 6 burned domains. It uses a generic 6-9 month burn lifetime (30-46 inboxes/month, 7-10/week) and gives no explicit warm-spare pool size or per-month domain replacement number, only 'keep spare inboxes warming'.
-- The shadow-ban check is only a heuristic (0% bounce, zero replies, rewrite copy, wait 48 hours). There is no seed-list or inbox-placement test with a defined cadence or pass/fail threshold.
-- There is no automation error budget with a number. It explains reliability compounding (0.8^4 ≈ 41%, 0.99^4 ≈ 96%) and asks for an owner, check and blast radius per step, but sets no tolerated failure rate.
-- The script was not actually run (the answer says Bash was denied), so the arithmetic is hand-computed and unverified by the skill's tool.
-- Not every assumption is flagged as the model's own. Presenting the 70% load on proven inboxes and the 'don't push 15-20/day' guidance as skill-backed or as neutral advice is unclear.
+- Burn-replacement cadence is not sized to last month's 6 burned domains: it gives a generic 30-46 inboxes/month (7-10/week) from a 6-9 month burn assumption and says to buy about 58 new domains, but does not define a warm-spare pool (e.g. N domains kept warming at all times) tied to a 6/month burn rate
+- No real automation error budget: it explains compounding reliability (0.8^4 = 41%, 0.99^4 = 96%) and asks for an owner/check per step, but sets no numeric budget (e.g. max acceptable failed sends or error rate before pausing)
+- No real inbox-placement test (seed/placement testing across providers); only a zero-reply heuristic for shadow-bans
+- Asserts last-month cause as 'most likely' running inboxes hot from a 120x10x22 estimate it admits it cannot verify, which slightly overreaches; also the per-client domain count rounding is not shown (38+23+19+13 = 93 but each is ceil, fine)
+- Tool call to run the script reportedly failed/was denied, so the stated numbers were not tool-verified
 
 ## Defects to fix in the skill
 
-- The skill does not require sizing warm spares from the observed burn count (for example, burned domains per month × a buffer factor) and falls back on a generic burn-lifetime figure.
-- The skill does not require a concrete inbox-placement or seed test with thresholds, so shadow-ban detection ends up a vague heuristic.
-- The skill does not define an automation error budget as a number (acceptable failure rate and blast radius per step), so the output only illustrates compounding reliability.
-- The script-dependent workflow has no fallback instruction for when Bash is unavailable, so the run fell back on unverified hand arithmetic.
+- The skill does not require an explicit warm-spare pool sized to the prior burn count (burn replacement is expressed only as a generic rate from a 6-9 month lifetime)
+- The automation guidance stops at the compounding-reliability illustration and does not require a numeric error budget or pause threshold
+- The skill has no inbox-placement/seed test step; shadow-ban handling is only a symptom heuristic
+- The skill relies on a script via Bash with no fallback instructions for when it is denied, so the agent falls back to unverified hand math
 
 ## What it did
 

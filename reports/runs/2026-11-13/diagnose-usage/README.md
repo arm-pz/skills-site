@@ -1,8 +1,8 @@
 # diagnose-usage: real-world run, 2026-11-13
 
-**Verdict: PARTIAL** (7/10). The run read the paste and correctly ranked 14 subagents inheriting opus at xhigh (61% subagents, 88% opus) as the top cause, with xhigh set on 3 Nov as a contributor. The change instructions were vague, and the 74% headline figure was shaky.
+**Verdict: PARTIAL** (6/10). The run read the paste and ranked 14 subagents inheriting opus at xhigh (61% subagents, 88% opus) as the main cause, but it hedged the 3 Nov xhigh default as 'likely' and left the subagent-override setting unspecified, and I cannot verify from the transcript that the 13% workflow and 74% combined figures are accurate.
 
-Target: a real-shaped /usage breakdown from a session that hit 96% of its window. Run headless in a clean project with only this skill installed (5 turns, 3 tool calls, 17 s, $0.08).
+Target: a real-shaped /usage breakdown from a session that hit 96% of its window. Run headless in a clean project with only this skill installed (5 turns, 3 tool calls, 17 s, $0.1).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -24,25 +24,25 @@ My session limit is almost gone and it's only 15:40. My /usage is pasted in usag
 
 ## Met
 
-- Reads the breakdown and cites subagents 61%, opus 88% and workflow 13%
-- Ranks the 14 subagents inheriting opus at xhigh effort as the top cause, with numbers
-- Names the global xhigh default set on 3 Nov as a contributing cause
-- Gives three changes, which stays within the limit of three
-- Mostly avoids inventing usage numbers, and openly flags what it could not confirm from the paste
+- Reads the breakdown: cites subagents 61%, opus 88%, workflow 13%, main conversation 21%
+- Ranks the top cause as the 14 subagents inheriting opus at xhigh via the fan-out, with numbers
+- Names the global xhigh default set 3 Nov as a contributing cause
+- Offers three change groups (lower effort with /effort, set subagent model to Sonnet, stage the fan-out on 1-2 files)
+- Mostly flags uncertainty rather than fabricating usage numbers
 
 ## Missed
 
-- The 'how to set each' part is weak: it says it 'couldn't confirm the exact setting name' for the subagent model and tells the user to check the docs, so the main fix has no concrete setting
-- No concrete way to cap fan-out is given; it only says to run on one or two files first
-- It treats the workflow fan-out as a separate second cause instead of the mechanism behind the subagent burn, and its '74% together' headline sums two figures it later admits may overlap
-- Some claims are unverifiable and may come from the reference file rather than the paste: `/effort auto`, `CLAUDE_CODE_EFFORT_LEVEL` overriding other settings, and Anthropic following up on /feedback session IDs
-- The /feedback advice is padding that does not address what to change
+- Subagent model/effort override is not given with a concrete how-to-set: the run says it could not confirm the setting name and tells the user to check the docs
+- Adds a 74% combined figure for subagents plus workflow while also saying the 13% may overlap with the subagent figure, so the sum is potentially double-counted
+- Includes unverified claims: CLAUDE_CODE_EFFORT_LEVEL overriding other settings ('reported to'), and /feedback follow-up by Anthropic, which came from the reference file or memory and not the paste
+- Gives more than three change groups once the next-step advice (wait, switch to Sonnet, check running workflow, /feedback) is added
+- Ranks the 3 Nov xhigh default as third and 'likely' rather than clearly naming it as a contributing cause with a way to change the default in settings
 
 ## Defects to fix in the skill
 
-- The skill does not give a verified, concrete setting name or location for subagent model and effort overrides, so the agent falls back to 'check the docs'
-- The skill does not say how to relate workflow share to subagent share, which leads to a double-counted 74% headline
-- The skill's reference material encourages unsourced claims (env var override behavior, feedback follow-up) that the agent repeats as hedged facts
+- The skill does not give a concrete, verified way to set subagent model/effort (setting name or env var), so the agent has to send the user to the docs
+- The skill does not tell the agent how to treat overlapping categories (subagents vs workflow), which invites a double-counted sum
+- The skill allows or encourages unverified side claims (env var override, /feedback follow-up) instead of limiting output to three grounded changes
 
 ## What it did
 

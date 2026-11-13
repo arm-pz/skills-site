@@ -1,0 +1,25 @@
+{
+  "skill": "upstream-polish",
+  "install": [
+    "upstream-polish",
+    "upstream-check",
+    "wordsmith"
+  ],
+  "setup": "git clone -q --depth 1 https://github.com/arm-pz/keyword-guard repos/keyword-guard && git clone -q --depth 1 https://github.com/arm-pz/seo-polish repos/seo-polish && git clone -q --depth 1 https://github.com/arm-pz/wordsmith repos/wordsmith && curl -s https://skillsmith.tech/.well-known/agent-skills/index.json -o listing-index.json",
+  "target": "three skill repos and their live listing on skillsmith.tech (nothing pushed)",
+  "allow": [
+    "Bash(git fetch:*)",
+    "Bash(git -C:*)",
+    "Bash(git rev-parse:*)"
+  ],
+  "prompt": "Check repos/keyword-guard, repos/seo-polish and repos/wordsmith against their upstreams and against their listing on skillsmith.tech (listing-index.json is the live discovery index). Tell me what's drifted and draft the fixes. Don't push.",
+  "max_turns": 80,
+  "budget_usd": 6,
+  "rubric": [
+    "Gives a fetch-based verdict per repo (in sync, behind, diverged) and treats anything unreadable as inconclusive",
+    "Compares each repo's description/README against its listing and names real drift, quoting both sides",
+    "Notes wordsmith moved outside arm-pz if it sees it",
+    "Drafts rewrites without inventing facts",
+    "Pushes nothing"
+  ]
+}

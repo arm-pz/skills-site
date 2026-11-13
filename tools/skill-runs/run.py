@@ -137,10 +137,10 @@ def tool_log(events):
     return out
 
 
-def run_check(c, output, transcript, proj, written=""):
+def run_check(c, output, transcript, proj, written="", env=None):
     where = c.get("in", "any")  # any = the final message plus every file the run wrote
     if "cmd" in c:
-        r = subprocess.run(c["cmd"], shell=True, cwd=proj, capture_output=True, text=True, timeout=300)
+        r = subprocess.run(c["cmd"], shell=True, cwd=proj, env=env, capture_output=True, text=True, timeout=300)
         ok = r.returncode == 0
         detail = (r.stdout + r.stderr).strip()[-400:]
     elif "file" in c:
@@ -277,7 +277,7 @@ def run(name, man, day):
                 dest.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copy(f, dest)
         written = files_text(proj, made, limit=400_000)
-        checks = [run_check(c, output, transcript, proj, written) for c in scn.get("checks", [])]
+        checks = [run_check(c, output, transcript, proj, written, env) for c in scn.get("checks", [])]
         verdict, jcost = judge(scn, output, tools, checks, truth, env, proj, written[:30000])
         cap(verdict, checks)
         art = out_dir / "files"
@@ -397,6 +397,11 @@ def main(argv=None):
     ap.add_argument("--rejudge", action="store_true", help="grade saved runs again; does not rerun the skill")
     a = ap.parse_args(argv)
     names = sorted(p.stem for p in SCEN.glob("*.json")) if (a.all or a.list) else a.names
+    skipped = {p.stem for p in SCEN.glob("*.json") if json.loads(p.read_text()).get("skip")}
+    if not a.list:
+        for n in sorted(skipped & set(names)):
+            print(f"{n:34} SKIP     {json.loads((SCEN / f'{n}.json').read_text())['skip']}")
+        names = [n for n in names if n not in skipped]
     if a.list:
         for n in names:
             hits = sorted((ROOT / "reports" / "runs").glob(f"*/{n}/verdict.json"))

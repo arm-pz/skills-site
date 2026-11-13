@@ -1,0 +1,21 @@
+{
+  "skill": "publish-pipeline",
+  "setup": "git clone -q --depth 1 https://github.com/arm-pz/skills-site site-src",
+  "target": "this site's real publish pipeline (read-only audit)",
+  "prompt": "Audit the publish pipeline in site-src/ (the skillsmith.tech repo). What would make a new skill repo fail to appear on the site, and what's fragile? Don't change anything; write audit.md.",
+  "checks": [
+    {
+      "desc": "wrote audit.md",
+      "file": "audit.md"
+    }
+  ],
+  "max_turns": 80,
+  "budget_usd": 6,
+  "rubric": [
+    "Reads publish.yml, sync.py, build and check scripts before claiming anything",
+    "Names the real hold reasons in sync (missing SKILL.md at the expected path, no LICENSE, empty About, repo outside the org) with file references",
+    "Names real fragile points with file:line evidence",
+    "Invents no behaviour the code does not have",
+    "Changes nothing"
+  ]
+}

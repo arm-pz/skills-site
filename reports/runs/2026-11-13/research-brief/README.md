@@ -1,8 +1,8 @@
 # research-brief: real-world run, 2026-11-13
 
-**Verdict: PARTIAL** (7/10). The run correctly concluded the user (about £47,000 combined gross) starts MTD for Income Tax on 6 April 2027 under the £30,000 threshold, citing three fetched gov.uk pages, but it hedged on which tax year is tested, left the 2028 £20,000 threshold as planned, and sourced quarterly dates and penalties only from a search summary.
+**Verdict: PARTIAL** (7/10). The run correctly concluded the user (about £47,000 combined gross income) starts MTD for Income Tax on 6 April 2027 under the £30,000 threshold, cited gov.uk pages and listed the changes, but left the tax-year basis of the test unverified and mixed in details from an unopened search summary.
 
-Target: UK Making Tax Digital for Income Tax: thresholds and dates, from public sources. Run headless in a clean project with only this skill installed (11 turns, 9 tool calls, 58 s, $0.18).
+Target: UK Making Tax Digital for Income Tax: thresholds and dates, from public sources. Run headless in a clean project with only this skill installed (11 turns, 9 tool calls, 58 s, $0.21).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -25,25 +25,25 @@ I'm a UK sole trader with about £38,000 of self-employment income plus £9,000 
 
 ## Met
 
-- States the phased thresholds correctly: £50k from 6 April 2026, £30k from 6 April 2027, £20k planned from 6 April 2028, each tied to a fetched gov.uk page
-- Explains qualifying income is gross self-employment plus property income, giving about £47,000 combined, so the user is in from 6 April 2027 and not 2026
-- Lists what changes: digital records, quarterly updates via compatible software, and the annual return with final declaration
-- Cites gov.uk primary sources in a claim table with fetch dates and confidence levels, and flags uncertainty with [unverified], [search summary only] and [my inference] tags plus a Conflicts and Gaps section
-- Invents no thresholds or dates; penalty details are flagged as search-summary only
+- States the phased thresholds correctly: £50k from 6 April 2026, £30k from 6 April 2027, £20k planned from 6 April 2028, with the £20k flagged as planned
+- Explains qualifying income is gross self-employment plus property income, concludes 6 April 2027 and not 2026 for this user
+- Lists what changes: digital records, quarterly updates via compatible software, final declaration/annual return
+- Cites gov.uk primary sources per claim in a table, with confidence levels, conflicts and gaps flagged, and marks search-summary-only claims as such
+- Hard check met: cites gov.uk
+- No invented thresholds or dates; uncertain items tagged [unverified]/[my inference]
 
 ## Missed
 
-- Does not firmly establish that the test uses income from an earlier tax return; it says 'I infer' the 2025–26 return and marks this [unverified], though the sign-up page reportedly says 'previous year's return'
-- Quarterly deadlines, the 31 January deadline and the £200 at 4 points penalty come from a search summary of a page it never opened, so they are not tied to a read primary source
-- The final declaration is mentioned only briefly as part of the annual return, without explaining that it replaces or consolidates the existing process
-- The answer is padded with an assumption that the £38k may be turnover or profit, which muddies the clear conclusion; the user's figures give about £47,000 gross either way as the rubric expects
-- The 'find out if and when you need to use MTD' page, which would settle the tax-year question, was fetched but the run reports it could not be read, leaving a core point unconfirmed
+- The rubric wants it explained that the test uses income on an earlier tax return; the answer only 'infers' the 2025–26 return and says no page states it explicitly, and its gaps list says the £30k year-basis could not be settled (the 'find out if and when you need to use MTD' fetch failed)
+- The summary computes the combined figure as £47,000 but then hedges by treating £38k as possibly turnover or profit; it states an assumption rather than plainly using about £47,000 as asked
+- Quarterly deadlines, the £200 at 4 points penalty and the 31 January return rest on a search summary of a page that was never opened, so they are not tied to a read primary source
+- The first line says 'I read three GOV.UK pages' yet the claim table credits a fourth fetched page, and the sign-up page was fetched twice, so the account of what was read is slightly muddled
 
 ## Defects to fix in the skill
 
-- The skill does not require opening the source behind a search-summary claim before reporting it, so dates and penalties ended up resting on an unopened page
-- The skill gives no fallback when the key HMRC eligibility page fails to fetch, such as retrying or finding an alternative primary source, so the tax-year-tested point stayed unverified
-- The skill's output format (status line, claim table, conflicts, gaps, sources) is heavy for a simple personal question and buries the direct answer
+- The skill allows claims to be reported from search summaries without requiring the source page to be opened; it should require fetching the page for any date or penalty figure, or drop the claim
+- The skill has no fallback when the key authoritative page (the 'work out if you need to use MTD' guidance) fails to fetch, such as retrying or trying alternative gov.uk URLs, so the earlier-return rule stayed unverified
+- The output template is heavy (status line, summary, claim table, conflicts, gaps, sources), which duplicates content for a simple question
 
 ## What it did
 

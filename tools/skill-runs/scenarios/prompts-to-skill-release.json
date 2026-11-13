@@ -1,0 +1,29 @@
+{
+  "skill": "prompts-to-skill-release",
+  "install": [
+    "prompts-to-skill-release",
+    "tune-skill"
+  ],
+  "setup": "git clone -q --depth 1 https://github.com/arm-pz/keyword-resolver target",
+  "target": "a clone of arm-pz/keyword-resolver (packaged locally, nothing released)",
+  "prompt": "Package the skill in target/ for release as v1.0.1. Run its trigger tests, set the version and CHANGELOG, build the archive and README, and give me the install checklist. Don't publish or tag anything remotely.",
+  "checks": [
+    {
+      "desc": "an archive was built",
+      "cmd": "find . -path ./.claude -prune -o \\( -name '*.zip' -o -name '*.skill' -o -name '*.tar.gz' \\) -print | grep -q ."
+    },
+    {
+      "desc": "CHANGELOG mentions 1.0.1",
+      "re": "1\\.0\\.1"
+    }
+  ],
+  "max_turns": 80,
+  "budget_usd": 6,
+  "rubric": [
+    "Runs the trigger test cases and reports each pass/fail, keeping failures in the report",
+    "Sets version and CHANGELOG consistently",
+    "Builds an installable archive and a README",
+    "Ends with a per-platform install checklist",
+    "Publishes nothing"
+  ]
+}

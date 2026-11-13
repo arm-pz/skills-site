@@ -4,7 +4,7 @@
   "target": "a real-shaped fact sheet for a UK B2B SaaS that processes invoice data",
   "verdict": "PARTIAL",
   "score": 6,
-  "summary": "The agent wrote all four pages from facts.md and left the company number and the model-training question visibly open, but check_pages.py failed with 28 FAILs on unresolved [NEEDS] markers, and the transcript shows no confirmation that the pages state the 30/35-day retention or the controller/processor split.",
+  "summary": "The run wrote all four pages from facts.md with visible gaps (company number, cookie name/duration, etc.) and no model-training decision, but check_pages.py reported 28 FAILs from unresolved [NEEDS] markers, and the pages lack an in-document 'not legal advice' statement and lawyer checklist.",
   "checks": [
     {
       "desc": "all four pages written",
@@ -23,26 +23,23 @@
     }
   ],
   "met": [
-    "All four files (privacy.md, terms.md, refunds.md, cookies.md) were written",
-    "Company number left as a visible gap ('14XXXXX' flagged in the questions) rather than invented",
-    "Did not decide whether customer data trains models; flagged it in a [NEEDS] note for the user to decide",
-    "Refund policy is billing-errors only and cookie notice says no consent banner, matching facts.md as the agent described it",
-    "Said the draft is not legal advice and named what a lawyer should review (privacy policy, terms, processor/controller split, liability wording)",
-    "Reported the checker failure honestly, with the count of 28 FAILs"
+    "All four pages written (privacy.md, terms.md, refunds.md, cookies.md) using facts.md content: AWS London eu-west-2, Postmark and Sentry in the US, Stripe, Plausible cookie-free, retention 30 days and 35-day backups, refunds only for billing errors, one necessary session cookie",
+    "Company number left as a visible [NEEDS: company number] gap in both privacy.md and terms.md, not invented",
+    "Model-training question not decided; terms.md flags it as undecided in a [NEEDS] note and the final message says so",
+    "Controller (account data) vs processor (invoice/payout data) roles distinguished in privacy.md"
   ],
   "missed": [
-    "Hard check 'check_pages.py passes' failed: 28 FAILs, all from [NEEDS] markers",
-    "Many [NEEDS] gaps were for items the agent itself says facts.md does not give, so the pages are not launch-complete; some, such as the session cookie name and duration or the refund window, may have been fillable more conservatively or stated as unknown in prose",
-    "The summary does not show that 30/35-day retention or the controller/processor roles were reflected; the agent only mentions the 'processor/controller split' as a lawyer item and the transcript does not show the content",
-    "Lawyer-check list is partly folded into the questions and a general paragraph, not a clear itemised list per page",
-    "Ran the checker with output truncated by sed/tail, so the full failure detail was not inspected in the transcript"
+    "check_pages.py did not pass: 28 FAILs, the run stopped after one checker pass and did not resolve or accept them",
+    "The 'not legal advice' statement and the lawyer-check list appear only in the chat summary, not in the saved pages; the summary's lawyer list is partial (processor/controller split, liability wording, with a general call to review privacy and terms)",
+    "Several gaps may be fillable from facts.md or reasonably deferred; the pages are heavily placeholder-ridden (privacy.md, terms.md), reducing completeness as 'complete pages'",
+    "The refunds page's contact uses privacy@ledgerline.example for billing, a weak fit though flagged with a NEEDS"
   ],
   "skill_defects": [
-    "The skill's checker fails on any [NEEDS] marker, yet the skill tells the agent to leave gaps visible, so an honest draft cannot pass on the first run. The skill should define a pass state that allows flagged gaps, or explicitly say the first draft is expected to fail.",
-    "The skill does not require a dedicated 'what a lawyer should check' section in the output pages or a per-page checklist, so the lawyer guidance ended up as a loose paragraph in chat.",
-    "The skill gives no guidance for fact-sheet gaps that have safe defaults, such as the session cookie, so it generates many [NEEDS] markers that block the checker."
+    "The skill's checker fails on any [NEEDS] marker, so it cannot pass on a fact sheet with real gaps, which conflicts with the instruction to leave gaps visible; the skill should distinguish acceptable flagged gaps from real failures or say how to report them",
+    "The skill does not clearly require the 'not legal advice' notice and a lawyer-review checklist to be placed in the generated pages or a companion file, so the run put them only in chat",
+    "The skill does not make the run iterate on or explain checker output beyond a single truncated (200-char, tail -50) view, which hides detail on what failed"
   ],
-  "cost_usd": 0.17,
+  "cost_usd": 0.21,
   "turns": 13,
   "seconds": 47,
   "tool_calls": 11,

@@ -3,27 +3,27 @@
   "date": "2026-11-13",
   "target": "a synthetic CSM's negotiation for a \u00a358\u201368k Senior CSM offer",
   "verdict": "PARTIAL",
-  "score": 7,
-  "summary": "The skill gave a \u00a365k counter (said once) with reasoning, a word-for-word call script anchored on 64 accounts/\u00a32.1M ARR, churn 14%\u21929% and onboarding 19\u219211 days, and a non-disclosure line for the \u00a349k, but it did not script a response to a fixed band and its non-salary levers are thin and appear only in one table row.",
+  "score": 8,
+  "summary": "The run gave a \u00a365k counter (about +33% on \u00a349k, inside the \u00a358\u201368k band), a word-for-word call script, anchoring on 64 accounts/\u00a32.1M ARR, churn 14%\u21929% and onboarding 19\u219211 days, and a deflection for the \u00a349k question, but it never scripted a reply to 'the band is fixed' and listed non-salary levers only in a table row.",
   "checks": [],
   "met": [
-    "Specific counter of \u00a365k inside the band, with reasoning (matches core of ad, supports above \u00a363k midpoint, gaps on SQL/payments/management keep it off the top, room to settle at \u00a362\u201363k)",
-    "Word-for-word script covering opening, evidence, the ask, silence, and responses to pushback",
-    "Anchors on real facts (64 accounts, ~\u00a32.1M ARR, churn 14%\u21929%, time-to-first-invoice 19\u219211 days, mentored two CSMs) and explicitly warns not to credit the churn drop solely to the candidate because of the Q2 FY23 pricing change",
-    "Handles current salary: 'I'd rather focus on the value of the role. What's the budget for it?' and states they aren't obliged to disclose",
-    "Invents no market data; says explicitly none was looked up, uses only the ad band, and offers to fetch a sourced, dated figure"
+    "Specific counter of \u00a365k inside the band, with reasoning (matches core of ad, but gaps on SQL, payments and management limit going to the top; settle around \u00a362\u201363k)",
+    "Word-for-word script covering opener, evidence, the ask, silence, a 'where does 65k come from' answer, pushback table and call close",
+    "Anchored on real facts (64 accounts, ~\u00a32.1M ARR, churn 14%\u21929%, time-to-first-invoice 19\u219211 days) and explicitly warned not to claim the whole churn drop since the Q2 FY23 pricing change contributed",
+    "Handled the current salary question with a scripted deflection and noted they are not obliged to disclose it",
+    "Invented no market data; stated the band comes only from the ad and that a market view would need a sourced, dated figure"
   ],
   "missed": [
-    "The explicit 'the band is fixed' scenario is only partly covered: the closest rows are '58k is what we offer at this stage' and 'No budget on base'. The first elicits criteria rather than handling a firm band, so there is no direct line for 'the band is fixed, 58 is the number'.",
-    "Non-salary levers are named only inside the 'No budget on base' row (six-month review, sign-on payment, extra holiday, training budget). Start date, title and equity/bonus are not offered as fallbacks, and bonus/equity/pension only appear as a question to ask, so the coverage is thinner than the rubric expects.",
-    "The \u00a365k target and the \u00a362\u201363k settling range are acknowledged as judgment, but the reasoning on why \u00a365k rather than the top of the band is still the model's own call with little quantified support (the +18% on \u00a349k is mentioned only as context)."
+    "No dedicated script for 'the band is fixed / 58k is firm': the closest are the '58k is what we offer at this stage' and 'No budget on base' rows, which ask what would move it and pivot to other levers",
+    "Non-salary levers are thin: the table row mentions a six-month review, sign-on payment, extra holiday and training budget, but nothing on title or start date as fallbacks, and bonus/equity appear only as questions to ask",
+    "The pitch for 65k relies on the user's facts, but the answer to 'why 65k' avoids stating how the figure was chosen and leans on 'within your band'",
+    "The response never reasons about the +33% jump from \u00a349k to \u00a365k, and the gap between \u00a365k and the \u00a358k offer is not framed against the floor beyond 'write it down'"
   ],
   "skill_defects": [
-    "The negotiation reference/skill does not seem to require a scripted response to 'the band is fixed' with a pivot to specific non-base levers (start date, title, review timing, bonus, learning budget) in order of priority, so that fallback is left diffuse.",
-    "The skill leaves non-salary levers as a single table row rather than a dedicated fallback step with suggested wording for each lever.",
-    "The output carries extra material (career gap, weak spots, a disclaimer on notice period and contract terms) that dilutes the call script the user asked for."
+    "The skill does not require an explicit scripted branch for 'the band is fixed' that moves to a ranked list of non-salary levers (start date, title, review timing, bonus, learning budget) with exact wording for each",
+    "The skill does not prompt for the candidate's floor and competing offers before producing a target, so the target rests on judgment alone and is left as a placeholder"
   ],
-  "cost_usd": 0.11,
+  "cost_usd": 0.14,
   "turns": 7,
   "seconds": 26,
   "tool_calls": 5,

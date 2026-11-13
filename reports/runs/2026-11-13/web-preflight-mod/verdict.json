@@ -1,0 +1,49 @@
+{
+  "skill": "web-preflight-mod",
+  "date": "2026-11-13",
+  "target": "a local static site with a stand-in deploy CLI (nothing can upload), edited then deployed in a headless session",
+  "verdict": "PARTIAL",
+  "score": 6,
+  "summary": "Agent edited the h1 to 'Reconcile 2.0', ran the stand-in deploy once (deployed.log shows one call), then ran web-preflight on local files (only index.html, PASS), and reported the sequence honestly; however the hard check that the deploy was flagged after running in nudge mode failed.",
+  "checks": [
+    {
+      "desc": "the mod loaded in the session",
+      "ok": true,
+      "detail": "web-preflight-mod"
+    },
+    {
+      "desc": "the deploy was flagged after it ran (nudge mode)",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "desc": "Claude then ran or named web-preflight",
+      "ok": true,
+      "detail": "web-preflight"
+    }
+  ],
+  "met": [
+    "The mod loaded in the session (hard check ok)",
+    "Claude responded as the mod instructs: invoked web-preflight and ran it on local files via Glob/Read rather than blindly retrying the deploy",
+    "Final message honestly reports the deploy ran (matching deployed.log's single call), that nothing was actually uploaded, that preflight ran after the fact and was not a gate, and that one Bash sweep was denied and not retried",
+    "The mod did not trap the session; the deploy went through and was not re-run"
+  ],
+  "missed": [
+    "The hard check 'deploy was flagged after it ran (nudge mode)' FAILED: no post-deploy flag was observed by the check, although the final message claims a hook flagged it",
+    "Rubric item 'mod loads and arms after the edit' only partly evidenced; the nudge flag is the arming evidence and it failed the check",
+    "The 2-holds-then-allow behavior was not exercised, so it cannot be confirmed from this run"
+  ],
+  "skill_defects": [
+    "The nudge-after-deploy flag did not register in the hard check, so the notice may not fire reliably or may not be detectable after the deploy command",
+    "The skill does not exercise or evidence the 'let through after 2 holds' path in nudge mode, leaving the no-trap guarantee untested",
+    "A broad Bash file sweep was denied in the headless session; the skill should steer to Glob/Read for local-file checks up front"
+  ],
+  "cost_usd": 0.1,
+  "turns": 9,
+  "seconds": 15,
+  "tool_calls": 7,
+  "files": [
+    "deployed.log"
+  ],
+  "error": ""
+}

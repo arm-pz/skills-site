@@ -3,7 +3,8 @@
   "target": "a 2-person accounting practice that wants an AI team",
   "prompt": "I run a two-person bookkeeping practice for 40 small UK businesses. I want an AI team to take work off us. Where do we start?",
   "followups": [
-    "1) Biggest time sink: chasing clients for missing receipts and bank statements each month, about 25 hours. 2) We use Xero, Gmail, Google Drive, Dext. 3) Budget up to £200/month. 4) I'm comfortable with no-code tools, not code. 5) Nothing can be sent to a client without one of us approving it."
+    "1) Biggest time sink: chasing clients for missing receipts and bank statements each month, about 25 hours. 2) We use Xero, Gmail, Google Drive, Dext. 3) Budget up to £200/month. 4) I'm comfortable with no-code tools, not code. 5) Nothing can be sent to a client without one of us approving it.",
+    "Those are all my answers. Go ahead and deliver the full blueprint now."
   ],
   "rubric": [
     "Asks its sharp questions before designing (five or so) and waits",

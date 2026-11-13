@@ -1,8 +1,8 @@
 # recruiter-lens: real-world run, 2026-11-13
 
-**Verdict: PASS** (9/10). The run read the resume, job ad and the skill's reference file, gave a borderline-reject first-screen verdict, flagged the ~15-month Dec 2020–Mar 2022 gap, and gave five ordered, actionable fixes using bracketed placeholders ([X]%, [Y]%, [metric: ?]) instead of invented figures.
+**Verdict: PASS** (8/10). The run gave a borderline first-screen reject, flagged the vague summary, duty-style bullets and the 15-month Dec 2020–Mar 2022 gap, mapped the resume to the job requirements, and invented no metrics, using placeholders like [X]% and [metric: ?].
 
-Target: a synthetic mid-career CSM resume with planted weaknesses, against a real-shaped Senior CSM job ad. Run headless in a clean project with only this skill installed (6 turns, 4 tool calls, 32 s, $0.12).
+Target: a synthetic mid-career CSM resume with planted weaknesses, against a real-shaped Senior CSM job ad. Run headless in a clean project with only this skill installed (6 turns, 4 tool calls, 32 s, $0.15).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -27,24 +27,24 @@ Here's my resume (resume.md) and a job I want (job.md). Be the recruiter: would 
 
 ## Met
 
-- Gives a first-screen verdict (probably reject, borderline, fixable) with decisive reasons: no evidence of churn outcomes, no senior-level scope, generic filler
-- Flags the vague summary ('hard-working, passionate, results-driven') and duty-style bullets ('Helped reduce churn', 'Responsible for a book of accounts') with no outcomes
-- Flags the Dec 2020 – Mar 2022 gap (about 15 months) and advises a one-line honest note
-- Maps resume against job requirements: churn/expansion with numbers, SQL/BI (Looker, SQL), onboarding, Gainsight (skills list only), finance/billing domain (invoicing SaaS)
-- Does not invent metrics: uses [X]%, [Y]%, [metric: ?] placeholders and asks the user for real figures; the only number cited ('400 responses') comes from the resume
-- Fixes are ordered with churn evidence first and are specific, with before/after wording and targeted questions
+- Gives a first-screen verdict (probably reject, borderline) with deciding reasons: no outcome evidence, no senior scope, filler
+- Flags the vague summary (hard-working, passionate, results-driven) and duty-style bullets ('Helped reduce churn', 'Responsible for a book of accounts') with no outcomes
+- Flags the unexplained Dec 2020 – Mar 2022 gap (~15 months) and suggests an honest one-line note
+- Maps the resume against job requirements: churn/expansion numbers, SQL/BI, onboarding, Gainsight (listed only in skills), finance/billing domain
+- Never invents a metric: uses [X]%/[Y]% and [metric: ?] placeholders and asks the user for real numbers
+- Fixes are numbered, specific and actionable, with before/after examples and questions for the user
 
 ## Missed
 
-- Fix ordering is by impact only loosely: the gap, a likely screen-out factor, sits in fix 5 bundled with skills cleanup
-- Suggests phrasing like 'roughly halved' as honest scope, which edges toward an unquantified claim the user may not be able to support
-- The 6–8 second skim figure is cited as a heuristic and 'Ledgerline owns 40–60 accounts / £2–3M ARR' is taken from the job ad; both are acceptable but the final answer is long for a first-screen read
+- Fix ordering is not clearly by impact: the gap and skills cleanup are bundled into fix 5 even though the gap is a likely screen-out, and the ordering is not justified
+- The suggestion of 'roughly halved' or 'across the whole book' as fallback wording edges toward quantification without data, though it is framed as honest scope
+- The gap is buried in fix 5 and not listed among the reasons that decide the verdict in 'What sinks it'
 
 ## Defects to fix in the skill
 
-- The skill does not tell the agent to weight a gap or other screen-out risk in its impact ordering, so the gap ended up bundled into the last fix
-- No guidance on keeping the output compact; the response is long relative to a first-screen triage
-- Placeholder guidance is not strict enough: it permits qualitative phrases like 'roughly halved' alongside bracketed prompts
+- The skill does not require the employment gap to be weighed in the verdict reasons or placed in a prominent fix, so it can end up buried in a catch-all fix
+- The skill does not require an explicit impact-ranking rationale for the fix order
+- The skill output includes soft heuristics (e.g. '6–8 seconds', 'gaps over roughly six months') without sourcing; the skill could tell the agent to drop or caveat these
 
 ## What it did
 

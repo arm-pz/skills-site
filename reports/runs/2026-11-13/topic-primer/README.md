@@ -1,8 +1,8 @@
 # topic-primer: real-world run, 2026-11-13
 
-**Verdict: PARTIAL** (6/10). The skill gave a correct, code-flavoured primer and caught the misconception (cash debit, revenue credit, with the sum-to-zero reason), but the first turn dumped eight steps of lecture and never asked a background question first, and the later turns only partly recovered.
+**Verdict: PARTIAL** (6/10). The skill gave a code-analogy primer and correctly caught the 'both are debits' misconception (Cash +100 debit, Revenue -100 credit), but it front-loaded a long lecture before asking anything and issued multiple mini-checks in one output instead of one question at a time.
 
-Target: teaching double-entry bookkeeping to a software engineer from zero. Run headless in a clean project with only this skill installed (5 turns, 1 tool calls, 39 s, $0.24).
+Target: teaching double-entry bookkeeping to a software engineer from zero. Run headless in a clean project with only this skill installed (5 turns, 1 tool calls, 39 s, $0.27).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -36,24 +36,24 @@ My guess: when we make a sale for £100 cash, cash goes up by 100 and revenue go
 
 ## Met
 
-- Adapts to the engineer background: signed-amount Python dicts, checksum, append-only log, materialized view, test-suite analogies
-- Explains accounts, debits/credits and the accounting equation correctly: five account types, normal balances, Assets = Liabilities + Equity, worked examples that balance
-- Catches the planted misconception: states that cash is a debit (+100) and revenue a credit (-100), and explains that debit is not a synonym for increase, using the sum-to-zero rule
-- Checks understanding with exercises: the prepaid-revenue mini-check, the rent-sign question, and a final 'Your turn' writing the software subscription lines
+- Adapts to the engineer background: signed-amount transactions in Python, dict/key analogy for accounts, checksum, append-only log, materialized view, test suite for trial balance
+- Explains accounts, debits/credits and the accounting equation correctly (Assets = Liabilities + Equity, normal balances, five account types, worked examples that each net to zero)
+- Catches the planted misconception: states that debit is not a synonym for increase, shows Cash debit (+100) and Revenue credit (-100), and explains why two debits would sum to 200 and fail the zero rule
+- Checks understanding with exercises: a mini-check on prepaid revenue, a rent sign question, and a 'your turn' £30 software subscription entry
 
 ## Missed
 
-- Does not ask one question at a time and wait: the first turn delivered a long multi-step lecture before any question about the user's background, so the later 'My last message moved too fast' correction is the skill's own failure
-- The first turn's mini-check asked three things at once (which account to debit, which to credit, and the type of the credit account), so it was not a single question
-- The first-turn lecture introduced journal, GL, trial balance, accrual basis and deferred revenue before the user had shown any understanding, which is lecturing rather than checking
-- The misconception reply says 'both are debits' is wrong but did not first ask the user to test it against the sum-to-zero rule themselves, so it corrected directly instead of guiding discovery
-- The follow-up reply states 'Revenue is recorded as a negative number' and 'accountants call revenue a credit-balance account' without a worked check that the user's own £100 sale balances, leaving a small gap in the explanation
+- Does not ask one question at a time and wait: the first block is a full 8-step lecture ending in a mini-check, then a second block with another mini-check, then a third with a further exercise, all in one output with no pause for the user's answer
+- Opens with a large lecture before diagnosing the learner; the background question was only effectively answered by the follow-up, and the first block ignored the engineer's level of detail (e.g. mixed $ and £, introduced accrual, deferred revenue and prepayment before basics)
+- Mini-check in the first block (prepaid $1,200) was too advanced and was then self-retracted ('ignore its mini-check'), showing poor pacing
+- Currency inconsistency ($ in examples, £ in the user's scenario) and the first block's content duplicates later blocks
 
 ## Defects to fix in the skill
 
-- The skill does not enforce asking the learner's background and level before teaching, so the first turn was a full lecture with the questions arriving afterwards
-- The skill promises one question at a time, but nothing prevents a multi-part mini-check or a long multi-section dump in a single turn
-- The skill's output is a fixed 'foundation' document structure that front-loads content, which conflicts with an interactive, paced approach and had to be recovered through user feedback
+- The skill does not enforce a hard stop after a single question, so the model emitted multiple turns' worth of content and several questions in one response
+- The skill lets the model deliver a full multi-step primer before the learner's level is known; it should ask the background question first and wait, then teach in small steps
+- No guidance to keep a mini-check within what has been taught so far, which led to a prepaid-revenue/liability question before liabilities were explained
+- No instruction to keep consistent currency or to match the learner's stated currency
 
 ## What it did
 

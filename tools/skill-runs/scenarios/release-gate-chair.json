@@ -1,0 +1,43 @@
+{
+  "skill": "release-gate-chair",
+  "fixtures": "vuln-app",
+  "setup": "(nohup node server.js > .server.log 2>&1 & echo $! > .server.pid) && for i in $(seq 1 20); do curl -s -o /dev/null http://127.0.0.1:3100/ && break; sleep 0.5; done",
+  "teardown": "kill $(cat .server.pid) 2>/dev/null; rm -f .server.pid .server.log",
+  "allow": [
+    "Bash(curl:*)",
+    "Bash(node:*)",
+    "Bash(npx lighthouse:*)",
+    "Bash(npx -y lighthouse:*)",
+    "Bash(kill:*)",
+    "Bash(sleep:*)"
+  ],
+  "install": [
+    "release-gate-chair",
+    "web-preflight",
+    "pre-ship-security-red-team",
+    "pre-ship-performance-audit"
+  ],
+  "undeny": [
+    "Bash(curl -X POST:*)",
+    "Bash(curl --request POST:*)"
+  ],
+  "target": "Invoicely, a local invoicing app with 6 planted authorization and session flaws",
+  "prompt": "Run the release gate on Invoicely before launch. It's running locally at http://127.0.0.1:3100 (source in server.js, accounts in README.md); it isn't deployed anywhere yet, so the exposure lane can only check the local server. Give me each lane's verdict and the overall posture.",
+  "checks": [
+    {
+      "desc": "overall posture is HOLD",
+      "re": "\\bHOLD\\b"
+    }
+  ],
+  "ground_truth": "cat \"$SKILL_RUNS/truth_vuln.md\"",
+  "max_turns": 200,
+  "budget_usd": 15,
+  "timeout_s": 3600,
+  "rubric": [
+    "Runs the three lanes in order and keeps three separate verdicts (a pass in one lane never covers another)",
+    "Records each lane into one ledger",
+    "The security lane finds the planted critical flaws (IDOR, open admin API, mass-assignment escalation) with evidence",
+    "The overall posture is HOLD, computed by the script, with the blocking findings named",
+    "Lanes it could not run fully are marked untested/inconclusive, never passed"
+  ]
+}

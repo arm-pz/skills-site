@@ -1,0 +1,15 @@
+{
+  "skill": "skill-estate",
+  "target": "seven arm-pz skill repos and the live skillsmith.tech listing (inventory phase only)",
+  "setup": "git clone -q --depth 1 https://github.com/arm-pz/keyword-guard repos/keyword-guard && git clone -q --depth 1 https://github.com/arm-pz/keyword-resolver repos/keyword-resolver && git clone -q --depth 1 https://github.com/arm-pz/seo-polish repos/seo-polish && git clone -q --depth 1 https://github.com/arm-pz/wordsmith repos/wordsmith && git clone -q --depth 1 https://github.com/arm-pz/choose-effort repos/choose-effort && git clone -q --depth 1 https://github.com/arm-pz/straight-prose repos/straight-prose && git clone -q --depth 1 https://github.com/arm-pz/session-retrace repos/session-retrace && curl -s https://skillsmith.tech/.well-known/agent-skills/index.json -o listing-index.json",
+  "prompt": "Run phase 1 of skill-estate on the repos in repos/: inventory every repo and reconcile it against the live listing (listing-index.json). Stop at the end of phase 1 and report; change nothing public.",
+  "ground_truth": "for d in repos/*; do printf '%s: ' $(basename $d); find $d -name SKILL.md -not -path '*/.git/*' | wc -l; done; python3 -c \"import json;print('listed:',len(json.load(open('listing-index.json')).get('skills',[])))\"",
+  "max_turns": 80,
+  "budget_usd": 6,
+  "rubric": [
+    "Inventories each of the seven repos (SKILL.md location, version, license, README) accurately",
+    "Reconciles each against the live listing and names real mismatches",
+    "Stops at the phase-1 gate and changes nothing public",
+    "Invents nothing about repos it did not read"
+  ]
+}

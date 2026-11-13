@@ -1,8 +1,8 @@
 # platform-content: real-world run, 2026-11-13
 
-**Verdict: PARTIAL** (7/10). Delivered a LinkedIn post and a 6-post X thread, each with hook, body and a no-card 14-day trial CTA, using the 3.5→1 day figure (n=24) and the attributed Stackwise quote, with no SOC 2, AI or QuickBooks-integration claim. It adds an unsourced '2–4 days at most UK SaaS companies' market stat and a 'yet' that hints at a QuickBooks roadmap.
+**Verdict: PARTIAL** (7/10). Produced a LinkedIn post and a 6-post X thread, each with hook, body and a no-card 14-day trial CTA, using the 3.5→1 day (n=24) figure and the Stackwise quote with attribution and no SOC 2 or AI claims, but it mentions QuickBooks with a roadmap-implying 'yet' and adds unsourced framing.
 
-Target: a real-shaped B2B fintech product brief with claims it must not make. Run headless in a clean project with only this skill installed (4 turns, 2 tool calls, 23 s, $0.1).
+Target: a real-shaped B2B fintech product brief with claims it must not make. Run headless in a clean project with only this skill installed (4 turns, 2 tool calls, 23 s, $0.13).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -26,27 +26,25 @@ Using brief.md, write me a LinkedIn post and a 6-post X thread to promote Reconc
 
 ## Met
 
-- LinkedIn post and a 6-post thread, each with a hook, body and trial CTA (14-day free trial, no card, link placeholder)
-- Platform-native: LinkedIn has a two-line pre-fold hook and short paragraphs; the thread is numbered 1/ to 6/ with one idea per post
-- The 3.5→1 day median is labelled as the onboarding survey (n=24), and the Stackwise quote is attributed to Hana Ito, Finance Lead
-- No SOC 2 claim and no AI claim; QuickBooks is not claimed as an integration (hard checks pass)
-- Plain, dry voice with concrete detail (fees, refunds, partials, payout vs invoice) and little hype
-- Flags gaps honestly: missing links, baselines, and a reminder to check the quote is approved for social use
+- LinkedIn post and exactly 6 numbered X posts (1/ to 6/), each with hook, body and trial CTA
+- Platform-native shape: LinkedIn has a two-line hook before 'see more' and short paragraphs; the thread has numbered posts, each short
+- Proof limited to the brief's figures: 31 customers (in the gaps note), 3.5→1 day median, n=24 survey, Hana Ito/Stackwise quote, all attributed
+- No SOC 2 claim and no AI claim
+- Dry, plain, specific voice with no hype
 
 ## Missed
 
-- Both assets open with 'month-end close takes 2–4 days' at 'most UK SaaS companies'. This is a market-wide statistic stated as fact, and it is not among the brief's proof points (31 customers, 3.5→1 day, n=24, quote). It reads as invented or unsourced.
-- The LinkedIn body says 'It doesn't have a QuickBooks integration yet'. The word 'yet' implies a roadmap and puts QuickBooks in the copy, which risks the forbidden claim. Saying 'Xero only' would have been safer.
-- The 31-customer figure is never used in the copy, although it is part of the brief's proof set.
-- Asserts that mismatches go unnoticed 'for weeks' and 'often', which is unsupported generalisation beyond the brief's proof.
-- Adds pricing tiers (£149/£349) and an emoji (🧵) to a thread meant to be dry. The pricing is possibly from the brief, but I could not verify it from the transcript.
-- Adds extras not asked for: a comment variant, TEST sections, and a 'next step' pointing to a landing page and email sequence.
+- The LinkedIn body and thread post 6 raise QuickBooks ('doesn't have a QuickBooks integration yet'). The 'yet' implies a roadmap, which the brief likely does not support. The assumptions line also says QuickBooks was left out, which contradicts this.
+- The hook 'Month-end close at most UK SaaS companies takes 2–4 days' is an industry-wide statistic, and I can't confirm it comes from the brief. Both hooks lean on it.
+- The LinkedIn post says 'the median customer cut close from 3.5 to 1', which generalises from a survey of 24 respondents to customers as a whole.
+- Thread post 4 gives a tip (sort payouts by variance) that is not in the brief. The LinkedIn TEST note cites 'commonly reported' LinkedIn link-reach behaviour with no source.
+- The output adds a lot of scaffolding (TEST blocks, comment variant, GAPS, next-step upsell) beyond the two requested assets.
 
 ## Defects to fix in the skill
 
-- The skill does not tell the agent to restrict statistics to the brief's stated proof or to mark any outside industry benchmark as unsourced.
-- It has no rule on how to handle a forbidden-claim topic such as QuickBooks: omit it entirely, and never imply it is coming ('yet').
-- The output template adds sections (comment variant, TEST, next-step handoff) that go beyond the requested deliverables and clutter the output.
+- The skill does not tell the agent to leave forbidden or unsupported items out entirely, including negations like 'not yet' that imply a roadmap.
+- The skill does not forbid unsourced industry statistics or platform-behaviour claims, so they appear in hooks and test notes.
+- The output template adds extra blocks (TEST, comment variant, next-step handoff) that bloat the deliverable when the user asked for two assets.
 
 ## What it did
 
