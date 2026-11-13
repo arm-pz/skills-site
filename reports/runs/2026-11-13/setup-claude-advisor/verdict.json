@@ -1,0 +1,39 @@
+{
+  "skill": "setup-claude-advisor",
+  "date": "2026-11-13",
+  "target": "a fresh Claude Code install (isolated home directory)",
+  "verdict": "PARTIAL",
+  "score": 4,
+  "summary": "The run showed a complete plan (settings.json with model=sonnet and advisorModel=opus, 3 subagents, an advisor section in CLAUDE.md) and waited for approval, but the Bash pre-flight and all 5 Write calls were denied, so nothing was written and the CLI version and env vars were never read.",
+  "checks": [
+    {
+      "desc": "wrote ~/.claude/settings.json",
+      "ok": false,
+      "detail": ""
+    }
+  ],
+  "met": [
+    "Read the existing ~/.claude/settings.json and CLAUDE.md and globbed for existing agents, found none, and reported that before proposing",
+    "Showed the full diff-style plan and stopped for approval before any write was attempted",
+    "Used plausible, real-looking settings keys and models (model, advisorModel, sonnet/opus/haiku aliases, tools/model frontmatter), and the plan stayed consistent with the reference file it read",
+    "Did not try to work around the permission denial, and reported honestly that nothing was written"
+  ],
+  "missed": [
+    "Claude Code version and env vars were not checked: the Bash call was denied, and the report pushed that work onto the user",
+    "After approval, none of the five files were created (settings.json, the 3 agent files, CLAUDE.md); all writes were denied, so the hard check 'wrote ~/.claude/settings.json' failed",
+    "The advisory section in ~/.claude/CLAUDE.md was never written",
+    "Assumed ~/.claude was the /tmp/... home path inferred from a memory path, not confirmed"
+  ],
+  "skill_defects": [
+    "No fallback or early detection for a restricted permission mode: the skill attempted Bash and Write blindly and only discovered the denials at apply time, so the user got a plan but no result",
+    "The pre-flight step depends on Bash, with no instruction to fall back to Read/Glob checks or to ask the user for the version/env output up front",
+    "The skill does not say how to confirm which directory ~/.claude resolves to in an isolated home before proposing paths",
+    "The 'haiku resolved to Haiku 4.5 before 2.1.293' claim and the advisorModel key are stated as fact without a verification step, so they should be checked against the reference"
+  ],
+  "cost_usd": 0.24,
+  "turns": 15,
+  "seconds": 27,
+  "tool_calls": 12,
+  "files": [],
+  "error": ""
+}

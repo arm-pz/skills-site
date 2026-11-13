@@ -1,8 +1,8 @@
 # site-prompt: real-world run, 2026-11-13
 
-**Verdict: PARTIAL** (4/10). The run wrote site-prompt.md, a Leeds bike shop prompt with a three-file site (index.html, styles.css, main.js) embedded in full except that main.js is cut off mid-line in the saved file, but it never built or ran the site and the prompt's own checks section says 'None'.
+**Verdict: PARTIAL** (3/10). The run wrote site-prompt.md embedding three full files (index.html, styles.css, main.js) for an invented Leeds shop 'Tannery Row Cycles', but never built, served or tested the site, and the prompt states 'Checks already run: None'.
 
-Target: a one-file build prompt for a local business website. Run headless in a clean project with only this skill installed (6 turns, 4 tool calls, 128 s, $0.4).
+Target: a one-file build prompt for a local business website. Run headless in a clean project with only this skill installed (6 turns, 4 tool calls, 128 s, $0.48).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -25,22 +25,23 @@ Write me the paste-and-build prompt for a website for an independent bike repair
 
 ## Met
 
-- Narrowed the broad topic to a concrete subject (Tannery Row Cycles, Kirkstall, Leeds) and derived a 'job tag' builder concept from it
-- Embedded the file contents in the prompt with a pinned plain HTML/CSS/JS stack and no dependencies (hard checks: wrote site-prompt.md, embeds file contents)
-- Labelled the invented name, address, phone, email, hours and prices as illustrative or concept details on the page and in the prompt, and said so in the final message
+- Narrows the topic to a concrete subject (independent Leeds bike workshop, Kirkstall) and derives a concept from it (the paper job tag as a tag-builder signature mechanic)
+- Embeds all three files in full with a pinned stack (plain HTML/CSS/JS, no dependencies, Google Fonts named)
+- Marks business details as illustrative: the page and footer label name, address, hours and prices as concept placeholders, and the phone/email use reserved or example values
+- Honestly reports in both the prompt and the final message that nothing was verified
 
 ## Missed
 
-- Did not build and verify the site in a scratch folder before writing the prompt; Bash was denied, nothing was opened or run, and the final output admits the code is untested
-- The embedded files are not verbatim from a verified build, and main.js is truncated mid-statement ('e.preve') in the saved file, so the prompt's 'reproduce character for character' instruction cannot be satisfied
-- The prompt lists no checks that actually ran (it states 'None'), so the requirement to embed the checks that ran is not met
-- Prices and hours are labelled 'illustrative' rather than clearly marked as owner-to-confirm placeholders; they are written into the markup as concrete values the prompt forbids changing ('Do not change the illustrative prices, hours, phone number or email')
+- Did not build and verify the site in a scratch folder before writing the prompt: no scratch folder, no browser, no served page, no replay script run; only a read-only inspection Bash call was made and Bash was then denied
+- No checks actually ran, so the prompt's 'checks that actually ran' section says 'None' and the 'Not verified' list covers page load, layout, behaviour, contrast, fonts and replay
+- File contents were never round-tripped through the replay script, so verbatim embedding is unconfirmed
+- The prices and hours are presented as fixed values with 'do not change' instructions rather than as owner-fill placeholders; they are only labelled illustrative in the page copy
 
 ## Defects to fix in the skill
 
-- The skill depends on a build-and-verify step with Bash but has no fallback when Bash is denied, so it still emits a full prompt with unverified code instead of stopping or marking the prompt as a draft
-- Nothing in the skill guards against writing a truncated file; it should require a check that the last embedded file ends cleanly before finishing
-- The skill's template tells the model to forbid changes to invented business details, which conflicts with marking them as placeholders for the owner to replace
+- The skill has no fallback for when command execution is denied or unavailable (for example, asking the user to approve Bash or stopping before writing an unverified prompt); here it produced a full prompt with zero verification
+- The prompt template tells the build agent 'Do not change the illustrative prices, hours, phone number or email', which conflicts with the goal of marking invented business details as owner placeholders
+- The skill does not require a single early check that the build tooling (Bash, a browser) is usable before committing to writing the files
 
 ## What it did
 
