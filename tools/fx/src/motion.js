@@ -175,6 +175,21 @@ if (!reduced) {
     });
   }
 
+  /* pipelines: each workflow runs once as it scrolls in, job by job */
+  $$('.flows.roast .flow-steps').forEach((ol) => {
+    const jobs = $$('li', ol);
+    jobs.forEach((li) => { li.setAttribute('data-run', 'wait'); const st = document.createElement('span'); st.className = 'st'; li.prepend(st); });
+    ScrollTrigger.create({
+      trigger: ol, start: 'top 82%', once: true,
+      onEnter() {
+        jobs.forEach((li, i) => {
+          setTimeout(() => li.setAttribute('data-run', 'run'), 120 + i * 620);
+          setTimeout(() => li.setAttribute('data-run', 'done'), 120 + i * 620 + 560);
+        });
+      },
+    });
+  });
+
   /* parallax: the big marks move against the scroll */
   if ($('.band-mark')) gsap.fromTo('.band-mark', { yPercent: 8 }, { yPercent: -14, ease: 'none', scrollTrigger: { trigger: '.band', start: 'top bottom', end: 'bottom top', scrub: true } });
   if ($('.proof')) gsap.fromTo('.proof', { '--py': '0px' }, { '--py': '200px', ease: 'none', scrollTrigger: { trigger: '.proof', start: 'top bottom', end: 'bottom top', scrub: true } });
