@@ -1,8 +1,8 @@
 # ai-team-blueprint: real-world run, 2026-11-13
 
-**Verdict: PARTIAL** (4/10). The skill asked five questions (re-asking things already answered in the prompt), then recommended receipt/statement chasing and sketched a 3-agent team, but stopped before delivering the production prompts, workflow, tool stack, QA plan or 7-day launch plan.
+**Verdict: PARTIAL** (7/10). The run asked five questions first, recommended the receipt/statement chase, and wrote a 3-agent blueprint with prompts, approval gates, a QA plan and a 7-day plan, but its price figures are unsupported estimates and it did not ask again after the user's answers left the setup-time question unanswered.
 
-Target: a 2-person accounting practice that wants an AI team. Run headless in a clean project with only this skill installed (5 turns, 2 tool calls, 29 s, $0.13).
+Target: a 2-person accounting practice that wants an AI team. Run headless in a clean project with only this skill installed (7 turns, 3 tool calls, 75 s, $0.32).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -15,6 +15,12 @@ Follow-up:
 
 ```
 1) Biggest time sink: chasing clients for missing receipts and bank statements each month, about 25 hours. 2) We use Xero, Gmail, Google Drive, Dext. 3) Budget up to £200/month. 4) I'm comfortable with no-code tools, not code. 5) Nothing can be sent to a client without one of us approving it.
+```
+
+Follow-up:
+
+```
+Those are all my answers. Go ahead and deliver the full blueprint now.
 ```
 
 ## Rubric
@@ -31,91 +37,120 @@ Follow-up:
 
 ## Met
 
-- Recommends one starting use case that matches the answers (missing-records chasing, scored 18 vs 13 and 16)
-- Approval constraint is acknowledged: drafts go to Gmail drafts only and nothing is auto-sent
-- Invents no specific tool prices or features; the £200 budget claim is hedged as an assumption
-- Sketches a 3-agent team shape (Gap Finder, Chaser Drafter, Tracker and Reviewer)
+- Asked five sharp questions before designing and stopped to wait for answers
+- Recommended one starting use case (missing-records chase) matching the user's 25-hour receipt/statement chasing answer, with a comparison against two alternatives
+- Delivered 3 agents, each with a production XML-style prompt, plus a handoff workflow with three partner review points and a retry cap
+- Respected the approval constraint: every prompt escalates before sending, agents never send or write to Xero, and the workflow has partner approval before any email
+- Stayed within the £200 budget: tool stack totals about £50–£100/month
+- Included a QA plan (failure modes, pre-launch tests, metrics) and a 7-day launch plan with a START HERE FIRST section
+- Flagged UK GDPR and data minimisation, and told the user to enter credentials in the tool's own connection screen, not in chat
 
 ## Missed
 
-- Did not wait after the questions: the same output block asked five questions and then went on to the scoring table and recommendation without any user reply
-- Questions weren't tailored to what the user had already said: it asked about skills, software and the use case/first task again, though the user had stated the tools, no-code comfort and the biggest time sink
-- No production prompt per agent was delivered; only one-line descriptions of the agents
-- No handoff workflow was written, only a list of three agents
-- No tool stack with costs was given, so the £200 budget was asserted ('covers Make or Zapier and Claude with room to spare') rather than shown
-- No QA plan delivered
-- No 7-day launch plan delivered
-- Ended by asking 'Shall I go ahead?' for the full blueprint even though the user had already supplied all five answers in the follow-up, which adds a pointless extra turn
+- Tool prices are invented estimates (Claude about £20–£30 per seat, Make/Zapier about £10–£30/month, total £50–£100) with no source; the final message only says 'check current pricing'
+- Claimed Make or Zapier can pull Xero/Dext exports and create Gmail drafts, and that Claude Projects can be set up per agent, without verifying these capabilities
+- The 'realistic saving of 12–18 of those 25 hours' and the 'under 12 hours by month 3' target are not grounded in anything the user said
+- Setup/review time was never answered by the user; the run assumed 3 hrs/week and 2–3 hrs/week instead of asking again, though it did state the assumption
+- The assumed Dext matching and 'Xero bank transactions with attachment status' export formats are asserted without support
 
 ## Defects to fix in the skill
 
-- The skill's gating (ask, then wait for a yes before the blueprint) does not handle a follow-up that already answers the questions; it should go straight to the full blueprint once the answers are in
-- The skill doesn't tell the agent to skip questions the user has already answered in the prompt or follow-up, so it re-asked skills, software and use case
-- The questions and the recommendation were produced in one response, so the 'ask first and wait' step is not enforced
-- The confirmation step ('wait for your yes') adds a turn when the user has clearly asked for the team to be built
-- Only one tool call (reading references/use-cases.md) was made; the skill gives no instruction to load other references that would feed the prompts, QA and launch plan
+- The skill does not tell the agent to label tool prices as unverified or to avoid numeric price ranges when it cannot check current pricing
+- The skill does not require the agent to confirm that a proposed integration (e.g. Make/Zapier with Xero, Dext, Gmail drafts) actually exists, or to present it as a thing to verify
+- The skill does not require the 'sharp questions' to be re-asked when a follow-up leaves some unanswered (here, setup hours and the 90-day outcome); the run silently substituted assumptions
+- The skill does not ask for impact estimates (hours saved) to be labelled as assumptions rather than predictions
 
 ## What it did
 
 1. `Skill: ai-team-blueprint`
-1. `Bash: cd /tmp/run-ai-team-blueprint-zt5xuthv/project/.claude/skills/ai-team-blueprint && ls references && cat references/use-cases.md`
+1. `Read: /tmp/run-ai-team-blueprint-todjemr0/project/.claude/skills/ai-team-blueprint/references/blueprint-template.md`
+1. `Write: /tmp/run-ai-team-blueprint-todjemr0/project/ai-team-blueprint.md`
+
+## Files it wrote
+
+Copied under `files/`:
+
+- `ai-team-blueprint.md`
 
 ## Final output
 
-A two-person practice with 40 clients is a good fit for a small AI team. Before I recommend where to start, I need five answers. I've left out anything you've already told me.
+Bookkeeping for 40 small UK businesses is a good fit for an AI team. The work is repetitive, rules-based and document-heavy. Five questions first, so I recommend the right starting point and don't guess. Answer briefly, or say "assume" on any of them.
 
-1. **90-day outcome:** What do you want from this? For example, hours saved a week, room to take on more clients without hiring, fewer late filings, or faster month-end close.
-2. **Skills:** Which of these can you do? Edit spreadsheets, build no-code automations (Zapier or Make), or write a little code. Also, which software do you use (Xero, QuickBooks, FreeAgent, Dext, something else)?
-3. **Time:** How many hours a week can the two of you give to setting this up, and then to running and checking it?
-4. **Use case:** Do you already have one in mind? Common candidates are:
-   - chasing clients for missing records and receipts
-   - bank and receipt categorisation prep
-   - month-end review checks
-   - VAT, payroll and deadline tracking
-   - client email triage
-   - management-report commentary
-5. **First task:** What is the one concrete task you'd most like off your plate? Tell me roughly how often it comes up and how long it takes.
+1. **90-day outcome:** What do you want from this? For example, hours saved per month, taking on more clients without hiring, or faster month-end turnaround.
+2. **Skills:** Can you work with spreadsheets, use no-code automation (Zapier or Make), or write a little code?
+3. **Time:** How many hours a week can the two of you give to setting this up, and then to reviewing its output?
+4. **Use case in mind:** Do you already have one? Common candidates for a practice like yours:
+   - chasing clients for missing receipts and records
+   - categorising bank transactions and reconciling
+   - VAT and Making Tax Digital deadline tracking and client reminders
+   - client email triage and query replies
+   - month-end summaries and management notes
+5. **First task off your plate:** What's the single most annoying recurring job you'd hand over first?
 
-Two things that will shape the answer, if you can tell me them briefly:
-- Which work is repetitive and rules-based, and which needs a qualified accountant's judgement? I'll keep the second kind with you.
-- Are you comfortable with client data going through an AI tool? This matters for UK GDPR, so I'll build in anonymisation and approval steps either way.
+Some details would also sharpen the recommendation, though you don't have to give them:
+- Which software your clients use (Xero, QuickBooks, FreeAgent, spreadsheets).
+- Which software you use for practice management.
+- Whether client data may be processed by AI tools under your engagement letters and privacy notice. UK GDPR makes this worth confirming early.
 
-Once you reply, I'll compare the top three starting points and recommend one. I'll wait for your yes before writing the full blueprint.
+Once you answer, I'll compare the top three use cases, recommend one for you to approve, then write the full blueprint. It will have 3 agents, their prompts, the handoff workflow, a tool stack, a QA plan and a 7-day launch plan. Every agent will stop for your approval before anything is sent to a client, filed, or changed in your accounting software.
 
 ---
 
-I'd start with **chasing clients for missing receipts and bank statements**. That's the 25-hour job you named, so it's the clear first pick.
+Your answers point to one use case, so I'd start there.
 
-## Top three, scored 1–3
+## Comparison
 
-| Use case | Payoff | Repetition | Checkability | Skill fit | Time fit | Low blast radius | Total |
-|---|---|---|---|---|---|---|---|
-| **A. Missing-records chasing** (Xero/Dext gaps → drafted chaser emails → tracker) | 3 | 3 | 3 | 3 | 3 | 3 | **18** |
-| B. Month-end pre-review (flag odd transactions, uncategorised items, reconciliation gaps for you to review) | 2 | 3 | 2 | 2 | 2 | 2 | 13 |
-| C. Deadline and VAT tracker (client calendar, reminder drafts) | 2 | 2 | 3 | 3 | 3 | 3 | 16 |
+| | Use case | Fit to your answers | Verdict |
+|---|---|---|---|
+| **A** | **Missing-records chase.** Spot which clients are missing receipts or bank statements each month, draft reminders, and track replies. | It is your biggest time sink (about 25 hrs/month). Xero, Dext, Gmail and Drive all feed it. Drafts for your approval match your rule that nothing is sent unapproved. It needs no code and no write access to Xero. | **Recommended** |
+| B | Bank transaction categorisation and reconciliation checks. | It saves time, but Dext and Xero bank rules already cover much of it. Mistakes land in the clients' books, and it needs write access to Xero. | Later |
+| C | VAT/MTD deadline tracking and client reminders. | It's useful, but the time saving is smaller. It is also a natural add-on once A works, since it uses the same reminder flow. | Fold into A in week 2 or later |
 
-**Why A wins:**
-- **Payoff:** it targets your biggest time sink directly.
-- **Cadence:** it repeats every month for all 40 clients.
-- **Checking:** you can judge a chaser email in seconds.
-- **Risk:** nothing is sent without your approval, so a bad draft costs almost nothing.
-- **Tools:** the Xero, Gmail, Drive and Dext stack you already use, plus no-code glue, is enough.
+## Why A
 
-**Why not B or C first:** B needs more accounting judgement, so errors are costlier. C is useful but saves less time. Both make good second steps once A works.
+Your answer to question 1 puts the chase first. The "nothing sent without approval" rule in question 5 suits it, because every message is a draft that you approve. Your tools (Xero, Dext, Gmail, Drive) already hold the data, and Make or Zapier can connect them without code. £200/month covers a Claude plan plus a no-code automation tier. I'd expect a realistic saving of 12–18 of those 25 hours once it's running, with you still reviewing every message.
 
-## Assumptions I'm making
-- **Outcome:** cut the 25 hours a month to roughly 5–8 of review and approval. That's an assumption, so say if your target differs.
-- **Setup time:** you didn't give weekly hours, so I'm assuming 3–4 hours in week one, then about 1 hour a week.
-- **Budget:** the £200 a month covers a no-code tool (Make or Zapier) and Claude usage with room to spare.
-- **Data:** client data stays inside your existing tools. The agents only see the minimum needed (client name, what's missing, due date), and nothing is ever auto-sent.
+## Assumptions
 
-## Likely team shape (3 agents)
-1. **Gap Finder:** works out what's missing per client from Xero/Dext exports.
-2. **Chaser Drafter:** writes a tailored, polite email per client, with escalating tone for repeat chasers. These go into Gmail drafts only.
-3. **Tracker and Reviewer:** logs who's been chased and who has replied, and gives you one approval list.
+- **Setup time:** you didn't give hours per week, so I'm assuming about 3 hrs/week to set up and 2–3 hrs/week to review. Tell me if that's wrong.
+- **Access:** the team reads Xero and Dext data and drafts Gmail messages. It never sends, posts or edits anything itself.
+- **Client data:** please check that your engagement letters and privacy notice allow client data to be processed by AI tools (UK GDPR). I'll build this into the plan as a day-1 task.
 
-Two things I need to check before I build this:
-- **Xero and Dext access:** can you export the missing-items reports to Google Sheets, or does it have to be a manual download? It changes the tool stack but not the plan.
-- **Who approves:** is it one of you per client, or whoever is free? I'll build the approval step around your answer.
+## Your call
 
-**Shall I go ahead with option A and write the full blueprint (agent prompts, workflow, tool stack, QA plan, 7-day launch plan)?** A yes is enough, and you can answer the two questions above in the same reply.
+Reply **yes** and I'll write the full blueprint: 3 agents, a paste-ready prompt for each, the handoff workflow, the tool stack, the QA plan, and a 7-day launch plan ending in **START HERE FIRST**. If you'd rather start with B or C, say so now.
+
+---
+
+I've written the full blueprint to `/tmp/run-ai-team-blueprint-todjemr0/project/ai-team-blueprint.md`. It has a paste-ready prompt for each agent and follows the template section by section.
+
+## The team
+| Agent | Owns | Model |
+|---|---|---|
+| **Gap Spotter** | Monthly Gap Report: which receipts and statements are missing per client, from your Xero and Dext exports | Most capable Claude model |
+| **Chase Drafter** | One draft chase email per client, with the tone set per client | Faster, cheaper model |
+| **Reply Tracker** | Chase Status Board in Google Sheets, re-chase list, weekly escalation list | Faster, cheaper model |
+
+## Flow
+Month-end export, then the Gap Spotter, then **you review the report**. The Chase Drafter writes the emails, then **you approve and send them from Gmail**. The Reply Tracker updates the board weekly, then **you approve re-chases and escalations**.
+
+- The agents never send anything and never write to Xero.
+- Every prompt carries the approval gate, plus triggers to stop and ask, such as a missing export, a sensitive client note or round 3 of a chase.
+- v1 uses manual CSV exports. Add Make or Zapier in week 2 or later to create Gmail drafts only.
+
+## Cost and targets
+- **Cost:** about £50–£100/month, which is inside your £200 budget. These are rough estimates, so check current pricing.
+- **Target:** cut chasing from 25 hours to under 12 a month by month 3.
+- **Quality bar:** at least 70% of drafts approved without edits.
+- **Business metric:** the share of clients with complete records by working day 10.
+
+## Two things to check
+- **UK GDPR:** confirm your engagement letters and privacy notice allow client data to go through AI tools. This is on day 1 of the plan. I also built in data minimisation: no bank account numbers, and exports only.
+- **My assumption on setup time:** I assumed about 3 hrs/week to set up and 2–3 hrs/week to review. The 7-day plan depends on that. If you have less time, stretch the plan to two weeks.
+
+## START HERE FIRST
+1. **(10 min)** Check that your engagement letter and privacy notice cover AI processing of client data.
+2. **(20 min)** Create the client sheet, starting with your 5 most-chased clients.
+3. **(20 min)** Time one client's chase this month, start to finish, as your baseline.
+
+If you later want this built in code with the Claude API, I can hand the team table, prompts and workflow to the `claude-api` skill. Given your no-code preference, I'd stay with Claude Projects and Make for now.
