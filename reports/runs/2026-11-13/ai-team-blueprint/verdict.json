@@ -1,0 +1,38 @@
+{
+  "skill": "ai-team-blueprint",
+  "date": "2026-11-13",
+  "target": "a 2-person accounting practice that wants an AI team",
+  "verdict": "PARTIAL",
+  "score": 4,
+  "summary": "The skill asked five questions (re-asking things already answered in the prompt), then recommended receipt/statement chasing and sketched a 3-agent team, but stopped before delivering the production prompts, workflow, tool stack, QA plan or 7-day launch plan.",
+  "checks": [],
+  "met": [
+    "Recommends one starting use case that matches the answers (missing-records chasing, scored 18 vs 13 and 16)",
+    "Approval constraint is acknowledged: drafts go to Gmail drafts only and nothing is auto-sent",
+    "Invents no specific tool prices or features; the \u00a3200 budget claim is hedged as an assumption",
+    "Sketches a 3-agent team shape (Gap Finder, Chaser Drafter, Tracker and Reviewer)"
+  ],
+  "missed": [
+    "Did not wait after the questions: the same output block asked five questions and then went on to the scoring table and recommendation without any user reply",
+    "Questions weren't tailored to what the user had already said: it asked about skills, software and the use case/first task again, though the user had stated the tools, no-code comfort and the biggest time sink",
+    "No production prompt per agent was delivered; only one-line descriptions of the agents",
+    "No handoff workflow was written, only a list of three agents",
+    "No tool stack with costs was given, so the \u00a3200 budget was asserted ('covers Make or Zapier and Claude with room to spare') rather than shown",
+    "No QA plan delivered",
+    "No 7-day launch plan delivered",
+    "Ended by asking 'Shall I go ahead?' for the full blueprint even though the user had already supplied all five answers in the follow-up, which adds a pointless extra turn"
+  ],
+  "skill_defects": [
+    "The skill's gating (ask, then wait for a yes before the blueprint) does not handle a follow-up that already answers the questions; it should go straight to the full blueprint once the answers are in",
+    "The skill doesn't tell the agent to skip questions the user has already answered in the prompt or follow-up, so it re-asked skills, software and use case",
+    "The questions and the recommendation were produced in one response, so the 'ask first and wait' step is not enforced",
+    "The confirmation step ('wait for your yes') adds a turn when the user has clearly asked for the team to be built",
+    "Only one tool call (reading references/use-cases.md) was made; the skill gives no instruction to load other references that would feed the prompts, QA and launch plan"
+  ],
+  "cost_usd": 0.13,
+  "turns": 5,
+  "seconds": 29,
+  "tool_calls": 2,
+  "files": [],
+  "error": ""
+}

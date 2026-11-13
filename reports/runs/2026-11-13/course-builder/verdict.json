@@ -1,0 +1,49 @@
+{
+  "skill": "course-builder",
+  "date": "2026-11-13",
+  "target": "a 6-week SQL evening workshop for customer success managers",
+  "verdict": "PARTIAL",
+  "score": 7,
+  "summary": "The run wrote course.json for a 6-module, 12-hour SQL workshop with 6 outcomes and a two-criterion rubric, and the checker reported 0 FAIL and 0 WARN, but the transcript shows no fix cycle and gives little evidence for CS-data activities or per-outcome teaching.",
+  "checks": [
+    {
+      "desc": "course.json exists",
+      "ok": true,
+      "detail": "course.json"
+    },
+    {
+      "desc": "check_course.py passes",
+      "ok": true,
+      "detail": "6 outcomes, 6 modules, 12 of 12 hours; 0 FAIL, 0 WARN"
+    }
+  ],
+  "met": [
+    "Outcomes use measurable verbs (write, summarise, join, translate, diagnose, build) with no 'understand' or 'know'",
+    "Six modules of 2 hours each total 12 hours, sequenced with each depending on the previous one",
+    "A rubric is included (correctness and explanation, two criteria)",
+    "Checker was run (python3 scripts/check_course.py) and reported 12 of 12 hours, 0 FAIL, 0 WARN",
+    "course.json exists and the checker passes",
+    "Every outcome appears in at least one module and in the final assessment, per the reported mapping",
+    "Assessments reference CS data (accounts, usage, tickets, renewal risk)"
+  ],
+  "missed": [
+    "Checker was run only once, so there was no demonstration of finding and fixing issues; the 'fixes what it finds' item is satisfied only vacuously",
+    "Churn data is not explicitly used; the activities use accounts, usage, tickets and renewal risk, and the summary does not show learning activities for each module, only assessment evidence",
+    "Rubric is thin: only two criteria, and the summary says nothing about levels beyond 'what the work shows'",
+    "The practice dataset was not built, so the CS-data activities have no concrete data behind them",
+    "The final summary lists O1 through O6 and the assessment mapping, but the transcript does not show whether each module's teaching activities were written into the JSON, only that outcomes map to modules"
+  ],
+  "skill_defects": [
+    "The skill does not require a second checker pass or a recorded fix log, so a clean first run counts as 'fixed what it found'",
+    "The skill does not require the rubric to have multiple levels or a minimum number of criteria",
+    "The skill does not prompt for key unknowns (dialect, homework) before drafting, so these became assumptions"
+  ],
+  "cost_usd": 0.11,
+  "turns": 6,
+  "seconds": 31,
+  "tool_calls": 4,
+  "files": [
+    "course.json"
+  ],
+  "error": ""
+}

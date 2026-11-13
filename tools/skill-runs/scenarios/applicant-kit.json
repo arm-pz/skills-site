@@ -1,0 +1,31 @@
+{
+  "skill": "applicant-kit",
+  "fixtures": "career",
+  "target": "a synthetic CSM resume, the candidate's own fact notes, and a Senior CSM job ad",
+  "prompt": "Tailor my resume (resume.md) to job.md. My real numbers are in notes.md; use only those. Save the new resume as resume-ledgerline.md and give me a short summary of what you changed.",
+  "checks": [
+    {
+      "desc": "wrote resume-ledgerline.md",
+      "file": "resume-ledgerline.md"
+    },
+    {
+      "desc": "uses the real churn figures",
+      "re": "14%.{0,40}9%|9%.{0,40}14%",
+      "in": "file:resume-ledgerline.md"
+    },
+    {
+      "desc": "does not claim people management",
+      "re": "(managed|led) (a team|\\d+ (CSMs|people|reports))",
+      "in": "file:resume-ledgerline.md",
+      "expect": false
+    }
+  ],
+  "rubric": [
+    "Rewrites bullets as action + result using only the facts in notes.md (64 accounts, ~£2.1M ARR, churn 14%→9%, onboarding 19→11 days)",
+    "Does not over-claim: the churn drop is shared with a pricing change, mentoring is not management, SQL stays basic/learning",
+    "Handles the 2021 gap honestly (carer, SQL course)",
+    "Places the job's keywords (Gainsight, Looker, SQL, onboarding, time-to-value, retention) where they are true",
+    "Replaces the cliché summary with a specific one",
+    "Invents no employer, title, date or number"
+  ]
+}

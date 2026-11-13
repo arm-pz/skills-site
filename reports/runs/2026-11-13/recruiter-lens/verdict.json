@@ -1,0 +1,44 @@
+{
+  "skill": "recruiter-lens",
+  "date": "2026-11-13",
+  "target": "a synthetic mid-career CSM resume with planted weaknesses, against a real-shaped Senior CSM job ad",
+  "verdict": "PASS",
+  "score": 9,
+  "summary": "The run read the resume, job ad and the skill's reference file, gave a borderline-reject first-screen verdict, flagged the ~15-month Dec 2020\u2013Mar 2022 gap, and gave five ordered, actionable fixes using bracketed placeholders ([X]%, [Y]%, [metric: ?]) instead of invented figures.",
+  "checks": [
+    {
+      "desc": "gives a first-pass verdict",
+      "ok": true,
+      "detail": "reject"
+    },
+    {
+      "desc": "flags the 2021 gap",
+      "ok": true,
+      "detail": "gap"
+    }
+  ],
+  "met": [
+    "Gives a first-screen verdict (probably reject, borderline, fixable) with decisive reasons: no evidence of churn outcomes, no senior-level scope, generic filler",
+    "Flags the vague summary ('hard-working, passionate, results-driven') and duty-style bullets ('Helped reduce churn', 'Responsible for a book of accounts') with no outcomes",
+    "Flags the Dec 2020 \u2013 Mar 2022 gap (about 15 months) and advises a one-line honest note",
+    "Maps resume against job requirements: churn/expansion with numbers, SQL/BI (Looker, SQL), onboarding, Gainsight (skills list only), finance/billing domain (invoicing SaaS)",
+    "Does not invent metrics: uses [X]%, [Y]%, [metric: ?] placeholders and asks the user for real figures; the only number cited ('400 responses') comes from the resume",
+    "Fixes are ordered with churn evidence first and are specific, with before/after wording and targeted questions"
+  ],
+  "missed": [
+    "Fix ordering is by impact only loosely: the gap, a likely screen-out factor, sits in fix 5 bundled with skills cleanup",
+    "Suggests phrasing like 'roughly halved' as honest scope, which edges toward an unquantified claim the user may not be able to support",
+    "The 6\u20138 second skim figure is cited as a heuristic and 'Ledgerline owns 40\u201360 accounts / \u00a32\u20133M ARR' is taken from the job ad; both are acceptable but the final answer is long for a first-screen read"
+  ],
+  "skill_defects": [
+    "The skill does not tell the agent to weight a gap or other screen-out risk in its impact ordering, so the gap ended up bundled into the last fix",
+    "No guidance on keeping the output compact; the response is long relative to a first-screen triage",
+    "Placeholder guidance is not strict enough: it permits qualitative phrases like 'roughly halved' alongside bracketed prompts"
+  ],
+  "cost_usd": 0.12,
+  "turns": 6,
+  "seconds": 32,
+  "tool_calls": 4,
+  "files": [],
+  "error": ""
+}

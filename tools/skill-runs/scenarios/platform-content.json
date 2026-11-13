@@ -1,0 +1,25 @@
+{
+  "skill": "platform-content",
+  "fixtures": "product",
+  "target": "a real-shaped B2B fintech product brief with claims it must not make",
+  "prompt": "Using brief.md, write me a LinkedIn post and a 6-post X thread to promote Reconcile to UK SaaS finance leads. Goal is trial sign-ups.",
+  "checks": [
+    {
+      "desc": "no SOC 2 claim",
+      "re": "SOC ?2 (certified|compliant)",
+      "expect": false
+    },
+    {
+      "desc": "no QuickBooks integration claim",
+      "re": "(works|integrates) with QuickBooks",
+      "expect": false
+    }
+  ],
+  "rubric": [
+    "LinkedIn post and a 6-post thread, each with hook, body and a trial CTA",
+    "Native to each platform (length, line breaks, thread numbering)",
+    "Uses only the brief's proof (31 customers, 3.5→1 day median, n=24 survey, the Stackwise quote) and attributes it",
+    "Makes none of the forbidden claims (QuickBooks, SOC 2, AI)",
+    "Plain, specific, dry voice as the brief asks"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "skill": "crash-test",
+  "fixtures": "pipeline",
+  "target": "this site's real publish pipeline (publish.yml, sync.py, README) and a proposed redesign",
+  "prompt": "Crash-test this before I build it: replace the hourly publish cron in publish.yml with a repository_dispatch webhook that each skill repo fires on push, and drop the hourly schedule entirely. The current pipeline files are here (publish.yml, sync.py, README.md).",
+  "rubric": [
+    "Runs separate drafts/roles and an adversarial attack round, then a chair synthesis with a dissent log",
+    "Grounds claims about the files in what publish.yml, sync.py and README.md actually say (e.g. the hourly cron also detects renames/removals and live-deploy verification)",
+    "Finds the real risks of dropping the cron (missed webhooks, repos outside the org, renames/deletions, token needed in every repo, deploy-pending check)",
+    "Ends with a clear recommendation (e.g. add dispatch, keep a slower cron as backstop) and what to verify first",
+    "Invents no file contents"
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "skill": "wordsmith",
+  "date": "2026-11-13",
+  "target": "a 200-word product blog post draft with clich\u00e9s, hedges and real numbers",
+  "verdict": "PARTIAL",
+  "score": 6,
+  "summary": "The skill wrote draft-tight.md about 40% shorter, kept 40,000/day, roughly triples, up to six hours, 38 minutes vs 5h50 and the unmeasured-benefit hedge, but it left 'Experts agree' in place, which the rubric required cutting.",
+  "checks": [
+    {
+      "desc": "wrote draft-tight.md",
+      "ok": true,
+      "detail": "draft-tight.md"
+    },
+    {
+      "desc": "keeps the hedge that the customer benefit is unmeasured",
+      "ok": true,
+      "detail": "not measured"
+    },
+    {
+      "desc": "keeps 38 minutes",
+      "ok": true,
+      "detail": "38 minutes"
+    },
+    {
+      "desc": "keeps 40,000",
+      "ok": true,
+      "detail": "40,000"
+    }
+  ],
+  "met": [
+    "Cuts the opening clich\u00e9 and 'testament'",
+    "Cuts 'reimagined' (now 'rebuilt our engine from the ground up')",
+    "Cuts 'not just \u2026 it's smarter, more reliable, more scalable'",
+    "Cuts the emoji sign-off (\ud83d\ude80) and the excited closing",
+    "Keeps all numbers unchanged (40,000 a day, roughly triples, up to six hours, 38 minutes vs 5 hours 50 minutes)",
+    "Keeps the hedge 'may help\u2026 a little sooner, although we have not measured that yet' at the same strength",
+    "Adds no new claims, as far as the summary shows",
+    "Result is reported as about 40% shorter, with a list of cuts provided"
+  ],
+  "missed": [
+    "Did not cut 'Experts agree'; kept it deliberately as the author's claim and only flagged it as vague, though the rubric lists it among the clich\u00e9s to remove",
+    "The 40% shorter figure is the agent's own claim; the transcript shows no word count, and the file contents were not checked"
+  ],
+  "skill_defects": [
+    "The skill gives no guidance on stock authority-appeal phrases such as 'Experts agree'. The agent treated one as protected author content instead of filler to cut or flag, so the skill should list unsourced-authority openers as cut targets.",
+    "The skill does not require checking the saved output, for example by comparing word counts, so the reported percentage is unverified."
+  ],
+  "cost_usd": 0.07,
+  "turns": 5,
+  "seconds": 17,
+  "tool_calls": 3,
+  "files": [
+    "draft-tight.md"
+  ],
+  "error": ""
+}

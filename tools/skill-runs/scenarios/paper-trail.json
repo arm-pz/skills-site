@@ -1,0 +1,29 @@
+{
+  "skill": "paper-trail",
+  "fixtures": "policy",
+  "target": "a real-shaped fact sheet for a UK B2B SaaS that processes invoice data",
+  "prompt": "We're about to start charging for Reconcile. Draft our privacy policy, terms of service, refund policy and cookie notice from facts.md. Save them as privacy.md, terms.md, refunds.md and cookies.md.",
+  "checks": [
+    {
+      "desc": "all four pages written",
+      "cmd": "test -f privacy.md && test -f terms.md && test -f refunds.md && test -f cookies.md"
+    },
+    {
+      "desc": "check_pages.py passes",
+      "cmd": "python3 .claude/skills/paper-trail/scripts/check_pages.py --facts facts.md privacy.md terms.md refunds.md cookies.md"
+    },
+    {
+      "desc": "does not decide the model-training question",
+      "re": "(improve|train)[^.]{0,60}(model|matching)",
+      "in": "file:privacy.md",
+      "expect": false
+    }
+  ],
+  "rubric": [
+    "Four complete pages built only from the fact sheet (processors, regions, retention 30/35 days, refunds only for billing errors, one necessary cookie, Plausible)",
+    "Leaves the company number as a visible gap rather than inventing one",
+    "Does not state either way whether customer data trains models; flags it as undecided",
+    "Distinguishes controller vs processor roles as stated",
+    "Says it is not legal advice and lists what a lawyer should check"
+  ]
+}

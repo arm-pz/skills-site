@@ -1,0 +1,18 @@
+{
+  "skill": "research-brief",
+  "target": "UK Making Tax Digital for Income Tax: thresholds and dates, from public sources",
+  "prompt": "I'm a UK sole trader with about £38,000 of self-employment income plus £9,000 from renting out a flat. When do I have to start using Making Tax Digital for Income Tax, and what exactly changes for me? Cite sources.",
+  "checks": [
+    {
+      "desc": "cites gov.uk",
+      "re": "gov\\.uk"
+    }
+  ],
+  "rubric": [
+    "States the phased thresholds correctly: qualifying income over £50,000 from 6 April 2026, over £30,000 from 6 April 2027, over £20,000 from 6 April 2028",
+    "Explains that qualifying income is gross self-employment plus property income (here about £47,000), so on current rules this person is in from 6 April 2027 (over £30,000), not 2026 (not over £50,000), and that the test uses the income on an earlier tax return",
+    "Lists what changes: quarterly updates via compatible software, digital records, final declaration",
+    "Ties each claim to a cited primary source (gov.uk) and flags anything uncertain or subject to change",
+    "Invents no thresholds, dates or penalties"
+  ]
+}

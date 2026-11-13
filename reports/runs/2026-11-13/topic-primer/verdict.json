@@ -1,0 +1,33 @@
+{
+  "skill": "topic-primer",
+  "date": "2026-11-13",
+  "target": "teaching double-entry bookkeeping to a software engineer from zero",
+  "verdict": "PARTIAL",
+  "score": 6,
+  "summary": "The skill gave a correct, code-flavoured primer and caught the misconception (cash debit, revenue credit, with the sum-to-zero reason), but the first turn dumped eight steps of lecture and never asked a background question first, and the later turns only partly recovered.",
+  "checks": [],
+  "met": [
+    "Adapts to the engineer background: signed-amount Python dicts, checksum, append-only log, materialized view, test-suite analogies",
+    "Explains accounts, debits/credits and the accounting equation correctly: five account types, normal balances, Assets = Liabilities + Equity, worked examples that balance",
+    "Catches the planted misconception: states that cash is a debit (+100) and revenue a credit (-100), and explains that debit is not a synonym for increase, using the sum-to-zero rule",
+    "Checks understanding with exercises: the prepaid-revenue mini-check, the rent-sign question, and a final 'Your turn' writing the software subscription lines"
+  ],
+  "missed": [
+    "Does not ask one question at a time and wait: the first turn delivered a long multi-step lecture before any question about the user's background, so the later 'My last message moved too fast' correction is the skill's own failure",
+    "The first turn's mini-check asked three things at once (which account to debit, which to credit, and the type of the credit account), so it was not a single question",
+    "The first-turn lecture introduced journal, GL, trial balance, accrual basis and deferred revenue before the user had shown any understanding, which is lecturing rather than checking",
+    "The misconception reply says 'both are debits' is wrong but did not first ask the user to test it against the sum-to-zero rule themselves, so it corrected directly instead of guiding discovery",
+    "The follow-up reply states 'Revenue is recorded as a negative number' and 'accountants call revenue a credit-balance account' without a worked check that the user's own \u00a3100 sale balances, leaving a small gap in the explanation"
+  ],
+  "skill_defects": [
+    "The skill does not enforce asking the learner's background and level before teaching, so the first turn was a full lecture with the questions arriving afterwards",
+    "The skill promises one question at a time, but nothing prevents a multi-part mini-check or a long multi-section dump in a single turn",
+    "The skill's output is a fixed 'foundation' document structure that front-loads content, which conflicts with an interactive, paced approach and had to be recovered through user feedback"
+  ],
+  "cost_usd": 0.24,
+  "turns": 5,
+  "seconds": 39,
+  "tool_calls": 1,
+  "files": [],
+  "error": ""
+}

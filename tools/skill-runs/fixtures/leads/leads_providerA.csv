@@ -1,0 +1,11 @@
+first_name,last_name,title,company,domain,employees,country,industry,email
+Priya,Shah,VP Customer Success,Ledgerline,ledgerline.example,180,UK,Fintech SaaS,priya.shah@ledgerline.example
+Tom,Reilly,Head of Customer Success,Quillbook,quillbook.example,95,Ireland,B2B SaaS,tom@quillbook.example
+Grace,Lin,Customer Success Manager,Fernway,fernway.example,240,UK,B2B SaaS,grace.lin@fernway.example
+Info,,,Paystack Labs,paystacklabs.example,320,UK,Fintech SaaS,info@paystacklabs.example
+Owen,Price,Director of Customer Success,Tallyhub,tallyhub.example,410,UK,B2B SaaS,owen.price@tallyhub.example
+Sara,Byrne,CCO,Docket,docket.example,2600,UK,B2B SaaS,sara.byrne@docket.example
+Mark,Hughes,Head of Customer Success,Brightline Talent,brightlinetalent.example,60,UK,Recruitment agency,mark@brightlinetalent.example
+Aoife,Walsh,VP Customer Experience,Ravelin Data,raveldata.example,130,Ireland,B2B SaaS,aoife.walsh@gmail.com
+Ben,Carter,Head of Customer Success,Stackwise,stackwise.example,75,UK,B2B SaaS,ben.carter@stackwise.example
+Leah,Moss,Director of Customer Success,Penny Lane Software,pennylane.example,220,UK,B2B SaaS,leah.moss@pennylane.example

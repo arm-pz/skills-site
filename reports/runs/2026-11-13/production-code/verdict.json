@@ -1,0 +1,55 @@
+{
+  "skill": "production-code",
+  "date": "2026-11-13",
+  "target": "a lead-list cleaning CLI with tests, built on a real-shaped provider export",
+  "verdict": "PARTIAL",
+  "score": 4,
+  "summary": "The agent wrote clean_leads.py and a 12-case test file, but its only Bash call (tests and CLI run) was denied, so nothing was executed or verified; it hand-predicted 6 of 9 rows kept on the sample.",
+  "checks": [
+    {
+      "desc": "clean_leads.py runs on the fixture",
+      "ok": true,
+      "detail": "wrote 7 rows to clean.csv; dropped: role_inbox=1, free_mail=1, over_limit=1"
+    },
+    {
+      "desc": "its unit tests pass",
+      "ok": true,
+      "detail": "----------------------------------------------------------------------\nRan 12 tests in 0.004s\n\nOK"
+    },
+    {
+      "desc": "drops the info@, gmail and 2,600-employee rows",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "met": [
+    "Wrote a stdlib script with argparse, --max-employees (default 500), -o, and exit-1 error messages for a bad file or missing email/employees columns",
+    "Wrote tests covering each rule, the 500/501 boundary, dedupe order, and the CLI end to end",
+    "Gave usage commands and a section-by-section plain-English explanation",
+    "Handled edge cases in the code as described: blank emails, case-insensitive dedupe, missing columns, UTF-8 BOM, +tag, thousands separators",
+    "Reported honestly that nothing was run and labeled the expected output as reasoned by hand, not observed"
+  ],
+  "missed": [
+    "Hard checks 'clean_leads.py runs on the fixture' and 'unit tests pass' were not demonstrated; Bash was denied, so there is no execution evidence",
+    "Test passing could not be confirmed; there was not even a syntax check",
+    "The hand-computed summary is inconsistent: it says 6 of 9 rows are kept but lists 7 names as kept (Priya, Tom, Grace, Owen, Mark, Ben, Leah)",
+    "Setup steps are minimal (Python version note only), with no explicit setup section"
+  ],
+  "skill_defects": [
+    "The skill gives no fallback for when execution is denied, such as a step that falls back to read-only checks like a manual walkthrough or re-reading the code against the fixture",
+    "The skill makes verification depend on Bash in a single combined command, so one denial blocked all checks; it could instruct splitting the commands or asking for permission sooner",
+    "The skill does not require the hand-reasoned expected output to be cross-checked, which allowed the 6-vs-7 kept-row count mismatch to ship"
+  ],
+  "cost_usd": 0.14,
+  "turns": 8,
+  "seconds": 38,
+  "tool_calls": 6,
+  "files": [
+    "__pycache__/clean_leads.cpython-313.pyc",
+    "__pycache__/test_clean_leads.cpython-313.pyc",
+    "clean.csv",
+    "clean_leads.py",
+    "test_clean_leads.py"
+  ],
+  "error": ""
+}

@@ -1,0 +1,44 @@
+{
+  "skill": "tune-skill-mod",
+  "plugins": [
+    "arm-pz/caffeinity-skills:mods/tune-skill-mod"
+  ],
+  "install": [],
+  "fixtures": "skill-repo",
+  "setup": "git init -q -b main && git -c user.email=run@example.com -c user.name=run add -A && git -c user.email=run@example.com -c user.name=run commit -qm init && git init -q --bare ../remote.git && git remote add origin ../remote.git && git push -q origin main",
+  "max_turns": 50,
+  "budget_usd": 5,
+  "undeny": [
+    "Bash(git push:*)"
+  ],
+  "allow": [
+    "Bash(git push:*)",
+    "Bash(git tag:*)"
+  ],
+  "target": "a small skill repo with a local bare remote: edit SKILL.md, then push",
+  "prompt": "In skills/invoice-namer/SKILL.md, add to the description that it also handles .png scans of invoices. Commit it and push to origin main. If anything flags the push, do what it says and tell me what happened.",
+  "checks": [
+    {
+      "desc": "the mod loaded in the session",
+      "re": "tune-skill-mod",
+      "in": "transcript"
+    },
+    {
+      "desc": "the push was flagged after the SKILL.md edit (nudge mode)",
+      "re": "tune-skill-mod: that ran before",
+      "in": "transcript"
+    },
+    {
+      "desc": "tune-skill was then run",
+      "re": "\"skill\":\\s*\"[^\"]*tune-skill\"",
+      "in": "transcript"
+    }
+  ],
+  "ground_truth": "echo '--- commits on the bare remote:'; git --git-dir=../remote.git log --oneline main",
+  "rubric": [
+    "The mod arms only because a SKILL.md was edited",
+    "In nudge mode the push goes through and Claude is told tune-skill has not run since the edit",
+    "Claude runs tune-skill (bundled in the mod) on the edited skill and reports what it found",
+    "The final message matches what the remote actually has"
+  ]
+}

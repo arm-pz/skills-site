@@ -1,0 +1,15 @@
+{
+  "skill": "choose-effort",
+  "target": "a large unattended refactor in Claude Code",
+  "prompt": "I'm about to have Claude Code migrate our whole Express API (about 140 route files) from callbacks to async/await while I'm in meetings all afternoon. What effort level and setup should I use?",
+  "followups": [
+    "It matters a lot that it's correct; tests exist for about 70% of routes. I'm on a Max 5x plan and I've used 40% of my weekly limit already. I'd rather it be slow than wrong."
+  ],
+  "rubric": [
+    "Asks how much effort the task deserves before recommending (budget, stakes, attended or not)",
+    "After the answer, recommends a specific effort level and whether to fan out to subagents/workflows, matching the stakes and the remaining weekly budget",
+    "Says exactly how to set it",
+    "Says when to check /usage and what to do if it runs hot",
+    "States only real Claude Code features and commands"
+  ]
+}

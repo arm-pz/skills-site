@@ -1,0 +1,53 @@
+{
+  "skill": "sales-copy",
+  "date": "2026-11-13",
+  "target": "a real-shaped B2B fintech product brief with claims it must not make",
+  "verdict": "FAIL",
+  "score": 3,
+  "summary": "The run read brief.md and wrote reconcile-copy.md with a landing page and a 3-email sequence that avoids SOC 2, QuickBooks and AI claims, but the hard checks found the prices wrong and the customer quote not used, while the final message says both are exact.",
+  "checks": [
+    {
+      "desc": "no SOC 2 claim",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "desc": "prices are right",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "desc": "uses the customer quote",
+      "ok": false,
+      "detail": ""
+    }
+  ],
+  "met": [
+    "Produced one file containing a landing page and 3 emails, with a trial CTA on the page and one trial link per email",
+    "No SOC 2 claim (hard check passed); the Xero-only and not-yet-SOC 2 limits are stated openly, per the run's own report",
+    "Email 1 is pitched at checklist downloaders (checklist tidies month-end, doesn't shorten it), which suits the awareness level",
+    "Flagged uncertain items for the user instead of inventing them: the mechanism wording, quote permission, the customer count, and the FAQ answers"
+  ],
+  "missed": [
+    "Hard check FAILED: prices are not right, although the final message says they are 'exactly as given'",
+    "Hard check FAILED: the customer quote is not used correctly (not verbatim or not attributed as the check expects), although the final message says it is used verbatim and attributed to Hana Ito",
+    "The final summary contradicts the hard-check results, so its claims about exact prices and the verbatim quote cannot be trusted",
+    "The landing page offers four headline options rather than one committed headline and subheadline",
+    "Several FAQ answers, email sender details and URLs are left as placeholders, so the copy is not ready to use",
+    "The run did not verify its copy against the brief after writing it (only Read and Write were called)"
+  ],
+  "skill_defects": [
+    "The skill has no step to re-read the brief after drafting and check every price, trial term and quote character by character, which is how the wrong prices and quote got through",
+    "The skill does not require a verbatim-facts section (price, trial terms, quote with attribution) to be copied from the brief before drafting",
+    "The skill lets the agent report 'prices exact, quote verbatim' without a check, so its self-report can be false",
+    "The skill does not say to commit to one headline and subheadline, so the agent offers several options and leaves placeholders"
+  ],
+  "cost_usd": 0.12,
+  "turns": 5,
+  "seconds": 41,
+  "tool_calls": 3,
+  "files": [
+    "reconcile-copy.md"
+  ],
+  "error": ""
+}

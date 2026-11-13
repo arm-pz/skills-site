@@ -1,0 +1,22 @@
+{
+  "skill": "course-builder",
+  "target": "a 6-week SQL evening workshop for customer success managers",
+  "prompt": "Design a 6-week evening workshop teaching SQL to 12 customer success managers (2 hours a week, 12 hours total, they use Looker but have never written SQL). Write the plan as course.json in the shape your skill uses, and check it.",
+  "checks": [
+    {
+      "desc": "course.json exists",
+      "file": "course.json"
+    },
+    {
+      "desc": "check_course.py passes",
+      "cmd": "python3 .claude/skills/course-builder/scripts/check_course.py course.json"
+    }
+  ],
+  "rubric": [
+    "Measurable outcomes (no 'understand'/'know')",
+    "Module sequence with prerequisites that fits 12 hours",
+    "Every outcome is taught and assessed; activities use CS data (accounts, churn, tickets)",
+    "Includes a rubric",
+    "Runs the checker and fixes what it finds"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "skill": "data-readout",
+  "date": "2026-11-13",
+  "target": "a 14-day checkout A/B test export (182,000 sessions, two devices) with one planted tracking outage",
+  "verdict": "PASS",
+  "score": 9,
+  "summary": "The run found B's zero orders on 2026-10-09 on both devices, excluded that day, and reported B beating A overall (4.25% vs 3.89%, +9.4%, p=0.0001), with mobile +22.8% (p<0.0001) and desktop flat (\u22120.15 pts, p=0.40), all matching ground truth.",
+  "checks": [
+    {
+      "desc": "names the day-9 gap in variant B",
+      "ok": true,
+      "detail": "10-09"
+    },
+    {
+      "desc": "reports a mobile-specific result",
+      "ok": true,
+      "detail": "mobile"
+    }
+  ],
+  "met": [
+    "Identifies B's zero orders on 2026-10-09 on both devices (4 rows, 8,000 sessions, $0 revenue) and treats it as a likely tracking or deploy fault, labelling the cause as inferred and unconfirmed",
+    "Recomputes without the faulty day: A 3.89% vs B 4.25%, +9.4% relative, p=0.0001, matching the ground truth of z 3.80 and p 0.0001",
+    "Splits by device: mobile 3.01% to 3.70% (+22.8%, p<0.0001) and desktop 5.29% to 5.14% (p=0.40), matching the ground truth",
+    "Recommends not killing B, shipping on mobile with a desktop holdout, investigating the 10-09 outage and extending the desktop test; the gaps section lists what it did not compute (revenue-per-session significance, outage cause, novelty and day-of-week effects)",
+    "Stated numbers match the ground truth or derive from the file (1,923 vs 1,566 mobile orders, 84,500 and 52,000 sessions per arm, 91,000 per arm overall); the pooled all-days figures of 3.89% vs 3.95% and p=0.48 also match"
+  ],
+  "missed": [
+    "Does not report the all-days desktop result (B \u22129.4%, p=0.0026) that appears as significant harm before the outage is removed; it only reports the cleaned desktop figure",
+    "Several derived figures (revenue per session of $1.51 vs $1.24, AOV, \"B above A on all 13 clean days\", about $64 vs $41 per order) are not in the ground truth and cannot be verified from the transcript excerpt, though they are plausibly computed from the file"
+  ],
+  "skill_defects": [
+    "The skill does not require stating the all-days per-device numbers alongside the cleaned ones, so the apparent desktop harm created by the outage goes unmentioned",
+    "The 'ship on mobile' recommendation is stated as firm in the summary while the outage cause is still unconfirmed; the skill could require the recommendation to be conditional on the fault being confirmed"
+  ],
+  "cost_usd": 0.12,
+  "turns": 6,
+  "seconds": 37,
+  "tool_calls": 4,
+  "files": [],
+  "error": ""
+}

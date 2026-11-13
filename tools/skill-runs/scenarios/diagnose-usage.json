@@ -1,0 +1,13 @@
+{
+  "skill": "diagnose-usage",
+  "fixtures": "usage",
+  "target": "a real-shaped /usage breakdown from a session that hit 96% of its window",
+  "prompt": "My session limit is almost gone and it's only 15:40. My /usage is pasted in usage.txt. What burned it and what should I change?",
+  "rubric": [
+    "Reads the breakdown: subagents 61%, opus 88%, workflow 13%",
+    "Ranks the top cause as 14 subagents inheriting opus at xhigh effort via the workflow fan-out, with the numbers",
+    "Names the effort xhigh default set on 3 Nov as a contributing cause",
+    "Gives up to three concrete changes (e.g. subagent model/effort override, lower default effort, cap fan-out) with how to set each",
+    "Does not invent usage numbers or features"
+  ]
+}

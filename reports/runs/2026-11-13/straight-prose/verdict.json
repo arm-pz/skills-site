@@ -1,0 +1,49 @@
+{
+  "skill": "straight-prose",
+  "date": "2026-11-13",
+  "target": "a 200-word product blog post with stock AI-writing patterns",
+  "verdict": "PASS",
+  "score": 8,
+  "summary": "The agent read draft.md, wrote draft-v2.md, and ran slop_scan, which found nothing; the hedge about unmeasured customer benefit was kept, and the agent removed the opener, the closing line with emoji, 'Experts agree' and 'not just faster, it's smarter'.",
+  "checks": [
+    {
+      "desc": "wrote draft-v2.md",
+      "ok": true,
+      "detail": "draft-v2.md"
+    },
+    {
+      "desc": "slop_scan --strict finds nothing in draft-v2.md",
+      "ok": true,
+      "detail": "0 hits: none\nNot checked: groups of three, unlisted inflated wording, voice changes, empty sentences."
+    },
+    {
+      "desc": "keeps the unmeasured hedge",
+      "ok": true,
+      "detail": "n't measured"
+    }
+  ],
+  "met": [
+    "Wrote draft-v2.md",
+    "slop_scan --strict reported no findings on draft-v2.md",
+    "Kept the hedge that faster payment for customers has not been measured",
+    "Removed the inflated opener, the chatbot sign-off with emoji and offer to answer questions, the vague 'Experts agree' attribution and the negative parallelism",
+    "Reported that numbers and engine features were unchanged",
+    "Told the user that the former 'Experts agree' claim now stands as a plain statement and should be checked, rather than hiding the change"
+  ],
+  "missed": [
+    "The transcript does not show the draft-v2 text, so the engineer voice, the absence of added facts and the removal of em dashes and forced threes rest on the scanner and the agent's own summary rather than on visible output",
+    "The agent kept the unsourced late-invoice cash-flow claim as a flat assertion instead of removing or softening it, though it did flag this to the user"
+  ],
+  "skill_defects": [
+    "The skill gives no rule for vague-attribution claims: it should say whether to drop the claim, soften it, or keep it and flag it",
+    "The scanner checks only surface patterns, so nothing in the skill checks whether the rewrite reads like a specific engineer or has added facts"
+  ],
+  "cost_usd": 0.08,
+  "turns": 6,
+  "seconds": 11,
+  "tool_calls": 4,
+  "files": [
+    "draft-v2.md"
+  ],
+  "error": ""
+}

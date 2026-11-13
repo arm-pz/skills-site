@@ -1,0 +1,33 @@
+{
+  "skill": "choose-effort",
+  "date": "2026-11-13",
+  "target": "a large unattended refactor in Claude Code",
+  "verdict": "PARTIAL",
+  "score": 6,
+  "summary": "The agent asked two clarifying questions, then in the same turn recommended `high` effort, mostly serial execution, batches of 10-15 files, and `/usage` checkpoints, but it did not wait for the answers and the plan is hedged.",
+  "checks": [],
+  "met": [
+    "Asked about stakes (cost of being wrong) and usage appetite before recommending, and noted the task is unattended",
+    "Recommended a specific level (`high`) and a fan-out stance (serial or at most a few agents, split by directory), tied to correctness stakes and the 60% remaining weekly budget",
+    "Said how to set it: `/effort high` typed by the user or `claude --effort high`, with `/effort auto` to undo",
+    "Said when to run `/usage` (after the first batch and at the end) and what to do if it runs hot (drop to `medium` for mechanical files)",
+    "Mentioned only real Claude Code features (`/effort`, `/usage`, subagents, permission modes, `claude --effort`)"
+  ],
+  "missed": [
+    "Asked its questions and gave a full recommendation in the same turn, so the recommendation did not follow the user's answers, and the user had already given stakes and budget in the follow-up",
+    "Contradictory framing: it says it will give the `/effort` command once the user answers, then gives it anyway, and earlier text leans toward `medium` while the final recommendation is `high`",
+    "The `/usage` guidance is vague: 'more than about 1/10 of what you can afford' is not a usable threshold for someone unattended, and it does not say what to do if usage runs hot while the user is away, such as a stop condition",
+    "Did not recommend reading the `/effort` confirmation or model support as a firm step, only a hedge ('I haven't checked which levels your model offers')"
+  ],
+  "skill_defects": [
+    "The skill does not distinguish between asking questions and recommending: it lets the agent do both in one turn, producing a response that asks for input and then ignores the need for it",
+    "No guidance on unattended runs for what to do if the budget runs out mid-run, such as a pause or stop rule, so the `/usage` advice is only a one-time checkpoint",
+    "The skill does not tell the agent to use stakes and budget already stated in the user's message instead of re-asking"
+  ],
+  "cost_usd": 0.12,
+  "turns": 4,
+  "seconds": 22,
+  "tool_calls": 1,
+  "files": [],
+  "error": ""
+}

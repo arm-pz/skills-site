@@ -1,0 +1,40 @@
+{
+  "skill": "research-brief",
+  "date": "2026-11-13",
+  "target": "UK Making Tax Digital for Income Tax: thresholds and dates, from public sources",
+  "verdict": "PARTIAL",
+  "score": 7,
+  "summary": "The run correctly concluded the user (about \u00a347,000 combined gross) starts MTD for Income Tax on 6 April 2027 under the \u00a330,000 threshold, citing three fetched gov.uk pages, but it hedged on which tax year is tested, left the 2028 \u00a320,000 threshold as planned, and sourced quarterly dates and penalties only from a search summary.",
+  "checks": [
+    {
+      "desc": "cites gov.uk",
+      "ok": true,
+      "detail": "GOV.UK"
+    }
+  ],
+  "met": [
+    "States the phased thresholds correctly: \u00a350k from 6 April 2026, \u00a330k from 6 April 2027, \u00a320k planned from 6 April 2028, each tied to a fetched gov.uk page",
+    "Explains qualifying income is gross self-employment plus property income, giving about \u00a347,000 combined, so the user is in from 6 April 2027 and not 2026",
+    "Lists what changes: digital records, quarterly updates via compatible software, and the annual return with final declaration",
+    "Cites gov.uk primary sources in a claim table with fetch dates and confidence levels, and flags uncertainty with [unverified], [search summary only] and [my inference] tags plus a Conflicts and Gaps section",
+    "Invents no thresholds or dates; penalty details are flagged as search-summary only"
+  ],
+  "missed": [
+    "Does not firmly establish that the test uses income from an earlier tax return; it says 'I infer' the 2025\u201326 return and marks this [unverified], though the sign-up page reportedly says 'previous year's return'",
+    "Quarterly deadlines, the 31 January deadline and the \u00a3200 at 4 points penalty come from a search summary of a page it never opened, so they are not tied to a read primary source",
+    "The final declaration is mentioned only briefly as part of the annual return, without explaining that it replaces or consolidates the existing process",
+    "The answer is padded with an assumption that the \u00a338k may be turnover or profit, which muddies the clear conclusion; the user's figures give about \u00a347,000 gross either way as the rubric expects",
+    "The 'find out if and when you need to use MTD' page, which would settle the tax-year question, was fetched but the run reports it could not be read, leaving a core point unconfirmed"
+  ],
+  "skill_defects": [
+    "The skill does not require opening the source behind a search-summary claim before reporting it, so dates and penalties ended up resting on an unopened page",
+    "The skill gives no fallback when the key HMRC eligibility page fails to fetch, such as retrying or finding an alternative primary source, so the tax-year-tested point stayed unverified",
+    "The skill's output format (status line, claim table, conflicts, gaps, sources) is heavy for a simple personal question and buries the direct answer"
+  ],
+  "cost_usd": 0.18,
+  "turns": 11,
+  "seconds": 58,
+  "tool_calls": 9,
+  "files": [],
+  "error": ""
+}

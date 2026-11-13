@@ -1,0 +1,19 @@
+/usage — copied from my terminal, Thursday 12 Nov 2026, 15:40
+
+Plan: Max 5x
+Current session (5-hour window): 96% used, resets 17:10
+Weekly limit: 71% used, resets Mon 09:00
+
+This session by model
+  claude-opus-5-5     88%
+  claude-sonnet-5-5    9%
+  claude-haiku-5-5     3%
+
+This session by source
+  Main conversation           21%
+  Subagents (14 launched)     61%
+  Workflow: refactor-sweep    13%
+  Hooks / other                5%
+
+Settings in effect: effort xhigh (set in ~/.claude/settings.json on 3 Nov), model opus, subagent model: inherit
+What I did: one prompt at 13:15 — "refactor the billing module to the new Money type" — it ran the refactor-sweep workflow, which fanned out a subagent per file (14 files). I went to lunch. Normally a day like this uses ~30% of my session window.

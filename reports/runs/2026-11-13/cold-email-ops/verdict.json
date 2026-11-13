@@ -1,0 +1,34 @@
+{
+  "skill": "cold-email-ops",
+  "date": "2026-11-13",
+  "target": "a 60,000-sends-a-month cold-email plan across 4 clients",
+  "verdict": "PARTIAL",
+  "score": 6,
+  "summary": "The plan sizes 60k sends/month at 275 inboxes and 93 domains (about 58 new), with a per-client split and a 1% reply floor, but the burn-replacement cadence, inbox-placement test and automation error budget are thin.",
+  "checks": [],
+  "met": [
+    "Capacity arithmetic is correct and the assumptions are stated (10 sends/inbox/day, 3 inboxes/domain, 22 days): 60,000/22 = 2,727/day, 273 inboxes and 91 domains pooled, 275 inboxes and 93 domains split per client, and 93 - 35 healthy = 58 new domains.",
+    "Capacity is split per client (114/69/55/37 inboxes, 38/23/19/13 domains), and the plan explains why domains are kept separate per client.",
+    "Sets a 1% reply-rate floor per domain, with replacement scheduled rather than continued monitoring, plus a two-consecutive-week falling-slope watch trigger.",
+    "Labels some assumptions as its own (warm-up of 2-4 weeks is 'my rule of thumb') and separates skill defaults from user-provided inputs. It also lists missing data as Unknown or INCONCLUSIVE rather than inventing it."
+  ],
+  "missed": [
+    "Burn-replacement cadence is not sized to last month's 6 burned domains. It uses a generic 6-9 month burn lifetime (30-46 inboxes/month, 7-10/week) and gives no explicit warm-spare pool size or per-month domain replacement number, only 'keep spare inboxes warming'.",
+    "The shadow-ban check is only a heuristic (0% bounce, zero replies, rewrite copy, wait 48 hours). There is no seed-list or inbox-placement test with a defined cadence or pass/fail threshold.",
+    "There is no automation error budget with a number. It explains reliability compounding (0.8^4 \u2248 41%, 0.99^4 \u2248 96%) and asks for an owner, check and blast radius per step, but sets no tolerated failure rate.",
+    "The script was not actually run (the answer says Bash was denied), so the arithmetic is hand-computed and unverified by the skill's tool.",
+    "Not every assumption is flagged as the model's own. Presenting the 70% load on proven inboxes and the 'don't push 15-20/day' guidance as skill-backed or as neutral advice is unclear."
+  ],
+  "skill_defects": [
+    "The skill does not require sizing warm spares from the observed burn count (for example, burned domains per month \u00d7 a buffer factor) and falls back on a generic burn-lifetime figure.",
+    "The skill does not require a concrete inbox-placement or seed test with thresholds, so shadow-ban detection ends up a vague heuristic.",
+    "The skill does not define an automation error budget as a number (acceptable failure rate and blast radius per step), so the output only illustrates compounding reliability.",
+    "The script-dependent workflow has no fallback instruction for when Bash is unavailable, so the run fell back on unverified hand arithmetic."
+  ],
+  "cost_usd": 0.13,
+  "turns": 6,
+  "seconds": 29,
+  "tool_calls": 4,
+  "files": [],
+  "error": ""
+}

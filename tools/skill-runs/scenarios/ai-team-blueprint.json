@@ -1,0 +1,16 @@
+{
+  "skill": "ai-team-blueprint",
+  "target": "a 2-person accounting practice that wants an AI team",
+  "prompt": "I run a two-person bookkeeping practice for 40 small UK businesses. I want an AI team to take work off us. Where do we start?",
+  "followups": [
+    "1) Biggest time sink: chasing clients for missing receipts and bank statements each month, about 25 hours. 2) We use Xero, Gmail, Google Drive, Dext. 3) Budget up to £200/month. 4) I'm comfortable with no-code tools, not code. 5) Nothing can be sent to a client without one of us approving it."
+  ],
+  "rubric": [
+    "Asks its sharp questions before designing (five or so) and waits",
+    "Recommends one starting use case that matches the answers (receipt/statement chasing)",
+    "Delivers a team of 3–5 agents with a production prompt per agent and a handoff workflow",
+    "Respects the human-approval constraint in the workflow and the £200 budget in the tool stack",
+    "Includes a QA plan and a 7-day launch plan",
+    "Invents no tool features or prices it cannot support"
+  ]
+}

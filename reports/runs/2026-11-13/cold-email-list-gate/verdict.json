@@ -1,0 +1,40 @@
+{
+  "skill": "cold-email-list-gate",
+  "date": "2026-11-13",
+  "target": "a 10-row provider sample of a 2,400-row cold-email list against a written ICP",
+  "verdict": "PARTIAL",
+  "score": 7,
+  "summary": "The run returned HOLD after checking all 10 sample rows, correctly finding 4 on ICP and 6 off, with a fail pattern and re-run condition; it misattributed the Ravelin failure, named an unsupported suppression target (Brightfold), and declined to compare provider B on the same criteria.",
+  "checks": [
+    {
+      "desc": "returns HOLD",
+      "ok": true,
+      "detail": "HOLD"
+    }
+  ],
+  "met": [
+    "Checked all 10 rows in a table against size, title, mailbox and exclusions",
+    "Identified exactly 4 on ICP (Ledgerline, Quillbook, Stackwise, Penny Lane) and 6 off, with the right reason for Fernway, Paystack, Tallyhub, Docket and Brightline",
+    "Returned HOLD (hard check met)",
+    "Gave a fail pattern (wrong filter, mailbox quality secondary) and a concrete re-run condition (fresh random 10-row sample after fix, re-quote the count)",
+    "Provider B: noted 8/10, said it is 2 wrong and also HOLD by the same rule, better than A, and asked for actual rows before treating it as a fallback"
+  ],
+  "missed": [
+    "Ravelin was labelled a gmail failure with a title note ('VP Customer Experience' off-spec); the rubric expects CX not CS title as a distinct reason. This was only mentioned in passing and was not counted as a title failure, and the 'Size fit' and 'Mailbox valid' columns do not capture it.",
+    "Required change says 'Suppress Brightfold and Tallyhub'; Brightfold is not a row in the sample (the excluded agency was Brightline Talent), which may be an invented or misnamed entry.",
+    "Provider B was not compared on the same criteria; the run explicitly declined to score it and only restated the README summary, so the implication is thin.",
+    "Cited a 'Will Breton X article of 18 October 2026' as the source of the benchmark; the transcript shows no read that supports this beyond the skill's reference file, so provenance is unverified.",
+    "Said the fail pattern is 'wrong filter' while 4 of the 6 failures are individual-row issues; the claim about what the provider's query does ('doesn't enforce the 50-500 band') is inferred beyond the evidence, including a size floor failure that no row demonstrated."
+  ],
+  "skill_defects": [
+    "The skill does not require comparing the fallback provider on the same criteria or stating a clear implication when only a summary is available, so the run stopped at 'request the rows'.",
+    "The skill's output template has no title-fit column or per-row note guidance that forces every failing reason to be listed, so secondary failures like Ravelin's CX title are buried.",
+    "The skill does not instruct the agent to take exclusion names only from the sample/ICP files, which allowed an unsupported name (Brightfold) into the required changes."
+  ],
+  "cost_usd": 0.09,
+  "turns": 7,
+  "seconds": 25,
+  "tool_calls": 5,
+  "files": [],
+  "error": ""
+}

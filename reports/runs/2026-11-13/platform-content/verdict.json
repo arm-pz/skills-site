@@ -1,0 +1,47 @@
+{
+  "skill": "platform-content",
+  "date": "2026-11-13",
+  "target": "a real-shaped B2B fintech product brief with claims it must not make",
+  "verdict": "PARTIAL",
+  "score": 7,
+  "summary": "Delivered a LinkedIn post and a 6-post X thread, each with hook, body and a no-card 14-day trial CTA, using the 3.5\u21921 day figure (n=24) and the attributed Stackwise quote, with no SOC 2, AI or QuickBooks-integration claim. It adds an unsourced '2\u20134 days at most UK SaaS companies' market stat and a 'yet' that hints at a QuickBooks roadmap.",
+  "checks": [
+    {
+      "desc": "no SOC 2 claim",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "desc": "no QuickBooks integration claim",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "met": [
+    "LinkedIn post and a 6-post thread, each with a hook, body and trial CTA (14-day free trial, no card, link placeholder)",
+    "Platform-native: LinkedIn has a two-line pre-fold hook and short paragraphs; the thread is numbered 1/ to 6/ with one idea per post",
+    "The 3.5\u21921 day median is labelled as the onboarding survey (n=24), and the Stackwise quote is attributed to Hana Ito, Finance Lead",
+    "No SOC 2 claim and no AI claim; QuickBooks is not claimed as an integration (hard checks pass)",
+    "Plain, dry voice with concrete detail (fees, refunds, partials, payout vs invoice) and little hype",
+    "Flags gaps honestly: missing links, baselines, and a reminder to check the quote is approved for social use"
+  ],
+  "missed": [
+    "Both assets open with 'month-end close takes 2\u20134 days' at 'most UK SaaS companies'. This is a market-wide statistic stated as fact, and it is not among the brief's proof points (31 customers, 3.5\u21921 day, n=24, quote). It reads as invented or unsourced.",
+    "The LinkedIn body says 'It doesn't have a QuickBooks integration yet'. The word 'yet' implies a roadmap and puts QuickBooks in the copy, which risks the forbidden claim. Saying 'Xero only' would have been safer.",
+    "The 31-customer figure is never used in the copy, although it is part of the brief's proof set.",
+    "Asserts that mismatches go unnoticed 'for weeks' and 'often', which is unsupported generalisation beyond the brief's proof.",
+    "Adds pricing tiers (\u00a3149/\u00a3349) and an emoji (\ud83e\uddf5) to a thread meant to be dry. The pricing is possibly from the brief, but I could not verify it from the transcript.",
+    "Adds extras not asked for: a comment variant, TEST sections, and a 'next step' pointing to a landing page and email sequence."
+  ],
+  "skill_defects": [
+    "The skill does not tell the agent to restrict statistics to the brief's stated proof or to mark any outside industry benchmark as unsourced.",
+    "It has no rule on how to handle a forbidden-claim topic such as QuickBooks: omit it entirely, and never imply it is coming ('yet').",
+    "The output template adds sections (comment variant, TEST, next-step handoff) that go beyond the requested deliverables and clutter the output."
+  ],
+  "cost_usd": 0.1,
+  "turns": 4,
+  "seconds": 23,
+  "tool_calls": 2,
+  "files": [],
+  "error": ""
+}

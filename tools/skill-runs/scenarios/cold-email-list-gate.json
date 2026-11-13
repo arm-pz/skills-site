@@ -1,0 +1,19 @@
+{
+  "skill": "cold-email-list-gate",
+  "fixtures": "leads",
+  "target": "a 10-row provider sample of a 2,400-row cold-email list against a written ICP",
+  "prompt": "We're about to load a 2,400-lead list from provider A. ICP is in icp.md, the 10-row sample is leads_providerA.csv, and there's a note on provider B in README.md. GO or HOLD?",
+  "checks": [
+    {
+      "desc": "returns HOLD",
+      "re": "\\bHOLD\\b"
+    }
+  ],
+  "rubric": [
+    "Checks all 10 rows against company type/size/country, title, mailbox and exclusions, row by row",
+    "Finds exactly 4 rows on ICP (Ledgerline, Quillbook, Stackwise, Penny Lane) and 6 off: Fernway (IC title), Paystack info@ (role inbox), Tallyhub (current customer), Docket (2,600 employees), Brightline Talent (recruitment agency), Ravelin (gmail, and CX not CS title)",
+    "Returns HOLD with the fail pattern and a concrete re-run condition",
+    "Compares provider B (8/10) on the same criteria and says what that implies",
+    "Invents no rows or numbers"
+  ]
+}
