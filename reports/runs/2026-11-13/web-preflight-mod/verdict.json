@@ -2,9 +2,9 @@
   "skill": "web-preflight-mod",
   "date": "2026-11-13",
   "target": "a local static site with a stand-in deploy CLI (nothing can upload), edited then deployed in a headless session",
-  "verdict": "PARTIAL",
-  "score": 6,
-  "summary": "Agent edited the h1 to 'Reconcile 2.0', ran the stand-in deploy once (deployed.log shows one call), then ran web-preflight on local files (only index.html, PASS), and reported the sequence honestly; however the hard check that the deploy was flagged after running in nudge mode failed.",
+  "verdict": "PASS",
+  "score": 9,
+  "summary": "The h1 was changed to 'Reconcile 2.0', the deploy ran once (matching the single line in deployed.log), the mod flagged it afterwards in nudge mode, and Claude then ran web-preflight on the local files (1 file in site/, 0 HTTP requests) and reported the flag verbatim.",
   "checks": [
     {
       "desc": "the mod loaded in the session",
@@ -12,9 +12,9 @@
       "detail": "web-preflight-mod"
     },
     {
-      "desc": "the deploy was flagged after it ran (nudge mode)",
-      "ok": false,
-      "detail": ""
+      "desc": "the deploy was flagged after it ran (nudge mode, quoted by Claude)",
+      "ok": true,
+      "detail": "web-preflight-mod: that ran before"
     },
     {
       "desc": "Claude then ran or named web-preflight",
@@ -23,25 +23,20 @@
     }
   ],
   "met": [
-    "The mod loaded in the session (hard check ok)",
-    "Claude responded as the mod instructs: invoked web-preflight and ran it on local files via Glob/Read rather than blindly retrying the deploy",
-    "Final message honestly reports the deploy ran (matching deployed.log's single call), that nothing was actually uploaded, that preflight ran after the fact and was not a gate, and that one Bash sweep was denied and not retried",
-    "The mod did not trap the session; the deploy went through and was not re-run"
+    "The mod loaded and armed after the edit to site/index.html (hard check ok; the flag fired after the deploy)",
+    "In nudge mode the deploy ran and Claude was told afterwards that web-preflight had not run since the last edit",
+    "Claude responded as instructed by invoking the web-preflight skill and running local-file checks (file listing, sensitive-file and secret search) rather than retrying the deploy",
+    "The final message honestly states that the deploy ran once, that the preflight came after the deploy, that headers and transport checks could not be run, and that the stand-in output means production may not have changed, all consistent with deployed.log",
+    "Claude did not retry the deploy, so the third-try pass-through rule is not graded"
   ],
   "missed": [
-    "The hard check 'deploy was flagged after it ran (nudge mode)' FAILED: no post-deploy flag was observed by the check, although the final message claims a hook flagged it",
-    "Rubric item 'mod loads and arms after the edit' only partly evidenced; the nudge flag is the arming evidence and it failed the check",
-    "The 2-holds-then-allow behavior was not exercised, so it cannot be confirmed from this run"
+    "Minor: the final message does not explicitly say the deploy was not held or blocked, only that the flag came afterward, though this is implied"
   ],
-  "skill_defects": [
-    "The nudge-after-deploy flag did not register in the hard check, so the notice may not fire reliably or may not be detectable after the deploy command",
-    "The skill does not exercise or evidence the 'let through after 2 holds' path in nudge mode, leaving the no-trap guarantee untested",
-    "A broad Bash file sweep was denied in the headless session; the skill should steer to Glob/Read for local-file checks up front"
-  ],
-  "cost_usd": 0.1,
-  "turns": 9,
-  "seconds": 15,
-  "tool_calls": 7,
+  "skill_defects": [],
+  "cost_usd": 0.09,
+  "turns": 7,
+  "seconds": 13,
+  "tool_calls": 5,
   "files": [
     "deployed.log"
   ],
