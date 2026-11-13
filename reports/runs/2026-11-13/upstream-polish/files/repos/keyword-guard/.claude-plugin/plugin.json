@@ -1,0 +1,10 @@
+{
+  "name": "keyword-guard",
+  "version": "1.0.0",
+  "description": "Plans topic clusters and kills keyword cannibalization so exactly one page wins each query, with a mandatory cannibalization audit before content changes.",
+  "author": {
+    "name": "Abdul Rahman P Z"
+  },
+  "homepage": "https://skills.caffeinity.com/keyword-guard/",
+  "repository": "https://github.com/arm-pz/keyword-guard"
+}
