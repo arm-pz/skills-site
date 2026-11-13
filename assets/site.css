@@ -571,6 +571,26 @@ footer .meta a{text-decoration:none;color:var(--ink)}
   .flows.roast .flow-steps li:not(:last-child)::after{top:100%;left:28px;width:1px;height:var(--join)}
 }
 
+/* /skills/, /mods/ and /workflows/: every row is a card, like the homepage flagships. motion.js
+   pins them group by group (html.is-stacked) so each one slides over the last, which settles
+   back and darkens; without it, or on phones, they are a plain column of cards. */
+.catalogue.roast .sk-grid{gap:20px;padding-top:24px}
+.flows.roast .flow-grid{gap:20px;padding-top:clamp(8px,1.4vw,20px)}
+.catalogue.roast .skill,.flows.roast .flow{position:relative;border-radius:22px;background-color:var(--surface);box-shadow:inset 0 0 0 1px var(--line),0 -24px 60px -36px #000;transform-origin:50% 0}
+.catalogue.roast .skill{padding:clamp(26px,3vw,44px)}
+.catalogue.roast .skill h3{font-size:clamp(26px,2.6vw,38px);line-height:1.02;letter-spacing:-.02em}
+.flows.roast .flow{padding:clamp(32px,4vw,56px)}
+.catalogue.roast .skill::after,.flows.roast .flow::after{content:"";position:absolute;inset:0;border-radius:inherit;background:#000;opacity:var(--shade,0);pointer-events:none}
+.is-stacked .catalogue.roast .skill,.is-stacked .flows.roast .flow{position:sticky}
+@media (hover:hover) and (pointer:fine){
+  .catalogue.roast .skill:hover{background-color:var(--surface);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--ink) 28%,transparent),0 -24px 60px -36px #000}
+}
+@media (max-width:760px){
+  .catalogue.roast .sk-grid,.flows.roast .flow-grid{gap:12px}
+  .catalogue.roast .skill{padding:22px 18px;border-radius:16px}
+  .flows.roast .flow{padding:26px 18px;border-radius:16px}
+}
+
 /* skill pages: below the hero the ground turns espresso and each section is a numbered card.
    stack.js makes them pin and stack as you scroll (html.is-stacked); without it they are a
    plain column of cards. */
