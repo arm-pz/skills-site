@@ -58,6 +58,13 @@ if (rig) rest(rig, runs[0]);
 /* skill pages: the sections below the hero stack as cards */
 if ($('body > .sk-hero')) stack($$('body > .sk-hero ~ section'));
 
+/* /skills/, /mods/ and /workflows/: each row is a card that stacks the same way, group by group,
+   pinning just under the sticky filter bar where there is one */
+const findBar = $('.catalogue.roast .find');
+const underFind = () => (findBar ? Math.max(84, Math.round(findBar.getBoundingClientRect().height) + 20) : 84);
+$$('.catalogue.roast .sk-grid').forEach((g) => stack($$(':scope > .skill', g), { top: underFind }));
+$$('.flows.roast .flow-grid').forEach((g) => stack($$(':scope > .flow', g)));
+
 function webgl() {
   try { const c = document.createElement('canvas'); return !!(c.getContext('webgl2') || c.getContext('webgl')); }
   catch (e) { return false; }
@@ -161,7 +168,9 @@ if (!reduced) {
     '.purpose .body', '.uses > *', '.files', '.related li', '.source', '.find', '.sk-head', '.skill', '.flow', '.router',
     '.step', '.pair', '.console', '.others li', '.plan', '.steps li', '.faq details', '.contact p', '.contact .mail', '.cta',
     '.lost .lead', '.lost-links li', '.close-grid p', '.aside', '.note', '.alt', '.work-line'];
-  const items = $$(rise.join(',')).filter((el) => !el.closest('.hero'));
+  /* stacked catalogue cards set their own transform, so they skip the rise */
+  const stacked = document.documentElement.classList.contains('is-stacked');
+  const items = $$(rise.join(',')).filter((el) => !el.closest('.hero') && !(stacked && el.matches('.catalogue.roast .skill, .flows.roast .flow')));
   gsap.set(items, { opacity: 0, y: 28 });
   ScrollTrigger.batch(items, {
     start: 'top 92%', once: true,

@@ -5,8 +5,12 @@
 
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
 
-export function stack(cards) {
-  if (cards.length < 2) return;
+/* opts.top(): where the first card pins, in px from the top of the window (default 84). Cards
+   that are hidden (the catalogue filter sets [hidden]) are skipped, and the rest re-stack. */
+export function stack(all, opts = {}) {
+  if (all.length < 2) return;
+  const base = opts.top || (() => 84);
+  let cards = all;
   const root = document.documentElement;
   const reduced = matchMedia('(prefers-reduced-motion:reduce)').matches;
   const wide = matchMedia('(min-width:761px)');
@@ -15,13 +19,15 @@ export function stack(cards) {
   function layout() {
     if (!wide.matches) {
       root.classList.remove('is-stacked');
-      cards.forEach((c) => { c.style.top = ''; c.style.transform = ''; c.style.removeProperty('--shade'); });
+      all.forEach((c) => { c.style.top = ''; c.style.transform = ''; c.style.removeProperty('--shade'); });
       return;
     }
     root.classList.add('is-stacked');
-    const vh = innerHeight;
+    all.forEach((c) => { if (c.hidden) { c.style.transform = ''; c.style.removeProperty('--shade'); } });
+    cards = all.filter((c) => !c.hidden);
+    const vh = innerHeight, b = base();
     tops = cards.map((c, i) => {
-      const t = Math.round(Math.min(84 + i * 14, vh - c.offsetHeight - 16));
+      const t = Math.round(Math.min(b + i * 14, vh - c.offsetHeight - 16));
       c.style.top = t + 'px';
       return t;
     });
@@ -48,7 +54,7 @@ export function stack(cards) {
   }, { passive: true });
   addEventListener('resize', layout);
   if (wide.addEventListener) wide.addEventListener('change', layout);
-  if (window.ResizeObserver) { const ro = new ResizeObserver(layout); cards.forEach((c) => ro.observe(c)); }
+  if (window.ResizeObserver) { const ro = new ResizeObserver(layout); all.forEach((c) => ro.observe(c)); }
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(layout);
   layout();
 }
