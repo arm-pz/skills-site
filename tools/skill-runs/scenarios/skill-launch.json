@@ -26,5 +26,8 @@
     "Drafts with draft-skill, then gates with tune-skill's validator (zero FAILs)",
     "Polishes README/listing against real queries without inventing facts",
     "Stops before anything public and lists the commands for the user's go-ahead"
+  ],
+  "followups": [
+    "Confirmed, that's right. Go ahead and finish it without stopping for more questions."
   ]
 }

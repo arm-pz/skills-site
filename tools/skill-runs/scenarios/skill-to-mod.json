@@ -22,5 +22,8 @@
     "If yes: builds a plugin with the skill bundled unchanged and a thin trigger on the release commands",
     "Validates and tests it, and reports the result honestly",
     "Lists the trust surface (hooks, calls) plainly"
+  ],
+  "followups": [
+    "Confirmed, that's right. Go ahead and finish it without stopping for more questions."
   ]
 }

@@ -20,5 +20,8 @@
     "Checks each step against the live catalog and reuses real skills where they fit (e.g. wordsmith or straight-prose for the rewrite)",
     "Only proposes new skills for steps no catalog skill claims",
     "Validates any new skill with check_skill.py"
+  ],
+  "followups": [
+    "Confirmed, that's right. Go ahead and finish it without stopping for more questions."
   ]
 }

@@ -23,5 +23,8 @@
     "Then polishes README/About text from the final description, against real queries",
     "Every change is grounded; nothing invented",
     "Pushes nothing"
+  ],
+  "followups": [
+    "Confirmed, that's right. Go ahead and finish it without stopping for more questions."
   ]
 }

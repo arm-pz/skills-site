@@ -25,5 +25,8 @@
     "Builds an installable archive and a README",
     "Ends with a per-platform install checklist",
     "Publishes nothing"
+  ],
+  "followups": [
+    "Confirmed, that's right. Go ahead and finish it without stopping for more questions."
   ]
 }

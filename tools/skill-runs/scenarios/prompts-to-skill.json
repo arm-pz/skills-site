@@ -25,5 +25,8 @@
     "Drafts with draft-skill and writes trigger test cases including near-misses",
     "Gates the result with tune-skill's validator with zero FAILs",
     "Keeps the 'show me before sending' constraint in the skill"
+  ],
+  "followups": [
+    "Confirmed, that's right. Go ahead and finish it without stopping for more questions."
   ]
 }

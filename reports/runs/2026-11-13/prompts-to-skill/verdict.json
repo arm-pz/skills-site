@@ -1,0 +1,43 @@
+{
+  "skill": "prompts-to-skill",
+  "date": "2026-11-13",
+  "target": "four real-shaped release-notes prompts from a developer's history",
+  "verdict": "FAIL",
+  "score": 2,
+  "summary": "The run read prompts.md (4 prompts), checked installed skills for overlap, and stopped to ask for intent confirmation, but never drafted a skill, wrote test cases, or ran the validator, so no SKILL.md exists under skills/.",
+  "checks": [
+    {
+      "desc": "a SKILL.md was written under skills/",
+      "ok": false,
+      "detail": "ls: cannot access 'skills/*/SKILL.md': No such file or directory"
+    },
+    {
+      "desc": "check_skill.py reports no FAIL",
+      "ok": false,
+      "detail": "FAIL  no SKILL.md in /tmp/run-prompts-to-skill-j6wqet47/project/skills/*"
+    }
+  ],
+  "met": [
+    "Ran an intent step (proposed purpose, single-skill decision, output, triggers, scope) before drafting",
+    "Ran an overlap check (Glob of **/SKILL.md and references) and reported no installed skill covers release notes",
+    "Planned to keep the 'show me before sending' constraint (stop point described in the proposed intent)"
+  ],
+  "missed": [
+    "No SKILL.md was written under skills/ (hard check failed); only Read and Glob calls were made",
+    "No draft-skill step was run and no trigger test cases (including near-misses) were written",
+    "tune-skill's validator (check_skill.py) was never run, so there is no zero-FAIL gate",
+    "The 'show me before sending' constraint is only stated in chat, not present in any skill file",
+    "Stopped to ask for 'yes' confirmation even though the user had already given intake answers (for me, Claude Code, GitHub, stop and show before sending) and asked for the result to be put under skills/"
+  ],
+  "skill_defects": [
+    "The skill's intent step requires a user confirmation round-trip even when the user has already supplied intake answers and asked for the output to be written; it should proceed to draft when intake answers are given, or at least not halt the whole run on a confirmation",
+    "The skill does not distinguish single-turn/non-interactive runs, so the pipeline can end after the intent step with no artifact produced",
+    "The skill instructs showing test cases to the user before tuning, which adds another potential halt point and risks the run ending without writing files"
+  ],
+  "cost_usd": 0.07,
+  "turns": 6,
+  "seconds": 10,
+  "tool_calls": 4,
+  "files": [],
+  "error": ""
+}
