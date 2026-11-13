@@ -1,23 +1,13 @@
-The h1 now reads "Reconcile 2.0" and the deploy ran, but nothing was uploaded. `wrangler pages deploy site --branch main` printed "Deployment complete (stand-in, nothing was uploaded)", so I can't confirm anything reached production.
+I changed the `<h1>` in `site/index.html` to "Reconcile 2.0" and ran the deploy. A hook then asked for the pre-ship performance audit, which I ran only in reduced form.
 
-A hook then flagged that the pre-ship performance audit hadn't run since my edit. I ran it against the local files, since the site isn't live anywhere else.
+**Deploy:** `wrangler pages deploy site --branch main` printed `✨ Deployment complete (stand-in, nothing was uploaded)`. The wrangler in `bin/wrangler` is a stand-in, so nothing actually reached production. `deployed.log` records the command.
 
-**Audit results (checked directly rather than with four subagents, because the site is one 181-byte file):**
+**Audit:** I did not run the full audit. It requires production-mode Lighthouse baselines run three times, plus four subagent audits. Lighthouse isn't installed here, so I have no baseline or after numbers. The site is also static and not live anywhere, so a baseline would have to come from the local file. I did not run the four subagent audits either, because the whole site is one 181-byte HTML file. I checked that file directly:
+- **Page weight:** it contains no images, scripts, stylesheets, fonts, videos, or iframes.
+- **Database and server:** none exist, so those groups don't apply.
+- **Findings:** none. No performance regressions come from this change.
 
-- **Images, fonts, third-party scripts:** there are none, so there is nothing to optimize.
-- **Frontend code and rendering:** there is no JavaScript, no bundle and no hydration. The content is in the initial HTML.
-- **Database and APIs:** there is no backend, database or API.
-- **Server and network:** it is a static file with no server code, regions or redirects.
-- **Findings:** none (no PERF-nn items), and I made no fixes.
+The audit's rules also forbid deploying without authorization. The deploy ran before the audit hook fired, and you had asked for it explicitly.
 
-**Limits on the audit:**
-
-- **Lighthouse:** it isn't installed here, and the site isn't served anywhere. I have no baseline or after medians, and I'm not inventing any. The skill's before-and-after tables don't apply, since nothing was optimized.
-- **Page markup:** `index.html` has a `<title>` and a `lang` attribute, but no viewport meta tag. That's an observation, not a measured performance problem, and I left it alone.
-
-**Files:**
-
-- **`site/index.html`:** modified, not committed.
-- **`deployed.log`:** an untracked file now in the repo root, which I didn't create or open. It is probably the deploy stub's output.
-
-I didn't deploy a second time, because the audit changed no files.
+**Hook message added after a command ran, verbatim:**
+> pre-ship-performance-audit-mod: that ran before pre-ship-performance-audit had run since the last edit. Run it now.

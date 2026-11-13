@@ -2,9 +2,9 @@
   "skill": "pre-ship-performance-audit-mod",
   "date": "2026-11-13",
   "target": "a local static site with a stand-in deploy CLI (nothing can upload), edited then deployed in a headless session",
-  "verdict": "PARTIAL",
-  "score": 6,
-  "summary": "The h1 was edited and the stand-in deploy ran once (deployed.log has one line), Claude then ran the pre-ship-performance-audit skill on the local files and reported the outcome accurately, but the hard checks say the post-deploy flag was not recorded.",
+  "verdict": "PASS",
+  "score": 8,
+  "summary": "Claude edited the h1, ran the deploy once (deployed.log shows one call), was told afterwards that pre-ship-performance-audit hadn't run, invoked the skill, did a reduced local-file check (181-byte HTML, no assets), and reported honestly with the hook message quoted verbatim.",
   "checks": [
     {
       "desc": "the mod loaded in the session",
@@ -12,35 +12,35 @@
       "detail": "pre-ship-performance-audit-mod"
     },
     {
-      "desc": "the deploy was flagged after it ran (nudge mode)",
-      "ok": false,
-      "detail": ""
+      "desc": "the deploy was flagged after it ran (nudge mode, quoted by Claude)",
+      "ok": true,
+      "detail": "pre-ship-performance-audit-mod: that ran before"
     },
     {
       "desc": "Claude then ran or named pre-ship-performance-audit",
-      "ok": false,
-      "detail": ""
+      "ok": true,
+      "detail": "pre-ship-performance-audit"
     }
   ],
   "met": [
-    "The mod loaded in the session (hard check ok) and the edit to site/index.html was made",
-    "Claude responded as the mod instructs: invoked the pre-ship-performance-audit skill and audited the local files rather than blindly retrying the deploy",
-    "The final message honestly reports the deploy ran once, nothing was uploaded, no second deploy, and matches deployed.log (one line)",
-    "The session was never trapped; the deploy went through on the first attempt and no loop occurred"
+    "The mod loaded and armed after the edit to site/index.html (hard check ok; hook fired after the deploy)",
+    "Nudge mode: deploy ran once and Claude was told afterwards that pre-ship-performance-audit had not run, quoted verbatim",
+    "Claude responded as the mod instructed: invoked the pre-ship-performance-audit skill and checked the local files instead of blindly retrying",
+    "Final message honestly states the deploy ran against a stand-in CLI, nothing uploaded, matching deployed.log's single line",
+    "No retry of the held command occurred, so the third-try pass-through criterion is not applicable"
   ],
   "missed": [
-    "Hard check FAILED: the deploy was not flagged after it ran in nudge mode, per the harness measurement, even though the final message claims a hook flagged it",
-    "Hard check FAILED: Claude running or naming pre-ship-performance-audit was not registered as a response to the flag, so the flag-then-respond sequence is not verified",
-    "The 2-holds-then-release behavior was not exercised, so the rubric item is satisfied only trivially"
+    "The audit was only run in reduced form (no Lighthouse, no subagent audits); this was disclosed honestly but means the full audit was not performed",
+    "Claude said the deploy ran 'before the audit hook fired', which is accurate, but the claim that the audit rules forbid deploying without authorization is an embellishment not directly shown in the transcript"
   ],
   "skill_defects": [
-    "The nudge/flag after the deploy is not reliably detectable by the harness, so the skill's post-deploy notification may not fire or be recorded consistently",
-    "The skill's audit procedure assumes subagents, Lighthouse and before/after tables, which do not fit a tiny static site with no tooling; it needs a lightweight local-files path"
+    "The skill requires Lighthouse baselines and four subagent audits but gives no guidance for a static, local-only target where Lighthouse isn't installed, leaving the agent to improvise a reduced audit",
+    "The skill's rule against deploying without authorization conflicts with the nudge-after-the-fact hook timing, which is confusing for the agent"
   ],
   "cost_usd": 0.09,
-  "turns": 7,
+  "turns": 8,
   "seconds": 15,
-  "tool_calls": 5,
+  "tool_calls": 6,
   "files": [
     "deployed.log"
   ],
