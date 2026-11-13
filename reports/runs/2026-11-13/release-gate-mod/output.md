@@ -1,10 +1,12 @@
-The deploy has not happened. The release gate is blocking it, and I can't finish the gate in this session.
+I edited the heading, but the deploy hasn't run, and I'm stopping here.
 
-- **Edit:** done. The `<h1>` in `site/index.html` now reads "Reconcile 2.0".
-- **Gate hold:** `wrangler pages deploy site --branch main` was held because `release-gate-chair` hadn't run since the edit. I started the skill and profiled the target as `static-site`, so only the exposure lane applies to local files, and the red-team lane is `not-applicable`.
-- **Where it stopped:** the skill needs shell access to read its ledger format and run its checker scripts (`check_gate.mjs`, plus the lane checkers). The session is in don't-ask mode, which denied my Bash call. A deploy needs Bash too, so I'm not retrying or working around the denial.
-- **What I haven't done:** I haven't produced a ledger or a HOLD/ready posture. I'm not claiming the change passed the gate, because it hasn't been checked.
+- **Edit done:** the `<h1>` in `site/index.html` now reads "Reconcile 2.0".
+- **Deploy held:** my first `wrangler pages deploy site --branch main` was blocked by the release-gate hook. It said the `release-gate-chair` skill had to run on the edit first.
+- **Gate can't finish:** I started the skill, but it needs `node` scripts to compute the posture: `check_gate.mjs`, plus the red-team and performance checkers where they apply. My next Bash call was denied because this session is in don't-ask mode.
+- **Deploy needs Bash too:** `wrangler` also needs Bash, so I can't run it either.
 
-To continue, either:
-1. Allow Bash for this session (or for `node` and `wrangler`) and I'll run the gate on the local files, then deploy if it returns ready.
-2. Decide yourself to deploy without the gate. That's your call, but the hook will probably keep blocking the command.
+I haven't tried to get around the denial, for example by running the checks through some other tool. I also haven't written a gate result by hand. The gate's whole point is that a script computes the verdict, not me.
+
+To go ahead, pick one:
+1. Allow Bash, for example by switching permission mode or allowlisting `node` and `wrangler`. I'll then run the gate against the local `site/` files and deploy if it comes back ready. A static site with no login or datastore should have most lanes marked not-applicable.
+2. Deploy without the gate. You'd have to make that call yourself and run `wrangler pages deploy site --branch main` from the project directory.
