@@ -164,10 +164,13 @@ def render_outcomes(manifest):
 
     Each row is a <details> that opens to the recipe (the skills in order) and a link to the
     workflow's page. They share a name, so browsers that support it keep one open at a time;
-    the first starts open so the menu shows what a row holds.
+    the first starts open so the menu shows what a row holds. A workflow marked lead comes first;
+    the rest keep their manifest order.
     """
+    flows = manifest.get("workflows", [])
+    flows = [f for f in flows if f.get("lead")] + [f for f in flows if not f.get("lead")]
     lines = []
-    for i, flow in enumerate(manifest.get("workflows", [])):
+    for i, flow in enumerate(flows):
         url = f'/workflows/{esc(flow["slug"])}/'
         lines += [f'      <details class="brew" name="brew"{" open" if i == 0 else ""}>',
                   f'        <summary><b>{esc(flow["title"])}</b><i aria-hidden="true"></i>'

@@ -3759,6 +3759,7 @@
       "name": "Dial-in",
       "title": "Set up a coding agent for a repo",
       "slug": "set-up-a-coding-agent",
+      "lead": true,
       "summary": "Get a coding agent that follows the repo's rules and stays inside its usage: write or prune the rules and guardrails, tier the models by role, then pick the effort each large task deserves.",
       "steps": [
         {

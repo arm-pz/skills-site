@@ -84,10 +84,10 @@
     <div class="hero-copy">
       <p class="eyebrow" data-r><i></i>Open agent skills, tested on real targets</p>
       <h1>Agent skills that <em>finish</em> the job.</h1>
-      <p class="lead" data-r>Plain-markdown skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md. Each does one concrete job and shows its evidence.</p>
+      <p class="lead" data-r>Start with the agent you code with: audit the CLAUDE.md, rules and hooks it reads, tier its models and stop burning usage. Plain-markdown skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md, each doing one concrete job and showing its evidence.</p>
       <div class="hero-act" data-r>
-        <button class="cmd" type="button" data-copy="npx skills add arm-pz/caffeinity-skills --skill caffeinity-routing" aria-label="Copy the install command for caffeinity-routing"><span>npx skills add arm-pz/caffeinity-skills --skill caffeinity-routing</span><span class="copy" aria-hidden="true">Copy</span></button>
-        <p class="small hero-note">Installs the router: describe an outcome and it picks the skills. Or <a href="/skills/">browse every skill</a>.</p>
+        <button class="cmd" type="button" data-copy="npx skills add arm-pz/harness-audit" aria-label="Copy the install command for harness-audit"><span>npx skills add arm-pz/harness-audit</span><span class="copy" aria-hidden="true">Copy</span></button>
+        <p class="small hero-note">Audits the harness your coding agent already has and proposes diffs, applied only when you say so. See the <a href="/workflows/set-up-a-coding-agent/">coding-agent workflow</a>, start with the <a href="/caffeinity-routing/">router</a>, or <a href="/skills/">browse every skill</a>.</p>
       </div>
     </div>
     <figure class="rig" data-rig>
@@ -143,6 +143,19 @@ catch-all routing     <span class="ok">none</span>
       <div class="brews">
       <!-- gen:outcomes:start -->
       <details class="brew" name="brew" open>
+        <summary><b>Set up a coding agent for a repo</b><i aria-hidden="true"></i><span>Dial-in</span></summary>
+        <div class="brew-body">
+          <p>Get a coding agent that follows the repo's rules and stays inside its usage: write or prune the rules and guardrails, tier the models by role, then pick the effort each large task deserves.</p>
+          <ol class="recipe">
+            <li><a href="/portable-harness/">portable-harness</a> <span class="or">or</span> <a href="/harness-audit/">harness-audit</a></li>
+            <li><a href="/setup-claude-advisor/">setup-claude-advisor</a> <span class="opt">optional</span></li>
+            <li><a href="/diagnose-usage/">diagnose-usage</a> <span class="opt">optional</span></li>
+            <li><a href="/choose-effort/">choose-effort</a> <span class="opt">optional</span></li>
+          </ol>
+          <a class="outcome" href="/workflows/set-up-a-coding-agent/">Open Brew 12 · Dial-in</a>
+        </div>
+      </details>
+      <details class="brew" name="brew">
         <summary><b>Build a skill and make it installable</b><i aria-hidden="true"></i><span>Pour-over</span></summary>
         <div class="brew-body">
           <p>Go from an idea or a pile of prompts to a tested skill anyone can install: draft it, tune its trigger, then package and release it.</p>
@@ -281,19 +294,6 @@ catch-all routing     <span class="ok">none</span>
             <li><a href="/skill-estate/">skill-estate</a></li>
           </ol>
           <a class="outcome" href="/workflows/audit-a-skill-estate/">Open Brew 11 · Estate roast</a>
-        </div>
-      </details>
-      <details class="brew" name="brew">
-        <summary><b>Set up a coding agent for a repo</b><i aria-hidden="true"></i><span>Dial-in</span></summary>
-        <div class="brew-body">
-          <p>Get a coding agent that follows the repo's rules and stays inside its usage: write or prune the rules and guardrails, tier the models by role, then pick the effort each large task deserves.</p>
-          <ol class="recipe">
-            <li><a href="/portable-harness/">portable-harness</a> <span class="or">or</span> <a href="/harness-audit/">harness-audit</a></li>
-            <li><a href="/setup-claude-advisor/">setup-claude-advisor</a> <span class="opt">optional</span></li>
-            <li><a href="/diagnose-usage/">diagnose-usage</a> <span class="opt">optional</span></li>
-            <li><a href="/choose-effort/">choose-effort</a> <span class="opt">optional</span></li>
-          </ol>
-          <a class="outcome" href="/workflows/set-up-a-coding-agent/">Open Brew 12 · Dial-in</a>
         </div>
       </details>
       <!-- gen:outcomes:end -->

@@ -100,6 +100,19 @@ class GenHomeTest(unittest.TestCase):
         self.assertIn('<details class="brew" name="brew" open>', out)
         self.assertIn("Open Brew 1 · Pour-over</a>", out)
 
+    def test_lead_workflow_comes_first_and_open_on_the_menu(self):
+        first = MANIFEST["workflows"][0]
+        lead = dict(first, id="dial-in", number=2, name="Dial-in", title="Set up an agent",
+                    slug="set-up-an-agent", lead=True)
+        out = render({**MANIFEST, "workflows": [first, lead]})
+        menu = out[out.index("gen:outcomes:start"):out.index("gen:outcomes:end")]
+        self.assertLess(menu.index("Set up an agent"), menu.index("Edit a page"))
+        self.assertIn('<details class="brew" name="brew" open>\n        <summary><b>Set up an agent</b>', menu)
+        self.assertEqual(menu.count(" open>"), 1)
+        self.assertIn("Open Brew 2 · Dial-in</a>", menu)
+        listing = out[out.index("gen:workflows:start"):out.index("gen:workflows:end")]
+        self.assertLess(listing.index("Edit a page"), listing.index("Set up an agent"))
+
     def test_flagships_need_a_featured_skill_and_show_its_run(self):
         self.assertNotIn('class="flag"', render())
         alpha = dict(MANIFEST["skills"][0], featured=1, tested=TESTED)
