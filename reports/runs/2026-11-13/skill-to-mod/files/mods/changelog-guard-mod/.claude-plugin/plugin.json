@@ -1,0 +1,5 @@
+{
+  "name": "changelog-guard-mod",
+  "version": "0.1.0",
+  "description": "Reminds Claude to run the changelog-guard skill before it tags or publishes a release. Advisory, fails open, snoozable."
+}

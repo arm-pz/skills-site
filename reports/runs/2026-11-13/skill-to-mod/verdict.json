@@ -1,0 +1,48 @@
+{
+  "skill": "skill-to-mod",
+  "date": "2026-11-13",
+  "target": "a real-shaped 'changelog-guard' skill that should fire before every release",
+  "verdict": "PARTIAL",
+  "score": 5,
+  "summary": "The run made a yes call and wrote a plugin with the skill bundled and hooks on git tag, npm publish and gh release create, but validate and test were never run (Bash denied), and it is labeled unvalidated in the README and final message.",
+  "checks": [
+    {
+      "desc": "the skill was left unchanged",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "met": [
+    "Made a reasoned yes call (clear ship moment: git tag / npm publish / gh release create) and chose a hybrid with the skill kept as-is",
+    "Built a plugin with the skill bundled and a thin trigger on release commands (tag, publish, gh release create), with fail-open, hold cap and snooze",
+    "Listed the trust surface plainly: hooks session.start, skill.prompt, tool.call (Bash, Edit/Write), command.run; $ calls only ui.toast and command.register; no process/file/network/model access",
+    "Reported honestly that validation and tests were not run and that the API was written against the contract (2.1.306) rather than the installed version",
+    "Hard check: the skill content was left unchanged (copied with identical frontmatter and body)"
+  ],
+  "missed": [
+    "Did not validate the plugin: claude plugin validate was never run, so there is no validation result",
+    "Did not run the tests: six tests were written but never executed, so none are known to pass",
+    "Did not verify the bundled SKILL.md is byte-identical (it was re-typed with Write rather than copied) and only told the user to check",
+    "Final output contains two inconsistent parts: the first part says nothing was built yet, the later part says it was built",
+    "Wrote claim that the skill was 'read' from references in one place yet earlier said reference files weren't read; contradictory progress narration",
+    "Unverified guesses in the code (e.args type, plugin skill name suffix) were left in rather than checked against the installed version"
+  ],
+  "skill_defects": [
+    "The skill has no fallback path when Bash is denied: it does not say how to produce a validated mod or how to copy the skill without shell access, leaving a hand-written, unvalidated artifact",
+    "The skill does not tell the agent to copy the skill file with a byte-preserving method (cp) and verify with a diff or checksum, so 'unchanged' relies on retyping",
+    "The skill does not make the agent give one consolidated final report, so earlier 'not built yet' text persisted alongside the final report"
+  ],
+  "cost_usd": 0.27,
+  "turns": 16,
+  "seconds": 45,
+  "tool_calls": 13,
+  "files": [
+    "mods/changelog-guard-mod/.claude-plugin/plugin.json",
+    "mods/changelog-guard-mod/README.md",
+    "mods/changelog-guard-mod/hooks/hooks.json",
+    "mods/changelog-guard-mod/hooks/register.js",
+    "mods/changelog-guard-mod/skills/changelog-guard/SKILL.md",
+    "mods/changelog-guard-mod/tests/changelog-guard-mod.test.ts"
+  ],
+  "error": ""
+}
