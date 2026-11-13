@@ -2,6 +2,12 @@
   "collisions": [],
   "dangling": [],
   "skills": {
+    "ai-team-blueprint": {
+      "description_sha": "89c54fef337e",
+      "fail": [],
+      "note": [],
+      "warn": []
+    },
     "applicant-kit": {
       "description_sha": "b926049273e7",
       "fail": [],
@@ -19,13 +25,19 @@
       ]
     },
     "caffeinity-routing": {
-      "description_sha": "1b687fdf56e1",
+      "description_sha": "0630e86a9462",
       "fail": [],
       "note": [],
       "warn": []
     },
     "career-track": {
       "description_sha": "f461156023cd",
+      "fail": [],
+      "note": [],
+      "warn": []
+    },
+    "choose-effort": {
+      "description_sha": "0ec6d74e177f",
       "fail": [],
       "note": [],
       "warn": []
@@ -38,6 +50,12 @@
     },
     "cold-email-ops": {
       "description_sha": "6ba0548173c4",
+      "fail": [],
+      "note": [],
+      "warn": []
+    },
+    "consistent-code-review": {
+      "description_sha": "adc6222bd1f0",
       "fail": [],
       "note": [],
       "warn": []
@@ -56,6 +74,12 @@
     },
     "data-readout": {
       "description_sha": "4b4e6575939f",
+      "fail": [],
+      "note": [],
+      "warn": []
+    },
+    "diagnose-usage": {
+      "description_sha": "742099c16302",
       "fail": [],
       "note": [],
       "warn": []
@@ -84,6 +108,24 @@
       "note": [],
       "warn": []
     },
+    "get-indexed": {
+      "description_sha": "8299f3651b0d",
+      "fail": [],
+      "note": [],
+      "warn": []
+    },
+    "harness-audit": {
+      "description_sha": "33ef2b1dbd8f",
+      "fail": [],
+      "note": [],
+      "warn": []
+    },
+    "insights-to-prompts": {
+      "description_sha": "7da6105ed1a9",
+      "fail": [],
+      "note": [],
+      "warn": []
+    },
     "keyword-guard": {
       "description_sha": "a33252ccdf90",
       "fail": [],
@@ -108,6 +150,12 @@
       "note": [],
       "warn": []
     },
+    "portable-harness": {
+      "description_sha": "685d65c0cdd8",
+      "fail": [],
+      "note": [],
+      "warn": []
+    },
     "pre-ship-performance-audit": {
       "description_sha": "81b202ac8c07",
       "fail": [],
@@ -123,7 +171,7 @@
       ]
     },
     "production-code": {
-      "description_sha": "1b9dfe71bb4b",
+      "description_sha": "7bbaeab4acf3",
       "fail": [],
       "note": [],
       "warn": []
@@ -136,6 +184,12 @@
     },
     "prompts-to-skill-release": {
       "description_sha": "91f1a9518fa2",
+      "fail": [],
+      "note": [],
+      "warn": []
+    },
+    "prompts-to-workflow": {
+      "description_sha": "a86d25dba5b7",
       "fail": [],
       "note": [],
       "warn": []
@@ -200,6 +254,30 @@
       "note": [],
       "warn": []
     },
+    "seo-sweep": {
+      "description_sha": "fefe2522e359",
+      "fail": [],
+      "note": [],
+      "warn": []
+    },
+    "session-retrace": {
+      "description_sha": "c340ebc06b24",
+      "fail": [],
+      "note": [],
+      "warn": []
+    },
+    "setup-claude-advisor": {
+      "description_sha": "49afba8ba5d7",
+      "fail": [],
+      "note": [],
+      "warn": []
+    },
+    "ship-second-brain": {
+      "description_sha": "dbb9273e85f4",
+      "fail": [],
+      "note": [],
+      "warn": []
+    },
     "site-prompt": {
       "description_sha": "5083697325bf",
       "fail": [],
@@ -207,7 +285,7 @@
       "warn": []
     },
     "skill-estate": {
-      "description_sha": "f4c37dbc5791",
+      "description_sha": "bf5c44278558",
       "fail": [],
       "note": [],
       "warn": []
@@ -226,6 +304,12 @@
     },
     "solo-income-blueprint": {
       "description_sha": "fe41fbc880da",
+      "fail": [],
+      "note": [],
+      "warn": []
+    },
+    "straight-prose": {
+      "description_sha": "d40a8e251f68",
       "fail": [],
       "note": [],
       "warn": []
@@ -253,6 +337,14 @@
       "fail": [],
       "note": [],
       "warn": []
+    },
+    "tune-and-ship": {
+      "description_sha": "970ef1eed990",
+      "fail": [],
+      "note": [],
+      "warn": [
+        "description is 963 characters, close to the 1024 limit"
+      ]
     },
     "tune-skill": {
       "description_sha": "d47d57225722",
