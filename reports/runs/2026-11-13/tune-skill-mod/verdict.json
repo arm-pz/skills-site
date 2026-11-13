@@ -3,8 +3,8 @@
   "date": "2026-11-13",
   "target": "a small skill repo with a local bare remote: edit SKILL.md, then push",
   "verdict": "PARTIAL",
-  "score": 4,
-  "summary": "The agent edited the SKILL.md description and the mod flagged the commit and tune-skill was invoked, but the commit failed (git identity unknown), nothing was pushed (remote still has only 8a00dfb), and the tune-skill validator never ran.",
+  "score": 6,
+  "summary": "Agent edited the invoice-namer description, committed and pushed (remote shows 00c7f15 on main), the hook flagged the push twice, and tune-skill was invoked, but its check_skill.py validator was denied by Bash permissions so no findings were produced.",
   "checks": [
     {
       "desc": "the mod loaded in the session",
@@ -23,25 +23,22 @@
     }
   ],
   "met": [
-    "The mod armed only after the SKILL.md was edited (hook message cites the edited file)",
-    "Claude was told tune-skill had not run since the edit and quoted both hook messages verbatim",
-    "Claude invoked tune-skill on the edited skill",
-    "The final message matches the remote: it correctly says nothing was committed or pushed, consistent with the remote having only the init commit"
+    "The mod armed only after the SKILL.md edit and the push went through in nudge mode, with Claude quoting the hook message that tune-skill had not run since the edit",
+    "Final message matches the remote: it reports the push as 3d9fc29..00c7f15, which agrees with the ground-truth commit 00c7f15 on the bare remote",
+    "Hook messages were quoted verbatim and the agent honestly said the check did not run and that it did not work around the denial"
   ],
   "missed": [
-    "Commit and push to origin main were not completed; commit failed with Author identity unknown and the agent stopped instead of setting a repo-local identity",
-    "In nudge mode the push was supposed to go through; it never ran, so the push-flagging behavior was not actually exercised on a push",
-    "tune-skill's check_skill.py was not run and no findings were reported; Bash was denied (don't-ask mode) and the agent only searched for the script",
-    "Hook messages were quoted, but the second one ('ran before tune-skill had run since the last edit') followed the failed commit, not a push as the scenario intended"
+    "Claude invoked tune-skill but never ran its validator (Bash denied in don't-ask mode), so it reported no findings on the edited skill",
+    "Agent added an unrequested change (each file keeps its own extension) to the description, which went beyond the user's instruction",
+    "The summary says there were no hook messages after the denied Bash call, but the transcript gives no way to verify that"
   ],
   "skill_defects": [
-    "The nudge fires on a failed or non-push Bash command (the commit) and the message is generic, so it does not distinguish a push from other commands",
-    "tune-skill depends on Bash to run check_skill.py, with no fallback (e.g., manual review of the SKILL.md) when Bash is unavailable",
-    "The hook tells the agent to run check_skill.py but gives no path, so the agent had to search the filesystem with find to locate it"
+    "The skill's flow depends on running a bundled script via Bash with no fallback when Bash is denied, such as a manual checklist, so a restricted-permission session ends with no validation at all",
+    "The hook says to run tune-skill before shipping, but it fires only after the push has already happened, so the flagged content reaches the remote unchecked in nudge mode"
   ],
   "cost_usd": 0.08,
   "turns": 7,
-  "seconds": 12,
+  "seconds": 13,
   "tool_calls": 5,
   "files": [],
   "error": ""

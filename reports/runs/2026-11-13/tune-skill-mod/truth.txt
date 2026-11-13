@@ -1,2 +1,3 @@
 --- commits on the bare remote:
-8a00dfb init
+00c7f15 invoice-namer: mention .png invoice scans in description
+3d9fc29 init
