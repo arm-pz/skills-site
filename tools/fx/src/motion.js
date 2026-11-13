@@ -5,6 +5,7 @@
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { HOME_RUNS, pageRuns, mountBeside, play, rest } from './rig.js';
+import { stack } from './stack.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -53,6 +54,9 @@ if (!rig) {
   } else rig = null;
 }
 if (rig) rest(rig, runs[0]);
+
+/* skill pages: the sections below the hero stack as cards */
+if ($('body > .sk-hero')) stack($$('body > .sk-hero ~ section'));
 
 function webgl() {
   try { const c = document.createElement('canvas'); return !!(c.getContext('webgl2') || c.getContext('webgl')); }
