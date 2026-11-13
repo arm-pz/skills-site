@@ -37,6 +37,9 @@ for name in $(cd tools/agent-skills && python -c "import skilllib; print(*skilll
   mkdir -p "dist/$name"
   cp -r "$name/." "dist/$name/"
 done
+# Workflow Map draws its graphs from the manifest itself, so the page can never name a route
+# or a skill that is no longer published.
+cp site/skills.json dist/map/skills.json
 
 python tools/agent-skills/gen_page.py --list | tr -d '\r' | while read -r name; do
   [ -n "$name" ] || continue

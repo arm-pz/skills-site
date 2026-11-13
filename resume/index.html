@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resume Check: what a recruiter sees in the first scan | Skillsmith by Caffeinity</title>
+<meta name="description" content="Paste your resume and a job ad. See the duty wording, the bullets with no numbers and the terms from the ad you are missing, marked in place. Free, runs in your browser, nothing is uploaded.">
+<link rel="canonical" href="https://skillsmith.tech/resume/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Skillsmith by Caffeinity">
+<meta property="og:title" content="What does a recruiter see in the first scan?">
+<meta property="og:description" content="Paste your resume and a job ad. See the duty wording, the bullets with no numbers and the terms from the ad you are missing, marked in place. Free, runs in your browser, nothing is uploaded.">
+<meta property="og:url" content="https://skillsmith.tech/resume/">
+<meta name="twitter:card" content="summary">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="preload" href="/fonts/files/cY9AfjOCX1hbuyalUrK4397yjA.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/files/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/tool.css">
+</head>
+<body>
+
+<nav class="nav" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="/"><b>/</b>skillsmith <span class="brand-by">by caffeinity</span></a>
+    <div class="nav-links">
+      <a href="/skills/">Skills</a>
+      <a href="/workflows/">Workflows</a>
+      <a href="/checks/">Free tools</a>
+      <a href="/work/">Work with us</a>
+    </div>
+    <div class="nav-cta">
+      <a class="gh" href="https://github.com/arm-pz" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-accent btn-sm" href="/recruiter-lens/">Get the skill</a>
+    </div>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="wrap">
+    <h1>What does a recruiter see in the first scan?</h1>
+    <p class="lead">A first screening lasts seconds. Resume Check counts what gets read in that time: bullets that carry a number, phrases that state a duty, and the terms from the job ad that your resume never uses. Your resume stays in your browser.</p>
+  </div>
+</header>
+
+<section class="tone" id="check" aria-labelledby="check-title">
+  <div class="wrap">
+    <h2 id="check-title">Check a resume.</h2>
+    <form class="checker" id="form" novalidate>
+      <div class="two">
+        <div>
+          <label for="resume">Your resume, as text</label>
+          <textarea id="resume" name="resume" placeholder="Open the file, select all, copy, and paste here."></textarea>
+        </div>
+        <div>
+          <label for="ad">The job ad (optional)</label>
+          <textarea id="ad" name="ad" placeholder="Paste the ad to see which of its terms you are missing."></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <button class="btn btn-accent" type="submit">Check the resume</button>
+        <button type="button" class="link" id="sample">load an example with problems</button>
+      </div>
+      <p id="status" role="status" aria-live="polite"></p>
+    </form>
+    <div id="result" hidden></div>
+    <noscript><p class="sub">Resume Check needs JavaScript, because the check runs in your browser instead of on a server. The <a href="/recruiter-lens/">recruiter-lens</a> skill does the full review in your own agent.</p></noscript>
+  </div>
+</section>
+
+<section aria-labelledby="what-title">
+  <div class="wrap">
+    <h2 id="what-title">What it checks.</h2>
+    <p class="sub">The part of <a href="/recruiter-lens/">recruiter-lens</a> that a script can do on pasted text. It counts and quotes. It does not score you.</p>
+    <ul class="checks">
+      <li><b>Numbers in bullets.</b> How many bullets say how much, how many or how fast. Years do not count.</li>
+      <li><b>Duty wording.</b> &quot;Responsible for&quot;, &quot;helped&quot;, &quot;worked on&quot;: phrases that say what the job was, not what you did with it.</li>
+      <li><b>Stock phrases.</b> &quot;Results-driven&quot;, &quot;proven track record&quot;, &quot;team player&quot;, and others that most resumes use.</li>
+      <li><b>Terms from the job ad.</b> The words and phrases the ad repeats, and which of them your resume never uses.</li>
+      <li><b>Contact details.</b> An email and a phone number in the body text.</li>
+      <li><b>Plain section headings.</b> Experience, Education and Skills, which applicant tracking systems use to sort a resume into fields.</li>
+      <li><b>First person.</b> &quot;I&quot; and &quot;my&quot; at the start of bullets, where the verb should be.</li>
+      <li><b>Length.</b> A word count that suggests more than two pages.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="tone" aria-labelledby="faq-title">
+  <div class="wrap">
+    <h2 id="faq-title">Before you paste.</h2>
+    <div class="faq">
+      <details>
+        <summary>Where does my resume go?</summary>
+        <p>Nowhere. The check is a script that runs in this page, and neither the resume nor the job ad is sent to us or stored. You can read the script at <a href='/resume/resume-core.js'>/resume/resume-core.js</a>.</p>
+      </details>
+      <details>
+        <summary>Is this an ATS score?</summary>
+        <p>No. Applicant tracking systems differ, and none publishes how it ranks. This page shows which of the ad's repeated terms are missing and whether your headings are the plain ones a parser expects. It gives no percentage.</p>
+      </details>
+      <details>
+        <summary>Should I add every missing term?</summary>
+        <p>Only the ones that are true of you. A term you cannot back up gets found in the first interview. Use the ad's wording for things you have really done.</p>
+      </details>
+      <details>
+        <summary>Why can it not check my layout?</summary>
+        <p>Pasted text has no layout. Two-column designs, tables and text boxes are what scramble a resume inside a tracking system, and only the file shows them. The result lists layout as not checked.</p>
+      </details>
+      <details>
+        <summary>It found nothing. Is my resume good?</summary>
+        <p>It is free of the faults a script can count. Whether the story makes sense, whether a gap needs a line of explanation and whether your numbers are the right ones take a reader. The recruiter-lens skill does that review.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer class="roast">
+  <div class="wrap">
+    <div class="meta">
+      <span>Skillsmith by <a href="https://caffeinity.com/">Caffeinity</a>: open agent skills by Abdul Rahman P Z, and custom skills built to order.</span>
+      <a href="/checks/">All free tools</a>
+      <a href="https://github.com/arm-pz" target="_blank" rel="noopener">github.com/arm-pz</a>
+    </div>
+    <p class="kural"><span lang="ta">யாம் பெற்ற இன்பம் பெறுக இவ்வையகம்</span><span>“May this world attain the same bliss that I have attained.”</span></p>
+  </div>
+</footer>
+<script src="/assets/site.js" defer></script>
+<script src="/assets/tool.js" defer></script>
+<script src="/resume/resume-core.js" defer></script>
+<script src="/resume/resume.js" defer></script>
+</body>
+</html>
