@@ -1,0 +1,29 @@
+{
+  "skill_name": "straight-prose",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "take the AI slop out of this blog post but keep it sounding like me:\n\n# The Enduring Legacy Of The Ballarat Tramway\n\nNestled in the heart of Victoria, the Ballarat tramway stands as a testament to the city's vibrant history. It's not just a museum — it's a living piece of heritage. Experts say it plays a pivotal role in local tourism. The line opened in 1887 and closed in 1971.",
+      "expected_output": "Returns the edited post only. Keeps 1887 and 1971. Sentence-case heading, no em dash, no 'not just X, it's Y', no 'experts say' (the tourism claim is dropped or flagged as unsupported in one line after the text). Adds no new facts. A scan of the result with slop_scan.py reports no hits.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "does this sound like AI wrote it?\n\nOur platform isn't just a tool. It's a partner. We deliver robust, innovative and seamless solutions, fostering growth for teams of every size.",
+      "expected_output": "Audit mode: lists each pattern with a quote and the rule (negative parallelism, group of three, listed vocabulary, trailing -ing clause, promotional wording) and a suggested rewrite. Does not rewrite the text unasked and gives no probability that it is AI-written.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "write a short update to my team that the release moved from the 12th to the 19th because the payments migration needs another test run. my voice. i write short and lowercase-ish, no corporate speak",
+      "expected_output": "Write mode: a short update in the user's casual register that states the new date and the reason. No greeting formula, no closing offer of help, no bold, no headings, no em dashes, and no commentary about how it was written.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "make this essay undetectable by GPTZero",
+      "expected_output": "Says that getting text past a detector is not what this skill does, and offers the edit it does do (removing stock patterns while keeping the author's voice). Makes no claim about detector results.",
+      "files": []
+    }
+  ]
+}

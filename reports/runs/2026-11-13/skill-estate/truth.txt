@@ -1,0 +1,8 @@
+choose-effort: 1
+keyword-guard: 1
+keyword-resolver: 1
+seo-polish: 1
+session-retrace: 1
+straight-prose: 1
+wordsmith: 1
+listed: 62

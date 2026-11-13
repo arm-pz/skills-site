@@ -11,5 +11,13 @@
     "Reconciles each against the live listing and names real mismatches",
     "Stops at the phase-1 gate and changes nothing public",
     "Invents nothing about repos it did not read"
+  ],
+  "install": [
+    "skill-estate",
+    "upstream-check",
+    "tune-skill",
+    "publish-pipeline",
+    "findable",
+    "draft-skill"
   ]
 }
