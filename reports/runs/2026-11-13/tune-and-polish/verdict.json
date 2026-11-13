@@ -1,0 +1,46 @@
+{
+  "skill": "tune-and-polish",
+  "date": "2026-11-13",
+  "target": "a clone of arm-pz/keyword-resolver (edits local, nothing pushed)",
+  "verdict": "PARTIAL",
+  "score": 4,
+  "summary": "The run rewrote the SKILL.md description, added two boundary owners, and reworked the README opening, but the tool list shows a Bash call to check_skill.py yet the final output says it never ran, so the zero-FAIL gate was not verified, and no About text was applied to the repo.",
+  "checks": [
+    {
+      "desc": "check_skill.py reports no FAIL on the tuned skill",
+      "ok": true,
+      "detail": "WARN  name 'keyword-resolver' differs from folder 'target'\n\n0 fail, 1 warn (783 description chars, 119 body lines)"
+    }
+  ],
+  "met": [
+    "Pushed nothing: no git push or gh repo edit was executed; edits stayed local in target/",
+    "Tuned the description first (problem-led, trigger phrases, inputs, not-for list) and added sibling boundaries for findable-polish and wordsmith before touching the README",
+    "README opening was rewritten from the final description's content, using example queries that mirror the description's trigger phrases",
+    "Reconciled the README 'Not for' section with the description by dropping seo-crawl and adding the wordsmith line, and disclosed the uncertainty openly"
+  ],
+  "missed": [
+    "check_skill.py was not shown to be run with zero FAILs. The transcript lists a Bash call that includes it, yet the final output says Bash was denied and the check never ran, so the gating requirement is unverified and the final claims conflict with the call log",
+    "The final answer says the family regression and trigger tests were not run, and keyword-guard was not available to compare descriptions against, so sibling overlap was only partly checked",
+    "The seo-audit name was chosen from recollection of the marketingskills repo ('I haven't confirmed that'), so a stale/sibling name was changed without grounding",
+    "GitHub About text and topics were only drafted in the answer, not written anywhere; topics were left unverified; the 'about 290 characters' figure is stated without having been measured",
+    "Polish was not checked against real queries beyond hand-written examples, and no check was run on the edited README",
+    "Inconsistency: the final response says it checked description length by reading, with no measured numbers"
+  ],
+  "skill_defects": [
+    "tune-and-polish does not say what to do when check_skill.py cannot run (for example, stop and report, or use a fallback), so the gate was silently replaced by a read-through",
+    "The skill does not require grounding a sibling skill's name (seo-audit vs seo-crawl/seo-polish) in a verifiable source before renaming, which allowed a name chosen from memory",
+    "No step has the About text and topics written to a file in the repo for review, so the listing half of the polish ends as chat drafts only",
+    "The skill does not tell the agent to confirm the final summary matches the tool-call log, which allowed a contradiction about whether the check script was run"
+  ],
+  "cost_usd": 0.35,
+  "turns": 14,
+  "seconds": 41,
+  "tool_calls": 11,
+  "files": [
+    "target/.gitignore",
+    "target/LICENSE",
+    "target/README.md",
+    "target/SKILL.md"
+  ],
+  "error": ""
+}

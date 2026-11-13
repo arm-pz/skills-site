@@ -54,7 +54,14 @@ ALLOW = ["Read", "Write", "Edit", "Glob", "Grep", "Skill", "TodoWrite", "Agent",
          "Bash(curl -s:*)", "Bash(node:*)", "Bash(npx:*)", "Bash(sed:*)", "Bash(awk:*)", "Bash(jq:*)",
          "Bash(cut:*)", "Bash(tr:*)", "Bash(uniq:*)", "Bash(echo:*)", "Bash(printf:*)", "Bash(cp:*)",
          "Bash(mv:*)", "Bash(touch:*)", "Bash(diff:*)", "Bash(cd:*)", "Bash(test:*)", "Bash(xargs:*)",
-         "Bash(for:*)", "Bash(while:*)", "Bash(if:*)", "Bash(export:*)", "Bash(true:*)", "Bash(ls -a:*)"]
+         "Bash(for:*)", "Bash(while:*)", "Bash(if:*)", "Bash(export:*)", "Bash(true:*)", "Bash(ls -a:*)",
+         # read-only or project-local commands that real runs needed
+         "Bash(git ls-files:*)", "Bash(git rev-parse:*)", "Bash(git show:*)", "Bash(git branch:*)",
+         "Bash(git tag -l:*)", "Bash(git describe:*)", "Bash(git init:*)", "Bash(git checkout:*)",
+         "Bash(claude --version:*)", "Bash(claude plugin validate:*)", "Bash(pwd:*)", "Bash(which:*)",
+         "Bash(du:*)", "Bash(stat:*)", "Bash(file:*)", "Bash(basename:*)", "Bash(dirname:*)",
+         "Bash(realpath:*)", "Bash(seq:*)", "Bash(date:*)", "Bash(sha256sum:*)", "Bash(zip:*)",
+         "Bash(unzip:*)", "Bash(tar:*)", "Bash(rm:*)", "Bash(chmod:*)", "Bash(ln:*)"]
 DENY = [
     "Bash(git push:*)", "Bash(gh:*)", "Bash(npm publish:*)", "Bash(npx wrangler:*)",
     "Bash(wrangler:*)", "Bash(curl -X POST:*)", "Bash(curl --request POST:*)",
