@@ -96,3 +96,24 @@ footer .wrap{font-family:var(--sans);font-size:14px}
   h1.hero-h{font-size:clamp(32px,9vw,40px)}
   section{padding:56px 0}
 }
+
+
+/* below the hero the ground turns espresso and each section is a numbered card on it, the same
+   as the generated skill pages. /assets/stack.js makes them pin and stack (html.is-stacked). */
+body:has(> header.hero){background:#0c0807;counter-reset:card}
+body:has(> header.hero) > .nav,body:has(> header.hero) > header.hero{background:var(--ink)}
+body:has(> header.hero) > section{counter-increment:card;position:relative;width:min(calc(100% - 2 * clamp(18px,5vw,56px)),1112px);margin:0 auto 20px;padding:clamp(44px,5.5vw,80px) 0;border-top:0;border-radius:22px;transform-origin:50% 0;
+  --ink:#1b1512;--surface:#271f1b;--raised:#30261f;--paper:#f1ece2;--paper-ink:#f1ece2;--dim:#b9ada1;--brass:#dba97c;
+  --rule:rgba(241,236,226,.12);--rule-strong:rgba(241,236,226,.26);--sheet:#271f1b;
+  background:var(--ink);color:var(--paper);box-shadow:inset 0 0 0 1px var(--rule),0 -24px 60px -36px #000}
+body:has(> header.hero) > section:first-of-type{margin-top:clamp(36px,4.5vw,64px)}
+body:has(> header.hero) > section:last-of-type{margin-bottom:clamp(40px,5vw,72px)}
+body:has(> header.hero) > section::after{content:"";position:absolute;inset:0;border-radius:inherit;background:#000;opacity:var(--shade,0);pointer-events:none}
+body:has(> header.hero) > section > .wrap::before{content:counter(card,decimal-leading-zero);display:block;margin-bottom:clamp(18px,2.4vw,30px);font:500 13px/1 'IBM Plex Mono',ui-monospace,monospace;color:#ff6a3d}
+body:has(> header.hero) > footer{position:relative;z-index:1}
+.is-stacked body:has(> header.hero) > section{position:sticky}
+@media (max-width:760px){
+  body:has(> header.hero) > section{width:calc(100% - 24px);border-radius:16px}
+}
+
+body:has(> header.hero) > section .cmd-card{background:#0c0807;box-shadow:inset 0 0 0 1px var(--rule)}

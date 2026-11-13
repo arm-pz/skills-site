@@ -1,9 +1,9 @@
 {
   "name": "skillsmith-fx",
   "private": true,
-  "description": "Builds /assets/motion.js (GSAP scroll choreography) and /assets/forge.js (the three.js hero).",
+  "description": "Builds /assets/motion.js (GSAP scroll motion and the hero sessions), /assets/forge.js (the three.js floor) and /assets/stack.js (stacked section cards for hand-written skill pages).",
   "scripts": {
-    "build": "esbuild --bundle --format=esm --minify --target=es2020 --legal-comments=none --outdir=../../assets src/forge.js && esbuild --bundle --format=esm --minify --target=es2020 --legal-comments=none --outdir=../../assets --external:./forge.js src/motion.js"
+    "build": "esbuild --bundle --format=esm --minify --target=es2020 --legal-comments=none --outdir=../../assets src/forge.js && esbuild --bundle --format=esm --minify --target=es2020 --legal-comments=none --outdir=../../assets --external:./forge.js src/motion.js && esbuild --bundle --format=iife --minify --target=es2020 --legal-comments=none src/stack-entry.js --outfile=../../assets/stack.js"
   },
   "devDependencies": {
     "esbuild": "^0.25.0",

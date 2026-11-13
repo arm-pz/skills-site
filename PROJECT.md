@@ -82,8 +82,9 @@ One look across every page type, in two stylesheets under `assets/` (copied to `
 | `assets/site.js` | pages that link it | copy buttons (`data-copy`), the `/skills/` filter, the proof tabs |
 | `assets/motion.js` | fetched by `site.js` | GSAP + ScrollTrigger: hero entrance, word-by-word headings, stacking flagship cards, parallax marks, the agents strip, pointer-lit cards. Skipped under `prefers-reduced-motion` |
 | `assets/forge.js` | fetched by `motion.js` on `/` only | the three.js floor under the hero: a perspective dot grid that ripples out from under the agent session each time a replayed check passes (orange) or fails (red). The session itself (SKILL.md, terminal, verdict stamp) is `tools/fx/src/rig.js`: on `/` it replays the real runs from the proof section (its rest state is HTML in `index.html`); on every page that loads `site.js` it is built from that page's own content (a skill's install and files, a workflow's route, a catalogue's tested skills, the 404's real request). Hand-written skill pages keep their own heroes Needs WebGL; without it the hero keeps a CSS glow |
+| `assets/stack.js` | the hand-written skill pages (generated pages get the same code through `motion.js`) | below a skill page's hero, each section is a numbered card on an espresso ground; the cards pin and stack as you scroll, and a card taller than the window scrolls through before it pins. Dependency-free; without it the cards are a plain column |
 
-`motion.js` and `forge.js` are built files: edit `tools/fx/src/`, then `cd tools/fx && npm install && npm run build`
+`motion.js`, `forge.js` and `stack.js` are built files: edit `tools/fx/src/`, then `cd tools/fx && npm install && npm run build`
 and commit the output (both are self-hosted, so the CSP stays `script-src 'self'`). No page depends on
 either: content is in the HTML and every rule in `site.css` holds without them.
 

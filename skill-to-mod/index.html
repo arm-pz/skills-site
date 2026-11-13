@@ -205,6 +205,21 @@
   .qb li{padding:10px 0;border-top:1px solid var(--qb-line)}
   .qb .qb-flag{font-weight:400}
   .qb .qb-flag.fail{box-shadow:inset 0 -.14em 0 var(--ember,var(--accent))}
+
+  /* below the hero: espresso ground, each section a numbered card that stacks as you scroll
+     (the same as every other skill page; /assets/stack.js adds html.is-stacked) */
+  body:has(> header.hero){background:#0c0807;counter-reset:card}
+  body:has(> header.hero) > .nav,body:has(> header.hero) > header.hero{background:var(--bg)}
+  body:has(> header.hero) > section{counter-increment:card;position:relative;width:min(calc(100% - 2 * var(--gutter)),1132px);margin:0 auto 20px;padding:clamp(44px,5.5vw,80px) 0;border-radius:22px;transform-origin:50% 0;
+    --bg:#1b1512;--surface:#271f1b;--paper:#271f1b;--ink:#f1ece2;--muted:#b9ada1;--paper-ink:#f1ece2;--paper-muted:#b9ada1;
+    background:var(--bg);color:var(--ink);box-shadow:inset 0 0 0 1px rgba(241,236,226,.12),0 -24px 60px -36px #000}
+  body:has(> header.hero) > section:first-of-type{margin-top:clamp(36px,4.5vw,64px)}
+  body:has(> header.hero) > section:last-of-type{margin-bottom:clamp(40px,5vw,72px)}
+  body:has(> header.hero) > section::after{content:"";position:absolute;inset:0;border-radius:inherit;background:#000;opacity:var(--shade,0);pointer-events:none}
+  body:has(> header.hero) > section > .wrap::before{content:counter(card,decimal-leading-zero);display:block;margin-bottom:clamp(18px,2.4vw,30px);font:500 13px/1 var(--mono);color:var(--accent)}
+  body:has(> header.hero) > footer{position:relative;z-index:1}
+  .is-stacked body:has(> header.hero) > section{position:sticky}
+  @media (max-width:760px){body:has(> header.hero) > section{width:calc(100% - 24px);border-radius:16px}}
 </style>
 <!-- gen:quality-css:end -->
 </head>
@@ -391,5 +406,6 @@ By hand: pane / band / status line (see plugin-authoring and Anthropic's sample 
   });
 })();
 </script>
+<script src="/assets/stack.js" defer></script>
 </body>
 </html>
