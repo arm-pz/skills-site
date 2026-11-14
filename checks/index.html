@@ -3,15 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Free tools: try a skill before you install it | Skillsmith by Caffeinity</title>
-<meta name="description" content="Six free tools built from our open agent skills: check a SKILL.md, a draft, a web page, a resume or a lead list, or map a goal to a workflow. All run in your browser.">
+<title>Free tools to check your work before it goes out | Skillsmith by Caffeinity</title>
+<meta name="description" content="Six free browser tools that check your work before it goes out: a SKILL.md, a draft, a web page, a resume, a lead list, or a goal you need a workflow for. No sign-up, nothing uploaded.">
 <link rel="canonical" href="https://skillsmith.tech/checks/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Skillsmith by Caffeinity">
-<meta property="og:title" content="Try the skill before you install it">
-<meta property="og:description" content="Six free tools built from our open agent skills: check a SKILL.md, a draft, a web page, a resume or a lead list, or map a goal to a workflow. All run in your browser.">
+<meta property="og:title" content="Check it before you send it: six free tools">
+<meta property="og:description" content="Six free browser tools that check your work before it goes out: a SKILL.md, a draft, a web page, a resume, a lead list, or a goal you need a workflow for. No sign-up, nothing uploaded.">
 <meta property="og:url" content="https://skillsmith.tech/checks/">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Check it before you send it: six free tools">
+<meta name="twitter:description" content="Six free browser tools that check your work before it goes out: a SKILL.md, a draft, a web page, a resume, a lead list, or a goal you need a workflow for. No sign-up, nothing uploaded.">
 <meta name="color-scheme" content="light dark">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/fonts/fonts.css">
@@ -19,6 +21,23 @@
 <link rel="preload" href="/fonts/files/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/site.css">
 <link rel="stylesheet" href="/assets/tool.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"CollectionPage","@id":"https://skillsmith.tech/checks/","url":"https://skillsmith.tech/checks/","name":"Free tools from Skillsmith by Caffeinity","description":"Six free browser tools that check your work before it goes out: a SKILL.md, a draft, a web page, a resume, a lead list, or a goal you need a workflow for. No sign-up, nothing uploaded.","mainEntity":{"@type":"ItemList","numberOfItems":6,"itemListElement":[
+{"@type":"ListItem","position":1,"name":"Skill Check","url":"https://skillsmith.tech/check/"},
+{"@type":"ListItem","position":2,"name":"Prose Check","url":"https://skillsmith.tech/prose/"},
+{"@type":"ListItem","position":3,"name":"SEO Check","url":"https://skillsmith.tech/seo-check/"},
+{"@type":"ListItem","position":4,"name":"Resume Check","url":"https://skillsmith.tech/resume/"},
+{"@type":"ListItem","position":5,"name":"List Gate","url":"https://skillsmith.tech/list/"},
+{"@type":"ListItem","position":6,"name":"Workflow Map","url":"https://skillsmith.tech/map/"}]}},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Are the tools really free?","acceptedAnswer":{"@type":"Answer","text":"Yes. All six are free, with no sign-up, no trial and no limit on how often you run them. The skills they are built from are free and MIT-licensed too. We charge only when you ask a person to do the work: a hand tune-up of a skill, a hand edit of a draft, or custom skills for a team."}},
+{"@type":"Question","name":"Where does what I paste go?","acceptedAnswer":{"@type":"Answer","text":"Nowhere. Each tool is a script that runs in the page, so your text or file is read on your own machine and is not sent to us. The one network request is in Skill Check, which fetches a public file from GitHub when you give it a GitHub link."}},
+{"@type":"Question","name":"Do I need an AI agent to use them?","acceptedAnswer":{"@type":"Answer","text":"No. The tools need only a browser. An agent such as Claude Code, Cursor or Codex is needed only if you want to run the full skill behind a tool."}},
+{"@type":"Question","name":"If a tool finds nothing, is my work good?","acceptedAnswer":{"@type":"Answer","text":"Not necessarily. A script can count, match and parse, but it cannot judge. Every result lists what was left unchecked, and an unchecked item is never shown as a pass."}},
+{"@type":"Question","name":"What do the paid options cover?","acceptedAnswer":{"@type":"Answer","text":"A person does the fix. A skill tune-up is $29 for one skill or $99 for up to five that work together, and a hand edit of a draft is $29 for up to 1,500 words. Each comes back within two or three working days, and the $29 jobs are refunded in full if we find nothing worth changing."}}]}
+]}
+</script>
 </head>
 <body>
 
@@ -28,7 +47,7 @@
     <div class="nav-links">
       <a href="/skills/">Skills</a>
       <a href="/workflows/">Workflows</a>
-      <a href="/checks/">Free tools</a>
+      <a href="/checks/" aria-current="page">Free tools</a>
       <a href="/work/">Work with us</a>
     </div>
     <div class="nav-cta">
@@ -38,66 +57,246 @@
   </div>
 </nav>
 
-<header class="page-hero">
+<header class="page-hero hub-hero">
   <div class="wrap">
-    <h1>Try the skill before you install it.</h1>
-    <p class="lead">Each tool is one of our open skills, cut down to the part a browser can run. Paste your work, read what it finds, then fix it yourself or give the full skill to your agent. No sign-up, and what you paste stays in your browser.</p>
+  <div class="hub-hero-grid">
+    <div>
+      <p class="eyebrow"><i></i>Free tools, no sign-up</p>
+      <h1>Check it <em>before</em> you send it.</h1>
+      <p class="lead">Six tools for the last look before work leaves your hands. Paste it in and read, in seconds, what a script can prove is wrong and what it could not check. Nothing you paste leaves your browser.</p>
+      <div class="cta">
+        <a class="btn btn-accent" href="#tools">Pick a tool</a>
+        <a class="btn btn-quiet" href="#how">How they work</a>
+      </div>
+      <ul class="hub-facts" aria-label="At a glance">
+        <li><b>6</b> tools</li>
+        <li><b>$0</b> to run, every time</li>
+        <li><b>0</b> sign-ups</li>
+        <li><b>0</b> uploads</li>
+      </ul>
+    </div>
+
+    <nav class="picker roast" aria-labelledby="picker-title">
+      <h2 id="picker-title">What are you about to send?</h2>
+      <ol>
+        <li><a href="/check/"><span class="have">A SKILL.md</span><i></i><span class="go">Skill Check</span></a></li>
+        <li><a href="/prose/"><span class="have">A draft</span><i></i><span class="go">Prose Check</span></a></li>
+        <li><a href="/seo-check/"><span class="have">A web page</span><i></i><span class="go">SEO Check</span></a></li>
+        <li><a href="/resume/"><span class="have">A resume</span><i></i><span class="go">Resume Check</span></a></li>
+        <li><a href="/list/"><span class="have">A lead list</span><i></i><span class="go">List Gate</span></a></li>
+        <li><a href="/map/"><span class="have">Only a goal so far</span><i></i><span class="go">Workflow Map</span></a></li>
+      </ol>
+    </nav>
+  </div>
   </div>
 </header>
 
-<section class="tone" aria-labelledby="tools-title">
+<section class="tone" id="tools" aria-labelledby="tools-title">
   <div class="wrap">
-    <h2 id="tools-title">Six tools.</h2>
+    <h2 id="tools-title">Six tools. One question each.</h2>
+    <p class="sub">Each one answers the question you would otherwise find out the hard way. The boxes show the kind of result you get, on made-up input.</p>
     <div class="toolgrid">
+
       <a class="tool" href="/check/">
-        <span class="path">/check/</span>
-        <span class="name">Skill Check</span>
-        <span class="q">Will an agent load your SKILL.md? Paste the file or a GitHub link.</span>
-        <span class="from">From tune-skill</span>
+        <span class="who">For skill authors</span>
+        <h3>Will an agent load your SKILL.md?</h3>
+        <span class="demo" aria-label="Example result">
+          <span class="demo-k">Example result</span>
+          <span class="demo-row"><span class="lvl fail">FAIL</span><span>SKILL.md has no YAML frontmatter between --- lines</span></span>
+          <span class="demo-note">Listed separately: what a script could not check</span>
+        </span>
+        <span class="q">Paste the file or a GitHub link. It reads the frontmatter the way an installer does and lists what would stop the skill loading or triggering.</span>
+        <span class="foot"><span class="name">Skill Check</span><span class="offer">Hand tune-up from $29</span></span>
       </a>
+
       <a class="tool" href="/prose/">
-        <span class="path">/prose/</span>
-        <span class="name">Prose Check</span>
-        <span class="q">Does your draft read like a chatbot wrote it? Paste any text.</span>
-        <span class="from">From straight-prose</span>
+        <span class="who">For anyone who writes</span>
+        <h3>Does your draft read like a chatbot wrote it?</h3>
+        <span class="demo" aria-label="Example result">
+          <span class="demo-k">Example result</span>
+          <span class="demo-text">This <mark>pivotal</mark> release <mark>serves as</mark> a <mark>robust</mark> foundation for the team.</span>
+          <span class="demo-note">3 marks, each with how to rewrite it</span>
+        </span>
+        <span class="q">Paste an email, a post or a README. Every stock phrase a language model reaches for is marked in place, with a fix prompt you can copy.</span>
+        <span class="foot"><span class="name">Prose Check</span><span class="offer">Hand edit $29</span></span>
       </a>
-      <a class="tool" href="/map/">
-        <span class="path">/map/</span>
-        <span class="name">Workflow Map</span>
-        <span class="q">Say what you want done. Get the route through the skills, drawn as a graph.</span>
-        <span class="from">From caffeinity-routing</span>
-      </a>
+
       <a class="tool" href="/seo-check/">
-        <span class="path">/seo-check/</span>
-        <span class="name">SEO Check</span>
-        <span class="q">What would stop this page ranking? Paste the page source.</span>
-        <span class="from">From seo-crawl</span>
+        <span class="who">For site owners</span>
+        <h3>What would stop this page ranking?</h3>
+        <span class="demo" aria-label="Example result">
+          <span class="demo-k">Example result</span>
+          <span class="demo-row"><span class="lvl fail">FAIL</span><span>No meta description</span></span>
+          <span class="demo-row"><span class="lvl">WARN</span><span>The canonical address is relative</span></span>
+        </span>
+        <span class="q">Paste the page source. It reads the title, description, canonical, robots and headings the way a crawler does, and quotes the tag behind each finding.</span>
+        <span class="foot"><span class="name">SEO Check</span><span class="offer free">Free</span></span>
       </a>
+
       <a class="tool" href="/resume/">
-        <span class="path">/resume/</span>
-        <span class="name">Resume Check</span>
-        <span class="q">What does a recruiter see in the first scan? Paste a resume and the job ad.</span>
-        <span class="from">From recruiter-lens</span>
+        <span class="who">For job seekers</span>
+        <h3>What does a recruiter see in the first scan?</h3>
+        <span class="demo" aria-label="Example result">
+          <span class="demo-k">Example result</span>
+          <span class="demo-stat"><b>3 of 11</b><span>bullets carry a number</span></span>
+          <span class="demo-terms"><span>In the ad, not in your resume:</span><code>SQL</code><code>roadmap</code><code>forecasting</code></span>
+        </span>
+        <span class="q">Paste a resume and the job ad. It counts the bullets with a number, quotes the duty wording, and lists the ad's terms you never use.</span>
+        <span class="foot"><span class="name">Resume Check</span><span class="offer free">Free</span></span>
       </a>
+
       <a class="tool" href="/list/">
-        <span class="path">/list/</span>
-        <span class="name">List Gate</span>
-        <span class="q">Is this lead list safe to load? Check the CSV before you send one email.</span>
-        <span class="from">From cold-email-list-gate</span>
+        <span class="who">For outbound teams</span>
+        <h3>Is this lead list safe to load?</h3>
+        <span class="demo" aria-label="Example result">
+          <span class="demo-k">Example result</span>
+          <span class="demo-gate"><b>Hold.</b><span>Do not load this list yet.</span></span>
+          <span class="demo-note">Typo domains, role inboxes, duplicates, off-target titles</span>
+        </span>
+        <span class="q">Drop in the CSV before it reaches a sending tool. Every row is read and you get one answer, go or hold, with the rows that caused it.</span>
+        <span class="foot"><span class="name">List Gate</span><span class="offer free">Free</span></span>
       </a>
+
+      <a class="tool" href="/map/">
+        <span class="who">For anyone starting out</span>
+        <h3>Which skills get this job done?</h3>
+        <span class="demo" aria-label="Example result">
+          <span class="demo-k">Example result</span>
+          <span class="demo-route"><code>draft-skill</code><b aria-hidden="true">&rarr;</b><code>tune-skill</code><b aria-hidden="true">&rarr;</b><code>prompts-to-skill-release</code></span>
+          <span class="demo-note">Plus the lines to install the whole route</span>
+        </span>
+        <span class="q">Type the goal in your own words. It picks the one of our twelve workflows that fits and draws the chain of skills, step by step.</span>
+        <span class="foot"><span class="name">Workflow Map</span><span class="offer free">Free</span></span>
+      </a>
+
     </div>
   </div>
 </section>
 
-<section aria-labelledby="how-title">
+<section id="how" aria-labelledby="how-title">
   <div class="wrap">
-    <h2 id="how-title">How they work.</h2>
-    <ul class="checks">
-      <li><b>They run in your browser.</b> Each tool is a script in the page. The text or file you give it is read on your own machine and is not sent to us. Skill Check fetches a public file from GitHub only when you give it a GitHub link.</li>
-      <li><b>They say what they did not check.</b> A script can count, match and parse. It cannot judge. Every result lists what was left unchecked, and an unchecked item is never shown as a pass.</li>
-      <li><b>The skill does the rest.</b> Each tool comes from an open skill that your own agent can run in full: crawl the whole site, rewrite the resume, edit the draft. Every result links to it.</li>
-      <li><b>The code is open.</b> Each page loads a short script you can read, and the skills they come from are MIT-licensed repos under arm-pz on GitHub.</li>
+    <h2 id="how-title">From paste to fixed in three steps.</h2>
+    <ol class="steps">
+      <li>
+        <h3>Paste it in</h3>
+        <p>A file, a draft, a page's source or a CSV. No account and no upload: the script that reads it is already in the page.</p>
+      </li>
+      <li>
+        <h3>Read what it found</h3>
+        <p>Each finding quotes the line it came from and says how to fix it. What the script could not check is listed too, and never shown as a pass.</p>
+      </li>
+      <li>
+        <h3>Fix it your way</h3>
+        <p>Make the edits yourself, give the full skill to your own agent, or send the work to us and get it back done.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="tone" id="pricing" aria-labelledby="pricing-title">
+  <div class="wrap">
+    <h2 id="pricing-title">Free to check. Free to fix. Paid only when we do it for you.</h2>
+    <p class="sub">The tool finds the problem. The open skill behind it does the whole job in your own agent. A person on our side is the only part that costs money.</p>
+    <div class="plans">
+      <article class="plan">
+        <span class="tag">In your browser</span>
+        <h3>The free tools</h3>
+        <p class="price">$0</p>
+        <p class="for">The six tools on this page. Use them as often as you like.</p>
+        <ul>
+          <li>No sign-up, no trial and no run limit</li>
+          <li>Nothing you paste is uploaded</li>
+          <li>Findings quote the line and say the fix</li>
+          <li>Unchecked items are listed, never passed</li>
+        </ul>
+        <a class="btn btn-quiet" href="#tools">Pick a tool</a>
+      </article>
+
+      <article class="plan roast">
+        <span class="tag">In your agent</span>
+        <h3>The open skills</h3>
+        <p class="price">$0 <small>open source, MIT</small></p>
+        <p class="for">The full skill each tool is cut from. Your own agent runs it.</p>
+        <ul>
+          <li>Does the work a browser cannot: crawl the whole site, rewrite the resume, edit the draft</li>
+          <li>One line to install each skill</li>
+          <li>Works in Claude Code, Cursor, Codex and any agent that reads a SKILL.md</li>
+          <li>You spend your own tokens and review the edits</li>
+        </ul>
+        <a class="btn btn-accent" href="/skills/">Browse the skills</a>
+      </article>
+
+      <article class="plan">
+        <span class="tag">Done for you</span>
+        <h3>A person fixes it</h3>
+        <p class="price">$29 <small>and up</small></p>
+        <p class="for">Send the work, get it back fixed, with what changed and why.</p>
+        <ul>
+          <li><a href="/check/#tuneup">Skill tune-up</a>: $29 for one skill, $99 for up to five</li>
+          <li><a href="/prose/#skill">Hand edit of a draft</a>: $29 for up to 1,500 words</li>
+          <li>Back within two or three working days</li>
+          <li>The $29 jobs are refunded in full if we find nothing worth changing</li>
+        </ul>
+        <a class="btn btn-quiet" href="/work/">Custom skills for a team</a>
+      </article>
+    </div>
+    <p class="small hub-fine">Prices in USD, before any local taxes. Ordering opens an email to us; we reply with a secure payment link, and the clock starts when you pay.</p>
+  </div>
+</section>
+
+<section class="roast" aria-labelledby="rules-title">
+  <div class="wrap">
+    <h2 id="rules-title">Four rules every tool keeps.</h2>
+    <ul class="rules">
+      <li>
+        <h3>Your work stays on your machine</h3>
+        <p>Each tool is a script in the page. What you give it is read in your browser and is not sent to us. Skill Check fetches a public file from GitHub only when you give it a GitHub link.</p>
+      </li>
+      <li>
+        <h3>Not checked is never a pass</h3>
+        <p>A script can count, match and parse. It cannot judge. Every result lists what was left unchecked, so a clean screen never claims more than it looked at.</p>
+      </li>
+      <li>
+        <h3>The skill does the rest</h3>
+        <p>Each tool comes from an open skill that your own agent can run in full. Every result links to it, so the free check is never a dead end.</p>
+      </li>
+      <li>
+        <h3>You can read the code</h3>
+        <p>Each page loads a short script you can open, and the skills they come from are MIT-licensed repos under <a href="https://github.com/arm-pz" target="_blank" rel="noopener">arm-pz on GitHub</a>.</p>
+      </li>
     </ul>
+  </div>
+</section>
+
+<section aria-labelledby="faq-title">
+  <div class="wrap">
+    <h2 id="faq-title">Before you paste.</h2>
+    <div class="faq">
+      <details>
+        <summary>Are the tools really free?</summary>
+        <p>Yes. All six are free, with no sign-up, no trial and no limit on how often you run them. The skills they are built from are free and MIT-licensed too. We charge only when you ask a person to do the work: a hand tune-up of a skill, a hand edit of a draft, or <a href="/work/">custom skills for a team</a>.</p>
+      </details>
+      <details>
+        <summary>Where does what I paste go?</summary>
+        <p>Nowhere. Each tool is a script that runs in the page, so your text or file is read on your own machine and is not sent to us. The one network request is in Skill Check, which fetches a public file from GitHub when you give it a GitHub link.</p>
+      </details>
+      <details>
+        <summary>Do I need an AI agent to use them?</summary>
+        <p>No. The tools need only a browser. An agent such as Claude Code, Cursor or Codex is needed only if you want to run the full skill behind a tool.</p>
+      </details>
+      <details>
+        <summary>If a tool finds nothing, is my work good?</summary>
+        <p>Not necessarily. A script can count, match and parse, but it cannot judge. Every result lists what was left unchecked, and an unchecked item is never shown as a pass.</p>
+      </details>
+      <details>
+        <summary>What do the paid options cover?</summary>
+        <p>A person does the fix. A <a href="/check/#tuneup">skill tune-up</a> is $29 for one skill or $99 for up to five that work together, and a <a href="/prose/#skill">hand edit of a draft</a> is $29 for up to 1,500 words. Each comes back within two or three working days, and the $29 jobs are refunded in full if we find nothing worth changing.</p>
+      </details>
+      <details>
+        <summary>Can you build a tool like these for my team?</summary>
+        <p>Yes. We turn a workflow your team repeats every week into a skill, tested on your real tasks and delivered as a repo you own. <a href="/work/">See custom work</a>.</p>
+      </details>
+    </div>
   </div>
 </section>
 
