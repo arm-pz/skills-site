@@ -4,7 +4,7 @@
   "target": "skillsmith.tech (92 live pages)",
   "verdict": "FAIL",
   "score": 1,
-  "summary": "The run never crawled skillsmith.tech or wrote seo-polish.md because its one Bash crawl call was denied, so it measured nothing and proposed no rewrites.",
+  "summary": "The agent's one crawl attempt (a Bash call) was denied, so it measured none of the 92 pages, wrote no seo-polish.md, and ended by asking the user to pick a way forward.",
   "checks": [
     {
       "desc": "wrote seo-polish.md",
@@ -13,25 +13,28 @@
     }
   ],
   "met": [
-    "Changed nothing live: no write or modification to the site was made",
-    "Said plainly that it could not measure anything and why (Bash denied), without inventing findings"
+    "Changed nothing live",
+    "Said plainly that nothing was measured and that seo-polish.md was not written",
+    "Did not invent findings or fabricate rewrites without measurement"
   ],
   "missed": [
-    "Did not measure the live site: the single crawl command was denied and no pages were fetched (ground truth: 92 pages)",
-    "No findings produced, so none could match the ground truth (12 titles over 60 chars, 8 descriptions over 160, no broken links, one h1 per page)",
-    "No 2\u20133 rewritten alternatives for titles, descriptions or headings were given",
-    "seo-polish.md was not written (hard check failed)",
-    "Did not fall back to WebFetch or another read-only method to produce even partial, labeled-unverified output; it stopped and asked the user instead"
+    "Did not crawl the site: the Bash call to run seo-crawl.mjs was denied, and no other measurement was tried (e.g. a web-fetch of the sitemap pages)",
+    "Did not report any findings, so the ground truth (12 titles over 60 chars, 8 descriptions over 160, no broken links, one h1 per page) was not matched",
+    "Gave no 2-3 rewritten alternatives for any finding",
+    "Did not write seo-polish.md (hard check failed)",
+    "Declined to use a lighter fallback measurement and stopped to ask the user, though the user had asked for the proposals file to be written",
+    "Described the crawl as capped at 25 pages, which would not cover the 92-page sitemap even if it had run"
   ],
   "skill_defects": [
-    "The skill depends entirely on a Node script run through Bash and has no fallback path when Bash is unavailable, so it produced nothing",
-    "The crawler is capped at 25 pages and depth 3 per the run's own description, which cannot cover a 92-page sitemap; the skill should crawl all sitemap URLs",
-    "The skill does not say to still write seo-polish.md with a clear 'not measured' note and any best-effort labeled proposals when measurement fails",
-    "The skill does not tell the agent to request a specific permission or allow rule up front, so the denied command ended the run"
+    "The skill depends on a single Bash-run crawler script and has no fallback path (e.g. web-fetch of the sitemap and pages) when Bash is denied, so the run produced nothing.",
+    "The skill's crawler is capped at 25 pages, so it cannot cover a 92-page sitemap; the skill does not tell the agent how to sample or extend coverage.",
+    "The skill requires an ownership/authorization confirmation before crawling, which blocks the run in a non-interactive context where the user's prompt already asks for the audit.",
+    "The skill does not say to still write seo-polish.md with a clear 'could not measure' section when measurement fails, so the requested deliverable was absent."
   ],
   "cost_usd": 0.1,
+  "model": "sonnet",
   "turns": 7,
-  "seconds": 10,
+  "seconds": 12,
   "tool_calls": 4,
   "files": [],
   "error": ""

@@ -1,8 +1,8 @@
 # seo-polish: real-world run, 2026-11-13
 
-**Verdict: FAIL** (1/10). The run never crawled skillsmith.tech or wrote seo-polish.md because its one Bash crawl call was denied, so it measured nothing and proposed no rewrites.
+**Verdict: FAIL** (1/10). The agent's one crawl attempt (a Bash call) was denied, so it measured none of the 92 pages, wrote no seo-polish.md, and ended by asking the user to pick a way forward.
 
-Target: skillsmith.tech (92 live pages). Run headless in a clean project with only this skill installed (7 turns, 4 tool calls, 10 s, $0.1).
+Target: skillsmith.tech (92 live pages). Run headless on sonnet in a clean project with only this skill installed (7 turns, 4 tool calls, 12 s, $0.1).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -24,23 +24,25 @@ Polish the on-page SEO of https://skillsmith.tech. Measure first, then give me r
 
 ## Met
 
-- Changed nothing live: no write or modification to the site was made
-- Said plainly that it could not measure anything and why (Bash denied), without inventing findings
+- Changed nothing live
+- Said plainly that nothing was measured and that seo-polish.md was not written
+- Did not invent findings or fabricate rewrites without measurement
 
 ## Missed
 
-- Did not measure the live site: the single crawl command was denied and no pages were fetched (ground truth: 92 pages)
-- No findings produced, so none could match the ground truth (12 titles over 60 chars, 8 descriptions over 160, no broken links, one h1 per page)
-- No 2–3 rewritten alternatives for titles, descriptions or headings were given
-- seo-polish.md was not written (hard check failed)
-- Did not fall back to WebFetch or another read-only method to produce even partial, labeled-unverified output; it stopped and asked the user instead
+- Did not crawl the site: the Bash call to run seo-crawl.mjs was denied, and no other measurement was tried (e.g. a web-fetch of the sitemap pages)
+- Did not report any findings, so the ground truth (12 titles over 60 chars, 8 descriptions over 160, no broken links, one h1 per page) was not matched
+- Gave no 2-3 rewritten alternatives for any finding
+- Did not write seo-polish.md (hard check failed)
+- Declined to use a lighter fallback measurement and stopped to ask the user, though the user had asked for the proposals file to be written
+- Described the crawl as capped at 25 pages, which would not cover the 92-page sitemap even if it had run
 
 ## Defects to fix in the skill
 
-- The skill depends entirely on a Node script run through Bash and has no fallback path when Bash is unavailable, so it produced nothing
-- The crawler is capped at 25 pages and depth 3 per the run's own description, which cannot cover a 92-page sitemap; the skill should crawl all sitemap URLs
-- The skill does not say to still write seo-polish.md with a clear 'not measured' note and any best-effort labeled proposals when measurement fails
-- The skill does not tell the agent to request a specific permission or allow rule up front, so the denied command ended the run
+- The skill depends on a single Bash-run crawler script and has no fallback path (e.g. web-fetch of the sitemap and pages) when Bash is denied, so the run produced nothing.
+- The skill's crawler is capped at 25 pages, so it cannot cover a 92-page sitemap; the skill does not tell the agent how to sample or extend coverage.
+- The skill requires an ownership/authorization confirmation before crawling, which blocks the run in a non-interactive context where the user's prompt already asks for the audit.
+- The skill does not say to still write seo-polish.md with a clear 'could not measure' section when measurement fails, so the requested deliverable was absent.
 
 ## Ground truth
 
@@ -107,24 +109,19 @@ per page: status | title (len) | h1
 
 1. `Skill: seo-polish`
 1. `Skill: seo-crawl`
-1. `Bash: cd /tmp/run-seo-polish-1yz1wy69/project; ls -R .claude/skills | head -50; ls`
-1. `Bash: cd /tmp/run-seo-polish-1yz1wy69/project/.claude/skills/seo-crawl && node scripts/seo-crawl.mjs --url https://skillsmith.tech --out /tmp/run-seo-polish-1yz1wy69/`
+1. `Bash: ls -R . 2>/dev/null | grep -v node_modules | head -50`
+1. `Bash: cd /tmp/run-seo-polish-ds4oz1rb/project/.claude/skills/seo-crawl && ls -R . && mkdir -p /tmp/run-seo-polish-ds4oz1rb/project/reports && node scripts/seo-crawl.m`
 
 ## Final output
 
-I couldn't run the crawl, so I haven't measured anything yet and have no proposals to write. The sandbox denied the Bash call (this session is in don't-ask mode), and the crawler is a Node script, so it needs Bash.
+I couldn't run the crawl, so I haven't measured anything and `seo-polish.md` doesn't exist yet.
 
-The command I tried to run was:
+The `seo-polish` skill starts by running the bundled crawler, `node scripts/seo-crawl.mjs --url https://skillsmith.tech --out reports/seo-crawl.json`. The session is in "don't ask" mode, which denied the Bash call, so the crawler never ran. The project directory is also empty apart from the `.claude/skills` folders, so there are no local files to audit instead.
 
-```
-cd .claude/skills/seo-crawl && node scripts/seo-crawl.mjs --url https://skillsmith.tech --out ../../../reports/seo-crawl.json
-```
+I could try fetching a few pages with a web-fetch tool and read the titles and headings from those. I didn't, because that wouldn't give you the crawl's finding IDs, redirect and canonical checks, or sitemap coverage. A page-fetch summary can also miss or invent details. Rewrites based on that would be guesses, which is what you asked me to avoid by measuring first.
 
-It is a bounded, read-only crawl: GET requests only, same origin, obeys robots.txt, 25 pages max and depth 3. It writes one JSON file, `reports/seo-crawl.json`, in the project directory. That file is the only thing it creates. Nothing on the site changes.
+Pick one:
+1. **Allow Bash for the crawl.** Either switch the permission mode or allow `node scripts/seo-crawl.mjs`. It's a read-only crawl of 25 pages at most that obeys robots.txt. I'd then run it and write the proposals to `seo-polish.md` without touching anything else.
+2. **Use a lighter check.** I fetch the homepage and a few key pages with the web-fetch tool. The proposals would then be marked as based on a partial, unmeasured sample.
 
-I could use WebFetch to read the pages instead. I'd rather not, because it gives summarized page content. It doesn't give exact titles, meta descriptions, H1 counts, canonicals, redirects or sitemap coverage. The rewrites would rest on guesses rather than measurements. It also wouldn't be the deterministic crawl the workflow calls for.
-
-How would you like to proceed?
-1. Allow Bash for that crawl command, either by approving it or adding an allow rule, and I'll continue through to `seo-polish.md`.
-2. Run the command yourself and tell me where the JSON ended up. I'll read it and write the proposals.
-3. Have me use WebFetch anyway. I'll label the results as unverified and mark the technical checks inconclusive.
+Also confirm you own or are authorized to crawl skillsmith.tech, since the crawl skill requires that.
