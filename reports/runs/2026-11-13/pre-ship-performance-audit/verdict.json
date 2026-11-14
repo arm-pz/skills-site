@@ -1,0 +1,34 @@
+{
+  "skill": "pre-ship-performance-audit",
+  "date": "2026-11-13",
+  "target": "Ledgerboard, a local marketing page and stats API with 6 planted slow-downs",
+  "verdict": "FAIL",
+  "score": 0,
+  "summary": "The run made one Bash call (project listing, package.json, curl, tool check) that was denied, then stopped and asked the user how to proceed; no baseline, findings, fixes, or numbers were produced.",
+  "checks": [],
+  "met": [
+    "Did not invent any baseline or measurements; it stated plainly that it could not measure and offered options"
+  ],
+  "missed": [
+    "No Lighthouse mobile baseline was measured (zero repeated runs)",
+    "Did not identify any of the planted issues: 6 MB hero image, render-blocking app.js with busy-wait, 9-weight blocking font, no-store/no compression, N+1 /api/stats, late client-side stats fetch",
+    "No fixes were made and no before/after numbers exist",
+    "Did not fall back to Read/Glob/Grep to at least review the source, even though it said those tools still worked; it ended after a single denied call and handed the decision back to the user",
+    "Did not report what could not be measured in a measured-vs-unmeasured breakdown, because nothing was done"
+  ],
+  "skill_defects": [
+    "The skill has no fallback path when Bash is denied: it forbids code-only estimates, so the agent stalls instead of delivering a labeled static review of the source (which would have found most of the planted issues without measurements).",
+    "The skill does not tell the agent to proceed with read-only discovery (Read/Glob/Grep on the source) in parallel while waiting on permissions, so a single denied command ended the whole run.",
+    "The first step bundles many probes (ls, cat, git status, curl, npm cache listing) into one compound shell command, so one denial blocks all of them; smaller, separate calls or dedicated file tools would have degraded more gracefully."
+  ],
+  "cost_usd": 0.07,
+  "model": "sonnet",
+  "turns": 4,
+  "seconds": 10,
+  "tool_calls": 2,
+  "files": [
+    "public/app.js",
+    "public/hero.png"
+  ],
+  "error": ""
+}
