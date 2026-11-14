@@ -1,14 +1,20 @@
 # prompts-to-skill: real-world run, 2026-11-13
 
-**Verdict: FAIL** (2/10). The run read prompts.md (4 prompts), checked installed skills for overlap, and stopped to ask for intent confirmation, but never drafted a skill, wrote test cases, or ran the validator, so no SKILL.md exists under skills/.
+**Verdict: PASS** (8/10). The run built a single release-notes skill at skills/release-notes/ (SKILL.md, a claim-check reference, 7 eval prompts, 9 test cases including near-misses), and check_skill.py reported 0 fail and 0 warn; the stop-before-send rule is kept as a hard rule and a final stage.
 
-Target: four real-shaped release-notes prompts from a developer's history. Run headless in a clean project with only this skill installed (6 turns, 4 tool calls, 10 s, $0.07).
+Target: four real-shaped release-notes prompts from a developer's history. Run headless in a clean project with only this skill installed (14 turns, 11 tool calls, 55 s, $0.26).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
 
 ```
 Turn the prompts in prompts.md into a skill (or skills). Put the result under skills/. My answers to your intake questions: it's for me in Claude Code, repos are on GitHub, I want it to stop and show me the notes before anything is sent.
+```
+
+Follow-up:
+
+```
+Confirmed, that's right. Go ahead and finish it without stopping for more questions.
 ```
 
 ## Rubric
@@ -20,54 +26,85 @@ Turn the prompts in prompts.md into a skill (or skills). Put the result under sk
 
 ## Hard checks
 
-- ✗ a SKILL.md was written under skills/
-- ✗ check_skill.py reports no FAIL
+- ✓ a SKILL.md was written under skills/
+- ✓ check_skill.py reports no FAIL
 
 ## Met
 
-- Ran an intent step (proposed purpose, single-skill decision, output, triggers, scope) before drafting
-- Ran an overlap check (Glob of **/SKILL.md and references) and reported no installed skill covers release notes
-- Planned to keep the 'show me before sending' constraint (stop point described in the proposed intent)
+- Ran an intent step (restated purpose, output, triggers, safety stop, shape for confirmation) and an overlap check (found no installed skill covering release notes; code-review named as nearest) before drafting
+- Drafted with draft-skill: read its SKILL.md and structure reference, then wrote SKILL.md, references/claim-check.md and evals
+- Wrote 9 trigger test cases that include near-misses (CHANGELOG edit, bug review, version bump/tag/GitHub release) and a 'write and email them' case that expects a stop
+- Gated with tune-skill's check_skill.py, run with python3 -I, reporting 0 fail and 0 warn
+- Kept the 'show me before sending' constraint: a hard rule that the skill never sends or publishes, plus a stage 5 that shows the text and waits
+- Hard checks satisfied: SKILL.md written under skills/ and no FAIL from the validator
+- Honestly reported that the test cases were reviewed by hand with no live runs, and that Gate B was passed by review, not executed
 
 ## Missed
 
-- No SKILL.md was written under skills/ (hard check failed); only Read and Glob calls were made
-- No draft-skill step was run and no trigger test cases (including near-misses) were written
-- tune-skill's validator (check_skill.py) was never run, so there is no zero-FAIL gate
-- The 'show me before sending' constraint is only stated in chat, not present in any skill file
-- Stopped to ask for 'yes' confirmation even though the user had already given intake answers (for me, Claude Code, GitHub, stop and show before sending) and asked for the result to be put under skills/
+- The final output says the intent was confirmed once, but the test-case list was not shown for editing before tuning, as the skill's own intent message promised; this was excused by the follow-up's 'no more questions'
+- Triggering was not tested live, so the 9 'pass (review)' results are self-judged, not measured
+- The first bulk-write Bash attempt was blocked and was redone with the Write tool; no harm, but the transcript shows a wasted step
 
 ## Defects to fix in the skill
 
-- The skill's intent step requires a user confirmation round-trip even when the user has already supplied intake answers and asked for the output to be written; it should proceed to draft when intake answers are given, or at least not halt the whole run on a confirmation
-- The skill does not distinguish single-turn/non-interactive runs, so the pipeline can end after the intent step with no artifact produced
-- The skill instructs showing test cases to the user before tuning, which adds another potential halt point and risks the run ending without writing files
+- The prompts-to-skill gates allow 'passed by review' for the triggering gate with no live run, so near-miss behavior is never actually exercised
+- The skill does not say what to do when the user pre-answers intake questions and then says to skip stops, so the test-case review step is dropped silently
 
 ## What it did
 
 1. `Skill: prompts-to-skill`
-1. `Read: /tmp/run-prompts-to-skill-j6wqet47/project/prompts.md`
-1. `Glob: **/SKILL.md`
-1. `Glob: .claude/skills/*/references/*`
+1. `Read: /tmp/run-prompts-to-skill-ggnkrl49/project/prompts.md`
+1. `Bash: cd /tmp/run-prompts-to-skill-ggnkrl49/project; ls -R .claude/skills | head -50; ls skills 2>&1 | head`
+1. `Bash: cd /tmp/run-prompts-to-skill-ggnkrl49/project/.claude/skills; cat draft-skill/SKILL.md draft-skill/references/structure.md tune-skill/references/test-cases.md p`
+1. `Bash: cd /tmp/run-prompts-to-skill-ggnkrl49/project/.claude/skills; cat tune-skill/references/test-cases.md prompts-to-skill/references/gates.md`
+1. `Bash: cd /tmp/run-prompts-to-skill-ggnkrl49/project; mkdir -p skills/release-notes/references skills/release-notes/evals
+cat > skills/release-notes/SKILL.md <<'EOF'
+-`
+1. `Write: /tmp/run-prompts-to-skill-ggnkrl49/project/skills/release-notes/SKILL.md`
+1. `Write: /tmp/run-prompts-to-skill-ggnkrl49/project/skills/release-notes/references/claim-check.md`
+1. `Write: /tmp/run-prompts-to-skill-ggnkrl49/project/skills/release-notes/evals/evals.json`
+1. `Write: /tmp/run-prompts-to-skill-ggnkrl49/project/skills/release-notes/evals/test-cases.md`
+1. `Bash: python3 -I /tmp/run-prompts-to-skill-ggnkrl49/project/.claude/skills/tune-skill/scripts/check_skill.py /tmp/run-prompts-to-skill-ggnkrl49/project/skills/release`
+
+## Files it wrote
+
+Copied under `files/`:
+
+- `skills/release-notes/SKILL.md`
+- `skills/release-notes/evals/evals.json`
+- `skills/release-notes/evals/test-cases.md`
+- `skills/release-notes/references/claim-check.md`
 
 ## Final output
 
-I've read prompts.md and checked the installed skills. Four prompts is above the three-prompt minimum, and no installed skill covers release notes, so there's no overlap. Before I draft anything, please confirm this intent.
+Both dependencies (`draft-skill`, `tune-skill`) are installed. Your four prompts are enough to work from, and none of them involves unauthorized access, exfiltration, or personal data. No installed skill covers release notes, so this isn't a duplicate.
 
-**Purpose:** one skill, `release-notes`, that takes a repo from its CHANGELOG to published customer notes. It runs your four prompts as one flow:
-1. Read CHANGELOG.md and summarize what changed since the last tag, grouped into features, fixes and breaking changes.
-2. Rewrite that as customer-facing notes: plain English, no ticket numbers, led by what users can now do.
-3. Check the notes against the actual diff since the last tag and flag any claim the code doesn't support.
-4. Turn the final notes into a short customer email and a 3-line changelog-page post.
+**Please confirm this intent before I draft anything:**
 
-**One skill, not four.** The prompts are sequential stages of one job, and each stage uses the previous stage's output.
+- **Purpose:** Turn a repo's changes since the last tag into customer-facing release notes, check them against the code, and prepare them to send. This covers your four prompts in order:
+  1. Summarize `CHANGELOG.md` since the last tag, grouped into features, fixes and breaking changes.
+  2. Rewrite that summary as plain-English notes with no ticket numbers, leading with what users can now do.
+  3. Check each claim in the notes against the real diff since the last tag, and flag anything the code doesn't do.
+  4. Produce a short customer email and a 3-line changelog-page post.
+- **Output:** The grouped summary, the release notes, a list of unsupported claims, then the email and the 3-line post.
+- **Trigger contexts:** You ask in Claude Code, inside a GitHub-hosted repo, for things like "write release notes", "what changed since the last tag", "check the notes against the diff", or "draft the customer email for this release".
+- **Safety stop:** The skill never sends or publishes anything. That includes email, changelog page, GitHub releases, and `gh` or `git push` commands. After the claim check it shows you the final notes, email and post, and waits for your explicit go-ahead. Even then it only prepares the text for you to send.
+- **Shape:** One skill, `release-notes`, in `skills/release-notes/`. The four prompts are sequential stages of one workflow, so splitting them into separate skills would add nothing.
 
-**Output:** the grouped summary, the notes, a list of flagged claims, the email and the 3-line post. All of it is shown in the chat.
+Is that right? If so, I'll draft it, write at least eight test cases, and show you the list to edit before tuning.
 
-**Stop point:** the skill ends with a hard stop and shows you the notes, flags, email and post. It never sends, publishes, pushes, posts or creates a GitHub release unless you explicitly approve after reviewing. Drafting and local diff reads are fine. Anything that leaves your machine needs your go-ahead.
+---
 
-**Triggers:** "write release notes", "what changed since the last tag", "customer-facing changelog", "check the notes against the diff", "turn this into a customer email", and similar phrasing. It runs in Claude Code against a GitHub-hosted repo, using local git (`git describe --tags`, `git diff <tag>..HEAD`) and `gh` for context only.
+I built the `release-notes` skill at `skills/release-notes/`, and the structure check passes. I haven't run the skill against a real repo. My first attempt to write the files in bulk was blocked, so I wrote them one at a time instead. Your one confirmation was the intent, which I restated before drafting.
 
-**Not covered:** tagging or cutting the release itself, and editing CHANGELOG.md.
+- **Overlap:** none. No installed skill covers release notes. `code-review` is the nearest, and the description hands code review off to it.
+- **Step 1 (draft):** `SKILL.md` runs your four prompts as stages: summarize since the last tag, rewrite for customers, check against the diff, then draft the email and a 3-line post. `references/claim-check.md` explains how to judge borderline claims.
+- **Stop-before-send:** a final stage shows the notes, the claim check, the email and the post, then waits for you. The skill never sends or publishes anything, including `gh release` and `git push`.
+- **Step 2 (test cases):** `evals/test-cases.md` has 9 cases and `evals/evals.json` has 7 prompts. You said not to stop for questions, so I didn't pause for you to edit the list. Edit `evals/test-cases.md` and `evals/evals.json` if you want to add or remove cases.
+- **Step 3 (tune):** `check_skill.py` reported 0 fail and 0 warn. The description is 747 characters.
+- **Gate A:** passed.
+- **Gate B:** passed by review, not run. All 9 cases were judged by hand against the description, with none run live, and the original four prompts each match a stage. The cases include a near-miss pair against `code-review`, plus a "write and email them" case that expects the skill to stop without sending.
+- **Prompts not covered:** none.
+- **`findable`:** skipped, because you didn't mention publishing.
 
-Is that right? Reply "yes" or tell me what to change. After that I'll draft the skill, write at least eight test cases and show them to you, then tune and validate.
+**Next step:** try it in a real repo with a tag, for example "write release notes since the last tag". The stop-before-send behavior is the thing to watch.

@@ -226,6 +226,7 @@ def judge(scn, output, tools, checks, truth, env, proj, written=""):
             + (f"\n\n## Files the run wrote\n{written}" if written else "")
             + f"\n\n## Final output\n{output[-40000:]}\n")
     events, _, _ = claude(["-p", body, "--max-turns", "1", "--output-format", "stream-json", "--verbose",
+                           *(["--model", MODEL] if MODEL else []),
                            "--tools", ""], proj, env, 600)
     text = final(events).get("result", "")
     m = re.search(r"\{.*\}", text, re.S)
@@ -234,6 +235,9 @@ def judge(scn, output, tools, checks, truth, env, proj, written=""):
     except Exception:
         return {"verdict": "FAIL", "score": 0, "summary": "judge returned no JSON", "met": [],
                 "missed": [text[:500]], "skill_defects": []}, 0
+
+
+MODEL = None  # --model: the model the skill sessions and the judge run on (default: the CLI's)
 
 
 def run(name, man, day):
@@ -260,7 +264,7 @@ def run(name, man, day):
             subprocess.run(scn["setup"], shell=True, cwd=proj, env=env, check=True, timeout=600)
         args = ["--output-format", "stream-json", "--verbose", "--max-turns", str(scn.get("max_turns", 60)),
                 "--permission-mode", "dontAsk", "--allowedTools", *ALLOW, *scn.get("allow", []),
-                "--max-budget-usd", str(scn.get("budget_usd", 5)),
+                "--max-budget-usd", str(scn.get("budget_usd", 5)), *(["--model", MODEL] if MODEL else []),
                 "--disallowedTools", *[d for d in DENY if d not in scn.get("undeny", [])]]
         for p in scn.get("plugins", []):
             args += ["--plugin-dir", str(source(p, man))]
@@ -315,7 +319,7 @@ def run(name, man, day):
               "score": verdict.get("score"), "summary": verdict.get("summary", ""),
               "checks": checks, "met": verdict.get("met", []), "missed": verdict.get("missed", []),
               "skill_defects": verdict.get("skill_defects", []), "cost_usd": round(cost + jcost, 2),
-              "turns": turns, "seconds": round(secs), "tool_calls": len(tools), "files": made[:40],
+              "model": MODEL or "cli default", "turns": turns, "seconds": round(secs), "tool_calls": len(tools), "files": made[:40],
               "error": err.strip()[-1500:] if not results else ""}
     (out_dir / "truth.txt").write_text(truth)
     (out_dir / "output.md").write_text(redact(output))
@@ -388,7 +392,7 @@ def report(scn, r, output, tools, truth):
     mark = {"PASS": "PASS", "PARTIAL": "PARTIAL", "FAIL": "FAIL"}.get(r["verdict"], r["verdict"])
     lines = [f"# {scn['skill']}: real-world run, {r['date']}", "",
              f"**Verdict: {mark}** ({r['score']}/10). {r['summary']}", "",
-             f"Target: {scn['target']}. Run headless in a clean project with only this skill installed"
+             f"Target: {scn['target']}. Run headless on {r.get('model', 'the CLI default model')} in a clean project with only this skill installed"
              f" ({r['turns']} turns, {r['tool_calls']} tool calls, {r['seconds']} s, ${r['cost_usd']}).",
              "Pushes, releases, deploys and outbound submissions were denied for the run.", "",
              "## Prompt", "", "```", scn["prompt"], "```"]
@@ -420,7 +424,10 @@ def main(argv=None):
     ap.add_argument("--list", action="store_true")
     ap.add_argument("--date", default=date.today().isoformat())
     ap.add_argument("--rejudge", action="store_true", help="grade saved runs again; does not rerun the skill")
+    ap.add_argument("--model", help="model for the skill sessions and the judge, e.g. sonnet")
     a = ap.parse_args(argv)
+    global MODEL
+    MODEL = a.model
     names = sorted(p.stem for p in SCEN.glob("*.json")) if (a.all or a.list) else a.names
     skipped = {p.stem for p in SCEN.glob("*.json") if json.loads(p.read_text()).get("skip")}
     if not a.list:

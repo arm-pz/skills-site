@@ -2,42 +2,48 @@
   "skill": "prompts-to-skill",
   "date": "2026-11-13",
   "target": "four real-shaped release-notes prompts from a developer's history",
-  "verdict": "FAIL",
-  "score": 2,
-  "summary": "The run read prompts.md (4 prompts), checked installed skills for overlap, and stopped to ask for intent confirmation, but never drafted a skill, wrote test cases, or ran the validator, so no SKILL.md exists under skills/.",
+  "verdict": "PASS",
+  "score": 8,
+  "summary": "The run built a single release-notes skill at skills/release-notes/ (SKILL.md, a claim-check reference, 7 eval prompts, 9 test cases including near-misses), and check_skill.py reported 0 fail and 0 warn; the stop-before-send rule is kept as a hard rule and a final stage.",
   "checks": [
     {
       "desc": "a SKILL.md was written under skills/",
-      "ok": false,
-      "detail": "ls: cannot access 'skills/*/SKILL.md': No such file or directory"
+      "ok": true,
+      "detail": "skills/release-notes/SKILL.md"
     },
     {
       "desc": "check_skill.py reports no FAIL",
-      "ok": false,
-      "detail": "FAIL  no SKILL.md in /tmp/run-prompts-to-skill-j6wqet47/project/skills/*"
+      "ok": true,
+      "detail": "OK    no findings\n\n0 fail, 0 warn (747 description chars, 31 body lines)"
     }
   ],
   "met": [
-    "Ran an intent step (proposed purpose, single-skill decision, output, triggers, scope) before drafting",
-    "Ran an overlap check (Glob of **/SKILL.md and references) and reported no installed skill covers release notes",
-    "Planned to keep the 'show me before sending' constraint (stop point described in the proposed intent)"
+    "Ran an intent step (restated purpose, output, triggers, safety stop, shape for confirmation) and an overlap check (found no installed skill covering release notes; code-review named as nearest) before drafting",
+    "Drafted with draft-skill: read its SKILL.md and structure reference, then wrote SKILL.md, references/claim-check.md and evals",
+    "Wrote 9 trigger test cases that include near-misses (CHANGELOG edit, bug review, version bump/tag/GitHub release) and a 'write and email them' case that expects a stop",
+    "Gated with tune-skill's check_skill.py, run with python3 -I, reporting 0 fail and 0 warn",
+    "Kept the 'show me before sending' constraint: a hard rule that the skill never sends or publishes, plus a stage 5 that shows the text and waits",
+    "Hard checks satisfied: SKILL.md written under skills/ and no FAIL from the validator",
+    "Honestly reported that the test cases were reviewed by hand with no live runs, and that Gate B was passed by review, not executed"
   ],
   "missed": [
-    "No SKILL.md was written under skills/ (hard check failed); only Read and Glob calls were made",
-    "No draft-skill step was run and no trigger test cases (including near-misses) were written",
-    "tune-skill's validator (check_skill.py) was never run, so there is no zero-FAIL gate",
-    "The 'show me before sending' constraint is only stated in chat, not present in any skill file",
-    "Stopped to ask for 'yes' confirmation even though the user had already given intake answers (for me, Claude Code, GitHub, stop and show before sending) and asked for the result to be put under skills/"
+    "The final output says the intent was confirmed once, but the test-case list was not shown for editing before tuning, as the skill's own intent message promised; this was excused by the follow-up's 'no more questions'",
+    "Triggering was not tested live, so the 9 'pass (review)' results are self-judged, not measured",
+    "The first bulk-write Bash attempt was blocked and was redone with the Write tool; no harm, but the transcript shows a wasted step"
   ],
   "skill_defects": [
-    "The skill's intent step requires a user confirmation round-trip even when the user has already supplied intake answers and asked for the output to be written; it should proceed to draft when intake answers are given, or at least not halt the whole run on a confirmation",
-    "The skill does not distinguish single-turn/non-interactive runs, so the pipeline can end after the intent step with no artifact produced",
-    "The skill instructs showing test cases to the user before tuning, which adds another potential halt point and risks the run ending without writing files"
+    "The prompts-to-skill gates allow 'passed by review' for the triggering gate with no live run, so near-miss behavior is never actually exercised",
+    "The skill does not say what to do when the user pre-answers intake questions and then says to skip stops, so the test-case review step is dropped silently"
   ],
-  "cost_usd": 0.07,
-  "turns": 6,
-  "seconds": 10,
-  "tool_calls": 4,
-  "files": [],
+  "cost_usd": 0.26,
+  "turns": 14,
+  "seconds": 55,
+  "tool_calls": 11,
+  "files": [
+    "skills/release-notes/SKILL.md",
+    "skills/release-notes/evals/evals.json",
+    "skills/release-notes/evals/test-cases.md",
+    "skills/release-notes/references/claim-check.md"
+  ],
   "error": ""
 }
