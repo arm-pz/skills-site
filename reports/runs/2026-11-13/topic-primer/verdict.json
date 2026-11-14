@@ -1,0 +1,33 @@
+{
+  "skill": "topic-primer",
+  "date": "2026-11-13",
+  "target": "teaching double-entry bookkeeping to a software engineer from zero",
+  "verdict": "PARTIAL",
+  "score": 6,
+  "summary": "The skill gave a code-analogy primer and correctly caught the 'both are debits' misconception (Cash +100 debit, Revenue -100 credit), but it front-loaded a long lecture before asking anything and issued multiple mini-checks in one output instead of one question at a time.",
+  "checks": [],
+  "met": [
+    "Adapts to the engineer background: signed-amount transactions in Python, dict/key analogy for accounts, checksum, append-only log, materialized view, test suite for trial balance",
+    "Explains accounts, debits/credits and the accounting equation correctly (Assets = Liabilities + Equity, normal balances, five account types, worked examples that each net to zero)",
+    "Catches the planted misconception: states that debit is not a synonym for increase, shows Cash debit (+100) and Revenue credit (-100), and explains why two debits would sum to 200 and fail the zero rule",
+    "Checks understanding with exercises: a mini-check on prepaid revenue, a rent sign question, and a 'your turn' \u00a330 software subscription entry"
+  ],
+  "missed": [
+    "Does not ask one question at a time and wait: the first block is a full 8-step lecture ending in a mini-check, then a second block with another mini-check, then a third with a further exercise, all in one output with no pause for the user's answer",
+    "Opens with a large lecture before diagnosing the learner; the background question was only effectively answered by the follow-up, and the first block ignored the engineer's level of detail (e.g. mixed $ and \u00a3, introduced accrual, deferred revenue and prepayment before basics)",
+    "Mini-check in the first block (prepaid $1,200) was too advanced and was then self-retracted ('ignore its mini-check'), showing poor pacing",
+    "Currency inconsistency ($ in examples, \u00a3 in the user's scenario) and the first block's content duplicates later blocks"
+  ],
+  "skill_defects": [
+    "The skill does not enforce a hard stop after a single question, so the model emitted multiple turns' worth of content and several questions in one response",
+    "The skill lets the model deliver a full multi-step primer before the learner's level is known; it should ask the background question first and wait, then teach in small steps",
+    "No guidance to keep a mini-check within what has been taught so far, which led to a prepaid-revenue/liability question before liabilities were explained",
+    "No instruction to keep consistent currency or to match the learner's stated currency"
+  ],
+  "cost_usd": 0.27,
+  "turns": 5,
+  "seconds": 39,
+  "tool_calls": 1,
+  "files": [],
+  "error": ""
+}

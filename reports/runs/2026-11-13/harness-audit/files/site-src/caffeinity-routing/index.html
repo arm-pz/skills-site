@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caffeinity Routing — AI Agent Skill for Claude Code</title>
+<meta name="description" content="Picks which caffeinity skills to run, in what order, for a goal that spans more than one of them, and says what each step hands the next: build and…">
+<link rel="canonical" href="https://skillsmith.tech/caffeinity-routing/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Skillsmith by Caffeinity">
+<meta property="og:title" content="Caffeinity Routing — AI Agent Skill for Claude Code">
+<meta property="og:description" content="Picks which caffeinity skills to run, in what order, for a goal that spans more than one of them, and says what each step hands the next: build and publish a skill, get a project found, pass a release gate, grow organic search traffic, run a job search, make a decision, learn a skill, run cold outbound, launch a one-person product, set up a coding agent for a repo, or set up and keep the skills themselves healthy. Checks which of those skills are installed and names the missing ones instead of improvising their work. Use whenever someone asks which skill to use, what to run first, how the skills fit together, or describes a multi-step outcome such as &quot;take this idea to a published skill&quot; or &quot;get my site ready to ship and ranking&quot;, even if they never name a skill. Not for a request one skill already owns (load that skill directly), and not for doing a step&#x27;s work itself: the named skill does it.">
+<meta property="og:url" content="https://skillsmith.tech/caffeinity-routing/">
+<meta name="twitter:card" content="summary">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="preload" href="/fonts/files/cY9AfjOCX1hbuyalUrK4397yjA.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/files/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "caffeinity-routing",
+  "alternateName": "Caffeinity Routing",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any",
+  "url": "https://skillsmith.tech/caffeinity-routing/",
+  "description": "Picks which caffeinity skills to run, in what order, for a goal that spans more than one of them, and says what each step hands the next: build and publish a skill, get a project found, pass a release gate, grow organic search traffic, run a job search, make a decision, learn a skill, run cold outbound, launch a one-person product, set up a coding agent for a repo, or set up and keep the skills themselves healthy. Checks which of those skills are installed and names the missing ones instead of improvising their work. Use whenever someone asks which skill to use, what to run first, how the skills fit together, or describes a multi-step outcome such as \"take this idea to a published skill\" or \"get my site ready to ship and ranking\", even if they never name a skill. Not for a request one skill already owns (load that skill directly), and not for doing a step's work itself: the named skill does it.",
+  "codeRepository": "https://github.com/arm-pz/caffeinity-skills",
+  "license": "https://spdx.org/licenses/MIT.html",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Caffeinity",
+    "url": "https://caffeinity.com/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+<!-- gen:quality-css:start -->
+<style>
+  .qb{--qb-line:var(--rule,var(--line,color-mix(in srgb,currentColor 14%,transparent)));--qb-dim:var(--dim,var(--muted));padding:clamp(64px,9vw,128px) 0}
+  .qb h2{font-family:var(--serif);font-weight:400;font-size:clamp(34px,4.3vw,60px);line-height:1;letter-spacing:-.024em;margin:0}
+  .qb-lead{color:var(--qb-dim);max-width:58ch;margin-top:18px;font-size:17px}
+  .qb a{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em}
+  .qb-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:0 clamp(28px,4vw,64px);margin-top:clamp(32px,4vw,56px)}
+  .qb-grid>div{border-top:2px solid currentColor;padding:14px 0 30px}
+  .qb dt{font-size:14px;font-weight:600;line-height:1.3;color:var(--qb-dim)}
+  .qb dd{margin:8px 0 0;font-family:var(--serif);font-size:24px;line-height:1.15;letter-spacing:-.01em}
+  .qb dd small{display:block;font-family:var(--sans);letter-spacing:0;color:var(--qb-dim);font-size:15px;line-height:1.5;margin-top:8px}
+  .qb .qb-wide{grid-column:1/-1}
+  .qb .qb-wide dd{font-family:var(--sans);font-size:17px;line-height:1.55;letter-spacing:0;max-width:78ch}
+  .qb ul{list-style:none;margin:8px 0 0;padding:0}
+  .qb li{padding:10px 0;border-top:1px solid var(--qb-line)}
+  .qb .qb-flag{font-weight:400}
+  .qb .qb-flag.fail{box-shadow:inset 0 -.14em 0 var(--ember,var(--accent))}
+</style>
+<!-- gen:quality-css:end -->
+</head>
+<body>
+
+<nav class="nav" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="/"><b>/</b>skillsmith <span class="brand-by">by caffeinity</span></a>
+    <div class="nav-links">
+      <a href="/skills/">Skills</a>
+      <a href="/workflows/">Workflows</a>
+      <a href="/mods/">Mods</a>
+      <a href="/work/">Work with us</a>
+    </div>
+    <div class="nav-cta">
+      <a class="gh" href="https://github.com/arm-pz" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-accent btn-sm" href="/caffeinity-routing/">Start here</a>
+    </div>
+  </div>
+</nav>
+
+<header class="sk-hero">
+  <div class="wrap">
+    <p class="crumbs"><a href="/skills/">Skills</a><span>caffeinity-routing</span></p>
+    <h1>Caffeinity Routing</h1>
+    <p class="lead">Start here. Tell it the outcome you want and it picks one of twelve brews (workflows), lists the skills in order with what each hands the next, and names the ones you have not installed instead of improvising their work.</p>
+    <div class="install-line">
+      <button class="cmd" type="button" data-copy="npx skills add arm-pz/caffeinity-skills --skill caffeinity-routing" aria-label="Copy the install command"><span id="cmd">npx skills add arm-pz/caffeinity-skills --skill caffeinity-routing</span><span class="copy" aria-hidden="true">Copy</span></button>
+    </div>
+    <p class="facts">4 files and 415 lines, free under MIT. Built from <a href="https://github.com/arm-pz/caffeinity-skills" target="_blank" rel="noopener">arm-pz/caffeinity-skills</a> at <code>523bc2b</code>.</p>
+  </div>
+</header>
+
+<section class="purpose tone" aria-labelledby="for-h">
+  <div class="wrap">
+    <h2 id="for-h">What it is for</h2>
+    <p class="body">Picks which caffeinity skills to run, in what order, for a goal that spans more than one of them, and says what each step hands the next: build and publish a skill, get a project found, pass a release gate, grow organic search traffic, run a job search, make a decision, learn a skill, run cold outbound, launch a one-person product, set up a coding agent for a repo, or set up and keep the skills themselves healthy. Checks which of those skills are installed and names the missing ones instead of improvising their work. Use whenever someone asks which skill to use, what to run first, how the skills fit together, or describes a multi-step outcome such as &quot;take this idea to a published skill&quot; or &quot;get my site ready to ship and ranking&quot;, even if they never name a skill.</p>
+    <div class="uses">
+    <div class="uses-col not">
+      <h3>Not for</h3>
+      <ul><li>A request one skill already owns (load that skill directly)</li><li>Not for doing a step&#x27;s work itself: the named skill does it</li></ul>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- gen:quality:start -->
+<section class="qb" aria-labelledby="qb-h">
+  <div class="wrap">
+    <h2 id="qb-h">Know what you are installing.</h2>
+    <p class="qb-lead">Version, date and limits are read from the repo on every sync, and the check runs every night. Real-world runs are listed only with their evidence.</p>
+    <dl class="qb-grid">
+      <div><dt>Version</dt><dd>1.1.0<small>commit 523bc2b</small></dd></div>
+      <div><dt>Updated</dt><dd><a href="https://github.com/arm-pz/caffeinity-skills/commits" target="_blank" rel="noopener">13 Nov 2026</a><small>last commit to the repo</small></dd></div>
+      <div><dt>Works in</dt><dd>Claude Code, Codex, Cursor, Qoder and any agent that loads a SKILL.md<small>plain text; no API keys</small></dd></div>
+      <div><dt>Nightly check</dt><dd>Passing<small>No failures or warnings. <a href="https://github.com/arm-pz/skills-site/blob/main/.github/workflows/health.yml" target="_blank" rel="noopener">How it is checked</a></small></dd></div>
+      <div><dt>Last real-world run</dt><dd>No public run yet<small>Runs are published only with their evidence.</small></dd></div>
+      <div class="qb-wide"><dt>Known limits</dt><dd>Not built for:<ul><li>A request one skill already owns (load that skill directly)</li><li>Not for doing a step&#x27;s work itself: the named skill does it</li></ul></dd></div>
+    </dl>
+  </div>
+</section>
+<!-- gen:quality:end -->
+
+<section class="ships" aria-labelledby="ships-h">
+  <div class="wrap">
+    <h2 id="ships-h">Every file it installs</h2>
+    <p class="sub">Measured from the packed archive at commit <code>523bc2b</code>. A skill is plain text your agent reads, so this list is all of it.</p>
+    <table class="files">
+      <thead class="sr-only"><tr><th>File</th><th>Lines</th><th>Bytes</th></tr></thead>
+      <tbody>
+        <tr><td>SKILL.md</td><td class="n">90</td><td class="n bytes">6,692 B</td></tr>
+        <tr><td>references/trigger-cases.md</td><td class="n">30</td><td class="n bytes">2,888 B</td></tr>
+        <tr><td>references/workflows.md</td><td class="n">151</td><td class="n bytes">13,095 B</td></tr>
+        <tr><td>scripts/route_check.py</td><td class="n">144</td><td class="n bytes">5,774 B</td></tr>
+      </tbody>
+      <tfoot><tr><td>4 files</td><td class="n">415</td><td class="n bytes">10 KB</td></tr></tfoot>
+    </table>
+  </div>
+</section>
+
+<section class="more tone" aria-labelledby="more-h">
+  <div class="wrap">
+    <h2 id="more-h" class="sr-only">Source</h2>
+    <div class="source">
+      <p>Read it before you install it: the skill lives at <code>plugins/caffeinity-routing/skills/caffeinity-routing</code> in <a href="https://github.com/arm-pz/caffeinity-skills" target="_blank" rel="noopener">arm-pz/caffeinity-skills</a>.</p>
+      <a class="btn" href="https://github.com/arm-pz/caffeinity-skills" target="_blank" rel="noopener">Open the repo</a>
+    </div>
+  </div>
+</section>
+
+<footer class="roast">
+  <div class="wrap">
+    <div class="meta">
+      <span>Caffeinity Routing is an open agent skill on <a href="/">Skillsmith by Caffeinity</a>, from <a href="https://github.com/arm-pz/caffeinity-skills" target="_blank" rel="noopener">arm-pz/caffeinity-skills</a>.</span>
+      <a href="/work/">Custom skills for your team</a>
+      <a href="https://github.com/arm-pz" target="_blank" rel="noopener">github.com/arm-pz</a>
+    </div>
+    <p class="kural"><span lang="ta">யாம் பெற்ற இன்பம் பெறுக இவ்வையகம்</span><span>“May this world attain the same bliss that I have attained.”</span></p>
+  </div>
+</footer>
+
+<script src="/assets/site.js" defer></script>
+</body>
+</html>

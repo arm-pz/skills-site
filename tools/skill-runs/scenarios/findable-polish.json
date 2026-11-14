@@ -1,0 +1,25 @@
+{
+  "skill": "findable-polish",
+  "install": [
+    "findable-polish",
+    "findable",
+    "wordsmith"
+  ],
+  "setup": "git clone -q --depth 1 https://github.com/arm-pz/seo-polish target",
+  "target": "the README of arm-pz/seo-polish against live searches",
+  "prompt": "Nobody finds the skill in target/. Audit its README against what a stranger would actually search, and give me 2-3 rewrite options for each problem. Write to findable-report.md; don't push anything.",
+  "checks": [
+    {
+      "desc": "wrote findable-report.md",
+      "file": "findable-report.md"
+    }
+  ],
+  "max_turns": 80,
+  "budget_usd": 6,
+  "rubric": [
+    "Runs real searches and reports where the repo does or does not appear",
+    "Names concrete gaps in the README/About",
+    "Gives 2-3 alternatives per finding that invent no facts about the skill",
+    "Pushes nothing"
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "skill": "ai-team-blueprint",
+  "date": "2026-11-13",
+  "target": "a 2-person accounting practice that wants an AI team",
+  "verdict": "PARTIAL",
+  "score": 7,
+  "summary": "The run asked five questions first, recommended the receipt/statement chase, and wrote a 3-agent blueprint with prompts, approval gates, a QA plan and a 7-day plan, but its price figures are unsupported estimates and it did not ask again after the user's answers left the setup-time question unanswered.",
+  "checks": [],
+  "met": [
+    "Asked five sharp questions before designing and stopped to wait for answers",
+    "Recommended one starting use case (missing-records chase) matching the user's 25-hour receipt/statement chasing answer, with a comparison against two alternatives",
+    "Delivered 3 agents, each with a production XML-style prompt, plus a handoff workflow with three partner review points and a retry cap",
+    "Respected the approval constraint: every prompt escalates before sending, agents never send or write to Xero, and the workflow has partner approval before any email",
+    "Stayed within the \u00a3200 budget: tool stack totals about \u00a350\u2013\u00a3100/month",
+    "Included a QA plan (failure modes, pre-launch tests, metrics) and a 7-day launch plan with a START HERE FIRST section",
+    "Flagged UK GDPR and data minimisation, and told the user to enter credentials in the tool's own connection screen, not in chat"
+  ],
+  "missed": [
+    "Tool prices are invented estimates (Claude about \u00a320\u2013\u00a330 per seat, Make/Zapier about \u00a310\u2013\u00a330/month, total \u00a350\u2013\u00a3100) with no source; the final message only says 'check current pricing'",
+    "Claimed Make or Zapier can pull Xero/Dext exports and create Gmail drafts, and that Claude Projects can be set up per agent, without verifying these capabilities",
+    "The 'realistic saving of 12\u201318 of those 25 hours' and the 'under 12 hours by month 3' target are not grounded in anything the user said",
+    "Setup/review time was never answered by the user; the run assumed 3 hrs/week and 2\u20133 hrs/week instead of asking again, though it did state the assumption",
+    "The assumed Dext matching and 'Xero bank transactions with attachment status' export formats are asserted without support"
+  ],
+  "skill_defects": [
+    "The skill does not tell the agent to label tool prices as unverified or to avoid numeric price ranges when it cannot check current pricing",
+    "The skill does not require the agent to confirm that a proposed integration (e.g. Make/Zapier with Xero, Dext, Gmail drafts) actually exists, or to present it as a thing to verify",
+    "The skill does not require the 'sharp questions' to be re-asked when a follow-up leaves some unanswered (here, setup hours and the 90-day outcome); the run silently substituted assumptions",
+    "The skill does not ask for impact estimates (hours saved) to be labelled as assumptions rather than predictions"
+  ],
+  "cost_usd": 0.32,
+  "turns": 7,
+  "seconds": 75,
+  "tool_calls": 3,
+  "files": [
+    "ai-team-blueprint.md"
+  ],
+  "error": ""
+}

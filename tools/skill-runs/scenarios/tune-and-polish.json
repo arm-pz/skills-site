@@ -1,0 +1,30 @@
+{
+  "skill": "tune-and-polish",
+  "install": [
+    "tune-and-polish",
+    "tune-skill",
+    "findable-polish",
+    "findable",
+    "wordsmith"
+  ],
+  "setup": "git clone -q --depth 1 https://github.com/arm-pz/keyword-resolver target",
+  "target": "a clone of arm-pz/keyword-resolver (edits local, nothing pushed)",
+  "prompt": "The skill in target/ both misfires and is hard to find. Tune it and polish its listing. Work on the local copy only; don't push.",
+  "checks": [
+    {
+      "desc": "check_skill.py reports no FAIL on the tuned skill",
+      "cmd": "python3 .claude/skills/tune-skill/scripts/check_skill.py target"
+    }
+  ],
+  "max_turns": 100,
+  "budget_usd": 8,
+  "rubric": [
+    "Tunes the description, sibling overlaps and stale names first, gated on check_skill.py with zero FAILs",
+    "Then polishes README/About text from the final description, against real queries",
+    "Every change is grounded; nothing invented",
+    "Pushes nothing"
+  ],
+  "followups": [
+    "Confirmed, that's right. Go ahead and finish it without stopping for more questions."
+  ]
+}

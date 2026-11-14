@@ -1,0 +1,26 @@
+{
+  "skill": "pre-ship-performance-audit",
+  "fixtures": "slow-app",
+  "setup": "node make_assets.js && (nohup node server.js > .server.log 2>&1 & echo $! > .server.pid) && for i in $(seq 1 20); do curl -s -o /dev/null http://127.0.0.1:3200/ && break; sleep 0.5; done",
+  "teardown": "kill $(cat .server.pid) 2>/dev/null; rm -f .server.pid .server.log",
+  "allow": [
+    "Bash(curl:*)",
+    "Bash(node:*)",
+    "Bash(npx lighthouse:*)",
+    "Bash(npx -y lighthouse:*)",
+    "Bash(kill:*)",
+    "Bash(sleep:*)"
+  ],
+  "target": "Ledgerboard, a local marketing page and stats API with 6 planted slow-downs",
+  "prompt": "Ledgerboard launches next week and feels slow. It's running locally at http://127.0.0.1:3200 (source here). Audit its real-world speed, measure it, fix what's worth fixing, and prove each fix with before and after numbers.",
+  "ground_truth": "cat \"$SKILL_RUNS/truth_slow.md\"",
+  "max_turns": 150,
+  "budget_usd": 12,
+  "timeout_s": 3600,
+  "rubric": [
+    "Measures a baseline (Lighthouse mobile, repeated runs) before changing anything, and never invents one",
+    "Finds the 6 MB hero image, the render-blocking synchronous app.js with the busy-wait, the 9-weight blocking font, no-store/no compression, and the N+1 /api/stats",
+    "Fixes without removing features and proves each fix with the same measurement protocol",
+    "Reports numbers it actually measured; says what it could not measure (e.g. no real network)"
+  ]
+}

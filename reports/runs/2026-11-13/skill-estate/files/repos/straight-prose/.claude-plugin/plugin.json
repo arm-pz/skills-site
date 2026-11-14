@@ -1,0 +1,9 @@
+{
+  "name": "straight-prose",
+  "version": "0.1.0",
+  "description": "Writes, edits and audits prose against a set of rules for stock AI writing patterns, keeps the author's voice and dialect, and ships a scanner for the mechanical patterns.",
+  "author": {
+    "name": "Abdul Rahman P Z"
+  },
+  "repository": "https://github.com/arm-pz/straight-prose"
+}

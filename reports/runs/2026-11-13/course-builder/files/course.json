@@ -1,0 +1,91 @@
+{
+  "title": "SQL for Customer Success Managers",
+  "learners": "12 customer success managers who use Looker daily and have never written SQL; evening workshop, 6 weekly 2-hour sessions",
+  "budget_hours": 12,
+  "outcomes": [
+    {"id": "O1", "text": "Write a SELECT query with WHERE, ORDER BY and LIMIT that returns a requested slice of an accounts table"},
+    {"id": "O2", "text": "Calculate counts, sums and averages per customer segment using GROUP BY and HAVING"},
+    {"id": "O3", "text": "Combine accounts, usage and tickets tables with JOINs to answer a question that spans them"},
+    {"id": "O4", "text": "Translate a Looker explore (dimensions, measures, filters) into an equivalent SQL query"},
+    {"id": "O5", "text": "Diagnose a failing or wrong-result query from its error message or output and fix it"},
+    {"id": "O6", "text": "Build a multi-step query with CTEs that answers a real renewal-risk or health-score question and explain its logic to a colleague"}
+  ],
+  "modules": [
+    {
+      "id": "M1",
+      "title": "First queries: SELECT, WHERE, ORDER BY",
+      "outcomes": ["O1"],
+      "prereqs": [],
+      "hours": 2,
+      "activity": "Guided queries on a practice accounts table; then pull 'enterprise accounts renewing this quarter, soonest first' unguided",
+      "assessment": {"outcomes": ["O1"], "evidence": "three new data requests answered with working queries, checked against expected row counts"}
+    },
+    {
+      "id": "M2",
+      "title": "Summarising: aggregates and GROUP BY",
+      "outcomes": ["O2", "O4"],
+      "prereqs": ["M1"],
+      "hours": 2,
+      "activity": "Rebuild three familiar Looker measures by hand, then compare the SQL Looker shows ('Show SQL') with your own",
+      "assessment": {"outcomes": ["O2", "O4"], "evidence": "a per-segment summary query plus a short note mapping each Looker dimension, measure and filter to the matching SQL clause"}
+    },
+    {
+      "id": "M3",
+      "title": "Joining tables",
+      "outcomes": ["O3"],
+      "prereqs": ["M2"],
+      "hours": 2,
+      "activity": "Join accounts to tickets, then add usage; inspect what changes between INNER and LEFT JOIN with row counts",
+      "assessment": {"outcomes": ["O3"], "evidence": "a query answering 'which accounts have high ticket volume and falling usage' and a sentence justifying the join type chosen"}
+    },
+    {
+      "id": "M4",
+      "title": "Debugging and sanity-checking",
+      "outcomes": ["O5"],
+      "prereqs": ["M3"],
+      "hours": 2,
+      "activity": "Six broken queries (syntax error, fan-out duplicates, wrong filter), with hints withdrawn over time",
+      "assessment": {"outcomes": ["O5"], "evidence": "a diagnosis and fix for two unseen broken queries, each naming the cause and the evidence line or row count"}
+    },
+    {
+      "id": "M5",
+      "title": "Multi-step questions with CTEs",
+      "outcomes": ["O6"],
+      "prereqs": ["M4"],
+      "hours": 2,
+      "activity": "Refactor a nested query into CTEs; pair-explain each step to a partner",
+      "assessment": {"outcomes": ["O6"], "evidence": "a CTE-based draft of the capstone query, reviewed by a peer using the rubric"}
+    },
+    {
+      "id": "M6",
+      "title": "Capstone: a renewal-risk query",
+      "outcomes": ["O1", "O2", "O3", "O6"],
+      "prereqs": ["M5"],
+      "hours": 2,
+      "activity": "Build and present a renewal-risk or health-score query on your own portfolio-style data; peer questions",
+      "assessment": {"outcomes": ["O6"], "evidence": "final query plus a 3-minute walkthrough, scored on the rubric below"}
+    }
+  ],
+  "final": {
+    "outcomes": ["O1", "O2", "O3", "O4", "O5", "O6"],
+    "evidence": "capstone renewal-risk query (uses filters, grouping and joins), a mapping back to the equivalent Looker explore, one bug found and fixed in a colleague's query, and a spoken walkthrough"
+  },
+  "rubric": [
+    {
+      "criterion": "Correctness",
+      "levels": [
+        "Query runs and returns the right rows; row counts were checked against a known figure",
+        "Query runs, but one filter or join gives duplicate or missing rows",
+        "Query errors or answers a different question"
+      ]
+    },
+    {
+      "criterion": "Explanation",
+      "levels": [
+        "Walkthrough names what each CTE does and why each join type was chosen",
+        "Walkthrough describes the clauses but not the reasons",
+        "Walkthrough only reads the code aloud"
+      ]
+    }
+  ]
+}

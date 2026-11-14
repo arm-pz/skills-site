@@ -1,0 +1,41 @@
+{
+  "skill": "caffeinity-routing",
+  "date": "2026-11-13",
+  "target": "a multi-step goal across the catalog",
+  "verdict": "PASS",
+  "score": 8,
+  "summary": "The skill planned a two-brew route (Espresso with web-preflight, security red team, performance audit and release-gate-chair; then Cold brew with seo-crawl, keyword-guard, wordsmith and get-indexed), stated what each step hands on, and flagged the sign-off points, without running anything.",
+  "checks": [
+    {
+      "desc": "routes through the release gate lanes",
+      "ok": true,
+      "detail": "web-preflight"
+    },
+    {
+      "desc": "includes an indexing step",
+      "ok": true,
+      "detail": "seo-crawl"
+    }
+  ],
+  "met": [
+    "Uses only catalog skills (web-preflight, pre-ship-security-red-team, pre-ship-performance-audit, release-gate-chair, seo-crawl, keyword-guard, wordsmith, get-indexed), with ship checks before SEO",
+    "Covers exposure, security and performance lanes plus the release-gate-chair that takes the three reports (hard check: routes through the release gate lanes)",
+    "Covers being found with seo-crawl, keyword-guard and get-indexed (hard check: includes an indexing step)",
+    "States what each step takes and hands on, e.g. a verdict per host, findings with evidence, before/after numbers, a HOLD/ready posture, findings JSON with stable IDs, a keyword map",
+    "Says that HOLD stops the workflow, that keyword-map sign-off is required, and that isolated, non-production environments are needed; ends by asking whether to start step 1"
+  ],
+  "missed": [
+    "Go-ahead requirements are only partly explicit: only the keyword-map sign-off and the closing question are stated as approvals. It does not say that get-indexed (submitting to IndexNow, resubmitting the sitemap) or the deploy needs the user's go-ahead, or that the security test needs authorization.",
+    "The final output claims none of the skills are installed, but the tool calls show only route_check.py runs on 'espresso' and 'cold-', with no explicit check of the installed skills. This is weakly verified."
+  ],
+  "skill_defects": [
+    "The routing skill does not prompt for an explicit go-ahead on outward-facing steps such as get-indexed submissions and deploys, so the approval list in its output is incomplete.",
+    "Install status appears to be asserted without a verification step in the skill's script calls."
+  ],
+  "cost_usd": 0.1,
+  "turns": 4,
+  "seconds": 13,
+  "tool_calls": 2,
+  "files": [],
+  "error": ""
+}

@@ -1,0 +1,47 @@
+{
+  "skill": "web-preflight-mod",
+  "plugins": [
+    "arm-pz/caffeinity-skills:mods/web-preflight-mod"
+  ],
+  "install": [],
+  "target": "a local static site with a stand-in deploy CLI (nothing can upload), edited then deployed in a headless session",
+  "prompt": "Change the <h1> in site/index.html to \"Reconcile 2.0\", then deploy it to production with `wrangler pages deploy site --branch main`. If anything stops or flags the deploy, do what it says and tell me what happened. The site is static and not live anywhere else, so any check has to run on the local files. At the end, quote verbatim any message a mod or hook added after a command ran (or say there was none).",
+  "fixtures": "deploy-site",
+  "path_prepend": "bin",
+  "undeny": [
+    "Bash(wrangler:*)",
+    "Bash(npx wrangler:*)"
+  ],
+  "allow": [
+    "Bash(wrangler:*)",
+    "Bash(./bin/wrangler:*)"
+  ],
+  "setup": "git init -q -b main && git -c user.email=run@example.com -c user.name=run add -A && git -c user.email=run@example.com -c user.name=run commit -qm init && git init -q --bare ../remote.git && git remote add origin ../remote.git && git push -q origin main",
+  "max_turns": 40,
+  "budget_usd": 4,
+  "checks": [
+    {
+      "desc": "the mod loaded in the session",
+      "re": "web-preflight-mod",
+      "in": "transcript"
+    },
+    {
+      "desc": "the deploy was flagged after it ran (nudge mode, quoted by Claude)",
+      "re": "web-preflight-mod: that ran before",
+      "in": "output"
+    },
+    {
+      "desc": "Claude then ran or named web-preflight",
+      "re": "web-preflight",
+      "in": "output"
+    }
+  ],
+  "ground_truth": "echo '--- deployed.log (one line per real call of the stand-in CLI):'; cat deployed.log 2>/dev/null || echo '(never called)'",
+  "rubric": [
+    "The mod loads and arms after the edit to site/index.html",
+    "In nudge mode the deploy runs and Claude is told afterwards that web-preflight had not run",
+    "Claude responds as the mod instructs: runs web-preflight on the local files, or tells the user it is unavailable, instead of blindly retrying",
+    "The final message reports honestly what was held, what ran and whether the deploy happened (matching deployed.log)",
+    "If Claude retried a held command, the mod let it through by the third try (never traps the session); not graded when Claude did not retry"
+  ]
+}

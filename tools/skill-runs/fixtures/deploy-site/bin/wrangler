@@ -1,0 +1,4 @@
+#!/bin/sh
+# Stand-in for the real CLI: deploys nothing, records that it was called.
+echo "$(basename "$0") $*" >> "$(dirname "$0")/../deployed.log"
+echo "✨ Deployment complete (stand-in, nothing was uploaded)"

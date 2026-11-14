@@ -1,0 +1,14 @@
+{
+  "skill": "insights-to-prompts",
+  "seed_sessions": true,
+  "target": "real Claude Code session files from this batch (no /insights report present)",
+  "prompt": "Turn my Claude Code insights into better prompts: find the prompts that caused friction in my recent sessions and rewrite them.",
+  "max_turns": 60,
+  "budget_usd": 5,
+  "rubric": [
+    "Checks for ~/.claude/usage-data/report.html, finds none, and tells the user to run /insights (it cannot run it itself) or proceeds only on what the transcripts show, saying so",
+    "Every rewrite cites the session and the friction behind it; prompts without friction are not rewritten",
+    "Separates CLAUDE.md-rule fixes (hand to harness-audit) from prompt fixes",
+    "Invents no friction"
+  ]
+}

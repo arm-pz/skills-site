@@ -1,0 +1,9 @@
+I've written the board memo to `strategy-memo.md`. It recommends building multi-entity first, but with low-to-medium confidence, because the data is thin.
+
+- **Why multi-entity:** It's cheaper (8 engineer-weeks against 10). The demand comes from four paying customers, and the £900 plan is already priced. If all four upgrade and currently pay the £223 average, that's about +£2.7k MRR, roughly 39% of today's £6.9k. That assumes all four convert and that they pay the average today, and I don't have their actual plan prices.
+- **What would flip it to QuickBooks:** QuickBooks only matches that upside if about 21% of the 58 waitlist sign-ups (about 12 customers) pay. That also assumes QuickBooks users pay the same average as Xero users. Sign-ups haven't been asked to pay, so the memo proposes a pre-sell test over the next three weeks. It would ask the four customers for a commitment at £900 and offer the waitlist a priced founding-customer deal. Fewer than 3 of the 4 committing, or 12 or more paying from the waitlist, would reverse the pick.
+- **The dissent section:** Both customers you lost went to QuickBooks, and waitlist demand is about three times the Xero launch pace. The memo says plainly that this argues for QuickBooks first.
+- **What's missing:** Several figures are marked as slots for you to fill, and they are listed under Gaps. The most important are what the four multi-entity customers pay now and how much MRR the two churned customers represented.
+- **Roadmap:** It covers ninety days, one year and three years. I left the owners as "founders" or "engineer" in places, because I don't know who does what.
+
+I also put a research-brief handoff at the end for sizing the QuickBooks market and checking competitors. I didn't assert any market facts myself.

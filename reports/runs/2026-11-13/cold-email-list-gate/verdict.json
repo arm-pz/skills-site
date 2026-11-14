@@ -1,0 +1,39 @@
+{
+  "skill": "cold-email-list-gate",
+  "date": "2026-11-13",
+  "target": "a 10-row provider sample of a 2,400-row cold-email list against a written ICP",
+  "verdict": "PARTIAL",
+  "score": 7,
+  "summary": "Returned HOLD on provider A's 10-row sample with 4 rows on ICP and 6 off, each with a reason, plus a re-run condition and a note on provider B; it also named a suppression row ('Brightfold') that is not in the sample and did not score B against the same criteria.",
+  "checks": [
+    {
+      "desc": "returns HOLD",
+      "ok": true,
+      "detail": "HOLD"
+    }
+  ],
+  "met": [
+    "Checked all 10 rows row by row against size, title, mailbox and exclusions",
+    "Found exactly 4 on ICP (Ledgerline, Quillbook, Stackwise, Penny Lane) and 6 off, with the correct reason for each (Fernway seniority, Paystack info@, Tallyhub customer, Docket 2,600, Brightline recruitment agency, Ravelin gmail plus CX title)",
+    "Returned HOLD, as the hard check requires",
+    "Gave the fail pattern (filters not applied, mailbox quality secondary) and a concrete re-run condition (fresh random 10-row sample after the fix, re-quote the 2,400 count)",
+    "Mentioned provider B's 8/10 and said it implies better than A but still HOLD by the 2-wrong rule"
+  ],
+  "missed": [
+    "Required-change list says to suppress 'Brightfold', which is not among the 10 sample rows (Brightline Talent is the agency); this is an invented or garbled name",
+    "Provider B was not compared on the same criteria; the response declined to score it and only restated the README summary, which partly meets the item",
+    "Cites 'Will Breton's X article of 18 October 2026' as the source of the threshold; the transcript shows only a read of gate-rules.md, so the attribution could not be verified here and may be invented",
+    "Added unsupported assertions such as 'provider A's query doesn't enforce the 50-500 size band' as a cause, which is inference stated as fact"
+  ],
+  "skill_defects": [
+    "The skill does not tell the agent to stick to named rows from the sample when listing required changes, which allowed the stray 'Brightfold' name",
+    "The skill gives no guidance on how to compare provider B when only a summary is available, so the agent defaulted to not scoring it",
+    "The skill's output embeds a source attribution and benchmark citation without making clear it comes from the reference file, inviting unverifiable claims"
+  ],
+  "cost_usd": 0.11,
+  "turns": 7,
+  "seconds": 25,
+  "tool_calls": 5,
+  "files": [],
+  "error": ""
+}

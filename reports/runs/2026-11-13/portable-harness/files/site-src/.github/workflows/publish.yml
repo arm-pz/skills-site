@@ -1,0 +1,194 @@
+name: publish
+
+# Anything live on GitHub reaches main without a human merge: every hour
+# sync.py adds new skill repos, refreshes generated pages whose repo moved,
+# follows renames (with 301s) and drops repos that went away. The build and
+# every gate must pass before the sync is committed. The gated dist/ is then
+# committed to the `deploy` branch, which the Cloudflare Pages project watches
+# through Cloudflare's own GitHub app: Cloudflare pulls, so CI holds no
+# Cloudflare credentials. One "Deploy pending" issue stays open while the live
+# site is behind; tools/agent-skills/deploy.sh is the manual fallback.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+  repository_dispatch:
+    types: [skill-updated]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-skills-site
+  cancel-in-progress: false
+
+jobs:
+  check:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: unit tests
+        run: python -m unittest discover -s tools/agent-skills/tests -v
+      - name: generated surfaces are current
+        run: |
+          python tools/agent-skills/gen_home.py --check
+          python tools/agent-skills/gen_page.py --check
+      - name: sync preview (read-only)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH: gh
+        run: python tools/agent-skills/sync.py --summary "$GITHUB_STEP_SUMMARY"
+      - name: build
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH: gh
+        run: python tools/agent-skills/build.py
+      - name: sitemap
+        run: python tools/agent-skills/gen_sitemap.py --write
+      - name: dist
+        run: bash tools/agent-skills/make_dist.sh
+      - name: gate
+        run: python tools/agent-skills/check_dist.py
+      - name: verify
+        run: node tools/agent-skills/verify.mjs local
+
+  publish:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      contents: write
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: sync with GitHub
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH: gh
+        # pipefail: without it a sync.py crash is hidden by tee and the job
+        # reports success (it did, every run from 29 Oct to 31 Oct 2026)
+        shell: bash
+        run: |
+          set -o pipefail
+          python tools/agent-skills/sync.py --write --summary "$GITHUB_STEP_SUMMARY" | tee "$RUNNER_TEMP/sync.txt"
+      - name: unit tests
+        run: python -m unittest discover -s tools/agent-skills/tests -v
+      - name: generated surfaces are current
+        run: |
+          python tools/agent-skills/gen_home.py --check
+          python tools/agent-skills/gen_page.py --check
+      - name: build
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH: gh
+        run: python tools/agent-skills/build.py
+      - name: sitemap
+        run: python tools/agent-skills/gen_sitemap.py --write
+      - name: dist
+        run: bash tools/agent-skills/make_dist.sh
+      - name: gate
+        run: python tools/agent-skills/check_dist.py
+      - name: verify local
+        run: node tools/agent-skills/verify.mjs local
+      - name: commit the sync back to main
+        run: |
+          set -euo pipefail
+          [ -n "$(git status --porcelain)" ] || { echo "- sync: nothing new" >> "$GITHUB_STEP_SUMMARY"; exit 0; }
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "sync: add what is live on GitHub" -m "$(head -40 "$RUNNER_TEMP/sync.txt")"
+          git pull --rebase origin main
+          git push origin HEAD:main
+      - name: publish dist to the deploy branch
+        # The branch holds only the gated build under public/ (Pages output directory), one
+        # commit per change. An unchanged build pushes nothing, so Cloudflare builds nothing.
+        id: deploy
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          src=$(git rev-parse HEAD)
+          stage="$RUNNER_TEMP/deploy"
+          rm -rf "$stage" && mkdir -p "$stage" && cd "$stage"
+          git init -q -b deploy
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          if git fetch -q --depth 1 origin deploy; then git reset -q --soft FETCH_HEAD; fi
+          cp -r "$GITHUB_WORKSPACE/dist" public
+          printf '* -text\n' > .gitattributes
+          printf '%s\n' "# deploy" "" "Generated by the publish workflow from main; do not edit." \
+            "Cloudflare Pages serves public/. Source: https://github.com/${GITHUB_REPOSITORY}/commit/$src" > README.md
+          git add -A
+          if git rev-parse -q --verify HEAD >/dev/null && git diff --cached --quiet; then
+            echo "- deploy branch: unchanged" >> "$GITHUB_STEP_SUMMARY"
+            echo "pushed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git commit -q -m "Deploy main ${src:0:7}" -m "version $(cat public/version.json)"
+          git push -q origin HEAD:deploy
+          echo "- deploy branch: pushed $(git rev-parse --short HEAD) from main ${src:0:7}" >> "$GITHUB_STEP_SUMMARY"
+          echo "pushed=true" >> "$GITHUB_OUTPUT"
+      - name: flag a pending deploy
+        # dist/version.json hashes the whole build, so this compares what main would publish
+        # with what is live, and nothing the CDN injects counts. After a push to `deploy`,
+        # give Cloudflare a few minutes to build before calling the site behind.
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PUSHED: ${{ steps.deploy.outputs.pushed }}
+        run: |
+          set -euo pipefail
+          title="Deploy pending: skillsmith.tech is behind main"
+          want=$(cat dist/version.json)
+          live=$(curl -fsS "https://skillsmith.tech/version.json?v=$GITHUB_RUN_ID" || true)
+          if [ "$PUSHED" = "true" ]; then
+            for i in $(seq 1 20); do
+              [ "$live" = "$want" ] && break
+              sleep 30
+              live=$(curl -fsS "https://skillsmith.tech/version.json?v=$GITHUB_RUN_ID-$i" || true)
+            done
+          fi
+          open=$(gh issue list --state open --search "\"$title\" in:title" --json number --jq '.[0].number // empty')
+          if [ "$live" = "$want" ]; then
+            echo "- live site matches main" >> "$GITHUB_STEP_SUMMARY"
+            [ -z "$open" ] || gh issue close "$open" --comment "Live site now matches main ($want)."
+            [ "$PUSHED" = "true" ] && CACHE_BUST="$GITHUB_RUN_ID" node tools/agent-skills/verify.mjs https://skillsmith.tech
+            exit 0
+          fi
+          echo "- live site is behind main" >> "$GITHUB_STEP_SUMMARY"
+          [ -n "$open" ] && exit 0
+          printf '%s\n' \
+            "The build on main differs from what skillsmith.tech serves, after waiting for Cloudflare." "" \
+            "1. Cloudflare dashboard > Workers & Pages > the project serving skillsmith.tech > Deployments:" \
+            "   is the latest \`deploy\` branch build failed or missing? Is the project connected to this repo's \`deploy\` branch?" \
+            "2. Fallback, from your machine (no secrets in CI):" "" \
+            '```' "git pull && bash tools/agent-skills/deploy.sh" '```' "" \
+            "This issue closes itself once the live site matches." \
+            > "$RUNNER_TEMP/issue.md"
+          gh issue create --title "$title" --body-file "$RUNNER_TEMP/issue.md"

@@ -1,0 +1,52 @@
+{
+  "skill": "prompts-to-skill-release",
+  "date": "2026-11-13",
+  "target": "a clone of arm-pz/keyword-resolver (packaged locally, nothing released)",
+  "verdict": "PARTIAL",
+  "score": 4,
+  "summary": "The run set version 1.0.1 in SKILL.md, wrote a CHANGELOG and updated the README, but built no archive and executed no trigger tests (0 pass/0 fail/8 reviewed-only), then gave an install checklist and published nothing.",
+  "checks": [
+    {
+      "desc": "an archive was built",
+      "ok": false,
+      "detail": ""
+    },
+    {
+      "desc": "CHANGELOG mentions 1.0.1",
+      "ok": true,
+      "detail": "1.0.1"
+    }
+  ],
+  "met": [
+    "Sets version and CHANGELOG consistently: SKILL.md version and metadata.version are 1.0.1, and CHANGELOG and README both say 1.0.1",
+    "README built/updated with install options, dependency note, test status and version",
+    "Ends with an install checklist that covers Claude app/web and Claude Code",
+    "Publishes nothing: no tags or remote actions, and the README says 'once published' for GitHub",
+    "Honest reporting: states plainly that nothing was executed and the zip was not built; does not invent test results"
+  ],
+  "missed": [
+    "No archive was built (hard check failed); the run says Bash was denied, so the zip was never created or verified",
+    "Trigger test cases were not run: no pass/fail results exist, only read-through plausibility notes on 4 prompts the run wrote itself; the CHANGELOG cites 8 reviewed-only while the final report lists 4",
+    "Install checklist is not truly per-platform: it covers the app/web and Claude Code but not other platforms, and its first step is an unexecuted manual zip command",
+    "Did not resolve the folder-name vs skill-name mismatch (target/ vs keyword-resolver), which the skill's own precondition requires",
+    "Left the seo-audit vs seo-crawl sibling-name inconsistency between SKILL.md and README unfixed"
+  ],
+  "skill_defects": [
+    "No fallback when shell access is denied: the skill gives no way to produce the archive or run tests, so the run ends with an unbuilt zip",
+    "No guidance for a target that has no trigger-test source (no evals.json, no tune table): it should say whether to generate cases and how to record them as unexecuted",
+    "The folder-name precondition has no remedy step, so the run only flagged the mismatch instead of fixing it (for example by staging a correctly named copy)",
+    "The checklist requirement is not specific about which platforms must appear"
+  ],
+  "cost_usd": 0.16,
+  "turns": 13,
+  "seconds": 25,
+  "tool_calls": 11,
+  "files": [
+    "target/.gitignore",
+    "target/CHANGELOG.md",
+    "target/LICENSE",
+    "target/README.md",
+    "target/SKILL.md"
+  ],
+  "error": ""
+}

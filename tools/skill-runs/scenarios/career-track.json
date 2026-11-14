@@ -1,0 +1,14 @@
+{
+  "skill": "career-track",
+  "fixtures": "career",
+  "target": "a synthetic CSM's negotiation for a £58–68k Senior CSM offer",
+  "prompt": "Ledgerline (job.md) just verbally offered me £58k for the Senior CSM role. Band in the ad is £58–68k. My background is in resume.md and notes.md. I currently earn £49k. How do I negotiate? Give me the actual words to say on the call tomorrow.",
+  "rubric": [
+    "Gives a specific counter number inside or at the top of the band and the reasoning for it",
+    "Gives a word-for-word script for the call, including what to say if they say the band is fixed",
+    "Anchors on value from the candidate's real facts (book size, churn drop, onboarding time) without inflating them",
+    "Advises on not disclosing or how to handle the current £49k salary",
+    "Mentions non-salary levers (start date, title, review timing, equity/bonus, learning budget) as fallbacks",
+    "Invents no market data; if it cites ranges, it marks them as needing a source"
+  ]
+}

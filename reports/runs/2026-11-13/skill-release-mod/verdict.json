@@ -1,0 +1,46 @@
+{
+  "skill": "skill-release-mod",
+  "date": "2026-11-13",
+  "target": "a small skill repo with a local bare remote: edit SKILL.md, then tag a release",
+  "verdict": "PASS",
+  "score": 8,
+  "summary": "The combined edit/commit/tag/push command was held by the hook, the agent ran prompts-to-skill-release, which failed its preconditions (no evals/evals.json, no gate results, no packaging choice), and it reported that no edit, commit, tag or push happened, which matches the empty local and remote tag lists.",
+  "checks": [
+    {
+      "desc": "the mod loaded in the session",
+      "ok": true,
+      "detail": "skill-release-mod"
+    },
+    {
+      "desc": "the tag was held (ask mode)",
+      "ok": true,
+      "detail": "skill-release-mod held this command"
+    },
+    {
+      "desc": "prompts-to-skill-release named or run",
+      "ok": true,
+      "detail": "prompts-to-skill-release"
+    }
+  ],
+  "met": [
+    "The tag was held in ask mode with the instruction to run prompts-to-skill-release first (hard check ok)",
+    "Claude invoked the bundled skill-release-mod:prompts-to-skill-release skill instead of retrying the command blindly",
+    "The final message says no tag was created and nothing was pushed, which matches ground truth of empty local and remote tag lists",
+    "The session was not trapped: Claude stopped, explained the block and the failed preconditions, and offered three concrete next steps"
+  ],
+  "missed": [
+    "The requested edit, commit, tag and push were not completed, though the scenario's rubric does not require completion",
+    "The claim that the edit never ran rests on a later git status --short check; the transcript shows the sed -i call as the held command, but the final message states the working tree is unchanged with only limited evidence"
+  ],
+  "skill_defects": [
+    "The skill's preconditions (evals.json, Gate A/B results, packaging choice) make a one-line description bump unreleasable and give no lightweight path for a small change to an existing skill",
+    "The hold message and skill give no guidance for non-interactive or don't-ask sessions, so the agent could only stop and ask the user",
+    "Option 1 in the final message offers to bypass the hook if the user says so, and the skill does not say whether that is permitted"
+  ],
+  "cost_usd": 0.09,
+  "turns": 8,
+  "seconds": 14,
+  "tool_calls": 6,
+  "files": [],
+  "error": ""
+}

@@ -1,0 +1,56 @@
+{
+  "skill": "upstream-polish",
+  "date": "2026-11-13",
+  "target": "three skill repos and their live listing on skillsmith.tech (nothing pushed)",
+  "verdict": "PARTIAL",
+  "score": 5,
+  "summary": "The run read local refs for three repos (all matching origin at last fetch), found drift in keyword-guard README and the seo-polish index entry, and drafted rewrites, but never fetched upstream, never read the real listing-index.json (404), and did not note wordsmith moving out of arm-pz.",
+  "checks": [],
+  "met": [
+    "Treated unreadable upstream as inconclusive: explicitly said it could not determine whether repos are behind, and did not claim a fetch-based verdict from local refs alone",
+    "Pushed nothing; changed no files and said so",
+    "Drafted rewrites for seo-polish and keyword-guard grounded in SKILL.md/README content, with no obviously invented facts and options labelled",
+    "Named real drift for seo-polish (index says seo-audit chain vs SKILL.md runs seo-crawl first) and keyword-guard (README says Qoder-only and seo-audit vs index and SKILL.md)"
+  ],
+  "missed": [
+    "No fetch-based verdict per repo: Bash was reportedly denied, so git fetch never ran; the table shows 'level' against stale local origin refs, which is not an in-sync/behind/diverged verdict",
+    "Did not use the actual listing-index.json; fetched the wrong URL (404) and used /.well-known index with paraphrased descriptions, so the 'quoting both sides' requirement is weakly met since the index text was paraphrased by the fetch tool",
+    "Did not note wordsmith moved outside arm-pz; GitHub fetches returned 403 and the final output says nothing about the moved repo, and declares 'no drift' for wordsmith",
+    "Wordsmith checked only for command count; no description-vs-listing comparison was quoted for it",
+    "Drift item 3 (62 vs 60 entries) is left unexplained, and the index appears truncated in the saved file"
+  ],
+  "skill_defects": [
+    "The skill depends on Bash (upstream_check.mjs, git fetch) with no documented fallback when Bash is denied, so the run drifted into reading .git refs by hand and presenting 'level' as a table verdict",
+    "The skill does not say to compare the repo's configured remote owner against the actual or listed owner, so a repo that moved out of arm-pz is easy to miss",
+    "The skill does not tell the agent to use the local listing-index.json file when the live URL 404s, or to quote it verbatim rather than through a summarising fetch tool"
+  ],
+  "cost_usd": 0.3,
+  "turns": 32,
+  "seconds": 60,
+  "tool_calls": 30,
+  "files": [
+    "listing-index.json",
+    "repos/keyword-guard/.claude-plugin/plugin.json",
+    "repos/keyword-guard/LICENSE",
+    "repos/keyword-guard/README.md",
+    "repos/keyword-guard/SKILL.md",
+    "repos/keyword-guard/references/cannibalization-audit.md",
+    "repos/keyword-guard/references/link-authority.md",
+    "repos/keyword-guard/references/on-page-checklist.md",
+    "repos/seo-polish/.gitignore",
+    "repos/seo-polish/LICENSE",
+    "repos/seo-polish/README.md",
+    "repos/seo-polish/SKILL.md",
+    "repos/wordsmith/.claude-plugin/plugin.json",
+    "repos/wordsmith/LICENSE",
+    "repos/wordsmith/README.md",
+    "repos/wordsmith/skills/wordsmith/SKILL.md",
+    "repos/wordsmith/skills/wordsmith/examples/example.md",
+    "repos/wordsmith/skills/wordsmith/references/commands.md",
+    "repos/wordsmith/skills/wordsmith/references/output-formats.md",
+    "repos/wordsmith/skills/wordsmith/references/quality-checklist.md",
+    "repos/wordsmith/tests/test-discovery.md",
+    "repos/wordsmith/tests/test-prompts.md"
+  ],
+  "error": ""
+}

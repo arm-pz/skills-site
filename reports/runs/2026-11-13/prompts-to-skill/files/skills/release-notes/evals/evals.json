@@ -1,0 +1,12 @@
+{
+  "skill_name": "release-notes",
+  "prompts": [
+    "Read the CHANGELOG.md in this repo and tell me what changed since the last tag, grouped into features, fixes and breaking changes.",
+    "Rewrite those changes as customer-facing release notes: plain English, no internal ticket numbers, lead with what users can now do.",
+    "Check the release notes against the actual diff since the last tag and flag anything the notes claim that the code doesn't do.",
+    "Turn the final notes into a short email to customers and a 3-line post for our changelog page.",
+    "What shipped since v2.3.0? I need to write it up for customers.",
+    "Do these notes overclaim anything compared to the code?",
+    "Write the release notes and email them to our customers."
+  ]
+}

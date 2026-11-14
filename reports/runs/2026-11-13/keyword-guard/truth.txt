@@ -1,0 +1,102 @@
+pages rendered: 92 of 92 in sitemap; internal links checked: 98
+non-200 pages: none
+broken internal links: none
+titles over 60 chars: 12; descriptions missing: 0; over 160 chars: 8
+pages without exactly one h1: none
+canonical missing or pointing elsewhere: none
+duplicate titles: none
+duplicate descriptions: 0
+
+per page: status | title (len) | h1
+200 / | Skillsmith by Caffeinity: tested AI agent skills (48) | Agent skills that finish the job.
+200 /work/ | Custom AI agent skills for your team | Skillsmith by Caffeinity (63) | Skills built for your team's work.
+200 /skills/ | All AI agent skills for Claude Code and Codex | Skillsmith by Caffeinity (72) | Every skill, by job.
+200 /mods/ | Claude Code mods: plugins with hooks | Skillsmith by Caffeinity (63) | Mods for Claude Code.
+200 /workflows/ | AI agent workflows: skills chained by outcome | Skillsmith by Caffeinity (72) | Workflows that finish a job.
+200 /seo/ | AI-driven SEO skills for your coding agent — Skillsmith by Caffeinity (69) | Every search startson a keyboard.
+200 /check/ | Skill Check: free SKILL.md validator | Skillsmith by Caffeinity (63) | Will an agent actually load your skill?
+200 /prose/ | Prose Check: find the AI writing patterns in a draft | Skillsmith by Caffeinity (79) | Does your draft read like a chatbot wrote it?
+200 /checks/ | Free tools: try a skill before you install it | Skillsmith by Caffeinity (72) | Try the skill before you install it.
+200 /map/ | Workflow Map: say the goal, see the route | Skillsmith by Caffeinity (68) | Say what you want done. See the route.
+200 /seo-check/ | SEO Check: what would stop this page ranking? | Skillsmith by Caffeinity (72) | What would stop this page ranking?
+200 /resume/ | Resume Check: what a recruiter sees in the first scan | Skillsmith by Caffeinity (80) | What does a recruiter see in the first scan?
+200 /list/ | List Gate: is this lead list safe to load? | Skillsmith by Caffeinity (69) | Is this lead list safe to load?
+200 /workflows/build-a-skill/ | Build a skill and make it installable (37) | Build a skill and make it installable
+200 /workflows/get-found/ | Get a repo, skill or plugin found | Skillsmith by Caffeinity (60) | Get a repo, skill or plugin found
+200 /workflows/launch-safely/ | Decide whether a site is safe to launch (39) | Decide whether a site is safe to launch
+200 /workflows/grow-search-traffic/ | Grow organic search traffic | Skillsmith by Caffeinity (54) | Grow organic search traffic
+200 /workflows/land-a-job/ | Land a job: AI agent workflow | Skillsmith by Caffeinity (56) | Land a job
+200 /workflows/make-a-decision/ | Make a decision | Skillsmith by Caffeinity (42) | Make a decision
+200 /workflows/learn-a-skill/ | Learn a skill: AI agent workflow | Skillsmith by Caffeinity (59) | Learn a skill
+200 /workflows/run-cold-outbound/ | Run cold outbound | Skillsmith by Caffeinity (44) | Run cold outbound
+200 /workflows/launch-a-product/ | Launch a one-person product | Skillsmith by Caffeinity (54) | Launch a one-person product
+200 /workflows/maintain-skills/ | Maintain the skill family | Skillsmith by Caffeinity (52) | Maintain the skill family
+200 /workflows/audit-a-skill-estate/ | Stand up or audit a skill estate | Skillsmith by Caffeinity (59) | Stand up or audit a skill estate
+200 /workflows/set-up-a-coding-agent/ | Set up a coding agent for a repo | Skillsmith by Caffeinity (59) | Set up a coding agent for a repo
+200 /caffeinity-routing/ | Caffeinity Routing — AI Agent Skill for Claude Code (51) | Caffeinity Routing
+200 /draft-skill/ | draft-skill: Draft a New AI Agent Skill From an Idea (52) | A new skill is a decision, not a template.Settle it before you write a file.
+200 /prompts-to-skill/ | prompts-to-skill — Turn Your Prompt List into a Tested Skill (60) | You paste the same prompts every week.Turn one into a skill that fires on them.
+200 /tune-skill/ | tune-skill — Audit and Fine-Tune an Existing Agent Skill (56) | The skill is already written. The work left is making it fire.Tune what already exists.
+200 /prompts-to-skill-release/ | prompts-to-skill-release — Failed Tests Stay Visible (52) | The skill is finished. The release is not.Failed tests stay visible.
+200 /skill-to-mod/ | Skill to Mod — Turn a Skill Into a Claude Code Mod (50) | Skill to Mod
+200 /skill-launch/ | skill-launch — Draft, Validate and Publish a Skill (50) | An idea in, a launched skill out — three gates deep.
+200 /tune-and-polish/ | tune-and-polish — Fix Skill Triggers, Then Polish Discovery (59) | Make it fire. Then make it findable.
+200 /tune-skill-mod/ | Tune Skill Mod — Claude Code mod (32) | Tune Skill Mod
+200 /skill-release-mod/ | Skill Release Mod — Claude Code mod (35) | Skill Release Mod
+200 /tune-and-ship/ | Tune And Ship — AI Agent Skill for Claude Code and Codex (56) | Tune And Ship
+200 /findable/ | findable — Get Your Repo Found by What It Does (46) | Nobody searches your name. They search the task.Get found by what it does.
+200 /publish-pipeline/ | Publish Pipeline — AI Agent Skill for Claude Code and Codex (59) | Publish Pipeline
+200 /upstream-check/ | Upstream Check — AI Agent Skill for Claude Code and Codex (57) | Upstream Check
+200 /findable-polish/ | findable-polish — Audit Discoverability, Then Fix It (52) | It isn't being found. First learn why, then rewrite the surfaces.
+200 /upstream-polish/ | upstream-polish — Find the Drift, Then Rewrite What's Stale (59) | You pushed. The listings still say last week. Sync them.
+200 /skill-estate/ | Skill Estate — AI Agent Skill for Claude Code and Codex (55) | Skill Estate
+200 /site-prompt/ | Site Prompt — AI Agent Skill for Claude Code and Codex (54) | Site Prompt
+200 /production-code/ | Production Code — AI Agent Skill for Claude Code and Codex (58) | Production Code
+200 /web-preflight/ | Web Preflight — Status Is a Signal, Not a Finding (49) | A 200 on /.env.Status is a signal, not a finding.
+200 /pre-ship-security-red-team/ | Pre-Ship Security Red Team — Attack It Before Users Do (54) | Holds in code review.Fails as user B with one curl.
+200 /pre-ship-performance-audit/ | Pre-Ship Performance Audit — Speed Is Measured, Not Claimed (59) | Clean in code review.Slow on a cheap Android at 4G.
+200 /release-gate-chair/ | Release Gate · Chair — AI Agent Skill for Claude Code (53) | Release Gate · Chair
+200 /release-gate-ledger/ | Release Gate · Ledger — AI Agent Skill for Claude Code (54) | Release Gate · Ledger
+200 /release-gate-validator/ | Release Gate · Validator — AI Agent Skill for Claude Code (57) | Release Gate · Validator
+200 /ship-sentinel/ | Ship Sentinel — Make Claude Run Your Checks Before It Ships (59) | Ship Sentinel
+200 /paper-trail/ | Paper Trail — AI Agent Skill for Claude Code and Codex (54) | Paper Trail
+200 /release-gate-mod/ | Release Gate Mod — Claude Code mod (34) | Release Gate Mod
+200 /web-preflight-mod/ | Web Preflight Mod — Claude Code mod (35) | Web Preflight Mod
+200 /pre-ship-security-red-team-mod/ | Security Red Team Mod — Claude Code mod (39) | Security Red Team Mod
+200 /pre-ship-performance-audit-mod/ | Performance Audit Mod — Claude Code mod (39) | Performance Audit Mod
+200 /seo-crawl/ | SEO Crawl — AI Agent Skill for Claude Code and Codex (52) | SEO Crawl
+200 /keyword-guard/ | Keyword Guard — One query, one owner (36) | Three of your pages chase one query.One query, one owner.
+200 /keyword-resolver/ | keyword-resolver — Fix Cannibalized Pages, Then Rewrite Them (60) | Two pages, one query. Decide the winner, then write for it.
+200 /seo-polish/ | seo-polish — Full SEO Audit, Then the Optimized Rewrite (55) | The audit says what's broken. Then write the fix.
+200 /wordsmith/ | Wordsmith — Teach your agent to edit (36) | Your agent can write.Teach it to edit.
+200 /platform-content/ | Platform Content — AI Agent Skill for Claude Code and Codex (59) | Platform Content
+200 /sales-copy/ | Sales Copy — AI Agent Skill for Claude Code and Codex (53) | Sales Copy
+200 /cold-email-list-gate/ | Cold Email List Gate — AI Agent Skill for Claude Code (53) | Cold Email List Gate
+200 /cold-email-ops/ | Cold Email Ops — AI Agent Skill for Claude Code and Codex (57) | Cold Email Ops
+200 /recruiter-lens/ | Recruiter Lens — Teach your agent to screen (43) | Your agent can embellish.Teach it to screen.
+200 /applicant-kit/ | Applicant Kit — Teach your agent to write the better version (60) | Your agent will guess.Teach it to write.
+200 /application-pilot/ | Application Pilot — Run the Job Search, Stop at Send (52) | It runs the search.It never presses send.
+200 /career-track/ | Career Track — AI Agent Skill for Claude Code and Codex (55) | Career Track
+200 /research-brief/ | Research Brief — AI Agent Skill for Claude Code and Codex (57) | Research Brief
+200 /data-readout/ | Data Readout — AI Agent Skill for Claude Code and Codex (55) | Data Readout
+200 /crash-test/ | crash-test: pressure-test a decision before you build it (56) | Ask for a second opinion, get four more copies of the answer you already distrusted, one merged answer. Ship what survives the crash.
+200 /do-better/ | Do Better — Make 100 agents fight over your task (48) | Your "try again" gets better.Run a tournament.
+200 /strategy-memo/ | Strategy Memo — AI Agent Skill for Claude Code and Codex (56) | Strategy Memo
+200 /solo-income-blueprint/ | Solo Income Blueprint — AI Agent Skill for Claude Code (54) | Solo Income Blueprint
+200 /topic-primer/ | Topic Primer — Teach your agent to teach (40) | Your agent can lecture.Teach it to teach.
+200 /study-system/ | Study System — AI Agent Skill for Claude Code and Codex (55) | Study System
+200 /course-builder/ | Course Builder — AI Agent Skill for Claude Code and Codex (57) | Course Builder
+200 /choose-effort/ | Choose Effort — AI Agent Skill for Claude Code and Codex (56) | Choose Effort
+200 /diagnose-usage/ | Diagnose Usage — AI Agent Skill for Claude Code and Codex (57) | Diagnose Usage
+200 /seo-sweep/ | Seo Sweep — AI Agent Skill for Claude Code and Codex (52) | Seo Sweep
+200 /session-retrace/ | Session Retrace — AI Agent Skill for Claude Code and Codex (58) | Session Retrace
+200 /get-indexed/ | Get Indexed — AI Agent Skill for Claude Code and Codex (54) | Get Indexed
+200 /consistent-code-review/ | Consistent Code Review — AI Agent Skill for Claude Code (55) | Consistent Code Review
+200 /ai-team-blueprint/ | Ai Team Blueprint — AI Agent Skill for Claude Code and Codex (60) | Ai Team Blueprint
+200 /portable-harness/ | Portable Harness — AI Agent Skill for Claude Code and Codex (59) | Portable Harness
+200 /harness-audit/ | Harness Audit — AI Agent Skill for Claude Code and Codex (56) | Harness Audit
+200 /setup-claude-advisor/ | Setup Claude Advisor — AI Agent Skill for Claude Code (53) | Setup Claude Advisor
+200 /insights-to-prompts/ | Insights To Prompts — AI Agent Skill for Claude Code (52) | Insights To Prompts
+200 /prompts-to-workflow/ | Prompts To Workflow — AI Agent Skill for Claude Code (52) | Prompts To Workflow
+200 /ship-second-brain/ | Ship Second Brain — AI Agent Skill for Claude Code and Codex (60) | Ship Second Brain
+200 /straight-prose/ | Straight Prose — AI Agent Skill for Claude Code and Codex (57) | Straight Prose

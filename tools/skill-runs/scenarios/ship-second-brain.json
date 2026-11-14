@@ -1,0 +1,21 @@
+{
+  "skill": "ship-second-brain",
+  "fixtures": "brain-sources",
+  "target": "a real-shaped issue, PR and customer call for a fintech product",
+  "prompt": "Build our team second brain in ./vault from the sources in this folder (issue-412.md, pr-431.md, call-2026-11-04.md). Then answer from the vault alone: 1) Are split payments handled? Since when? 2) Are overpayments handled? 3) Did we promise Stackwise anything about QuickBooks?",
+  "checks": [
+    {
+      "desc": "vault/today.md exists",
+      "file": "vault/today.md"
+    }
+  ],
+  "max_turns": 80,
+  "budget_usd": 6,
+  "rubric": [
+    "Saves raw sources first, then one-idea notes with a source and a confidence (seen / verified / opinion)",
+    "Answers: split payments handled via partially_matched, merged 2026-10-21, on for all since 2026-10-24",
+    "Answers: overpayments NOT handled (tracked in #440); Sam's 'next release' is an unconfirmed opinion, not a fact",
+    "Answers: no QuickBooks promise; 'on the roadmap, no date'",
+    "Puts the open question about overpayments/year-end in gaps or today.md"
+  ]
+}

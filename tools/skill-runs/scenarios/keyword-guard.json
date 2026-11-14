@@ -1,0 +1,28 @@
+{
+  "skill": "keyword-guard",
+  "install": [
+    "keyword-guard"
+  ],
+  "target": "skillsmith.tech (sitemap fallback, no Search Console)",
+  "prompt": "Audit https://skillsmith.tech for keyword cannibalization. I don't have Search Console access. Which pages compete for the same query, and which page should own each? Write the ownership map to keyword-map.md.",
+  "checks": [
+    {
+      "desc": "wrote keyword-map.md",
+      "file": "keyword-map.md"
+    },
+    {
+      "desc": "names the sitemap fallback",
+      "re": "sitemap"
+    }
+  ],
+  "ground_truth": "node \"$SKILL_RUNS/truth_seo.mjs\" https://skillsmith.tech",
+  "max_turns": 80,
+  "budget_usd": 6,
+  "rubric": [
+    "Uses the sitemap fallback and says so, since there is no Search Console data",
+    "Finds real overlapping page groups from live titles/H1s (e.g. tune-skill vs tune-skill-mod vs tune-and-polish vs tune-and-ship; web-preflight vs web-preflight-mod; the release-gate family)",
+    "Assigns exactly one owner page per query with a reason, and says what the other pages should target instead",
+    "Treats the audit as a blocker before content changes",
+    "Invents no search volumes or rankings"
+  ]
+}

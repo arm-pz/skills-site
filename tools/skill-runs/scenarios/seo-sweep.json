@@ -1,0 +1,34 @@
+{
+  "skill": "seo-sweep",
+  "install": [
+    "seo-sweep",
+    "seo-crawl",
+    "findable",
+    "keyword-guard",
+    "wordsmith",
+    "get-indexed"
+  ],
+  "target": "skillsmith.tech and its source repo (fixes local only, nothing pushed or submitted)",
+  "setup": "git clone -q --depth 1 https://github.com/arm-pz/skills-site site-src",
+  "allow": [
+    "Bash(git -C:*)"
+  ],
+  "prompt": "Run your SEO sweep on https://skillsmith.tech. The site's source is in site-src/ (it's built by tools/agent-skills). Fix what you find in the source, prove the fixes, but do not push, deploy or submit anything to search engines. Summarise in sweep.md.",
+  "checks": [
+    {
+      "desc": "wrote sweep.md",
+      "file": "sweep.md"
+    }
+  ],
+  "ground_truth": "node \"$SKILL_RUNS/truth_seo.mjs\" https://skillsmith.tech",
+  "max_turns": 120,
+  "budget_usd": 10,
+  "timeout_s": 3000,
+  "rubric": [
+    "Runs the chained skills in order on the live site and records each step's findings",
+    "Findings match the Playwright ground truth and none are invented",
+    "Fixes are made in the generator/templates or manifest in site-src, not hand-edited output, and each is proven (rebuild or re-check)",
+    "Pushes, deploys and submits nothing",
+    "Reports any defect it saw in the skills themselves"
+  ]
+}
