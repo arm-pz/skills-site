@@ -1,25 +1,20 @@
-I can't give you a release posture yet. The red team lane has nothing on disk, and I couldn't run the gate scripts.
+**Release posture: HOLD.** I couldn't compute it with the script, and the reason is the red team lane.
 
-**What I found**
-- `redteam/` exists but is empty. There are no `group-*.md` results tables there or anywhere else in the repo.
-- There is no `.pre-ship-red-team/` directory and no `.release-gate/` ledger.
-- The gate scripts only parse the red team's 12-column results tables. Without those tables, the `app-tests` lane has no input, and I won't invent a verdict for it.
-- Bash was denied in this session, so I couldn't run `gate_ingest.mjs` or `check_gate.mjs`.
+| Lane | State | What it means |
+|---|---|---|
+| `app-tests` (red team) | **Absent** | `redteam/` is empty. There is no `results/` directory and no `group-*.md` tables. The ingester exited 2 with `NOT-INGESTABLE`. |
+| `exposure` (preflight) | PASS WITH FIXES on 127.0.0.1:3100 | No TLS and no security headers. This is a passive check of a local host only. |
+| `perf` | **Not measured** | Nothing was measured, so this lane is a gap. |
 
-**Lane status, as far as I can tell**
-| Lane | State |
-|---|---|
-| `app-tests` (red team) | **Absent.** The run directory is empty. |
-| `exposure` (preflight) | You reported `PASS WITH FIXES` for `127.0.0.1:3100`, with no TLS on local and no security headers. I can record it, but I need the finding table verbatim, including severity, remediation and evidence. |
-| `perf` | Not measured. It would be recorded as `not-measured`. |
+- **Red team:** With no results table, I have no evidence about auth, IDOR, role escalation, quotas, XSS or SSRF. Your message says the pass ran, but nothing on disk backs that up, and I won't invent a verdict from the claim. The preflight pass doesn't cover this lane, and the other lanes' results don't cover it either.
+- **Exposure:** It is a PASS WITH FIXES, not a clean pass, and it covers the local host, not production. The missing TLS and headers are only acceptable locally if they get fixed or explicitly accepted before launch.
+- **Perf:** It's reported as absent, not as passing.
 
-An absent red team lane counts as a gap, not a pass. A `PASS WITH FIXES` on exposure doesn't cover app logic, and the unmeasured perf lane doesn't cover anything. The best posture I could report right now is **HOLD**: one lane is missing and one is unmeasured. The script hasn't confirmed that.
+**What I didn't do:** I haven't written `.release-gate/` or run `check_gate.mjs`. I don't know the commit the preflight ran at, and I'd need the severity and evidence for each finding, which you described only in summary. Without those, a staleness check (R6) would be meaningless. The current HEAD is `feb1c60`, the only commit. Nothing was re-run and no target was touched.
 
-**What I need from you**
-1. The actual red team run directory. It may have been written elsewhere, such as `.pre-ship-red-team/<run-id>/results/`, or the files may not have been committed. The repo has only the single "init" commit, so check whether `redteam/` was meant to hold the results.
-2. The preflight finding table, pasted verbatim.
-3. The git SHA each lane ran at. The current HEAD is `31aae2f`, and I can't tell whether either report is stale against it.
-4. Permission to run Bash, so I can ingest, record and compute the posture with the scripts.
-5. If you want the red team lane to pass, the exit code from `check_results.mjs --require-fixes`. Without it the lane holds on R3.
+**To get a computed posture, I need:**
+1. The real red team run directory. It may be at `.pre-ship-red-team/<run-id>/` somewhere else, or `redteam/` may have been moved or cleaned. I'd also need the `check_results.mjs --require-fixes` exit code, or it holds on R3.
+2. The preflight report pasted verbatim, with its finding rows and the commit it ran at.
+3. Confirmation that perf is `not-measured`.
 
-Also, the preflight ran against local `127.0.0.1:3100`. Even once the ledger is complete, it says nothing about the production host. Before launch, run a live `web-preflight` against production.
+If the red team results are really gone, the pass has to be re-run before launch. Whether to deploy on a HOLD is your call, and I'd record it as such. Before any production deploy, run the live `web-preflight` against the production host, because the current exposure result is localhost-only.

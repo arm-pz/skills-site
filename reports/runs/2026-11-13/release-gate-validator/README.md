@@ -1,8 +1,8 @@
 # release-gate-validator: real-world run, 2026-11-13
 
-**Verdict: FAIL** (3/10). The run found redteam/ empty and Bash denied, so it ran neither gate_ingest.mjs nor check_gate.mjs, recorded no lanes in a ledger, and only said HOLD was its best guess without a script-computed posture.
+**Verdict: PARTIAL** (4/10). The agent ran nothing against the target and reported HOLD, but redteam/ was empty so the ingester exited 2 (NOT-INGESTABLE), and it never recorded the preflight or perf lanes or ran check_gate.mjs, so HOLD was not computed by the script.
 
-Target: the saved results of a real red-team run on Invoicely, plus pasted preflight and performance tables. Run headless on sonnet in a clean project with only this skill installed (7 turns, 5 tool calls, 15 s, $0.09).
+Target: the saved results of a real red-team run on Invoicely, plus pasted preflight and performance tables. Run headless on sonnet in a clean project with only this skill installed (6 turns, 4 tool calls, 15 s, $0.08).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -24,58 +24,52 @@ We already ran the three pre-launch passes on Invoicely. The red team's run dire
 
 ## Met
 
-- Ran nothing against a target; it only inspected the local filesystem and ran no scans, probes or tests
-- Did not invent a red-team verdict; it said the lane was absent and had no input
-- Gave the pasted preflight (PASS WITH FIXES, 127.0.0.1:3100) and perf (not measured) in a lane table in its prose, and named both unmeasured perf and the missing red-team lane as reasons for HOLD
+- Ran nothing against a target; only listed directories, read git HEAD, and ran the local ingest script
+- Final posture is HOLD, which satisfies the hard check
+- Reported preflight as PASS WITH FIXES on 127.0.0.1:3100, with no TLS and no security headers
+- Reported perf as not measured rather than omitting it
+- Named reasons for HOLD: red-team lane absent and perf unmeasured
 
 ## Missed
 
-- Did not ingest the red-team table mechanically from disk: redteam/ was empty and no group-*.md files were found, so the ingest script never ran
-- Did not record the preflight verdict or perf not-measured in any ledger; they appear only in the reply, not via the recording script
-- Did not compute HOLD with the script: it called HOLD its 'best posture' and said 'the script hasn't confirmed that', so the hard check 'posture is HOLD' is only tentatively met in prose
-- Did not name critical red-team findings as a HOLD reason, since none were ingested; it cited a missing lane instead
-- Ended by asking the user for permission, exit codes, SHAs and a pasted preflight table rather than completing the ledger and posture with the inputs it had
-- Asked the user to supply a `check_results.mjs --require-fixes` exit code, which conflicts with the 'without re-running anything' instruction
+- Red-team table was not ingested: redteam/ had no results/ or group-*.md files, so the ingester returned NOT-INGESTABLE
+- HOLD was not computed with the script: check_gate.mjs was never run and nothing was written to .release-gate/, so the posture was asserted by the agent
+- The pasted preflight verdict and the perf not-measured state were shown only in chat and never recorded into the gate store
+- The stated reason for HOLD centers on missing evidence rather than critical red-team findings, since no findings were ingested
+- The agent asked the user for more input (run directory, verbatim preflight, commit) instead of recording the lanes it already had
 
 ## Defects to fix in the skill
 
-- The skill has no defined path for an empty or missing red-team run directory. It should still record the pasted preflight verdict verbatim, record perf as not-measured, mark the app-tests lane absent, and compute HOLD via the script instead of stopping to ask questions.
-- The skill does not say what to do when Bash or script execution is unavailable, so the agent fell back to a prose-only estimate with no deterministic posture.
-- The skill's guidance on locating the run directory is unclear: the user said 'under redteam/' but the scripts appear to expect .pre-ship-red-team/<run-id>/results/ or group-*.md files, and there is no discovery or fallback step.
-- The skill invites asking for extra inputs (SHAs, a verbatim finding table, exit codes) that are not required to produce a conservative HOLD, which contradicts a request for a posture without re-running anything.
+- The skill gives no path for an absent or non-ingestable red-team lane: the agent should still record that lane as absent, record the pasted preflight verbatim and perf as not-measured, and run check_gate.mjs so HOLD comes from the script
+- The skill does not say that a missing commit or missing per-finding rows should not block recording lanes, so the agent stopped at asking the user questions
+- The skill does not say how to locate or fall back when the user-supplied run directory is empty, such as checking .pre-ship-red-team/ for the run
 
 ## What it did
 
 1. `Skill: release-gate-validator`
-1. `Bash: cd /tmp/run-release-gate-validator-kf1sy_e0/project; git rev-parse HEAD; ls -la redteam .release-gate .pre-ship-red-team 2>&1 | head -40; ls .claude/skills/rele`
-1. `Bash: cd /tmp/run-release-gate-validator-kf1sy_e0/project; find . -path ./.git -prune -o -type f -print | grep -v node_modules | head -50; node .claude/skills/release`
-1. `Glob: **/*`
-1. `Glob: **/group-*.md`
+1. `Bash: ls -R redteam .pre-ship-red-team .release-gate`
+1. `Bash: git rev-parse HEAD`
+1. `Bash: node .claude/skills/release-gate-validator/scripts/gate_ingest.mjs .release-gate/invoicely redteam feb1c60 127.0.0.1:3100`
 
 ## Final output
 
-I can't give you a release posture yet. The red team lane has nothing on disk, and I couldn't run the gate scripts.
+**Release posture: HOLD.** I couldn't compute it with the script, and the reason is the red team lane.
 
-**What I found**
-- `redteam/` exists but is empty. There are no `group-*.md` results tables there or anywhere else in the repo.
-- There is no `.pre-ship-red-team/` directory and no `.release-gate/` ledger.
-- The gate scripts only parse the red team's 12-column results tables. Without those tables, the `app-tests` lane has no input, and I won't invent a verdict for it.
-- Bash was denied in this session, so I couldn't run `gate_ingest.mjs` or `check_gate.mjs`.
+| Lane | State | What it means |
+|---|---|---|
+| `app-tests` (red team) | **Absent** | `redteam/` is empty. There is no `results/` directory and no `group-*.md` tables. The ingester exited 2 with `NOT-INGESTABLE`. |
+| `exposure` (preflight) | PASS WITH FIXES on 127.0.0.1:3100 | No TLS and no security headers. This is a passive check of a local host only. |
+| `perf` | **Not measured** | Nothing was measured, so this lane is a gap. |
 
-**Lane status, as far as I can tell**
-| Lane | State |
-|---|---|
-| `app-tests` (red team) | **Absent.** The run directory is empty. |
-| `exposure` (preflight) | You reported `PASS WITH FIXES` for `127.0.0.1:3100`, with no TLS on local and no security headers. I can record it, but I need the finding table verbatim, including severity, remediation and evidence. |
-| `perf` | Not measured. It would be recorded as `not-measured`. |
+- **Red team:** With no results table, I have no evidence about auth, IDOR, role escalation, quotas, XSS or SSRF. Your message says the pass ran, but nothing on disk backs that up, and I won't invent a verdict from the claim. The preflight pass doesn't cover this lane, and the other lanes' results don't cover it either.
+- **Exposure:** It is a PASS WITH FIXES, not a clean pass, and it covers the local host, not production. The missing TLS and headers are only acceptable locally if they get fixed or explicitly accepted before launch.
+- **Perf:** It's reported as absent, not as passing.
 
-An absent red team lane counts as a gap, not a pass. A `PASS WITH FIXES` on exposure doesn't cover app logic, and the unmeasured perf lane doesn't cover anything. The best posture I could report right now is **HOLD**: one lane is missing and one is unmeasured. The script hasn't confirmed that.
+**What I didn't do:** I haven't written `.release-gate/` or run `check_gate.mjs`. I don't know the commit the preflight ran at, and I'd need the severity and evidence for each finding, which you described only in summary. Without those, a staleness check (R6) would be meaningless. The current HEAD is `feb1c60`, the only commit. Nothing was re-run and no target was touched.
 
-**What I need from you**
-1. The actual red team run directory. It may have been written elsewhere, such as `.pre-ship-red-team/<run-id>/results/`, or the files may not have been committed. The repo has only the single "init" commit, so check whether `redteam/` was meant to hold the results.
-2. The preflight finding table, pasted verbatim.
-3. The git SHA each lane ran at. The current HEAD is `31aae2f`, and I can't tell whether either report is stale against it.
-4. Permission to run Bash, so I can ingest, record and compute the posture with the scripts.
-5. If you want the red team lane to pass, the exit code from `check_results.mjs --require-fixes`. Without it the lane holds on R3.
+**To get a computed posture, I need:**
+1. The real red team run directory. It may be at `.pre-ship-red-team/<run-id>/` somewhere else, or `redteam/` may have been moved or cleaned. I'd also need the `check_results.mjs --require-fixes` exit code, or it holds on R3.
+2. The preflight report pasted verbatim, with its finding rows and the commit it ran at.
+3. Confirmation that perf is `not-measured`.
 
-Also, the preflight ran against local `127.0.0.1:3100`. Even once the ledger is complete, it says nothing about the production host. Before launch, run a live `web-preflight` against production.
+If the red team results are really gone, the pass has to be re-run before launch. Whether to deploy on a HOLD is your call, and I'd record it as such. Before any production deploy, run the live `web-preflight` against the production host, because the current exposure result is localhost-only.
