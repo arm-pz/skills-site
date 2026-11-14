@@ -119,7 +119,7 @@
       <div><dt>Updated</dt><dd><a href="https://github.com/arm-pz/release-gate-chair/commits" target="_blank" rel="noopener">24 Oct 2026</a><small>last commit to the repo</small></dd></div>
       <div><dt>Works in</dt><dd>Claude Code, Codex, Cursor, Qoder and any agent that loads a SKILL.md<small>plain text; no API keys</small></dd></div>
       <div><dt>Nightly check</dt><dd>Passing<small>No failures or warnings. <a href="https://github.com/arm-pz/skills-site/blob/main/.github/workflows/health.yml" target="_blank" rel="noopener">How it is checked</a></small></dd></div>
-      <div><dt>Last real-world run</dt><dd>No public run yet<small>Runs are published only with their evidence.</small></dd></div>
+      <div><dt>Last real-world run</dt><dd>14 Nov 2026, on Invoicely, a local invoicing app with 6 planted authorization and session flaws<small>The run kept three separate lane verdicts (exposure PASS WITH FIXES, app-tests HOLD, perf not-measured), recorded them in one ledger, and check_gate.mjs computed overall HOLD (R1, R2, R4, R8); app-tests ran 14 scenarios with 7… <a href="https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/release-gate-chair/README.md" target="_blank" rel="noopener">See the run</a></small></dd></div>
       <div class="qb-wide"><dt>Known limits</dt><dd>Not built for:<ul><li>A single-lane check (invoke that skill directly)</li><li>For reports that already exist (use release-gate-validator)</li><li>For penetration testing of production, or for performing the deploy</li></ul></dd></div>
     </dl>
   </div>

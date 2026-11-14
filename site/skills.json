@@ -110,6 +110,12 @@
           "a request one skill already owns (load that skill directly)",
           "not for doing a step's work itself: the named skill does it"
         ]
+      },
+      "tested": {
+        "date": "2026-11-13",
+        "target": "a multi-step goal across the catalog",
+        "result": "The skill planned a two-brew route (Espresso with web-preflight, security red team, performance audit and release-gate-chair; then Cold brew with seo-crawl, keyword-guard, wordsmith and get-indexed), stated what each step hands…",
+        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/caffeinity-routing/README.md"
       }
     },
     {
@@ -168,6 +174,12 @@
           "creating a skill from a plain description with no prompts (use draft-skill)",
           "finding existing skills for a task"
         ]
+      },
+      "tested": {
+        "date": "2026-11-14",
+        "target": "four real-shaped release-notes prompts from a developer's history",
+        "result": "The run built a single release-notes skill at skills/release-notes/ (SKILL.md, a claim-check reference, 7 eval prompts, 9 test cases including near-misses), and check_skill.py reported 0 fail and 0 warn; the stop-before-send rule…",
+        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/prompts-to-skill/README.md"
       }
     },
     {
@@ -244,6 +256,12 @@
           "improving a skill's wording or triggering (use tune-skill)",
           "plain skill packaging (use skill-creator)"
         ]
+      },
+      "tested": {
+        "date": "2026-11-14",
+        "target": "a real-shaped 'changelog-guard' skill that should fire before every release",
+        "result": "Run judged changelog-guard a good fit for a mod, built mods/changelog-guard-mod with the skill bundled unchanged (diff-confirmed), ran claude plugin validate (passed) and claude plugin test (10/10 passed), and listed hooks and…",
+        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/skill-to-mod/README.md"
       }
     },
     {
@@ -494,6 +512,12 @@
         "commit": "af1c597",
         "updated": "2026-11-12",
         "notFor": []
+      },
+      "tested": {
+        "date": "2026-11-13",
+        "target": "a small skill repo with a local bare remote: edit SKILL.md, then tag a release",
+        "result": "The combined edit/commit/tag/push command was held by the hook, the agent ran prompts-to-skill-release, which failed its preconditions (no evals/evals.json, no gate results, no packaging choice), and it reported that no edit…",
+        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/skill-release-mod/README.md"
       }
     },
     {
@@ -1095,6 +1119,12 @@
           "for reports that already exist (use release-gate-validator)",
           "for penetration testing of production, or for performing the deploy"
         ]
+      },
+      "tested": {
+        "date": "2026-11-14",
+        "target": "Invoicely, a local invoicing app with 6 planted authorization and session flaws",
+        "result": "The run kept three separate lane verdicts (exposure PASS WITH FIXES, app-tests HOLD, perf not-measured), recorded them in one ledger, and check_gate.mjs computed overall HOLD (R1, R2, R4, R8); app-tests ran 14 scenarios with 7…",
+        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/release-gate-chair/README.md"
       }
     },
     {
@@ -1426,6 +1456,12 @@
         "commit": "af1c597",
         "updated": "2026-11-12",
         "notFor": []
+      },
+      "tested": {
+        "date": "2026-11-13",
+        "target": "a local static site with a stand-in deploy CLI (nothing can upload), edited then deployed in a headless session",
+        "result": "The agent edited the h1 to 'Reconcile 2.0', the first wrangler deploy was held by the hook pointing to release-gate-chair, the agent invoked that skill, was then denied Bash in don't-ask mode, did not retry or bypass, and…",
+        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/release-gate-mod/README.md"
       }
     },
     {
@@ -1513,6 +1549,12 @@
         "commit": "af1c597",
         "updated": "2026-11-12",
         "notFor": []
+      },
+      "tested": {
+        "date": "2026-11-13",
+        "target": "a local static site with a stand-in deploy CLI (nothing can upload), edited then deployed in a headless session",
+        "result": "The h1 was changed to 'Reconcile 2.0', the deploy ran once (matching the single line in deployed.log), the mod flagged it afterwards in nudge mode, and Claude then ran web-preflight on the local files (1 file in site/, 0 HTTP…",
+        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/web-preflight-mod/README.md"
       }
     },
     {
@@ -1630,6 +1672,12 @@
         "commit": "af1c597",
         "updated": "2026-11-12",
         "notFor": []
+      },
+      "tested": {
+        "date": "2026-11-13",
+        "target": "a local static site with a stand-in deploy CLI (nothing can upload), edited then deployed in a headless session",
+        "result": "Claude changed the h1 to \"Reconcile 2.0\", the first `wrangler pages deploy` was held by the mod, Claude loaded pre-ship-security-red-team, could not run its Bash scripts, and reported that the deploy never ran (deployed.log shows…",
+        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/pre-ship-security-red-team-mod/README.md"
       }
     },
     {
@@ -1707,6 +1755,12 @@
         "commit": "af1c597",
         "updated": "2026-11-12",
         "notFor": []
+      },
+      "tested": {
+        "date": "2026-11-13",
+        "target": "a local static site with a stand-in deploy CLI (nothing can upload), edited then deployed in a headless session",
+        "result": "Claude edited the h1, ran the deploy once (deployed.log shows one call), was told afterwards that pre-ship-performance-audit hadn't run, invoked the skill, did a reduced local-file check (181-byte HTML, no assets), and reported…",
+        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/pre-ship-performance-audit-mod/README.md"
       }
     },
     {
@@ -2149,6 +2203,12 @@
         "notFor": [
           "prose editing (wordsmith, if installed) or producing the final .docx or .pdf (the file skills)"
         ]
+      },
+      "tested": {
+        "date": "2026-11-13",
+        "target": "a synthetic mid-career CSM resume with planted weaknesses, against a real-shaped Senior CSM job ad",
+        "result": "The run gave a borderline first-screen reject, flagged the vague summary, duty-style bullets and the 15-month Dec 2020–Mar 2022 gap, mapped the resume to the job requirements, and invented no metrics, using placeholders like [X]%…",
+        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/recruiter-lens/README.md"
       }
     },
     {
@@ -2348,6 +2408,12 @@
           "writing the pandas or R code that crunches the file (use production-code)",
           "for market research outside the user's own data (use research-brief) or for the strategic roadmap that follows (use strategy-memo)"
         ]
+      },
+      "tested": {
+        "date": "2026-11-13",
+        "target": "a 14-day checkout A/B test export (182,000 sessions, two devices) with one planted tracking outage",
+        "result": "The run found B's zero orders on 2026-10-09 on both devices (4 rows, 8,000 sessions), dropped that day from both arms, and reported B beating A at 4.25% vs 3.89% (p=0.0001), with mobile up 3.01% to 3.70% (p<0.0001) and desktop…",
+        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/data-readout/README.md"
       }
     },
     {
@@ -2490,6 +2556,12 @@
           "SEO for an existing site (seo-audit)",
           "privacy and legal pages (paper-trail)"
         ]
+      },
+      "tested": {
+        "date": "2026-11-13",
+        "target": "a realistic persona: a UK accountant with 8 hours a week and £300",
+        "result": "The run recommended a Xero bookkeeping/VAT-prep retainer (5 clients at about £300 a month, 25–30 hours) with a 5-conversation demand check, text-only LinkedIn and referral channels, a 9-hour 7-day plan, and compliance flags…",
+        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/solo-income-blueprint/README.md"
       }
     },
     {
@@ -2876,6 +2948,12 @@
           "ranking or brand-search problems (use findable or seo-sweep)",
           "writing page copy (use wordsmith)"
         ]
+      },
+      "tested": {
+        "date": "2026-11-13",
+        "target": "skillsmith.tech (plan only, nothing submitted)",
+        "result": "Ran the get-indexed script in plan mode against skillsmith.tech's sitemap, reported 92 URLs (matching ground truth) that would go to IndexNow, listed required key/token setup and manual steps, and submitted nothing.",
+        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/get-indexed/README.md"
       }
     },
     {
@@ -3329,6 +3407,12 @@
           "a one-off summary of one document, a shareable doc built from the vault (use docs)",
           "a database or Notion setup"
         ]
+      },
+      "tested": {
+        "date": "2026-11-13",
+        "target": "a real-shaped issue, PR and customer call for a fintech product",
+        "result": "The run saved 3 raw sources, wrote 9 one-idea notes with source and confidence, and answered all three questions correctly from the vault: split payments handled (merged 2026-10-21, flag on 2026-10-24), overpayments not handled…",
+        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/ship-second-brain/README.md"
       }
     },
     {
@@ -3399,6 +3483,12 @@
           "for resumes and CVs (use recruiter-lens or applicant-kit)",
           "for getting text past an AI detector"
         ]
+      },
+      "tested": {
+        "date": "2026-11-13",
+        "target": "a 200-word product blog post with stock AI-writing patterns",
+        "result": "The run wrote draft-v2.md, a roughly 110-word rewrite, and the scan was reported clean. It keeps the 40,000/day, about-3x month-end, up-to-six-hours, 38-minute and 5h50m figures plus the unmeasured-benefit hedge, and drops the…",
+        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/straight-prose/README.md"
       }
     }
   ],
