@@ -1,6 +1,6 @@
 # Real-world runs: summary
 
-59 skills and mods run: 15 PASS, 43 PARTIAL, 1 FAIL. Only PASS runs are shown on the site. Each row links to the full evidence.
+59 skills and mods run: 15 PASS, 44 PARTIAL, 0 FAIL. Only PASS runs are shown on the site. Each row links to the full evidence.
 
 | Verdict | Skill | Ran | Result |
 |---|---|---|---|
@@ -43,6 +43,7 @@
 | PARTIAL | [prompts-to-skill-release](2026-11-13/prompts-to-skill-release/README.md) | 2026-11-13 | The run set version 1.0.1 in SKILL.md, wrote a CHANGELOG and updated the README, but built no archive and executed no trigger tests (0 pass/0 fail/8 reviewed-only), then gave an install checklist and published nothing. |
 | PARTIAL | [prompts-to-workflow](2026-11-13/prompts-to-workflow/README.md) | 2026-11-13 | The run mapped the 4 prompts to 4 ordered steps with gates, marked 2 steps as reuse of wordsmith and 2 as new skills (summarize-changes-since-tag, verify-release-notes), and wrote workflow, chain SKILL.md, 2 briefs and trigger cases under workflows/release-notes/, but never ran check_skill.py on… |
 | PARTIAL | [publish-pipeline](2026-11-13/publish-pipeline/README.md) | 2026-11-13 | The run read publish.yml, sync.py, discover.py, skilllib.py, build.py, check_dist.py, verify.mjs and health.yml and reported hold reasons and fragile points, but the hard check on audit.md failed and the final message gives no file:line evidence or repo-outside-org hold. |
+| PARTIAL | [release-gate-ledger](2026-11-13/release-gate-ledger/README.md) | 2026-11-14 | Run produced three separate lane verdicts (exposure PASS WITH FIXES, app-tests HOLD, perf untested) and an overall HOLD via check_gate.mjs, with live evidence for the IDOR, open admin API and role escalation, but missed cookie flags and login rate limiting, ran no real exposure checks beyond local… |
 | PARTIAL | [release-gate-validator](2026-11-13/release-gate-validator/README.md) | 2026-11-14 | The agent ran nothing against the target and reported HOLD, but redteam/ was empty so the ingester exited 2 (NOT-INGESTABLE), and it never recorded the preflight or perf lanes or ran check_gate.mjs, so HOLD was not computed by the script. |
 | PARTIAL | [research-brief](2026-11-13/research-brief/README.md) | 2026-11-13 | The run correctly concluded the user (about £47,000 combined gross income) starts MTD for Income Tax on 6 April 2027 under the £30,000 threshold, cited gov.uk pages and listed the changes, but left the tax-year basis of the test unverified and mixed in details from an unopened search summary. |
 | PARTIAL | [sales-copy](2026-11-13/sales-copy/README.md) | 2026-11-13 | The run produced a landing page with four headline options and a 3-email checklist sequence with correct prices (£149/£349, 14-day no-card trial), a verbatim attributed quote and the 3.5-to-1-day figure (n=24) attributed to the survey, with none of the forbidden claims, but it leaves several… |
@@ -62,7 +63,6 @@
 | PARTIAL | [tune-skill-mod](2026-11-13/tune-skill-mod/README.md) | 2026-11-13 | Agent edited the invoice-namer description, committed and pushed (remote shows 00c7f15 on main), the hook flagged the push twice, and tune-skill was invoked, but its check_skill.py validator was denied by Bash permissions so no findings were produced. |
 | PARTIAL | [upstream-polish](2026-11-13/upstream-polish/README.md) | 2026-11-13 | The run read local refs for three repos (all matching origin at last fetch), found drift in keyword-guard README and the seo-polish index entry, and drafted rewrites, but never fetched upstream, never read the real listing-index.json (404), and did not note wordsmith moving out of arm-pz. |
 | PARTIAL | [wordsmith](2026-11-13/wordsmith/README.md) | 2026-11-13 | The run wrote draft-tight.md, kept 40,000, triples, up to six hours, 38 min vs 5h50 and the unmeasured-benefit hedge, and cut most fluff, but left 'Experts agree' in the file and the summary says the cut list is mostly complete. |
-| FAIL | [release-gate-ledger](2026-11-13/release-gate-ledger/README.md) | 2026-11-14 | The run stopped after a partial exposure probe (most paths returned the same 401) and never ran the app-tests or perf lanes, wrote no ledger rows through the recorder, and computed no overall posture by script. |
 
 ## Fix list for tune-skill and the polish skills
 
@@ -197,6 +197,12 @@ Defects the judge attributed to the skill itself (not to the run's environment),
 - The skill's list of sync hold reasons is not enforced, so 'repo outside the org' was omitted
 - The skill does not require labeling each claim as read-from-code, reproduced or inferred inside audit.md itself
 
+### release-gate-ledger (PARTIAL)
+- The skill lets the exposure lane record PASS WITH FIXES when key checks (cookies, TLS) could not be run; it should require untested/inconclusive for those checks or a lower verdict
+- The skill does not tell the agent to check session cookie attributes and login rate limiting as part of the minimum security lane, so those planted flaws were missed
+- The skill allows a manual chair-run app-tests pass without check_results.mjs, leaving checker_exit empty and the lane only partly validated
+- The skill gives no fallback for the perf lane when Lighthouse is unavailable (e.g. curl timing), so it defaults to untested without any measurement
+
 ### release-gate-validator (PARTIAL)
 - The skill gives no path for an absent or non-ingestable red-team lane: the agent should still record that lane as absent, record the pasted preflight verbatim and perf as not-measured, and run check_gate.mjs so HOLD comes from the script
 - The skill does not say that a missing commit or missing per-finding rows should not block recording lanes, so the agent stopped at asking the user questions
@@ -296,11 +302,4 @@ Defects the judge attributed to the skill itself (not to the run's environment),
 - The skill does not tell the agent to treat unsupported authority appeals like 'Experts agree' as fluff to cut by default, so it kept it and only flagged it
 - The skill lacks guidance on when to keep a vague claim versus cut it, leaving the agent to rationalise keeping it as 'your claim'
 - The skill does not require rewriting an opening cliché to be removed rather than paraphrased, so the opener's meaning was reworded and could introduce a new claim ('shows customers how much a business values them')
-
-### release-gate-ledger (FAIL)
-- The skill's fixed unauthenticated path-probe list yields no signal against apps that return 401 for every unauthenticated path; it has no step to detect or handle a uniform-response catch-all before concluding
-- The skill does not tell the agent to write the ledger row (via the recorder) immediately after each lane, so an interruption leaves no persisted results
-- Probing in many separate curl calls and in a broad for-loop appears to risk triggering the safety classifier; the skill should say to batch probes in a narrow, clearly scoped, local-only way
-- The skill does not state that when the user has authorized local testing with documented synthetic accounts, the agent should proceed to the authenticated lane rather than pause for confirmation
-- HOLD is computed by the script only after rows exist; the skill has no fallback to run the script and get a HOLD with 'untested' lanes when the run is cut short
 
