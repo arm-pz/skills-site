@@ -1,8 +1,8 @@
 # seo-sweep: real-world run, 2026-11-13
 
-**Verdict: FAIL** (1/10). The run could not execute the chained skills (Bash was denied), crawled nothing and made no fixes; it did a static read of site-src and reported one finding (no og:image), missing the 12 long titles and 8 long descriptions.
+**Verdict: PARTIAL** (5/10). The run crawled the live site, found the 12 over-long titles and 8 over-long descriptions that match ground truth, shortened them and re-crawled locally to show 12 to 0 titles and 8 to 2 descriptions, but it edited the output HTML directly rather than the generator, skipped some chained skills, and reported no skill defects.
 
-Target: skillsmith.tech and its source repo (fixes local only, nothing pushed or submitted). Run headless on sonnet in a clean project with only this skill installed (20 turns, 18 tool calls, 43 s, $0.46).
+Target: skillsmith.tech and its source repo (fixes local only, nothing pushed or submitted). Run headless on sonnet in a clean project with only this skill installed (32 turns, 30 tool calls, 150 s, $0.45).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -25,23 +25,27 @@ Run your SEO sweep on https://skillsmith.tech. The site's source is in site-src/
 
 ## Met
 
-- Pushed, deployed and submitted nothing (no get-indexed, no network actions)
-- Honestly reported that Bash was denied and that no crawl, fixes or proofs were done
-- Wrote sweep.md
+- Findings match ground truth: 12 titles over 60 chars and 8 descriptions over 160 chars were found, with no invented broken pages or h1/canonical problems
+- Fixes were proven by serving site-src locally and re-crawling (titles 12 to 0, descriptions 8 to 2)
+- Pushed, deployed and submitted nothing; only a local http.server was started
+- Honestly reported what was not checked (keyword ownership, wordsmith rewrites, get-indexed, search results) and the two unverified descriptions
+- sweep.md was written
 
 ## Missed
 
-- Did not run the chained skills in order on the live site; no per-step findings recorded, only a static grep
-- Findings do not match ground truth: the 12 titles over 60 chars and 8 descriptions over 160 chars were not found; the 'all 95 HTML files have a description' claim was made without checking lengths
-- No fixes made in generator/templates or manifest, so nothing was proven by rebuild or re-check
-- Did not report defects in the skills themselves
-- The og:image finding is outside the ground-truth set and no verification of impact was done; the 95 HTML file count differs from the 92 sitemap pages without explanation
+- Fixes were made with sed directly on hand-written site-src/*/index.html pages (check, checks, list, map, prose, resume, seo-check, seo); the sweep did not touch the generator/templates or manifest, and the one generated-looking page (set-up-a-coding-agent, 189-char description) was left unfixed
+- Not all chained skills were run in order: only seo-crawl was run; keyword-guard, wordsmith and get-indexed were skipped or noted as not done
+- Two descriptions remain over 160 after the fix, and the /seo-check/ trim was never re-crawled, so 'each fix proven' is only partly true
+- The og:title and og:description tags were left with the old wording, so the titles/descriptions are inconsistent across tags
+- The 9 /cdn-cgi/l/email-protection flags were dismissed as a false positive on reasoning from source grep, not verified against the live page; this is also a defect in the crawler's output that the run did not clearly report as a skill defect
+- No defects in the skills themselves were reported (e.g. the crawler's false-positive on Cloudflare email obfuscation, the 80-page default that missed pages, needing a second crawl at 200)
 
 ## Defects to fix in the skill
 
-- The skill gives no fallback when Bash is unavailable or denied; it should state a minimum viable path (e.g., use Read/Grep to measure title and description lengths) rather than ending with a thin static review
-- The skill does not tell the agent where the generator lives when tools/agent-skills is absent from the project, so fixes to the generator could not be located
-- The skill does not require checking title and description lengths even in a static pass, which is where the ground-truth issues were
+- seo-crawl flags Cloudflare email-protection rewrites as broken links, producing false positives the skill does not warn about
+- seo-crawl default --max-pages 80 undercounts a 92-page site; the skill should default to the sitemap size or warn when capped
+- seo-sweep gives no guidance on distinguishing generated vs hand-written pages, so fixes can land in output HTML instead of the generator or templates
+- seo-sweep does not require reporting defects found in the chained skills, so none were surfaced
 
 ## Ground truth
 
@@ -107,23 +111,35 @@ per page: status | title (len) | h1
 ## What it did
 
 1. `Skill: seo-sweep`
-1. `Bash: cd /tmp/run-seo-sweep-fwquz5q3/project; ls; ls site-src tools tools/agent-skills .claude/skills .claude/skills/seo-sweep/references 2>&1 | head -60`
-1. `Bash: cd /tmp/run-seo-sweep-fwquz5q3/project/site-src; ls | tail -40; cat PROJECT.md | head -40; cat _headers; ls .claude/skills/seo-crawl/scripts ../.claude/skills/s`
-1. `Glob: *`
-1. `Read: /tmp/run-seo-sweep-fwquz5q3/project/site-src/index.html`
-1. `Read: /tmp/run-seo-sweep-fwquz5q3/project/site-src/PROJECT.md`
-1. `Glob: {robots.txt,sitemap*.xml,llms.txt,_redirects,CNAME}`
-1. `Grep: noindex|rel="canonical"`
-1. `Read: /tmp/run-seo-sweep-fwquz5q3/project/site-src/robots.txt`
-1. `Grep: rel="canonical" href="(?!https://skillsmith\.tech/)[^"]*"`
-1. `Grep: noindex`
-1. `Grep: skills\.caffeinity\.com|http://skillsmith`
-1. `Grep: rel="canonical" href="(http:|https://(www\.|skills\.)|[^h"])[^"]*"`
-1. `Grep: <meta name="description"`
-1. `Glob: **/*.html`
-1. `Grep: og:image`
-1. `Glob: **/*.{png,jpg,webp}`
-1. `Write: /tmp/run-seo-sweep-fwquz5q3/project/sweep.md`
+1. `Bash: ls /tmp/run-seo-sweep-m206x_e9/project /tmp/run-seo-sweep-m206x_e9/project/site-src /tmp/run-seo-sweep-m206x_e9/project/.claude/skills /tmp/run-seo-sweep-m206x_`
+1. `Bash: node .claude/skills/seo-crawl/scripts/seo-crawl.mjs --url https://skillsmith.tech --max-pages 80 --out /tmp/run-seo-sweep-m206x_e9/baseline.json`
+1. `Bash: cat site-src/robots.txt site-src/_headers; ls site-src/site site-src/seo site-src/tools | head -30; ls site-src/*.xml`
+1. `Bash: node -e "const r=require('/tmp/run-seo-sweep-m206x_e9/baseline.json');console.log(JSON.stringify({s:r.summary,c:r.checks},null,0).slice(0,2500));for(const f of `
+1. `Bash: node .claude/skills/seo-crawl/scripts/seo-crawl.mjs --url https://skillsmith.tech --max-pages 200 --out /tmp/run-seo-sweep-m206x_e9/baseline2.json`
+1. `Bash: grep -rl "sitemap" site-src --include=* -s | head; ls site-src/tools/agent-skills | head`
+1. `Bash: node -e "const r=require('/tmp/run-seo-sweep-m206x_e9/baseline2.json');console.log(JSON.stringify(r.summary),JSON.stringify(r.checks));const c={};for(const f of`
+1. `Bash: cat site-src/tools/agent-skills/gen_sitemap.py | head -60`
+1. `Bash: grep -rn "email-protection\|mailto:" site-src --include=*.html --include=*.py --include=*.js -l | head`
+1. `Bash: grep -n "<title>\|name=\"description\"" site-src/check/index.html site-src/checks/index.html site-src/list/index.html site-src/map/index.html site-src/prose/ind`
+1. `Bash: grep -n "mailto:\|@" site-src/check/index.html site-src/prose/index.html site-src/work/index.html | grep -v "@context\|@id\|@type\|@media\|@font" | head`
+1. `Bash: grep -rn "by Caffeinity" site-src/tools/agent-skills/*.py | head; grep -rn "title" site-src/tools/agent-skills/check_dist.py | head`
+1. `Bash: sed -i -e 's#| Skillsmith by Caffeinity</title>#| Skillsmith</title>#' -e 's#— Skillsmith by Caffeinity</title>#| Skillsmith</title>#' site-src/check/index.html`
+1. `Bash: sed -i -e 's#Prose Check: find the AI writing patterns in a draft#Prose Check: find AI writing patterns#' -e 's#Resume Check: what a recruiter sees in the first`
+1. `Bash: sed -i -E 's#(<meta name="description" content=")Six free tools built from our open agent skills: check a SKILL.md, a draft, a web page, a resume or a lead list`
+1. `Bash: sed -i -E 's#content="Check a cold-email lead list before it loads:.*"#content="Check a cold-email lead list before it loads: role addresses, duplicates, typo d`
+1. `Bash: sed -i -E 's#content="Type what you want to get done.*"#content="Type what you want to get done and see the matching workflow as a graph: which agent skills to `
+1. `Bash: sed -i -E "s#content=\"Paste a draft and see every stock AI writing pattern.*\"#content=\"Paste a draft and see stock AI writing patterns marked in place: em da`
+1. `Bash: sed -i -E 's#content="Paste your resume and a job ad\..*"#content="Paste your resume and a job ad. See duty wording, bullets with no numbers and missing terms f`
+1. `Bash: sed -i -E "s#content=\"Paste a page's source and see what would stop it ranking.*\"#content=\"Paste a page's source and see what would stop it ranking: noindex,`
+1. `Bash: sed -i -E 's#content="AI-driven SEO from Skillsmith by Caffeinity:.*" />#content="AI SEO from Skillsmith by Caffeinity: tested agent skills that crawl your site`
+1. `Bash: python3 -m http.server 8765 --directory site-src`
+1. `Bash: node .claude/skills/seo-crawl/scripts/seo-crawl.mjs --url http://localhost:8765 --max-pages 200 --out /tmp/run-seo-sweep-m206x_e9/after.json`
+1. `Bash: node -e "const r=require('/tmp/run-seo-sweep-m206x_e9/after.json');console.log(JSON.stringify(r.summary),JSON.stringify(r.checks.map(c=>c.id+':'+c.status+':'+c.`
+1. `Bash: node -e "const r=require('/tmp/run-seo-sweep-m206x_e9/after.json');for(const f of r.findings)if(f.id.indexOf('canonical-offsite')<0)console.log(f.id,JSON.string`
+1. `Bash: sed -i 's#structured data, each with evidence\. Free#structured data, with evidence. Free#' site-src/seo-check/index.html`
+1. `Bash: grep -rn "description" site-src/workflows/set-up-a-coding-agent/index.html | head -3`
+1. `TaskStop: `
+1. `Write: /tmp/run-seo-sweep-m206x_e9/project/sweep.md`
 
 ## Files it wrote
 
@@ -172,22 +188,15 @@ Copied under `files/`:
 
 ## Final output
 
-I couldn't finish the sweep. Bash was denied in this session, so I couldn't run the crawler, the build or any network check. I made no source edits and have no fixes to prove. `sweep.md` says the same.
+I ran the sweep, fixed the over-long titles and descriptions in `site-src/`, and wrote the summary to `sweep.md`. I didn't push, deploy or submit anything.
 
-I did a static read of `site-src/` instead:
-- **Canonicals:** every page has one, and none points at the wrong host.
-- **Meta descriptions:** all 95 HTML files have one. I didn't check their lengths.
-- **noindex and robots.txt:** `noindex` is only on `404.html`, which is intended. `robots.txt` allows everything and points to the sitemap.
-- **Homepage:** it has JSON-LD, and its content is plain HTML that a non-rendering crawler can read.
+- **Crawl:** The live site has no indexability problems: robots.txt and the sitemap's 92 URLs all check out. The crawl found only two kinds of real defects: 12 page titles of 63–80 characters and 8 meta descriptions of 166–204 characters.
+- **Broken links:** The crawler also flagged 9 broken links to `/cdn-cgi/l/email-protection` on `/check/`, `/prose/` and `/work/`. I treated them as a false positive. The source has plain `mailto:` links, and Cloudflare's email obfuscation rewrites them at the edge.
+- **Fixes:** I shortened the 12 titles by changing the suffix from "Skillsmith by Caffeinity" to "Skillsmith", plus a shorter lead on three pages. I trimmed 7 of the 8 descriptions. I left the `og:title` and `og:description` tags alone, so they may still carry the old wording.
+- **Proof:** I served `site-src/` locally and re-crawled it. Long titles went from 12 to 0, and long descriptions went from 8 to 2.
+- **Remaining description warnings:**
+  - `/seo-check/` was 161 characters and I trimmed it after that crawl, so it is not re-checked.
+  - The `set-up-a-coding-agent` workflow page is 189 characters. It looks generated, so I left it for you.
+- **Not checked:** I didn't check search results, so I can't say whether the site is indexed or who ranks for "skillsmith". That needs Search Console and Bing Webmaster Tools. I also skipped the keyword-ownership mapping, the wordsmith rewrites and `get-indexed`.
 
-I found one real gap. No page has an `og:image`, and the Twitter card is `summary`. I didn't add one because the source has no suitable brand image.
-
-Not done, because it needs Bash and network access:
-- **Indexation baseline:** I didn't search for the brand, so I don't know whether the site is indexed.
-- **Crawl:** nothing was crawled, so there's no before/after comparison.
-- **Generated files:** `tools/agent-skills` isn't in the project, only the page templates. `sitemap.xml`, `llms.txt` and `_redirects` are made at build time, so I couldn't check them.
-- **Submission:** I didn't run get-indexed, as you asked.
-
-The Search Console steps are yours. They are listed in `sweep.md`: add the property, submit the sitemap, request indexing of `/`, and repeat in Bing Webmaster Tools.
-
-If you allow Bash, I'll crawl a local build and the live site, fix what turns up, and re-crawl to prove it.
+`sweep.md` lists the steps left for you. They are building and deploying, verifying the domain in Search Console and Bing, submitting the sitemap, and re-running the brand searches two to three weeks after deploy.

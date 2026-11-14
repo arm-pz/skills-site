@@ -1,19 +1,12 @@
-I couldn't finish the sweep. Bash was denied in this session, so I couldn't run the crawler, the build or any network check. I made no source edits and have no fixes to prove. `sweep.md` says the same.
+I ran the sweep, fixed the over-long titles and descriptions in `site-src/`, and wrote the summary to `sweep.md`. I didn't push, deploy or submit anything.
 
-I did a static read of `site-src/` instead:
-- **Canonicals:** every page has one, and none points at the wrong host.
-- **Meta descriptions:** all 95 HTML files have one. I didn't check their lengths.
-- **noindex and robots.txt:** `noindex` is only on `404.html`, which is intended. `robots.txt` allows everything and points to the sitemap.
-- **Homepage:** it has JSON-LD, and its content is plain HTML that a non-rendering crawler can read.
+- **Crawl:** The live site has no indexability problems: robots.txt and the sitemap's 92 URLs all check out. The crawl found only two kinds of real defects: 12 page titles of 63–80 characters and 8 meta descriptions of 166–204 characters.
+- **Broken links:** The crawler also flagged 9 broken links to `/cdn-cgi/l/email-protection` on `/check/`, `/prose/` and `/work/`. I treated them as a false positive. The source has plain `mailto:` links, and Cloudflare's email obfuscation rewrites them at the edge.
+- **Fixes:** I shortened the 12 titles by changing the suffix from "Skillsmith by Caffeinity" to "Skillsmith", plus a shorter lead on three pages. I trimmed 7 of the 8 descriptions. I left the `og:title` and `og:description` tags alone, so they may still carry the old wording.
+- **Proof:** I served `site-src/` locally and re-crawled it. Long titles went from 12 to 0, and long descriptions went from 8 to 2.
+- **Remaining description warnings:**
+  - `/seo-check/` was 161 characters and I trimmed it after that crawl, so it is not re-checked.
+  - The `set-up-a-coding-agent` workflow page is 189 characters. It looks generated, so I left it for you.
+- **Not checked:** I didn't check search results, so I can't say whether the site is indexed or who ranks for "skillsmith". That needs Search Console and Bing Webmaster Tools. I also skipped the keyword-ownership mapping, the wordsmith rewrites and `get-indexed`.
 
-I found one real gap. No page has an `og:image`, and the Twitter card is `summary`. I didn't add one because the source has no suitable brand image.
-
-Not done, because it needs Bash and network access:
-- **Indexation baseline:** I didn't search for the brand, so I don't know whether the site is indexed.
-- **Crawl:** nothing was crawled, so there's no before/after comparison.
-- **Generated files:** `tools/agent-skills` isn't in the project, only the page templates. `sitemap.xml`, `llms.txt` and `_redirects` are made at build time, so I couldn't check them.
-- **Submission:** I didn't run get-indexed, as you asked.
-
-The Search Console steps are yours. They are listed in `sweep.md`: add the property, submit the sitemap, request indexing of `/`, and repeat in Bing Webmaster Tools.
-
-If you allow Bash, I'll crawl a local build and the live site, fix what turns up, and re-crawl to prove it.
+`sweep.md` lists the steps left for you. They are building and deploying, verifying the domain in Search Console and Bing, submitting the sitemap, and re-running the brand searches two to three weeks after deploy.
