@@ -1,0 +1,80 @@
+{
+  "skill": "seo-sweep",
+  "date": "2026-11-13",
+  "target": "skillsmith.tech and its source repo (fixes local only, nothing pushed or submitted)",
+  "verdict": "FAIL",
+  "score": 1,
+  "summary": "The run could not execute the chained skills (Bash was denied), crawled nothing and made no fixes; it did a static read of site-src and reported one finding (no og:image), missing the 12 long titles and 8 long descriptions.",
+  "checks": [
+    {
+      "desc": "wrote sweep.md",
+      "ok": true,
+      "detail": "sweep.md"
+    }
+  ],
+  "met": [
+    "Pushed, deployed and submitted nothing (no get-indexed, no network actions)",
+    "Honestly reported that Bash was denied and that no crawl, fixes or proofs were done",
+    "Wrote sweep.md"
+  ],
+  "missed": [
+    "Did not run the chained skills in order on the live site; no per-step findings recorded, only a static grep",
+    "Findings do not match ground truth: the 12 titles over 60 chars and 8 descriptions over 160 chars were not found; the 'all 95 HTML files have a description' claim was made without checking lengths",
+    "No fixes made in generator/templates or manifest, so nothing was proven by rebuild or re-check",
+    "Did not report defects in the skills themselves",
+    "The og:image finding is outside the ground-truth set and no verification of impact was done; the 95 HTML file count differs from the 92 sitemap pages without explanation"
+  ],
+  "skill_defects": [
+    "The skill gives no fallback when Bash is unavailable or denied; it should state a minimum viable path (e.g., use Read/Grep to measure title and description lengths) rather than ending with a thin static review",
+    "The skill does not tell the agent where the generator lives when tools/agent-skills is absent from the project, so fixes to the generator could not be located",
+    "The skill does not require checking title and description lengths even in a static pass, which is where the ground-truth issues were"
+  ],
+  "cost_usd": 0.46,
+  "model": "sonnet",
+  "turns": 20,
+  "seconds": 43,
+  "tool_calls": 18,
+  "files": [
+    "site-src/.gitattributes",
+    "site-src/.github/workflows/health.yml",
+    "site-src/.github/workflows/publish.yml",
+    "site-src/.gitignore",
+    "site-src/.reviews/3f3dc796540e.md",
+    "site-src/.well-known/skills.json",
+    "site-src/404.html",
+    "site-src/DIRECTORIES.md",
+    "site-src/LICENSE",
+    "site-src/PROJECT.md",
+    "site-src/README.md",
+    "site-src/_headers",
+    "site-src/ai-team-blueprint/index.html",
+    "site-src/applicant-kit/index.html",
+    "site-src/application-pilot/index.html",
+    "site-src/assets/forge.js",
+    "site-src/assets/motion.js",
+    "site-src/assets/site.css",
+    "site-src/assets/site.js",
+    "site-src/assets/skill.css",
+    "site-src/assets/stack.js",
+    "site-src/assets/tool.css",
+    "site-src/assets/tool.js",
+    "site-src/caffeinity-routing/index.html",
+    "site-src/career-track/index.html",
+    "site-src/check/check-core.js",
+    "site-src/check/check.js",
+    "site-src/check/index.html",
+    "site-src/checks/index.html",
+    "site-src/choose-effort/index.html",
+    "site-src/cold-email-list-gate/index.html",
+    "site-src/cold-email-ops/index.html",
+    "site-src/consistent-code-review/index.html",
+    "site-src/course-builder/index.html",
+    "site-src/crash-test/index.html",
+    "site-src/data-readout/index.html",
+    "site-src/diagnose-usage/index.html",
+    "site-src/do-better/index.html",
+    "site-src/draft-skill/index.html",
+    "site-src/favicon.ico"
+  ],
+  "error": ""
+}
