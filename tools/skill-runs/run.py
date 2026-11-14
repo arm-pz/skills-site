@@ -68,6 +68,13 @@ DENY = [
 ]
 
 
+LIMIT = re.compile(r"hit your [\w-]+ limit[^\n]*")
+
+
+class UsageLimit(Exception):
+    """The plan's usage limit ended the run; nothing is saved and later runs are skipped."""
+
+
 def manifest():
     return {e["name"]: e for e in json.loads((ROOT / "site" / "skills.json").read_text())["skills"]}
 
@@ -271,6 +278,8 @@ def run(name, man, day):
             sid = final(more).get("session_id", sid)
         results = [e for e in events if e.get("type") == "result"]
         output = "\n\n---\n\n".join(r.get("result", "") for r in results)
+        if LIMIT.search(output):
+            raise UsageLimit(LIMIT.search(output).group(0))
         cost = sum(r.get("total_cost_usd", 0) for r in results)
         turns = sum(r.get("num_turns", 0) for r in results)
         transcript = "\n".join(json.dumps(e) for e in events)
@@ -280,11 +289,11 @@ def run(name, man, day):
             g = subprocess.run(scn["ground_truth"], shell=True, cwd=proj, env=env, capture_output=True,
                                text=True, timeout=600)
             truth = g.stdout + (f"\n[stderr]\n{g.stderr[-2000:]}" if g.returncode else "")
+        if scn.get("teardown"):
+            subprocess.run(scn["teardown"], shell=True, cwd=proj, env=env, timeout=60)
         made = sorted(str(p.relative_to(proj)) for p in proj.rglob("*")
                       if p.is_file() and ".claude" not in p.parts and ".git" not in p.parts
                       and not (FIX / scn.get("fixtures", "\0") / p.relative_to(proj)).exists())
-        if scn.get("teardown"):
-            subprocess.run(scn["teardown"], shell=True, cwd=proj, env=env, timeout=60)
         if not scn.get("seed_sessions"):
             for f in (home / ".claude" / "projects").rglob("*.jsonl"):
                 dest = POOL / f.relative_to(home / ".claude" / "projects")
@@ -293,6 +302,8 @@ def run(name, man, day):
         written = files_text(proj, made, limit=400_000)
         checks = [run_check(c, output, transcript, proj, written, env) for c in scn.get("checks", [])]
         verdict, jcost = judge(scn, output, tools, checks, truth, env, proj, files_text(proj, made, limit=90000))
+        if LIMIT.search(json.dumps(verdict)):
+            raise UsageLimit("the judge hit the usage limit")
         cap(verdict, checks)
         art = out_dir / "files"
         for rel in made[:40]:
@@ -426,6 +437,9 @@ def main(argv=None):
     for n in names:
         try:
             r = rejudge(n, a.date) if a.rejudge else run(n, man, a.date)
+        except UsageLimit as ex:
+            print(f"{n:34} LIMIT    {ex}; stopping, nothing saved for this or later runs", flush=True)
+            return 2
             print(f"{n:34} {r['verdict']:8} ${r['cost_usd']:<6} {r['summary']}", flush=True)
         except Exception as ex:  # one broken scenario must not stop the batch
             print(f"{n:34} ERROR    {type(ex).__name__}: {ex}", flush=True)
