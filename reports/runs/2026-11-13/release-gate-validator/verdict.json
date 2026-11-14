@@ -1,0 +1,41 @@
+{
+  "skill": "release-gate-validator",
+  "date": "2026-11-13",
+  "target": "the saved results of a real red-team run on Invoicely, plus pasted preflight and performance tables",
+  "verdict": "FAIL",
+  "score": 3,
+  "summary": "The run found redteam/ empty and Bash denied, so it ran neither gate_ingest.mjs nor check_gate.mjs, recorded no lanes in a ledger, and only said HOLD was its best guess without a script-computed posture.",
+  "checks": [
+    {
+      "desc": "posture is HOLD",
+      "ok": true,
+      "detail": "HOLD"
+    }
+  ],
+  "met": [
+    "Ran nothing against a target; it only inspected the local filesystem and ran no scans, probes or tests",
+    "Did not invent a red-team verdict; it said the lane was absent and had no input",
+    "Gave the pasted preflight (PASS WITH FIXES, 127.0.0.1:3100) and perf (not measured) in a lane table in its prose, and named both unmeasured perf and the missing red-team lane as reasons for HOLD"
+  ],
+  "missed": [
+    "Did not ingest the red-team table mechanically from disk: redteam/ was empty and no group-*.md files were found, so the ingest script never ran",
+    "Did not record the preflight verdict or perf not-measured in any ledger; they appear only in the reply, not via the recording script",
+    "Did not compute HOLD with the script: it called HOLD its 'best posture' and said 'the script hasn't confirmed that', so the hard check 'posture is HOLD' is only tentatively met in prose",
+    "Did not name critical red-team findings as a HOLD reason, since none were ingested; it cited a missing lane instead",
+    "Ended by asking the user for permission, exit codes, SHAs and a pasted preflight table rather than completing the ledger and posture with the inputs it had",
+    "Asked the user to supply a `check_results.mjs --require-fixes` exit code, which conflicts with the 'without re-running anything' instruction"
+  ],
+  "skill_defects": [
+    "The skill has no defined path for an empty or missing red-team run directory. It should still record the pasted preflight verdict verbatim, record perf as not-measured, mark the app-tests lane absent, and compute HOLD via the script instead of stopping to ask questions.",
+    "The skill does not say what to do when Bash or script execution is unavailable, so the agent fell back to a prose-only estimate with no deterministic posture.",
+    "The skill's guidance on locating the run directory is unclear: the user said 'under redteam/' but the scripts appear to expect .pre-ship-red-team/<run-id>/results/ or group-*.md files, and there is no discovery or fallback step.",
+    "The skill invites asking for extra inputs (SHAs, a verbatim finding table, exit codes) that are not required to produce a conservative HOLD, which contradicts a request for a posture without re-running anything."
+  ],
+  "cost_usd": 0.09,
+  "model": "sonnet",
+  "turns": 7,
+  "seconds": 15,
+  "tool_calls": 5,
+  "files": [],
+  "error": ""
+}
