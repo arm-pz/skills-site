@@ -182,3 +182,25 @@ button.link{background:none;border:0;font:inherit;font-size:14px;color:var(--mut
 /* on a toned section the quiet button's own ground is the section's, so lift it */
 .tone #result .btn-quiet{background:var(--surface)}
 .after button.link{text-align:left}
+/* /checks/ in motion (tools/fx/src/hub.js). Everything below is behind .fx-on, which motion.js sets
+   only when motion is allowed, so the page above is complete without it. */
+.picker,.tool{--mx:-999px;--my:-999px;background-image:radial-gradient(520px circle at var(--mx) var(--my),rgba(var(--glow),.16),transparent 62%)}
+/* depth is for a pointer that can lean a card; on touch the cards stay flat and no wider than the page */
+@media (hover:hover) and (pointer:fine){
+.fx-on .picker,.fx-on .tool,.fx-on .plan{transform-style:preserve-3d}
+.fx-on .picker h2{transform:translateZ(44px)}
+.fx-on .picker ol{transform:translateZ(22px);transform-style:preserve-3d}
+.fx-on .tool .demo{transform:translateZ(30px);box-shadow:0 18px 30px -24px rgba(var(--glow),.55)}
+.fx-on .plan .price{transform:translateZ(24px)}
+}
+.fx-on .tool{transition:box-shadow 160ms var(--ease)}
+.fx-on .demo mark{background:linear-gradient(color-mix(in srgb,var(--accent) 26%,transparent),color-mix(in srgb,var(--accent) 26%,transparent)) no-repeat 0 0/100% 100%}
+.fx-on .demo .lvl,.fx-on .demo-gate{transform-origin:0 50%}
+#how .steps li{position:relative}
+.fx-on #how .steps li{border-top-color:var(--line)}
+.fx-on #how .steps li::after{content:"";position:absolute;left:0;right:0;top:-2px;height:2px;background:var(--accent);transform:scaleX(var(--p,0));transform-origin:0 50%}
+.fx-on #how .steps li::before{color:var(--muted);transition:color 300ms var(--ease)}
+.fx-on #how .steps li.is-lit::before{color:var(--accent)}
+.fx-on #how .steps h3,.fx-on #how .steps p{opacity:.45;transition:opacity 400ms var(--ease)}
+.fx-on #how .steps li.is-lit h3,.fx-on #how .steps li.is-lit p{opacity:1}
+.fx-on .contact.ember{background-image:radial-gradient(70% 120% at 85% calc(50% + var(--by,0%)),rgba(255,255,255,.2),transparent 70%)}
