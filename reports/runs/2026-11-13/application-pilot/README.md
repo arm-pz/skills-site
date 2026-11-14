@@ -1,8 +1,8 @@
 # application-pilot: real-world run, 2026-11-13
 
-**Verdict: PARTIAL** (6/10). The run flagged Paystack Labs (35 days quiet) and drafted a follow-up to Amira, recommended marking Quillbook no-reply, left Fernway alone, and gave a Tallyhub panel plan, but the Tallyhub briefing was not written and the drafts contain unfilled placeholders.
+**Verdict: PARTIAL** (6/10). The run flagged Paystack Labs (35 days quiet) and Quillbook (59 days, suggested no-reply), left Fernway alone, and made no send claims, but the Tallyhub briefing was deferred pending a JD and resume, and tracker changes were proposed without dates.
 
-Target: a five-role job-search tracker with one stalled recruiter thread and one upcoming panel. Run headless in a clean project with only this skill installed (6 turns, 4 tool calls, 20 s, $0.12).
+Target: a five-role job-search tracker with one stalled recruiter thread and one upcoming panel. Run headless on the CLI default model in a clean project with only this skill installed (6 turns, 4 tool calls, 20 s, $0.14).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -26,25 +26,25 @@ Today is 2026-11-13. Here's my job tracker (tracker.csv). What needs doing this 
 
 ## Met
 
-- Flags Paystack Labs as quiet for 35 days since 10-09 and drafts a follow-up to Amira
-- Flags Quillbook (applied 09-15, 59 days) as stale and gives a clear call (mark no-reply, offer a last nudge)
-- Does not suggest following up on Fernway; notes it was rejected 10-14
-- Addresses the Tallyhub panel on 11-18 without inventing facts about Tallyhub; states what the tracker lacks
-- Explicitly says nothing was sent and proposes tracker changes (Quillbook to no-reply, add follow_up_due column) pending confirmation
+- Flags Paystack Labs as overdue (recruiter promised next steps within a week of 10-09, ~35 days silent) and drafts a follow-up to Amira
+- Flags Quillbook (applied 09-15, 59 days) as stale and gives a clear call: mark no-reply rather than chase, offering a last nudge on request
+- Does not suggest following up on Fernway; marks it rejected with nothing to do
+- Does not invent facts about Tallyhub; states explicitly what the tracker does and does not contain
+- States plainly that nothing was sent and that drafts need approval
 
 ## Missed
 
-- No actual Tallyhub briefing was produced; it only listed what it needs (JD, resume, panel details) and described what it would write, so the 'prep me' request was deferred rather than delivered
-- Paystack draft contains placeholders ([date of screen?], [specific point from the screen?]), so it is not send-ready
-- Proposed tracker changes carry few explicit dates, and the tracker was not actually updated
-- Said the Paystack window closed 'about 4 weeks ago' while listing 35 days quiet; minor, but the figure is loosely stated
-- Ledgerline draft was added beyond the rubric but is mostly placeholders, so it adds little
+- Did not produce a Tallyhub panel briefing; it only listed the known facts and asked for the JD, resume and panel details. Prep was requested, and a generic but honest prep (likely question themes, questions to ask, logistics checklist) could have been given without inventing company facts
+- Tracker changes were only proposed in vague terms (set Quillbook to no-reply, add a follow_up_due column) with no dated values, and the tracker was not updated
+- Paystack draft contains unfilled placeholders ([date of screen?], [specific point from the screen?]), so it is not actually ready; the Ledgerline draft is mostly placeholders
+- Date framing inconsistent: the output says 'as of Fri 2026-11-13' and says the Paystack window closed 'about 4 weeks ago'. The 35 days is from last touch, not from the window closing, so the framing is slightly muddled
 
 ## Defects to fix in the skill
 
-- The skill's rule demanding a specific JD line and a 30-day deliverable in every follow-up draft leaves drafts full of placeholders when the tracker has no JD, so it should allow a clean, shorter draft that is usable without that material
-- The skill doesn't tell the agent to give a generic-but-useful panel prep (standard question themes, questions to ask, logistics checklist) when the JD and resume are missing, so the briefing was deferred entirely
-- The agent should be told to propose concrete dated tracker edits (e.g., next_action_date) rather than only asking for confirmation to change the schema
+- The skill's rule requiring a specific JD line and a 30-day deliverable per follow-up draft makes it produce placeholder-heavy drafts when the tracker lacks that data; it needs a fallback for a usable draft without them
+- The skill has no fallback for interview prep when no JD or resume is supplied; it should offer a generic structured briefing with explicit unknowns rather than deferring entirely
+- The skill did not look for or ask about a JD/resume file in the project directory before stopping to ask the user
+- The tracker schema mismatch is not handled; the skill proposes a migration instead of working with the existing columns and recording dated proposed edits
 
 ## What it did
 

@@ -1,8 +1,8 @@
 # insights-to-prompts: real-world run, 2026-11-13
 
-**Verdict: PARTIAL** (4/10). The run found no ~/.claude/usage-data report and produced zero rewrites, telling the user to run /insights; it did not fall back to the available session transcripts and its claim that Bash was denied is not supported by the transcript.
+**Verdict: PARTIAL** (4/10). The run checked for ~/.claude/usage-data, found it absent, told the user to run /insights, and produced zero rewrites, never reading the available session transcripts.
 
-Target: real Claude Code session files from this batch (no /insights report present). Run headless on sonnet in a clean project with only this skill installed (5 turns, 3 tool calls, 8 s, $0.06).
+Target: real Claude Code session files from this batch (no /insights report present). Run headless on sonnet in a clean project with only this skill installed (5 turns, 3 tool calls, 8 s, $0.08).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -23,22 +23,23 @@ Turn my Claude Code insights into better prompts: find the prompts that caused f
 
 ## Met
 
-- Checked for ~/.claude/usage-data and found none, then told the user to run /insights since it cannot run it itself
-- Invented no friction and no prompts
-- Did not rewrite prompts lacking evidence
+- Checked for the insights report (ls on ~/.claude/usage-data) and found none
+- Told the user to run /insights rather than trying to run it itself
+- Invented no friction and no rewritten prompts
+- No rewrites were made, so none lacked a session citation or rewrote a frictionless prompt
 
 ## Missed
 
-- Did not proceed on the transcripts even though the scenario provides real session files; it only offered this as an option dependent on the user, rather than doing it
-- Produced no rewrites, so there is nothing citing a session and its friction
-- Did not separate CLAUDE.md-rule fixes (harness-audit handoff) from prompt fixes, since no analysis was done
-- Claimed Bash was denied, but the transcript shows a Bash call was made (the ls) and no denial is shown; the digest script was never attempted, so the blocker is unsubstantiated
+- Did not proceed on what the transcripts show; the scenario says real session files exist, but the run only globbed **/* in the working directory and never looked at the session files, so it stopped instead of doing the fallback
+- Claimed Bash was denied in this session, but the transcript shows a Bash call (ls) that appears to have run and shown the directory missing; the stated blocker is not backed by the tool calls and looks unsupported
+- Produced no rewrites and no output file (prompt-rewrites.md), so the user's request was not fulfilled
+- Did not demonstrate separating CLAUDE.md-rule fixes (hand to harness-audit) from prompt fixes, since nothing was analyzed
 
 ## Defects to fix in the skill
 
-- The skill appears to treat a missing report.html as a near-terminal state instead of directing a fallback to session transcripts (e.g. running extract_insights.py or reading ~/.claude/projects directly)
-- The skill does not make clear the digest script should be tried regardless of the report, so the run stopped after one directory listing
-- The skill's fallback path does not state what to do when the script can't run (e.g. read the JSONL session files with Read/Glob)
+- The skill's fallback when report.html is absent is unclear or not strongly enforced: it should direct the agent to read session transcripts under ~/.claude/projects directly instead of stopping and asking the user to run /insights
+- The skill depends on Bash to run scripts/extract_insights.py, with no non-Bash fallback (e.g., Glob/Read on session JSONL files) when Bash is unavailable
+- The skill does not say to locate the session files in the project's .claude/projects directory, so the agent globbed the working directory and found nothing useful
 
 ## What it did
 

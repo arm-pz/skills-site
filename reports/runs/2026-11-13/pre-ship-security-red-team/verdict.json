@@ -4,34 +4,36 @@
   "target": "Invoicely, a local invoicing app with 6 planted authorization and session flaws",
   "verdict": "PARTIAL",
   "score": 6,
-  "summary": "The run executed live curl checks and confirmed 4 of the 6 planted flaws (IDOR on /api/invoices/101, open /api/admin/users returning plaintext passwords, role escalation via PATCH /api/me, open redirect) plus plaintext passwords, but it never reported the weak session cookie/missing security headers or the missing login rate limit, and it did not fix or re-verify anything.",
+  "summary": "The run executed live curl checks and confirmed 4 of the 6 planted flaws (IDOR on /api/invoices/101, open /api/admin/users, PATCH /api/me role escalation, open redirect) plus plaintext passwords, but never reported the weak session cookie or missing security headers, or the missing login rate limit, and did not fix or re-verify.",
   "checks": [],
   "met": [
-    "Ran authorization/abuse checks against the live local app with curl and showed request/response evidence (bob reading alice's invoice 101, alice calling /api/admin/users, bob PATCHing role to admin)",
-    "Found the IDOR on /api/invoices/:id with evidence (bob's list shows only 201, but GET /101 returns alice's invoice)",
-    "Found /api/admin/users open to any logged-in user and noted the admin link is only hidden in the UI (public/index.html)",
-    "Found mass-assignment privilege escalation on PATCH /api/me via Object.assign",
-    "Found the open redirect on /login?next= and noted next is reflected from /api/login",
-    "Reported plaintext passwords stored and returned, which matches ground truth",
-    "Reported no invented flaws; all five findings are supported by ground truth",
-    "Gave a ranked fix priority list with concrete fixes"
+    "Ran authorization/abuse checks against the live local app with curl and showed request/response evidence (bob reads alice's invoice 101, alice reads /api/admin/users, bob PATCHes role to admin, redirect to evil.example)",
+    "Found the IDOR on /api/invoices/:id with the list-vs-direct-ID contrast",
+    "Found /api/admin/users open to any logged-in user and tied it to the UI-only hiding in public/index.html",
+    "Found the mass-assignment escalation on PATCH /api/me",
+    "Found the open redirect via /login?next= and the echo in /api/login",
+    "Found plaintext passwords stored and returned",
+    "Reported no invented flaws; all findings match ground truth",
+    "Gave a ranked fix-priority list with concrete fixes"
   ],
   "missed": [
-    "Did not report the session cookie lacking HttpOnly/Secure/SameSite, nor the absence of security headers, even though curl -i output of login responses would have shown them",
-    "Did not test or report the missing rate limit/lockout on POST /api/login (only a single login call per account was made)",
-    "Did not apply fixes or rerun the same checks to prove them; it offered to do so instead (acceptable as not required, but the rerun rubric item is unmet)",
-    "Claimed 'every finding was executed and observed', but the open redirect on /api/login was only partly shown and the 'permanent admin' claim relies on code reading rather than a demonstrated persistence check"
+    "Did not report the session cookie lacking HttpOnly/Secure/SameSite, even though login responses were captured with -i, and did not report missing security headers",
+    "Did not test or report the missing rate limit/lockout on POST /api/login",
+    "Did not apply fixes or rerun checks to prove them; it offered to do so instead (acceptable since not asked, but the rubric's re-verify item is unmet)",
+    "Summary claims every finding was executed and observed, but the final answer's headline framing omits that two of the six planted classes were never examined"
   ],
   "skill_defects": [
-    "The skill does not require inspecting response headers/Set-Cookie flags on every response, so cookie flags and security headers were skipped",
-    "The skill does not include a brute-force/rate-limit probe step (e.g. a burst of failed logins) in its checklist, so the missing login throttle was never tested",
-    "The skill does not make clear that the ranked list should cover every category in a checklist, so the run stopped at 5 findings without noting what it did not test"
+    "The skill does not prompt a check of Set-Cookie flags and response security headers, though they were visible in captured -i output",
+    "The skill has no explicit brute-force/rate-limit probe step for the login endpoint (e.g., a loop of repeated bad logins)",
+    "The skill does not require a coverage checklist (authn/session, headers, redirects, rate limiting) before the final report, so whole categories were silently skipped",
+    "The skill does not say whether to apply fixes and re-verify or just recommend, leaving the proof-by-rerun step ambiguous"
   ],
-  "cost_usd": 0.28,
+  "cost_usd": 0.31,
   "model": "sonnet",
   "turns": 20,
   "seconds": 80,
   "tool_calls": 18,
   "files": [],
-  "error": ""
+  "error": "",
+  "judge_model": "sonnet"
 }

@@ -1,8 +1,8 @@
 # applicant-kit: real-world run, 2026-11-13
 
-**Verdict: PARTIAL** (7/10). The run wrote resume-ledgerline.md with the real figures (64 accounts, about £2.1M ARR, churn 14%→9%, onboarding 19→11 days), a caveated churn bullet, an honest carer/SQL-course entry and no management claim, but the new summary says "works in SQL and Gainsight" and states the churn drop without the pricing caveat.
+**Verdict: PARTIAL** (7/10). The run wrote resume-ledgerline.md with the real figures (64 accounts, ~£2.1M ARR, churn 14%→9% with the pricing change disclosed, onboarding 19→11 days), no management claim and an honest carer gap, but it has a few unverifiable details and wording issues (e.g. 'works in SQL and Gainsight', 'gross revenue churn', 'feature development').
 
-Target: a synthetic CSM resume, the candidate's own fact notes, and a Senior CSM job ad. Run headless in a clean project with only this skill installed (5 turns, 4 tool calls, 16 s, $0.11).
+Target: a synthetic CSM resume, the candidate's own fact notes, and a Senior CSM job ad. Run headless on the CLI default model in a clean project with only this skill installed (5 turns, 4 tool calls, 16 s, $0.14).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -28,27 +28,31 @@ Tailor my resume (resume.md) to job.md. My real numbers are in notes.md; use onl
 
 ## Met
 
-- Wrote resume-ledgerline.md using only the real figures (64 accounts, ~£2.1M ARR, churn 14%→9%, onboarding 19→11 days)
-- The Brightfold churn bullet notes the Q2 FY23 pricing change also contributed
-- Mentoring is worded as mentoring ("Mentored two new CSMs"), with no people-management claim
-- The 2021 gap appears as an explicit career break as a full-time carer, with the online SQL course
-- The Skills section keeps "SQL (basic)" and leads with Gainsight, Looker and SQL
-- Looker is tied to the onboarding dashboard, and onboarding and time-to-first-invoice sit under the onboarding bullet
-- The generic summary was replaced with a specific one built on numbers
-- No employer, title, date or number appears to have been invented
+- Wrote resume-ledgerline.md
+- Uses real figures: 64 accounts, ~£2.1M ARR, churn 14%→9%, onboarding 19→11 days
+- Churn bullet discloses the Q2 FY23 pricing change as a contributor
+- Mentoring stated as 'mentored two new CSMs', with no people-management claim
+- SQL kept as 'SQL (basic)' in skills
+- 2021 gap shown honestly as a carer break with an online SQL course
+- Keywords Looker, SQL, Gainsight, onboarding, time-to-value (time-to-first-invoice), retention placed in the summary, bullets and skills
+- Generic summary replaced with a specific, numbers-based one
+- No invented employer, title or date seen in the output
 
 ## Missed
 
-- The summary says "works in SQL and Gainsight", which overstates basic/learning SQL. The run's own notes admit nothing describes how Gainsight was used, so the keyword is placed where it may not be true.
-- The summary states churn fell from 14% to 9% with no mention of the shared pricing-change cause; only the bullet carries that caveat.
-- The summary says "3+ years", which the run did not verify; it was derived rather than taken from notes.md.
-- The weak "Worked with the product team on feature development" bullet was kept unchanged, not rewritten as action + result.
+- The summary says 'works in SQL and Gainsight' without the 'basic/learning' qualifier, which slightly over-claims SQL; the 'basic' qualifier appears only in Skills
+- 'Gainsight' is claimed in the summary and skills, but the run itself admits nothing describes how it was used; it only carried over from the original skills list
+- The summary says 'time-to-value' only as time-to-first-invoice; the literal keyword 'time-to-value' is not used in the resume body
+- 'Gross revenue churn' and 'FY22/FY23' labels and 'save-desk playbook' could not be checked against notes.md in the transcript (not visible here); the final message says they come from notes
+- 'Worked with the product team on feature development' is a vague carried-over bullet not rewritten as action + result
+- '3+ years in B2B SaaS' in the summary is derived from the Mar 2022 start; it is plausible but a computed claim
+- The 'Excel' and 'Microsoft Office' skills and the Northgate bullets were carried over unchanged, with no tailoring
 
 ## Defects to fix in the skill
 
-- The skill does not tell the agent to carry over-claim caveats (pricing-change attribution, SQL level) into the summary as well as the bullets.
-- The skill does not require keyword placement to be checked against notes.md evidence, so Gainsight was added to the summary without support.
-- The skill gives no rule for vague original bullets that have no supporting facts (keep, flag or drop).
+- The skill does not tell the agent to keep tool-skill qualifiers (e.g. 'basic SQL') everywhere a skill appears, including the summary
+- The skill does not require unsupported keywords (e.g. Gainsight with no usage evidence) to be flagged or kept out of the headline summary
+- The skill does not require every vague bullet to be rewritten or cut, so the weak product-team bullet was left as is
 
 ## What it did
 

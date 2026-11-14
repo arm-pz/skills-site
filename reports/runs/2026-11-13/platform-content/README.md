@@ -1,8 +1,8 @@
 # platform-content: real-world run, 2026-11-13
 
-**Verdict: PARTIAL** (7/10). The run produced one LinkedIn post and a 6-post X thread, each with a hook, body and a 14-day no-card trial CTA, and both use the 3.5→1 day (n=24) figure and the attributed Stackwise quote. But the LinkedIn post names QuickBooks despite the output saying it was left out, and a few unsourced or generic claims were added.
+**Verdict: PARTIAL** (6/10). The run produced a LinkedIn post and a 6-post X thread, each with a hook, body and a 14-day no-card trial CTA, and it attributed the 3.5→1 day figure (n=24) and the Stackwise quote. It left out the 31-customer proof, put QuickBooks in the copy despite saying it had left it out, and added unsourced claims.
 
-Target: a real-shaped B2B fintech product brief with claims it must not make. Run headless in a clean project with only this skill installed (4 turns, 2 tool calls, 23 s, $0.16).
+Target: a real-shaped B2B fintech product brief with claims it must not make. Run headless on the CLI default model in a clean project with only this skill installed (4 turns, 2 tool calls, 23 s, $0.19).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -24,27 +24,30 @@ Using brief.md, write me a LinkedIn post and a 6-post X thread to promote Reconc
 
 ## Met
 
-- LinkedIn post and a 6-post thread were delivered, each with hook, body and a trial CTA (14-day free trial, no card, trial link placeholder)
-- Platform-native structure: the LinkedIn hook is two lines before 'see more' and the body has short lines; the thread is numbered 1/–6/, with each post short and the CTA last
-- Proof is attributed: '3.5 to 1 day' is labelled as the onboarding survey (n=24), and the quote is credited to Hana Ito, Finance Lead, Stackwise
-- No SOC 2 or AI claims appear in either asset
-- Voice is plain, specific and dry, with a free tip in thread post 4 and no hype
-- Gaps are flagged (missing links, baselines, quote approval for social use)
+- LinkedIn post and a 6-post thread are both delivered, each with a hook, body and a trial CTA
+- The 3.5→1 day median is labelled as coming from the onboarding survey (n=24) in both assets
+- The Hana Ito / Stackwise quote is attributed by name, title and company in both assets
+- No SOC 2 or AI claims appear anywhere
+- The platform formatting is mostly native: the LinkedIn post has a two-line hook and short paragraphs, and the thread posts are numbered and short
+- The voice is plain and dry, with no hype
+- Missing links and baselines are flagged as placeholders rather than invented
 
 ## Missed
 
-- The LinkedIn post says 'It doesn't have a QuickBooks integration yet'. This puts QuickBooks in the copy even though the assumptions line claims it was left out. It is a negation rather than a false claim, but it contradicts the run's own statement and may breach a brief that says not to mention it.
-- The hook of both assets states '2–4 days' as typical for UK SaaS companies. The transcript does not show where this comes from, so it is an unverified general statistic unless the brief supplies it.
-- The LinkedIn test note adds 'commonly reported that LinkedIn may reach fewer people with posts that contain external links', which is not sourced from the brief.
-- The thread's 'mismatches surface weeks later' and similar pain-point claims are asserted as fact, not as brief-backed proof.
-- The '🧵' emoji in thread post 1 sits slightly off a dry voice.
-- Extra material was added beyond the request (comment variant, test plans, GAPS, sales-copy handoff), which dilutes the two deliverables.
+- The 31-customer proof point is not used in either asset; it appears only in the GAPS note
+- QuickBooks is named in the LinkedIn copy ('doesn't have a QuickBooks integration yet'), while the assumptions line says QuickBooks was left out, so the output misreports its own content; the brief may have wanted it left out entirely
+- The hooks and body use stats and claims that look like they are not in the brief: 'most UK SaaS companies take 2–4 days', 'mismatches go unnoticed for weeks', and the Stripe fee, refund and partial-payment explanations
+- The comment variant refers to a 'month-end checklist' that may not exist, which would be an invented asset
+- Thread numbering is '1/' to '6/' with no '/6' total, and the 🧵 emoji may clash with the dry voice
+- Heavy extras (TEST blocks, comment variant, next-step upsell) pad the deliverable beyond the request
+- The tip in post 4 is invented generic advice rather than brief-based content
 
 ## Defects to fix in the skill
 
-- The skill does not tell the agent to scan finished copy for forbidden terms. Negated mentions such as 'no QuickBooks integration' slip through while the output says the term was omitted.
-- The skill does not require that general claims, such as typical close times and 'weeks later' discovery, trace to the brief's proof. Unsourced stats and platform-reach claims get included.
-- The output template adds TEST, GAPS and variant sections by default. These bloat a two-asset request and add unsourced statements.
+- The skill does not force a check that every statistic and claim in the copy traces to the brief, so it let generic industry claims such as '2–4 days' through
+- It does not require using every approved proof point (31 customers) or explicitly listing which ones were used
+- It lets the model mention forbidden-topic terms such as QuickBooks in copy, and the assumptions statement can contradict the output
+- It encourages speculative extras (comment variants, referenced lead magnets) that can invent assets not in the brief
 
 ## What it did
 

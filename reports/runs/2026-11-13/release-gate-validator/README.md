@@ -1,8 +1,8 @@
 # release-gate-validator: real-world run, 2026-11-13
 
-**Verdict: PARTIAL** (4/10). The agent ran nothing against the target and reported HOLD, but redteam/ was empty so the ingester exited 2 (NOT-INGESTABLE), and it never recorded the preflight or perf lanes or ran check_gate.mjs, so HOLD was not computed by the script.
+**Verdict: PARTIAL** (4/10). The run ingested nothing because redteam/ was empty and gate_ingest.mjs exited 2 with NOT-INGESTABLE; the final answer says HOLD and lists red-team absent, preflight PASS WITH FIXES and perf not measured, but check_gate.mjs was never run and nothing was written to .release-gate/.
 
-Target: the saved results of a real red-team run on Invoicely, plus pasted preflight and performance tables. Run headless on sonnet in a clean project with only this skill installed (6 turns, 4 tool calls, 15 s, $0.08).
+Target: the saved results of a real red-team run on Invoicely, plus pasted preflight and performance tables. Run headless on sonnet in a clean project with only this skill installed (6 turns, 4 tool calls, 15 s, $0.11).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -24,25 +24,25 @@ We already ran the three pre-launch passes on Invoicely. The red team's run dire
 
 ## Met
 
-- Ran nothing against a target; only listed directories, read git HEAD, and ran the local ingest script
-- Final posture is HOLD, which satisfies the hard check
-- Reported preflight as PASS WITH FIXES on 127.0.0.1:3100, with no TLS and no security headers
-- Reported perf as not measured rather than omitting it
-- Named reasons for HOLD: red-team lane absent and perf unmeasured
+- Ran nothing against a target: the only calls were ls, git rev-parse and the local ingest script, and the answer says nothing was re-run.
+- Final posture is HOLD, which satisfies the hard check.
+- The answer reports the preflight verdict as PASS WITH FIXES on 127.0.0.1:3100 with its caveats, and perf as 'Not measured', so neither lane is omitted.
+- It does not invent a red-team verdict and states that nothing on disk backs the claim that the pass ran.
 
 ## Missed
 
-- Red-team table was not ingested: redteam/ had no results/ or group-*.md files, so the ingester returned NOT-INGESTABLE
-- HOLD was not computed with the script: check_gate.mjs was never run and nothing was written to .release-gate/, so the posture was asserted by the agent
-- The pasted preflight verdict and the perf not-measured state were shown only in chat and never recorded into the gate store
-- The stated reason for HOLD centers on missing evidence rather than critical red-team findings, since no findings were ingested
-- The agent asked the user for more input (run directory, verbatim preflight, commit) instead of recording the lanes it already had
+- The red-team table was not ingested from disk: redteam/ was empty and the ingester exited NOT-INGESTABLE. This is mostly an environment problem, but the item is still unmet.
+- HOLD was not computed with the script: check_gate.mjs was never run, and the answer says 'I couldn't compute it with the script' while still stating HOLD as the posture.
+- The preflight verdict and the perf not-measured state were only written in chat; no lane records were saved to .release-gate/, so they were not recorded through the tooling.
+- The reasons for HOLD name the missing red-team evidence and unmeasured perf, but they come from the agent's own reasoning rather than a script output; 'critical red-team findings' were never established.
+- It asked the user for the commit hash, finding rows and a check_results exit code instead of recording the information it was given.
 
 ## Defects to fix in the skill
 
-- The skill gives no path for an absent or non-ingestable red-team lane: the agent should still record that lane as absent, record the pasted preflight verbatim and perf as not-measured, and run check_gate.mjs so HOLD comes from the script
-- The skill does not say that a missing commit or missing per-finding rows should not block recording lanes, so the agent stopped at asking the user questions
-- The skill does not say how to locate or fall back when the user-supplied run directory is empty, such as checking .pre-ship-red-team/ for the run
+- The skill has no defined path for when the red-team lane is NOT-INGESTABLE. It should still record the pasted preflight and perf lanes, mark app-tests as absent, and run check_gate.mjs so HOLD comes from the script.
+- The skill does not make clear that gate_ingest.mjs failing on one lane must not stop the other lanes from being recorded or the gate from being computed.
+- The agent had to ask for the preflight commit hash and extra inputs (check_results exit code, finding rows) that the user's prompt didn't supply; the skill should say how to proceed with unknown or defaulted values instead of skipping the write.
+- The skill lets the agent report a posture while saying the script was not used, so the final answer can contradict the requirement that the posture be script-computed.
 
 ## What it did
 

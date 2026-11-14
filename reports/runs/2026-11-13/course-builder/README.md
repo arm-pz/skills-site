@@ -1,8 +1,8 @@
 # course-builder: real-world run, 2026-11-13
 
-**Verdict: PARTIAL** (7/10). The run wrote a 6-module, 12-hour SQL course.json with 6 outcomes and a 2-criterion rubric, ran check_course.py once and reported 0 FAIL/0 WARN, but never fixed anything and left some coverage gaps.
+**Verdict: PARTIAL** (7/10). The run wrote course.json with 6 outcomes and 6 two-hour modules (12 of 12 hours) and ran check_course.py, which reported 0 FAIL and 0 WARN, but O4 and O5 are each taught and assessed only once and the rubric's levels are unlabeled.
 
-Target: a 6-week SQL evening workshop for customer success managers. Run headless in a clean project with only this skill installed (6 turns, 4 tool calls, 31 s, $0.14).
+Target: a 6-week SQL evening workshop for customer success managers. Run headless on the CLI default model in a clean project with only this skill installed (6 turns, 4 tool calls, 31 s, $0.17).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -26,27 +26,26 @@ Design a 6-week evening workshop teaching SQL to 12 customer success managers (2
 
 ## Met
 
-- Outcomes use measurable verbs (write, calculate, combine, translate, diagnose, build); none use 'understand' or 'know'
-- Linear module sequence M1-M6 with prerequisites, 2 hours each, totalling 12 hours
-- Every outcome appears in a module and in an assessment; O4 is assessed in M2 and O1-O3 are assessed in M1-M3
-- Activities and data use CS contexts: accounts, tickets, usage, renewals, health scores, renewal risk
-- Includes a rubric with Correctness and Explanation criteria and three levels each
-- Hard checks satisfied: course.json exists and check_course.py was run and reported passing
+- Outcomes are measurable: they use verbs like write, calculate, combine, translate, diagnose and build, with none of 'understand' or 'know'
+- Module sequence M1 to M6 has a linear prerequisite chain and hours sum to 12, matching budget_hours
+- Every outcome O1 to O6 appears in at least one module and in at least one assessment, plus the final
+- Activities use CS data: accounts, tickets, usage, renewal risk, health score, and a 'high ticket volume and falling usage' question
+- A rubric is included with two criteria (Correctness, Explanation), each with three levels
+- Ran check_course.py on the file; the final output reports 0 FAIL and 0 WARN. The run made only one checker call, so no fix cycle was needed or shown
 
 ## Missed
 
-- The checker was run once and came back clean, so there was no 'fix what it finds' step; the run only shows a pass, not a fix
-- The rubric is thin: only two criteria, with no scoring weights, and levels are unlabeled (no names or points); it does not cover outcomes like Looker mapping (O4) or debugging (O5)
-- The M6 capstone lists O1, O2, O3 and O6 but its assessment covers only O6, and the rubric does not score O1-O3 directly
-- Some outcomes are taught but assessed only in the final or thinly: O5 is covered by M4's assessment, but the rubric does not grade it, and O4 depends on a short note
-- The practice dataset is referenced throughout but was not built; the final message admits this and defers it
-- The final message states the dialect and homework as open questions, leaving key design inputs assumed rather than set
+- The rubric's levels are bare strings with no names or scores (e.g. Proficient/Developing), and it has only two criteria, so it cannot grade O3, O4 or O5 directly
+- M6 lists O1, O2, O3 and O6 but assesses only O6, so the capstone does not independently assess the others; O4 is assessed only in M2 and O5 only in M4, with thin practice in between
+- The checker's output was never shown in the transcript; the 0 FAIL / 0 WARN claim comes from the final message, not from visible tool output
+- The practice dataset was not built and the dialect was left unspecified, so the activities depend on data that does not exist yet (disclosed in the output)
+- The final-assessment bundle (capstone, Looker mapping, bug fix in a colleague's query, spoken walkthrough) has no rubric criteria for the Looker mapping or the debugging component
 
 ## Defects to fix in the skill
 
-- The skill does not require rubric criteria to map to each outcome, so the rubric can omit O1-O5 while the checker still passes
-- The checker passes a module that lists outcomes in its teaching but assesses only a subset, so assessment gaps within a module are not flagged
-- Nothing in the skill prompts building or specifying the practice dataset, even though every activity depends on it
+- The skill does not require rubric levels to be labeled or scored, nor that the rubric criteria cover every outcome
+- The skill does not require that outcomes listed in a capstone module are assessed in that module, so M6 lists four outcomes and assesses one
+- The skill does not require the checker's output to be echoed or quoted, so the run's pass claim is unverifiable from the transcript
 
 ## What it did
 

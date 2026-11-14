@@ -1,8 +1,8 @@
 # pre-ship-performance-audit: real-world run, 2026-11-13
 
-**Verdict: PARTIAL** (5/10). The run took 3 Lighthouse mobile baselines and 3 after-runs and fixed render-blocking, font, compression and the N+1 (936→32 ms, FCP 4842→1457 ms, score 36→48), but left the 6.4 MB hero and 450 ms busy-wait unfixed and LCP stayed ~33 s.
+**Verdict: PARTIAL** (5/10). The run took 3 Lighthouse mobile runs before and after (score 36→48, FCP 4,842→1,457 ms, /api/stats 936→32 ms) and fixed the blocking script/font, compression and the N+1 API, but left the 6.4 MB hero image and the 450 ms busy-wait unfixed (LCP still ~33 s).
 
-Target: Ledgerboard, a local marketing page and stats API with 6 planted slow-downs. Run headless on sonnet in a clean project with only this skill installed (37 turns, 34 tool calls, 719 s, $0.58).
+Target: Ledgerboard, a local marketing page and stats API with 6 planted slow-downs. Run headless on sonnet in a clean project with only this skill installed (37 turns, 34 tool calls, 719 s, $0.62).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -23,28 +23,29 @@ Ledgerboard launches next week and feels slow. It's running locally at http://12
 
 ## Met
 
-- Measured a Lighthouse mobile baseline with 3 repeated runs before changing anything, reported real numbers, and did not invent any
-- Found the hero image (6.4 MB PNG), synchronous app.js with the 450 ms busy-wait, the 9-weight blocking font, no-store/no compression, and the N+1 in /api/stats
-- Re-measured after with the same protocol (3 Lighthouse mobile runs, same version) and reported medians with the run-to-run spread
-- Was candid about what was not fixed, the mistaken `kill 1`, the stale pid file, that caching isn't measured by Lighthouse, and that the font and fix effects weren't isolated
-- Did not remove features
+- Measured a Lighthouse mobile baseline with 3 repeated runs before changing anything, using real numbers, not invented ones
+- Found the main planted issues: 6 MB hero PNG, synchronous render-blocking app.js with busy-wait, 9-weight blocking font, no-store/no compression, and the N+1 /api/stats
+- Re-measured with the same protocol (3 Lighthouse mobile runs, same version and Chrome) and reported before/after medians with run-to-run spread
+- Was candid about what was unmeasured or not done: curl used for the API timing, repeat-visit caching not measured by Lighthouse, deferral and font changes not isolated, hero not fixed, no real network/database
+- Did not remove features; fixes were deferral, font trimming, gzip, cache headers and concurrent queries
 
 ## Missed
 
-- Hero image was not actually fixed (only width/height/fetchpriority added); the main bottleneck remained, LCP ~33 s. The first conversion attempt was denied and no alternative converter was tried
-- The 450 ms busy-wait was not addressed; TBT unchanged at ~1.79 s
-- The N+1 was fixed by running the 31 queries concurrently rather than one grouped query, which the ground truth expected; also the /api/stats claim rests on a single curl, not the same Lighthouse protocol
-- The late client-side stats fetch (item 6) was not identified or addressed
-- Did not clearly state that there was no real network/throttling limitation beyond mentioning simulated defaults; it did not check or disclose whether the Google Fonts request actually worked offline in the Lighthouse runs (it probed but the final report doesn't say)
-- Skipped the skill's subagent audit and finished with the server left stopped, so the site isn't running
+- The 6 MB hero image was not fixed: the ImageMagick convert was denied and no alternative (e.g. Node-based resizing) was tried, so LCP stayed ~33 s
+- The 450 ms busy-wait in app.js was left untouched, so TBT is unchanged at ~1,790 ms
+- /api/stats was made concurrent (Promise.all-style) rather than one grouped query as the ground truth specifies, and it was said to be unfixable without a real database; the 31 queries remain
+- Did not lazy-load or use responsive sizes or a modern format for the hero; only added width/height and fetchpriority
+- The client-side late stats fetch (item 6) was not addressed or identified as a finding
+- Font fix was not independently proven; it was bundled with the defer change, and the font stylesheet could not be loaded offline so its real effect is unmeasured
+- Left the server stopped and a stale .server.pid, and killed the wrong process (kill 1) by mistake, although this was disclosed
 
 ## Defects to fix in the skill
 
-- Skill does not give a fallback path when the preferred image converter is denied (e.g. try sharp/node/python PIL, or ask for approval up front), so the largest win was left undone
-- Skill lets the run stop at 'open' for the dominant bottleneck instead of requiring an alternative attempt or a concrete resolved plan
-- Skill does not tell the agent to prefer a grouped query over concurrent queries for N+1, nor to verify the N+1 fix under the same Lighthouse protocol
-- Skill does not require a statement about network/font availability limits (offline fonts, simulated throttling) in the report
-- Skill's server-restart guidance led to a foreground/background process that timed out and left the app not running
+- The skill doesn't tell the agent to try fallback image tools (Node sharp, pure-JS encoders, or ffmpeg) when ImageMagick is denied, so the highest-impact fix was abandoned
+- The skill doesn't require fixing or at least attempting the top bottleneck before reporting, so the run finished with LCP essentially unchanged
+- The skill doesn't require one change per measurement, so the defer and font changes were bundled and can't be attributed separately
+- The skill doesn't guide server lifecycle handling (running the server detached with a recorded PID), which led to the wrong kill and a server that timed out and left nothing running
+- The skill lacks guidance for the N+1 case, where the fix is a single grouped query rather than concurrency, and for a busy-wait that should be split or deferred
 
 ## Ground truth
 

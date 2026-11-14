@@ -1,8 +1,8 @@
 # ai-team-blueprint: real-world run, 2026-11-13
 
-**Verdict: PARTIAL** (7/10). The run asked five questions first, recommended the receipt/statement chase, and wrote a 3-agent blueprint with prompts, approval gates, a QA plan and a 7-day plan, but its price figures are unsupported estimates and it did not ask again after the user's answers left the setup-time question unanswered.
+**Verdict: PARTIAL** (7/10). The run asked five questions, picked missing-records chasing, and wrote a 3-agent blueprint with prompts, workflow, QA and a 7-day plan, but the tool costs are unsupported estimates and the user's follow-up answers were not clearly reflected in the first turn.
 
-Target: a 2-person accounting practice that wants an AI team. Run headless in a clean project with only this skill installed (7 turns, 3 tool calls, 75 s, $0.32).
+Target: a 2-person accounting practice that wants an AI team. Run headless on the CLI default model in a clean project with only this skill installed (7 turns, 3 tool calls, 75 s, $0.37).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -37,28 +37,26 @@ Those are all my answers. Go ahead and deliver the full blueprint now.
 
 ## Met
 
-- Asked five sharp questions before designing and stopped to wait for answers
-- Recommended one starting use case (missing-records chase) matching the user's 25-hour receipt/statement chasing answer, with a comparison against two alternatives
-- Delivered 3 agents, each with a production XML-style prompt, plus a handoff workflow with three partner review points and a retry cap
-- Respected the approval constraint: every prompt escalates before sending, agents never send or write to Xero, and the workflow has partner approval before any email
-- Stayed within the £200 budget: tool stack totals about £50–£100/month
-- Included a QA plan (failure modes, pre-launch tests, metrics) and a 7-day launch plan with a START HERE FIRST section
-- Flagged UK GDPR and data minimisation, and told the user to enter credentials in the tool's own connection screen, not in chat
+- Asked about five sharp questions before designing and stopped for answers
+- Recommended one starting use case (missing receipt/statement chasing) matching the user's answers, with a comparison against alternatives
+- Delivered 3 agents, each with a structured production prompt, plus a handoff workflow with review points
+- Human-approval constraint is built into every agent's escalate block and three workflow review points; agents never send or write to Xero
+- Included a QA plan with failure modes, pre-launch tests and metrics, and a 7-day launch plan with a START HERE FIRST section
+- Tool stack total (about £50-£100/month) stays under the £200 budget and Make/Zapier is deferred to week 2+
 
 ## Missed
 
-- Tool prices are invented estimates (Claude about £20–£30 per seat, Make/Zapier about £10–£30/month, total £50–£100) with no source; the final message only says 'check current pricing'
-- Claimed Make or Zapier can pull Xero/Dext exports and create Gmail drafts, and that Claude Projects can be set up per agent, without verifying these capabilities
-- The 'realistic saving of 12–18 of those 25 hours' and the 'under 12 hours by month 3' target are not grounded in anything the user said
-- Setup/review time was never answered by the user; the run assumed 3 hrs/week and 2–3 hrs/week instead of asking again, though it did state the assumption
-- The assumed Dext matching and 'Xero bank transactions with attachment status' export formats are asserted without support
+- Cost figures (Claude about £20-£30 per seat, Make/Zapier about £10-£30/month) are stated without any source or lookup. The final summary says to check current pricing, but the blueprint file presents them as tiers. This is borderline invented pricing.
+- Claims about Claude Projects, a 'shared team plan', and Make/Zapier creating Gmail drafts without sending are asserted as features without verification
+- The claim of a realistic saving of 12-18 of the 25 hours is an unsupported estimate
+- The questions asked did not match the later answers' framing (e.g. it asked about use case and skills, which the user then answered in a different form), and the comparison table claimed Dext/Xero bank rules already cover categorisation without support
+- The assumed setup time of 3 hrs/week was invented because the user never gave it, though it was disclosed as an assumption
 
 ## Defects to fix in the skill
 
-- The skill does not tell the agent to label tool prices as unverified or to avoid numeric price ranges when it cannot check current pricing
-- The skill does not require the agent to confirm that a proposed integration (e.g. Make/Zapier with Xero, Dext, Gmail drafts) actually exists, or to present it as a thing to verify
-- The skill does not require the 'sharp questions' to be re-asked when a follow-up leaves some unanswered (here, setup hours and the 90-day outcome); the run silently substituted assumptions
-- The skill does not ask for impact estimates (hours saved) to be labelled as assumptions rather than predictions
+- The template pushes specific cost tiers and per-seat prices without a rule to say 'verify current pricing' inside the deliverable itself, so the blueprint file carries unsupported prices
+- No instruction to avoid asserting integration capabilities (Make creating Gmail drafts, Claude Projects team plans) unless verified or flagged as needing confirmation
+- The skill's questions can overlap with what the user volunteers, and it lacks a step to reconcile the user's actual numbered answers with the question list before comparing use cases
 
 ## What it did
 

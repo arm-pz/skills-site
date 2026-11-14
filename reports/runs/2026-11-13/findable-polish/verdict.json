@@ -4,7 +4,7 @@
   "target": "the README of arm-pz/seo-polish against live searches",
   "verdict": "PARTIAL",
   "score": 4,
-  "summary": "The run read the README and SKILL.md and wrote a 7-problem findability report with 2-3 rewrite options each, but it ran zero live searches, so it never checked where the repo appears; the query table is guesses.",
+  "summary": "The run wrote findable-report.md with 7 README findings, each with 2-3 rewrite options and nothing pushed, but it ran no live searches, so it never reported whether the repo appears in any result.",
   "checks": [
     {
       "desc": "wrote findable-report.md",
@@ -13,24 +13,23 @@
     }
   ],
   "met": [
-    "Names concrete gaps in the README: no 'agent skill' or 'Claude Code' wording, a dense ~90-word opening sentence, wordsmith missing from the README and Install, no output example",
-    "Gives 2-3 alternatives per finding and flags where a fact is unknown (the wordsmith install command, whether 'other coding agents' is true) rather than guessing",
-    "Pushes nothing; the report and final message both say the target was not edited and nothing was pushed",
-    "Wrote findable-report.md (hard check)"
+    "Names concrete gaps in the README: no platform named (never says 'agent skill' or 'Claude Code'), a dense ~90-word opening sentence, dependencies (seo-crawl, wordsmith) missing from Install, no example output",
+    "Gives 2-3 alternatives per finding, and mostly invents no facts about the skill; it flags that 'other coding agents' and wordsmith's install command are unverified",
+    "Pushes nothing: no git push was made and target/ was not edited",
+    "Wrote findable-report.md (hard check passed)"
   ],
   "missed": [
-    "Runs real searches and reports where the repo does or does not appear: no search tool was called, and the report admits the queries and rankings are untested guesses",
-    "The report's own table of 'does the README match it today' is a read of the README, not live search results",
-    "The single Bash call (git remote, git log, ls) was denied, so the About text and topics were never read; the About options are drafted blind",
-    "The 'Does not push' item is met, but some alternatives carry invented specifics, such as the 68/57/55-char title example and the 'Free Shipping' copy; the report does label this as illustrative"
+    "Did not run real searches: there was no WebSearch or fetch call, so the report never says where the repo does or does not appear. The queries table only says whether the README text matches each query, and the report admits rankings are untested",
+    "The git remote / About / topics check failed: the Bash call was reported denied, so the About and topics were drafted from scratch with no look at the actual repo metadata",
+    "Some option text goes beyond what the skill documents: the draft About and lead lines describe a 'crawl your site' and 'ready-to-paste' output, and the before/after title example uses invented sample numbers (68 chars, Acme). The Acme example is labeled illustrative, which limits the harm",
+    "The 'same-name collision' claim for seo-polish is asserted as 'likely' with no search evidence"
   ],
   "skill_defects": [
-    "The skill does not make live searching a required step with a fallback, so the run finished without any search evidence and still produced a full report",
-    "There is no instruction to retrieve About text and topics through a path that does not need a shell (for example fetching the GitHub page), so a denied Bash call left that part blind",
-    "The skill does not require the report to state that the 'where it appears' section is empty when no searches ran, and it does not stop the run from presenting an untested query table as an audit",
-    "The skill does not require example copy to stay free of invented numbers and details, so an illustrative before/after with made-up character counts slipped in"
+    "The skill does not make live searching a hard, non-skippable step. The run substituted an unverified guess table and carried on without any search evidence",
+    "No fallback is specified when the shell or web tools are denied: the skill should say to try WebSearch/WebFetch, or to stop and say plainly that the core deliverable is missing, instead of writing a full report built on guesses",
+    "It does not require the report to state the repo's actual search position per query (found / not found / rank), so a report with no search results can still look complete"
   ],
-  "cost_usd": 0.16,
+  "cost_usd": 0.2,
   "turns": 8,
   "seconds": 39,
   "tool_calls": 6,
@@ -41,5 +40,6 @@
     "target/README.md",
     "target/SKILL.md"
   ],
-  "error": ""
+  "error": "",
+  "judge_model": "sonnet"
 }

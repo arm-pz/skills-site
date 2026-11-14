@@ -4,7 +4,7 @@
   "target": "skillsmith.tech (sitemap fallback, no Search Console)",
   "verdict": "PARTIAL",
   "score": 5,
-  "summary": "The run wrote resolution.md with an ownership map and rewrites for all four tune-* pages (titles 42-50 chars, metas 150-153), but it never captured the live current titles, H1s or metas, so it has no real 'before' text and says so.",
+  "summary": "The run wrote resolution.md with an ownership map and rewrites for all four tune-* pages (titles \u226460, metas \u2264155) and named the sitemap fallback, but it never obtained the live current titles, H1s or descriptions, so no real 'before' text is shown.",
   "checks": [
     {
       "desc": "wrote resolution.md",
@@ -13,29 +13,29 @@
     }
   ],
   "met": [
-    "Ownership map (owner/others-must table plus three conflicts) is settled before the Rewrites section.",
-    "One distinct query theme per page, grounded in what each skill does: auditor, pre-push gate mod, fix-then-polish workflow, release workflow.",
-    "Recommended rewritten titles are all \u226460 chars (46, 50, 42, 48) and metas \u2264160 (150-153); the four H1s are distinct.",
-    "Invents no search data; states the no-Search Console fallback and gives ownership by semantic fit, not clicks."
+    "Ownership map (one query, one owner) with conflicts is settled before the Rewrites section",
+    "One distinct query theme per page, grounded in each page's function (validator, pre-push mod, fix-then-polish workflow, release workflow)",
+    "Rewritten titles are all \u226460 chars (46, 50, 42, 48) and metas \u2264155 chars (150-153); H1s are distinct across the four pages",
+    "Names the sitemap/pre-GSC fallback and invents no search data (no clicks/impressions claimed; recommends GSC re-check)"
   ],
   "missed": [
-    "The 'before' is not the live current text. The file says current titles/meta for three pages are unknown and gives only a guessed H1 for /tune-skill/. The ground truth has them: /tune-skill/ title 'tune-skill \u2014 Audit and Fine-Tune an Existing Agent Skill' (56); /tune-skill-mod/ 'Tune Skill Mod \u2014 Claude Code mod' (32), H1 'Tune Skill Mod'; /tune-and-polish/ title 59 chars, H1 'Make it fire. Then make it findable.'; /tune-and-ship/ title 56 chars, H1 'Tune And Ship'.",
-    "The curl Bash call to read the head tags was denied and was not retried by another route. The run left the user to grep the live head themselves.",
-    "The fallback is named as 'keyword-guard pre-GSC fallback (sitemap + page content)', but the sitemap was never actually used for evidence of the pages' current state.",
-    "The /tune-skill/ rewrite is presented as 'keep the keyword, sharpen it' without a real before to compare; the claim that the mod 'will match every tune skill query' is asserted without any measured data.",
-    "Some rewritten H1s are long (e.g. 'Fix the skill file first, then polish README and site copy', 58), and the H1s do not follow the site's existing short H1 pattern. The run never checked this."
+    "Did not use the live current title/H1/meta as the 'before' for any page; the file says current tags are unknown. Ground truth shows titles were available: e.g. /tune-skill-mod/ was 'Tune Skill Mod \u2014 Claude Code mod' with H1 'Tune Skill Mod', /tune-and-ship/ had H1 'Tune And Ship'. The Bash curl was apparently denied and the run did not retry another way.",
+    "The only 'current' value cited (/tune-skill/ 'Audit and Fine-Tune\u2026' as likely H1) is actually the title; the real H1 was 'The skill is already written. The work left is making it fire. Tune what already exists.' The run guessed and flagged it as unverified.",
+    "Meta descriptions were never compared to current ones, so the claim that these pages 'fight for the same searches' is not demonstrated from live data; the real titles show they were already fairly distinct (no duplicate titles).",
+    "Alt B/C options lack character counts for several titles/metas, and Alt B metas were not length-checked (the Alt B tune-skill meta likely exceeds 150)."
   ],
   "skill_defects": [
-    "The skill has no instruction to fall back to a different fetch path (e.g. WebFetch of raw HTML, or a view-source style request) when curl/shell is denied, so it ends without the live title/H1/meta that the 'before' needs.",
-    "The skill does not require a before/after table with actual current values, so it let the run finish with 'current tags unknown' and still mark the work done.",
-    "The fallback path does not tell the agent to use the sitemap or a rendered-page fetch to get head tags, so 'sitemap fallback' is named but contributes nothing."
+    "The skill relies on a shell curl to read the live <head>, with no fallback when Bash is denied, leaving the 'before' column empty; it should instruct a WebFetch prompt that explicitly asks for the raw title, H1 and meta description, or a sitemap-fallback path that still captures them.",
+    "The skill does not require a before/after table, so a run can write rewrites without any verified current text and still look complete.",
+    "No instruction to length-check every alternate, not just the recommended option."
   ],
-  "cost_usd": 0.2,
+  "cost_usd": 0.21,
   "turns": 14,
   "seconds": 48,
   "tool_calls": 11,
   "files": [
     "resolution.md"
   ],
-  "error": ""
+  "error": "",
+  "judge_model": "sonnet"
 }

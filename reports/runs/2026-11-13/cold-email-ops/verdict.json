@@ -3,33 +3,35 @@
   "date": "2026-11-13",
   "target": "a 60,000-sends-a-month cold-email plan across 4 clients",
   "verdict": "PARTIAL",
-  "score": 6,
-  "summary": "The run hand-computed 275 inboxes and 93 domains for 60k sends (vs 120 inboxes and about 35 healthy domains on hand) with per-client splits and a 1% domain floor, but it gave no explicit warm-spare count for the 6 burns and no numeric error budget.",
+  "score": 7,
+  "summary": "The run hand-computed 275 inboxes and 93 domains for 60k sends/month (10/inbox/day, 3 inboxes/domain, 22 days) with a correct per-client split, a 1% domain reply floor and shadow-ban and automation checks, but its burn-replacement plan is not sized to the 6 burned domains and it gets today's date wrong.",
   "checks": [],
   "met": [
-    "Computes inboxes and domains from the 60k target with stated assumptions (10 sends/inbox/day, 3 inboxes/domain, 22 days); per-client totals sum to 275 inboxes / 93 domains and the arithmetic is consistent (e.g. 25k/22 = 1,136/day -> 114 inboxes -> 38 domains)",
-    "Sets a per-domain reply-rate floor (1%) and states the consequence: a domain below it is scheduled for replacement, not just monitored; also adds a two-week slope watch rule",
-    "Includes a shadow-ban test (0% bounce, healthy placement, zero replies -> rewrite copy once, retire inboxes after 48 hours with no change)",
-    "Splits capacity per client in a table and keeps domains separate per client, noting pooled vs separate cost (273/91 vs 275/93)",
-    "Flags own assumptions: says warm-up 2-4 weeks is its own rule of thumb, discloses that the script was not run and the math was done by hand, labels missing data as Unknown/INCONCLUSIVE"
+    "Inboxes and domains computed from the target with stated assumptions (10 sends/inbox/day, 3 inboxes/domain, 22 days). The arithmetic checks out: 2,727/day, 273 inboxes and 91 domains pooled, 275 and 93 summed per client.",
+    "Per-client capacity table (25k: 114 inboxes/38 domains, 15k: 69/23, 12k: 55/19, 8k: 37/13) with a reasoned choice to keep domains separate per client at a cost of about 2 extra domains.",
+    "Per-domain reply floor of 1%, with an explicit action when a domain falls below it (schedule for replacement, not just monitor), plus a two-week declining-slope watch rule.",
+    "Shadow-ban check: 0% bounce with zero replies triggers one copy rewrite, then retirement after 48 hours if nothing changes.",
+    "Automation reliability math (0.8^4 \u2248 41% vs 0.99^4 \u2248 96%, about 2,400 misses at 60k) with an owner, check and blast-radius per step. This works as an error budget.",
+    "Marks its own assumptions (warm-up of 2\u20134 weeks is 'my rule of thumb', hand-computed math, skill defaults) and flags unknown inputs, rather than presenting them as facts."
   ],
   "missed": [
-    "Burn-replacement cadence is not sized to last month's 6 burned domains: it gives a generic 30-46 inboxes/month (7-10/week) from a 6-9 month burn assumption and says to buy about 58 new domains, but does not define a warm-spare pool (e.g. N domains kept warming at all times) tied to a 6/month burn rate",
-    "No real automation error budget: it explains compounding reliability (0.8^4 = 41%, 0.99^4 = 96%) and asks for an owner/check per step, but sets no numeric budget (e.g. max acceptable failed sends or error rate before pausing)",
-    "No real inbox-placement test (seed/placement testing across providers); only a zero-reply heuristic for shadow-bans",
-    "Asserts last-month cause as 'most likely' running inboxes hot from a 120x10x22 estimate it admits it cannot verify, which slightly overreaches; also the per-client domain count rounding is not shown (38+23+19+13 = 93 but each is ceil, fine)",
-    "Tool call to run the script reportedly failed/was denied, so the stated numbers were not tool-verified"
+    "The burn-replacement cadence is not sized to last month's 6 burned domains out of 41 (about 15%). It uses a generic '6\u20139 month burn' rate to get 30\u201346 inboxes/month and says only 'keep spare inboxes warming', with no stated warm-spare pool size or per-week domain cadence.",
+    "No true inbox-placement or seed test (e.g. seed inboxes or placement tooling per provider). The shadow-ban check is only a symptom heuristic on reply data.",
+    "The automation error budget is a reliability illustration with no numeric tolerance, such as an acceptable failure rate or max emails per failure.",
+    "States 'Today is Nov 13' when the date is Nov 14. It also speculates that overloaded inboxes caused the 6 burns, which is hedged but unsupported without last month's send count.",
+    "Says the script could not be run because Bash was denied, so the numbers were never machine-verified, though they are correct."
   ],
   "skill_defects": [
-    "The skill does not require an explicit warm-spare pool sized to the prior burn count (burn replacement is expressed only as a generic rate from a 6-9 month lifetime)",
-    "The automation guidance stops at the compounding-reliability illustration and does not require a numeric error budget or pause threshold",
-    "The skill has no inbox-placement/seed test step; shadow-ban handling is only a symptom heuristic",
-    "The skill relies on a script via Bash with no fallback instructions for when it is denied, so the agent falls back to unverified hand math"
+    "The skill gives no guidance on sizing a warm-spare pool from the observed burn count (burned domains \u00f7 active domains) or on a weekly replacement cadence derived from it, so the agent fell back on a generic burn-lifetime rule.",
+    "The skill does not require a concrete inbox-placement or seed-test procedure, only symptom-based shadow-ban detection.",
+    "The skill does not give a numeric automation error budget (e.g. max tolerated failed sends per step), only a compounding-reliability illustration.",
+    "The skill relies on a script that failed to run here, with no instruction to show the formulas or a fallback computation, so the output is less verifiable."
   ],
-  "cost_usd": 0.16,
+  "cost_usd": 0.2,
   "turns": 6,
   "seconds": 29,
   "tool_calls": 4,
   "files": [],
-  "error": ""
+  "error": "",
+  "judge_model": "sonnet"
 }

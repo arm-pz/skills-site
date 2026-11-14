@@ -1,8 +1,8 @@
 # portable-harness: real-world run, 2026-11-13
 
-**Verdict: PARTIAL** (6/10). The run wrote AGENTS.md (12 rules at top) plus a CLAUDE.md containing only @AGENTS.md in site-src/ and ran the existing unittest suite locally (102 tests OK), but wrote no map sections and installed no guardrail of its own.
+**Verdict: PARTIAL** (6/10). The run wrote site-src/AGENTS.md (12 rules at top, test command, pointer to PROJECT.md) and a CLAUDE.md containing '@AGENTS.md', and ran the repo's unittest suite (102 tests OK), but wrote no map sections and installed no guardrail.
 
-Target: the skillsmith.tech source repo (local clone). Run headless in a clean project with only this skill installed (10 turns, 8 tool calls, 26 s, $0.19).
+Target: the skillsmith.tech source repo (local clone). Run headless on the CLI default model in a clean project with only this skill installed (10 turns, 8 tool calls, 26 s, $0.36).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -24,23 +24,22 @@ Set up site-src/ so any coding agent behaves the same in it. Write the rules fil
 
 ## Met
 
-- Working rules placed at the top of AGENTS.md, with CLAUDE.md importing it via @AGENTS.md so both agents read one file
-- Invented no commands: the test command is the repo's own `python -m unittest discover -s tools/agent-skills/tests`, and it declined to invent a type checker
-- Ran the unittest suite and showed the result (102 tests, OK)
-- Correctly found that the publish workflow already gates deploy on tests and checks, and did not duplicate it
-- Hard check met: AGENTS.md and CLAUDE.md were written
+- Working rules are at the top of AGENTS.md, with CLAUDE.md importing it via @AGENTS.md so both agents read the same file
+- The test command listed (python3 -m unittest discover -s tools/agent-skills/tests) exists in the repo and was run, passing 102 tests
+- Invented no commands: type checking was declined because no checker is configured, and the listed commands come from PROJECT.md/publish.yml
+- The existing CI gate in publish.yml was correctly identified as already covering tests before deploy
 
 ## Missed
 
-- Added no map sections, although the repo grounds several (generated pages vs sources via the gen:quality markers, site/skills.json as the inventory, the deploy branch/dist/). It identified them and then asked the user instead of writing them.
-- Installed no guardrail; the unittest suite was run but not wired into anything (hook, pre-commit, or documented gate) that the agent would hit, so the 'guardrails where they earn their place' step is effectively unfulfilled.
-- Did not show the diff before writing, which the skill asks for (the run admits this).
+- No map sections were written, even though the repo grounds several (generated pages vs hand-written pages, the gen:quality markers, site/skills.json as the single inventory, the deploy branch); the run asked the user instead of writing them
+- No guardrail was installed: the 'tests before deploy' guardrail was judged already present in CI and nothing local (hook or similar) was added or shown running as a guardrail
+- The run admits it skipped the skill's step of showing the diff before writing
 
 ## Defects to fix in the skill
 
-- The map-section step blocks on a user question ('where does the agent keep getting things wrong?') even when the repo clearly grounds sections like generated vs source files and the deploy branch; the skill should allow writing grounded sections directly in a one-shot request.
-- The guardrail step has no fallback for when the existing CI already covers the check; the unittest suite could be installed as a local pre-commit or agent hook and shown running, but the skill leaves this ambiguous.
-- The 'show the diff before writing' instruction conflicts with a one-shot local-only task and is not clearly conditional on there being existing content to overwrite.
+- The skill makes the map section depend on a user answer ('where does the agent keep getting things wrong?'), so a run with no interactive reply writes no map even when the repo plainly grounds one; it should default to writing grounded maps from PROJECT.md and the generator markers
+- The skill gives no fallback for when every guardrail is already covered by CI; it should say to install the local equivalent (for example a pre-push check running the unittest suite) and show it running
+- The 'show the diff before writing' step conflicts with a non-interactive one-shot request and was skipped; the skill should say what to do for new files
 
 ## What it did
 

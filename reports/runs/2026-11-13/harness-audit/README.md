@@ -1,8 +1,8 @@
 # harness-audit: real-world run, 2026-11-13
 
-**Verdict: PARTIAL** (4/10). The audit found no CLAUDE.md, settings or hooks in site-src or at user level, mined only 1 session (its own invocation, 0 corrections), made one real finding (no instruction file) and one non-actionable one, applied nothing, and read neither workflow file nor the real past sessions.
+**Verdict: PARTIAL** (4/10). The run inventoried the harness and found no CLAUDE.md, settings or hooks at project or user level, but it mined only 1 session (its own invocation) and never opened the real session files, so the report has one real finding, one non-finding, and a claim about the empty harness that is not well supported.
 
-Target: the skillsmith.tech repo plus real Claude Code session files from this batch. Run headless on sonnet in a clean project with only this skill installed (9 turns, 7 tool calls, 21 s, $0.27).
+Target: the skillsmith.tech repo plus real Claude Code session files from this batch. Run headless on sonnet in a clean project with only this skill installed (9 turns, 7 tool calls, 21 s, $0.45).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -24,27 +24,28 @@ Audit the agent harness for site-src/ (CLAUDE.md, settings, hooks, skills) again
 
 ## Met
 
-- Inventoried harness files via inventory.py at project root and site-src (and user level) and reported none exist
-- States exactly how many sessions were mined (1, its own invocation, 1 user message, 0 corrections) rather than overclaiming
-- Proposes a diff for CLAUDE.md and a portable-harness handoff, and states nothing was applied
-- Finding 1 cites concrete evidence (inventory shows 0 instruction files, PROJECT.md 22 KB, ~85 top-level dirs, workflows present)
-- No secrets or personal data (user name, email, tokens) appear in the report
-- Honest about limits: flags the denied ls of ~/.claude/projects and the vacuous passes in the score
+- Applied nothing: the report states nothing was applied and offers only a handoff block and a draft diff
+- Inventory step ran at project root and in site-src (inventory.py, with --no-user variant) and reported 0 instruction files and 0 settings
+- States how many sessions it read (1, its own invocation) and is explicit about that limit
+- No secrets or personal data (no names, emails or tokens) appear in the report
+- The CLAUDE.md-absence finding cites inventory results and real files (PROJECT.md 22 KB, DIRECTORIES.md, publish.yml, health.yml)
 
 ## Missed
 
-- Did not mine the real past sessions in ~/.claude/projects: the ls was denied and the run never retried via --sessions-dir or another path, so the core 'against my past sessions' ask is unmet and correction mining is empty
-- Did not read publish.yml or health.yml, the only enforcement present, so there is no review of existing harness content; the 'Kept on purpose' section admits this
-- Finding 2 is 'action: none' and speculative about skills being site pages, so it adds little as a ranked finding; ranking is thin with only one actionable item
-- Several repo claims (about 85 directories, about 60 skill-named dirs) come from an ls and were not shown to be verified in the transcript's own output
-- The proposed CLAUDE.md diff is generic and, by its own admission, based on unverified directory purposes
+- Did not mine the real session files: the `ls ~/.claude/projects` call was denied and the mining script saw only 1 session, so the 'past sessions' part of the prompt produced no evidence and no session-pattern findings
+- The report says the inventory found nothing at user level, but the run never verified that independently and the sessions directory was never located, so that claim is weakly supported
+- Did not read publish.yml or health.yml even though they were the only enforcement in the repo and were readable; no review of them was delivered
+- Finding 2 (skills are published content) is not a harness finding: it is a 'none' action with no real evidence, and the '~85 directories' and '~60 skill-named directories' figures are approximations from a listing, not exact counts
+- Score '3/6 passing' counts three checks as passing vacuously, which is inflated and not a meaningful result
+- The proposed CLAUDE.md diff is generic, with unverified directory purposes and 'no build step assumed', so it offers little real value
+- Ranked findings are essentially one real item; the rubric expected a ranked set grounded in sessions
 
 ## Defects to fix in the skill
 
-- The skill has no fallback when ~/.claude/projects listing is denied or yields only the current session; it should prompt for or auto-try --sessions-dir and surface a clear 'sessions not found' stop instead of producing a degraded report
-- The skill scores 'passing' on vacuous checks (no rules means nothing stale or unenforced), which inflates the 3/6 score when no harness exists; it should mark them N/A
-- mine_sessions.py appears to have been run on the project path and picked up only the audit's own session; the skill should resolve the session directory for the target project (and the user-level projects dir) or report it could not
-- The skill does not require reading existing workflows or CI files that act as the only enforcement, so the audit can skip the one real harness-like artifact
+- No fallback when the sessions directory is unreadable or missing: mine_sessions.py defaulted to a path holding 1 session, and the skill did not prompt the agent to locate the real ~/.claude/projects (e.g. via --sessions-dir or an env path) before concluding
+- The skill lets vacuous passes inflate the score (checks 2, 5, 6 'pass' with no rules to check), which misrepresents an empty harness as 3/6
+- The skill gives no instruction to read the CI workflows when they are the only enforcement present, so the audit skipped the one place with real content
+- The workflow runs inventory against the project root and then separately against site-src, but does not tell the agent how to reconcile the two or which counts to report
 
 ## What it did
 

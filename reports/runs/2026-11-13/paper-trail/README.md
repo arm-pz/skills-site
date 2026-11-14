@@ -1,8 +1,8 @@
 # paper-trail: real-world run, 2026-11-13
 
-**Verdict: PARTIAL** (6/10). The run wrote all four pages from facts.md with visible gaps (company number, cookie name/duration, etc.) and no model-training decision, but check_pages.py reported 28 FAILs from unresolved [NEEDS] markers, and the pages lack an in-document 'not legal advice' statement and lawyer checklist.
+**Verdict: PARTIAL** (6/10). Four pages were written from facts.md with the company number left as a gap, the model-training question left undecided, and controller/processor roles distinguished, but check_pages.py failed with 28 FAILs from unfilled [NEEDS] markers and the pages never state their own non-legal-advice status or list lawyer checks.
 
-Target: a real-shaped fact sheet for a UK B2B SaaS that processes invoice data. Run headless in a clean project with only this skill installed (13 turns, 11 tool calls, 47 s, $0.21).
+Target: a real-shaped fact sheet for a UK B2B SaaS that processes invoice data. Run headless on the CLI default model in a clean project with only this skill installed (13 turns, 11 tool calls, 47 s, $0.25).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -27,23 +27,23 @@ We're about to start charging for Reconcile. Draft our privacy policy, terms of 
 
 ## Met
 
-- All four pages written (privacy.md, terms.md, refunds.md, cookies.md) using facts.md content: AWS London eu-west-2, Postmark and Sentry in the US, Stripe, Plausible cookie-free, retention 30 days and 35-day backups, refunds only for billing errors, one necessary session cookie
-- Company number left as a visible [NEEDS: company number] gap in both privacy.md and terms.md, not invented
-- Model-training question not decided; terms.md flags it as undecided in a [NEEDS] note and the final message says so
-- Controller (account data) vs processor (invoice/payout data) roles distinguished in privacy.md
+- All four pages were written (privacy.md, terms.md, refunds.md, cookies.md) using facts from facts.md: AWS London, Postmark/Sentry US, 30-day deletion, 35-day backup roll-off, billing-error-only refunds, one necessary cookie, Plausible cookieless
+- Company number left as a visible [NEEDS: company number] gap rather than invented, in both privacy.md and terms.md
+- Did not decide model training: terms.md says no licence is stated and flags it as undecided in a [NEEDS] note; the hard check passed
+- Controller (account data) vs processor (invoice and payout data) roles stated in privacy.md as the fact sheet gives them
 
 ## Missed
 
-- check_pages.py did not pass: 28 FAILs, the run stopped after one checker pass and did not resolve or accept them
-- The 'not legal advice' statement and the lawyer-check list appear only in the chat summary, not in the saved pages; the summary's lawyer list is partial (processor/controller split, liability wording, with a general call to review privacy and terms)
-- Several gaps may be fillable from facts.md or reasonably deferred; the pages are heavily placeholder-ridden (privacy.md, terms.md), reducing completeness as 'complete pages'
-- The refunds page's contact uses privacy@ledgerline.example for billing, a weak fit though flagged with a NEEDS
+- check_pages.py did not pass: 28 FAILs, all [NEEDS] markers; the run reported this honestly but did not resolve or reduce it
+- The delivered pages do not contain a not-legal-advice statement or a lawyer checklist; that appears only in the chat summary, and the lawyer guidance there is generic (privacy policy and terms, processor/controller split, liability wording) rather than a per-page list of items to check
+- Some gaps may have been fillable from facts.md (e.g. cookie name/duration, Stripe/Plausible location, refund contact), and an invented-looking support address (privacy@ledgerline.example) is used as the refund contact, though it presumably comes from facts.md
+- The terms' model-training [NEEDS] note says the owner has not decided, which is flagged but embedded in a public-facing draft
 
 ## Defects to fix in the skill
 
-- The skill's checker fails on any [NEEDS] marker, so it cannot pass on a fact sheet with real gaps, which conflicts with the instruction to leave gaps visible; the skill should distinguish acceptable flagged gaps from real failures or say how to report them
-- The skill does not clearly require the 'not legal advice' notice and a lawyer-review checklist to be placed in the generated pages or a companion file, so the run put them only in chat
-- The skill does not make the run iterate on or explain checker output beyond a single truncated (200-char, tail -50) view, which hides detail on what failed
+- The skill's checker fails on any [NEEDS] marker, so a run that correctly leaves gaps for missing facts can never pass; the skill should distinguish intentional visible gaps from defects or provide a draft mode
+- The skill does not require the not-legal-advice disclaimer and lawyer-check list to be written into a file (e.g. a REVIEW.md), so they only appear in chat
+- The skill gives no guidance on how to present the undecided model-training question without leaking internal notes into customer-facing page text
 
 ## What it did
 

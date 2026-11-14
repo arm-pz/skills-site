@@ -1,8 +1,8 @@
 # keyword-guard: real-world run, 2026-11-13
 
-**Verdict: PARTIAL** (4/10). The run wrote keyword-map.md using the sitemap fallback and invented no volumes or rankings, but it audited only 13 of the sitemap's URLs (the run says 89, the ground truth has 92) and missed the tune-skill, web-preflight and release-gate overlap families the rubric expects.
+**Verdict: PARTIAL** (4/10). Run used the sitemap fallback and wrote keyword-map.md with one owner per query for three SEO-related groups from 13 of the sitemap's pages, but missed the tune-skill, web-preflight and release-gate families and reported 89 URLs where the sitemap has 92.
 
-Target: skillsmith.tech (sitemap fallback, no Search Console). Run headless in a clean project with only this skill installed (21 turns, 19 tool calls, 65 s, $0.25).
+Target: skillsmith.tech (sitemap fallback, no Search Console). Run headless on the CLI default model in a clean project with only this skill installed (21 turns, 19 tool calls, 65 s, $0.31).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -26,26 +26,27 @@ Audit https://skillsmith.tech for keyword cannibalization. I don't have Search C
 
 ## Met
 
-- Uses the sitemap fallback and says so explicitly: 'pre-GSC fallback (sitemap + title/H1 intent check)', with a note that there is no Search Console or ranking data.
-- Invents no search volumes or rankings, and labels every conflict as predicted rather than measured.
-- Assigns exactly one owner per query family with a reason and says what the non-owner pages should do instead, e.g. retitle /keyword-resolver/ and drop 'get found' from /findable/.
-- Is honest about its limits: it says only 13 pages were inspected, that the titles quoted may not be the real tags, and that Bash was denied.
+- Uses the sitemap fallback and says so explicitly (hard check ok; 'pre-GSC fallback (sitemap + title/H1 intent check)')
+- Assigns one owner per query family with reasons and says what the non-owner pages should do instead (e.g. retitle /seo-sweep/, drop 'get found' from /findable/)
+- Invents no search volumes or rankings; labels all conflicts as predicted, not measured
+- Found real overlap between /keyword-guard/ and /keyword-resolver/, and between /findable/ and /workflows/get-found/ using live page headings
 
 ## Missed
 
-- Does not find the rubric's overlap groups: tune-skill / tune-skill-mod / tune-and-polish / tune-and-ship, web-preflight / web-preflight-mod, and the release-gate family (chair/ledger/validator/mod) are all absent from the map. It lists them as 'not audited'.
-- Audited only 13 pages, all in the SEO/findability cluster. The skill's cannibalization audit needs live titles and H1s for the whole sitemap. The bulk curl was attempted in Bash and, per the run, denied, and the run never fell back to other means such as WebFetch for the remaining families.
-- Does not treat the audit as a blocker before content changes. The map offers 'next steps' and a retitle order, and says nothing about gating content work until ownership is settled.
-- Reports 89 sitemap URLs, but the ground truth is 92 pages in the sitemap, so the count is wrong.
-- Quotes headings as titles. For example it never notes that /seo/ has a 69-char title, and it does not use the actual title tags, which are the primary signal. Its claim that the /seo-sweep/ title includes 'audit' is unverified.
-- Spends time on the SEO cluster, where the owner assignments are plausible but speculative, and reports no `-mod` vs skill collisions, which are the clearest title/H1 duplicates, e.g. 'Tune Skill Mod' vs 'tune-skill'.
+- Did not find the expected overlap groups: tune-skill vs tune-skill-mod vs tune-and-polish vs tune-and-ship; web-preflight vs web-preflight-mod; the release-gate family. Only 13 pages were inspected.
+- Reported 89 sitemap URLs where ground truth shows 92 pages, so the coverage count is wrong
+- Did not treat the audit as a blocker before content changes; it ends with 'Retitle in this order' as a next step and does not gate content work on resolving the map
+- Titles and H1s were not extracted from the live pages. The bulk curl was attempted but its output was not used, and the map quotes heading text that 'may differ from the actual tags', although title/H1 data was available via curl
+- Claims 'Bash was denied' yet the transcript shows a Bash call made; the 76 unaudited pages were left unaudited when a curl loop was available
+- Some table owner assignments are weak: the 'no conflict' section treats the homepage as safe without checking, and the SEO-family conflict is partly speculative
 
 ## Defects to fix in the skill
 
-- The skill's sitemap fallback does not require extracting <title> and H1 for every sitemap URL by a method that works when Bash or curl is unavailable, so the run stopped at 13 of the pages and left the rest 'not audited'.
-- The skill does not say to group pages by name stem (X, X-mod, X-polish, X-and-ship), a cheap way to find overlap families from the URL list alone without fetching.
-- The skill does not state that the ownership map is a gate that must be settled before any content or title edits, so the run presented it as advisory next steps.
-- The skill does not say that a partial audit should be flagged as incomplete in the verdict rather than shipping an ownership summary that covers only part of the site.
+- The sitemap-fallback flow does not require extracting <title> and <h1> for every URL before grouping, so a run can stop after sampling 13 of 92 pages and miss whole families
+- No step groups pages by shared name stems (X, X-mod, X-polish, X-release) to catch the skill/mod/chain families that most commonly cannibalize
+- Does not say the audit must gate content changes (it should be a blocker before any retitle/rewrite), so the output offers retitling as a next step
+- Relies on WebFetch's rendered text rather than raw HTML for titles, with no instruction to fall back to curl/grep for <title> and <h1> when that tool hides them
+- Does not tell the run to count the sitemap URLs exactly and report coverage, so the 89 vs 92 count error goes unnoticed
 
 ## Ground truth
 

@@ -4,7 +4,7 @@
   "target": "a lead-list cleaning CLI with tests, built on a real-shaped provider export",
   "verdict": "PARTIAL",
   "score": 7,
-  "summary": "The run produced a stdlib clean_leads.py and 12 unit tests; the hard checks pass and clean.csv has 7 kept rows with the info@, gmail and 2,600-employee rows gone, but the final report says nothing was run and states the wrong kept count (6 of 9) while listing 7 names.",
+  "summary": "The run wrote a stdlib clean_leads.py and a 12-test suite, and the fixture output (clean.csv) has 7 rows with the info@, gmail and 2,600-employee rows removed. The final report says nothing was executed and gives a hand-reasoned count (6 of 9 rows kept) that contradicts its own list of 7 kept names and the actual 7-row output.",
   "checks": [
     {
       "desc": "clean_leads.py runs on the fixture",
@@ -23,25 +23,24 @@
     }
   ],
   "met": [
-    "Complete stdlib script with argparse, --max-employees (default 500), -o, and error handling that prints 'error: ...' and exits 1 for a missing file or missing required columns",
-    "Tests cover role inboxes, free-mail, the employee limit (500 kept, 501 dropped, configurable), case-insensitive dedupe, bad or blank emails, missing columns and a missing file; hard checks say they pass",
-    "Hard checks pass: the script runs on the fixture and drops the info@, gmail and 2,600-employee rows (clean.csv has 7 clean rows)",
-    "Usage commands and a section-by-section plain-English map are provided",
-    "Edge cases handled: blank or malformed emails, mixed case, +tag role inboxes, '1,200' and '250.0' employee values, UTF-8 BOM, and a filtered row not shadowing a later valid duplicate"
+    "Complete stdlib script with argparse, --max-employees (default 500), -o, and exit code 1 with a stderr message on OSError, ValueError or csv.Error",
+    "Tests cover role inboxes (including +tag and a lookalike name), free mail, the 500/501 limit boundary, bad employee counts, case-insensitive dedupe, malformed emails, a CLI end-to-end run, a missing column and a missing file",
+    "Edge cases handled: missing required columns, blank or malformed emails, mixed-case emails, UTF-8 BOM, '1,200' and '250.0' employee values, and a filtered row not shadowing a later duplicate",
+    "Run steps and a section-by-section plain-English map are given, and the assumptions are flagged",
+    "Hard checks pass: the script runs on the fixture and the three target rows are dropped (clean.csv has 7 rows, none of them info@, gmail or the 2,600-employee company)"
   ],
   "missed": [
-    "The final report says Bash was denied and nothing was executed, yet a Bash call was issued and clean.csv exists, so the stated verification status does not match the transcript",
-    "The hand-reasoned expected output says '6 of the 9 rows are kept' but lists seven kept people, and the real output has 7 rows, so the count is wrong",
-    "The report names the dropped free-mail row as '<email>', a placeholder rather than the actual address, so the drop list is not literal",
-    "No observed test results or sample output are shown in the final report",
-    "The setup section is thin, with no setup steps beyond 'Python 3.8+' and the run commands"
+    "The final report says nothing was run because Bash was denied, yet the transcript shows a Bash call (tests plus a run on the fixture), so the report does not match what the run did. The user gets no observed test or run results.",
+    "The hand-reasoned expectation is wrong: it says 6 of 9 rows are kept but lists 7 names, and the real output has 7 kept rows plus 3 dropped, so the fixture has 10 rows.",
+    "One dropped row is shown as a literal '<email>' placeholder instead of the actual address.",
+    "No quoted test output or drop-count summary from a real run is included in the report."
   ],
   "skill_defects": [
-    "The skill does not require reporting verification results (or a denied run) consistently, so the answer ended with unverified, self-contradictory numbers",
-    "The skill does not tell the agent to quote exact values from the fixture instead of placeholders or hand-counted totals",
-    "The skill does not require an explicit Setup step (Python version, file layout, how to run the tests) in the final answer"
+    "The skill has no rule for when verification can't run: it should say to report only what was observed and not to give predicted counts as fact, or to re-read the fixture to get the numbers right.",
+    "The skill doesn't tell the agent to reconcile the final report with the tool results, so a report can claim 'not run' while the transcript shows a run, and can give counts that contradict the output files.",
+    "The skill doesn't require the final report to quote the actual run output (test summary and drop counts) rather than paraphrase it."
   ],
-  "cost_usd": 0.19,
+  "cost_usd": 0.24,
   "turns": 8,
   "seconds": 38,
   "tool_calls": 6,
@@ -52,5 +51,6 @@
     "clean_leads.py",
     "test_clean_leads.py"
   ],
-  "error": ""
+  "error": "",
+  "judge_model": "sonnet"
 }

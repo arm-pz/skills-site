@@ -1,8 +1,8 @@
 # career-track: real-world run, 2026-11-13
 
-**Verdict: PARTIAL** (8/10). The run gave a £65k counter (about +33% on £49k, inside the £58–68k band), a word-for-word call script, anchoring on 64 accounts/£2.1M ARR, churn 14%→9% and onboarding 19→11 days, and a deflection for the £49k question, but it never scripted a reply to 'the band is fixed' and listed non-salary levers only in a table row.
+**Verdict: PARTIAL** (7/10). The skill gave a £65k counter within the £58–68k band, a word-for-word call script using the real figures (64 accounts, ~£2.1M ARR, churn 14%→9%, onboarding 19→11 days) and advice on not disclosing the £49k, but it left non-salary levers thin and had no scripted reply for a fixed band.
 
-Target: a synthetic CSM's negotiation for a £58–68k Senior CSM offer. Run headless in a clean project with only this skill installed (7 turns, 5 tool calls, 26 s, $0.14).
+Target: a synthetic CSM's negotiation for a £58–68k Senior CSM offer. Run headless on the CLI default model in a clean project with only this skill installed (7 turns, 5 tool calls, 26 s, $0.17).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -25,23 +25,23 @@ Ledgerline (job.md) just verbally offered me £58k for the Senior CSM role. Band
 
 ## Met
 
-- Specific counter of £65k inside the band, with reasoning (matches core of ad, but gaps on SQL, payments and management limit going to the top; settle around £62–63k)
-- Word-for-word script covering opener, evidence, the ask, silence, a 'where does 65k come from' answer, pushback table and call close
-- Anchored on real facts (64 accounts, ~£2.1M ARR, churn 14%→9%, time-to-first-invoice 19→11 days) and explicitly warned not to claim the whole churn drop since the Q2 FY23 pricing change contributed
-- Handled the current salary question with a scripted deflection and noted they are not obliged to disclose it
-- Invented no market data; stated the band comes only from the ad and that a market view would need a sourced, dated figure
+- Specific counter of £65k inside the band, with reasoning (matches core of ad, above £63k midpoint, gaps on SQL/payments/management make the very top harder, room to settle around £62–63k)
+- Word-for-word script covering opening, evidence, ask, silence, follow-up questions, pushback table and close
+- Value anchored on real facts without inflation: 64 accounts, ~£2.1M ARR, churn 14%→9%, time-to-first-invoice 19→11 days; explicitly warns not to claim all the churn drop (pricing change also helped) and not to claim people management
+- Handles the £49k: gives a line for deflecting the current-salary question and states they aren't obliged to disclose
+- Invents no market data: states the band comes from the ad, no market figures used, and says a sourced, dated figure would be needed for a market view
 
 ## Missed
 
-- No dedicated script for 'the band is fixed / 58k is firm': the closest are the '58k is what we offer at this stage' and 'No budget on base' rows, which ask what would move it and pivot to other levers
-- Non-salary levers are thin: the table row mentions a six-month review, sign-on payment, extra holiday and training budget, but nothing on title or start date as fallbacks, and bonus/equity appear only as questions to ask
-- The pitch for 65k relies on the user's facts, but the answer to 'why 65k' avoids stating how the figure was chosen and leans on 'within your band'
-- The response never reasons about the +33% jump from £49k to £65k, and the gap between £65k and the £58k offer is not framed against the floor beyond 'write it down'
+- Fixed-band scenario is only partly covered: 'No budget on base' and '58k is what we offer' are in the table, but there is no line for 'the band is fixed' as such, only generic pivots
+- Non-salary levers appear only as a short list inside one pushback reply (6-month review, sign-on payment, extra holiday, training budget); start date and title are not offered as fallbacks, and equity/bonus are only flagged as questions to ask
+- The script doesn't state the real fallback sequence (what to accept, in what order) if base can't move
 
 ## Defects to fix in the skill
 
-- The skill does not require an explicit scripted branch for 'the band is fixed' that moves to a ranked list of non-salary levers (start date, title, review timing, bonus, learning budget) with exact wording for each
-- The skill does not prompt for the candidate's floor and competing offers before producing a target, so the target rests on judgment alone and is left as a placeholder
+- The skill's negotiation reference doesn't appear to require a distinct scripted response for 'the band is fixed' with a pivot to a prioritised list of non-salary levers (start date, title, review timing, bonus/equity, learning budget)
+- No instruction to give a ranked fallback package, so non-salary levers are mentioned in passing rather than turned into a concrete ask
+- Some content is added beyond the negotiation request (career gap, weak spots), which is accurate to the files but dilutes the call script
 
 ## What it did
 

@@ -1,8 +1,8 @@
 # seo-polish: real-world run, 2026-11-13
 
-**Verdict: PARTIAL** (4/10). The run crawled only 25 of 92 sitemap pages and reported 3 length findings plus 13 truncated descriptions; ground truth shows 12 titles over 60 chars and 8 descriptions over 160, so most real findings were missed and some claims are unverified.
+**Verdict: PARTIAL** (4/10). The run crawled only 25 of 92 sitemap pages, reported 3 crawler info findings plus 13 truncated descriptions and 13 generic titles, and missed the 12 long titles and 8 long descriptions the ground truth found across the full site.
 
-Target: skillsmith.tech (92 live pages). Run headless on sonnet in a clean project with only this skill installed (11 turns, 8 tool calls, 77 s, $0.28).
+Target: skillsmith.tech (92 live pages). Run headless on sonnet in a clean project with only this skill installed (11 turns, 8 tool calls, 77 s, $0.34).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -24,26 +24,29 @@ Polish the on-page SEO of https://skillsmith.tech. Measure first, then give me r
 
 ## Met
 
-- Measured the live site with a read-only crawler before proposing, and changed nothing live
-- Correctly found no non-200 pages, no missing canonicals and exactly one h1 per page on the pages it crawled
-- Stated clearly what it could not measure: partial crawl, inconclusive sitemap/link checks, no H1 text, no Core Web Vitals, estimated character counts
-- Gave two alternatives per page for the titles and descriptions it chose to fix, mostly within length limits
+- Measured the live site before proposing (ran seo-crawl and used its output)
+- Changed nothing live and said so; wrote only seo-polish.md
+- Said what it could not measure: partial crawl, inconclusive sitemap/internal-link checks, H1 text, Core Web Vitals, approximate character counts
+- Correctly reported status 200, self-referencing canonicals and one H1 per page on the pages it fetched, which matches ground truth
+- Gave two alternatives per finding, with titles within 60 characters
 
 ## Missed
 
-- Crawled only 25 of 92 pages and did not raise the budget, so it never reached the other 67 pages and could not check all 98 internal links
-- Found only 2 over-long titles (/checks/, /check/) and 1 over-long description, versus ground truth of 12 titles over 60 chars and 8 descriptions over 160; most real over-length pages were never reported
-- Priority 2 labels 13 titles as problems for being generic and slug-derived, a judgement call that is not a measured defect; those titles are mostly under 60 chars
-- Claimed 13 truncated descriptions ending in '…' at about 150 chars; this is not in the ground truth, and the descriptions were eyeballed rather than measured, so it may be invented
-- Did not rewrite any H1s, and did not give 2–3 alternatives (only 2, or a single replacement for descriptions) for the High/Medium items
-- Character counts were 'by eye' and approximate, so the length compliance of the rewrites is unverified
+- Crawled only 25 of 92 sitemap pages and did not raise the budget, so most of the site was not measured
+- Found only 2 of the 12 over-length titles (/checks/ at 72, /check/ at 63); the other ten were never seen, so the 12-title ground truth was not reproduced
+- Found only 1 over-length description (/checks/ at 166); the ground truth has 8
+- Raised 13 'truncated descriptions' and 13 'generic slug-derived titles' that are not in the ground truth. The titles are within 60 chars, unique and have one H1 each, so these look like invented or at best unverified problems promoted to Medium priority
+- Some Option A/B titles are not verified within 60 characters (counted by eye), and the replacement descriptions are shortened from truncated text the run could not see in full, so meaning is not guaranteed to be preserved
+- Did not rewrite any headings even though the prompt asked for headings; it said the H1 text was not captured, but the ground truth shows the H1s are readily available
+- Did not write the crawl report to disk (reports/ missing) and did not create it
 
 ## Defects to fix in the skill
 
-- The seo-crawl default budget of 25 pages is far below the sitemap size, and the skill did not tell the agent to raise it to cover the sitemap before proposing
-- The crawler records only the H1 count and not its text, so heading rewrites are impossible without a second fetch step
-- The skill has no step to measure rewrite lengths programmatically, so counts were estimated by eye
-- It depends on seo-audit, which was not installed, leaving prioritisation to ad hoc judgement that raised unmeasured findings
+- The skill defaults to a 25-page crawl budget and does not tell the agent to raise it to the sitemap size, so it leaves 67 of 92 URLs unmeasured on a site that small
+- The crawler records only the H1 count, not its text, so the skill cannot produce the heading rewrites the user asked for without an extra fetch step
+- The skill has no step that flags over-length titles and descriptions across every page, so it fell back to eyeballed lengths and 'about' figures
+- The skill depends on seo-audit, which was not installed, and has no fallback for prioritizing findings besides manual judgment, which led to unmeasured findings such as the 'truncated' and 'generic title' items
+- The skill has no instruction to create the output directory (reports/) or retry when the first crawl command failed
 
 ## Ground truth
 
