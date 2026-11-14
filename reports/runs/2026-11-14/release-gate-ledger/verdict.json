@@ -1,0 +1,47 @@
+{
+  "skill": "release-gate-ledger",
+  "date": "2026-11-14",
+  "target": "Invoicely, a local invoicing app with 6 planted authorization and session flaws",
+  "verdict": "PARTIAL",
+  "score": 6,
+  "summary": "The run produced three separate lane verdicts (exposure PASS WITH FIXES, app-tests HOLD, perf not-measured) and a script-computed overall HOLD, with 5 findings recorded through the validating recorder, but it missed the no-rate-limit flaw and recorded the cookie-flag finding under the exposure lane, and the exposure lane is worded as passing.",
+  "checks": [
+    {
+      "desc": "overall posture is HOLD",
+      "ok": true,
+      "detail": "HOLD"
+    }
+  ],
+  "met": [
+    "Three lanes kept with separate verdicts; perf's not-measured did not get covered by another lane's result",
+    "Each lane row and each finding was written via gate_record.mjs (lane/finding subcommands)",
+    "Security lane found and evidenced IDOR (alice read bob's 201), open admin API (bob got all users with plaintext passwords), and mass-assignment escalation (bob PATCH role=admin)",
+    "Overall posture HOLD came from check_gate.mjs (R1, R2, R4 fired) and the blocking findings were named",
+    "Perf lane marked not-measured rather than passed; local-only exposure and untested app-test scenarios (S13, reset reuse, caching) were disclosed as not tested",
+    "Also found the open redirect and missing cookie flags/security headers"
+  ],
+  "missed": [
+    "Did not test or record the missing rate limit/lockout on POST /api/login (planted flaw #6)",
+    "Exposure lane verdict is 'PASS WITH FIXES' despite being local-only with no HTTPS/HSTS assessable; this reads closer to a pass than to inconclusive/partial for a lane that could not be fully run",
+    "Session cookie flags were logged as MEDIUM exposure finding, not an authorization/session finding in the app-tests lane; plaintext password storage was only noted in evidence/prose, not as its own finding",
+    "Ran the app-tests lane as a manual curl pass with the checker (check_results.mjs) never run, and marked several scenarios not-applicable by code reading only",
+    "First recorder calls were made before the directory existed and had to be retried (minor process wobble)",
+    "IDOR rated HIGH rather than critical, though the rubric treats it among the critical flaws"
+  ],
+  "skill_defects": [
+    "The skill does not clearly require a lane that could only be run locally to be recorded as inconclusive/partial rather than PASS WITH FIXES",
+    "No guidance that the recorder needs the output directory created first (mkdir) before lane/finding calls",
+    "The red-team scenario list lacks a login rate-limit/lockout check, so the brute-force flaw was never exercised",
+    "Allows a manual curl pass to substitute for the scaffolded run without forcing the result checker, leaving not-applicable judgments unverified"
+  ],
+  "cost_usd": 0.33,
+  "model": "sonnet",
+  "turns": 44,
+  "seconds": 53,
+  "tool_calls": 42,
+  "files": [
+    ".release-gate/run1/findings.tsv",
+    ".release-gate/run1/lanes.tsv"
+  ],
+  "error": ""
+}

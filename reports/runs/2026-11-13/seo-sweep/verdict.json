@@ -4,7 +4,7 @@
   "target": "skillsmith.tech and its source repo (fixes local only, nothing pushed or submitted)",
   "verdict": "PARTIAL",
   "score": 5,
-  "summary": "The run crawled the live site, found the 12 over-long titles and 8 over-long descriptions that match ground truth, shortened them and re-crawled locally to show 12 to 0 titles and 8 to 2 descriptions, but it edited the output HTML directly rather than the generator, skipped some chained skills, and reported no skill defects.",
+  "summary": "The run crawled the live site (80-page cap, then 200), found the 12 over-length titles and 8 over-length descriptions that match ground truth, edited the HTML in site-src and re-crawled locally (titles 12 to 0, descriptions 8 to 2), and pushed or deployed nothing, but it hand-edited built pages, flagged 9 email-protection links that are not in the ground truth, skipped chained steps, and reported no skill defects.",
   "checks": [
     {
       "desc": "wrote sweep.md",
@@ -13,27 +13,27 @@
     }
   ],
   "met": [
-    "Findings match ground truth: 12 titles over 60 chars and 8 descriptions over 160 chars were found, with no invented broken pages or h1/canonical problems",
-    "Fixes were proven by serving site-src locally and re-crawling (titles 12 to 0, descriptions 8 to 2)",
-    "Pushed, deployed and submitted nothing; only a local http.server was started",
-    "Honestly reported what was not checked (keyword ownership, wordsmith rewrites, get-indexed, search results) and the two unverified descriptions",
-    "sweep.md was written"
+    "Found 12 titles over 60 chars and 8 descriptions over 160 chars, matching the ground-truth counts",
+    "Reported no indexability problems, consistent with no non-200 pages, no missing canonicals and no duplicate titles",
+    "Pushed, deployed and submitted nothing; ran a local http.server and a local crawl only",
+    "Re-crawled the locally served site-src after editing and reported before and after numbers (titles 12 to 0, descriptions 8 to 2), and disclosed the two descriptions still over",
+    "Said what it did not check (search presence, keyword mapping, wordsmith rewrites, get-indexed)"
   ],
   "missed": [
-    "Fixes were made with sed directly on hand-written site-src/*/index.html pages (check, checks, list, map, prose, resume, seo-check, seo); the sweep did not touch the generator/templates or manifest, and the one generated-looking page (set-up-a-coding-agent, 189-char description) was left unfixed",
-    "Not all chained skills were run in order: only seo-crawl was run; keyword-guard, wordsmith and get-indexed were skipped or noted as not done",
-    "Two descriptions remain over 160 after the fix, and the /seo-check/ trim was never re-crawled, so 'each fix proven' is only partly true",
-    "The og:title and og:description tags were left with the old wording, so the titles/descriptions are inconsistent across tags",
-    "The 9 /cdn-cgi/l/email-protection flags were dismissed as a false positive on reasoning from source grep, not verified against the live page; this is also a defect in the crawler's output that the run did not clearly report as a skill defect",
-    "No defects in the skills themselves were reported (e.g. the crawler's false-positive on Cloudflare email obfuscation, the 80-page default that missed pages, needing a second crawl at 200)"
+    "Fixes were made with sed directly on site-src/*/index.html, which are generated or hand-written output pages. The run grepped gen_sitemap.py and check_dist.py but did not edit the generator, templates or manifest. The set-up-a-coding-agent description (189 chars) was left unfixed because it looked generated, which means the generator was never touched",
+    "Reported 9 broken /cdn-cgi/l/email-protection links on /check/, /prose/ and /work/. Ground truth has no broken internal links. The run dismissed them as an edge-rewrite false positive, but it still counts as a finding that does not match ground truth",
+    "Did not run the full chain: skipped keyword-ownership mapping, wordsmith rewrites and get-indexed; the crawl was first capped at 80 pages, then rerun at 200",
+    "The local proof left 2 descriptions still over 160 chars, and /seo-check/ was edited after the final crawl and never re-checked, so the proof is incomplete",
+    "Did not report any defect in the skills themselves. The seo-crawl false positive on email-protection links and the 80-page default cap are plausible skill defects but were not raised as such",
+    "Left og:title and og:description unchanged, so social metadata may still carry the old wording"
   ],
   "skill_defects": [
-    "seo-crawl flags Cloudflare email-protection rewrites as broken links, producing false positives the skill does not warn about",
-    "seo-crawl default --max-pages 80 undercounts a 92-page site; the skill should default to the sitemap size or warn when capped",
-    "seo-sweep gives no guidance on distinguishing generated vs hand-written pages, so fixes can land in output HTML instead of the generator or templates",
-    "seo-sweep does not require reporting defects found in the chained skills, so none were surfaced"
+    "seo-sweep does not tell the agent to trace a finding back to the generator, template or manifest before editing, so the run patched output HTML with sed",
+    "seo-crawl flags Cloudflare's /cdn-cgi/l/email-protection rewrites as broken links, producing false positives on a site with plain mailto: links in source, and the sweep has no step for filtering them",
+    "The sweep does not say how to verify a fix against a local build, or when to rebuild instead of serving raw site-src",
+    "The skill does not require reporting skill or tool defects in its output, so none were reported"
   ],
-  "cost_usd": 0.45,
+  "cost_usd": 0.65,
   "model": "sonnet",
   "turns": 32,
   "seconds": 150,
@@ -80,5 +80,6 @@
     "site-src/draft-skill/index.html",
     "site-src/favicon.ico"
   ],
-  "error": ""
+  "error": "",
+  "judge_model": "sonnet"
 }

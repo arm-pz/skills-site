@@ -1,8 +1,8 @@
 # wordsmith: real-world run, 2026-11-13
 
-**Verdict: PARTIAL** (6/10). The run wrote draft-tight.md, kept 40,000, triples, up to six hours, 38 min vs 5h50 and the unmeasured-benefit hedge, and cut most fluff, but left 'Experts agree' in the file and the summary says the cut list is mostly complete.
+**Verdict: PARTIAL** (6/10). The run wrote draft-tight.md about 40% shorter, kept 40,000, 'roughly triples', 'up to six hours', 38 minutes vs 5h50 and the 'not measured yet' hedge, but left 'Experts agree' in the text despite the rubric requiring it cut.
 
-Target: a 200-word product blog post draft with clichés, hedges and real numbers. Run headless in a clean project with only this skill installed (5 turns, 3 tool calls, 17 s, $0.09).
+Target: a 200-word product blog post draft with clichés, hedges and real numbers. Run headless on the CLI default model in a clean project with only this skill installed (5 turns, 3 tool calls, 17 s, $0.11).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -28,23 +28,26 @@ Tighten draft.md. Keep my facts, my numbers and my hedges exactly as strong or w
 
 ## Met
 
-- Wrote draft-tight.md
-- Cut the opening cliché, 'testament', 'reimagined', 'not just … it's' constructions and the emoji sign-off
+- Cut the opening cliché 'In today's fast-paced digital landscape'
+- Cut 'testament', 'reimagined' and 'not just … it's' constructions
+- Cut the emoji sign-off (🚀) and the 'Moving forward, we're excited' closing
 - Kept all numbers unchanged: 40,000/day, roughly triples, up to six hours, 38 minutes vs 5 hours 50 minutes
-- Kept the hedge 'may help some customers … we have not measured that yet' at the same strength
-- Added no new claims; result is noticeably shorter and still plain in the author's voice
+- Kept the hedge 'may help some customers get paid a little sooner, although we have not measured that yet' at the same strength
+- Added no new claims
+- Result is noticeably shorter and reads plainly in the author's voice
+- Wrote draft-tight.md and listed what was cut
 
 ## Missed
 
-- Rubric requires cutting 'Experts agree', but the output still contains 'Experts agree that late invoices hurt cash flow'; the run flagged it rather than cutting it, contradicting the user's 'cut the fluff' instruction and the rubric
-- The 'What I cut' list does not mention that 'Experts agree' stayed in as a cut item, so the list is accurate only because it is under 'Flag'; a reader skimming the cut list may assume it is gone
-- Minor: 'Customers noticed.' and the 'Let us know if you have any questions.' filler were retained, and the opening 'shows customers how much a business values them' is a paraphrase of the cliché rather than a clean cut, which risks slightly altering the author's claim
+- 'Experts agree that late invoices hurt cash flow' was kept in the output. The rubric expects it cut as filler/unsourced authority. The run only flagged it as vague rather than removing it.
+- The cut list in the final message does not mention the 'Experts agree' sentence as a cut, and the run did not list the several smaller trims (e.g. the opening sentence rewritten as 'shows customers how much a business values them') in detail.
+- The rewritten opening sentence 'Invoicing shows customers how much a business values them' is a paraphrase of the cliché's point and arguably introduces a new claim not in the plain facts.
 
 ## Defects to fix in the skill
 
-- The skill does not tell the agent to treat unsupported authority appeals like 'Experts agree' as fluff to cut by default, so it kept it and only flagged it
-- The skill lacks guidance on when to keep a vague claim versus cut it, leaving the agent to rationalise keeping it as 'your claim'
-- The skill does not require rewriting an opening cliché to be removed rather than paraphrased, so the opener's meaning was reworded and could introduce a new claim ('shows customers how much a business values them')
+- The skill does not tell the agent to treat vague authority appeals ('Experts agree') as cliché/filler to cut, so it preserved the phrase under 'keep my facts' and only flagged it.
+- The skill gives no guidance on distinguishing a user's facts from filler attributions, leaving ambiguity about when unsourced claims should be cut versus kept.
+- The skill does not require the cut list to enumerate every removed phrase, so the report is a summary rather than a complete list.
 
 ## What it did
 

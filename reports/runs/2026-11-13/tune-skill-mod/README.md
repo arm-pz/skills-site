@@ -1,8 +1,8 @@
 # tune-skill-mod: real-world run, 2026-11-13
 
-**Verdict: PARTIAL** (6/10). Agent edited the invoice-namer description, committed and pushed (remote shows 00c7f15 on main), the hook flagged the push twice, and tune-skill was invoked, but its check_skill.py validator was denied by Bash permissions so no findings were produced.
+**Verdict: PARTIAL** (5/10). The agent edited the invoice-namer description, committed, and pushed (remote shows 00c7f15 on top of 3d9fc29); the hook flagged that tune-skill had not run, but the validator was denied by Bash permissions so no findings were produced.
 
-Target: a small skill repo with a local bare remote: edit SKILL.md, then push. Run headless in a clean project with only this skill installed (7 turns, 5 tool calls, 13 s, $0.08).
+Target: a small skill repo with a local bare remote: edit SKILL.md, then push. Run headless on the CLI default model in a clean project with only this skill installed (7 turns, 5 tool calls, 13 s, $0.1).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -26,20 +26,20 @@ In skills/invoice-namer/SKILL.md, add to the description that it also handles .p
 
 ## Met
 
-- The mod armed only after the SKILL.md edit and the push went through in nudge mode, with Claude quoting the hook message that tune-skill had not run since the edit
-- Final message matches the remote: it reports the push as 3d9fc29..00c7f15, which agrees with the ground-truth commit 00c7f15 on the bare remote
-- Hook messages were quoted verbatim and the agent honestly said the check did not run and that it did not work around the denial
+- The mod armed only after a SKILL.md edit, and the push went through in nudge mode with the hook saying tune-skill had not run since the edit
+- Final message matches the remote: it reports the push 3d9fc29..00c7f15 and the remote has 00c7f15 on top of 3d9fc29
+- Hook messages were quoted verbatim and the agent said honestly that none followed the denied Bash call
 
 ## Missed
 
-- Claude invoked tune-skill but never ran its validator (Bash denied in don't-ask mode), so it reported no findings on the edited skill
-- Agent added an unrequested change (each file keeps its own extension) to the description, which went beyond the user's instruction
-- The summary says there were no hook messages after the denied Bash call, but the transcript gives no way to verify that
+- Claude invoked the tune-skill skill but never ran its check_skill.py, because Bash was denied, so it reported no tune-skill findings
+- It added an unrequested change (each file keeps its own extension) to the description
+- Hook messages were attributed to a single call as 'edit/commit/push', and the quoted wording was not checked against the transcript, which only shows the commit call
 
 ## Defects to fix in the skill
 
-- The skill's flow depends on running a bundled script via Bash with no fallback when Bash is denied, such as a manual checklist, so a restricted-permission session ends with no validation at all
-- The hook says to run tune-skill before shipping, but it fires only after the push has already happened, so the flagged content reaches the remote unchecked in nudge mode
+- The tune-skill instructions depend on running a Bash script and give no fallback (e.g. manual checklist of the validator's checks) when Bash is denied
+- The mod's nudge came after the push, so the unvalidated change was already on the remote; a pre-push hook would have caught it earlier
 
 ## Ground truth
 
@@ -55,7 +55,7 @@ In skills/invoice-namer/SKILL.md, add to the description that it also handles .p
 1. `Edit: /tmp/run-tune-skill-mod-5rykj_4r/project/skills/invoice-namer/SKILL.md`
 1. `Bash: git add skills/invoice-namer/SKILL.md && git commit -q -m "invoice-namer: mention .png invoice scans in description
 
-Co-Authored-By: Claude Sonnet 5.5 <noreply@`
+Co-Authored-By: Claude Sonnet 5.5 <<email>>`
 1. `Skill: tune-skill-mod:tune-skill`
 1. `Bash: cd /tmp/claude-0/-home-user-skills-site/19ab0674-2bec-506b-b3eb-85b8061ed9a5/scratchpad/src/caffeinity-skills/mods/tune-skill-mod/skills/tune-skill && ls script`
 

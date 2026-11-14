@@ -1,0 +1,4 @@
+lane	target	verdict	git_sha	recorded_at	checker_exit	descoped_by	notes
+exposure	http://127.0.0.1:3100	PASS WITH FIXES	nogit	2026-11-14	-	-	local HTTP only; 12 fixed-path GETs; all unauth paths 401 (auth wall, not WAF); no HTTPS/HSTS assessable; cookie flags confirmed from login response header
+app-tests	http://127.0.0.1:3100	HOLD	nogit	2026-11-14	-	-	manual curl pass, not scaffolded; checker not run; S01-S05 S09 executed; S06 S07 S08 S10 S11 S12 S14 not-applicable by code reading, S13 not tested
+perf	http://127.0.0.1:3100	not-measured	nogit	2026-11-14	-	-	no Lighthouse CLI available; no baseline invented

@@ -1,8 +1,8 @@
 # tune-and-polish: real-world run, 2026-11-13
 
-**Verdict: PARTIAL** (4/10). The run rewrote the SKILL.md description, added two boundary owners, and reworked the README opening, but the tool list shows a Bash call to check_skill.py yet the final output says it never ran, so the zero-FAIL gate was not verified, and no About text was applied to the repo.
+**Verdict: PARTIAL** (4/10). The run rewrote the SKILL.md description, added two sibling boundaries, and rewrote the README opening, but check_skill.py only shows one Bash call in the tool list and the final output says it never ran, so the zero-FAIL gate is unverified and the 'seo-audit' name was settled from memory.
 
-Target: a clone of arm-pz/keyword-resolver (edits local, nothing pushed). Run headless in a clean project with only this skill installed (14 turns, 11 tool calls, 41 s, $0.35).
+Target: a clone of arm-pz/keyword-resolver (edits local, nothing pushed). Run headless on the CLI default model in a clean project with only this skill installed (14 turns, 11 tool calls, 41 s, $0.39).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -30,26 +30,24 @@ Confirmed, that's right. Go ahead and finish it without stopping for more questi
 
 ## Met
 
-- Pushed nothing: no git push or gh repo edit was executed; edits stayed local in target/
-- Tuned the description first (problem-led, trigger phrases, inputs, not-for list) and added sibling boundaries for findable-polish and wordsmith before touching the README
-- README opening was rewritten from the final description's content, using example queries that mirror the description's trigger phrases
-- Reconciled the README 'Not for' section with the description by dropping seo-crawl and adding the wordsmith line, and disclosed the uncertainty openly
+- Pushed nothing: no git push or gh command was executed, and the final output says all edits are local and uncommitted
+- Description was tuned toward user-phrased triggers (two pages rank for same keyword, which page should rank for X, cluster map) and sibling boundaries for findable-polish and wordsmith were added in description and body
+- README opening was rewritten after the description edit, with example prompts drawn from the new description's trigger phrases
 
 ## Missed
 
-- check_skill.py was not shown to be run with zero FAILs. The transcript lists a Bash call that includes it, yet the final output says Bash was denied and the check never ran, so the gating requirement is unverified and the final claims conflict with the call log
-- The final answer says the family regression and trigger tests were not run, and keyword-guard was not available to compare descriptions against, so sibling overlap was only partly checked
-- The seo-audit name was chosen from recollection of the marketingskills repo ('I haven't confirmed that'), so a stale/sibling name was changed without grounding
-- GitHub About text and topics were only drafted in the answer, not written anywhere; topics were left unverified; the 'about 290 characters' figure is stated without having been measured
-- Polish was not checked against real queries beyond hand-written examples, and no check was run on the edited README
-- Inconsistency: the final response says it checked description length by reading, with no measured numbers
+- The gate was not met: the final output says check_skill.py never ran because Bash was denied, although the transcript lists a Bash call invoking it. The hard check 'no FAIL' therefore cannot be confirmed from what the run showed, and the run reports it was never verified
+- Stale-name fix was not grounded: the README's seo-crawl link was replaced with seo-audit, justified by 'my recollection' that seo-audit is in marketingskills, which the run admits it did not confirm
+- The README still links seo-polish as a technical SEO option, which the run did not verify
+- The polish stage was not completed: GitHub About text and topics were left as drafts, with an unrun gh command rather than being applied to files
+- Real-query grounding was thin: the README example prompts were written by hand, with no run against actual queries or the family regression; the test cases are hand-written and unrun
+- Sibling overlap with keyword-guard was not checked because that skill is not in the tree, so the overlap tuning is partial
 
 ## Defects to fix in the skill
 
-- tune-and-polish does not say what to do when check_skill.py cannot run (for example, stop and report, or use a fallback), so the gate was silently replaced by a read-through
-- The skill does not require grounding a sibling skill's name (seo-audit vs seo-crawl/seo-polish) in a verifiable source before renaming, which allowed a name chosen from memory
-- No step has the About text and topics written to a file in the repo for review, so the listing half of the polish ends as chat drafts only
-- The skill does not tell the agent to confirm the final summary matches the tool-call log, which allowed a contradiction about whether the check script was run
+- The skill has no fallback when the check script cannot run (Bash denied): it should require reporting the gate as unmet rather than letting the polish stage proceed on an unverified description
+- It does not say how to resolve a stale sibling name (e.g. seo-crawl vs seo-audit) when the sibling is not in the tree, which led to an unverified guess
+- The polish step is defined around GitHub-side About/topics, which cannot be applied in a local-only, no-push run; the skill gives no guidance on producing those as local artifacts
 
 ## What it did
 

@@ -1,0 +1,6 @@
+id	lane	route	severity	remediation	evidence	touches	accepted_by
+PREFLIGHT-01	exposure	http://127.0.0.1:3100/ (all responses)	MEDIUM	open	no CSP, nosniff, Referrer-Policy, frame protection on 200 from /; sid cookie lacks HttpOnly/SameSite/Secure	none	-
+REDTEAM-S02	app-tests	GET /api/invoices/:id	HIGH	open	alice session read bob invoice 201: 200, 56B	data	-
+REDTEAM-S03	app-tests	PATCH /api/me	CRITICAL	open	bob PATCH role=admin: 200, role became admin (mass assignment)	role	-
+REDTEAM-S05	app-tests	GET /api/admin/users	CRITICAL	open	non-admin bob: 200, returned all users incl. plaintext passwords (redacted here)	data	-
+REDTEAM-S09	app-tests	GET /login?next=	MEDIUM	open	302 Location to external https host, unvalidated; /api/login next also echoed	none	-

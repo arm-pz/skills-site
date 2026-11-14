@@ -1,8 +1,8 @@
 # strategy-memo: real-world run, 2026-11-13
 
-**Verdict: PARTIAL** (6/10). The memo recommends multi-entity first (8 vs 10 engineer-weeks) with a pre-sell test, uses most supplied figures and flags gaps honestly, but its headline ~+£2.7k MRR upside rests on an invented assumption and the 90-day plan does not pick a single metric that proves the call right.
+**Verdict: PARTIAL** (6/10). The memo recommends multi-entity first (8 vs 10 engineer-weeks) with a pre-sell test to flip it, uses most supplied figures and has a 90-day plan, but the central upside number (+£2.7k MRR) rests on an invented £223 average price for the 4 requesters and the 14-month runway and 9% MoM are barely used in the reasoning.
 
-Target: a real-shaped build decision for a 3-person fintech startup (QuickBooks vs multi-entity). Run headless in a clean project with only this skill installed (5 turns, 3 tool calls, 42 s, $0.17).
+Target: a real-shaped build decision for a 3-person fintech startup (QuickBooks vs multi-entity). Run headless on the CLI default model in a clean project with only this skill installed (5 turns, 3 tool calls, 42 s, $0.21).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -24,27 +24,27 @@ Read situation.md and write me the decision memo for the board: which do we buil
 
 ## Met
 
-- Makes one clear recommendation (multi-entity first, with a pre-board pre-sell test) and gives reasoning a board can check
-- Uses the supplied numbers: 58 vs ~20 waitlist, 10 vs 8 engineer-weeks, 2 churned to QuickBooks, 4 multi-entity asks, ~£900 plan, 14 months runway, 9% MoM; basic arithmetic (6,900/31 ≈ £223, 2/31 ≈ 6%, 10+8=18) is correct
-- Names the strongest case for QuickBooks in a dedicated Dissent section and lists explicit flip conditions (fewer than 3 of 4 commit, waitlist conversion ≥ ~21%, churned MRR large, further churn)
-- Provides a 90-day plan with owners, milestones and metrics, plus 1-year and 3-year horizons
-- Invents no external market data; market size and competitor coverage are listed as gaps and handed off to research-brief
+- One clear recommendation (multi-entity first, QuickBooks next quarter) with ranked options and stated confidence
+- Strongest case for QuickBooks is given in a dedicated Dissent section, plus explicit flip conditions (fewer than 3 of 4 commit, waitlist conversion of about 12 or more, churned MRR large)
+- 90-day plan with owners, milestones and metrics, and a named proving metric (commitments from the 4, waitlist payers vs ~12 threshold)
+- No external market data asserted; market size and competitor coverage are listed as gaps and deferred to research-brief
+- Most supplied figures used: 58 vs ~20 waitlist, 10 vs 8 weeks, 2 churned, 4 asks, £900 plan, 14 months, 9% MoM; 6,900/31 ≈ £223 and 2/31 ≈ 6% are correct
 
 ## Missed
 
-- The headline upside (~+£2.7k MRR, ~39% of MRR) rests on an assumed £223 current price for the 4 customers (4 × (900−223) ≈ £2,708). It is labelled [assumed], but it drives the recommendation and is not in the situation file
-- The ~21% / ~12-customer flip threshold assumes QuickBooks users pay the same £223 ARPA, which is also an assumption; the comparison is built on it
-- Several 'metrics' in the 90-day plan are unfilled placeholders ('supply this'), and no single metric is named as the one that proves the call right or wrong; the closest is commitments from the 4 (target 3+) versus the ~12 waitlist payers threshold
-- The ~13-week quarter, the month-5 runway threshold of 9 months, and the 'target 3+' are invented parameters, though marked [assumed]
-- Runway (14 months) and 9% MoM growth are restated but not used in any reasoning or calculation
-- The 3-year section is mostly placeholders and adds little; the memo also carries a research-brief handoff block not requested for a board memo
+- Headline upside of +£2.7k MRR (+39%) depends on an assumed £223 current price for the 4 requesters; the real current price is unknown, so the figure is a scenario presented as the main justification. It is flagged as assumed, but the recommendation leans on it
+- Arithmetic is shaky in places: (900-223)*4 ≈ £2.7k is fine, but the '12 customers ≈ 21% of waitlist' flip threshold compares gross QuickBooks MRR with incremental multi-entity MRR, and 2 churned of 31 is 'about 6%' while the dissent says '100% of the churn' with no total churn base given
+- Runway (14 months) is only used as a vague checkpoint 'above 9 at month 5' with an invented threshold; the 9% MoM growth is not used to project anything or tie the decision to runway
+- Invented details: a ~13-week quarter, the 'month 5 runway above 9' threshold, and a 'week 10 beta' schedule, though most are labelled assumed
+- Pre-board test of 3 weeks overlaps with a 90-day plan that starts from the board decision, which muddles the timeline; board meeting date '3 weeks from 2026-11-13' may be taken from the file but is not verified here
+- Includes 1-year and 3-year sections with many unsupported slots, which pads the memo beyond the ask
 
 ## Defects to fix in the skill
 
-- The skill's template pushes placeholders ('supply this') into the 90-day metric slots instead of requiring one concrete proof metric with a threshold from the supplied data
-- The skill mandates 1-year and 3-year sections even when the situation gives no basis for them, producing filler placeholders in a board memo
-- The skill does not require using every supplied figure (runway, MoM growth) in the argument, so those figures are only restated
-- The skill appends a handoff block to another skill into the memo file, putting non-board content in the deliverable
+- The skill's template forces a 1-year and 3-year roadmap even when the decision is a single-quarter build, producing placeholder-heavy filler
+- No instruction to anchor the recommendation on the supplied runway and growth figures (for example a simple projection), so they are mentioned but not used in the reasoning
+- The skill lets a derived 'assumed' price drive the headline number instead of requiring the memo to lead with what is actually known and treat the assumption only as a sensitivity
+- The unconditional research-brief handoff block is appended inside the deliverable file, polluting a board-facing memo
 
 ## What it did
 

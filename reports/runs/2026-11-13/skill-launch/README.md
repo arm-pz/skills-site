@@ -1,8 +1,8 @@
 # skill-launch: real-world run, 2026-11-13
 
-**Verdict: PARTIAL** (4/10). The run wrote a changelog-to-release-notes skill (SKILL.md, 3 references, README, LISTING.md, .gitignore) and published nothing, but it never ran check_skill.py or tune-skill's validator and did not use draft-skill, findable-polish or wordsmith as skills, only reading their docs and hand-checking.
+**Verdict: PARTIAL** (4/10). The run wrote a coherent changelog-to-release-notes skill (SKILL.md, 3 references, README, LISTING.md) under skills/ and published nothing, but Bash was denied so check_skill.py never ran, no formal draft-skill/tune-skill/findable-polish pass was done, and the validator gate was left to the user.
 
-Target: a new skill idea taken from idea to launch-ready (nothing published). Run headless in a clean project with only this skill installed (20 turns, 17 tool calls, 80 s, $0.52).
+Target: a new skill idea taken from idea to launch-ready (nothing published). Run headless on the CLI default model in a clean project with only this skill installed (20 turns, 17 tool calls, 80 s, $0.57).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -30,26 +30,24 @@ Confirmed, that's right. Go ahead and finish it without stopping for more questi
 
 ## Met
 
-- Wrote a SKILL.md under skills/changelog-to-release-notes/ with name, description containing 'Use when' and 'Not for', and 5-step workflow
-- Stopped before anything public: no repo created, nothing published; gave git/gh commands for the user at the end
-- Did not invent facts in README/listing: stated plainly 'not yet run against a real repository', license 'not chosen yet', test cases 'written, not run'
-- Final report is honest that Bash was denied and checks were not run
-- Flagged a real issue in its own publish commands (gh release create would post all of LISTING.md)
+- A SKILL.md was written under skills/changelog-to-release-notes/ with frontmatter, a 5-step workflow, and Use when / Not for boundaries
+- Did not create repos or publish anything; gave git init, gh repo create, gh repo edit and gh release create commands at the end for the user to run
+- Did not invent facts in README/LISTING: explicitly states 'not yet tested against a real repository', 'license not chosen yet', and test cases 'written, not run'
+- Flagged that gh release create with LISTING.md would post the whole file and told the user to extract only the release-notes section
 
 ## Missed
 
-- Did not gate with tune-skill's validator: check_skill.py was read but never executed, so 'zero FAILs' was only asserted by hand-check (the harness hard check reports no FAIL, but the run itself shows no validator output)
-- Did not draft via the draft-skill skill; only read its SKILL.md and structure.md and wrote files directly
-- Did not run findable-polish; README/listing polish was an inline pass with no real query research, only self-authored 'queries this should match'
-- Tune-skill steps (description rewrite, sibling comparison, regress.py) were not performed
-- Contradiction in final output: first section says no LICENSE or .gitignore were added, later a .gitignore was written; the first summary also mentions a README HTML comment that was later removed
-- No A/B/C options from findable/wordsmith were produced, only three self-written About lines
+- Did not run tune-skill's check_skill.py validator; the rubric requires gating with zero FAILs, but the run only claims a hand check and 'expects it to pass'
+- Read draft-skill and tune-skill instructions but did not actually follow draft-skill's flow or run tune-skill's description comparison; the final output admits the tune pass was not done formally
+- Did not run findable-polish; README/listing polish against real queries was an inline pass with 4 self-written queries, not tested against real search or sibling skills
+- Final output is duplicated and partly inconsistent: the first section says no .gitignore or LICENSE was added, while a .gitignore was in fact written afterwards
+- The hard check 'check_skill.py reports no FAIL' is not supported by any tool output in the transcript, since the script was only read, never executed
 
 ## Defects to fix in the skill
 
-- skill-launch relies on Bash for the validator and has no fallback instruction when Bash is denied, so the gating step silently degrades to a manual hand-check
-- The skill does not make clear that draft-skill, tune-skill and findable-polish must be invoked as skills rather than just read, so the run only read their SKILL.md files
-- No instruction to produce a single consolidated final report; the run emitted two overlapping, partly contradictory summaries
+- skill-launch has no fallback when Bash is unavailable or denied: it should stop and report the gate as not passed rather than substitute a hand check, or at least give a clear block on that
+- The skill does not require reporting the gate result as a numbered tool output, so a hand-check claim can stand in for a validator run
+- Instructions for polishing do not say how to ground README/listing queries in real data when search tools are unavailable, leaving the model to self-write 'queries this should match'
 
 ## What it did
 

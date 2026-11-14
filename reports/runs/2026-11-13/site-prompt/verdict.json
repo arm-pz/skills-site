@@ -3,8 +3,8 @@
   "date": "2026-11-13",
   "target": "a one-file build prompt for a local business website",
   "verdict": "PARTIAL",
-  "score": 3,
-  "summary": "The run wrote site-prompt.md embedding three full files (index.html, styles.css, main.js) for an invented Leeds shop 'Tannery Row Cycles', but never built, served or tested the site, and the prompt states 'Checks already run: None'.",
+  "score": 4,
+  "summary": "The run wrote site-prompt.md with a Leeds bike-shop concept ('Tannery Row Cycles') embedding three complete files (index.html, styles.css, main.js) in a plain HTML/CSS/JS stack, but it never built or ran the site in a scratch folder, so the prompt states 'Checks already run: None'.",
   "checks": [
     {
       "desc": "wrote site-prompt.md",
@@ -18,28 +18,29 @@
     }
   ],
   "met": [
-    "Narrows the topic to a concrete subject (independent Leeds bike workshop, Kirkstall) and derives a concept from it (the paper job tag as a tag-builder signature mechanic)",
-    "Embeds all three files in full with a pinned stack (plain HTML/CSS/JS, no dependencies, Google Fonts named)",
-    "Marks business details as illustrative: the page and footer label name, address, hours and prices as concept placeholders, and the phone/email use reserved or example values",
-    "Honestly reports in both the prompt and the final message that nothing was verified"
+    "Narrows the topic to a concrete subject (Leeds independent bike workshop) and derives a concept from it (the job-tag builder, kraft-paper workshop-counter world)",
+    "Embeds every file verbatim (index.html, styles.css, main.js) with a pinned stack (plain HTML/CSS/JS, no dependencies, Barlow fonts via Google Fonts)",
+    "Marks invented details (name, address, phone on the Ofcom drama range, example.com email, hours, prices) as illustrative concept-shop placeholders on the page and in the notes",
+    "Honestly reports that nothing was verified instead of claiming checks that did not run; the final message says the same"
   ],
   "missed": [
-    "Did not build and verify the site in a scratch folder before writing the prompt: no scratch folder, no browser, no served page, no replay script run; only a read-only inspection Bash call was made and Bash was then denied",
-    "No checks actually ran, so the prompt's 'checks that actually ran' section says 'None' and the 'Not verified' list covers page load, layout, behaviour, contrast, fonts and replay",
-    "File contents were never round-tripped through the replay script, so verbatim embedding is unconfirmed",
-    "The prices and hours are presented as fixed values with 'do not change' instructions rather than as owner-fill placeholders; they are only labelled illustrative in the page copy"
+    "Did not build and verify the site in a scratch folder before writing the prompt: Bash was denied, only an inspection command and a Write were made, and no browser, server or replay script ran",
+    "The prompt lists no checks that actually ran ('Checks already run: None'), so the rubric's 'checks that actually ran' is not satisfied",
+    "Placeholders are labelled 'illustrative' but are written as concrete values in the code (e.g. \u00a360, 08:00\u201318:00) with an instruction 'Do not change the illustrative prices, hours, phone number or email', rather than flagged as items for the owner to fill in",
+    "Did not stop and ask about, or work around, the denied Bash permission, for example by trying a different verification path"
   ],
   "skill_defects": [
-    "The skill has no fallback for when command execution is denied or unavailable (for example, asking the user to approve Bash or stopping before writing an unverified prompt); here it produced a full prompt with zero verification",
-    "The prompt template tells the build agent 'Do not change the illustrative prices, hours, phone number or email', which conflicts with the goal of marking invented business details as owner placeholders",
-    "The skill does not require a single early check that the build tooling (Bash, a browser) is usable before committing to writing the files"
+    "The skill gives no fallback when execution is unavailable (for example, a clear stop-and-ask step rather than emitting an unverified prompt), so it can produce an unverified deliverable",
+    "The template tells the build agent not to change prices, hours, phone number or email, which conflicts with treating them as owner placeholders; it should tell the owner what to replace",
+    "The skill has no explicit guard that checks for a working verification environment (browser or node available) before it starts drafting"
   ],
-  "cost_usd": 0.48,
+  "cost_usd": 0.56,
   "turns": 6,
   "seconds": 128,
   "tool_calls": 4,
   "files": [
     "site-prompt.md"
   ],
-  "error": ""
+  "error": "",
+  "judge_model": "sonnet"
 }

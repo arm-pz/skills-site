@@ -1,8 +1,8 @@
 # session-retrace: real-world run, 2026-11-13
 
-**Verdict: PARTIAL** (5/10). The run searched with the bundled script and found one candidate, claude:eda1adb5 (2026-11-13, workspace /tmp/run-ship-second-brain-69r37__h/project), which matches the ground truth, but it gave no decisions because it never read beyond a 12-turn view.
+**Verdict: PARTIAL** (5/10). The run used the bundled script to find one session, claude:eda1adb5 (2026-11-13, workspace run-ship-second-brain-69r37__h), which matches the ground truth, but it gave no decisions from that session and read only 12 turns.
 
-Target: real Claude Code session files from this batch of runs. Run headless on sonnet in a clean project with only this skill installed (7 turns, 5 tool calls, 13 s, $0.08).
+Target: real Claude Code session files from this batch of runs. Run headless on sonnet in a clean project with only this skill installed (7 turns, 5 tool calls, 13 s, $0.1).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -24,22 +24,22 @@ I can't find the chat where we built a team second brain about split payments an
 ## Met
 
 - Searched the transcript files on disk with the bundled session_retrace.py script
-- Top candidate id (eda1adb5) matches the ground truth session
-- Gave date, workspace and verbatim prompt evidence for the candidate, at no more than three candidates
-- Invented no decisions; it said plainly that it could not recover the answers
+- Top candidate id (eda1adb5) matches the ground truth session eda1adb5-d41a-45ea-b194-ed172aadf0d2
+- Gave no more than three candidates (one), with date, workspace and a verbatim quote from the user prompt
+- Did not invent decisions; it stated openly that the answers could not be recovered
 
 ## Missed
 
-- Did not summarise the session's decisions on split payments, overpayments or the Stackwise promise; it stopped after a 12-turn view and only offered to read 40 turns
-- Evidence is labelled with 'claude:eda1adb5' rather than the agent:id form (agent-aed7119ed04059d93), and the other ground-truth id was not surfaced
-- Tried to read the vault on disk (ls, Glob) instead of reading further into the transcript, which is where the decisions would be
-- Did not use the available follow-up (show with more turns) before giving up, so the user's second question went unanswered
+- Did not summarise the session's decisions on split payments or Stackwise. It reported only what was built and the verified/seen note counts, and left the user's actual question unanswered
+- Stopped after reading 12 turns and only offered to read 40, so the answers in the transcript were probably never reached
+- The id was given as claude:eda1adb5 rather than a full agent:id, and the ground truth also lists agent-aed7119ed04059d93, which was not surfaced
+- Tried to read the vault from disk (cd, ls, Glob) instead of reading the rest of the transcript, which is where the decisions would be
 
 ## Defects to fix in the skill
 
-- The skill does not tell the agent to read enough of the chosen session (e.g. the final assistant answer) to report decisions, so a shallow show --turns 12 can leave the second half of the question unanswered
-- The skill does not make clear that the id to report is the agent:id form, so the output used claude:eda1adb5
-- The skill does not steer the agent toward the transcript's final answer turns rather than re-reading workspace files that may no longer exist
+- The skill does not tell the agent to keep paging through the transcript (more turns, or the subagent sessions) when the first view lacks the decisions, so the run ended without answering
+- The skill gives no step for finding the related subagent session (agent-aed7119...) that answered from the vault, even though it likely held the decisions
+- The skill does not require the id in the agent:id format, so the output used a short claude: prefix
 
 ## Ground truth
 

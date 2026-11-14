@@ -1,8 +1,8 @@
 # tune-and-ship: real-world run, 2026-11-13
 
-**Verdict: PARTIAL** (4/10). The run fact-checked choose-effort against Anthropic docs (6 confirmed, 3 corrected, 1 added), edited SKILL.md to 1.0.1, wrote references/sources.md and gave draft release notes and commands, but it did not run tune-skill or findable-polish and left the sibling and install claims unchecked.
+**Verdict: PARTIAL** (4/10). The run fact-checked about 10 claims in choose-effort against Anthropic docs, corrected 3, and drafted release notes and release commands, but it never ran tune-skill or check_skill.py, never ran findable-polish, and left the install command and sibling link unchecked.
 
-Target: a clone of arm-pz/choose-effort (tuned and fact-checked locally; release steps not run). Run headless on sonnet in a clean project with only this skill installed (27 turns, 25 tool calls, 57 s, $0.32).
+Target: a clone of arm-pz/choose-effort (tuned and fact-checked locally; release steps not run). Run headless on sonnet in a clean project with only this skill installed (27 turns, 25 tool calls, 57 s, $0.37).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -25,26 +25,25 @@ Take the skill in target/ through tune-and-ship: tune it, fact-check every versi
 
 ## Met
 
-- Fact-checked effort levels, /effort, --effort, /usage, /goal and agent-teams claims against code.claude.com docs (model-config, commands, agent-teams) and recorded each with a source and verdict in references/sources.md
-- Corrected real inaccuracies: subagent effort inheritance only on the same model, the fallback for unsupported levels, and the 'may save' wording for typed /effort levels
-- Stopped before release: nothing was committed, pushed or tagged, and the run listed draft release notes and the exact commands it would run
-- Disclosed what could not be done (Bash denied, GitHub 403, install command and sibling link unchecked) without inventing results
+- Fact-checks concrete claims (effort levels, flags, commands) against primary docs: model-config, commands and agent-teams were fetched, and references/sources.md lists each claim with its source and a Confirmed/Corrected/Added verdict (6 confirmed, 3 corrected, 1 added)
+- Stops before release: no commit, push, PR or tag was made, and the release notes and the exact commands (check_skill.py, git switch/add/commit/push, gh pr create, tag, gh release create) are given
+- Invents no facts: the final output openly states that it did not run check_skill.py, tune-skill or findable-polish, and that GitHub returned 403; the sources.md table matches what the fetches could support
+- The skill's own SKILL.md and the unverifiable README claim were corrected: the unverified 'check_skill.py: OK, 0 fail 0 warn' line was replaced with a pointer to sources.md
 
 ## Missed
 
-- Did not tune with tune-skill: it read the tune-skill SKILL.md but never ran check_skill.py or the tune loop, so the 'zero FAILs' item has no evidence from the transcript (the harness hard check passes, but the run itself did not execute it)
-- Did not polish the listing: findable-polish was read but not run, and the README opening, About text and topics were not revised from the final description (only a Status line was edited)
-- Did not read the sibling skills (diagnose-usage, product-self-knowledge), so the 'Not for' routing claims and the hand-read trigger cases remain unverified
-- The install command and the diagnose-usage link were not verified (GitHub returned 403), so those concrete claims have no verdict
-- The README Status line cites 'Claims checked ... on 2026-11-14', while the trigger-cases file still carries an older 2026-10-29 hand-read date and was not re-examined after the description changes
-- Release notes were drafted but there is no changelog entry or tag check, and the commands rely on pr.md and notes.md files that were never created
+- Tunes with tune-skill (zero FAILs): the run read tune-skill/SKILL.md but did not run the tune or check_skill.py; the final output says 'I didn't run the full tune or its validator', so zero FAILs is unverified and the hard check was never exercised
+- Polishes the listing from the final description: findable-polish was read but not run, and the README opening, About text and topics are unchanged apart from the Status line; the final output admits this
+- Fact-check coverage is incomplete: the npx install command and the arm-pz/diagnose-usage link were not checked (GitHub 403), and the sibling skills (diagnose-usage, product-self-knowledge) were not read, so the Not-for claims and trigger cases rest on unseen descriptions
+- The skill's required output is only partly delivered: the run claims Bash was denied, yet the listed tool calls include several Bash calls (find, ls, cat, git log), and no later Bash call was retried or an alternative route tried for validation
+- The README's 'Claims checked against Anthropic's docs on 2026-11-14' was added even though not all claims were checked, and the trigger-cases date and 'Hand-read' status were left stale after the SKILL.md description changed (though the description itself was not edited)
 
 ## Defects to fix in the skill
 
-- The skill has no fallback when Bash or GitHub access is denied: it should still do the tune and polish steps with file tools, but here those stages were skipped entirely
-- The fact-check step does not say how to handle claims about sibling repos or install commands when the primary source (GitHub) is unreachable, such as using a different fetch route or recording an explicit 'unverified' verdict in the output
-- The skill does not require the commands it lists to be self-contained, so the output referenced pr.md and notes.md that do not exist
-- The skill does not make the tune-skill validator run and its output a required gate before the fact-check, so a run can skip the tune and still proceed to the release summary
+- tune-and-ship has no fallback when Bash or the validator cannot run: it lets the run skip tune-skill and check_skill.py and still produce a 'done' summary, instead of requiring the tune or marking the whole run blocked
+- The fact-check step does not say how to verify GitHub-hosted claims (install command, sibling repo links) when WebFetch returns 403, for example via the gh CLI, raw.githubusercontent.com, or flagging them as unverified in the listing
+- tune-and-ship does not require reading the sibling skills a description depends on before tuning it, so the trigger cases and Not-for clauses can go unchecked
+- The skill does not say that a polish step it could not run must be listed as missing in the release notes and commands, which lets a release path be presented without the listing being polished
 
 ## What it did
 

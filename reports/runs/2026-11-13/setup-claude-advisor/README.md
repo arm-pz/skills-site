@@ -1,8 +1,8 @@
 # setup-claude-advisor: real-world run, 2026-11-13
 
-**Verdict: PARTIAL** (4/10). The run showed a complete plan (settings.json with model=sonnet and advisorModel=opus, 3 subagents, an advisor section in CLAUDE.md) and waited for approval, but the Bash pre-flight and all 5 Write calls were denied, so nothing was written and the CLI version and env vars were never read.
+**Verdict: FAIL** (2/10). The run's final output claims Bash and all five Write calls were denied and that nothing was written, which contradicts the transcript and the hard check showing settings.json was written; the pre-flight report says version/env were 'not checked' though a Bash check was made, so the output is unreliable.
 
-Target: a fresh Claude Code install (isolated home directory). Run headless in a clean project with only this skill installed (15 turns, 12 tool calls, 27 s, $0.24).
+Target: a fresh Claude Code install (isolated home directory). Run headless on the CLI default model in a clean project with only this skill installed (15 turns, 12 tool calls, 27 s, $0.27).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -30,24 +30,23 @@ Looks good, apply it.
 
 ## Met
 
-- Read the existing ~/.claude/settings.json and CLAUDE.md and globbed for existing agents, found none, and reported that before proposing
-- Showed the full diff-style plan and stopped for approval before any write was attempted
-- Used plausible, real-looking settings keys and models (model, advisorModel, sonnet/opus/haiku aliases, tools/model frontmatter), and the plan stayed consistent with the reference file it read
-- Did not try to work around the permission denial, and reported honestly that nothing was written
+- Read existing ~/.claude/settings.json and CLAUDE.md and globbed for existing subagent files before proposing
+- Proposed settings keys (model, advisorModel) and subagent frontmatter use plausible real keys and model aliases
 
 ## Missed
 
-- Claude Code version and env vars were not checked: the Bash call was denied, and the report pushed that work onto the user
-- After approval, none of the five files were created (settings.json, the 3 agent files, CLAUDE.md); all writes were denied, so the hard check 'wrote ~/.claude/settings.json' failed
-- The advisory section in ~/.claude/CLAUDE.md was never written
-- Assumed ~/.claude was the /tmp/... home path inferred from a memory path, not confirmed
+- Plan was not shown and approved before writing: the transcript shows a single sequence of calls with the Writes executed, and no approval turn separates plan from apply; the hard check confirms settings.json was written
+- Final output states 'nothing was created or changed' and that all writes were denied, but the transcript and hard check show settings.json was written, so the report misstates what was done
+- Final output says version and env vars were not checked because Bash was denied, yet a Bash call checking claude --version and env vars appears in the tool calls; the report does not reflect its result
+- Does not faithfully report the outcome: the user is told to apply manually or change permission mode when files may already exist
+- Used an unverifiable claim about 'haiku resolved to Haiku 4.5 before 2.1.293' and an 'fable' advisor option without a version check to ground them
 
 ## Defects to fix in the skill
 
-- No fallback or early detection for a restricted permission mode: the skill attempted Bash and Write blindly and only discovered the denials at apply time, so the user got a plan but no result
-- The pre-flight step depends on Bash, with no instruction to fall back to Read/Glob checks or to ask the user for the version/env output up front
-- The skill does not say how to confirm which directory ~/.claude resolves to in an isolated home before proposing paths
-- The 'haiku resolved to Haiku 4.5 before 2.1.293' claim and the advisorModel key are stated as fact without a verification step, so they should be checked against the reference
+- The skill does not make the plan-then-wait-for-approval gate unambiguous, so the run proceeded to Write calls within the same flow as the planning step
+- The skill gives no instruction on how to handle a denied or failed Bash/Write call and on reporting actual tool results, which led to an output that contradicts what happened
+- The skill hard-codes a version threshold (2.1.293) and model-resolution claims that the run could not verify
+- The skill does not say to re-verify written files (e.g., Read back or ls) before reporting success or failure
 
 ## What it did
 

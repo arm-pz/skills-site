@@ -1,8 +1,8 @@
 # upstream-polish: real-world run, 2026-11-13
 
-**Verdict: PARTIAL** (5/10). The run read local refs for three repos (all matching origin at last fetch), found drift in keyword-guard README and the seo-polish index entry, and drafted rewrites, but never fetched upstream, never read the real listing-index.json (404), and did not note wordsmith moving out of arm-pz.
+**Verdict: PARTIAL** (5/10). The run found two real listing drifts (seo-polish index entry still names seo-audit instead of seo-crawl; keyword-guard README calls itself Qoder-only and omits Claude Code/Cursor) and pushed nothing. It could not fetch upstream (Bash denied, GitHub 403), never read the local listing-index.json, did not mention that wordsmith had moved outside arm-pz, and quoted listing text only in paraphrase.
 
-Target: three skill repos and their live listing on skillsmith.tech (nothing pushed). Run headless in a clean project with only this skill installed (32 turns, 30 tool calls, 60 s, $0.3).
+Target: three skill repos and their live listing on skillsmith.tech (nothing pushed). Run headless on the CLI default model in a clean project with only this skill installed (32 turns, 30 tool calls, 60 s, $0.49).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -24,24 +24,26 @@ Check repos/keyword-guard, repos/seo-polish and repos/wordsmith against their up
 
 ## Met
 
-- Treated unreadable upstream as inconclusive: explicitly said it could not determine whether repos are behind, and did not claim a fetch-based verdict from local refs alone
-- Pushed nothing; changed no files and said so
-- Drafted rewrites for seo-polish and keyword-guard grounded in SKILL.md/README content, with no obviously invented facts and options labelled
-- Named real drift for seo-polish (index says seo-audit chain vs SKILL.md runs seo-crawl first) and keyword-guard (README says Qoder-only and seo-audit vs index and SKILL.md)
+- Pushed nothing and changed no files
+- Said plainly that upstream state is unreadable and that it could not tell whether any repo is behind, instead of claiming 'in sync'
+- Found real drift for seo-polish (index says seo-audit chain, SKILL.md/README say seo-crawl first) and keyword-guard (README 'Qoder Skill' vs listing 'Claude Code, Cursor, Qoder'; seo-audit vs seo-crawl)
+- Drafted rewrites (seo-polish index description, keyword-guard README opening, Not-for section) that stay within facts in SKILL.md/README, with no invented numbers or capabilities
+- Correctly counted 62 entries in the index and flagged the mismatch with the site's '60 skills plus 7 mods' without guessing a cause
 
 ## Missed
 
-- No fetch-based verdict per repo: Bash was reportedly denied, so git fetch never ran; the table shows 'level' against stale local origin refs, which is not an in-sync/behind/diverged verdict
-- Did not use the actual listing-index.json; fetched the wrong URL (404) and used /.well-known index with paraphrased descriptions, so the 'quoting both sides' requirement is weakly met since the index text was paraphrased by the fetch tool
-- Did not note wordsmith moved outside arm-pz; GitHub fetches returned 403 and the final output says nothing about the moved repo, and declares 'no drift' for wordsmith
-- Wordsmith checked only for command count; no description-vs-listing comparison was quoted for it
-- Drift item 3 (62 vs 60 entries) is left unexplained, and the index appears truncated in the saved file
+- No fetch-based verdict: the table shows 'level' for all three repos from local refs/packed-refs only; the run never completed a git fetch. This is honestly labelled but is not the required fetch-based verdict, and 'level' in the table is easy to misread as 'in sync'.
+- Did not quote both sides of the drift. It paraphrased the listing ('says the skill audits with seo-audit...') because it used a WebFetch summary instead of reading the listing-index.json present in the project.
+- Fetched skillsmith.tech/listing-index.json, got a 404, and fell back to the .well-known path and /skills/ page. It never read the local listing-index.json that the prompt named as the live index, and told the user the index fetch failed.
+- Did not note that wordsmith moved outside arm-pz. It read wordsmith's .git/config and fetched github.com/arm-pz/wordsmith (403) but reported 'no drift found' for wordsmith.
+- Did not mention that the plugin.json homepage (skills.caffeinity.com) differs from the skillsmith.tech listing host for keyword-guard and wordsmith.
 
 ## Defects to fix in the skill
 
-- The skill depends on Bash (upstream_check.mjs, git fetch) with no documented fallback when Bash is denied, so the run drifted into reading .git refs by hand and presenting 'level' as a table verdict
-- The skill does not say to compare the repo's configured remote owner against the actual or listed owner, so a repo that moved out of arm-pz is easy to miss
-- The skill does not tell the agent to use the local listing-index.json file when the live URL 404s, or to quote it verbatim rather than through a summarising fetch tool
+- The skill hinges on Bash (upstream_check.mjs / git fetch) with no stated fallback when Bash or the network is denied. The run ended with no real fetch verdict, and the skill gives no guidance on how to report that cleanly, for example an explicit INCONCLUSIVE column.
+- The skill does not tell the agent to read the provided listing-index.json file in the project first; it fetched a guessed URL, hit a 404 and worked from a paraphrased page.
+- No explicit step to compare each repo's remote URL / owner against the listing's expected owner (arm-pz), so a repo that moved to another owner can pass as 'no drift'.
+- Does not require drift findings to quote the listing text and the repo text verbatim side by side, so paraphrased findings are allowed.
 
 ## What it did
 

@@ -4,34 +4,34 @@
   "target": "a 6-month conversational-Portuguese plan for a busy adult",
   "verdict": "PARTIAL",
   "score": 7,
-  "summary": "The run wrote a 26-week, 5 h/week system with five gated stages, a 60/90/90/50-minute weekly routine, an expanding-interval card schedule and a prepaid weekly tutor slot, but it uses the Spanish transfer only thinly and gives no concrete false-friend or EP-versus-Brazilian pronunciation content.",
+  "summary": "The run wrote a 26-week, five-stage plan fitting about 4h50m/week with observable gates, a card ladder, a prepaid tutor slot and a floor-day/restart rule, but the Spanish transfer is only thinly used and there is no systematic gap-audit mechanism.",
   "checks": [],
   "met": [
-    "Roadmap fits the constraints: 5 stages over weeks 1\u201326 with observable gates, and a weekly routine totalling about 4 h 50 min.",
-    "Deliberate practice with speaking: a weekly 60-min live session, two 45-min recorded speaking drills against a checklist, and an error log (one line per session) that doubles as the gap audit; the 'Open gaps' section lists further gaps to test.",
-    "Spaced repetition schedule is explicit: a 1d/3d/1wk/2wk/4wk/8wk ladder, an adjustment rule, a load cap and 10 new cards a day at most.",
-    "Quitting pattern is addressed with concrete mechanisms: a prepaid weekly tutor slot, a 10-minute floor day, a no-catch-up restart rule after a 3+ day gap, and logging sessions done and gates passed with no streaks.",
-    "Measurable 20-minute check: a recorded unscripted 20-minute conversation in weeks 20\u201326 with counted language switches, plus dress rehearsals and a fallback of two 10-minute conversations.",
-    "Nothing invented: the 130 h / 90 h figures are labelled as arithmetic, gate thresholds are labelled as guesses, and no tutor or app is named."
+    "Roadmap: five stages over weeks 1-26 with dependency reasons and pass/fail gates; weekly block totals about 4h50m, fitting 5 h/week",
+    "Deliberate practice with speaking: weekly 60-min live session, two recorded speaking drills with a checklist, shadowing, an error log and a band-moving rule",
+    "Spaced repetition: explicit ladder (same/next day, 1d, 3d, 1w, 2w, 4w, 8w), adjustment rules, a daily load cap and new-card limits",
+    "Quitting pattern: prepaid weekly live slot, 10-minute floor day, a no-catch-up restart rule, no streaks (sessions done vs gates passed tracked separately), family calls as pull",
+    "Measurable 20-minute check: stage 4 gate is a recorded 20-minute unscripted conversation with counted language switches, plus a week-1 baseline and a rule to narrow the goal if behind schedule",
+    "Honest about unknowns: marks reachability, the family's dialect and the user's level as unknown, and names no unverified resources"
   ],
   "missed": [
-    "Spanish transfer is used only generically ('reuse vocab and grammar frame', 'Spanish autopilot'); no actual false friends are listed and no Spanish-to-Portuguese mappings are given.",
-    "EP vs Brazilian pronunciation is mentioned only as a warning to check that audio and tutors are EP; no concrete EP features beyond a one-line 'vowel reduction, nasal vowels, sibilants'.",
-    "The 20-minute threshold for language switches is left for the learner to set in week 20, so the final gate is not fully quantified.",
-    "The week-by-week roadmap is stage-level (weeks 2\u20136, 7\u201312, etc.), not week-by-week, and the system omits a stage-4 ramp such as 5/10/15-minute conversation lengths.",
-    "The anti-quit design rests on external dependencies (tutor, partner, family) with no fallback if the tutor slot lapses, other than the floor day."
+    "Spanish transfer is only lightly used: it is listed as reusable vocabulary and grammar, but the file gives no concrete false-friend examples and no specific Spanish-to-EP contrasts beyond naming vowel reduction, nasals and sibilants",
+    "European vs Brazilian pronunciation is only mentioned as a resource caveat, with no concrete contrasts and no EP-specific drill content",
+    "Gap audit is weak: gaps are caught through the error log and a cards-you-can't-answer rule, but there is no periodic structured audit, such as a scheduled self-test or checklist review against the component map",
+    "The stage 4 switch threshold is deferred to week 20 instead of being set now, so the final gate is partly unmeasured at plan time"
   ],
   "skill_defects": [
-    "The skill's design reference pushes generic structure, so the output has no step requiring a concrete cross-language transfer table (false friends, sound mappings) when the learner names a related language.",
-    "The skill says not to name resources unless verified, which led to no concrete EP resource guidance and left the learner to find tutors and audio themselves.",
-    "The skill has no requirement to fix a numeric pass threshold for the final goal gate, so the 20-minute check ended with a threshold to be defined later."
+    "The skill's design reference pushes generic, resource-agnostic structure and the 'unverified' stance, which led to no concrete language-specific content (false friends, EP phonology examples) even though the prompt asked for Spanish transfer",
+    "No required step for a periodic, scheduled gap audit (for example a monthly diagnostic against the component map) separate from the error log",
+    "The skill allows leaving the final-gate threshold open, where it should require a concrete pass criterion up front"
   ],
-  "cost_usd": 0.22,
+  "cost_usd": 0.26,
   "turns": 5,
   "seconds": 73,
   "tool_calls": 3,
   "files": [
     "study-system.md"
   ],
-  "error": ""
+  "error": "",
+  "judge_model": "sonnet"
 }
