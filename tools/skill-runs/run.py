@@ -368,10 +368,13 @@ def rejudge(name, day):
         shutil.copy(Path.home() / ".claude" / ".credentials.json", home / ".claude")
         verdict, jcost = judge(scn, output, tools, rec["checks"], truth, child_env(home), Path(tmp),
                                files_text(out_dir / "files", rec["files"], limit=90000))
+    if LIMIT.search(json.dumps(verdict)):
+        raise UsageLimit("the judge hit the usage limit")
     cap(verdict, rec["checks"])
     rec.update(verdict=verdict["verdict"], score=verdict.get("score"), summary=verdict.get("summary", ""),
                met=verdict.get("met", []), missed=verdict.get("missed", []),
-               skill_defects=verdict.get("skill_defects", []), cost_usd=round(rec["cost_usd"] + jcost, 2))
+               skill_defects=verdict.get("skill_defects", []), cost_usd=round(rec["cost_usd"] + jcost, 2),
+               judge_model=MODEL or "cli default")
     (out_dir / "output.md").write_text(redact(output))
     (out_dir / "verdict.json").write_text(json.dumps(rec, indent=2) + "\n")
     (out_dir / "README.md").write_text(redact(report(scn, rec, output, tools, truth)))
@@ -458,9 +461,10 @@ def main(argv=None):
         except UsageLimit as ex:
             print(f"{n:34} LIMIT    {ex}; stopping, nothing saved for this or later runs", flush=True)
             return 2
-            print(f"{n:34} {r['verdict']:8} ${r['cost_usd']:<6} {r['summary']}", flush=True)
         except Exception as ex:  # one broken scenario must not stop the batch
             print(f"{n:34} ERROR    {type(ex).__name__}: {ex}", flush=True)
+            continue
+        print(f"{n:34} {r['verdict']:8} ${r['cost_usd']:<6} {r['summary']}", flush=True)
     return 0
 
 

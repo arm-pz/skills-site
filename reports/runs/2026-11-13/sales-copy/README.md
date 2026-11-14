@@ -1,8 +1,8 @@
 # sales-copy: real-world run, 2026-11-13
 
-**Verdict: PARTIAL** (7/10). The run produced a landing page with four headline options and a 3-email checklist sequence with correct prices (£149/£349, 14-day no-card trial), a verbatim attributed quote and the 3.5-to-1-day figure (n=24) attributed to the survey, with none of the forbidden claims, but it leaves several bracketed placeholders and a thin, unfinished mismatch section.
+**Verdict: PARTIAL** (7/10). The run produced a landing page (four headline options, one recommended) and three single-CTA emails with the brief's prices (£149/£349), 14-day no-card trial, verbatim Hana Ito quote and n=24 survey figure, with no QuickBooks, SOC 2 or AI claims, but it left bracketed placeholders in the copy and put an unbriefed company name in Email 1's sign-off.
 
-Target: a real-shaped B2B fintech product brief with claims it must not make. Run headless in a clean project with only this skill installed (5 turns, 3 tool calls, 34 s, $0.16).
+Target: a real-shaped B2B fintech product brief with claims it must not make. Run headless on the CLI default model in a clean project with only this skill installed (5 turns, 3 tool calls, 34 s, $0.19).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -26,25 +26,24 @@ Write the landing page for Reconcile and a 3-email sequence for people who downl
 
 ## Met
 
-- Landing page has headline options, subheadline, body sections, proof (survey n=24, Hana Ito quote, 31 customers listed in header) and CTA; 3 emails each have a subject line and a single 'Start free trial' CTA
-- Targets UK SaaS finance teams of 1-3 people with the payout-matching pain, and explicitly pitches at problem-aware level for checklist downloaders
-- Prices £149/£349, 14-day no-card trial, and the quote 'We closed October in a day for the first time.' attributed to Hana Ito, Finance Lead, Stackwise, match the brief; hard checks pass
-- No QuickBooks support, SOC 2 certification or AI claims; states Xero-only and SOC 2 not yet/in progress honestly, and caveats the survey as small and self-run
-- Voice is plain, specific and dry, with no hype or urgency
+- Landing page has headline options, subheadline, body sections, proof (survey n=24, quote, 31 paying customers listed) and CTA; 3 emails each with a subject line and one Start free trial CTA
+- Targets UK SaaS finance teams of 1-3 people with the payout-to-invoice matching pain; correctly treats checklist downloaders as problem-aware
+- Prices £149/£349, 14-day free trial with no card, and the quote 'We closed October in a day for the first time.' attributed to Hana Ito, Finance Lead, Stackwise match the brief (hard checks pass)
+- No forbidden claims: states Xero only and no QuickBooks, says SOC 2 is not yet certified with audit in progress, no AI claims; survey caveats stated honestly
+- Plain, dry, specific voice with no hype or urgency language
 
 ## Missed
 
-- The landing page is not ship-ready: it contains in-body placeholders ('[How mismatches are shown ... — supply this]', '[What happens at trial end — supply this]', '[Pricing above 5,000 — supply this]', '[Security details ... — supply this]'), and the FAQ has unanswered questions
-- Delivers four headline options and only recommends one, rather than committing to a single headline in the page itself
-- Emails carry unresolved placeholders ([Sender name], [Setup time — supply this], [Confirm replies are monitored]); Email 1 signs off 'Ledgerline', which may be an invented or unverified company name, if not in the brief
-- Email 3 says 'you've lost a short setup and nothing else', a mild unsupported claim since setup time is not in the brief
-- Email 3's CTA block also invites replying with questions, a soft second action against 'one CTA'
+- The landing page is not publish-ready: several bracketed '[... supply this]' placeholders sit inside the copy (mismatch handling, trial-end behaviour, pricing above 5,000, security details), including in the FAQ and body, so a reader would see them
+- Email 1 signs off with 'Ledgerline', a company name that appears not to come from the brief (Reconcile is the product) and was never flagged as an assumption in the gaps list, so it may be invented
+- The deliverable is a working document with four headline options, test notes, gap lists and a claims check mixed in with the copy, rather than a single clean landing page; the headline choice is deferred to the reader
+- 'Customers' median close time fell from 3.5 days to 1' and the 'two to four days' by-hand figure are accepted from the brief, but the run itself flags the survey wording as unconfirmed, so the proof framing is partly hedged
 
 ## Defects to fix in the skill
 
-- The skill leaves the output as a working document with options, gap lists and test notes mixed into the deliverable rather than clean, paste-ready copy
-- It does not tell the agent to commit to one headline or to avoid inline placeholders in the body, leaving [supply this] gaps inside the copy
-- It does not tell the agent to avoid sign-offs or company names that the brief does not supply
+- The skill allows unresolved bracketed placeholders and multi-option headlines inside the deliverable instead of requiring a clean, ready-to-use page with gaps listed separately
+- No instruction to avoid introducing company or sender names not present in the brief, or to flag any assumed ones in the gaps list
+- The skill bundles strategy notes (awareness, test notes, claims check) into the same file as the copy, with no guidance to separate them from the publishable text
 
 ## What it did
 
