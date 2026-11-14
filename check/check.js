@@ -192,8 +192,8 @@
     var clean=!r.fatal&&!fails.length&&!warns.length;
     p.appendChild(el("b",null,clean?"A script can only check the shape.":"Want it sent back fixed?"));
     p.appendChild(document.createTextNode(clean
-      ?"Whether the description wins the right requests takes a reader. A tune-up is $29 for one skill, refunded if we find nothing worth changing."
-      :"A tune-up is $29 for one skill: a replacement SKILL.md, each finding with its fix, and test requests. Back in two working days, refunded if we find nothing worth changing."));
+      ?"Whether the description wins the right requests takes a reader. A tune-up is $19 for one skill at the launch price, refunded if we find nothing worth changing."
+      :"A tune-up is $19 for one skill at the launch price: a replacement SKILL.md, each finding with its fix, and test requests. Back in two working days, refunded if we find nothing worth changing."));
     up.appendChild(p);
     var a=el("a","btn btn-accent","Order a tune-up");
     a.href=orderHref("single",link||"");
@@ -205,7 +205,7 @@
 
   function orderHref(kind,link){
     if(PAY[kind])return PAY[kind];
-    var subject=kind==="family"?"Family tune-up ($99)":"Skill tune-up ($29)";
+    var subject=kind==="family"?"Family tune-up ($99)":"Skill tune-up ($19 launch price)";
     return "mailto:hello@skillsmith.tech?subject="+encodeURIComponent(subject)+"&body="+encodeURIComponent("Skill repo or SKILL.md link: "+link+"\n\nAnything we should know (what it fails to do, which agent you use): \n");
   }
   [].forEach.call(document.querySelectorAll("[data-order]"),function(a){
