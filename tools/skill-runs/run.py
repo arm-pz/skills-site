@@ -75,6 +75,16 @@ class UsageLimit(Exception):
     """The plan's usage limit ended the run; nothing is saved and later runs are skipped."""
 
 
+# Told to every run session. The permission layer matches each Bash call against an allowlist, and a
+# compound command (variables, functions, cd chains) cannot match, so it is denied whole. Saying so up
+# front lets a skill do its real work instead of giving up after one denied call.
+ENV_NOTE = ("This environment runs Bash with a fixed allowlist. Use one simple command per Bash call: "
+            "no shell variables, functions, `cd dir && ...` chains, `;` lists or heredocs. Call scripts by "
+            "path relative to the project (e.g. `node .claude/skills/<skill>/scripts/x.mjs`), write files "
+            "with the Write tool, and if a call is denied, split it into simpler calls rather than stopping. "
+            "Pushing, releasing, deploying and posting to outside services are not allowed here.")
+
+
 def manifest():
     return {e["name"]: e for e in json.loads((ROOT / "site" / "skills.json").read_text())["skills"]}
 
@@ -265,6 +275,7 @@ def run(name, man, day):
         args = ["--output-format", "stream-json", "--verbose", "--max-turns", str(scn.get("max_turns", 60)),
                 "--permission-mode", "dontAsk", "--allowedTools", *ALLOW, *scn.get("allow", []),
                 "--max-budget-usd", str(scn.get("budget_usd", 5)), *(["--model", MODEL] if MODEL else []),
+                "--append-system-prompt", ENV_NOTE,
                 "--disallowedTools", *[d for d in DENY if d not in scn.get("undeny", [])]]
         for p in scn.get("plugins", []):
             args += ["--plugin-dir", str(source(p, man))]
