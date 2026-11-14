@@ -1,0 +1,56 @@
+{
+  "skill": "production-code",
+  "date": "2026-11-13",
+  "target": "a lead-list cleaning CLI with tests, built on a real-shaped provider export",
+  "verdict": "PARTIAL",
+  "score": 7,
+  "summary": "The run produced a stdlib clean_leads.py and 12 unit tests; the hard checks pass and clean.csv has 7 kept rows with the info@, gmail and 2,600-employee rows gone, but the final report says nothing was run and states the wrong kept count (6 of 9) while listing 7 names.",
+  "checks": [
+    {
+      "desc": "clean_leads.py runs on the fixture",
+      "ok": true,
+      "detail": "wrote 7 rows to clean.csv; dropped: role_inbox=1, free_mail=1, over_limit=1"
+    },
+    {
+      "desc": "its unit tests pass",
+      "ok": true,
+      "detail": "----------------------------------------------------------------------\nRan 12 tests in 0.004s\n\nOK"
+    },
+    {
+      "desc": "drops the info@, gmail and 2,600-employee rows",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "met": [
+    "Complete stdlib script with argparse, --max-employees (default 500), -o, and error handling that prints 'error: ...' and exits 1 for a missing file or missing required columns",
+    "Tests cover role inboxes, free-mail, the employee limit (500 kept, 501 dropped, configurable), case-insensitive dedupe, bad or blank emails, missing columns and a missing file; hard checks say they pass",
+    "Hard checks pass: the script runs on the fixture and drops the info@, gmail and 2,600-employee rows (clean.csv has 7 clean rows)",
+    "Usage commands and a section-by-section plain-English map are provided",
+    "Edge cases handled: blank or malformed emails, mixed case, +tag role inboxes, '1,200' and '250.0' employee values, UTF-8 BOM, and a filtered row not shadowing a later valid duplicate"
+  ],
+  "missed": [
+    "The final report says Bash was denied and nothing was executed, yet a Bash call was issued and clean.csv exists, so the stated verification status does not match the transcript",
+    "The hand-reasoned expected output says '6 of the 9 rows are kept' but lists seven kept people, and the real output has 7 rows, so the count is wrong",
+    "The report names the dropped free-mail row as '<email>', a placeholder rather than the actual address, so the drop list is not literal",
+    "No observed test results or sample output are shown in the final report",
+    "The setup section is thin, with no setup steps beyond 'Python 3.8+' and the run commands"
+  ],
+  "skill_defects": [
+    "The skill does not require reporting verification results (or a denied run) consistently, so the answer ended with unverified, self-contradictory numbers",
+    "The skill does not tell the agent to quote exact values from the fixture instead of placeholders or hand-counted totals",
+    "The skill does not require an explicit Setup step (Python version, file layout, how to run the tests) in the final answer"
+  ],
+  "cost_usd": 0.19,
+  "turns": 8,
+  "seconds": 38,
+  "tool_calls": 6,
+  "files": [
+    "__pycache__/clean_leads.cpython-313.pyc",
+    "__pycache__/test_clean_leads.cpython-313.pyc",
+    "clean.csv",
+    "clean_leads.py",
+    "test_clean_leads.py"
+  ],
+  "error": ""
+}

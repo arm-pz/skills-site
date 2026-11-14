@@ -1,0 +1,37 @@
+{
+  "skill": "study-system",
+  "date": "2026-11-13",
+  "target": "a 6-month conversational-Portuguese plan for a busy adult",
+  "verdict": "PARTIAL",
+  "score": 7,
+  "summary": "The run wrote a 26-week, 5 h/week system with five gated stages, a 60/90/90/50-minute weekly routine, an expanding-interval card schedule and a prepaid weekly tutor slot, but it uses the Spanish transfer only thinly and gives no concrete false-friend or EP-versus-Brazilian pronunciation content.",
+  "checks": [],
+  "met": [
+    "Roadmap fits the constraints: 5 stages over weeks 1\u201326 with observable gates, and a weekly routine totalling about 4 h 50 min.",
+    "Deliberate practice with speaking: a weekly 60-min live session, two 45-min recorded speaking drills against a checklist, and an error log (one line per session) that doubles as the gap audit; the 'Open gaps' section lists further gaps to test.",
+    "Spaced repetition schedule is explicit: a 1d/3d/1wk/2wk/4wk/8wk ladder, an adjustment rule, a load cap and 10 new cards a day at most.",
+    "Quitting pattern is addressed with concrete mechanisms: a prepaid weekly tutor slot, a 10-minute floor day, a no-catch-up restart rule after a 3+ day gap, and logging sessions done and gates passed with no streaks.",
+    "Measurable 20-minute check: a recorded unscripted 20-minute conversation in weeks 20\u201326 with counted language switches, plus dress rehearsals and a fallback of two 10-minute conversations.",
+    "Nothing invented: the 130 h / 90 h figures are labelled as arithmetic, gate thresholds are labelled as guesses, and no tutor or app is named."
+  ],
+  "missed": [
+    "Spanish transfer is used only generically ('reuse vocab and grammar frame', 'Spanish autopilot'); no actual false friends are listed and no Spanish-to-Portuguese mappings are given.",
+    "EP vs Brazilian pronunciation is mentioned only as a warning to check that audio and tutors are EP; no concrete EP features beyond a one-line 'vowel reduction, nasal vowels, sibilants'.",
+    "The 20-minute threshold for language switches is left for the learner to set in week 20, so the final gate is not fully quantified.",
+    "The week-by-week roadmap is stage-level (weeks 2\u20136, 7\u201312, etc.), not week-by-week, and the system omits a stage-4 ramp such as 5/10/15-minute conversation lengths.",
+    "The anti-quit design rests on external dependencies (tutor, partner, family) with no fallback if the tutor slot lapses, other than the floor day."
+  ],
+  "skill_defects": [
+    "The skill's design reference pushes generic structure, so the output has no step requiring a concrete cross-language transfer table (false friends, sound mappings) when the learner names a related language.",
+    "The skill says not to name resources unless verified, which led to no concrete EP resource guidance and left the learner to find tutors and audio themselves.",
+    "The skill has no requirement to fix a numeric pass threshold for the final goal gate, so the 20-minute check ended with a threshold to be defined later."
+  ],
+  "cost_usd": 0.22,
+  "turns": 5,
+  "seconds": 73,
+  "tool_calls": 3,
+  "files": [
+    "study-system.md"
+  ],
+  "error": ""
+}

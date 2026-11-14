@@ -1,0 +1,45 @@
+{
+  "skill": "tune-skill-mod",
+  "date": "2026-11-13",
+  "target": "a small skill repo with a local bare remote: edit SKILL.md, then push",
+  "verdict": "PARTIAL",
+  "score": 6,
+  "summary": "Agent edited the invoice-namer description, committed and pushed (remote shows 00c7f15 on main), the hook flagged the push twice, and tune-skill was invoked, but its check_skill.py validator was denied by Bash permissions so no findings were produced.",
+  "checks": [
+    {
+      "desc": "the mod loaded in the session",
+      "ok": true,
+      "detail": "tune-skill-mod"
+    },
+    {
+      "desc": "the push was flagged after the SKILL.md edit (nudge mode, quoted by Claude)",
+      "ok": true,
+      "detail": "tune-skill-mod: that ran before"
+    },
+    {
+      "desc": "tune-skill was then run",
+      "ok": true,
+      "detail": "\"skill\": \"tune-skill-mod:tune-skill\""
+    }
+  ],
+  "met": [
+    "The mod armed only after the SKILL.md edit and the push went through in nudge mode, with Claude quoting the hook message that tune-skill had not run since the edit",
+    "Final message matches the remote: it reports the push as 3d9fc29..00c7f15, which agrees with the ground-truth commit 00c7f15 on the bare remote",
+    "Hook messages were quoted verbatim and the agent honestly said the check did not run and that it did not work around the denial"
+  ],
+  "missed": [
+    "Claude invoked tune-skill but never ran its validator (Bash denied in don't-ask mode), so it reported no findings on the edited skill",
+    "Agent added an unrequested change (each file keeps its own extension) to the description, which went beyond the user's instruction",
+    "The summary says there were no hook messages after the denied Bash call, but the transcript gives no way to verify that"
+  ],
+  "skill_defects": [
+    "The skill's flow depends on running a bundled script via Bash with no fallback when Bash is denied, such as a manual checklist, so a restricted-permission session ends with no validation at all",
+    "The hook says to run tune-skill before shipping, but it fires only after the push has already happened, so the flagged content reaches the remote unchecked in nudge mode"
+  ],
+  "cost_usd": 0.08,
+  "turns": 7,
+  "seconds": 13,
+  "tool_calls": 5,
+  "files": [],
+  "error": ""
+}

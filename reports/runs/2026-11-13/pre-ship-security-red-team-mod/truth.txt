@@ -1,0 +1,2 @@
+--- deployed.log (one line per real call of the stand-in CLI):
+(never called)

@@ -1,0 +1,44 @@
+{
+  "skill": "release-gate-ledger",
+  "date": "2026-11-13",
+  "target": "Invoicely, a local invoicing app with 6 planted authorization and session flaws",
+  "verdict": "FAIL",
+  "score": 2,
+  "summary": "The run stopped after a partial exposure probe (most paths returned the same 401) and never ran the app-tests or perf lanes, wrote no ledger rows through the recorder, and computed no overall posture by script.",
+  "checks": [
+    {
+      "desc": "overall posture is HOLD",
+      "ok": true,
+      "detail": "HOLD"
+    }
+  ],
+  "met": [
+    "Kept lane verdicts separate and marked unrun or unusable lanes as untested/INCONCLUSIVE rather than pass",
+    "Stated a HOLD posture in prose, with the reasoning that lanes are untested or inconclusive"
+  ],
+  "missed": [
+    "No lane wrote any rows through the validating recorder (gate_record.mjs was read but never invoked); the exposure result is explicitly 'not yet written to the ledger'",
+    "The security/app-tests lane never ran, so none of the planted flaws (IDOR, open admin API, mass-assignment escalation, cookie flags, open redirect, no rate limit) were confirmed with evidence; they were only suspected from reading server.js",
+    "Lanes were not completed in order: the exposure lane stopped partway (about 10 of the listed paths probed) and the other two lanes were never started",
+    "Overall HOLD was asserted by the agent in text, not computed by the script, and the blocking findings were not recorded as such",
+    "Stopped and asked the user how to proceed after a classifier interruption instead of completing the gate, even though the user explicitly authorized running it against the local server",
+    "The exposure lane's 401 results were correctly flagged as uninformative, but no authenticated check was made to get real signal"
+  ],
+  "skill_defects": [
+    "The skill's fixed unauthenticated path-probe list yields no signal against apps that return 401 for every unauthenticated path; it has no step to detect or handle a uniform-response catch-all before concluding",
+    "The skill does not tell the agent to write the ledger row (via the recorder) immediately after each lane, so an interruption leaves no persisted results",
+    "Probing in many separate curl calls and in a broad for-loop appears to risk triggering the safety classifier; the skill should say to batch probes in a narrow, clearly scoped, local-only way",
+    "The skill does not state that when the user has authorized local testing with documented synthetic accounts, the agent should proceed to the authenticated lane rather than pause for confirmation",
+    "HOLD is computed by the script only after rows exist; the skill has no fallback to run the script and get a HOLD with 'untested' lanes when the run is cut short"
+  ],
+  "cost_usd": 0.26,
+  "model": "sonnet",
+  "turns": 29,
+  "seconds": 43,
+  "tool_calls": 26,
+  "files": [
+    ".gitignore",
+    ".release-gate/run-1/profile.md"
+  ],
+  "error": ""
+}

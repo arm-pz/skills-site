@@ -1,0 +1,32 @@
+{
+  "skill": "career-track",
+  "date": "2026-11-13",
+  "target": "a synthetic CSM's negotiation for a \u00a358\u201368k Senior CSM offer",
+  "verdict": "PARTIAL",
+  "score": 8,
+  "summary": "The run gave a \u00a365k counter (about +33% on \u00a349k, inside the \u00a358\u201368k band), a word-for-word call script, anchoring on 64 accounts/\u00a32.1M ARR, churn 14%\u21929% and onboarding 19\u219211 days, and a deflection for the \u00a349k question, but it never scripted a reply to 'the band is fixed' and listed non-salary levers only in a table row.",
+  "checks": [],
+  "met": [
+    "Specific counter of \u00a365k inside the band, with reasoning (matches core of ad, but gaps on SQL, payments and management limit going to the top; settle around \u00a362\u201363k)",
+    "Word-for-word script covering opener, evidence, the ask, silence, a 'where does 65k come from' answer, pushback table and call close",
+    "Anchored on real facts (64 accounts, ~\u00a32.1M ARR, churn 14%\u21929%, time-to-first-invoice 19\u219211 days) and explicitly warned not to claim the whole churn drop since the Q2 FY23 pricing change contributed",
+    "Handled the current salary question with a scripted deflection and noted they are not obliged to disclose it",
+    "Invented no market data; stated the band comes only from the ad and that a market view would need a sourced, dated figure"
+  ],
+  "missed": [
+    "No dedicated script for 'the band is fixed / 58k is firm': the closest are the '58k is what we offer at this stage' and 'No budget on base' rows, which ask what would move it and pivot to other levers",
+    "Non-salary levers are thin: the table row mentions a six-month review, sign-on payment, extra holiday and training budget, but nothing on title or start date as fallbacks, and bonus/equity appear only as questions to ask",
+    "The pitch for 65k relies on the user's facts, but the answer to 'why 65k' avoids stating how the figure was chosen and leans on 'within your band'",
+    "The response never reasons about the +33% jump from \u00a349k to \u00a365k, and the gap between \u00a365k and the \u00a358k offer is not framed against the floor beyond 'write it down'"
+  ],
+  "skill_defects": [
+    "The skill does not require an explicit scripted branch for 'the band is fixed' that moves to a ranked list of non-salary levers (start date, title, review timing, bonus, learning budget) with exact wording for each",
+    "The skill does not prompt for the candidate's floor and competing offers before producing a target, so the target rests on judgment alone and is left as a placeholder"
+  ],
+  "cost_usd": 0.14,
+  "turns": 7,
+  "seconds": 26,
+  "tool_calls": 5,
+  "files": [],
+  "error": ""
+}

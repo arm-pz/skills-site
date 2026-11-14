@@ -1,0 +1,79 @@
+{
+  "skill": "portable-harness",
+  "date": "2026-11-13",
+  "target": "the skillsmith.tech source repo (local clone)",
+  "verdict": "PARTIAL",
+  "score": 6,
+  "summary": "The run wrote AGENTS.md (12 rules at top) plus a CLAUDE.md containing only @AGENTS.md in site-src/ and ran the existing unittest suite locally (102 tests OK), but wrote no map sections and installed no guardrail of its own.",
+  "checks": [
+    {
+      "desc": "a CLAUDE.md or AGENTS.md was written",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "met": [
+    "Working rules placed at the top of AGENTS.md, with CLAUDE.md importing it via @AGENTS.md so both agents read one file",
+    "Invented no commands: the test command is the repo's own `python -m unittest discover -s tools/agent-skills/tests`, and it declined to invent a type checker",
+    "Ran the unittest suite and showed the result (102 tests, OK)",
+    "Correctly found that the publish workflow already gates deploy on tests and checks, and did not duplicate it",
+    "Hard check met: AGENTS.md and CLAUDE.md were written"
+  ],
+  "missed": [
+    "Added no map sections, although the repo grounds several (generated pages vs sources via the gen:quality markers, site/skills.json as the inventory, the deploy branch/dist/). It identified them and then asked the user instead of writing them.",
+    "Installed no guardrail; the unittest suite was run but not wired into anything (hook, pre-commit, or documented gate) that the agent would hit, so the 'guardrails where they earn their place' step is effectively unfulfilled.",
+    "Did not show the diff before writing, which the skill asks for (the run admits this)."
+  ],
+  "skill_defects": [
+    "The map-section step blocks on a user question ('where does the agent keep getting things wrong?') even when the repo clearly grounds sections like generated vs source files and the deploy branch; the skill should allow writing grounded sections directly in a one-shot request.",
+    "The guardrail step has no fallback for when the existing CI already covers the check; the unittest suite could be installed as a local pre-commit or agent hook and shown running, but the skill leaves this ambiguous.",
+    "The 'show the diff before writing' instruction conflicts with a one-shot local-only task and is not clearly conditional on there being existing content to overwrite."
+  ],
+  "cost_usd": 0.19,
+  "turns": 10,
+  "seconds": 26,
+  "tool_calls": 8,
+  "files": [
+    "site-src/.gitattributes",
+    "site-src/.github/workflows/health.yml",
+    "site-src/.github/workflows/publish.yml",
+    "site-src/.gitignore",
+    "site-src/.reviews/3f3dc796540e.md",
+    "site-src/.well-known/skills.json",
+    "site-src/404.html",
+    "site-src/AGENTS.md",
+    "site-src/CLAUDE.md",
+    "site-src/DIRECTORIES.md",
+    "site-src/LICENSE",
+    "site-src/PROJECT.md",
+    "site-src/README.md",
+    "site-src/_headers",
+    "site-src/ai-team-blueprint/index.html",
+    "site-src/applicant-kit/index.html",
+    "site-src/application-pilot/index.html",
+    "site-src/assets/forge.js",
+    "site-src/assets/motion.js",
+    "site-src/assets/site.css",
+    "site-src/assets/site.js",
+    "site-src/assets/skill.css",
+    "site-src/assets/stack.js",
+    "site-src/assets/tool.css",
+    "site-src/assets/tool.js",
+    "site-src/caffeinity-routing/index.html",
+    "site-src/career-track/index.html",
+    "site-src/check/check-core.js",
+    "site-src/check/check.js",
+    "site-src/check/index.html",
+    "site-src/checks/index.html",
+    "site-src/choose-effort/index.html",
+    "site-src/cold-email-list-gate/index.html",
+    "site-src/cold-email-ops/index.html",
+    "site-src/consistent-code-review/index.html",
+    "site-src/course-builder/index.html",
+    "site-src/crash-test/index.html",
+    "site-src/data-readout/index.html",
+    "site-src/diagnose-usage/index.html",
+    "site-src/do-better/index.html"
+  ],
+  "error": ""
+}

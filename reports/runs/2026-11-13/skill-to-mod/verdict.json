@@ -1,0 +1,45 @@
+{
+  "skill": "skill-to-mod",
+  "date": "2026-11-13",
+  "target": "a real-shaped 'changelog-guard' skill that should fire before every release",
+  "verdict": "PASS",
+  "score": 9,
+  "summary": "Run judged changelog-guard a good fit for a mod, built mods/changelog-guard-mod with the skill bundled unchanged (diff-confirmed), ran claude plugin validate (passed) and claude plugin test (10/10 passed), and listed hooks and API calls from the verifier.",
+  "checks": [
+    {
+      "desc": "the skill was left unchanged",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "met": [
+    "Made a reasoned yes call (HYBRID), tied to the clear ship moment of git tag / npm publish",
+    "Built a plugin with SKILL.md bundled unchanged (diff -r against the original showed identical) and a thin trigger hooking Bash commands matching git tag and npm publish",
+    "Validated and tested it: validate passed, 10 of 10 tests passed on Claude Code 2.1.325, and the report says the live --plugin-dir dry run was not done",
+    "Listed the trust surface plainly: the hooks (session.start, skill.prompt, tool.call on edit tools and Bash, command.run), the four API calls ($.command.register, $.ui.ask, $.ui.status, $.ui.toast), no file/process/network access, no approval power",
+    "Hard check met: the original skill was left unchanged"
+  ],
+  "missed": [
+    "The first turn stopped and asked for Bash permission before building, which delayed the work; the follow-up then completed it",
+    "The first turn's trust-surface description (a tool.check hook) differed from what was actually built (tool.call hooks), but the final report gives the correct verifier-derived list",
+    "The final summary's claim of no access to files/env/other sessions goes beyond the verifier's hook and call lines, though it is consistent with them"
+  ],
+  "skill_defects": [
+    "The skill does not say what to do when Bash is denied before scripts can run, so the first turn ended with a plan and a question instead of a built mod",
+    "The README says the validate report refreshes with verify_mod.py --update-readme, but the shown README trust block mirrors the verifier output and does not show the verifier's warnings about the missing LICENSE and icon"
+  ],
+  "cost_usd": 0.23,
+  "model": "sonnet",
+  "turns": 14,
+  "seconds": 36,
+  "tool_calls": 11,
+  "files": [
+    "mods/changelog-guard-mod/.claude-plugin/plugin.json",
+    "mods/changelog-guard-mod/README.md",
+    "mods/changelog-guard-mod/hooks/hooks.json",
+    "mods/changelog-guard-mod/hooks/register.js",
+    "mods/changelog-guard-mod/skills/changelog-guard/SKILL.md",
+    "mods/changelog-guard-mod/tests/changelog-guard-mod.test.ts"
+  ],
+  "error": ""
+}

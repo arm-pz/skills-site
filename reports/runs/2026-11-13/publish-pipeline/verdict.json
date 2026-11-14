@@ -1,0 +1,83 @@
+{
+  "skill": "publish-pipeline",
+  "date": "2026-11-13",
+  "target": "this site's real publish pipeline (read-only audit)",
+  "verdict": "PARTIAL",
+  "score": 4,
+  "summary": "The run read publish.yml, sync.py, discover.py, skilllib.py, build.py, check_dist.py, verify.mjs and health.yml and reported hold reasons and fragile points, but the hard check on audit.md failed and the final message gives no file:line evidence or repo-outside-org hold.",
+  "checks": [
+    {
+      "desc": "wrote audit.md",
+      "ok": false,
+      "detail": "audit.md"
+    }
+  ],
+  "met": [
+    "Read publish.yml, health.yml, sync.py, discover.py, skilllib.py (shape_failures), build.py, make_dist.sh, check_dist.py, deploy.sh and verify.mjs before reporting",
+    "Named real shape-test hold reasons: single SKILL.md at an allowed path, LICENSE and README.md at root, name matching folder and repo, single-line description of at most 1024 characters",
+    "Named the empty-About failure, where sync holds the repo and build.py fails if About is blanked later",
+    "Named fragile points that line up with the pre-existing review: prove.py sitemap check that cannot pass, unguarded KeyError aborting the whole hourly run, health.yml pushes not triggering publish",
+    "Flagged inferred claims as inferred (reserved-directory collision not reproduced) and said the .reviews findings may be stale against commit db04809",
+    "Changed no existing files; the only Write was audit.md"
+  ],
+  "missed": [
+    "Hard check failed: audit.md was written to site-src/audit.md, and the grader's check for audit.md did not pass",
+    "The final message gives no file:line citations, and the audit's content is not shown, so the 'fragile points with file:line evidence' item cannot be confirmed from the transcript",
+    "Did not name 'repo outside the org' as a hold or exclusion reason, so the rubric's list of sync hold reasons is incomplete",
+    "Several claims are inference only (reserved-name collision, sync commit ordering, the shell tool never ran the code), so how much of the audit is verified is unclear",
+    "The run leans on the existing .reviews findings, which are dated 2026-11-02 and were not re-verified against current code"
+  ],
+  "skill_defects": [
+    "The skill does not say where audit.md must be written (project root vs site-src/), so the output landed at a path the checker did not accept",
+    "The skill does not require file:line citations for each finding or a final check that every cited line exists, so evidence quality is left to chance",
+    "The skill's list of sync hold reasons is not enforced, so 'repo outside the org' was omitted",
+    "The skill does not require labeling each claim as read-from-code, reproduced or inferred inside audit.md itself"
+  ],
+  "cost_usd": 0.45,
+  "turns": 17,
+  "seconds": 74,
+  "tool_calls": 15,
+  "files": [
+    "site-src/.gitattributes",
+    "site-src/.github/workflows/health.yml",
+    "site-src/.github/workflows/publish.yml",
+    "site-src/.gitignore",
+    "site-src/.reviews/3f3dc796540e.md",
+    "site-src/.well-known/skills.json",
+    "site-src/404.html",
+    "site-src/DIRECTORIES.md",
+    "site-src/LICENSE",
+    "site-src/PROJECT.md",
+    "site-src/README.md",
+    "site-src/_headers",
+    "site-src/ai-team-blueprint/index.html",
+    "site-src/applicant-kit/index.html",
+    "site-src/application-pilot/index.html",
+    "site-src/assets/forge.js",
+    "site-src/assets/motion.js",
+    "site-src/assets/site.css",
+    "site-src/assets/site.js",
+    "site-src/assets/skill.css",
+    "site-src/assets/stack.js",
+    "site-src/assets/tool.css",
+    "site-src/assets/tool.js",
+    "site-src/audit.md",
+    "site-src/caffeinity-routing/index.html",
+    "site-src/career-track/index.html",
+    "site-src/check/check-core.js",
+    "site-src/check/check.js",
+    "site-src/check/index.html",
+    "site-src/checks/index.html",
+    "site-src/choose-effort/index.html",
+    "site-src/cold-email-list-gate/index.html",
+    "site-src/cold-email-ops/index.html",
+    "site-src/consistent-code-review/index.html",
+    "site-src/course-builder/index.html",
+    "site-src/crash-test/index.html",
+    "site-src/data-readout/index.html",
+    "site-src/diagnose-usage/index.html",
+    "site-src/do-better/index.html",
+    "site-src/draft-skill/index.html"
+  ],
+  "error": ""
+}

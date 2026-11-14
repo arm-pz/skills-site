@@ -1,0 +1,44 @@
+{
+  "skill": "recruiter-lens",
+  "date": "2026-11-13",
+  "target": "a synthetic mid-career CSM resume with planted weaknesses, against a real-shaped Senior CSM job ad",
+  "verdict": "PASS",
+  "score": 8,
+  "summary": "The run gave a borderline first-screen reject, flagged the vague summary, duty-style bullets and the 15-month Dec 2020\u2013Mar 2022 gap, mapped the resume to the job requirements, and invented no metrics, using placeholders like [X]% and [metric: ?].",
+  "checks": [
+    {
+      "desc": "gives a first-pass verdict",
+      "ok": true,
+      "detail": "reject"
+    },
+    {
+      "desc": "flags the 2021 gap",
+      "ok": true,
+      "detail": "gap"
+    }
+  ],
+  "met": [
+    "Gives a first-screen verdict (probably reject, borderline) with deciding reasons: no outcome evidence, no senior scope, filler",
+    "Flags the vague summary (hard-working, passionate, results-driven) and duty-style bullets ('Helped reduce churn', 'Responsible for a book of accounts') with no outcomes",
+    "Flags the unexplained Dec 2020 \u2013 Mar 2022 gap (~15 months) and suggests an honest one-line note",
+    "Maps the resume against job requirements: churn/expansion numbers, SQL/BI, onboarding, Gainsight (listed only in skills), finance/billing domain",
+    "Never invents a metric: uses [X]%/[Y]% and [metric: ?] placeholders and asks the user for real numbers",
+    "Fixes are numbered, specific and actionable, with before/after examples and questions for the user"
+  ],
+  "missed": [
+    "Fix ordering is not clearly by impact: the gap and skills cleanup are bundled into fix 5 even though the gap is a likely screen-out, and the ordering is not justified",
+    "The suggestion of 'roughly halved' or 'across the whole book' as fallback wording edges toward quantification without data, though it is framed as honest scope",
+    "The gap is buried in fix 5 and not listed among the reasons that decide the verdict in 'What sinks it'"
+  ],
+  "skill_defects": [
+    "The skill does not require the employment gap to be weighed in the verdict reasons or placed in a prominent fix, so it can end up buried in a catch-all fix",
+    "The skill does not require an explicit impact-ranking rationale for the fix order",
+    "The skill output includes soft heuristics (e.g. '6\u20138 seconds', 'gaps over roughly six months') without sourcing; the skill could tell the agent to drop or caveat these"
+  ],
+  "cost_usd": 0.15,
+  "turns": 6,
+  "seconds": 32,
+  "tool_calls": 4,
+  "files": [],
+  "error": ""
+}

@@ -1,0 +1,54 @@
+{
+  "skill": "applicant-kit",
+  "date": "2026-11-13",
+  "target": "a synthetic CSM resume, the candidate's own fact notes, and a Senior CSM job ad",
+  "verdict": "PARTIAL",
+  "score": 7,
+  "summary": "The run wrote resume-ledgerline.md with the real figures (64 accounts, about \u00a32.1M ARR, churn 14%\u21929%, onboarding 19\u219211 days), a caveated churn bullet, an honest carer/SQL-course entry and no management claim, but the new summary says \"works in SQL and Gainsight\" and states the churn drop without the pricing caveat.",
+  "checks": [
+    {
+      "desc": "wrote resume-ledgerline.md",
+      "ok": true,
+      "detail": "resume-ledgerline.md"
+    },
+    {
+      "desc": "uses the real churn figures",
+      "ok": true,
+      "detail": "14% to 9%"
+    },
+    {
+      "desc": "does not claim people management",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "met": [
+    "Wrote resume-ledgerline.md using only the real figures (64 accounts, ~\u00a32.1M ARR, churn 14%\u21929%, onboarding 19\u219211 days)",
+    "The Brightfold churn bullet notes the Q2 FY23 pricing change also contributed",
+    "Mentoring is worded as mentoring (\"Mentored two new CSMs\"), with no people-management claim",
+    "The 2021 gap appears as an explicit career break as a full-time carer, with the online SQL course",
+    "The Skills section keeps \"SQL (basic)\" and leads with Gainsight, Looker and SQL",
+    "Looker is tied to the onboarding dashboard, and onboarding and time-to-first-invoice sit under the onboarding bullet",
+    "The generic summary was replaced with a specific one built on numbers",
+    "No employer, title, date or number appears to have been invented"
+  ],
+  "missed": [
+    "The summary says \"works in SQL and Gainsight\", which overstates basic/learning SQL. The run's own notes admit nothing describes how Gainsight was used, so the keyword is placed where it may not be true.",
+    "The summary states churn fell from 14% to 9% with no mention of the shared pricing-change cause; only the bullet carries that caveat.",
+    "The summary says \"3+ years\", which the run did not verify; it was derived rather than taken from notes.md.",
+    "The weak \"Worked with the product team on feature development\" bullet was kept unchanged, not rewritten as action + result."
+  ],
+  "skill_defects": [
+    "The skill does not tell the agent to carry over-claim caveats (pricing-change attribution, SQL level) into the summary as well as the bullets.",
+    "The skill does not require keyword placement to be checked against notes.md evidence, so Gainsight was added to the summary without support.",
+    "The skill gives no rule for vague original bullets that have no supporting facts (keep, flag or drop)."
+  ],
+  "cost_usd": 0.11,
+  "turns": 5,
+  "seconds": 16,
+  "tool_calls": 4,
+  "files": [
+    "resume-ledgerline.md"
+  ],
+  "error": ""
+}

@@ -1,0 +1,27 @@
+{
+  "skill": "straight-prose",
+  "fixtures": "writing",
+  "target": "a 200-word product blog post with stock AI-writing patterns",
+  "prompt": "draft.md reads like a chatbot wrote it. Rewrite it so it sounds like a person on our engineering team wrote it, same facts. Save as draft-v2.md.",
+  "checks": [
+    {
+      "desc": "wrote draft-v2.md",
+      "file": "draft-v2.md"
+    },
+    {
+      "desc": "slop_scan --strict finds nothing in draft-v2.md",
+      "cmd": "python3 .claude/skills/straight-prose/scripts/slop_scan.py draft-v2.md --strict"
+    },
+    {
+      "desc": "keeps the unmeasured hedge",
+      "re": "(not|n't) (yet )?measured",
+      "in": "file:draft-v2.md"
+    }
+  ],
+  "rubric": [
+    "Removes inflated significance, promotional wording, vague attribution ('Experts agree'), negative parallelism ('not just … it's'), forced threes, em dashes, chatbot sign-off and emoji",
+    "Keeps every fact and number and the hedge about unmeasured customer benefit",
+    "Reads like a specific engineer wrote it, not a template",
+    "Adds no facts"
+  ]
+}

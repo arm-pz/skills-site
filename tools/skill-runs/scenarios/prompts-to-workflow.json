@@ -1,0 +1,27 @@
+{
+  "skill": "prompts-to-workflow",
+  "fixtures": "prompts-batch",
+  "install": [
+    "prompts-to-workflow",
+    "tune-skill"
+  ],
+  "target": "four real-shaped release-notes prompts checked against the live catalog",
+  "prompt": "These prompts in prompts.md are one job I do every release. Turn them into a workflow and tell me which steps are existing skills on skillsmith.tech and which need new ones. Output under workflows/.",
+  "checks": [
+    {
+      "desc": "wrote something under workflows/",
+      "cmd": "ls -R workflows | grep -q ."
+    }
+  ],
+  "max_turns": 80,
+  "budget_usd": 6,
+  "rubric": [
+    "Maps the 4 prompts to ordered steps with inputs, outputs and gates",
+    "Checks each step against the live catalog and reuses real skills where they fit (e.g. wordsmith or straight-prose for the rewrite)",
+    "Only proposes new skills for steps no catalog skill claims",
+    "Validates any new skill with check_skill.py"
+  ],
+  "followups": [
+    "Confirmed, that's right. Go ahead and finish it without stopping for more questions."
+  ]
+}

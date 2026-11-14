@@ -1,0 +1,24 @@
+{
+  "skill": "recruiter-lens",
+  "fixtures": "career",
+  "target": "a synthetic mid-career CSM resume with planted weaknesses, against a real-shaped Senior CSM job ad",
+  "prompt": "Here's my resume (resume.md) and a job I want (job.md). Be the recruiter: would I get past the first screen, and what are the five fixes that matter most? Don't make up numbers for me.",
+  "checks": [
+    {
+      "desc": "gives a first-pass verdict",
+      "re": "(reject|pass|advance|screen(ed)? out|shortlist)"
+    },
+    {
+      "desc": "flags the 2021 gap",
+      "re": "(gap|2021|Jan 2021|career break)"
+    }
+  ],
+  "rubric": [
+    "Gives a first-screen verdict with the 2-3 reasons that decide it",
+    "Flags the vague summary and duty-style bullets with no outcomes",
+    "Flags the unexplained Dec 2020 – Mar 2022 gap",
+    "Maps the resume against the job's requirements (churn numbers, SQL/BI, onboarding, Gainsight, finance/billing domain)",
+    "Never invents a metric: uses bracketed prompts like [quantify] instead of made-up numbers",
+    "Fixes are ordered by impact and specific enough to act on"
+  ]
+}

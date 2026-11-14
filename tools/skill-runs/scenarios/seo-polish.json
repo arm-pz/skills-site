@@ -1,0 +1,25 @@
+{
+  "skill": "seo-polish",
+  "install": [
+    "seo-polish",
+    "seo-crawl",
+    "wordsmith"
+  ],
+  "target": "skillsmith.tech (92 live pages)",
+  "prompt": "Polish the on-page SEO of https://skillsmith.tech. Measure first, then give me rewritten titles, meta descriptions and headings for what's worth fixing. Don't change anything; write the proposals to seo-polish.md.",
+  "checks": [
+    {
+      "desc": "wrote seo-polish.md",
+      "file": "seo-polish.md"
+    }
+  ],
+  "ground_truth": "node \"$SKILL_RUNS/truth_seo.mjs\" https://skillsmith.tech",
+  "max_turns": 80,
+  "budget_usd": 6,
+  "rubric": [
+    "Measures the live site before proposing (crawl of the sitemap pages)",
+    "Its findings match the Playwright ground truth (e.g. 12 titles over 60 chars, 8 descriptions over 160, no broken links, one h1 per page) and invent no problems",
+    "Gives 2–3 rewritten alternatives for each High/Medium finding, within length limits, keeping the page's meaning",
+    "Changes nothing live and says what it could not measure"
+  ]
+}

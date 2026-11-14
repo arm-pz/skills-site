@@ -1,0 +1,40 @@
+{
+  "skill": "research-brief",
+  "date": "2026-11-13",
+  "target": "UK Making Tax Digital for Income Tax: thresholds and dates, from public sources",
+  "verdict": "PARTIAL",
+  "score": 7,
+  "summary": "The run correctly concluded the user (about \u00a347,000 combined gross income) starts MTD for Income Tax on 6 April 2027 under the \u00a330,000 threshold, cited gov.uk pages and listed the changes, but left the tax-year basis of the test unverified and mixed in details from an unopened search summary.",
+  "checks": [
+    {
+      "desc": "cites gov.uk",
+      "ok": true,
+      "detail": "GOV.UK"
+    }
+  ],
+  "met": [
+    "States the phased thresholds correctly: \u00a350k from 6 April 2026, \u00a330k from 6 April 2027, \u00a320k planned from 6 April 2028, with the \u00a320k flagged as planned",
+    "Explains qualifying income is gross self-employment plus property income, concludes 6 April 2027 and not 2026 for this user",
+    "Lists what changes: digital records, quarterly updates via compatible software, final declaration/annual return",
+    "Cites gov.uk primary sources per claim in a table, with confidence levels, conflicts and gaps flagged, and marks search-summary-only claims as such",
+    "Hard check met: cites gov.uk",
+    "No invented thresholds or dates; uncertain items tagged [unverified]/[my inference]"
+  ],
+  "missed": [
+    "The rubric wants it explained that the test uses income on an earlier tax return; the answer only 'infers' the 2025\u201326 return and says no page states it explicitly, and its gaps list says the \u00a330k year-basis could not be settled (the 'find out if and when you need to use MTD' fetch failed)",
+    "The summary computes the combined figure as \u00a347,000 but then hedges by treating \u00a338k as possibly turnover or profit; it states an assumption rather than plainly using about \u00a347,000 as asked",
+    "Quarterly deadlines, the \u00a3200 at 4 points penalty and the 31 January return rest on a search summary of a page that was never opened, so they are not tied to a read primary source",
+    "The first line says 'I read three GOV.UK pages' yet the claim table credits a fourth fetched page, and the sign-up page was fetched twice, so the account of what was read is slightly muddled"
+  ],
+  "skill_defects": [
+    "The skill allows claims to be reported from search summaries without requiring the source page to be opened; it should require fetching the page for any date or penalty figure, or drop the claim",
+    "The skill has no fallback when the key authoritative page (the 'work out if you need to use MTD' guidance) fails to fetch, such as retrying or trying alternative gov.uk URLs, so the earlier-return rule stayed unverified",
+    "The output template is heavy (status line, summary, claim table, conflicts, gaps, sources), which duplicates content for a simple question"
+  ],
+  "cost_usd": 0.21,
+  "turns": 11,
+  "seconds": 58,
+  "tool_calls": 9,
+  "files": [],
+  "error": ""
+}

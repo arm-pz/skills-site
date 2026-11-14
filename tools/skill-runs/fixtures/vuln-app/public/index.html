@@ -1,0 +1,9 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Invoicely</title></head><body>
+<h1>Invoicely</h1><div id="app"></div>
+<script>
+fetch('/api/me').then(r => r.json()).then(u => {
+  let html = '<p>Hello ' + u.username + '</p><a href="#" id="inv">My invoices</a>'
+  if (u.role === 'admin') html += ' · <a href="/api/admin/users">Admin: users</a>'  // hidden for non-admins
+  document.getElementById('app').innerHTML = html
+})
+</script></body></html>

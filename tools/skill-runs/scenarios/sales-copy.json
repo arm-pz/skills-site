@@ -1,0 +1,23 @@
+{
+  "skill": "sales-copy",
+  "fixtures": "product",
+  "target": "a real-shaped B2B fintech product brief with claims it must not make",
+  "prompt": "Write the landing page for Reconcile and a 3-email sequence for people who downloaded our month-end checklist. Everything you need is in brief.md.",
+  "checks": [
+    {
+      "desc": "prices are right",
+      "re": "£149"
+    },
+    {
+      "desc": "uses the customer quote",
+      "re": "closed October in a day"
+    }
+  ],
+  "rubric": [
+    "Landing page with headline, subheadline, body sections, proof and CTA; 3 emails each with subject line and one CTA",
+    "Targets the stated buyer and pain, at the right awareness level for checklist downloaders",
+    "Prices, trial terms and proof are exactly as in the brief; the quote is verbatim and attributed",
+    "Makes none of the forbidden claims (QuickBooks, SOC 2, AI) and handles objections honestly",
+    "Plain, specific, dry voice"
+  ]
+}

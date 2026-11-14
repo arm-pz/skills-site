@@ -1,0 +1,29 @@
+{
+  "skill": "skill-to-mod",
+  "fixtures": "mod-candidate",
+  "install": [
+    "skill-to-mod"
+  ],
+  "target": "a real-shaped 'changelog-guard' skill that should fire before every release",
+  "allow": [
+    "Bash(claude plugin validate:*)"
+  ],
+  "prompt": "Should skills/changelog-guard become a Claude Code mod? If yes, build it in mods/changelog-guard-mod with the skill unchanged, validate it and test it. Tell me exactly what it can touch.",
+  "checks": [
+    {
+      "desc": "the skill was left unchanged",
+      "cmd": "diff -q skills/changelog-guard/SKILL.md \"$SKILL_RUNS/fixtures/mod-candidate/skills/changelog-guard/SKILL.md\""
+    }
+  ],
+  "max_turns": 80,
+  "budget_usd": 6,
+  "rubric": [
+    "Makes a reasoned yes/no call (this skill has a clear ship moment: git tag / npm publish)",
+    "If yes: builds a plugin with the skill bundled unchanged and a thin trigger on the release commands",
+    "Validates and tests it, and reports the result honestly",
+    "Lists the trust surface (hooks, calls) plainly"
+  ],
+  "followups": [
+    "Confirmed, that's right. Go ahead and finish it without stopping for more questions."
+  ]
+}

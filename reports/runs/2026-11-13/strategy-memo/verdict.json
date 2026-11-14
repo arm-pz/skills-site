@@ -1,0 +1,38 @@
+{
+  "skill": "strategy-memo",
+  "date": "2026-11-13",
+  "target": "a real-shaped build decision for a 3-person fintech startup (QuickBooks vs multi-entity)",
+  "verdict": "PARTIAL",
+  "score": 6,
+  "summary": "The memo recommends multi-entity first (8 vs 10 engineer-weeks) with a pre-sell test, uses most supplied figures and flags gaps honestly, but its headline ~+\u00a32.7k MRR upside rests on an invented assumption and the 90-day plan does not pick a single metric that proves the call right.",
+  "checks": [],
+  "met": [
+    "Makes one clear recommendation (multi-entity first, with a pre-board pre-sell test) and gives reasoning a board can check",
+    "Uses the supplied numbers: 58 vs ~20 waitlist, 10 vs 8 engineer-weeks, 2 churned to QuickBooks, 4 multi-entity asks, ~\u00a3900 plan, 14 months runway, 9% MoM; basic arithmetic (6,900/31 \u2248 \u00a3223, 2/31 \u2248 6%, 10+8=18) is correct",
+    "Names the strongest case for QuickBooks in a dedicated Dissent section and lists explicit flip conditions (fewer than 3 of 4 commit, waitlist conversion \u2265 ~21%, churned MRR large, further churn)",
+    "Provides a 90-day plan with owners, milestones and metrics, plus 1-year and 3-year horizons",
+    "Invents no external market data; market size and competitor coverage are listed as gaps and handed off to research-brief"
+  ],
+  "missed": [
+    "The headline upside (~+\u00a32.7k MRR, ~39% of MRR) rests on an assumed \u00a3223 current price for the 4 customers (4 \u00d7 (900\u2212223) \u2248 \u00a32,708). It is labelled [assumed], but it drives the recommendation and is not in the situation file",
+    "The ~21% / ~12-customer flip threshold assumes QuickBooks users pay the same \u00a3223 ARPA, which is also an assumption; the comparison is built on it",
+    "Several 'metrics' in the 90-day plan are unfilled placeholders ('supply this'), and no single metric is named as the one that proves the call right or wrong; the closest is commitments from the 4 (target 3+) versus the ~12 waitlist payers threshold",
+    "The ~13-week quarter, the month-5 runway threshold of 9 months, and the 'target 3+' are invented parameters, though marked [assumed]",
+    "Runway (14 months) and 9% MoM growth are restated but not used in any reasoning or calculation",
+    "The 3-year section is mostly placeholders and adds little; the memo also carries a research-brief handoff block not requested for a board memo"
+  ],
+  "skill_defects": [
+    "The skill's template pushes placeholders ('supply this') into the 90-day metric slots instead of requiring one concrete proof metric with a threshold from the supplied data",
+    "The skill mandates 1-year and 3-year sections even when the situation gives no basis for them, producing filler placeholders in a board memo",
+    "The skill does not require using every supplied figure (runway, MoM growth) in the argument, so those figures are only restated",
+    "The skill appends a handoff block to another skill into the memo file, putting non-board content in the deliverable"
+  ],
+  "cost_usd": 0.17,
+  "turns": 5,
+  "seconds": 42,
+  "tool_calls": 3,
+  "files": [
+    "strategy-memo.md"
+  ],
+  "error": ""
+}

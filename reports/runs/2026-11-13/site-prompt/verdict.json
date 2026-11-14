@@ -1,0 +1,45 @@
+{
+  "skill": "site-prompt",
+  "date": "2026-11-13",
+  "target": "a one-file build prompt for a local business website",
+  "verdict": "PARTIAL",
+  "score": 3,
+  "summary": "The run wrote site-prompt.md embedding three full files (index.html, styles.css, main.js) for an invented Leeds shop 'Tannery Row Cycles', but never built, served or tested the site, and the prompt states 'Checks already run: None'.",
+  "checks": [
+    {
+      "desc": "wrote site-prompt.md",
+      "ok": true,
+      "detail": "site-prompt.md"
+    },
+    {
+      "desc": "embeds file contents",
+      "ok": true,
+      "detail": "<!doctype html"
+    }
+  ],
+  "met": [
+    "Narrows the topic to a concrete subject (independent Leeds bike workshop, Kirkstall) and derives a concept from it (the paper job tag as a tag-builder signature mechanic)",
+    "Embeds all three files in full with a pinned stack (plain HTML/CSS/JS, no dependencies, Google Fonts named)",
+    "Marks business details as illustrative: the page and footer label name, address, hours and prices as concept placeholders, and the phone/email use reserved or example values",
+    "Honestly reports in both the prompt and the final message that nothing was verified"
+  ],
+  "missed": [
+    "Did not build and verify the site in a scratch folder before writing the prompt: no scratch folder, no browser, no served page, no replay script run; only a read-only inspection Bash call was made and Bash was then denied",
+    "No checks actually ran, so the prompt's 'checks that actually ran' section says 'None' and the 'Not verified' list covers page load, layout, behaviour, contrast, fonts and replay",
+    "File contents were never round-tripped through the replay script, so verbatim embedding is unconfirmed",
+    "The prices and hours are presented as fixed values with 'do not change' instructions rather than as owner-fill placeholders; they are only labelled illustrative in the page copy"
+  ],
+  "skill_defects": [
+    "The skill has no fallback for when command execution is denied or unavailable (for example, asking the user to approve Bash or stopping before writing an unverified prompt); here it produced a full prompt with zero verification",
+    "The prompt template tells the build agent 'Do not change the illustrative prices, hours, phone number or email', which conflicts with the goal of marking invented business details as owner placeholders",
+    "The skill does not require a single early check that the build tooling (Bash, a browser) is usable before committing to writing the files"
+  ],
+  "cost_usd": 0.48,
+  "turns": 6,
+  "seconds": 128,
+  "tool_calls": 4,
+  "files": [
+    "site-prompt.md"
+  ],
+  "error": ""
+}

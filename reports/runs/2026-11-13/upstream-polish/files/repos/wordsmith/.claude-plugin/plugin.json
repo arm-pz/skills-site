@@ -1,0 +1,10 @@
+{
+  "name": "wordsmith",
+  "version": "1.0.0",
+  "description": "Teaches your agent to edit, not just generate: 44 commands across 5 disciplines that tighten, rewrite, critique and proofread while keeping the author's meaning, hedges and voice intact.",
+  "author": {
+    "name": "Abdul Rahman P Z"
+  },
+  "homepage": "https://skills.caffeinity.com/wordsmith/",
+  "repository": "https://github.com/arm-pz/wordsmith"
+}
