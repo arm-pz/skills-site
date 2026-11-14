@@ -1,0 +1,36 @@
+{
+  "skill": "pre-ship-security-red-team",
+  "date": "2026-11-13",
+  "target": "Invoicely, a local invoicing app with 6 planted authorization and session flaws",
+  "verdict": "PARTIAL",
+  "score": 3,
+  "summary": "The run read server.js and reported 5 suspected issue groups covering all 6 planted flaws, but the live attack Bash call was denied, so no request/response evidence was captured and nothing was proven or fixed.",
+  "checks": [],
+  "met": [
+    "Finds the IDOR on /api/invoices/:id (static read of line 40, labeled not-proven)",
+    "Finds /api/admin/users lacks a role check and returns passwords (static, not-proven)",
+    "Finds mass assignment on PATCH /api/me via Object.assign (static, not-proven)",
+    "Identifies cookie flags missing, open redirect via next, and no login throttling (static)",
+    "Reports no invented flaws; honestly labels everything as not-proven and says the attacks were not run",
+    "Provides a ranked fix order"
+  ],
+  "missed": [
+    "No captured request/response evidence: the exploit Bash call was denied and the run stopped rather than adapting",
+    "Missing security headers were not mentioned (only cookie flags); the finding was not checked against actual responses",
+    "Did not read public/ and left stored XSS and cache checks unexamined",
+    "No fixes applied and no rerun of checks to prove them",
+    "Did not attempt a smaller or alternative approach to get evidence (e.g., individual curl calls) after the denial"
+  ],
+  "skill_defects": [
+    "The skill gives no fallback path when the batched exploit command is denied; it should break the attacks into small single-purpose curl calls so a partial denial still yields evidence",
+    "The skill front-loads one large multi-step Bash script, which is more likely to be blocked by permission checks",
+    "The skill's checklist does not explicitly require checking for security headers on responses, so that finding was omitted"
+  ],
+  "cost_usd": 0.11,
+  "model": "sonnet",
+  "turns": 6,
+  "seconds": 24,
+  "tool_calls": 4,
+  "files": [],
+  "error": ""
+}
