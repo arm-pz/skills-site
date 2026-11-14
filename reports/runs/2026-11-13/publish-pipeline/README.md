@@ -1,8 +1,8 @@
 # publish-pipeline: real-world run, 2026-11-13
 
-**Verdict: FAIL** (3/10). The run read publish.yml, sync.py, build.py, check_dist.py, verify.mjs and skilllib.py and issued a Write to site-src/audit.md, but the hard check 'wrote audit.md' failed, so the required deliverable is not confirmed and its contents cannot be graded.
+**Verdict: PARTIAL** (7/10). The run read publish.yml, health.yml, sync.py, skilllib.py, build.py, check_dist.py, verify.mjs and deploy.sh, then wrote site-src/audit.md listing 9 reasons a repo would not appear and about a dozen fragile points. Some claims carry no line evidence or look unverified or overstated, and nothing was changed apart from the audit file.
 
-Target: this site's real publish pipeline (read-only audit). Run headless on the CLI default model in a clean project with only this skill installed (17 turns, 15 tool calls, 74 s, $0.63).
+Target: this site's real publish pipeline (read-only audit). Run headless on the CLI default model in a clean project with only this skill installed (17 turns, 15 tool calls, 74 s, $0.81).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -21,29 +21,30 @@ Audit the publish pipeline in site-src/ (the skillsmith.tech repo). What would m
 
 ## Hard checks
 
-- ✗ wrote audit.md
+- ✓ wrote audit.md (root or site-src/)
 
 ## Met
 
-- Read publish.yml, health.yml, sync.py, discover.py, build.py, make_dist.sh, check_dist.py, deploy.sh, verify.mjs and skilllib.py (shape_failures, RESERVED) before writing anything
-- The final message names real hold reasons: shape test failures (SKILL.md path, LICENSE, README, name and description rules), empty About, and mods or bundled skills that are never auto-added
-- Only read-only Bash, Grep and Read calls preceded the Write, and the final message says nothing else was changed
-- The final message separates inferred claims from reproduced ones (reserved-name collisions) and treats the older .reviews finding as possibly stale
+- Read publish.yml, sync.py, build.py, check_dist.py, verify.mjs, deploy.sh and skilllib.py before writing the audit
+- Named real hold reasons: shape-test failures (SKILL.md at one of three paths with exactly one in the repo, exact LICENSE, README.md), empty About, private, fork or denied repo, and a repo whose name is not arm-pz/<name>
+- Gave file:line evidence for several fragile points, such as skilllib.py:336 and discover.py:123, and cited review items with their lines
+- Hedged inferred behaviour explicitly in the Caveats section, for example the directory-collision case being unreproduced
+- Wrote audit.md and modified nothing else
+- Did not run anything against GitHub, Cloudflare or the live site, and said so
 
 ## Missed
 
-- Hard check failed: audit.md was not confirmed as written. The Write call exists, but the run's file list does not show it and the harness marked the check FAILED.
-- The 'repo outside the org' hold reason is not clearly named in the final summary
-- The final message gives no file:line evidence for the fragile points. This cannot be verified because audit.md was not available to inspect.
-- Several fragile-point claims, such as verify.mjs not checking response.ok and prove.py's sitemap check never passing, rest partly on the prior .reviews file and cannot be confirmed as the run's own findings
-- The run ended with no confirmation that audit.md exists, and it did not re-read the file after writing
+- Many fragile points have no file:line evidence, for example the verify.mjs response.ok claim, the `|| true` curl handling and the deploy.sh shallow-clone claim; the P1/P2 items are mostly workflow-level prose
+- Some claims are asserted from the transcript without clear verification: the prove.py sitemap bug is repeated from the dated review and then partly hedged, and 'about 90 repos' and 'about 75 page folders' are not clearly sourced
+- P1-2 (sync committed to main before deploy) is framed as a defect against the skill's design note, but PROJECT.md documents the same order as the intended design, so it may be overstated
+- The hold reasons point to sync.py:plan and skilllib.py:336 only loosely; there are no line numbers for the About hold or for the name-already-known skip
+- Several fragile items (supply-chain pinning, observability, the shallow clone in this working copy) are generic rather than tied to why a new repo fails to appear
 
 ## Defects to fix in the skill
 
-- The skill does not require a read-back or ls of the output file after Write, so a missing or failed write goes unnoticed and is reported as done.
-- The skill does not require file:line citations in the final message, so the evidence rubric item cannot be checked from the transcript alone.
-- The skill does not tell the agent to enumerate the hold reasons (including repo outside the org) as an explicit checklist, so one was left out of the summary.
-- The skill does not say to separate re-verified findings from findings copied from an existing review file.
+- The skill does not require every fragile-point claim to carry file:line evidence, so the audit mixes line-cited findings with unanchored prose
+- The skill has no rule separating confirmed-in-code claims from claims carried over from an older review, so stale review items (prove.py:59, H1 to M2) are repeated, only partly hedged
+- The skill's 'commit after live proof' design note is applied as a defect without checking that the repo's own PROJECT.md documents the opposite order
 
 ## What it did
 
@@ -67,6 +68,7 @@ Audit the publish pipeline in site-src/ (the skillsmith.tech repo). What would m
 
 Copied under `files/`:
 
+- `site-src/audit.md`
 - `site-src/.gitattributes`
 - `site-src/.github/workflows/health.yml`
 - `site-src/.github/workflows/publish.yml`
@@ -90,7 +92,6 @@ Copied under `files/`:
 - `site-src/assets/stack.js`
 - `site-src/assets/tool.css`
 - `site-src/assets/tool.js`
-- `site-src/audit.md`
 - `site-src/caffeinity-routing/index.html`
 - `site-src/career-track/index.html`
 - `site-src/check/check-core.js`

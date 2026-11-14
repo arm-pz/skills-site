@@ -226,6 +226,17 @@ def files_text(folder, names, limit=30000):
     return "\n\n".join(out)
 
 
+def by_run_first(events, names):
+    """Files the run wrote with Write/Edit first, so files a setup step cloned cannot crowd them out of the judge."""
+    touched = set()
+    for e in events:
+        for c in (e.get("message", {}).get("content", []) if e.get("type") == "assistant" else []):
+            if c.get("type") == "tool_use" and c.get("name") in ("Write", "Edit", "MultiEdit", "NotebookEdit"):
+                touched.add(str(c.get("input", {}).get("file_path", "")))
+    hit = lambda rel: any(t.endswith("/" + rel) for t in touched)
+    return [n for n in names if hit(n)] + [n for n in names if not hit(n)]
+
+
 def judge(scn, output, tools, checks, truth, env, proj, written=""):
     body = (f"{JUDGE}\n## Scenario\nSkill: {scn['skill']}\nTarget: {scn['target']}\n\nPrompt:\n{scn['prompt']}\n"
             + "".join(f"\nFollow-up:\n{f}\n" for f in scn.get("followups", []))
@@ -306,9 +317,9 @@ def run(name, man, day):
             truth = g.stdout + (f"\n[stderr]\n{g.stderr[-2000:]}" if g.returncode else "")
         if scn.get("teardown"):
             subprocess.run(scn["teardown"], shell=True, cwd=proj, env=env, timeout=60)
-        made = sorted(str(p.relative_to(proj)) for p in proj.rglob("*")
+        made = by_run_first(events, sorted(str(p.relative_to(proj)) for p in proj.rglob("*")
                       if p.is_file() and ".claude" not in p.parts and ".git" not in p.parts
-                      and not (FIX / scn.get("fixtures", "\0") / p.relative_to(proj)).exists())
+                      and not (FIX / scn.get("fixtures", "\0") / p.relative_to(proj)).exists()))
         if not scn.get("seed_sessions"):
             for f in (home / ".claude" / "projects").rglob("*.jsonl"):
                 dest = POOL / f.relative_to(home / ".claude" / "projects")
@@ -356,6 +367,7 @@ def rejudge(name, day):
     output = "\n\n---\n\n".join(r.get("result", "") for r in results)
     tools = tool_log(events)
     truth = (out_dir / "truth.txt").read_text() if (out_dir / "truth.txt").exists() else ""
+    rec["files"] = by_run_first(events, rec["files"])
     written = files_text(out_dir / "files", rec["files"], limit=400_000)
     transcript = (out_dir / "transcript.jsonl").read_text()
     old = {c["desc"]: c for c in rec["checks"]}

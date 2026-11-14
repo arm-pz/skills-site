@@ -5,8 +5,8 @@
   "prompt": "Audit the publish pipeline in site-src/ (the skillsmith.tech repo). What would make a new skill repo fail to appear on the site, and what's fragile? Don't change anything; write audit.md.",
   "checks": [
     {
-      "desc": "wrote audit.md",
-      "file": "audit.md"
+      "desc": "wrote audit.md (root or site-src/)",
+      "cmd": "test -f audit.md || test -f site-src/audit.md"
     }
   ],
   "max_turns": 80,
