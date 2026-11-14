@@ -2,30 +2,37 @@
   "skill": "pre-ship-performance-audit",
   "date": "2026-11-13",
   "target": "Ledgerboard, a local marketing page and stats API with 6 planted slow-downs",
-  "verdict": "FAIL",
-  "score": 0,
-  "summary": "The run made one Bash call (project listing, package.json, curl, tool check) that was denied, then stopped and asked the user how to proceed; no baseline, findings, fixes, or numbers were produced.",
+  "verdict": "PARTIAL",
+  "score": 5,
+  "summary": "The run took 3 Lighthouse mobile baselines and 3 after-runs and fixed render-blocking, font, compression and the N+1 (936\u219232 ms, FCP 4842\u21921457 ms, score 36\u219248), but left the 6.4 MB hero and 450 ms busy-wait unfixed and LCP stayed ~33 s.",
   "checks": [],
   "met": [
-    "Did not invent any baseline or measurements; it stated plainly that it could not measure and offered options"
+    "Measured a Lighthouse mobile baseline with 3 repeated runs before changing anything, reported real numbers, and did not invent any",
+    "Found the hero image (6.4 MB PNG), synchronous app.js with the 450 ms busy-wait, the 9-weight blocking font, no-store/no compression, and the N+1 in /api/stats",
+    "Re-measured after with the same protocol (3 Lighthouse mobile runs, same version) and reported medians with the run-to-run spread",
+    "Was candid about what was not fixed, the mistaken `kill 1`, the stale pid file, that caching isn't measured by Lighthouse, and that the font and fix effects weren't isolated",
+    "Did not remove features"
   ],
   "missed": [
-    "No Lighthouse mobile baseline was measured (zero repeated runs)",
-    "Did not identify any of the planted issues: 6 MB hero image, render-blocking app.js with busy-wait, 9-weight blocking font, no-store/no compression, N+1 /api/stats, late client-side stats fetch",
-    "No fixes were made and no before/after numbers exist",
-    "Did not fall back to Read/Glob/Grep to at least review the source, even though it said those tools still worked; it ended after a single denied call and handed the decision back to the user",
-    "Did not report what could not be measured in a measured-vs-unmeasured breakdown, because nothing was done"
+    "Hero image was not actually fixed (only width/height/fetchpriority added); the main bottleneck remained, LCP ~33 s. The first conversion attempt was denied and no alternative converter was tried",
+    "The 450 ms busy-wait was not addressed; TBT unchanged at ~1.79 s",
+    "The N+1 was fixed by running the 31 queries concurrently rather than one grouped query, which the ground truth expected; also the /api/stats claim rests on a single curl, not the same Lighthouse protocol",
+    "The late client-side stats fetch (item 6) was not identified or addressed",
+    "Did not clearly state that there was no real network/throttling limitation beyond mentioning simulated defaults; it did not check or disclose whether the Google Fonts request actually worked offline in the Lighthouse runs (it probed but the final report doesn't say)",
+    "Skipped the skill's subagent audit and finished with the server left stopped, so the site isn't running"
   ],
   "skill_defects": [
-    "The skill has no fallback path when Bash is denied: it forbids code-only estimates, so the agent stalls instead of delivering a labeled static review of the source (which would have found most of the planted issues without measurements).",
-    "The skill does not tell the agent to proceed with read-only discovery (Read/Glob/Grep on the source) in parallel while waiting on permissions, so a single denied command ended the whole run.",
-    "The first step bundles many probes (ls, cat, git status, curl, npm cache listing) into one compound shell command, so one denial blocks all of them; smaller, separate calls or dedicated file tools would have degraded more gracefully."
+    "Skill does not give a fallback path when the preferred image converter is denied (e.g. try sharp/node/python PIL, or ask for approval up front), so the largest win was left undone",
+    "Skill lets the run stop at 'open' for the dominant bottleneck instead of requiring an alternative attempt or a concrete resolved plan",
+    "Skill does not tell the agent to prefer a grouped query over concurrent queries for N+1, nor to verify the N+1 fix under the same Lighthouse protocol",
+    "Skill does not require a statement about network/font availability limits (offline fonts, simulated throttling) in the report",
+    "Skill's server-restart guidance led to a foreground/background process that timed out and left the app not running"
   ],
-  "cost_usd": 0.07,
+  "cost_usd": 0.58,
   "model": "sonnet",
-  "turns": 4,
-  "seconds": 10,
-  "tool_calls": 2,
+  "turns": 37,
+  "seconds": 719,
+  "tool_calls": 34,
   "files": [
     "public/app.js",
     "public/hero.png"

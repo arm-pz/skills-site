@@ -1,8 +1,8 @@
 # pre-ship-performance-audit: real-world run, 2026-11-13
 
-**Verdict: FAIL** (0/10). The run made one Bash call (project listing, package.json, curl, tool check) that was denied, then stopped and asked the user how to proceed; no baseline, findings, fixes, or numbers were produced.
+**Verdict: PARTIAL** (5/10). The run took 3 Lighthouse mobile baselines and 3 after-runs and fixed render-blocking, font, compression and the N+1 (936→32 ms, FCP 4842→1457 ms, score 36→48), but left the 6.4 MB hero and 450 ms busy-wait unfixed and LCP stayed ~33 s.
 
-Target: Ledgerboard, a local marketing page and stats API with 6 planted slow-downs. Run headless on sonnet in a clean project with only this skill installed (4 turns, 2 tool calls, 10 s, $0.07).
+Target: Ledgerboard, a local marketing page and stats API with 6 planted slow-downs. Run headless on sonnet in a clean project with only this skill installed (37 turns, 34 tool calls, 719 s, $0.58).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -23,21 +23,28 @@ Ledgerboard launches next week and feels slow. It's running locally at http://12
 
 ## Met
 
-- Did not invent any baseline or measurements; it stated plainly that it could not measure and offered options
+- Measured a Lighthouse mobile baseline with 3 repeated runs before changing anything, reported real numbers, and did not invent any
+- Found the hero image (6.4 MB PNG), synchronous app.js with the 450 ms busy-wait, the 9-weight blocking font, no-store/no compression, and the N+1 in /api/stats
+- Re-measured after with the same protocol (3 Lighthouse mobile runs, same version) and reported medians with the run-to-run spread
+- Was candid about what was not fixed, the mistaken `kill 1`, the stale pid file, that caching isn't measured by Lighthouse, and that the font and fix effects weren't isolated
+- Did not remove features
 
 ## Missed
 
-- No Lighthouse mobile baseline was measured (zero repeated runs)
-- Did not identify any of the planted issues: 6 MB hero image, render-blocking app.js with busy-wait, 9-weight blocking font, no-store/no compression, N+1 /api/stats, late client-side stats fetch
-- No fixes were made and no before/after numbers exist
-- Did not fall back to Read/Glob/Grep to at least review the source, even though it said those tools still worked; it ended after a single denied call and handed the decision back to the user
-- Did not report what could not be measured in a measured-vs-unmeasured breakdown, because nothing was done
+- Hero image was not actually fixed (only width/height/fetchpriority added); the main bottleneck remained, LCP ~33 s. The first conversion attempt was denied and no alternative converter was tried
+- The 450 ms busy-wait was not addressed; TBT unchanged at ~1.79 s
+- The N+1 was fixed by running the 31 queries concurrently rather than one grouped query, which the ground truth expected; also the /api/stats claim rests on a single curl, not the same Lighthouse protocol
+- The late client-side stats fetch (item 6) was not identified or addressed
+- Did not clearly state that there was no real network/throttling limitation beyond mentioning simulated defaults; it did not check or disclose whether the Google Fonts request actually worked offline in the Lighthouse runs (it probed but the final report doesn't say)
+- Skipped the skill's subagent audit and finished with the server left stopped, so the site isn't running
 
 ## Defects to fix in the skill
 
-- The skill has no fallback path when Bash is denied: it forbids code-only estimates, so the agent stalls instead of delivering a labeled static review of the source (which would have found most of the planted issues without measurements).
-- The skill does not tell the agent to proceed with read-only discovery (Read/Glob/Grep on the source) in parallel while waiting on permissions, so a single denied command ended the whole run.
-- The first step bundles many probes (ls, cat, git status, curl, npm cache listing) into one compound shell command, so one denial blocks all of them; smaller, separate calls or dedicated file tools would have degraded more gracefully.
+- Skill does not give a fallback path when the preferred image converter is denied (e.g. try sharp/node/python PIL, or ask for approval up front), so the largest win was left undone
+- Skill lets the run stop at 'open' for the dominant bottleneck instead of requiring an alternative attempt or a concrete resolved plan
+- Skill does not tell the agent to prefer a grouped query over concurrent queries for N+1, nor to verify the N+1 fix under the same Lighthouse protocol
+- Skill does not require a statement about network/font availability limits (offline fonts, simulated throttling) in the report
+- Skill's server-restart guidance led to a foreground/background process that timed out and left the app not running
 
 ## Ground truth
 
@@ -54,7 +61,39 @@ Planted slow-downs in fixtures/slow-app (6):
 ## What it did
 
 1. `Skill: pre-ship-performance-audit`
-1. `Bash: cd /tmp/run-pre-ship-performance-audit-466oqik_/project; ls -la; cat package.json; git status 2>&1 | head -1; curl -sI http://127.0.0.1:3200 | head; ls ~/.npm 2`
+1. `Bash: ls -la /tmp/run-pre-ship-performance-audit-v0i3vdm1/project`
+1. `Bash: curl -sI http://127.0.0.1:3200`
+1. `Read: /tmp/run-pre-ship-performance-audit-v0i3vdm1/project/server.js`
+1. `Read: /tmp/run-pre-ship-performance-audit-v0i3vdm1/project/make_assets.js`
+1. `Bash: ls -la /tmp/run-pre-ship-performance-audit-v0i3vdm1/project/public /tmp/run-pre-ship-performance-audit-v0i3vdm1/project/.claude/skills/pre-ship-performance-audi`
+1. `Read: /tmp/run-pre-ship-performance-audit-v0i3vdm1/project/public/index.html`
+1. `Bash: npx --no-install lighthouse --version`
+1. `Bash: ls /opt/node22/lib/node_modules; google-chrome --version`
+1. `Bash: npx --yes lighthouse@latest --version`
+1. `Bash: npx --yes lighthouse@13.6.0 http://127.0.0.1:3200/ --form-factor=mobile --output=json --output-path=/tmp/run-pre-ship-performance-audit-v0i3vdm1/lh/before-1.jso`
+1. `Write: /tmp/run-pre-ship-performance-audit-v0i3vdm1/lh/README.txt`
+1. `Bash: npx --yes lighthouse@13.6.0 http://127.0.0.1:3200/ --form-factor=mobile --output=json --output-path=/tmp/run-pre-ship-performance-audit-v0i3vdm1/lh/before-1.jso`
+1. `Bash: npx --yes lighthouse@13.6.0 http://127.0.0.1:3200/ --form-factor=mobile --output=json --output-path=/tmp/run-pre-ship-performance-audit-v0i3vdm1/lh/before-2.jso`
+1. `Bash: npx --yes lighthouse@13.6.0 http://127.0.0.1:3200/ --form-factor=mobile --output=json --output-path=/tmp/run-pre-ship-performance-audit-v0i3vdm1/lh/before-3.jso`
+1. `Write: /tmp/run-pre-ship-performance-audit-v0i3vdm1/lh/summarize.js`
+1. `Bash: node /tmp/run-pre-ship-performance-audit-v0i3vdm1/lh/summarize.js before`
+1. `Bash: curl -s -o /dev/null -w "api/stats %{time_total}s\n" http://127.0.0.1:3200/api/stats`
+1. `Bash: which cwebp convert magick python3 ffmpeg`
+1. `Bash: curl -s -m 5 -o /dev/null -w "fonts.googleapis.com: %{http_code} %{time_total}s\n" "https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap"`
+1. `Bash: convert /tmp/run-pre-ship-performance-audit-v0i3vdm1/project/public/hero.png -resize 900x -quality 70 /tmp/run-pre-ship-performance-audit-v0i3vdm1/project/publi`
+1. `Write: /tmp/run-pre-ship-performance-audit-v0i3vdm1/project/server.js`
+1. `Write: /tmp/run-pre-ship-performance-audit-v0i3vdm1/project/public/index.html`
+1. `Bash: kill 1`
+1. `Read: /tmp/run-pre-ship-performance-audit-v0i3vdm1/project/.server.pid`
+1. `Bash: curl -sI http://127.0.0.1:3200`
+1. `Bash: kill 4897`
+1. `Bash: node server.js`
+1. `Bash: curl -s -H "Accept-Encoding: gzip" -o /dev/null -w "app.js %{size_download}B  api: " http://127.0.0.1:3200/app.js`
+1. `Bash: curl -s -o /dev/null -w "api/stats %{time_total}s\n" http://127.0.0.1:3200/api/stats`
+1. `Bash: npx --yes lighthouse@13.6.0 http://127.0.0.1:3200/ --form-factor=mobile --output=json --output-path=/tmp/run-pre-ship-performance-audit-v0i3vdm1/lh/after-1.json`
+1. `Bash: npx --yes lighthouse@13.6.0 http://127.0.0.1:3200/ --form-factor=mobile --output=json --output-path=/tmp/run-pre-ship-performance-audit-v0i3vdm1/lh/after-2.json`
+1. `Bash: npx --yes lighthouse@13.6.0 http://127.0.0.1:3200/ --form-factor=mobile --output=json --output-path=/tmp/run-pre-ship-performance-audit-v0i3vdm1/lh/after-3.json`
+1. `Bash: node /tmp/run-pre-ship-performance-audit-v0i3vdm1/lh/summarize.js after`
 
 ## Files it wrote
 
@@ -65,16 +104,43 @@ Copied under `files/`:
 
 ## Final output
 
-I can't run the audit yet, because the session is in "don't ask" mode and it denied my first shell command. That command listed the project, read `package.json`, and checked whether the app on port 3200 responds and which Lighthouse or Chrome tools are installed.
+I fixed the render-blocking resources and the slow API, but the page is still slow. The 6.4 MB hero image and the 450 ms startup loop in `app.js` are still there. The score went from 36 to 48, but LCP is still about 33 seconds.
 
-The audit depends on shell access in three places:
-- **Baseline:** I need to run a production build, start the server, and run mobile Lighthouse three times per page. The skill forbids estimating these numbers from code review alone.
-- **Fixes:** I need to rebuild after each change and repeat the same Lighthouse runs for the after numbers.
-- **Database timings:** I need to measure query and API times.
+I measured with Lighthouse 13.6.0, mobile mode, three runs of `http://127.0.0.1:3200/`, on the same headless Chrome 153 with default throttling. The page was served by `node server.js`, which is the only mode this app has. Medians are below.
 
-Reading files with Read, Glob, and Grep still works. That would give me a code-only review, with no before or after numbers, so it wouldn't meet your request to prove each fix.
+| Metric | Before | After | Change |
+|---|---|---|---|
+| Performance score | 36 | 48 | +12 |
+| FCP | 4,842 ms | 1,457 ms | −70% |
+| Speed Index | 4,842 ms | 1,457 ms | −70% |
+| LCP | 34,978 ms | 33,014 ms | −6% |
+| TBT | 1,783 ms | 1,790 ms | no change |
+| CLS | 0 | 0 | none |
+| Transfer | 6,757 KB | 6,417 KB | −5% |
+| `/api/stats` (single curl, not Lighthouse) | 936 ms | 32 ms | −97% |
 
-How do you want to proceed?
-1. **Allow Bash** for this session, either by switching permission mode or by allowing `npm`, `next`, `curl`, `lighthouse`, and `node` commands. I'll then run the full audit.
-2. **Run the baseline yourself.** Give me the Lighthouse JSON for the homepage and the two or three slowest pages. I'll do the code audit and edits, but I couldn't rebuild or re-measure, so fixes would stay "fixed-unproven".
-3. **Code-only review now.** I'll produce the prioritized findings with no measurements and label them as unmeasured.
+Run-to-run spread was under 2%, so the FCP and score gains are real. The LCP and transfer changes are small.
+
+| Finding | Change | Result |
+|---|---|---|
+| PERF-01: 31 sequential queries in `/api/stats` (`server.js`) | Queries now run concurrently. | Fixed and verified: 936 ms to 32 ms. |
+| PERF-02: render-blocking script and font (`public/index.html`) | `app.js` is deferred. The font request is trimmed from 9 weights to 2, uses `display=swap` and has preconnects. | Fixed and verified: FCP −70%. I didn't test the two changes separately. |
+| PERF-03: nothing compressed or cached (`server.js`) | `app.js` is gzipped, 385 KB to 36.8 KB. The hero is cacheable for a day. HTML and JS revalidate with an ETag. `/api/stats` stays uncached. | Fixed and verified: gzip savings show in the transfer total. Caching only helps repeat visits, which Lighthouse doesn't measure. |
+| PERF-04: hero image is a 6.4 MB, 1800×1200 PNG | I added `width`, `height` and `fetchpriority=high` to prevent layout shift and prioritise the image. | Open. This is the main bottleneck and the cause of the 33 s LCP. |
+| PERF-05: `app.js` blocks the main thread for 450 ms (`make_assets.js` generates it) | Nothing. Deferring didn't change TBT. | Open. |
+
+- **Hero image:** I tried to convert it to a resized WebP with ImageMagick, but the command was denied, so I didn't try another converter. Fixing it means producing a roughly 900 px WebP or AVIF (plus a `<picture>` tag). The test image is random noise, which compresses badly, so a real hero should shrink far more than this one will. If you approve the conversion, I'll run it and re-measure.
+- **Startup loop:** it's a deliberate busy-wait in the generated `app.js`. In a real app, the fix is to split the widget initialization and run it after first paint. I didn't want to change the widget behavior without your say-so.
+- **Subagents:** I skipped the four-agent audit. The app is about 20 lines of server code and one HTML file, so four agents would have read the same three files.
+- **Mistake:** I accidentally ran `kill 1` while trying to restart the server. It had no effect. I then stopped the real server (PID 4897) and started the new one in the background.
+- **Server state:** the new server is still running, and `.server.pid` is stale.
+- **Git and database:** nothing was committed, and there's no database or git repository here.
+- **Remaining unmeasured items:** self-hosting the font instead of using Google Fonts, and replacing the 30 per-customer queries with one grouped query once there's a real database.
+
+---
+
+The background `node server.js` I started has now been stopped after hitting its time limit. Nothing is serving on port 3200 anymore. That was the server running the optimized code, so I won't restart it. The instructions say not to restart a command that already had the longest timeout. My "after" measurements were all taken before it stopped, so they still stand.
+
+To bring Ledgerboard back up, run `node server.js` from the project directory. The `.server.pid` file is stale (it holds the old PID 4897).
+
+The open items are unchanged. They are the 6.4 MB hero image (needs a WebP or AVIF conversion, which was denied earlier) and the 450 ms startup loop in `app.js`. Tell me if you want me to take either one on.
