@@ -1,8 +1,8 @@
 # seo-polish: real-world run, 2026-11-13
 
-**Verdict: FAIL** (1/10). The agent's one crawl attempt (a Bash call) was denied, so it measured none of the 92 pages, wrote no seo-polish.md, and ended by asking the user to pick a way forward.
+**Verdict: PARTIAL** (4/10). The run crawled only 25 of 92 sitemap pages and reported 3 length findings plus 13 truncated descriptions; ground truth shows 12 titles over 60 chars and 8 descriptions over 160, so most real findings were missed and some claims are unverified.
 
-Target: skillsmith.tech (92 live pages). Run headless on sonnet in a clean project with only this skill installed (7 turns, 4 tool calls, 12 s, $0.1).
+Target: skillsmith.tech (92 live pages). Run headless on sonnet in a clean project with only this skill installed (11 turns, 8 tool calls, 77 s, $0.28).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -20,29 +20,30 @@ Polish the on-page SEO of https://skillsmith.tech. Measure first, then give me r
 
 ## Hard checks
 
-- ✗ wrote seo-polish.md
+- ✓ wrote seo-polish.md
 
 ## Met
 
-- Changed nothing live
-- Said plainly that nothing was measured and that seo-polish.md was not written
-- Did not invent findings or fabricate rewrites without measurement
+- Measured the live site with a read-only crawler before proposing, and changed nothing live
+- Correctly found no non-200 pages, no missing canonicals and exactly one h1 per page on the pages it crawled
+- Stated clearly what it could not measure: partial crawl, inconclusive sitemap/link checks, no H1 text, no Core Web Vitals, estimated character counts
+- Gave two alternatives per page for the titles and descriptions it chose to fix, mostly within length limits
 
 ## Missed
 
-- Did not crawl the site: the Bash call to run seo-crawl.mjs was denied, and no other measurement was tried (e.g. a web-fetch of the sitemap pages)
-- Did not report any findings, so the ground truth (12 titles over 60 chars, 8 descriptions over 160, no broken links, one h1 per page) was not matched
-- Gave no 2-3 rewritten alternatives for any finding
-- Did not write seo-polish.md (hard check failed)
-- Declined to use a lighter fallback measurement and stopped to ask the user, though the user had asked for the proposals file to be written
-- Described the crawl as capped at 25 pages, which would not cover the 92-page sitemap even if it had run
+- Crawled only 25 of 92 pages and did not raise the budget, so it never reached the other 67 pages and could not check all 98 internal links
+- Found only 2 over-long titles (/checks/, /check/) and 1 over-long description, versus ground truth of 12 titles over 60 chars and 8 descriptions over 160; most real over-length pages were never reported
+- Priority 2 labels 13 titles as problems for being generic and slug-derived, a judgement call that is not a measured defect; those titles are mostly under 60 chars
+- Claimed 13 truncated descriptions ending in '…' at about 150 chars; this is not in the ground truth, and the descriptions were eyeballed rather than measured, so it may be invented
+- Did not rewrite any H1s, and did not give 2–3 alternatives (only 2, or a single replacement for descriptions) for the High/Medium items
+- Character counts were 'by eye' and approximate, so the length compliance of the rewrites is unverified
 
 ## Defects to fix in the skill
 
-- The skill depends on a single Bash-run crawler script and has no fallback path (e.g. web-fetch of the sitemap and pages) when Bash is denied, so the run produced nothing.
-- The skill's crawler is capped at 25 pages, so it cannot cover a 92-page sitemap; the skill does not tell the agent how to sample or extend coverage.
-- The skill requires an ownership/authorization confirmation before crawling, which blocks the run in a non-interactive context where the user's prompt already asks for the audit.
-- The skill does not say to still write seo-polish.md with a clear 'could not measure' section when measurement fails, so the requested deliverable was absent.
+- The seo-crawl default budget of 25 pages is far below the sitemap size, and the skill did not tell the agent to raise it to cover the sitemap before proposing
+- The crawler records only the H1 count and not its text, so heading rewrites are impossible without a second fetch step
+- The skill has no step to measure rewrite lengths programmatically, so counts were estimated by eye
+- It depends on seo-audit, which was not installed, leaving prioritisation to ad hoc judgement that raised unmeasured findings
 
 ## Ground truth
 
@@ -108,20 +109,38 @@ per page: status | title (len) | h1
 ## What it did
 
 1. `Skill: seo-polish`
-1. `Skill: seo-crawl`
-1. `Bash: ls -R . 2>/dev/null | grep -v node_modules | head -50`
-1. `Bash: cd /tmp/run-seo-polish-ds4oz1rb/project/.claude/skills/seo-crawl && ls -R . && mkdir -p /tmp/run-seo-polish-ds4oz1rb/project/reports && node scripts/seo-crawl.m`
+1. `Glob: .claude/skills/*/scripts/*`
+1. `Glob: .claude/skills/seo-crawl/**`
+1. `Read: /tmp/run-seo-polish-xi307jif/project/.claude/skills/seo-crawl/SKILL.md`
+1. `Bash: node .claude/skills/seo-crawl/scripts/seo-crawl.mjs --url https://skillsmith.tech --out reports/seo-crawl.json`
+1. `Bash: node .claude/skills/seo-crawl/scripts/seo-crawl.mjs --url https://skillsmith.tech`
+1. `Skill: wordsmith`
+1. `Write: /tmp/run-seo-polish-xi307jif/project/seo-polish.md`
+
+## Files it wrote
+
+Copied under `files/`:
+
+- `seo-polish.md`
 
 ## Final output
 
-I couldn't run the crawl, so I haven't measured anything and `seo-polish.md` doesn't exist yet.
+I measured the site and wrote the proposals to `seo-polish.md`. I didn't change anything on the site. I also didn't write the crawl report to disk, because `reports/` doesn't exist. I read it from stdout instead.
 
-The `seo-polish` skill starts by running the bundled crawler, `node scripts/seo-crawl.mjs --url https://skillsmith.tech --out reports/seo-crawl.json`. The session is in "don't ask" mode, which denied the Bash call, so the crawler never ran. The project directory is also empty apart from the `.claude/skills` folders, so there are no local files to audit instead.
+**Measured:** the crawl was partial, 25 of the 92 sitemap URLs. Sitemap coverage, internal links and crawl coverage are therefore inconclusive, not passed. The pages that were fetched are technically clean:
+- Every page returned 200 with no redirects.
+- Every page has a self-referencing canonical and exactly one H1.
+- robots.txt and the sitemap resolve.
 
-I could try fetching a few pages with a web-fetch tool and read the titles and headings from those. I didn't, because that wouldn't give you the crawl's finding IDs, redirect and canonical checks, or sitemap coverage. A page-fetch summary can also miss or invent details. Rewrites based on that would be guesses, which is what you asked me to avoid by measuring first.
+**Worth fixing:**
+1. **Truncated meta descriptions.** 13 of the 25 pages have a description that is cut off with "…" mid-sentence. The crawler doesn't flag this, but it is the clearest defect. For each page I proposed a replacement that ends on the last complete clause, with no facts added. Check the endings against the source SKILL.md. If the descriptions are generated, fixing the generator also covers the pages I didn't crawl.
+2. **Generic titles.** The same 13 pages use a title template built from the slug, such as "Ai Team Blueprint — AI Agent Skill…". It has wrong casing ("Ai", "To") and doesn't say what the skill does. I gave two title options per page, each within 60 characters.
+3. **The crawler's three info findings.** `/checks/` has a 72-character title and a 166-character description. `/check/` has a 63-character title. I gave two options for each.
 
-Pick one:
-1. **Allow Bash for the crawl.** Either switch the permission mode or allow `node scripts/seo-crawl.mjs`. It's a read-only crawl of 25 pages at most that obeys robots.txt. I'd then run it and write the proposals to `seo-polish.md` without touching anything else.
-2. **Use a lighter check.** I fetch the homepage and a few key pages with the web-fetch tool. The proposals would then be marked as based on a partial, unmeasured sample.
+**Gaps:**
+- I didn't rewrite any H1s, because the crawler records only how many H1s a page has, not their text. Send me the H1s, or let me fetch the pages, and I'll add them.
+- `seo-audit` isn't installed, so the priorities come from the crawl data and my own read of the titles and descriptions.
+- Character counts in the file are estimates and need a recheck before shipping.
+- Core Web Vitals weren't measured.
 
-Also confirm you own or are authorized to crawl skillsmith.tech, since the crawl skill requires that.
+I'd suggest one re-crawl at about 100 pages after the fixes, so the inconclusive checks can complete.
