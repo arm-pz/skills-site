@@ -1,0 +1,33 @@
+{
+  "skill": "session-retrace",
+  "date": "2026-11-13",
+  "target": "real Claude Code session files from this batch of runs",
+  "verdict": "PARTIAL",
+  "score": 5,
+  "summary": "The run searched with the bundled script and found one candidate, claude:eda1adb5 (2026-11-13, workspace /tmp/run-ship-second-brain-69r37__h/project), which matches the ground truth, but it gave no decisions because it never read beyond a 12-turn view.",
+  "checks": [],
+  "met": [
+    "Searched the transcript files on disk with the bundled session_retrace.py script",
+    "Top candidate id (eda1adb5) matches the ground truth session",
+    "Gave date, workspace and verbatim prompt evidence for the candidate, at no more than three candidates",
+    "Invented no decisions; it said plainly that it could not recover the answers"
+  ],
+  "missed": [
+    "Did not summarise the session's decisions on split payments, overpayments or the Stackwise promise; it stopped after a 12-turn view and only offered to read 40 turns",
+    "Evidence is labelled with 'claude:eda1adb5' rather than the agent:id form (agent-aed7119ed04059d93), and the other ground-truth id was not surfaced",
+    "Tried to read the vault on disk (ls, Glob) instead of reading further into the transcript, which is where the decisions would be",
+    "Did not use the available follow-up (show with more turns) before giving up, so the user's second question went unanswered"
+  ],
+  "skill_defects": [
+    "The skill does not tell the agent to read enough of the chosen session (e.g. the final assistant answer) to report decisions, so a shallow show --turns 12 can leave the second half of the question unanswered",
+    "The skill does not make clear that the id to report is the agent:id form, so the output used claude:eda1adb5",
+    "The skill does not steer the agent toward the transcript's final answer turns rather than re-reading workspace files that may no longer exist"
+  ],
+  "cost_usd": 0.08,
+  "model": "sonnet",
+  "turns": 7,
+  "seconds": 13,
+  "tool_calls": 5,
+  "files": [],
+  "error": ""
+}
