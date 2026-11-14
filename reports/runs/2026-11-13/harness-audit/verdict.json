@@ -2,32 +2,36 @@
   "skill": "harness-audit",
   "date": "2026-11-13",
   "target": "the skillsmith.tech repo plus real Claude Code session files from this batch",
-  "verdict": "FAIL",
-  "score": 2,
-  "summary": "The run did not produce an audit: the inventory/mining Bash call was denied, no sessions were read or counted, and it returned zero findings and zero diffs beyond saying site-src has no harness files.",
+  "verdict": "PARTIAL",
+  "score": 4,
+  "summary": "The audit found no CLAUDE.md, settings or hooks in site-src or at user level, mined only 1 session (its own invocation, 0 corrections), made one real finding (no instruction file) and one non-actionable one, applied nothing, and read neither workflow file nor the real past sessions.",
   "checks": [],
   "met": [
-    "Applied nothing and kept the repo untouched",
-    "Kept secrets and personal data out of the report",
-    "Inventoried what it could via Glob and reported no CLAUDE.md, settings, hooks or skills found in site-src or at user level, though it did not run the inventory script"
+    "Inventoried harness files via inventory.py at project root and site-src (and user level) and reported none exist",
+    "States exactly how many sessions were mined (1, its own invocation, 1 user message, 0 corrections) rather than overclaiming",
+    "Proposes a diff for CLAUDE.md and a portable-harness handoff, and states nothing was applied",
+    "Finding 1 cites concrete evidence (inventory shows 0 instruction files, PROJECT.md 22 KB, ~85 top-level dirs, workflows present)",
+    "No secrets or personal data (user name, email, tokens) appear in the report",
+    "Honest about limits: flags the denied ls of ~/.claude/projects and the vacuous passes in the score"
   ],
   "missed": [
-    "Did not mine session files or state how many it read; it only noted roughly 60 logs exist in ~/.claude/projects and none was opened",
-    "Produced no ranked findings and no proposed diffs; the report says 'None'",
-    "Did not read the CI workflows, PROJECT.md or DIRECTORIES.md that exist in site-src, so the harness picture is shallow",
-    "Evidence for the 'no harness' and 'no sessions for site-src' claims rests on Glob patterns alone, with no session content examined",
-    "After the Bash denial it did not use Read or Grep, which were available, to mine sessions or read the existing files, and instead asked the user for permission and clarification"
+    "Did not mine the real past sessions in ~/.claude/projects: the ls was denied and the run never retried via --sessions-dir or another path, so the core 'against my past sessions' ask is unmet and correction mining is empty",
+    "Did not read publish.yml or health.yml, the only enforcement present, so there is no review of existing harness content; the 'Kept on purpose' section admits this",
+    "Finding 2 is 'action: none' and speculative about skills being site pages, so it adds little as a ranked finding; ranking is thin with only one actionable item",
+    "Several repo claims (about 85 directories, about 60 skill-named dirs) come from an ls and were not shown to be verified in the transcript's own output",
+    "The proposed CLAUDE.md diff is generic and, by its own admission, based on unverified directory purposes"
   ],
   "skill_defects": [
-    "The skill depends on Bash scripts (inventory.py, mine_sessions.py) with no fallback path using Read/Grep/Glob when Bash is denied, so a denial yields an empty audit",
-    "The skill does not tell the agent to proceed with a degraded but evidence-based audit (read the existing files, grep session JSONL, report counts) when scripts cannot run",
-    "The skill does not say how to map a subdirectory target like site-src/ to session directories, which left it concluding 'no sessions for site-src' without checking the parent-project sessions"
+    "The skill has no fallback when ~/.claude/projects listing is denied or yields only the current session; it should prompt for or auto-try --sessions-dir and surface a clear 'sessions not found' stop instead of producing a degraded report",
+    "The skill scores 'passing' on vacuous checks (no rules means nothing stale or unenforced), which inflates the 3/6 score when no harness exists; it should mark them N/A",
+    "mine_sessions.py appears to have been run on the project path and picked up only the audit's own session; the skill should resolve the session directory for the target project (and the user-level projects dir) or report it could not",
+    "The skill does not require reading existing workflows or CI files that act as the only enforcement, so the audit can skip the one real harness-like artifact"
   ],
-  "cost_usd": 0.28,
+  "cost_usd": 0.27,
   "model": "sonnet",
-  "turns": 10,
-  "seconds": 18,
-  "tool_calls": 8,
+  "turns": 9,
+  "seconds": 21,
+  "tool_calls": 7,
   "files": [
     "site-src/.gitattributes",
     "site-src/.github/workflows/health.yml",

@@ -1,8 +1,8 @@
 # harness-audit: real-world run, 2026-11-13
 
-**Verdict: FAIL** (2/10). The run did not produce an audit: the inventory/mining Bash call was denied, no sessions were read or counted, and it returned zero findings and zero diffs beyond saying site-src has no harness files.
+**Verdict: PARTIAL** (4/10). The audit found no CLAUDE.md, settings or hooks in site-src or at user level, mined only 1 session (its own invocation, 0 corrections), made one real finding (no instruction file) and one non-actionable one, applied nothing, and read neither workflow file nor the real past sessions.
 
-Target: the skillsmith.tech repo plus real Claude Code session files from this batch. Run headless on sonnet in a clean project with only this skill installed (10 turns, 8 tool calls, 18 s, $0.28).
+Target: the skillsmith.tech repo plus real Claude Code session files from this batch. Run headless on sonnet in a clean project with only this skill installed (9 turns, 7 tool calls, 21 s, $0.27).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -24,34 +24,37 @@ Audit the agent harness for site-src/ (CLAUDE.md, settings, hooks, skills) again
 
 ## Met
 
-- Applied nothing and kept the repo untouched
-- Kept secrets and personal data out of the report
-- Inventoried what it could via Glob and reported no CLAUDE.md, settings, hooks or skills found in site-src or at user level, though it did not run the inventory script
+- Inventoried harness files via inventory.py at project root and site-src (and user level) and reported none exist
+- States exactly how many sessions were mined (1, its own invocation, 1 user message, 0 corrections) rather than overclaiming
+- Proposes a diff for CLAUDE.md and a portable-harness handoff, and states nothing was applied
+- Finding 1 cites concrete evidence (inventory shows 0 instruction files, PROJECT.md 22 KB, ~85 top-level dirs, workflows present)
+- No secrets or personal data (user name, email, tokens) appear in the report
+- Honest about limits: flags the denied ls of ~/.claude/projects and the vacuous passes in the score
 
 ## Missed
 
-- Did not mine session files or state how many it read; it only noted roughly 60 logs exist in ~/.claude/projects and none was opened
-- Produced no ranked findings and no proposed diffs; the report says 'None'
-- Did not read the CI workflows, PROJECT.md or DIRECTORIES.md that exist in site-src, so the harness picture is shallow
-- Evidence for the 'no harness' and 'no sessions for site-src' claims rests on Glob patterns alone, with no session content examined
-- After the Bash denial it did not use Read or Grep, which were available, to mine sessions or read the existing files, and instead asked the user for permission and clarification
+- Did not mine the real past sessions in ~/.claude/projects: the ls was denied and the run never retried via --sessions-dir or another path, so the core 'against my past sessions' ask is unmet and correction mining is empty
+- Did not read publish.yml or health.yml, the only enforcement present, so there is no review of existing harness content; the 'Kept on purpose' section admits this
+- Finding 2 is 'action: none' and speculative about skills being site pages, so it adds little as a ranked finding; ranking is thin with only one actionable item
+- Several repo claims (about 85 directories, about 60 skill-named dirs) come from an ls and were not shown to be verified in the transcript's own output
+- The proposed CLAUDE.md diff is generic and, by its own admission, based on unverified directory purposes
 
 ## Defects to fix in the skill
 
-- The skill depends on Bash scripts (inventory.py, mine_sessions.py) with no fallback path using Read/Grep/Glob when Bash is denied, so a denial yields an empty audit
-- The skill does not tell the agent to proceed with a degraded but evidence-based audit (read the existing files, grep session JSONL, report counts) when scripts cannot run
-- The skill does not say how to map a subdirectory target like site-src/ to session directories, which left it concluding 'no sessions for site-src' without checking the parent-project sessions
+- The skill has no fallback when ~/.claude/projects listing is denied or yields only the current session; it should prompt for or auto-try --sessions-dir and surface a clear 'sessions not found' stop instead of producing a degraded report
+- The skill scores 'passing' on vacuous checks (no rules means nothing stale or unenforced), which inflates the 3/6 score when no harness exists; it should mark them N/A
+- mine_sessions.py appears to have been run on the project path and picked up only the audit's own session; the skill should resolve the session directory for the target project (and the user-level projects dir) or report it could not
+- The skill does not require reading existing workflows or CI files that act as the only enforcement, so the audit can skip the one real harness-like artifact
 
 ## What it did
 
 1. `Skill: harness-audit`
-1. `Bash: cd /tmp/run-harness-audit-2xoowgqe/project; S=.claude/skills/harness-audit; mkdir -p /tmp/ha_out; python3 -I $S/scripts/inventory.py . > /tmp/ha_out/inventory.j`
-1. `Read: /tmp/run-harness-audit-2xoowgqe/project/.claude/skills/harness-audit/references/checks.md`
-1. `Glob: **/*`
-1. `Glob: **/*.jsonl`
-1. `Glob: {CLAUDE.md,AGENTS.md,.claude/**,.mcp.json,.claude.json}`
-1. `Glob: **/*site-src*`
-1. `Glob: {settings*.json,CLAUDE.md,hooks/**,skills/**}`
+1. `Bash: python .claude/skills/harness-audit/scripts/inventory.py /tmp/run-harness-audit-85bmj5yk/project`
+1. `Bash: python .claude/skills/harness-audit/scripts/mine_sessions.py /tmp/run-harness-audit-85bmj5yk/project`
+1. `Read: /tmp/run-harness-audit-85bmj5yk/project/.claude/skills/harness-audit/references/checks.md`
+1. `Bash: ls -la /tmp/run-harness-audit-85bmj5yk/project /tmp/run-harness-audit-85bmj5yk/project/site-src /tmp/run-harness-audit-85bmj5yk/project/site-src/.github/workflo`
+1. `Bash: python .claude/skills/harness-audit/scripts/inventory.py /tmp/run-harness-audit-85bmj5yk/project/site-src --no-user`
+1. `Bash: ls -la /tmp/run-harness-audit-85bmj5yk/home/.claude/projects`
 
 ## Files it wrote
 
@@ -100,35 +103,55 @@ Copied under `files/`:
 
 ## Final output
 
-I couldn't produce a real audit, and I've changed nothing. Bash was denied in this session ("don't ask" mode), and the skill's `inventory.py` and `mine_sessions.py` scripts need it. I didn't try to work around the denial. I fell back to the Glob search tool and found nothing in `site-src/` to audit.
-
 # Harness audit: site-src/
 
-**Scope:** file search only. The scripts were not run. Session mining was skipped.
-**Score:** not scored. A partial run can't support x/6.
+**Scope:** I looked for CLAUDE.md, AGENTS.md, rules, settings, hooks, MCP servers, commands and agents at both the project root and `site-src/`, plus user-level config. I found none. Session mining covered 1 session, which is this audit's own invocation, with 1 user message, 0 correction candidates and 1 tool call (`Skill`).
+**Score: 3/6 checks passing.** Checks 2, 5 and 6 pass vacuously: there are no rules, so nothing can be unproven, unenforced or stale. Check 1 failed on the missing map, check 3 on the missing instruction file, and check 4 is not meaningful at this sample size (below). The score only means there is nothing to prune. I haven't measured whether the harness works.
 
-## What the file search found
+## Findings
 
-1. **`site-src/` has no harness.** There is no `CLAUDE.md`, `AGENTS.md`, `.claude/` directory (settings, hooks, skills, rules) or `.mcp.json`. It looks like a static site: HTML tool pages, `assets/`, `check/`, `list/`, `fonts/` and `.github/workflows/{health,publish}.yml`. It also has `PROJECT.md`, `README.md`, `DIRECTORIES.md`, `.well-known/skills.json` and `.reviews/`. The only enforcement is the two CI workflows, and I haven't read them.
-2. **No user-level harness either.** `~/.claude` has no `settings*.json`, `CLAUDE.md`, `hooks/` or `skills/`.
-3. **No sessions for `site-src`.** `~/.claude/projects` holds about 60 session logs, but none has a path encoding `site-src`.
-   - The session directories come from other `/tmp/run-*` projects, such as `seo-polish`, `release-gate` and `pre-ship-*`.
-   - One directory, `-tmp-run-harness-audit-…-project`, matches the parent folder I'm running in. I haven't opened it.
-4. **The only harness here is the audit skill.** It sits at `project/.claude/skills/harness-audit`, one level above `site-src/`. That could be the harness you meant.
+### 1. `site-src/` has no instruction file  [check: instruction file size] [action: handoff]
+**Evidence:**
+- Inventory finds 0 instruction files and 0 settings at the root and in `site-src/`.
+- The repo is large: about 85 top-level directories, `PROJECT.md` (22 KB), `README.md`, `DIRECTORIES.md`, and a `workflows/` folder.
+- `.github/workflows/publish.yml` and `health.yml` hold the only machine-checked behavior.
 
-## Findings and diffs
+An agent entering this repo has to rediscover the layout and publish flow every session.
 
-None. With no instruction files, hooks or skills, the six checks have nothing to examine. The one thing worth considering is whether `site-src/` needs a `CLAUDE.md` at all. If it does, `PROJECT.md` and `DIRECTORIES.md` would be the starting material, and that is a job for `portable-harness`, not this audit. I haven't read them, so I'm not proposing content.
+**Proposed change:** Hand this to `portable-harness` for a short map-style CLAUDE.md under 60 lines. It should be a pointer file that links to the existing docs instead of copying them. You'd run it, not me.
+
+```
+HARNESS-AUDIT HANDOFF
+Project: /tmp/run-harness-audit-85bmj5yk/project/site-src
+Area: no agent-facing map of a ~85-directory static site, its publish pipeline and its docs
+Evidence: inventory.json shows 0 instruction files; PROJECT.md is 22 KB and DIRECTORIES.md exists but nothing points to them
+Wanted: map section
+```
+
+If you'd rather I draft it, this is the starting point. Directory purposes are unverified, so I'd read `DIRECTORIES.md` first:
+
+```diff
++++ site-src/CLAUDE.md
++# site-src
++Static site (HTML, no build step assumed; verify against publish.yml).
++- Layout: see DIRECTORIES.md. Product/context: see PROJECT.md.
++- Publish: .github/workflows/publish.yml. Health checks: health.yml.
++- Do not hand-edit generated output until publish.yml's inputs are confirmed.
+```
+
+### 2. The skills in the repo are published content, not an installed harness  [check: tool and skill load] [action: none]
+**Evidence:**
+- `site-src/` has about 60 skill-named directories (`seo-*`, `release-gate-*`, `tune-skill*`, and others).
+- They are site pages, not `.claude/skills/` entries. Only `harness-audit` is loaded at project level, from `project/.claude/skills`.
+
+I'm not proposing removals: with 1 session mined, any `remove-tool` would be downgraded to `trial-remove`. There is also no evidence that these directories are loaded anywhere.
+
+## Kept on purpose
+- The two GitHub workflows are the only enforcement in the repo, and I've left them alone. I did not read their contents, so I can't say whether they cover link checks or secrets.
 
 ## Not checked
+- **Correction mining:** skipped as meaningful analysis. There is 1 session with no real history. Your "past sessions" may be stored under other project paths. My attempt to list `~/.claude/projects` was denied by the permission mode. If you point me at the right directory (`--sessions-dir`), I'll re-run the mining.
+- **Workflow contents:** I didn't read `publish.yml` or `health.yml`, so there is no drift or enforcement review of them.
+- **User-level `~/.claude`:** the inventory found no settings or hooks there either.
 
-- Inventory and session-mining script output.
-- Correction clusters, tool-call counts and the 100-line size threshold.
-- `.github/workflows/*.yml`, `PROJECT.md` and `DIRECTORIES.md` contents.
-- Whether any of the other-project sessions touch `site-src`.
-
-## Decisions for you
-
-- **Allow Bash** so I can run the two scripts. Their outputs go to a temp folder and nothing in your repo is touched.
-- **Confirm the target.** If the harness lives somewhere other than `site-src/`, give me the path.
-- **Mine the other sessions anyway?** I can read the other sessions with Grep. They belong to different projects, so I'd only count a cross-project correction as supporting evidence, not as evidence about `site-src`.
+Nothing was applied. If you want finding 1 drafted or handed off, say so, and send the sessions path if it's elsewhere.
