@@ -1,8 +1,8 @@
 # release-gate-ledger: real-world run, 2026-11-13
 
-**Verdict: FAIL** (2/10). The run stopped after a partial exposure probe (most paths returned the same 401) and never ran the app-tests or perf lanes, wrote no ledger rows through the recorder, and computed no overall posture by script.
+**Verdict: PARTIAL** (6/10). Run produced three separate lane verdicts (exposure PASS WITH FIXES, app-tests HOLD, perf untested) and an overall HOLD via check_gate.mjs, with live evidence for the IDOR, open admin API and role escalation, but missed cookie flags and login rate limiting, ran no real exposure checks beyond local probes, and left perf unrun.
 
-Target: Invoicely, a local invoicing app with 6 planted authorization and session flaws. Run headless on sonnet in a clean project with only this skill installed (29 turns, 26 tool calls, 43 s, $0.26).
+Target: Invoicely, a local invoicing app with 6 planted authorization and session flaws. Run headless on sonnet in a clean project with only this skill installed (39 turns, 36 tool calls, 129 s, $0.65).
 Pushes, releases, deploys and outbound submissions were denied for the run.
 
 ## Prompt
@@ -25,25 +25,28 @@ Run the release gate on Invoicely before launch. It's running locally at http://
 
 ## Met
 
-- Kept lane verdicts separate and marked unrun or unusable lanes as untested/INCONCLUSIVE rather than pass
-- Stated a HOLD posture in prose, with the reasoning that lanes are untested or inconclusive
+- Three lanes kept with separate verdicts; a pass in exposure did not cover app-tests or perf
+- Lane and finding rows written through gate_record.mjs (validating recorder) for each lane
+- Security lane found and evidenced the IDOR (alice read bob's invoice 201), the open admin API (/api/admin/users returns all users with plaintext passwords to any logged-in user) and mass-assignment escalation (PATCH /api/me role:admin persisted on reread)
+- Overall posture HOLD computed by check_gate.mjs, with blocking findings named (REDTEAM-S02, S03, plus S09); hard check satisfied
+- Perf lane marked untested rather than passed; HTTPS/cookie attributes stated as not assessable rather than passed
 
 ## Missed
 
-- No lane wrote any rows through the validating recorder (gate_record.mjs was read but never invoked); the exposure result is explicitly 'not yet written to the ledger'
-- The security/app-tests lane never ran, so none of the planted flaws (IDOR, open admin API, mass-assignment escalation, cookie flags, open redirect, no rate limit) were confirmed with evidence; they were only suspected from reading server.js
-- Lanes were not completed in order: the exposure lane stopped partway (about 10 of the listed paths probed) and the other two lanes were never started
-- Overall HOLD was asserted by the agent in text, not computed by the script, and the blocking findings were not recorded as such
-- Stopped and asked the user how to proceed after a classifier interruption instead of completing the gate, even though the user explicitly authorized running it against the local server
-- The exposure lane's 401 results were correctly flagged as uninformative, but no authenticated check was made to get real signal
+- Cookie flags (no HttpOnly/Secure/SameSite) were never probed even though the security lane held an authenticated session and the login response was available; the exposure notes say cookie attributes were not probed
+- No test of rate limiting/lockout on POST /api/login (planted flaw 6) was run
+- Exposure lane recorded PASS WITH FIXES despite being unable to check HTTPS, HSTS, redirects or cookies; inconclusive/untested would be more faithful for the unassessable parts
+- Perf lane was not attempted at all (no basic latency measurement via curl), only declared untested
+- The app-tests lane was run as a manual 'chair' pass without the red-team subagents or negative controls, and check_results.mjs was never run, so the lane was only partially executed
+- The admin-users open API was folded into REDTEAM-S03 rather than recorded as its own finding, and plaintext password storage was not separately called out as a finding
+- Report's claim that /login redirects to / and DELETE returns 200 with no mutation is a side detail; DELETE on a victim's invoice was attempted against live data without confirmation
 
 ## Defects to fix in the skill
 
-- The skill's fixed unauthenticated path-probe list yields no signal against apps that return 401 for every unauthenticated path; it has no step to detect or handle a uniform-response catch-all before concluding
-- The skill does not tell the agent to write the ledger row (via the recorder) immediately after each lane, so an interruption leaves no persisted results
-- Probing in many separate curl calls and in a broad for-loop appears to risk triggering the safety classifier; the skill should say to batch probes in a narrow, clearly scoped, local-only way
-- The skill does not state that when the user has authorized local testing with documented synthetic accounts, the agent should proceed to the authenticated lane rather than pause for confirmation
-- HOLD is computed by the script only after rows exist; the skill has no fallback to run the script and get a HOLD with 'untested' lanes when the run is cut short
+- The skill lets the exposure lane record PASS WITH FIXES when key checks (cookies, TLS) could not be run; it should require untested/inconclusive for those checks or a lower verdict
+- The skill does not tell the agent to check session cookie attributes and login rate limiting as part of the minimum security lane, so those planted flaws were missed
+- The skill allows a manual chair-run app-tests pass without check_results.mjs, leaving checker_exit empty and the lane only partly validated
+- The skill gives no fallback for the perf lane when Lighthouse is unavailable (e.g. curl timing), so it defaults to untested without any measurement
 
 ## Ground truth
 
@@ -61,59 +64,82 @@ Also true: passwords stored and returned in plain text (seen through #2 and GET 
 ## What it did
 
 1. `Skill: release-gate-ledger`
-1. `Bash: ls -la /tmp/run-release-gate-ledger-ps3c_mxp/project /tmp/run-release-gate-ledger-ps3c_mxp/project/.claude/skills`
-1. `Read: /tmp/run-release-gate-ledger-ps3c_mxp/project/README.md`
-1. `Read: /tmp/run-release-gate-ledger-ps3c_mxp/project/server.js`
-1. `Bash: find /tmp/run-release-gate-ledger-ps3c_mxp/project/.claude/skills /tmp/run-release-gate-ledger-ps3c_mxp/project/public -type f`
-1. `Bash: curl -s -i http://127.0.0.1:3100/`
-1. `Read: /tmp/run-release-gate-ledger-ps3c_mxp/project/.claude/skills/web-preflight/SKILL.md`
-1. `Read: /tmp/run-release-gate-ledger-ps3c_mxp/project/.claude/skills/pre-ship-security-red-team/SKILL.md`
-1. `Read: /tmp/run-release-gate-ledger-ps3c_mxp/project/.claude/skills/pre-ship-performance-audit/SKILL.md`
-1. `Read: /tmp/run-release-gate-ledger-ps3c_mxp/project/.claude/skills/release-gate-ledger/scripts/gate_record.mjs`
-1. `Read: /tmp/run-release-gate-ledger-ps3c_mxp/project/.claude/skills/release-gate-ledger/references/ledger.md`
-1. `Write: /tmp/run-release-gate-ledger-ps3c_mxp/project/.release-gate/run-1/profile.md`
-1. `Write: /tmp/run-release-gate-ledger-ps3c_mxp/project/.gitignore`
-1. `Bash: curl -s -i -m 8 http://127.0.0.1:3100/robots.txt`
-1. `Bash: for p in / /favicon.ico /.env /.env.local /.env.production /.env.yaml /.env.json /config.json /settings.json /.git/HEAD /.git/config /package.json /package-lock`
-1. `Bash: curl -s -I -m 8 http://127.0.0.1:3100/`
-1. `Bash: curl -s -m 8 -o /dev/null -w "%{http_code} %{content_type} %{size_download}\n" http://127.0.0.1:3100/favicon.ico`
-1. `Bash: curl -s -m 8 -o /dev/null -w "%{http_code} %{content_type} %{size_download}\n" http://127.0.0.1:3100/.env`
-1. `Bash: curl -s -m 8 -o /dev/null -w "%{http_code} %{content_type} %{size_download}\n" http://127.0.0.1:3100/.env.local`
-1. `Bash: curl -s -m 8 -o /dev/null -w "%{http_code} %{content_type} %{size_download}\n" http://127.0.0.1:3100/.env.production`
-1. `Bash: curl -s -m 8 -o /dev/null -w "%{http_code} %{content_type} %{size_download}\n" http://127.0.0.1:3100/config.json`
-1. `Bash: curl -s -m 8 -o /dev/null -w "%{http_code} %{content_type} %{size_download}\n" http://127.0.0.1:3100/.git/HEAD`
-1. `Bash: curl -s -m 8 -o /dev/null -w "%{http_code} %{content_type} %{size_download}\n" http://127.0.0.1:3100/package.json`
-1. `Bash: curl -s -m 8 -o /dev/null -w "%{http_code} %{content_type} %{size_download}\n" http://127.0.0.1:3100/admin/`
-1. `Bash: curl -s -m 8 -o /dev/null -w "%{http_code} %{content_type} %{size_download} %{redirect_url}\n" http://127.0.0.1:3100/login`
-1. `Bash: curl -s -m 8 -o /dev/null -w "%{http_code} %{content_type} %{size_download}\n" http://127.0.0.1:3100/phpinfo.php`
+1. `Bash: ls -R /tmp/run-release-gate-ledger-8r0hgria/project --exclude=node_modules`
+1. `Read: /tmp/run-release-gate-ledger-8r0hgria/project/README.md`
+1. `Glob: **/*`
+1. `Read: /tmp/run-release-gate-ledger-8r0hgria/project/server.js`
+1. `Read: /tmp/run-release-gate-ledger-8r0hgria/project/.claude/skills/web-preflight/SKILL.md`
+1. `Read: /tmp/run-release-gate-ledger-8r0hgria/project/.claude/skills/release-gate-ledger/references/ledger.md`
+1. `Read: /tmp/run-release-gate-ledger-8r0hgria/project/.claude/skills/release-gate-ledger/scripts/gate_record.mjs`
+1. `Read: /tmp/run-release-gate-ledger-8r0hgria/project/.claude/skills/pre-ship-security-red-team/SKILL.md`
+1. `Read: /tmp/run-release-gate-ledger-8r0hgria/project/.claude/skills/pre-ship-performance-audit/SKILL.md`
+1. `Write: `
+1. `Bash: node .claude/skills/release-gate-ledger/scripts/gate_record.mjs lane .release-gate/run1 --lane exposure --target 127.0.0.1:3100 --verdict untested --sha no-git`
+1. `Bash: mkdir -p .release-gate/run1`
+1. `Bash: curl -s -m 8 -i http://127.0.0.1:3100/robots.txt`
+1. `Bash: curl -s -m 8 -o /dev/null -w "%{http_code} %{content_type} %{size_download} %{url_effective}\n" http://127.0.0.1:3100/ http://127.0.0.1:3100/favicon.ico http://`
+1. `Bash: curl -s -m 8 -I http://127.0.0.1:3100/`
+1. `Bash: node .claude/skills/release-gate-ledger/scripts/gate_record.mjs finding .release-gate/run1 --id PREFLIGHT-01 --lane exposure --route "127.0.0.1:3100/ (all respo`
+1. `Bash: node .claude/skills/release-gate-ledger/scripts/gate_record.mjs lane .release-gate/run1 --lane exposure --target 127.0.0.1:3100 --verdict "PASS WITH FIXES" --sh`
+1. `Read: /tmp/run-release-gate-ledger-8r0hgria/project/.claude/skills/pre-ship-security-red-team/references/attacks.md`
+1. `Bash: curl -s -m 8 -c .release-gate/run1/a.jar -X POST -d '{"username":"alice","password":"alice-pass"}' http://127.0.0.1:3100/api/login`
+1. `Bash: curl -s -m 8 -c .release-gate/run1/b.jar -X POST -d '{"username":"bob","password":"bob-pass"}' "http://127.0.0.1:3100/api/login?next=//example.invalid"`
+1. `Bash: curl -s -m 8 -i "http://127.0.0.1:3100/login?next=//example.invalid"`
+1. `Bash: curl -s -m 8 -b .release-gate/run1/a.jar -w " [%{http_code}]\n" http://127.0.0.1:3100/api/invoices/201`
+1. `Bash: curl -s -m 8 -b .release-gate/run1/a.jar -w " [%{http_code}]\n" http://127.0.0.1:3100/api/admin/users`
+1. `Bash: curl -s -m 8 -b .release-gate/run1/a.jar -X PATCH -d`
+1. `Bash: curl -s -m 8 -b .release-gate/run1/a.jar -X PATCH -H "Content-Type: application/json" --data-raw '{"role":"admin"}' http://127.0.0.1:3100/api/me`
+1. `Bash: curl -s -m 8 -b .release-gate/run1/a.jar http://127.0.0.1:3100/api/me`
+1. `Bash: curl -s -m 8 -b .release-gate/run1/a.jar -X PATCH -H "Content-Type: application/json" --data-raw '{"role":"user"}' http://127.0.0.1:3100/api/me`
+1. `Bash: curl -s -m 8 -b .release-gate/run1/a.jar -X DELETE -w " [%{http_code}]\n" http://127.0.0.1:3100/api/invoices/201
+curl -s -m 8 -b .release-gate/run1/a.jar http:/`
+1. `Bash: curl -s -m 8 -w " [%{http_code}]\n" http://127.0.0.1:3100/api/invoices
+curl -s -m 8 -w " [%{http_code}]\n" http://127.0.0.1:3100/api/admin/users`
+1. `Bash: node .claude/skills/release-gate-ledger/scripts/gate_record.mjs finding .release-gate/run1 --id REDTEAM-S02 --lane app-tests --route "GET /api/invoices/:id" --s`
+1. `Bash: node .claude/skills/release-gate-ledger/scripts/gate_record.mjs lane .release-gate/run1 --lane app-tests --target http://127.0.0.1:3100 --verdict HOLD --sha no-`
+1. `Bash: node .claude/skills/release-gate-ledger/scripts/gate_record.mjs lane .release-gate/run1 --lane perf --target http://127.0.0.1:3100 --verdict untested --sha no-g`
+1. `Bash: node .claude/skills/release-gate-ledger/scripts/check_gate.mjs .release-gate/run1 --sha no-git`
+1. `Bash: mkdir -p docs/release
+cat .release-gate/run1/lanes.tsv
+echo ---
+cat .release-gate/run1/findings.tsv`
+1. `Write: /tmp/run-release-gate-ledger-8r0hgria/project/docs/release/2026-11-14-invoicely-gate.md`
 
 ## Files it wrote
 
 Copied under `files/`:
 
 - `.gitignore`
-- `.release-gate/run-1/profile.md`
+- `.release-gate/run1/a.jar`
+- `.release-gate/run1/b.jar`
+- `.release-gate/run1/findings.tsv`
+- `.release-gate/run1/lanes.tsv`
+- `docs/release/2026-11-14-invoicely-gate.md`
 
 ## Final output
 
-The safety classifier stopped my last turn. I don't know which step triggered it, so I'm pausing and not guessing. I'm not running any more probes until you say how to proceed.
+Ran the three-lane release gate against Invoicely's local server and recorded everything through the validating ledger recorder. Report saved to `docs/release/2026-11-14-invoicely-gate.md`.
 
-**What I've done so far**
-- Read `README.md`, `server.js`, `public/index.html` and the four skills.
-- Created `.release-gate/run-1/profile.md` and a `.gitignore` with `.release-gate/` and `.pre-ship-red-team/`.
-- Ran the exposure lane's fixed GET probes against the local server only, with no authentication and no state changes.
+## Overall posture: **HOLD** — do not launch as-is
 
-**Exposure lane (partial, not yet written to the ledger)**
-- **Homepage:** `/` returns 200 `text/html`. It sends no CSP, `X-Content-Type-Options`, Referrer-Policy or frame protection. That is a hardening gap.
-- **`/login`:** returns a 302 to `/`.
-- **Everything else I probed:** I probed `/robots.txt`, `/favicon.ico`, the `.env*` paths, `/config.json`, `/.git/HEAD`, `/package.json`, `/admin/` and `/phpinfo.php`. Each returned the same 401 JSON `{"error":"login required"}` (26 bytes). I did not get to the remaining listed paths (`/settings.json`, `/.git/config`, `/package-lock.json`, `/composer.*`, `/wp-*`, `/server-status`).
-- **What the 401s mean:** `server.js` answers 401 to every unauthenticated path, so these results show nothing about whether files are exposed. `robots.txt` also couldn't be read, so I had no crawler guidance to apply. Provisional verdict: **INCONCLUSIVE**.
+| Lane | Verdict |
+|---|---|
+| **Exposure** (web-preflight, local-only since it's not deployed) | PASS WITH FIXES |
+| **App-tests** (security red-team, manual pass as alice/bob/admin) | **HOLD** |
+| **Perf** (performance audit) | untested — not run this session |
 
-**Not run yet**
-- **app-tests:** the verdict is `untested`. Reading `server.js` already suggests likely failures, but code reading isn't proof under this gate. For example, `/api/invoices/:id` has no ownership check, `PATCH /api/me` accepts any fields including `role`, and `/api/admin/users` has no role check.
-- **perf:** the verdict is `untested`. There is no `package.json`, build or Lighthouse tooling in the project.
-- **Posture:** HOLD, because lanes are `untested` or `INCONCLUSIVE`, and the project isn't a git repo (I'd record the sha as `no-git`).
+### Exposure — PASS WITH FIXES
+No secret/source/admin-surface exposure: `.env`, `.git/HEAD`, `wp-admin/`, etc. all correctly return `401`. One MEDIUM finding: no security headers at all (CSP, nosniff, Referrer-Policy, frame protection, HSTS) — recommended hardening, not a blocker.
 
-**How do you want to proceed?**
-1. Continue: record the exposure row, then run the app-tests lane with the README's synthetic accounts, local only. Perf would run measurement-only with its limits stated.
-2. Adjust the scope, for example skipping the authenticated attacks or marking a lane de-scoped with your reason.
+### App-tests — HOLD (the real problem)
+Two **CRITICAL** confirmed findings, reproduced live, not just read in code:
+- **IDOR**: as alice, `GET /api/invoices/201` returned bob's full invoice. Any user can read any other user's invoices by guessing the ID.
+- **Role escalation**: as alice, `PATCH /api/me {"role":"admin"}` persisted — she became admin. Separately and worse: `/api/admin/users` has **no role check at all** — any logged-in user (not even escalated) can dump the full user list, including plaintext passwords.
+- Plus one **HIGH**: open redirect via `next=` on `/login` and `/api/login`.
+
+I reverted alice's role back to `user` after confirming the escalation; no other test data was changed. Scenarios needing a reset-token flow, UI, quota/upload, or AI features were marked `not-applicable` — Invoicely has none of those.
+
+### Perf — untested
+No Lighthouse tooling available this session and no signal it's a priority for a small static-page app; flagged as genuinely unrun rather than a silent pass.
+
+**Bottom line**: the two CRITICAL findings reach another user's data and the role boundary — that alone holds the gate regardless of anything else. Fix the authorization checks on invoices and `/api/admin/users`, stop trusting a client-sent `role` field, fix the open redirect, then re-run app-tests with the full red-team dispatch (negative controls, `check_results.mjs --require-fixes`) before this can move to ready. Full detail and the fix order are in the saved report.

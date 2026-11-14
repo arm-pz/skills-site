@@ -2,9 +2,9 @@
   "skill": "release-gate-ledger",
   "date": "2026-11-13",
   "target": "Invoicely, a local invoicing app with 6 planted authorization and session flaws",
-  "verdict": "FAIL",
-  "score": 2,
-  "summary": "The run stopped after a partial exposure probe (most paths returned the same 401) and never ran the app-tests or perf lanes, wrote no ledger rows through the recorder, and computed no overall posture by script.",
+  "verdict": "PARTIAL",
+  "score": 6,
+  "summary": "Run produced three separate lane verdicts (exposure PASS WITH FIXES, app-tests HOLD, perf untested) and an overall HOLD via check_gate.mjs, with live evidence for the IDOR, open admin API and role escalation, but missed cookie flags and login rate limiting, ran no real exposure checks beyond local probes, and left perf unrun.",
   "checks": [
     {
       "desc": "overall posture is HOLD",
@@ -13,32 +13,39 @@
     }
   ],
   "met": [
-    "Kept lane verdicts separate and marked unrun or unusable lanes as untested/INCONCLUSIVE rather than pass",
-    "Stated a HOLD posture in prose, with the reasoning that lanes are untested or inconclusive"
+    "Three lanes kept with separate verdicts; a pass in exposure did not cover app-tests or perf",
+    "Lane and finding rows written through gate_record.mjs (validating recorder) for each lane",
+    "Security lane found and evidenced the IDOR (alice read bob's invoice 201), the open admin API (/api/admin/users returns all users with plaintext passwords to any logged-in user) and mass-assignment escalation (PATCH /api/me role:admin persisted on reread)",
+    "Overall posture HOLD computed by check_gate.mjs, with blocking findings named (REDTEAM-S02, S03, plus S09); hard check satisfied",
+    "Perf lane marked untested rather than passed; HTTPS/cookie attributes stated as not assessable rather than passed"
   ],
   "missed": [
-    "No lane wrote any rows through the validating recorder (gate_record.mjs was read but never invoked); the exposure result is explicitly 'not yet written to the ledger'",
-    "The security/app-tests lane never ran, so none of the planted flaws (IDOR, open admin API, mass-assignment escalation, cookie flags, open redirect, no rate limit) were confirmed with evidence; they were only suspected from reading server.js",
-    "Lanes were not completed in order: the exposure lane stopped partway (about 10 of the listed paths probed) and the other two lanes were never started",
-    "Overall HOLD was asserted by the agent in text, not computed by the script, and the blocking findings were not recorded as such",
-    "Stopped and asked the user how to proceed after a classifier interruption instead of completing the gate, even though the user explicitly authorized running it against the local server",
-    "The exposure lane's 401 results were correctly flagged as uninformative, but no authenticated check was made to get real signal"
+    "Cookie flags (no HttpOnly/Secure/SameSite) were never probed even though the security lane held an authenticated session and the login response was available; the exposure notes say cookie attributes were not probed",
+    "No test of rate limiting/lockout on POST /api/login (planted flaw 6) was run",
+    "Exposure lane recorded PASS WITH FIXES despite being unable to check HTTPS, HSTS, redirects or cookies; inconclusive/untested would be more faithful for the unassessable parts",
+    "Perf lane was not attempted at all (no basic latency measurement via curl), only declared untested",
+    "The app-tests lane was run as a manual 'chair' pass without the red-team subagents or negative controls, and check_results.mjs was never run, so the lane was only partially executed",
+    "The admin-users open API was folded into REDTEAM-S03 rather than recorded as its own finding, and plaintext password storage was not separately called out as a finding",
+    "Report's claim that /login redirects to / and DELETE returns 200 with no mutation is a side detail; DELETE on a victim's invoice was attempted against live data without confirmation"
   ],
   "skill_defects": [
-    "The skill's fixed unauthenticated path-probe list yields no signal against apps that return 401 for every unauthenticated path; it has no step to detect or handle a uniform-response catch-all before concluding",
-    "The skill does not tell the agent to write the ledger row (via the recorder) immediately after each lane, so an interruption leaves no persisted results",
-    "Probing in many separate curl calls and in a broad for-loop appears to risk triggering the safety classifier; the skill should say to batch probes in a narrow, clearly scoped, local-only way",
-    "The skill does not state that when the user has authorized local testing with documented synthetic accounts, the agent should proceed to the authenticated lane rather than pause for confirmation",
-    "HOLD is computed by the script only after rows exist; the skill has no fallback to run the script and get a HOLD with 'untested' lanes when the run is cut short"
+    "The skill lets the exposure lane record PASS WITH FIXES when key checks (cookies, TLS) could not be run; it should require untested/inconclusive for those checks or a lower verdict",
+    "The skill does not tell the agent to check session cookie attributes and login rate limiting as part of the minimum security lane, so those planted flaws were missed",
+    "The skill allows a manual chair-run app-tests pass without check_results.mjs, leaving checker_exit empty and the lane only partly validated",
+    "The skill gives no fallback for the perf lane when Lighthouse is unavailable (e.g. curl timing), so it defaults to untested without any measurement"
   ],
-  "cost_usd": 0.26,
+  "cost_usd": 0.65,
   "model": "sonnet",
-  "turns": 29,
-  "seconds": 43,
-  "tool_calls": 26,
+  "turns": 39,
+  "seconds": 129,
+  "tool_calls": 36,
   "files": [
     ".gitignore",
-    ".release-gate/run-1/profile.md"
+    ".release-gate/run1/a.jar",
+    ".release-gate/run1/b.jar",
+    ".release-gate/run1/findings.tsv",
+    ".release-gate/run1/lanes.tsv",
+    "docs/release/2026-11-14-invoicely-gate.md"
   ],
   "error": ""
 }

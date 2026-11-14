@@ -1,2 +1,4 @@
 .release-gate/
 .pre-ship-red-team/
+.server.pid
+.server.log
