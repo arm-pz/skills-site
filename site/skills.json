@@ -3490,6 +3490,191 @@
         "result": "The run wrote draft-v2.md, a roughly 110-word rewrite, and the scan was reported clean. It keeps the 40,000/day, about-3x month-end, up-to-six-hours, 38-minute and 5h50m figures plus the unmeasured-benefit hedge, and drops the…",
         "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/straight-prose/README.md"
       }
+    },
+    {
+      "name": "find-partners",
+      "repo": "arm-pz/find-partners",
+      "path": "skills/find-partners",
+      "group": "publish-discover",
+      "tag": "discovery",
+      "title": "Find Partners",
+      "pageTitle": "Find Partners — AI Agent Skill for Claude Code and Codex",
+      "blurb": "Finds real, non-competing businesses and publishers that share your audience, such as complementary tools, agencies, newsletters and podcasts, screens out link sellers, picks one collaboration per partner (guest post, expert quote, co-made…",
+      "stats": "6 files · 356 lines · 7 KB",
+      "install": "npx skills add arm-pz/find-partners",
+      "page": "generated",
+      "order": 924,
+      "pageSource": {
+        "description": "Finds real, non-competing businesses and publishers that share your audience, such as complementary tools, agencies, newsletters and podcasts, screens out link sellers, picks one collaboration per partner (guest post, expert quote, co-made data, integration listing, podcast) and drafts the ask, written to a partners CSV and one ask file per partner. Use whenever someone wants partners for backlinks or exposure: find sites to collaborate with, guest post opportunities, who could we co-market with, swap links for me, find link exchange partners, even if they never say partnership. Link-swap requests get the collaboration that earns the link without a swap. Step 3, the last of a three-step handover after replace-dead-tools. Not for best-of list outreach (use get-listed), dead entries on lists (use replace-dead-tools), or competitor research (use research-brief).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 81,
+            "bytes": 4314
+          },
+          {
+            "path": "evals/evals.json",
+            "lines": 36,
+            "bytes": 989
+          },
+          {
+            "path": "evals/trigger-cases.md",
+            "lines": 32,
+            "bytes": 2479
+          },
+          {
+            "path": "references/ask.md",
+            "lines": 60,
+            "bytes": 2882
+          },
+          {
+            "path": "references/handover.md",
+            "lines": 93,
+            "bytes": 4044
+          },
+          {
+            "path": "references/partners.md",
+            "lines": 54,
+            "bytes": 2771
+          }
+        ],
+        "fileCount": 6,
+        "lines": 356,
+        "bytes": 7230,
+        "license": "MIT",
+        "commit": "4143542976bf0f12aa7f1ebb44119e6907c5c1b9",
+        "sha256": "89cb22698b4b9ef3376dbf261645f403f63e439f2233adc200e9c3675e5edfda"
+      }
+    },
+    {
+      "name": "get-listed",
+      "repo": "arm-pz/get-listed",
+      "path": "skills/get-listed",
+      "group": "skill-authoring",
+      "tag": "authoring",
+      "title": "Get Listed",
+      "pageTitle": "Get Listed — AI Agent Skill for Claude Code and Codex",
+      "blurb": "Finds the best-of, top-X and alternatives articles, and the GitHub awesome-lists, that name your competitors but leave you out, finds each one's author or submission rules, and drafts a pitch, pull request or issue-form answer per list…",
+      "stats": "8 files · 607 lines · 11 KB",
+      "install": "npx skills add arm-pz/get-listed",
+      "page": "generated",
+      "order": 925,
+      "pageSource": {
+        "description": "Finds the best-of, top-X and alternatives articles, and the GitHub awesome-lists, that name your competitors but leave you out, finds each one's author or submission rules, and drafts a pitch, pull request or issue-form answer per list with a ready-to-paste entry, written to a targets CSV and one pitch file per list. Use whenever someone wants onto the roundups their competitors are on: why am I not on these best-of lists, which listicles or awesome lists mention my competitors and not me, get us into the top tools articles, find list placements for backlinks, pitch editors to add us, even if they never say listicle or outreach. Step 1 of a three-step handover; next is replace-dead-tools. Not for spotting dead tools on those lists (use replace-dead-tools), finding collaboration partners or link swaps (use find-partners), general competitor research (use research-brief), or sending email at volume (use cold-email-ops).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 120,
+            "bytes": 6591
+          },
+          {
+            "path": "evals/evals.json",
+            "lines": 40,
+            "bytes": 1097
+          },
+          {
+            "path": "evals/trigger-cases.md",
+            "lines": 37,
+            "bytes": 3157
+          },
+          {
+            "path": "references/handover.md",
+            "lines": 93,
+            "bytes": 4044
+          },
+          {
+            "path": "references/pitch.md",
+            "lines": 75,
+            "bytes": 3119
+          },
+          {
+            "path": "references/queries.md",
+            "lines": 68,
+            "bytes": 3702
+          },
+          {
+            "path": "scripts/scan_mentions.py",
+            "lines": 115,
+            "bytes": 4856
+          },
+          {
+            "path": "scripts/test_scan_mentions.py",
+            "lines": 59,
+            "bytes": 2278
+          }
+        ],
+        "fileCount": 8,
+        "lines": 607,
+        "bytes": 11626,
+        "license": "MIT",
+        "commit": "7e04f4cc7907beda3374fabbc13995f90be851ae",
+        "sha256": "685d38d00bc35fd2f33ed81ed72f2ee21eb01698409209e6bc25c625f27ffb82"
+      }
+    },
+    {
+      "name": "replace-dead-tools",
+      "repo": "arm-pz/replace-dead-tools",
+      "path": "skills/replace-dead-tools",
+      "group": "skill-authoring",
+      "tag": "authoring",
+      "title": "Replace Dead Tools",
+      "pageTitle": "Replace Dead Tools — AI Agent Skill for Claude Code",
+      "blurb": "Checks every tool named on best-of and alternatives lists for shutdowns, parked domains, acquisitions and abandonment, confirms each verdict with evidence a person can open, and drafts a \"replace the dead entry with us\" pitch per affected…",
+      "stats": "8 files · 763 lines · 13 KB",
+      "install": "npx skills add arm-pz/replace-dead-tools",
+      "page": "generated",
+      "order": 926,
+      "pageSource": {
+        "description": "Checks every tool named on best-of and alternatives lists for shutdowns, parked domains, acquisitions and abandonment, confirms each verdict with evidence a person can open, and drafts a \"replace the dead entry with us\" pitch per affected list. Use whenever someone wants the dead, discontinued or acquired tools still sitting on roundup articles so they can pitch themselves as the replacement, asks which listed tools no longer exist, or wants a broken-entry angle for list outreach, even if they never say dead link building. Step 2 of a three-step handover: reads get-listed's files, or a list of article URLs, and hands over to find-partners. Not for finding the lists or their authors (use get-listed), broken links on your own site (use broken-links), or partner and link-swap outreach (use find-partners).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 93,
+            "bytes": 5128
+          },
+          {
+            "path": "evals/evals.json",
+            "lines": 36,
+            "bytes": 957
+          },
+          {
+            "path": "evals/trigger-cases.md",
+            "lines": 34,
+            "bytes": 2650
+          },
+          {
+            "path": "references/confirm.md",
+            "lines": 47,
+            "bytes": 3266
+          },
+          {
+            "path": "references/handover.md",
+            "lines": 93,
+            "bytes": 4044
+          },
+          {
+            "path": "references/replace-pitch.md",
+            "lines": 46,
+            "bytes": 1896
+          },
+          {
+            "path": "scripts/check_tools.py",
+            "lines": 318,
+            "bytes": 13912
+          },
+          {
+            "path": "scripts/test_check_tools.py",
+            "lines": 96,
+            "bytes": 5241
+          }
+        ],
+        "fileCount": 8,
+        "lines": 763,
+        "bytes": 13755,
+        "license": "MIT",
+        "commit": "1ae6e1088d582f28b2ef8c2d91bd52488fd984e8",
+        "sha256": "d707acd8c531ab5320fecab9c1492e3579076e92dd5cf57b4bcd0004eaa56feb"
+      }
     }
   ],
   "workflows": [
