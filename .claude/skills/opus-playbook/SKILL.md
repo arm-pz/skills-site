@@ -1,6 +1,7 @@
 ---
 name: opus-playbook
-description: Playbook for a lead model (Fable) that hands work to Opus and has to decide whether the result does the job that was asked. Covers the brief that makes the work checkable, confirming Opus actually served the run, the checks to run on what comes back (diff, re-run, test tampering, an unbriefed probe, cited facts, scope), the phrases in a report that need a closer look, and the verdict (accept, return, take over, escalate). Use whenever the user asks to delegate to Opus, spawn an Opus subagent or session, "check Opus's work", "did the subagent do it", "verify the worker", "review what the agent did", "supervise Opus", or when an Opus subagent has just reported back and its result is about to be relayed, committed or shipped. Not for reviewing code a person wrote (use consistent-code-review). Not for deciding which model takes which role (use setup-claude-advisor). Not for picking an effort level (use choose-effort).
+description: Checks whether work a lead model handed to Opus, or to any subagent or worker session, does the job that was asked, and returns one evidenced verdict (accept, return, take over or escalate). Writes a checkable brief, confirms which model served the run, inventories the diff with a script, re-runs the verification, looks for edited tests, opens cited facts, checks scope and probes an unbriefed case. Use whenever the user wants to delegate to Opus and be sure of the result, asks "is Opus doing its job", "did the subagent actually do it", "check the worker's output", "can I trust what the agent says it did", or when a subagent has just reported back and its result is about to be relayed or shipped, even if they never say "verify". Not for a defect review of code with no brief to check against (use consistent-code-review), choosing which model takes which role (use setup-claude-advisor), or pressure-testing a decision (use crash-test).
+version: 0.1.0
 ---
 
 # Opus playbook
@@ -53,9 +54,18 @@ say so in your report; the checks below still apply.
 **1. Re-read your brief, not the report.** List the "done when" conditions. Each one needs a
 check you perform. The report tells you where to look, never whether to look.
 
-**2. Inventory what changed.** `git status` and `git diff --stat` against the starting point.
-Compare with the files the report names. A file changed but not mentioned is the first thing to
-open. A file mentioned but unchanged means the report is describing a plan.
+**2. Inventory what changed.** Run the script from the commit the worker started at, with the
+report saved to a file:
+
+```
+python scripts/worker_diff.py --base <start-commit> --report <report.txt>
+```
+
+It lists every changed and untracked file, the ones the report never names, the test and CI
+files touched with their assertion counts, and added lines that skip a test, silence a check,
+swallow a failure or leave a marker. It prints evidence and gives no verdict. A file changed but
+not mentioned is the first thing to open. A file mentioned but unchanged means the report is
+describing a plan. Outside a git repository, list the changed files by hand.
 
 **3. Read the diff.** All of it at standard depth and above. You are looking for the shortcuts
 that keep a summary true while the goal is missed: a hardcoded value that matches the test
@@ -66,7 +76,8 @@ return for the hard case, a `TODO` in the path that was the task.
 Pasted output is not a run. Run the whole suite the change could touch, not only the test the
 worker named.
 
-**5. Check the tests were not bent.** Diff the test files and config separately. Skips added,
+**5. Check the tests were not bent.** Start from the script's test and config section, then diff
+those files yourself. Skips added,
 assertions loosened, cases deleted, thresholds lowered, snapshots regenerated, a check moved out
 of CI: each of these makes red turn green without fixing anything. If the brief said tests are
 off limits, any edit here fails the work.
@@ -149,3 +160,18 @@ Unbriefed probe: <input> -> <result>
 Not checked: <what, and why>
 Verdict:     accept | return (n of 2) | take over | escalate
 ```
+
+## Hand off
+
+Offer the next step in one line; do not start it uninvited.
+
+- The work meets its brief but the code may hold defects the brief never covered: give
+  `consistent-code-review` the commit range and the brief. Without that skill, say the diff has
+  had an acceptance check and no defect review.
+- The run was served by the wrong model more than once, or the role split is the problem: give
+  `setup-claude-advisor` the record lines showing which model was configured and which served.
+- The brief failed twice because the decision behind it is unsettled: give `crash-test` the two
+  briefs and what each run got wrong.
+
+`references/trigger-cases.md` holds the trigger test cases. Open it only when changing the
+description.
