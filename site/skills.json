@@ -98,14 +98,14 @@
         "lines": 415,
         "bytes": 10535,
         "license": "MIT",
-        "commit": "523bc2bf98727c9fd981424f86ecba66c6d6ecd6",
+        "commit": "f0750e00e7ffb72d9818822a2e0f108eca2ab356",
         "sha256": "d1a45fffe54e35945e75344c35f15dafe8d8c7f5748fba2d32f36ce588790bc4"
       },
       "order": 101,
       "quality": {
         "version": "1.1.0",
-        "commit": "523bc2b",
-        "updated": "2026-11-13",
+        "commit": "f0750e0",
+        "updated": "2026-11-17",
         "notFor": [
           "a request one skill already owns (load that skill directly)",
           "not for doing a step's work itself: the named skill does it"
@@ -411,14 +411,14 @@
         "lines": 1288,
         "bytes": 20897,
         "license": "MIT",
-        "commit": "523bc2bf98727c9fd981424f86ecba66c6d6ecd6",
+        "commit": "f0750e00e7ffb72d9818822a2e0f108eca2ab356",
         "sha256": "e79c3f9cbd44fd97b950ca333c4a51b40f644416361a221b0754d0fa31e31a28"
       },
       "order": 208,
       "quality": {
         "version": "0.1.0",
-        "commit": "523bc2b",
-        "updated": "2026-11-13",
+        "commit": "f0750e0",
+        "updated": "2026-11-17",
         "notFor": []
       }
     },
@@ -503,14 +503,14 @@
         "lines": 627,
         "bytes": 10387,
         "license": "MIT",
-        "commit": "523bc2bf98727c9fd981424f86ecba66c6d6ecd6",
+        "commit": "f0750e00e7ffb72d9818822a2e0f108eca2ab356",
         "sha256": "0261e8afac9fd1c1a6bc03685149f45eae4a09c0c0b6f48f1e61b1ca60093aa9"
       },
       "order": 209,
       "quality": {
         "version": "0.1.0",
-        "commit": "523bc2b",
-        "updated": "2026-11-13",
+        "commit": "f0750e0",
+        "updated": "2026-11-17",
         "notFor": []
       },
       "tested": {
@@ -570,14 +570,14 @@
         "lines": 416,
         "bytes": 8802,
         "license": "MIT",
-        "commit": "523bc2bf98727c9fd981424f86ecba66c6d6ecd6",
+        "commit": "f0750e00e7ffb72d9818822a2e0f108eca2ab356",
         "sha256": "f1304d4562cee98a474722cbfee835c0c4d8dc642d31fe1419e06a642bab73ba"
       },
       "order": 210,
       "quality": {
         "version": "0.1.0",
-        "commit": "523bc2b",
-        "updated": "2026-11-13",
+        "commit": "f0750e0",
+        "updated": "2026-11-17",
         "notFor": [
           "a tune with no release (use tune-skill)",
           "drafts with nothing pushed (use tune-and-polish)",
@@ -851,14 +851,14 @@
         "lines": 176,
         "bytes": 5492,
         "license": "MIT",
-        "commit": "523bc2bf98727c9fd981424f86ecba66c6d6ecd6",
+        "commit": "f0750e00e7ffb72d9818822a2e0f108eca2ab356",
         "sha256": "b56b11f95e76ba757f8583562823353849f1d8a87fc9362a7217f684d7916803"
       },
       "order": 307,
       "quality": {
         "version": "1.0.0",
-        "commit": "523bc2b",
-        "updated": "2026-11-13",
+        "commit": "f0750e0",
+        "updated": "2026-11-17",
         "notFor": [
           "one skill (use tune-skill)",
           "one listing (use findable)",
@@ -1350,14 +1350,14 @@
         "lines": 382,
         "bytes": 8603,
         "license": "MIT",
-        "commit": "523bc2bf98727c9fd981424f86ecba66c6d6ecd6",
+        "commit": "f0750e00e7ffb72d9818822a2e0f108eca2ab356",
         "sha256": "cacb21e2865f9e92d46027f87f225b3e864a21251b0b1e671c628a42ab55daa7"
       },
       "order": 411,
       "quality": {
         "version": "1.0.0",
-        "commit": "523bc2b",
-        "updated": "2026-11-13",
+        "commit": "f0750e0",
+        "updated": "2026-11-17",
         "notFor": []
       }
     },
@@ -1447,14 +1447,14 @@
         "lines": 950,
         "bytes": 15781,
         "license": "MIT",
-        "commit": "523bc2bf98727c9fd981424f86ecba66c6d6ecd6",
+        "commit": "f0750e00e7ffb72d9818822a2e0f108eca2ab356",
         "sha256": "483f9eaa604c13a11140d9ee8ba44deaf5ae46289fd23c277f366014f623312e"
       },
       "order": 412,
       "quality": {
         "version": "0.1.0",
-        "commit": "523bc2b",
-        "updated": "2026-11-13",
+        "commit": "f0750e0",
+        "updated": "2026-11-17",
         "notFor": []
       },
       "tested": {
@@ -1540,14 +1540,14 @@
         "lines": 872,
         "bytes": 15074,
         "license": "MIT",
-        "commit": "523bc2bf98727c9fd981424f86ecba66c6d6ecd6",
+        "commit": "f0750e00e7ffb72d9818822a2e0f108eca2ab356",
         "sha256": "196c0f18c29c96eb51d0aa2096766dc642351fe7a571be583eccb7ea17289d9f"
       },
       "order": 413,
       "quality": {
         "version": "0.1.0",
-        "commit": "523bc2b",
-        "updated": "2026-11-13",
+        "commit": "f0750e0",
+        "updated": "2026-11-17",
         "notFor": []
       },
       "tested": {
@@ -1663,14 +1663,14 @@
         "lines": 1588,
         "bytes": 30959,
         "license": "MIT",
-        "commit": "523bc2bf98727c9fd981424f86ecba66c6d6ecd6",
+        "commit": "f0750e00e7ffb72d9818822a2e0f108eca2ab356",
         "sha256": "9fa3a48b71b2026a6d834903d0a2322ebf5dcc7cf065e441ef8041cf4184a711"
       },
       "order": 414,
       "quality": {
         "version": "0.1.0",
-        "commit": "523bc2b",
-        "updated": "2026-11-13",
+        "commit": "f0750e0",
+        "updated": "2026-11-17",
         "notFor": []
       },
       "tested": {
@@ -1746,14 +1746,14 @@
         "lines": 597,
         "bytes": 11488,
         "license": "MIT",
-        "commit": "523bc2bf98727c9fd981424f86ecba66c6d6ecd6",
+        "commit": "f0750e00e7ffb72d9818822a2e0f108eca2ab356",
         "sha256": "b8a788d07ff582c241ad3489dd83f30c482caab29d18a419b7c10c4cfd7b1a72"
       },
       "order": 415,
       "quality": {
         "version": "0.1.0",
-        "commit": "523bc2b",
-        "updated": "2026-11-13",
+        "commit": "f0750e0",
+        "updated": "2026-11-17",
         "notFor": []
       },
       "tested": {
@@ -2681,14 +2681,14 @@
         "lines": 302,
         "bytes": 6084,
         "license": "MIT",
-        "commit": "523bc2bf98727c9fd981424f86ecba66c6d6ecd6",
+        "commit": "f0750e00e7ffb72d9818822a2e0f108eca2ab356",
         "sha256": "1e8dfe3ceb472fd5ceab966ed884b027cd7e84f669755fb5a85695facc6efe87"
       },
       "order": 909,
       "quality": {
         "version": "1.0.0",
-        "commit": "523bc2b",
-        "updated": "2026-11-13",
+        "commit": "f0750e0",
+        "updated": "2026-11-17",
         "notFor": [
           "one person's own learning plan (use study-system)",
           "for being taught the topic (use topic-primer)",
@@ -3544,6 +3544,16 @@
         "license": "MIT",
         "commit": "4143542976bf0f12aa7f1ebb44119e6907c5c1b9",
         "sha256": "89cb22698b4b9ef3376dbf261645f403f63e439f2233adc200e9c3675e5edfda"
+      },
+      "quality": {
+        "version": "1.0.0",
+        "commit": "4143542",
+        "updated": "2026-11-17",
+        "notFor": [
+          "best-of list outreach (use get-listed)",
+          "dead entries on lists (use replace-dead-tools)",
+          "competitor research (use research-brief)"
+        ]
       }
     },
     {
@@ -3609,6 +3619,17 @@
         "license": "MIT",
         "commit": "7e04f4cc7907beda3374fabbc13995f90be851ae",
         "sha256": "685d38d00bc35fd2f33ed81ed72f2ee21eb01698409209e6bc25c625f27ffb82"
+      },
+      "quality": {
+        "version": "1.0.0",
+        "commit": "7e04f4c",
+        "updated": "2026-11-17",
+        "notFor": [
+          "spotting dead tools on those lists (use replace-dead-tools)",
+          "finding collaboration partners or link swaps (use find-partners)",
+          "general competitor research (use research-brief)",
+          "sending email at volume (use cold-email-ops)"
+        ]
       }
     },
     {
@@ -3674,6 +3695,16 @@
         "license": "MIT",
         "commit": "1ae6e1088d582f28b2ef8c2d91bd52488fd984e8",
         "sha256": "d707acd8c531ab5320fecab9c1492e3579076e92dd5cf57b4bcd0004eaa56feb"
+      },
+      "quality": {
+        "version": "1.0.0",
+        "commit": "1ae6e10",
+        "updated": "2026-11-17",
+        "notFor": [
+          "finding the lists or their authors (use get-listed)",
+          "broken links on your own site (use broken-links)",
+          "partner and link-swap outreach (use find-partners)"
+        ]
       }
     }
   ],
