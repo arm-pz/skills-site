@@ -1,6 +1,6 @@
 # Skillsmith by Caffeinity
 
-> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: 67 skills mapped into 12 workflows (build a skill, get found, gate a release, grow search traffic, land a job, decide, learn, run outbound, launch a product). Plain markdown, no API keys.
+> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: 70 skills mapped into 12 workflows (build a skill, get found, gate a release, grow search traffic, land a job, decide, learn, run outbound, launch a product). Plain markdown, no API keys.
 
 ## Install
 
@@ -28,6 +28,8 @@ Sections: [skills](https://skillsmith.tech/skills/), [workflows](https://skillsm
 - [skill-release-mod](https://skillsmith.tech/skill-release-mod/): Holds gh release create and npm publish in Claude Code until prompts-to-skill-release has run the skill's test cases since your last edit.
 - [tune-and-ship](https://skillsmith.tech/tune-and-ship/): One published skill at a time, all the way through: tuned with tune-skill, every version, flag and price checked against its source, listing polished, released in one PR, then the site page and marketplace copy confirmed live.
 - [straight-prose](https://skillsmith.tech/straight-prose/): Writes and edits prose so it reads like a specific person wrote it and carries no stock AI patterns such as inflated significance, promotional wording, vague attribution, negative parallelisms, forced threes, em dashes, chatbot…
+- [get-listed](https://skillsmith.tech/get-listed/): Finds the best-of, top-X and alternatives articles, and the GitHub awesome-lists, that name your competitors but leave you out, finds each one's author or submission rules, and drafts a pitch, pull request or issue-form answer per list…
+- [replace-dead-tools](https://skillsmith.tech/replace-dead-tools/): Checks every tool named on best-of and alternatives lists for shutdowns, parked domains, acquisitions and abandonment, confirms each verdict with evidence a person can open, and drafts a "replace the dead entry with us" pitch per affected…
 
 ## Publish & Discover
 
@@ -40,6 +42,7 @@ Sections: [skills](https://skillsmith.tech/skills/), [workflows](https://skillsm
 - [seo-sweep](https://skillsmith.tech/seo-sweep/): Runs the Skillsmith by Caffeinity SEO skills on a site you own, in order, fixes what they find in the site's code, proves each fix with a re-crawl, and turns every defect a skill shows along the way into a tested fix to that skill, chaining seo-crawl…
 - [get-indexed](https://skillsmith.tech/get-indexed/): Tells search engines about a site's new and changed pages through every channel that has an API, and lists the few steps that still need a person.
 - [portable-harness](https://skillsmith.tech/portable-harness/): Set up a repo so any coding agent (Claude Code, Codex, Cursor) behaves the same wherever it runs - writes 12 working rules at the top of CLAUDE.md or AGENTS.md, adds map sections only where the agent keeps getting things wrong, and…
+- [find-partners](https://skillsmith.tech/find-partners/): Finds real, non-competing businesses and publishers that share your audience, such as complementary tools, agencies, newsletters and podcasts, screens out link sellers, picks one collaboration per partner (guest post, expert quote, co-made…
 
 ## Build & Ship
 

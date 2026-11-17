@@ -107,6 +107,13 @@
       "digest": "sha256:ae6a68d973d7250c840b6fe5abb31723af613f9fb01584908b4b010b568849cb"
     },
     {
+      "name": "find-partners",
+      "description": "Find partners, not link swaps: an agent skill that finds newsletters, publishers and complementary tools your buyers already read, drops pay-to-post sites, and drafts one collaboration ask each, from guest posts to co-made data.",
+      "type": "archive",
+      "url": "https://skillsmith.tech/agent-skills/find-partners.tar.gz",
+      "digest": "sha256:89cb22698b4b9ef3376dbf261645f403f63e439f2233adc200e9c3675e5edfda"
+    },
+    {
       "name": "findable",
       "description": "Agent skill that sets up discovery for a GitHub repo, agent skill, Claude Code plugin or MCP server: audits where you rank today, derives the queries strangers type, drafts About text, topics, README opening, release notes and a site page, lists directories and plans a dated re-check. Never invents stars, rankings or sample output.",
       "type": "archive",
@@ -126,6 +133,13 @@
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/get-indexed.tar.gz",
       "digest": "sha256:2cd433a1568d52f49394f1cb1ffa6f78dd9cbe5559dbd768855dd38521a7622b"
+    },
+    {
+      "name": "get-listed",
+      "description": "Get onto the lists your competitors are on: an agent skill that finds best-of articles and awesome-lists that skip you, checks each list's rules and eligibility, and drafts the pitch or PR with an entry in the list's own format. Never sends. Works in Claude Code, Codex, Cursor.",
+      "type": "archive",
+      "url": "https://skillsmith.tech/agent-skills/get-listed.tar.gz",
+      "digest": "sha256:685d38d00bc35fd2f33ed81ed72f2ee21eb01698409209e6bc25c625f27ffb82"
     },
     {
       "name": "harness-audit",
@@ -266,6 +280,13 @@
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/release-gate-validator.tar.gz",
       "digest": "sha256:33f91264d733601a3be595a3aca6ed831ada4876012a35881c1cddc22f40f849"
+    },
+    {
+      "name": "replace-dead-tools",
+      "description": "Agent skill that checks every tool on best-of lists and awesome-lists for parked domains, shutdowns, acquisitions and archived or deleted GitHub repos, confirms each verdict with a link, and drafts a replace-the-dead-entry pitch. Blocked checks stay INCONCLUSIVE, never dead.",
+      "type": "archive",
+      "url": "https://skillsmith.tech/agent-skills/replace-dead-tools.tar.gz",
+      "digest": "sha256:d707acd8c531ab5320fecab9c1492e3579076e92dd5cf57b4bcd0004eaa56feb"
     },
     {
       "name": "research-brief",
