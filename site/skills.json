@@ -2435,6 +2435,12 @@
         "notFor": [
           "factual lookups, small edits, debugging an actual crash, or reviewing code for defects: it examines a decision, not a diff"
         ]
+      },
+      "tested": {
+        "date": "2026-11-18",
+        "target": "an AI sales team's offer and buyer decision",
+        "result": "A mixed-model panel merged its drafts into a new offer and buyer; cross-review caught one member's cross-domain error (3 of 4 reviewers) and a kill test too small to read (2 of 4).",
+        "evidence": "https://github.com/arm-pz/crash-test/blob/main/runs/2026-11-18-offer-and-buyer-decision.md"
       }
     },
     {
