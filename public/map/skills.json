@@ -3706,6 +3706,61 @@
           "partner and link-swap outreach (use find-partners)"
         ]
       }
+    },
+    {
+      "name": "opus-playbook",
+      "repo": "arm-pz/opus-playbook",
+      "path": ".",
+      "group": "career",
+      "tag": "career",
+      "title": "Opus Playbook",
+      "pageTitle": "Opus Playbook — AI Agent Skill for Claude Code and Codex",
+      "blurb": "Playbook for a lead model (Fable) that deputes a task to Opus, or to any subagent or worker session.",
+      "stats": "6 files · 725 lines · 15 KB",
+      "install": "npx skills add arm-pz/opus-playbook",
+      "page": "generated",
+      "order": 927,
+      "pageSource": {
+        "description": "Playbook for a lead model (Fable) that deputes a task to Opus, or to any subagent or worker session. Decides whether the task is safe to hand off, writes a checkable brief, enforces its terms (scope, tools, tests, stop rules), checks what comes back with a diff-inventory script, and gives a go or no-go with evidence. Use whenever the user wants to delegate to Opus and be sure of the result, asks \"is Opus doing its job\", \"did the subagent actually do it\", \"how will you check the worker\", \"what is your go/no-go\", or when a subagent has just reported back and its result is about to be relayed or shipped, even if they never say \"verify\". Not for a defect review of code with no brief to check against (use consistent-code-review), an effort level or how far to fan out (use choose-effort), which model takes which role (use setup-claude-advisor), or pressure-testing a decision (use crash-test).",
+        "files": [
+          {
+            "path": ".gitignore",
+            "lines": 3,
+            "bytes": 29
+          },
+          {
+            "path": "SKILL.md",
+            "lines": 252,
+            "bytes": 15838
+          },
+          {
+            "path": "discovery-kit.md",
+            "lines": 170,
+            "bytes": 8445
+          },
+          {
+            "path": "references/trigger-cases.md",
+            "lines": 63,
+            "bytes": 5549
+          },
+          {
+            "path": "runs/2026-11-17-first-hand-off.md",
+            "lines": 58,
+            "bytes": 3474
+          },
+          {
+            "path": "scripts/worker_diff.py",
+            "lines": 179,
+            "bytes": 8006
+          }
+        ],
+        "fileCount": 6,
+        "lines": 725,
+        "bytes": 15772,
+        "license": "MIT",
+        "commit": "ca82759f845c40edc3d91540d6a9a286625c0451",
+        "sha256": "8093f090841da3a0a059010dc85f4dd7453a7d41fc1e36ab801b6344fd21de5d"
+      }
     }
   ],
   "workflows": [

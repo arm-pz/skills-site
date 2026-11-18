@@ -170,6 +170,13 @@
       "digest": "sha256:68038867c13de02e6d7636e6b4ea96162fe613b5a55efdac08da38fe57a7e060"
     },
     {
+      "name": "opus-playbook",
+      "description": "Verify what a subagent says it did before you relay or ship it. Agent skill for a lead model (Fable leading Opus, or any orchestrator and worker): checkable brief, enforcement rules, a nine-step check ladder, a diff inventory script and an explicit go/no-go. For Claude Code and any agent that loads a SKILL.md. Not an Opus prompting guide.",
+      "type": "archive",
+      "url": "https://skillsmith.tech/agent-skills/opus-playbook.tar.gz",
+      "digest": "sha256:8093f090841da3a0a059010dc85f4dd7453a7d41fc1e36ab801b6344fd21de5d"
+    },
+    {
       "name": "paper-trail",
       "description": "Claude Code plugin marketplace and index of arm-pz agent skills: editorial, teaching, recruiting, SEO planning, release preflight, sub-agent tournaments and repo discovery. Install with npx skills add arm-pz/caffeinity-skills.",
       "type": "archive",

@@ -1,6 +1,6 @@
 # Skillsmith by Caffeinity
 
-> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: 70 skills mapped into 12 workflows (build a skill, get found, gate a release, grow search traffic, land a job, decide, learn, run outbound, launch a product). Plain markdown, no API keys.
+> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: 71 skills mapped into 12 workflows (build a skill, get found, gate a release, grow search traffic, land a job, decide, learn, run outbound, launch a product). Plain markdown, no API keys.
 
 ## Install
 
@@ -95,6 +95,7 @@ Sections: [skills](https://skillsmith.tech/skills/), [workflows](https://skillsm
 - [application-pilot](https://skillsmith.tech/application-pilot/): Runs the job search around the applications: turns role criteria into a live shortlist, scores each role for fit with evidence, keeps a reviewable tracker with submission and follow-up dates, flags roles that have gone quiet, drafts the follow-up and the interview briefing, and reads the funnel weekly.
 - [career-track](https://skillsmith.tech/career-track/): For the moves around a career: a positioning line you can repeat, the case for the next level, review and promotion narratives, salary negotiation scripts and a ninety-day plan.
 - [prompts-to-workflow](https://skillsmith.tech/prompts-to-workflow/): Turns a pasted batch of prompts that together do one multi-step job into a workflow, then decides how to split it into skills.
+- [opus-playbook](https://skillsmith.tech/opus-playbook/): Playbook for a lead model (Fable) that deputes a task to Opus, or to any subagent or worker session.
 
 ## Thinking & Learning
 
