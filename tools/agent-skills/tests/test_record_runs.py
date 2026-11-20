@@ -37,3 +37,33 @@ class RecordRunsTest(unittest.TestCase):
         self.assertEqual(entry["latestRun"]["verdict"], "PARTIAL")
         self.assertNotIn("tested", entry)
         self.assertNotIn("featured", entry)
+
+    def test_rejudged_older_report_is_dropped_when_a_newer_run_exists(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            runs = root / "reports/runs"
+            # The 11-12 run was recorded as a pass, then re-judged; a newer run also exists.
+            for date in ("2026-11-12", "2026-11-13"):
+                path = runs / date / "example" / "verdict.json"
+                path.parent.mkdir(parents=True)
+                path.write_text(json.dumps({"skill": "example", "date": date, "verdict": "PARTIAL",
+                                            "target": "fixture", "summary": "Result."}), encoding="utf-8")
+            with patch.multiple(record, ROOT=root, RUNS=runs):
+                latest, passing = record.latest()
+                rejected = record.rejected_evidence()
+
+        old = {"ran": "2026-11-12", "target": "fixture", "summary": "Result.",
+               "dir": "reports/runs/2026-11-12/example"}
+        entry = {"tested": record.evidence_for(old), "featured": 2}
+        self.assertTrue(record.record_entry(entry, latest["example"], passing.get("example"), rejected))
+        self.assertEqual(entry["latestRun"]["date"], "2026-11-13")
+        self.assertNotIn("tested", entry)
+        self.assertNotIn("featured", entry)
+
+    def test_hand_written_passing_example_is_kept(self):
+        run = {"ran": "2026-11-13", "target": "fixture", "summary": "Result.",
+               "dir": "reports/runs/2026-11-13/example", "verdict": "PARTIAL"}
+        proof = {"date": "2026-11-03", "target": "t", "result": "r", "evidence": "/#pane-land-a-job"}
+        entry = {"tested": dict(proof)}
+        record.record_entry(entry, run, None, {record.evidence_for(run)["evidence"]})
+        self.assertEqual(entry["tested"], proof)

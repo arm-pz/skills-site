@@ -32,6 +32,16 @@ def latest():
     return runs, passes
 
 
+def rejected_evidence():
+    """Evidence URLs of every run whose current verdict is not PASS, newest or not."""
+    out = set()
+    for f in RUNS.glob("*/*/verdict.json"):
+        v = json.loads(f.read_text(encoding="utf-8"))
+        if v["verdict"] != "PASS":
+            out.add(EVIDENCE + f.parent.relative_to(ROOT).as_posix() + "/README.md")
+    return out
+
+
 def result_line(summary, limit=230):
     s = " ".join(summary.split())
     return s if len(s) <= limit else s[: s.rfind(" ", 0, limit)].rstrip(",;") + "…"
@@ -42,7 +52,7 @@ def evidence_for(run):
             "evidence": EVIDENCE + run["dir"] + "/README.md"}
 
 
-def record_entry(entry, run, passing):
+def record_entry(entry, run, passing, rejected=frozenset()):
     changed = False
     if run:
         latest_run = dict(evidence_for(run), verdict=run["verdict"])
@@ -50,7 +60,10 @@ def record_entry(entry, run, passing):
             entry["latestRun"] = latest_run
             changed = True
     old_pass = entry.get("tested")
-    if run and run["verdict"] != "PASS" and old_pass and old_pass["evidence"] == latest_run["evidence"]:
+    # A recorded pass whose report was later re-judged is no longer a passing example,
+    # whether or not that report is still the newest run.
+    if old_pass and (old_pass["evidence"] in rejected or (
+            run and run["verdict"] != "PASS" and old_pass["evidence"] == latest_run["evidence"])):
         del entry["tested"]
         old_pass = None
         changed = True
@@ -69,11 +82,12 @@ def main(argv=None):
     ap.add_argument("--dry-run", action="store_true")
     a = ap.parse_args(argv)
     runs, passes = latest()
+    rejected = rejected_evidence()
     path = ROOT / "site" / "skills.json"
     manifest = json.loads(path.read_text(encoding="utf-8"))
     changed = []
     for s in manifest["skills"]:
-        if record_entry(s, runs.get(s["name"]), passes.get(s["name"])):
+        if record_entry(s, runs.get(s["name"]), passes.get(s["name"]), rejected):
             changed.append(s["name"])
     order = {"PASS": 0, "PARTIAL": 1, "FAIL": 2}
     rows = sorted(runs.values(), key=lambda v: (order.get(v["verdict"], 3), v["skill"]))

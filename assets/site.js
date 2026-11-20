@@ -72,7 +72,10 @@
     show(Math.max(0,linkedTab()));
     window.addEventListener('hashchange',function(){
       var i=linkedTab();
-      if(i>=0)show(i);
+      if(i<0)return;
+      show(i);
+      /* The browser tried to scroll to the pane while it was still hidden. */
+      document.getElementById(tabs[i].getAttribute('aria-controls')).scrollIntoView({block:'start'});
     });
   }
 
