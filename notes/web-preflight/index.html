@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3.02k visitors overnight, and none of them were people</title>
+<meta name="description" content="I deployed a static landing page on caffeinity.com and woke up to 3.02k visitors from Asia. They were bots looking for leftover secrets. That became the web-preflight skill.">
+<link rel="canonical" href="https://skillsmith.tech/notes/web-preflight/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Skillsmith by Caffeinity">
+<meta property="og:title" content="3.02k visitors overnight, and none of them were people">
+<meta property="og:description" content="I deployed a static landing page on caffeinity.com and woke up to 3.02k visitors from Asia. They were bots looking for leftover secrets. That became the web-preflight skill.">
+<meta property="og:url" content="https://skillsmith.tech/notes/web-preflight/">
+<meta name="twitter:card" content="summary">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="preload" href="/fonts/files/cY9AfjOCX1hbuyalUrK4397yjA.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/files/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+.story{padding-top:clamp(8px,2vw,24px)}
+.story-body{max-width:66ch}
+.story-body h2{font-size:clamp(28px,3vw,40px);line-height:1.08;margin:clamp(48px,6vw,80px) 0 18px}
+.story-body h2:first-child{margin-top:0}
+.story-body p{font-size:clamp(17px,1.3vw,19px);line-height:1.65}
+.story-body p+p{margin-top:1.05em}
+.story-body a{font-weight:600}
+.story-body code{font-family:var(--mono,ui-monospace,monospace);font-size:.88em;overflow-wrap:anywhere}
+.story-by{margin-top:22px;color:var(--muted);font-size:15px}
+.story-act{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.note-list{list-style:none;padding:0;margin:0;max-width:66ch}
+.note-list li{border-top:1px solid var(--line,rgba(127,127,127,.25));padding:28px 0}
+.note-list li:last-child{border-bottom:1px solid var(--line,rgba(127,127,127,.25))}
+.note-list .when{color:var(--muted);font-size:14px}
+.note-list h2{font-size:clamp(24px,2.4vw,32px);line-height:1.15;margin:6px 0 10px}
+.note-list p{font-size:clamp(16px,1.2vw,18px);line-height:1.6}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="/"><b>/</b>skillsmith <span class="brand-by">by caffeinity</span></a>
+    <div class="nav-links">
+      <a href="/skills/">Skills</a>
+      <a href="/workflows/">Workflows</a>
+      <a href="/mods/">Mods</a>
+      <a href="/story/">Story</a>
+      <a href="/notes/" aria-current="page">Notes</a>
+      <a href="/work/">Work with us</a>
+    </div>
+    <div class="nav-cta">
+      <a class="gh" href="https://github.com/arm-pz" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-accent btn-sm" href="/caffeinity-routing/">Start here</a>
+    </div>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="wrap">
+    <h1>3.02k visitors overnight. None of them were people.</h1>
+    <p class="lead">How a parked landing page on caffeinity.com turned into the web-preflight skill.</p>
+    <p class="story-by">Abdul Rahman P Z · <a href="/notes/">Notes</a></p>
+  </div>
+</header>
+
+<section class="story" aria-label="The note">
+  <div class="wrap">
+    <article class="story-body">
+
+      <h2>The launch</h2>
+      <p>I already owned caffeinity.com, and for a while all it had was a coming-soon page. I also had a landing page I'd built and then parked. So I thought, why not get it back up and deploy it? I put it on Cloudflare. It was a static site: no server code, no database, no login.</p>
+
+      <h2>The numbers</h2>
+      <p>The next day I opened Cloudflare Web Analytics. 3.02k visitors. Most of them from Japan and South Korea, some from the United States, and a scattering from elsewhere.</p>
+      <p>I was thrilled. In my head there was already a market for Caffeinity in Japan. I was planning an anime-themed post, and a Q&amp;A on Japan and coffee.</p>
+
+      <h2>The status codes</h2>
+      <p>Being a pessimist, I kept looking. Some requests were 200s. Many were 404s and 403s. A one-page landing site doesn't get a pile of 404s from real visitors, so I opened up the paths. They were asking for <code>/.env</code>, <code>/.git/config</code>, <code>/wp-login.php</code>, <code>/phpinfo.php</code>, <code>.ini</code> config files. None of those had ever existed on my site.</p>
+      <p>I took a screenshot and pasted it into Claude, ChatGPT, Duck.ai and Gemini. What came back was a shock. They were crawlers, bots that go through every new site looking for whatever a deploy left behind: environment files with API keys in them, Git metadata, PHP config, admin and debug pages. They don't care what the site is. A new domain coming online is enough.</p>
+
+      <h2>Why it didn't hurt, this time</h2>
+      <p>The 200s were my real pages. Everything the bots asked for came back 404 or 403. Claude, ChatGPT and Duck.ai all said the same thing: for a static landing page, this wasn't serious. If it had been a server-rendered app with a <code>.env</code> sitting in the deploy folder, it would have been a catastrophe.</p>
+      <p>So I was safe because there was nothing to find, not because I had checked.</p>
+
+      <h2>How most people ship</h2>
+      <p>Think about how most people deploy a website now, especially vibe coders and anyone who doesn't come from IT. It runs fine locally, so it goes to production. Nobody checks what else went up with it. The bots do, and they get there within a day.</p>
+
+      <h2>So it became a skill</h2>
+      <p>That's <a href="/web-preflight/">web-preflight</a>. Before you call a release done, your agent asks your site for the same things the bots ask for: a fixed list of 19 paths, including the <code>.env</code> variants, <code>.git/HEAD</code> and <code>.git/config</code>, package and composer files, <code>wp-admin</code>, <code>phpinfo</code> and <code>server-status</code>. Then it tells you what actually came back.</p>
+      <p>It's bounded on purpose. Requests and bytes have hard limits, nothing sensitive is written to disk, and it's only for a site you own. It isn't a scanner or a penetration test.</p>
+      <p>It also reads the answer, not just the status code, which is the lesson from my own logs. A 200 on <code>/.env</code> from a single-page app is usually the homepage served for every path, not your secrets. A firewall blocking everything doesn't prove the site behind it is clean. When it can't tell, it says INCONCLUSIVE. It never calls that a pass.</p>
+
+      <h2>The fans in Japan</h2>
+      <p>They were my own projection. The anime post and the Japan coffee Q&amp;A went up in steam. What I got instead was a check I now run before every deploy. I'd like you to run it before the bots get to your site.</p>
+      <div class="story-act">
+        <a class="btn btn-accent" href="/web-preflight/">Install web-preflight</a>
+        <a class="btn btn-quiet" href="https://github.com/arm-pz/web-preflight" target="_blank" rel="noopener">Read the source</a>
+      </div>
+
+    </article>
+  </div>
+</section>
+
+<footer class="roast">
+  <div class="wrap">
+    <div class="meta">
+      <span>Skillsmith by <a href="https://caffeinity.com/">Caffeinity</a>: open agent skills by Abdul Rahman P Z.</span>
+      <a href="/checks/">Free tools</a>
+      <a href="/work/">Custom skills for your team</a>
+      <a href="https://github.com/arm-pz" target="_blank" rel="noopener">github.com/arm-pz</a>
+    </div>
+    <p class="kural"><span lang="ta">யாம் பெற்ற இன்பம் பெறுக இவ்வையகம்</span><span>“May this world attain the same bliss that I have attained.”</span></p>
+  </div>
+</footer>
+<script src="/assets/site.js" defer></script>
+</body>
+</html>

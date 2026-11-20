@@ -21,6 +21,8 @@ class SitemapTest(unittest.TestCase):
                          ["https://skillsmith.tech/",
                           "https://skillsmith.tech/work/",
                           "https://skillsmith.tech/story/",
+                          "https://skillsmith.tech/notes/",
+                          "https://skillsmith.tech/notes/web-preflight/",
                           "https://skillsmith.tech/skills/",
                           "https://skillsmith.tech/mods/",
                           "https://skillsmith.tech/workflows/",
@@ -40,7 +42,7 @@ class SitemapTest(unittest.TestCase):
         root = ET.fromstring(xml)
         locs = [el.text for el in root.iter(
             "{http://www.sitemaps.org/schemas/sitemap/0.9}loc")]
-        self.assertEqual(len(locs), 16)
+        self.assertEqual(len(locs), 18)
 
 
 if __name__ == "__main__":
