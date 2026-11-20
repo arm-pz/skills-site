@@ -354,9 +354,9 @@ catch-all routing     <span class="ok">none</span>
   <div class="wrap">
     <h2 id="proof-h">Tested on real targets, this site first.</h2>
     <p class="sub"><a href="/notes/skill-test-results/">Read the November results for 59 skills and mods</a>, including the partial runs.</p>
-    <p class="sub">Seven real runs from 23 and 24 October 2026: what each skill found, and what changed because of it. Nothing here is a mock-up; where a fix is still waiting on a decision, the tab says so.</p>
+    <p class="sub">Eight runs from 23 October to 3 November 2026. Each tab shows what the skills found and what changed.</p>
     <div class="shell">
-        <div class="shell-bar" aria-hidden="true"><i></i><i></i><i></i><span>real runs · 23–24 Oct 2026</span></div>
+        <div class="shell-bar" aria-hidden="true"><i></i><i></i><i></i><span>real runs · 23 Oct to 3 Nov 2026</span></div>
         <div class="tabs" role="tablist" aria-label="Real runs">
           <button type="button" role="tab" id="tab-seo-crawl" aria-controls="pane-seo-crawl" aria-selected="true">seo-crawl</button>
           <button type="button" role="tab" id="tab-web-preflight" aria-controls="pane-web-preflight" aria-selected="false" tabindex="-1">web-preflight</button>
@@ -365,6 +365,7 @@ catch-all routing     <span class="ok">none</span>
           <button type="button" role="tab" id="tab-findable" aria-controls="pane-findable" aria-selected="false" tabindex="-1">findable</button>
           <button type="button" role="tab" id="tab-upstream-check" aria-controls="pane-upstream-check" aria-selected="false" tabindex="-1">upstream-check</button>
           <button type="button" role="tab" id="tab-draft-skill" aria-controls="pane-draft-skill" aria-selected="false" tabindex="-1">draft-skill</button>
+          <button type="button" role="tab" id="tab-land-a-job" aria-controls="pane-land-a-job" aria-selected="false" tabindex="-1">land-a-job</button>
         </div>
       <div class="pane" role="tabpanel" id="pane-seo-crawl" aria-labelledby="tab-seo-crawl">
         <div class="pane-col">
@@ -511,6 +512,30 @@ router  (did not exist)</pre></div>
 <pre>caffeinity-routing  11 brews
 check_skill.py      0 fail · 0 warn</pre></div>
           <p class="verdict">new; now eleven brews</p>
+        </div>
+      </div>
+      <div class="pane" role="tabpanel" id="pane-land-a-job" aria-labelledby="tab-land-a-job">
+        <div class="pane-col">
+          <p class="pane-label">recruiter-lens, applicant-kit and application-pilot · 3 Nov 2026</p>
+          <h3>A stretch role, ready to apply</h3>
+<pre>fit score     49/100 (rubric estimate)
+decision      apply with gaps named
+gaps          Python, RAG, ML frameworks</pre>
+          <p>A candidate with ten years of .NET and AWS experience was considering a Big Four AI consulting role. Recruiter Lens flagged a job title the candidate had never held and three tools they knew only at a surface level. Applicant Kit corrected the resume and wrote a 20-question interview pack. It marked questions that still needed a real example.</p>
+        </div>
+        <div class="pane-col">
+          <p class="pane-label">Before → after</p>
+          <div class="ba"><span>before</span>
+<pre>title        did not match the role held
+claims       3 tools overstated
+ATS parse    7/10, job titles and
+             company names merged</pre></div>
+          <div class="ba after"><span>after</span>
+<pre>title        corrected
+claims       3 tools removed
+ATS parse    9/10
+tracker      ready for candidate review</pre></div>
+          <p class="verdict">The application stayed in the tracker for the candidate to submit.</p>
         </div>
       </div>
     </div>

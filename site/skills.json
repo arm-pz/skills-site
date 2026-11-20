@@ -2482,6 +2482,12 @@
         "result": "The run wrote resume-ledgerline.md with the real figures (64 accounts, about £2.1M ARR, churn 14%→9%, onboarding 19→11 days), a caveated churn bullet, an honest carer/SQL-course entry and no management claim, but the new summary…",
         "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/applicant-kit/README.md",
         "verdict": "PARTIAL"
+      },
+      "tested": {
+        "date": "2026-11-03",
+        "target": "a 10-year .NET/AWS resume against a Big Four AI consulting role",
+        "result": "Wrote the tailored resume, five summaries and a 20-question answer pack; Python, RAG and ML frameworks stayed named gaps and were never added.",
+        "evidence": "/#pane-land-a-job"
       }
     },
     {
@@ -2510,6 +2516,12 @@
         "result": "The run flagged Paystack Labs (35 days quiet) and drafted a follow-up to Amira, recommended marking Quillbook no-reply, left Fernway alone, and gave a Tallyhub panel plan, but the Tallyhub briefing was not written and the drafts…",
         "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/application-pilot/README.md",
         "verdict": "PARTIAL"
+      },
+      "tested": {
+        "date": "2026-11-03",
+        "target": "a 10-year .NET/AWS resume against a Big Four AI consulting role",
+        "result": "Scored fit at 49/100 with evidence (apply with gaps named) and held the tracker row at ready, never marking it submitted.",
+        "evidence": "/#pane-land-a-job"
       }
     },
     {

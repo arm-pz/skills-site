@@ -465,6 +465,15 @@ INSTALL = {
 }
 
 
+def count_label(cards):
+    mods = sum(1 for s in cards if s.get("kind") == "mod")
+    skills = len(cards) - mods
+    parts = [f"{skills} skill" + ("" if skills == 1 else "s")] if skills else []
+    if mods:
+        parts.append(f"{mods} mod" + ("" if mods == 1 else "s"))
+    return " and ".join(parts) or "0 skills"
+
+
 def llms_txt(manifest):
     """/llms.txt: what the site offers, for agents and AI search, rendered from the manifest."""
     order = {g["id"]: g["order"] for g in manifest["groups"]}
@@ -472,7 +481,7 @@ def llms_txt(manifest):
                    key=lambda s: (order[s["group"]], s["order"]))
     out = ["# Skillsmith by Caffeinity", "",
            "> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: "
-           f"{len(pages)} skills mapped into {len(manifest.get('workflows', []))} workflows "
+           f"{count_label(pages)} mapped into {len(manifest.get('workflows', []))} workflows "
            "(build a skill, get found, gate a release, grow search traffic, land a job, decide, "
            "learn, run outbound, launch a product). Plain markdown, no API keys.", "",
            "## Install", "",

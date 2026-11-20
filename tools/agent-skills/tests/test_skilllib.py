@@ -116,6 +116,13 @@ class ManifestTest(unittest.TestCase):
     def test_valid_manifest_passes(self):
         skilllib.validate_manifest(self.manifest())
 
+    def test_llms_counts_public_skills_and_mods_separately(self):
+        data = self.manifest()
+        skill = data["skills"][0]
+        data["skills"].extend([dict(skill, name="demo-mod", kind="mod"),
+                               dict(skill, name="hidden", page="none")])
+        self.assertIn("1 skill and 1 mod mapped into", skilllib.llms_txt(data))
+
     def test_duplicate_order_fails(self):
         data = self.manifest()
         data["skills"].append(dict(data["skills"][0], name="other", repo="arm-pz/other"))
