@@ -2750,8 +2750,8 @@
       "install": "npx skills add arm-pz/crash-test --skill crash-test",
       "quality": {
         "version": "1.0.0",
-        "commit": "e7db75d",
-        "updated": "2026-11-06",
+        "commit": "666c379",
+        "updated": "2026-11-20",
         "notFor": [
           "factual lookups, small edits, debugging an actual crash, or reviewing code for defects: it examines a decision, not a diff"
         ]
