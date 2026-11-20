@@ -87,15 +87,6 @@ def card(skill):
     ]
 
 
-def count_label(cards):
-    mods = sum(1 for s in cards if s.get("kind") == "mod")
-    skills = len(cards) - mods
-    parts = [f"{skills} skill" + ("" if skills == 1 else "s")] if skills else []
-    if mods:
-        parts.append(f"{mods} mod" + ("" if mods == 1 else "s"))
-    return " and ".join(parts)
-
-
 def groups_with(manifest, cards):
     return [g for g in sorted(manifest["groups"], key=lambda g: g["order"])
             if any(s["group"] == g["id"] for s in cards)]
@@ -111,7 +102,7 @@ def render_skills(manifest):
         lines += [f'    <section class="sk-group" id="{gid}" aria-labelledby="{gid}-h">',
                   '      <div class="sk-head">',
                   f'        <h2 id="{gid}-h">{esc(group["title"])}</h2>',
-                  f'        <p>{count_label(rows)} · {esc(group["descriptor"])}</p>',
+                  f'        <p>{skilllib.count_label(rows)} · {esc(group["descriptor"])}</p>',
                   '      </div>',
                   '      <div class="sk-grid">']
         for skill in rows:
@@ -219,7 +210,7 @@ def render_stats(manifest):
     cards = visible(manifest)
     groups = len(groups_with(manifest, cards))
     flows = len(manifest.get("workflows", []))
-    return (f'<p class="stats">{count_label(cards)} · {flows} workflow{"" if flows == 1 else "s"} · '
+    return (f'<p class="stats">{skilllib.count_label(cards)} · {flows} workflow{"" if flows == 1 else "s"} · '
             f'{groups} {"category" if groups == 1 else "categories"} · 0 API keys</p>')
 
 

@@ -1,18 +1,15 @@
 """Record real-world runs on the site and list what each skill needs fixed.
 
-    python tools/skill-runs/record.py            # write PASS runs into site/skills.json + SUMMARY.md
+    python tools/skill-runs/record.py            # write run evidence into site/skills.json + SUMMARY.md
     python tools/skill-runs/record.py --dry-run  # show what would change
 
-For each skill, the newest verdict under reports/runs/*/<skill>/ counts. A PASS becomes the page's
-"Last real-world run" (the tested field), linked to that run's evidence; an existing tested entry is
-replaced only by a newer PASS. PARTIAL and FAIL runs are never shown as working: they go into
-reports/runs/SUMMARY.md with the defects the judge attributed to the skill, as the fix list for
-tune-skill and the polish skills. Regenerate the pages afterwards with gen_page.py --write.
+Record the latest verdict and the latest passing example independently. The summary
+lists the latest verdict for each skill and the defects attributed to the skill.
+Regenerate the pages afterwards with gen_page.py --write.
 """
 
 import argparse
 import json
-from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -21,15 +18,18 @@ EVIDENCE = "https://github.com/arm-pz/skills-site/blob/main/"
 
 
 def latest():
-    out = {}
+    runs, passes = {}, {}
     for f in sorted(RUNS.glob("*/*/verdict.json")):
-        v = json.loads(f.read_text())
-        # The day the run actually happened (a folder can hold runs that crossed midnight).
-        v["ran"] = datetime.fromtimestamp((f.parent / "transcript.jsonl").stat().st_mtime, timezone.utc).date().isoformat()
+        v = json.loads(f.read_text(encoding="utf-8"))
+        # The report date survives a fresh checkout, unlike the transcript's mtime.
+        v["ran"] = v["date"]
         v["dir"] = f.parent.relative_to(ROOT).as_posix()
-        if v["skill"] not in out or v["ran"] >= out[v["skill"]]["ran"]:
-            out[v["skill"]] = v
-    return out
+        name = v["skill"]
+        if name not in runs or v["ran"] >= runs[name]["ran"]:
+            runs[name] = v
+        if v["verdict"] == "PASS" and (name not in passes or v["ran"] >= passes[name]["ran"]):
+            passes[name] = v
+    return runs, passes
 
 
 def result_line(summary, limit=230):
@@ -37,31 +37,51 @@ def result_line(summary, limit=230):
     return s if len(s) <= limit else s[: s.rfind(" ", 0, limit)].rstrip(",;") + "…"
 
 
+def evidence_for(run):
+    return {"date": run["ran"], "target": run["target"], "result": result_line(run["summary"]),
+            "evidence": EVIDENCE + run["dir"] + "/README.md"}
+
+
+def record_entry(entry, run, passing):
+    changed = False
+    if run:
+        latest_run = dict(evidence_for(run), verdict=run["verdict"])
+        if entry.get("latestRun") != latest_run:
+            entry["latestRun"] = latest_run
+            changed = True
+    old_pass = entry.get("tested")
+    if run and run["verdict"] != "PASS" and old_pass and old_pass["evidence"] == latest_run["evidence"]:
+        del entry["tested"]
+        old_pass = None
+        changed = True
+    if passing and (not old_pass or passing["ran"] >= old_pass["date"]):
+        new_pass = evidence_for(passing)
+        if old_pass != new_pass:
+            entry["tested"] = new_pass
+            changed = True
+    if changed and "tested" not in entry:
+        entry.pop("featured", None)
+    return changed
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true")
     a = ap.parse_args(argv)
-    runs = latest()
+    runs, passes = latest()
     path = ROOT / "site" / "skills.json"
-    manifest = json.loads(path.read_text())
+    manifest = json.loads(path.read_text(encoding="utf-8"))
     changed = []
     for s in manifest["skills"]:
-        v = runs.get(s["name"])
-        if not v or v["verdict"] != "PASS":
-            continue
-        old = s.get("tested")
-        if old and old["date"] > v["ran"]:
-            continue
-        s["tested"] = {"date": v["ran"], "target": v["target"], "result": result_line(v["summary"]),
-                       "evidence": EVIDENCE + v["dir"] + "/README.md"}
-        changed.append(s["name"])
+        if record_entry(s, runs.get(s["name"]), passes.get(s["name"])):
+            changed.append(s["name"])
     order = {"PASS": 0, "PARTIAL": 1, "FAIL": 2}
     rows = sorted(runs.values(), key=lambda v: (order.get(v["verdict"], 3), v["skill"]))
     counts = {k: sum(v["verdict"] == k for v in rows) for k in order}
     lines = ["# Real-world runs: summary", "",
              f"{len(rows)} skills and mods run: {counts['PASS']} PASS, {counts['PARTIAL']} PARTIAL, {counts['FAIL']} FAIL. "
-             "Only PASS runs are shown on the site. Each row links to the full evidence.", "",
-             "| Verdict | Skill | Ran | Result |", "|---|---|---|---|"]
+             "Each row links to the full evidence.", "",
+             "| Verdict | Skill | Report date | Result |", "|---|---|---|---|"]
     for v in rows:
         lines.append(f"| {v['verdict']} | [{v['skill']}]({Path(v['dir']).relative_to('reports/runs').as_posix()}/README.md) "
                      f"| {v['ran']} | {result_line(v['summary'], 300).replace('|', '/')} |")
@@ -77,7 +97,7 @@ def main(argv=None):
         print(summary)
         return 0
     path.write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    (RUNS / "SUMMARY.md").write_text(summary)
+    (RUNS / "SUMMARY.md").write_text(summary, encoding="utf-8")
     print("recorded:", ", ".join(changed) or "nothing")
     return 0
 

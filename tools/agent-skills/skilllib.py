@@ -13,7 +13,7 @@ SITE = "https://skillsmith.tech"
 OWNER = "arm-pz"
 # Hand-written pages served at /<name>/, beside the hub and the skill pages. /workflows/ also
 # holds one generated page per workflow. RESERVED are section names kept for what comes next.
-STATIC_PAGES = ["work", "story", "notes", "notes/web-preflight", "skills", "mods", "workflows", "seo", "check", "prose",
+STATIC_PAGES = ["work", "story", "notes", "notes/web-preflight", "notes/skill-test-results", "skills", "mods", "workflows", "seo", "check", "prose",
                 "checks", "map", "seo-check", "resume", "list"]
 RESERVED = STATIC_PAGES + ["agents", "subagents", "harnesses"]
 INDEX_SCHEMA = "https://schemas.agentskills.io/discovery/0.2.0/schema.json"
@@ -172,16 +172,21 @@ def validate_manifest(data):
             _req(s["featured"] in (1, 2, 3), f"{name}: featured must be 1, 2 or 3")
             _req(s.get("tested") is not None, f"{name}: a featured skill needs a tested run")
         check_pairs(s.get("pairsWith"), name)
-        tested = s.get("tested")
-        if tested is not None:
-            _req(isinstance(tested, dict), f"{name}: tested must be an object")
-            _req(valid_date(tested.get("date")),
-                 f"{name}: tested.date must be a real date as YYYY-MM-DD")
+        for field in ("tested", "latestRun"):
+            run = s.get(field)
+            if run is None:
+                continue
+            _req(isinstance(run, dict), f"{name}: {field} must be an object")
+            _req(valid_date(run.get("date")),
+                 f"{name}: {field}.date must be a real date as YYYY-MM-DD")
             for key in ("target", "result", "evidence"):
-                _req(isinstance(tested.get(key), str) and tested[key].strip(),
-                     f"{name}: tested.{key} required")
-            _req(tested["evidence"].startswith(("/", "https://")),
-                 f"{name}: tested.evidence must be a site path or https URL")
+                _req(isinstance(run.get(key), str) and run[key].strip(),
+                     f"{name}: {field}.{key} required")
+            _req(run["evidence"].startswith(("/", "https://")),
+                 f"{name}: {field}.evidence must be a site path or https URL")
+            if field == "latestRun":
+                _req(run.get("verdict") in ("PASS", "PARTIAL", "FAIL"),
+                     f"{name}: latestRun.verdict must be PASS, PARTIAL or FAIL")
 
         if page == "generated":
             src = s.get("pageSource")
@@ -460,6 +465,15 @@ INSTALL = {
 }
 
 
+def count_label(cards):
+    mods = sum(1 for s in cards if s.get("kind") == "mod")
+    skills = len(cards) - mods
+    parts = [f"{skills} skill" + ("" if skills == 1 else "s")] if skills else []
+    if mods:
+        parts.append(f"{mods} mod" + ("" if mods == 1 else "s"))
+    return " and ".join(parts) or "0 skills"
+
+
 def llms_txt(manifest):
     """/llms.txt: what the site offers, for agents and AI search, rendered from the manifest."""
     order = {g["id"]: g["order"] for g in manifest["groups"]}
@@ -467,7 +481,7 @@ def llms_txt(manifest):
                    key=lambda s: (order[s["group"]], s["order"]))
     out = ["# Skillsmith by Caffeinity", "",
            "> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: "
-           f"{len(pages)} skills mapped into {len(manifest.get('workflows', []))} workflows "
+           f"{count_label(pages)} mapped into {len(manifest.get('workflows', []))} workflows "
            "(build a skill, get found, gate a release, grow search traffic, land a job, decide, "
            "learn, run outbound, launch a product). Plain markdown, no API keys.", "",
            "## Install", "",

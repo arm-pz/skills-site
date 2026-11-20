@@ -64,7 +64,17 @@
       if(k){e.preventDefault();show((i+k+tabs.length)%tabs.length,true);}
     });
   });
-  if(tabs.length)show(0);
+  function linkedTab(){
+    var panel=window.location.hash.slice(1);
+    return tabs.findIndex(function(t){return t.getAttribute('aria-controls')===panel;});
+  }
+  if(tabs.length){
+    show(Math.max(0,linkedTab()));
+    window.addEventListener('hashchange',function(){
+      var i=linkedTab();
+      if(i>=0)show(i);
+    });
+  }
 
   var me=document.currentScript,motion=document.createElement('script');
   var ver=me&&me.src&&me.src.indexOf('?')>-1?me.src.slice(me.src.indexOf('?')):'';
