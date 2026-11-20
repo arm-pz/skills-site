@@ -4131,7 +4131,7 @@
       "name": "Dial-in",
       "title": "Set up a coding agent for a repo",
       "slug": "set-up-a-coding-agent",
-      "summary": "Get a coding agent that follows the repo's rules and stays inside its usage: write or prune the rules and guardrails, tier the models by role, then pick the effort each large task deserves.",
+      "summary": "Set up a coding agent for your repo. Write or prune its rules and guardrails, choose models for each role, and match reasoning effort to the task.",
       "steps": [
         {
           "skills": [
