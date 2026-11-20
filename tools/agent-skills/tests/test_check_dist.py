@@ -58,6 +58,7 @@ class CheckDistTest(unittest.TestCase):
             '<url><loc>https://skillsmith.tech/story/</loc></url>'
             '<url><loc>https://skillsmith.tech/notes/</loc></url>'
             '<url><loc>https://skillsmith.tech/notes/web-preflight/</loc></url>'
+            '<url><loc>https://skillsmith.tech/notes/skill-test-results/</loc></url>'
             '<url><loc>https://skillsmith.tech/skills/</loc></url>'
             '<url><loc>https://skillsmith.tech/mods/</loc></url>'
             '<url><loc>https://skillsmith.tech/workflows/</loc></url>'
@@ -90,6 +91,8 @@ class CheckDistTest(unittest.TestCase):
         (self.root / "dist/notes/web-preflight").mkdir(parents=True)
         (self.root / "dist/notes/index.html").write_text("<title>notes</title>")
         (self.root / "dist/notes/web-preflight/index.html").write_text("<title>note</title>")
+        (self.root / "dist/notes/skill-test-results").mkdir()
+        (self.root / "dist/notes/skill-test-results/index.html").write_text("<title>results</title>")
         (self.root / "dist/seo").mkdir()
         (self.root / "dist/seo/index.html").write_text("<title>seo</title>")
         (self.root / "dist/check").mkdir()
