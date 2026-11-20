@@ -151,6 +151,13 @@ def health_html(entry, health):
     return ("Passing", "No failures or warnings.")
 
 
+def run_details(run):
+    evidence = run["evidence"]
+    external = ' target="_blank" rel="noopener"' if evidence.startswith("https://") else ""
+    return (f'{esc(human_date(run["date"]))}, on {esc(run["target"])}'
+            f'<small>{esc(run["result"])} <a href="{esc(evidence)}"{external}>See the run</a></small>')
+
+
 def quality_html(entry, health=None):
     """The quality block every skill page carries, generated and hand-written alike."""
     quality = entry.get("quality") or {}
@@ -174,11 +181,11 @@ def quality_html(entry, health=None):
     state, note = health_html(entry, health or {})
     check_dd = f'{state}<small>{esc(note)} <a href="{HEALTH_URL}" target="_blank" rel="noopener">How it is checked</a></small>'
     tested = entry.get("tested")
-    if tested:
-        evidence = tested["evidence"]
-        external = ' target="_blank" rel="noopener"' if evidence.startswith("https://") else ""
-        tested_dd = (f'{esc(human_date(tested["date"]))}, on {esc(tested["target"])}'
-                     f'<small>{esc(tested["result"])} <a href="{esc(evidence)}"{external}>See the run</a></small>')
+    latest_run = entry.get("latestRun")
+    if latest_run:
+        tested_dd = f'<strong>{esc(latest_run["verdict"])}</strong> · ' + run_details(latest_run)
+    elif tested:
+        tested_dd = run_details(tested)
     else:
         tested_dd = "No public run yet<small>Runs are published only with their evidence.</small>"
     if "notFor" in quality:
@@ -191,6 +198,8 @@ def quality_html(entry, health=None):
         limits_dd = "None stated in its description. Read the source before relying on it."
     rows = [("Version", version_dd), ("Updated", updated_dd), ("Works in", agents_dd),
             ("Nightly check", check_dd), ("Last real-world run", tested_dd)]
+    if latest_run and tested and latest_run["evidence"] != tested["evidence"]:
+        rows.append(("Passing example", run_details(tested)))
     pairs = "".join(
         f'\n      <div class="qb-wide"><dt>Pairs with</dt><dd><a href="{esc(p["url"])}" target="_blank" '
         f'rel="noopener">{esc(p["name"])}</a> for {esc(p["for"])}<small>Third-party, not made by Skillsmith by Caffeinity. '

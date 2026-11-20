@@ -55,6 +55,10 @@ class CheckDistTest(unittest.TestCase):
             '<?xml version="1.0"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
             '<url><loc>https://skillsmith.tech/</loc></url>'
             '<url><loc>https://skillsmith.tech/work/</loc></url>'
+            '<url><loc>https://skillsmith.tech/story/</loc></url>'
+            '<url><loc>https://skillsmith.tech/notes/</loc></url>'
+            '<url><loc>https://skillsmith.tech/notes/web-preflight/</loc></url>'
+            '<url><loc>https://skillsmith.tech/notes/skill-test-results/</loc></url>'
             '<url><loc>https://skillsmith.tech/skills/</loc></url>'
             '<url><loc>https://skillsmith.tech/mods/</loc></url>'
             '<url><loc>https://skillsmith.tech/workflows/</loc></url>'
@@ -82,6 +86,13 @@ class CheckDistTest(unittest.TestCase):
         (self.root / "dist/workflows/index.html").write_text("<title>workflows</title>")
         (self.root / "dist/work").mkdir()
         (self.root / "dist/work/index.html").write_text("<title>work</title>")
+        (self.root / "dist/story").mkdir()
+        (self.root / "dist/story/index.html").write_text("<title>story</title>")
+        (self.root / "dist/notes/web-preflight").mkdir(parents=True)
+        (self.root / "dist/notes/index.html").write_text("<title>notes</title>")
+        (self.root / "dist/notes/web-preflight/index.html").write_text("<title>note</title>")
+        (self.root / "dist/notes/skill-test-results").mkdir()
+        (self.root / "dist/notes/skill-test-results/index.html").write_text("<title>results</title>")
         (self.root / "dist/seo").mkdir()
         (self.root / "dist/seo/index.html").write_text("<title>seo</title>")
         (self.root / "dist/check").mkdir()

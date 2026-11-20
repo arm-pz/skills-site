@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What happened when we tested 59 skills and mods</title>
+<meta name="description" content="Results from 59 Claude Code runs. See what passed, what the SEO agent left unfinished, and how to read the verdicts.">
+<link rel="canonical" href="https://skillsmith.tech/notes/skill-test-results/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Skillsmith by Caffeinity">
+<meta property="og:title" content="What happened when we tested 59 skills and mods">
+<meta property="og:description" content="Results from 59 Claude Code runs. See what passed, what the SEO agent left unfinished, and how to read the verdicts.">
+<meta property="og:url" content="https://skillsmith.tech/notes/skill-test-results/">
+<meta name="twitter:card" content="summary">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+.story{padding-top:clamp(8px,2vw,24px)}
+.story-body{max-width:66ch}
+.story-body h2{font-size:clamp(28px,3vw,40px);line-height:1.08;margin:clamp(48px,6vw,80px) 0 18px}
+.story-body p{font-size:clamp(17px,1.3vw,19px);line-height:1.65}
+.story-body p+p{margin-top:1.05em}
+.story-body a{font-weight:600}
+.story-by{margin-top:22px;color:var(--muted);font-size:15px}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="/"><b>/</b>skillsmith <span class="brand-by">by caffeinity</span></a>
+    <div class="nav-links">
+      <a href="/skills/">Skills</a>
+      <a href="/workflows/">Workflows</a>
+      <a href="/mods/">Mods</a>
+      <a href="/story/">Story</a>
+      <a href="/notes/">Notes</a>
+      <a href="/work/">Work with us</a>
+    </div>
+    <div class="nav-cta">
+      <a class="gh" href="https://github.com/arm-pz" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-accent btn-sm" href="/caffeinity-routing/">Start here</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <header class="page-hero">
+    <div class="wrap">
+      <h1>What happened when we tested 59 skills and mods</h1>
+      <p class="lead">15 PASS, 44 PARTIAL, 0 FAIL in the November Claude Code batch.</p>
+      <p class="story-by">Skillsmith by Caffeinity · <time datetime="2026-11-20">20 November 2026</time> · <a href="/notes/">Notes</a></p>
+    </div>
+  </header>
+
+  <section class="story" aria-label="The note">
+    <div class="wrap">
+      <article class="story-body">
+        <p>We gave each skill or mod a task in Claude Code and kept a report of what happened. Some tasks used prepared examples. Others worked against the live site. The reports show what the agent got right, what it missed and how the run was graded. <a href="https://github.com/arm-pz/skills-site/blob/main/reports/runs/SUMMARY.md">Read all 59 results</a>.</p>
+
+        <h2>What a partial run looks like</h2>
+        <p>We asked <a href="/seo-sweep/">SEO Sweep</a> to crawl skillsmith.tech, fix what it found in the source and verify the changes locally. It found 12 titles over 60 characters and eight descriptions over 160. After its edits, the local crawl found zero long titles and two long descriptions.</p>
+        <p>The agent skipped parts of the workflow, including checking which page should rank for each search query. It left a long description on a generated workflow page untouched. The changes stayed local, and the run got PARTIAL. <a href="https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/seo-sweep/README.md">Read the SEO Sweep report</a>.</p>
+
+        <h2>How to read the verdicts</h2>
+        <p>A verdict belongs to the task in the report. For example, <a href="/get-indexed/">Get Indexed</a> passed a planning run by counting the 92 URLs in the sitemap and listing what submission would require. That task stopped at the plan. <a href="https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/get-indexed/README.md">Read the Get Indexed report</a>.</p>
+        <p>The nightly check looks for structural problems in the published skill files and broken references to other skills. The behavioral runner gives an agent a task and reviews its actions and output against a rubric. Some scenarios also check files or compare the result with a known answer. <a href="https://github.com/arm-pz/skills-site/blob/main/.github/workflows/health.yml">Nightly check</a> · <a href="https://github.com/arm-pz/skills-site/blob/main/tools/skill-runs/run.py">Behavioral runner</a>.</p>
+        <p>The November batch gives us examples from Claude Code. We still need matched runs with and without a skill to measure what installing it adds. The first comparison we plan to make is for the <a href="/caffeinity-routing/">catalog router</a>. We'll give it a project with a known set of installed skills and see whether it picks the right workflow and correctly reports what's missing.</p>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer class="roast">
+  <div class="wrap">
+    <div class="meta">
+      <span>Skillsmith by <a href="https://caffeinity.com/">Caffeinity</a>: open agent skills by Abdul Rahman P Z.</span>
+      <a href="/checks/">Free tools</a>
+      <a href="/work/">Custom skills for your team</a>
+      <a href="https://github.com/arm-pz" target="_blank" rel="noopener">github.com/arm-pz</a>
+    </div>
+    <p class="kural"><span lang="ta">யாம் பெற்ற இன்பம் பெறுக இவ்வையகம்</span><span>“May this world attain the same bliss that I have attained.”</span></p>
+  </div>
+</footer>
+<script src="/assets/site.js" defer></script>
+</body>
+</html>

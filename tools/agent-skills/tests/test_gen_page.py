@@ -49,6 +49,21 @@ class QualityBlockTest(unittest.TestCase):
                      "Not checked yet", "No public run yet", "None stated in its description"):
             self.assertIn(text, out)
 
+    def test_latest_partial_is_visible_with_or_without_a_passing_example(self):
+        partial = {"date": "2026-11-13", "target": "example.com", "result": "Skipped one step.",
+                   "evidence": "https://example.com/report", "verdict": "PARTIAL"}
+        out = gen_page.quality_html(dict(ENTRY, latestRun=partial))
+        self.assertIn("<strong>PARTIAL</strong> · 13 Nov 2026", out)
+        self.assertIn('href="https://example.com/report"', out)
+        out = gen_page.quality_html(dict(ENTRY, latestRun=partial, tested=TESTED))
+        self.assertIn("<dt>Passing example</dt><dd>23 Oct 2026", out)
+        self.assertIn('href="/#proof"', out)
+
+    def test_passing_report_is_only_shown_once(self):
+        out = gen_page.quality_html(dict(ENTRY, latestRun=dict(TESTED, verdict="PASS"), tested=TESTED))
+        self.assertIn("<strong>PASS</strong>", out)
+        self.assertEqual(out.count('href="/#proof"'), 1)
+
     def test_pairs_with_is_labelled_third_party(self):
         pair = {"name": "Tool & Co", "url": "https://example.com/tool", "for": "rankings.",
                 "needs": "Needs an API key."}

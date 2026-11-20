@@ -86,7 +86,7 @@ ENV_NOTE = ("This environment runs Bash with a fixed allowlist. Use one simple c
 
 
 def manifest():
-    return {e["name"]: e for e in json.loads((ROOT / "site" / "skills.json").read_text())["skills"]}
+    return {e["name"]: e for e in json.loads((ROOT / "site" / "skills.json").read_text(encoding="utf-8"))["skills"]}
 
 
 def clone(repo):
@@ -109,7 +109,7 @@ def source(spec, man):
 
 
 def _pw_module():
-    r = subprocess.run(["node", "-e", "console.log(require.resolve('playwright'))"], cwd="/tmp",
+    r = subprocess.run(["node", "-e", "console.log(require.resolve('playwright'))"], cwd=tempfile.gettempdir(),
                        capture_output=True, text=True)
     return r.stdout.strip() or "playwright"
 
@@ -135,8 +135,8 @@ def child_env(home):
 
 def claude(args, cwd, env, timeout):
     t = time.time()
-    p = subprocess.run(["claude", *args], cwd=cwd, env=env, capture_output=True, text=True, stdin=subprocess.DEVNULL,
-                       timeout=timeout)
+    p = subprocess.run(["claude", *args], cwd=cwd, env=env, capture_output=True,
+                       encoding="utf-8", errors="replace", stdin=subprocess.DEVNULL, timeout=timeout)
     events = []
     for line in p.stdout.splitlines():
         try:
