@@ -56,6 +56,16 @@ def install_of(skill):
     return skill.get("install") or f"npx skills add {skill['repo']}"
 
 
+def run_label(skill, passed):
+    """Date line for a card. It claims a working run only when the newest run passed, so a card
+    never says "tested" while the skill's page leads with a newer PARTIAL or FAIL run."""
+    latest, tested = skill.get("latestRun"), skill.get("tested")
+    if latest and latest["verdict"] != "PASS" and not (tested and tested["date"] > latest["date"]):
+        return ""
+    dates = [r["date"] for r in (latest, tested) if r]
+    return passed + " " + esc(human_date(max(dates))) if dates else ""
+
+
 def card(skill):
     name = esc(skill["name"])
     repo = attr(f"https://github.com/{skill['repo']}")
@@ -65,8 +75,9 @@ def card(skill):
         chips.append("chain")
     if skill.get("kind") == "mod":
         chips.append("Claude Code mod")
-    if skill.get("tested"):
-        chips.append("tested " + esc(human_date(skill["tested"]["date"])))
+    label = run_label(skill, "tested")
+    if label:
+        chips.append(label)
     chip_html = "".join(f'<span class="chip{" chip-hot" if c != chips[0] else ""}">{c}</span>'
                         for c in chips)
     install = install_of(skill)
@@ -290,8 +301,9 @@ def flow_steps_html(flow, manifest):
             s = by_name[n]
             q = s.get("quality") or {}
             facts = ["v" + esc(q["version"]) if q.get("version") else "unversioned"]
-            if s.get("tested"):
-                facts.append("shown working " + esc(human_date(s["tested"]["date"])))
+            label = run_label(s, "shown working")
+            if label:
+                facts.append(label)
             if s.get("kind") == "mod":
                 facts.append("Claude Code mod")
             out += [f'        <a class="step-skill" href="/{esc(n)}/">',

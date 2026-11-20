@@ -89,6 +89,19 @@ class GenHomeTest(unittest.TestCase):
         self.assertIn('<span class="chip chip-hot">chain</span>', out)
         self.assertIn('<span class="chip chip-hot">tested 24 Oct 2026</span>', out)
 
+    def test_card_claims_a_run_only_when_the_newest_run_passed(self):
+        partial = dict(TESTED, date="2026-11-13", verdict="PARTIAL")
+        alpha = dict(MANIFEST["skills"][0], tested=TESTED, latestRun=partial)
+        out = render({**MANIFEST, "skills": [alpha]})
+        self.assertNotIn("tested 24 Oct 2026", out)
+        self.assertEqual(gen_home.run_label(alpha, "shown working"), "")
+        # A pass newer than the graded run (crash-test's 18 Nov run) still counts.
+        newer = dict(alpha, tested=dict(TESTED, date="2026-11-18"))
+        self.assertEqual(gen_home.run_label(newer, "tested"), "tested 18 Nov 2026")
+        passed = dict(alpha, latestRun=dict(partial, verdict="PASS"))
+        self.assertEqual(gen_home.run_label(passed, "tested"), "tested 13 Nov 2026")
+        self.assertEqual(gen_home.run_label(MANIFEST["skills"][0], "tested"), "")
+
     def test_workflow_and_outcome_regions_link_the_workflow_page(self):
         out = render()
         self.assertIn('<a href="/alpha/">alpha</a> <span class="opt">optional</span>', out)
