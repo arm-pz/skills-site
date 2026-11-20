@@ -2762,6 +2762,12 @@
         "result": "The run read publish.yml, sync.py and README.md, ran Skeptic and Contrarian sub-agents, and recommended keeping a slower cron as backstop alongside the dispatch, but it skipped the adversarial rebuttal round and its dissent log…",
         "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/crash-test/README.md",
         "verdict": "PARTIAL"
+      },
+      "tested": {
+        "date": "2026-11-18",
+        "target": "an AI sales team's offer and buyer decision",
+        "result": "A mixed-model panel merged its drafts into a new offer and buyer; cross-review caught one member's cross-domain error (3 of 4 reviewers) and a kill test too small to read (2 of 4).",
+        "evidence": "https://github.com/arm-pz/crash-test/blob/main/runs/2026-11-18-offer-and-buyer-decision.md"
       }
     },
     {
