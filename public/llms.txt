@@ -1,6 +1,6 @@
 # Skillsmith by Caffeinity
 
-> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: 71 skills mapped into 12 workflows (build a skill, get found, gate a release, grow search traffic, land a job, decide, learn, run outbound, launch a product). Plain markdown, no API keys.
+> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: 64 skills and 7 mods mapped into 12 workflows (build a skill, get found, gate a release, grow search traffic, land a job, decide, learn, run outbound, launch a product). Plain markdown, no API keys.
 
 ## Install
 
