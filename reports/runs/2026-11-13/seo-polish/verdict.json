@@ -1,0 +1,44 @@
+{
+  "skill": "seo-polish",
+  "date": "2026-11-13",
+  "target": "skillsmith.tech (92 live pages)",
+  "verdict": "PARTIAL",
+  "score": 4,
+  "summary": "The run crawled only 25 of 92 sitemap pages and reported 3 length findings plus 13 truncated descriptions; ground truth shows 12 titles over 60 chars and 8 descriptions over 160, so most real findings were missed and some claims are unverified.",
+  "checks": [
+    {
+      "desc": "wrote seo-polish.md",
+      "ok": true,
+      "detail": "seo-polish.md"
+    }
+  ],
+  "met": [
+    "Measured the live site with a read-only crawler before proposing, and changed nothing live",
+    "Correctly found no non-200 pages, no missing canonicals and exactly one h1 per page on the pages it crawled",
+    "Stated clearly what it could not measure: partial crawl, inconclusive sitemap/link checks, no H1 text, no Core Web Vitals, estimated character counts",
+    "Gave two alternatives per page for the titles and descriptions it chose to fix, mostly within length limits"
+  ],
+  "missed": [
+    "Crawled only 25 of 92 pages and did not raise the budget, so it never reached the other 67 pages and could not check all 98 internal links",
+    "Found only 2 over-long titles (/checks/, /check/) and 1 over-long description, versus ground truth of 12 titles over 60 chars and 8 descriptions over 160; most real over-length pages were never reported",
+    "Priority 2 labels 13 titles as problems for being generic and slug-derived, a judgement call that is not a measured defect; those titles are mostly under 60 chars",
+    "Claimed 13 truncated descriptions ending in '\u2026' at about 150 chars; this is not in the ground truth, and the descriptions were eyeballed rather than measured, so it may be invented",
+    "Did not rewrite any H1s, and did not give 2\u20133 alternatives (only 2, or a single replacement for descriptions) for the High/Medium items",
+    "Character counts were 'by eye' and approximate, so the length compliance of the rewrites is unverified"
+  ],
+  "skill_defects": [
+    "The seo-crawl default budget of 25 pages is far below the sitemap size, and the skill did not tell the agent to raise it to cover the sitemap before proposing",
+    "The crawler records only the H1 count and not its text, so heading rewrites are impossible without a second fetch step",
+    "The skill has no step to measure rewrite lengths programmatically, so counts were estimated by eye",
+    "It depends on seo-audit, which was not installed, leaving prioritisation to ad hoc judgement that raised unmeasured findings"
+  ],
+  "cost_usd": 0.28,
+  "model": "sonnet",
+  "turns": 11,
+  "seconds": 77,
+  "tool_calls": 8,
+  "files": [
+    "seo-polish.md"
+  ],
+  "error": ""
+}

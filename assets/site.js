@@ -67,6 +67,7 @@
   if(tabs.length)show(0);
 
   var me=document.currentScript,motion=document.createElement('script');
-  motion.type='module';motion.src=(me&&me.src?me.src.replace(/site\.js.*$/,''):'/assets/')+'motion.js';
+  var ver=me&&me.src&&me.src.indexOf('?')>-1?me.src.slice(me.src.indexOf('?')):'';
+  motion.type='module';motion.src=(me&&me.src?me.src.replace(/site\.js.*$/,''):'/assets/')+'motion.js'+ver;
   document.head.appendChild(motion);
 })();

@@ -1,0 +1,25 @@
+{
+  "skill": "release-gate-validator",
+  "fixtures": "vuln-app",
+  "install": [
+    "release-gate-validator",
+    "pre-ship-security-red-team"
+  ],
+  "setup": "mkdir -p redteam && cp -r \"$SKILL_RUNS/../../reports/runs/2026-11-13/pre-ship-security-red-team/files/.\" redteam/ 2>/dev/null; git init -q && git -c user.email=r@example.com -c user.name=r add -A && git -c user.email=r@example.com -c user.name=r commit -qm init",
+  "target": "the saved results of a real red-team run on Invoicely, plus pasted preflight and performance tables",
+  "prompt": "We already ran the three pre-launch passes on Invoicely. The red team's run directory is under redteam/. Preflight said: target 127.0.0.1:3100, verdict PASS WITH FIXES (no TLS on local, no security headers). Performance wasn't measured. Give me the release posture without re-running anything.",
+  "checks": [
+    {
+      "desc": "posture is HOLD",
+      "re": "\\bHOLD\\b"
+    }
+  ],
+  "max_turns": 60,
+  "budget_usd": 5,
+  "rubric": [
+    "Runs nothing against a target; only ingests and records",
+    "Ingests the red-team table mechanically from disk",
+    "Records the pasted preflight verdict verbatim and performance as not-measured/untested (never omitted)",
+    "Computes HOLD with the script and names why (critical red-team findings, unmeasured perf)"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "skill": "application-pilot",
+  "fixtures": "career",
+  "target": "a five-role job-search tracker with one stalled recruiter thread and one upcoming panel",
+  "prompt": "Today is 2026-11-13. Here's my job tracker (tracker.csv). What needs doing this week? Draft whatever follow-ups are due and prep me for anything coming up.",
+  "checks": [
+    {
+      "desc": "flags Paystack Labs as gone quiet",
+      "re": "Paystack"
+    },
+    {
+      "desc": "addresses the Tallyhub panel",
+      "re": "Tallyhub"
+    }
+  ],
+  "rubric": [
+    "Flags Paystack Labs: recruiter promised next steps within a week of 2026-10-09 and has been silent ~5 weeks; drafts a follow-up to Amira",
+    "Flags Quillbook (applied 2026-09-15, no reply) as stale and gives a sensible call (one nudge or close it)",
+    "Does not suggest following up on Fernway (rejected)",
+    "Prepares a briefing for the Tallyhub panel on 2026-11-18 without inventing facts about Tallyhub",
+    "Updates or proposes tracker changes with dates; does not claim anything was sent"
+  ]
+}

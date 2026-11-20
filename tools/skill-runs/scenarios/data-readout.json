@@ -1,0 +1,28 @@
+{
+  "skill": "data-readout",
+  "fixtures": "ab-test",
+  "target": "a 14-day checkout A/B test export (182,000 sessions, two devices) with one planted tracking outage",
+  "prompt": "We ran a checkout redesign test for two weeks. Export is in checkout_test.csv (variant A = control, B = new checkout). My PM says the result is flat and we should kill B. Did B win? What should we do?",
+  "max_turns": 40,
+  "budget_usd": 4,
+  "checks": [
+    {
+      "desc": "names the day-9 gap in variant B",
+      "re": "(10-09|9 Oct|Oct(ober)? 9|day 9|ninth)",
+      "in": "output"
+    },
+    {
+      "desc": "reports a mobile-specific result",
+      "re": "mobile",
+      "in": "output"
+    }
+  ],
+  "ground_truth": "python3 \"$SKILL_RUNS/truth_ab.py\" checkout_test.csv",
+  "rubric": [
+    "Finds that variant B recorded zero orders on 2026-10-09 on both devices and treats it as a tracking or data fault, not real behaviour",
+    "Recomputes the comparison without the faulty day and reports that B beats A overall with a significance figure close to the ground truth",
+    "Splits by device: B clearly wins on mobile; desktop shows no significant difference once the outage is removed",
+    "Recommends an action that follows from the numbers (e.g. do not kill B; ship on mobile, keep testing or ship on desktop, fix tracking) and states what it could not compute",
+    "Every number it states matches the ground truth or is derived from the file; nothing invented"
+  ]
+}

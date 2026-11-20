@@ -1,0 +1,121 @@
+{
+  "name": "caffeinity-skills",
+  "version": "0.1.0",
+  "description": "Caffeinity skills marketplace: editing, teaching, recruiting, SEO, release orchestration, decision review, and multi-agent tournament plugins.",
+  "owner": {
+    "name": "Abdul Rahman P Z",
+    "github": "arm-pz"
+  },
+  "skills": [
+    {
+      "name": "wordsmith",
+      "repo": "arm-pz/wordsmith",
+      "description": "Edit, rewrite, critique and proofread while keeping the author's meaning, hedges and voice intact."
+    },
+    {
+      "name": "recruiter-lens",
+      "repo": "arm-pz/recruiter-lens",
+      "description": "Review resumes, CVs and LinkedIn profiles the way recruiters screen them."
+    },
+    {
+      "name": "applicant-kit",
+      "repo": "arm-pz/applicant-kit",
+      "description": "Produce tailored job-application material from a resume and JD."
+    },
+    {
+      "name": "topic-primer",
+      "repo": "arm-pz/topic-primer",
+      "description": "World-class teacher for any topic in eight modes from foundations to exams."
+    },
+    {
+      "name": "application-pilot",
+      "repo": "arm-pz/application-pilot",
+      "description": "Coordinate job search: shortlist, fit scoring, tracker, follow-ups, briefings."
+    },
+    {
+      "name": "do-better",
+      "repo": "arm-pz/do-better",
+      "description": "Single-elimination tournament of sub-agents with different strategy cards."
+    },
+    {
+      "name": "keyword-guard",
+      "repo": "arm-pz/keyword-guard",
+      "description": "Plan topic clusters and eliminate keyword cannibalization."
+    },
+    {
+      "name": "web-preflight",
+      "repo": "arm-pz/web-preflight",
+      "description": "Check a site you own before shipping for accidental exposure and missing controls."
+    },
+    {
+      "name": "findable",
+      "repo": "arm-pz/findable",
+      "description": "Set up discovery for repos, skills, plugins and MCP servers."
+    },
+    {
+      "name": "crash-test",
+      "repo": "arm-pz/crash-test",
+      "description": "Crash-test decisions with four adversarial roles before building."
+    },
+    {
+      "name": "pre-ship-performance-audit",
+      "repo": "arm-pz/pre-ship-performance-audit",
+      "description": "Audit and fix web app performance before launch with four read-only subagents."
+    },
+    {
+      "name": "pre-ship-security-red-team",
+      "repo": "arm-pz/pre-ship-security-red-team",
+      "description": "Authorized red-team pass over a web app you own before launch."
+    },
+    {
+      "name": "release-gate",
+      "repo": "arm-pz/release-gate-chair",
+      "description": "Three pre-launch passes (exposure, app-tests, perf) with one deterministic posture: HOLD or ready."
+    },
+    {
+      "name": "upstream-check",
+      "repo": "arm-pz/upstream-check",
+      "description": "Check unpushed local commits and compare published listings against the repos that ship a SKILL.md."
+    },
+    {
+      "name": "draft-skill",
+      "repo": "arm-pz/draft-skill",
+      "description": "Create a new agent skill from an idea, with sibling overlap checks and validation."
+    },
+    {
+      "name": "prompts-to-skill",
+      "repo": "arm-pz/prompts-to-skill",
+      "description": "Turn a list of your own prompts into a finished, tested skill, one per prompt."
+    },
+    {
+      "name": "prompts-to-skill-release",
+      "repo": "arm-pz/prompts-to-skill-release",
+      "description": "Package a finished skill for release, keeping failed trigger tests visible."
+    },
+    {
+      "name": "tune-skill",
+      "repo": "arm-pz/tune-skill",
+      "description": "Audit and fine-tune a skill that already exists; ships the check_skill.py validator."
+    },
+    {
+      "name": "seo-crawl",
+      "repo": "arm-pz/seo-crawl",
+      "description": "Crawl a site you own for deterministic, evidence-backed technical SEO findings."
+    },
+    {
+      "name": "publish-pipeline",
+      "repo": "arm-pz/publish-pipeline",
+      "description": "Publish skill repos to a site through a manifest, generated pages and gated CI."
+    },
+    {
+      "name": "cold-email-ops",
+      "repo": "arm-pz/cold-email-ops",
+      "description": "Plan and audit a cold-email program at volume: inbox and domain capacity, reply floors, burn replacement."
+    },
+    {
+      "name": "cold-email-list-gate",
+      "repo": "arm-pz/cold-email-list-gate",
+      "description": "Gate a cold-email lead list before load: ten-row ICP sample, GO or HOLD, fail pattern."
+    }
+  ]
+}

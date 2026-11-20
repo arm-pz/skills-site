@@ -1,0 +1,6 @@
+{
+  "description": "changelog-guard-mod: triggers the changelog-guard skill at the right moment.",
+  "modules": [
+    "./register.js"
+  ]
+}

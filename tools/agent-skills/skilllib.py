@@ -13,7 +13,7 @@ SITE = "https://skillsmith.tech"
 OWNER = "arm-pz"
 # Hand-written pages served at /<name>/, beside the hub and the skill pages. /workflows/ also
 # holds one generated page per workflow. RESERVED are section names kept for what comes next.
-STATIC_PAGES = ["work", "skills", "mods", "workflows", "seo", "check", "prose",
+STATIC_PAGES = ["work", "story", "notes", "notes/web-preflight", "skills", "mods", "workflows", "seo", "check", "prose",
                 "checks", "map", "seo-check", "resume", "list"]
 RESERVED = STATIC_PAGES + ["agents", "subagents", "harnesses"]
 INDEX_SCHEMA = "https://schemas.agentskills.io/discovery/0.2.0/schema.json"

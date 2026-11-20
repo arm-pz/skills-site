@@ -1,0 +1,71 @@
+{
+  "skill": "release-gate-chair",
+  "date": "2026-11-13",
+  "target": "Invoicely, a local invoicing app with 6 planted authorization and session flaws",
+  "verdict": "PASS",
+  "score": 8,
+  "summary": "The run kept three separate lane verdicts (exposure PASS WITH FIXES, app-tests HOLD, perf not-measured), recorded them in one ledger, and check_gate.mjs computed overall HOLD (R1, R2, R4, R8); app-tests ran 14 scenarios with 7 failures, including the planted IDOR, open admin API and role escalation, and it missed the cookie-flag and login rate-limit flaws.",
+  "checks": [
+    {
+      "desc": "overall posture is HOLD",
+      "ok": true,
+      "detail": "HOLD"
+    }
+  ],
+  "met": [
+    "Ran exposure (web-preflight), app-tests (red-team) and perf in order and kept three separate verdicts; perf not-measured was not covered by the other lanes",
+    "Recorded each lane in one ledger (.release-gate/20261114-0107/lanes.tsv and findings.tsv) plus a register doc",
+    "Security lane found the planted critical flaws with executed evidence: IDOR on GET /api/invoices/:id (S02/S12, alice read bob's 201, bob read alice's 101), open admin API (S05, non-admin bob got all users with plaintext passwords), mass-assignment escalation on PATCH /api/me (S03, role admin persisted and then used on the admin endpoint)",
+    "Overall posture HOLD came from the check_gate.mjs script, with blocking findings named (REDTEAM-S02, S03, S05, S12 CRITICAL, plus S09 and S10 HIGH)",
+    "Perf was marked not-measured (Lighthouse not installed) and explicitly called a gap, not a pass; the open redirect, missing security headers and plaintext passwords were also reported"
+  ],
+  "missed": [
+    "Cookie flags (no HttpOnly, Secure or SameSite on the session cookie) were not reported as a finding; the exposure lane only flagged missing response headers",
+    "Missing rate limit or lockout on POST /api/login (planted flaw 6) was never tested or reported",
+    "Exposure lane was labelled PASS WITH FIXES even though TLS, HSTS and the http-to-https redirect were untestable locally; this is noted in its notes, but inconclusive would be stricter",
+    "S10 stored XSS was recorded as a fail with HIGH severity without the payload ever being seen to execute (the browser launch was blocked); the run disclosed this honestly"
+  ],
+  "skill_defects": [
+    "The exposure lane's fixed checks do not inspect Set-Cookie attributes, so the planted cookie-flag flaw went undetected",
+    "The red-team scenario list has no brute-force or rate-limit scenario for login, so flaw 6 could not be found",
+    "The skill has no rule for marking a lane inconclusive when part of its coverage (TLS or HSTS) cannot be assessed locally, so a partially assessed exposure lane shows as PASS WITH FIXES",
+    "Sub-agents mutated shared seeded accounts (bob's email and username, alice's role) and the chair edited capture files to satisfy the mask checker; the skill should require reverting and re-masking at capture time rather than patching evidence afterward"
+  ],
+  "cost_usd": 9.02,
+  "model": "sonnet",
+  "turns": 49,
+  "seconds": 346,
+  "tool_calls": 183,
+  "files": [
+    ".gitignore",
+    ".pre-ship-red-team/20261114-0107/.env.example",
+    ".pre-ship-red-team/20261114-0107/briefs/group-1.md",
+    ".pre-ship-red-team/20261114-0107/briefs/group-2.md",
+    ".pre-ship-red-team/20261114-0107/briefs/group-3.md",
+    ".pre-ship-red-team/20261114-0107/captures/group-1/alice_cookies.txt",
+    ".pre-ship-red-team/20261114-0107/captures/group-1/bob_cookies.txt",
+    ".pre-ship-red-team/20261114-0107/captures/group-1/s01_anonymous_data_access.txt",
+    ".pre-ship-red-team/20261114-0107/captures/group-1/s02_idor_cross_user.txt",
+    ".pre-ship-red-team/20261114-0107/captures/group-1/s03_role_escalation.txt",
+    ".pre-ship-red-team/20261114-0107/captures/group-1/s04_reset_token_reuse.txt",
+    ".pre-ship-red-team/20261114-0107/captures/group-2/S05-direct-request-bypass.txt",
+    ".pre-ship-red-team/20261114-0107/captures/group-2/S06-quota-bypass.txt",
+    ".pre-ship-red-team/20261114-0107/captures/group-2/S07-concurrent-quota-race.txt",
+    ".pre-ship-red-team/20261114-0107/captures/group-2/S08-boundary-input.txt",
+    ".pre-ship-red-team/20261114-0107/captures/group-2/S09-open-redirect.txt",
+    ".pre-ship-red-team/20261114-0107/captures/group-3/preview-exposure.txt",
+    ".pre-ship-red-team/20261114-0107/captures/group-3/private-response-leak.txt",
+    ".pre-ship-red-team/20261114-0107/captures/group-3/prompt-injection.txt",
+    ".pre-ship-red-team/20261114-0107/captures/group-3/ssrf.txt",
+    ".pre-ship-red-team/20261114-0107/captures/group-3/stored-xss.txt",
+    ".pre-ship-red-team/20261114-0107/gate.md",
+    ".pre-ship-red-team/20261114-0107/report.md",
+    ".pre-ship-red-team/20261114-0107/results/group-1.md",
+    ".pre-ship-red-team/20261114-0107/results/group-2.md",
+    ".pre-ship-red-team/20261114-0107/results/group-3.md",
+    ".release-gate/20261114-0107/findings.tsv",
+    ".release-gate/20261114-0107/lanes.tsv",
+    "docs/release/2026-11-14-invoicely-local-gate.md"
+  ],
+  "error": ""
+}

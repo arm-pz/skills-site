@@ -8,6 +8,11 @@ on:
   schedule:
     - cron: "41 3 * * *"
   workflow_dispatch:
+    inputs:
+      accept_all:
+        description: "Record the current state as the baseline, regressions included (after review)"
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -40,7 +45,9 @@ jobs:
         run: |
           set +e
           cd tools/agent-skills
-          python health.py --root ../.. --accept --report "$RUNNER_TEMP/health.md"
+          accept="--accept"
+          [ "${{ inputs.accept_all }}" = "true" ] && accept="--accept-all"
+          python health.py --root ../.. $accept --report "$RUNNER_TEMP/health.md"
           echo "code=$?" >> "$GITHUB_OUTPUT"
           [ -f "$RUNNER_TEMP/health.md" ] && cat "$RUNNER_TEMP/health.md" >> "$GITHUB_STEP_SUMMARY"
           exit 0

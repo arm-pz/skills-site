@@ -1,0 +1,16 @@
+{
+  "skill": "topic-primer",
+  "target": "teaching double-entry bookkeeping to a software engineer from zero",
+  "prompt": "Teach me double-entry bookkeeping from zero. I'm a software engineer and I want to be able to read our startup's ledger.",
+  "followups": [
+    "I've got no accounting background at all. I write Python every day. I'd say I'm a complete beginner.",
+    "My guess: when we make a sale for £100 cash, cash goes up by 100 and revenue goes up by 100, so both are debits because they both increase."
+  ],
+  "rubric": [
+    "Asks one question at a time and waits, as the skill promises",
+    "Adapts to the engineer background (analogies to code/data)",
+    "Explains accounts, debits/credits and the accounting equation correctly",
+    "Catches the planted misconception: cash is debited, revenue is credited (credits increase revenue)",
+    "Checks understanding with a question or exercise rather than lecturing"
+  ]
+}

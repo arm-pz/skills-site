@@ -6,6 +6,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { HOME_RUNS, pageRuns, mountBeside, play, rest } from './rig.js';
 import { stack } from './stack.js';
+import { hub } from './hub.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -38,13 +39,14 @@ function words(el) {
 
 /* ---- the hero: an agent session over a rippling floor ---- */
 const state = { p: 0, px: 0, py: 0, ping: 0, ox: 0.4, oy: -0.3 };
-const stage = $('.stage');
+const stage = $('.stage'), hubHero = $('.hub-hero');
 let canvas = $('#forge'), hero = $('.hero'), rig = $('[data-rig]'), runs = rig ? HOME_RUNS : null;
 if (!rig) {
   hero = $('.sk-hero') || $('.page-hero') || $('.lost');
-  runs = hero ? pageRuns() : null;
-  if (runs && runs.length) {
-    rig = mountBeside(hero);
+  /* the hub of free tools has its own hero piece (hub.js): it keeps the floor, not the session */
+  runs = hero && !hubHero ? pageRuns() : null;
+  if (hubHero || (runs && runs.length)) {
+    if (!hubHero) rig = mountBeside(hero);
     const fx = document.createElement('div');
     fx.className = 'hero-fx';
     fx.setAttribute('aria-hidden', 'true');
@@ -64,7 +66,7 @@ function webgl() {
 }
 if (canvas && webgl()) {
   import('./forge.js').then((m) => {
-    if (m.mount(canvas, state, { still: reduced, page: !stage })) canvas.parentNode.classList.add('is-live');
+    if (m.mount(canvas, state, { still: reduced, page: !stage, scan: !!hubHero })) canvas.parentNode.classList.add('is-live');
   }).catch(() => {});
 }
 
@@ -129,6 +131,8 @@ if (!reduced) {
     ScrollTrigger.create({ trigger: hero, start: 'top top', end: 'bottom top', scrub: true, onUpdate(self) { state.p = self.progress; } });
     if (fine) addEventListener('pointermove', (ev) => { state.px = (ev.clientX / innerWidth) * 2 - 1; state.py = (ev.clientY / innerHeight) * 2 - 1; }, { passive: true });
   }
+
+  if (hubHero) hub({ gsap, ScrollTrigger, state, fine, canvas });
 
   /* the agents strip: loops on its own, leans into the scroll */
   const track = $('.marquee-track');

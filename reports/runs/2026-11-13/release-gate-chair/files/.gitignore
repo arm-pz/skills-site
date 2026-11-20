@@ -1,0 +1,5 @@
+# .pre-ship-red-team/ run artifacts
+.pre-ship-red-team/*/.env
+.pre-ship-red-team/*/captures/
+# release gate ledger
+.release-gate/

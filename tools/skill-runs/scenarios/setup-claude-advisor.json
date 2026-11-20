@@ -1,0 +1,25 @@
+{
+  "skill": "setup-claude-advisor",
+  "target": "a fresh Claude Code install (isolated home directory)",
+  "prompt": "Set up Claude Code so I stop burning my quota: Sonnet as my main model with Opus on call as an advisor, cheap read-only subagents. Show me the plan before writing anything.",
+  "followups": [
+    "Looks good, apply it."
+  ],
+  "allow": [
+    "Bash(claude --version:*)"
+  ],
+  "checks": [
+    {
+      "desc": "wrote ~/.claude/settings.json",
+      "cmd": "test -f \"$HOME/.claude/settings.json\" && cat \"$HOME/.claude/settings.json\""
+    }
+  ],
+  "max_turns": 60,
+  "budget_usd": 5,
+  "rubric": [
+    "Checks the Claude Code version, env vars and existing subagents/settings before proposing",
+    "Shows the plan and waits for approval before writing",
+    "After approval writes the settings and subagent files it proposed, and an advisory section in ~/.claude/CLAUDE.md",
+    "States only real settings keys and models"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "skill": "study-system",
+  "target": "a 6-month conversational-Portuguese plan for a busy adult",
+  "prompt": "I want to hold a 20-minute conversation in European Portuguese with my partner's family in 6 months. I have 5 hours a week, I speak decent Spanish, and I always quit apps after two weeks. Build me a system.",
+  "rubric": [
+    "Decomposes the goal into minimum viable components and uses the Spanish transfer (and its false friends / European vs Brazilian pronunciation)",
+    "Gives a week-by-week or phase roadmap that fits 5 hours/week over 6 months",
+    "Includes deliberate-practice routines with speaking, a spaced-repetition schedule and a way to audit gaps",
+    "Addresses the quitting-after-two-weeks pattern with a concrete mechanism",
+    "Has a measurable check for the 20-minute-conversation goal"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "skill": "prompts-to-skill",
+  "fixtures": "prompts-batch",
+  "install": [
+    "prompts-to-skill",
+    "draft-skill",
+    "tune-skill"
+  ],
+  "target": "four real-shaped release-notes prompts from a developer's history",
+  "prompt": "Turn the prompts in prompts.md into a skill (or skills). Put the result under skills/. My answers to your intake questions: it's for me in Claude Code, repos are on GitHub, I want it to stop and show me the notes before anything is sent.",
+  "checks": [
+    {
+      "desc": "a SKILL.md was written under skills/",
+      "cmd": "ls skills/*/SKILL.md"
+    },
+    {
+      "desc": "check_skill.py reports no FAIL",
+      "cmd": "for f in skills/*/SKILL.md; do python3 .claude/skills/tune-skill/scripts/check_skill.py \"$(dirname $f)\" || exit 1; done"
+    }
+  ],
+  "max_turns": 80,
+  "budget_usd": 6,
+  "rubric": [
+    "Runs an intent step and an overlap check before drafting",
+    "Drafts with draft-skill and writes trigger test cases including near-misses",
+    "Gates the result with tune-skill's validator with zero FAILs",
+    "Keeps the 'show me before sending' constraint in the skill"
+  ],
+  "followups": [
+    "Confirmed, that's right. Go ahead and finish it without stopping for more questions."
+  ]
+}

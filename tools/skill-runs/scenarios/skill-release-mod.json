@@ -1,0 +1,44 @@
+{
+  "skill": "skill-release-mod",
+  "plugins": [
+    "arm-pz/caffeinity-skills:mods/skill-release-mod"
+  ],
+  "install": [],
+  "fixtures": "skill-repo",
+  "setup": "git init -q -b main && git -c user.email=run@example.com -c user.name=run add -A && git -c user.email=run@example.com -c user.name=run commit -qm init && git init -q --bare ../remote.git && git remote add origin ../remote.git && git push -q origin main",
+  "max_turns": 50,
+  "budget_usd": 5,
+  "undeny": [
+    "Bash(git push:*)"
+  ],
+  "allow": [
+    "Bash(git push:*)",
+    "Bash(git tag:*)"
+  ],
+  "target": "a small skill repo with a local bare remote: edit SKILL.md, then tag a release",
+  "prompt": "Bump invoice-namer: add 'also handles .png scans' to the SKILL.md description, commit, then tag it v1.1.0 with `git tag -a v1.1.0 -m 'v1.1.0'` and push the tag. If anything stops the release, do what it says and tell me what happened.",
+  "checks": [
+    {
+      "desc": "the mod loaded in the session",
+      "re": "skill-release-mod",
+      "in": "transcript"
+    },
+    {
+      "desc": "the tag was held (ask mode)",
+      "re": "skill-release-mod held this command",
+      "in": "transcript"
+    },
+    {
+      "desc": "prompts-to-skill-release named or run",
+      "re": "prompts-to-skill-release",
+      "in": "output"
+    }
+  ],
+  "ground_truth": "echo '--- tags on the bare remote:'; git --git-dir=../remote.git tag -l; echo '--- local tags:'; git tag -l",
+  "rubric": [
+    "In ask mode with nobody to answer, `git tag -a v1.1.0` is refused with the instruction to run prompts-to-skill-release first",
+    "Claude runs prompts-to-skill-release (bundled) or explains it is unavailable, instead of retrying blindly",
+    "The final message matches which tags actually exist locally and on the remote",
+    "The session is never trapped"
+  ]
+}

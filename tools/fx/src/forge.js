@@ -13,7 +13,7 @@ const SLOTS = 6;
 const FLOOR = -1.4;
 
 const VERT = /* glsl */`
-uniform float uTime;uniform float uPx;uniform float uDim;
+uniform float uTime;uniform float uPx;uniform float uDim;uniform float uScan;
 uniform vec4 uRip[${SLOTS}];/* x,z origin; start time; sign (1 pass, -1 fail) */
 varying float vGlow;varying float vBad;varying float vFog;varying float vBase;
 void main(){
@@ -28,6 +28,9 @@ void main(){
     p.y+=sin(front*4.)*w*.22;
     glow+=w;bad+=w*step(r.w,0.);
   }
+  /* a scan line crosses the floor, front to back, on the pages that check things */
+  float sc=p.z-uScan,scan=exp(-sc*sc*2.2)+.35*exp(-max(sc,0.)*.9)*step(0.,sc);
+  p.y+=scan*.16;glow+=scan*.75;
   /* the floor breathes a little on its own */
   p.y+=sin(p.x*.7+uTime*.6)*cos(p.z*.6+uTime*.4)*.035;
   vGlow=min(glow,1.4);vBad=min(bad,1.);
@@ -54,7 +57,7 @@ void main(){
 const lerp = (a, b, t) => a + (b - a) * t;
 
 export function mount(canvas, state, opts) {
-  const still = !!(opts && opts.still), page = !!(opts && opts.page);
+  const still = !!(opts && opts.still), page = !!(opts && opts.page), scan = !!(opts && opts.scan);
   let renderer;
   try { renderer = new WebGLRenderer({ canvas, antialias: false, powerPreference: 'high-performance' }); }
   catch (e) { return null; }
@@ -87,9 +90,9 @@ export function mount(canvas, state, opts) {
   const geo = new BufferGeometry();
   geo.setAttribute('position', new BufferAttribute(pos, 3));
   const uRip = { value: Array.from({ length: SLOTS }, () => new Vector4(0, 0, -99, 1)) };
-  const uTime = { value: 0 }, uPx = { value: 40 }, uDim = { value: 1 };
+  const uTime = { value: 0 }, uPx = { value: 40 }, uDim = { value: 1 }, uScan = { value: 99 };
   const mat = new ShaderMaterial({ vertexShader: VERT, fragmentShader: FRAG,
-    uniforms: { uTime, uPx, uDim, uRip, uRest, uBase }, transparent: true, depthWrite: false, blending: NormalBlending });
+    uniforms: { uTime, uPx, uDim, uScan, uRip, uRest, uBase }, transparent: true, depthWrite: false, blending: NormalBlending });
   const dots = new Points(geo, mat);
   dots.frustumCulled = false;
   scene.add(dots);
@@ -134,6 +137,8 @@ export function mount(canvas, state, opts) {
     else { camera.position.set(px * 0.6, 1.1 - py * 0.25 + sp * 1.2, 7); camera.lookAt(px * 0.2, -0.6 - sp * 0.4, -4); }
     if (state.ping) { ping(state.ping); state.ping = 0; }
     uTime.value = t;
+    /* one pass every 6.5s: 2.6s to cross, then the floor rests */
+    if (scan) uScan.value = 5 - ((t + 4.6) % 6.5) * 9;
     uDim.value = lerp(1, 0.55, sp) * Math.min(1, t / 1.2 + (still ? 1 : 0));
     renderer.render(scene, camera);
   }

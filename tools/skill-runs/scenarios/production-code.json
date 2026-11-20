@@ -1,0 +1,26 @@
+{
+  "skill": "production-code",
+  "fixtures": "leads",
+  "target": "a lead-list cleaning CLI with tests, built on a real-shaped provider export",
+  "prompt": "Write me a Python CLI, clean_leads.py, that reads a provider CSV like leads_providerA.csv and writes clean.csv: drop role inboxes (info@, sales@, etc.), drop free-mail addresses, drop companies over a --max-employees limit (default 500), and dedupe by lowercased email. Standard library only. Include tests I can run with python3 -m unittest.",
+  "checks": [
+    {
+      "desc": "clean_leads.py runs on the fixture",
+      "cmd": "python3 clean_leads.py leads_providerA.csv && test -f clean.csv"
+    },
+    {
+      "desc": "its unit tests pass",
+      "cmd": "python3 -m unittest discover -v 2>&1 | tail -5"
+    },
+    {
+      "desc": "drops the info@, gmail and 2,600-employee rows",
+      "cmd": "! grep -E 'info@|gmail|docket' clean.csv"
+    }
+  ],
+  "rubric": [
+    "Complete, runnable stdlib script with argparse, error handling and clear messages",
+    "Tests cover each rule and pass",
+    "Setup and usage steps plus a plain-English explanation of each section",
+    "Handles edge cases (missing columns, blank emails, case)"
+  ]
+}

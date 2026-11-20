@@ -98,18 +98,24 @@
         "lines": 415,
         "bytes": 10535,
         "license": "MIT",
-        "commit": "af1c5977a397b6760e7ea27fd27cafb6b2e7ad8e",
+        "commit": "59031fc314f1a9cbf9ec0a9e20b6498fd7d0e252",
         "sha256": "d1a45fffe54e35945e75344c35f15dafe8d8c7f5748fba2d32f36ce588790bc4"
       },
       "order": 101,
       "quality": {
         "version": "1.1.0",
-        "commit": "af1c597",
-        "updated": "2026-11-12",
+        "commit": "59031fc",
+        "updated": "2026-11-19",
         "notFor": [
           "a request one skill already owns (load that skill directly)",
           "not for doing a step's work itself: the named skill does it"
         ]
+      },
+      "tested": {
+        "date": "2026-11-13",
+        "target": "a multi-step goal across the catalog",
+        "result": "The skill planned a two-brew route (Espresso with web-preflight, security red team, performance audit and release-gate-chair; then Cold brew with seo-crawl, keyword-guard, wordsmith and get-indexed), stated what each step hands…",
+        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/caffeinity-routing/README.md"
       }
     },
     {
@@ -168,6 +174,12 @@
           "creating a skill from a plain description with no prompts (use draft-skill)",
           "finding existing skills for a task"
         ]
+      },
+      "tested": {
+        "date": "2026-11-14",
+        "target": "four real-shaped release-notes prompts from a developer's history",
+        "result": "The run built a single release-notes skill at skills/release-notes/ (SKILL.md, a claim-check reference, 7 eval prompts, 9 test cases including near-misses), and check_skill.py reported 0 fail and 0 warn; the stop-before-send rule…",
+        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/prompts-to-skill/README.md"
       }
     },
     {
@@ -244,6 +256,12 @@
           "improving a skill's wording or triggering (use tune-skill)",
           "plain skill packaging (use skill-creator)"
         ]
+      },
+      "tested": {
+        "date": "2026-11-14",
+        "target": "a real-shaped 'changelog-guard' skill that should fire before every release",
+        "result": "Run judged changelog-guard a good fit for a mod, built mods/changelog-guard-mod with the skill bundled unchanged (diff-confirmed), ran claude plugin validate (passed) and claude plugin test (10/10 passed), and listed hooks and…",
+        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/skill-to-mod/README.md"
       }
     },
     {
@@ -393,14 +411,14 @@
         "lines": 1288,
         "bytes": 20897,
         "license": "MIT",
-        "commit": "af1c5977a397b6760e7ea27fd27cafb6b2e7ad8e",
+        "commit": "59031fc314f1a9cbf9ec0a9e20b6498fd7d0e252",
         "sha256": "e79c3f9cbd44fd97b950ca333c4a51b40f644416361a221b0754d0fa31e31a28"
       },
       "order": 208,
       "quality": {
         "version": "0.1.0",
-        "commit": "af1c597",
-        "updated": "2026-11-12",
+        "commit": "59031fc",
+        "updated": "2026-11-19",
         "notFor": []
       }
     },
@@ -485,15 +503,21 @@
         "lines": 627,
         "bytes": 10387,
         "license": "MIT",
-        "commit": "af1c5977a397b6760e7ea27fd27cafb6b2e7ad8e",
+        "commit": "59031fc314f1a9cbf9ec0a9e20b6498fd7d0e252",
         "sha256": "0261e8afac9fd1c1a6bc03685149f45eae4a09c0c0b6f48f1e61b1ca60093aa9"
       },
       "order": 209,
       "quality": {
         "version": "0.1.0",
-        "commit": "af1c597",
-        "updated": "2026-11-12",
+        "commit": "59031fc",
+        "updated": "2026-11-19",
         "notFor": []
+      },
+      "tested": {
+        "date": "2026-11-13",
+        "target": "a small skill repo with a local bare remote: edit SKILL.md, then tag a release",
+        "result": "The combined edit/commit/tag/push command was held by the hook, the agent ran prompts-to-skill-release, which failed its preconditions (no evals/evals.json, no gate results, no packaging choice), and it reported that no edit…",
+        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/skill-release-mod/README.md"
       }
     },
     {
@@ -546,14 +570,14 @@
         "lines": 416,
         "bytes": 8802,
         "license": "MIT",
-        "commit": "af1c5977a397b6760e7ea27fd27cafb6b2e7ad8e",
+        "commit": "59031fc314f1a9cbf9ec0a9e20b6498fd7d0e252",
         "sha256": "f1304d4562cee98a474722cbfee835c0c4d8dc642d31fe1419e06a642bab73ba"
       },
       "order": 210,
       "quality": {
         "version": "0.1.0",
-        "commit": "af1c597",
-        "updated": "2026-11-12",
+        "commit": "59031fc",
+        "updated": "2026-11-19",
         "notFor": [
           "a tune with no release (use tune-skill)",
           "drafts with nothing pushed (use tune-and-polish)",
@@ -827,14 +851,14 @@
         "lines": 176,
         "bytes": 5492,
         "license": "MIT",
-        "commit": "af1c5977a397b6760e7ea27fd27cafb6b2e7ad8e",
+        "commit": "59031fc314f1a9cbf9ec0a9e20b6498fd7d0e252",
         "sha256": "b56b11f95e76ba757f8583562823353849f1d8a87fc9362a7217f684d7916803"
       },
       "order": 307,
       "quality": {
         "version": "1.0.0",
-        "commit": "af1c597",
-        "updated": "2026-11-12",
+        "commit": "59031fc",
+        "updated": "2026-11-19",
         "notFor": [
           "one skill (use tune-skill)",
           "one listing (use findable)",
@@ -1095,6 +1119,12 @@
           "for reports that already exist (use release-gate-validator)",
           "for penetration testing of production, or for performing the deploy"
         ]
+      },
+      "tested": {
+        "date": "2026-11-14",
+        "target": "Invoicely, a local invoicing app with 6 planted authorization and session flaws",
+        "result": "The run kept three separate lane verdicts (exposure PASS WITH FIXES, app-tests HOLD, perf not-measured), recorded them in one ledger, and check_gate.mjs computed overall HOLD (R1, R2, R4, R8); app-tests ran 14 scenarios with 7…",
+        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/release-gate-chair/README.md"
       }
     },
     {
@@ -1320,14 +1350,14 @@
         "lines": 382,
         "bytes": 8603,
         "license": "MIT",
-        "commit": "af1c5977a397b6760e7ea27fd27cafb6b2e7ad8e",
+        "commit": "59031fc314f1a9cbf9ec0a9e20b6498fd7d0e252",
         "sha256": "cacb21e2865f9e92d46027f87f225b3e864a21251b0b1e671c628a42ab55daa7"
       },
       "order": 411,
       "quality": {
         "version": "1.0.0",
-        "commit": "af1c597",
-        "updated": "2026-11-12",
+        "commit": "59031fc",
+        "updated": "2026-11-19",
         "notFor": []
       }
     },
@@ -1417,15 +1447,21 @@
         "lines": 950,
         "bytes": 15781,
         "license": "MIT",
-        "commit": "af1c5977a397b6760e7ea27fd27cafb6b2e7ad8e",
+        "commit": "59031fc314f1a9cbf9ec0a9e20b6498fd7d0e252",
         "sha256": "483f9eaa604c13a11140d9ee8ba44deaf5ae46289fd23c277f366014f623312e"
       },
       "order": 412,
       "quality": {
         "version": "0.1.0",
-        "commit": "af1c597",
-        "updated": "2026-11-12",
+        "commit": "59031fc",
+        "updated": "2026-11-19",
         "notFor": []
+      },
+      "tested": {
+        "date": "2026-11-13",
+        "target": "a local static site with a stand-in deploy CLI (nothing can upload), edited then deployed in a headless session",
+        "result": "The agent edited the h1 to 'Reconcile 2.0', the first wrangler deploy was held by the hook pointing to release-gate-chair, the agent invoked that skill, was then denied Bash in don't-ask mode, did not retry or bypass, and…",
+        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/release-gate-mod/README.md"
       }
     },
     {
@@ -1504,15 +1540,21 @@
         "lines": 872,
         "bytes": 15074,
         "license": "MIT",
-        "commit": "af1c5977a397b6760e7ea27fd27cafb6b2e7ad8e",
+        "commit": "59031fc314f1a9cbf9ec0a9e20b6498fd7d0e252",
         "sha256": "196c0f18c29c96eb51d0aa2096766dc642351fe7a571be583eccb7ea17289d9f"
       },
       "order": 413,
       "quality": {
         "version": "0.1.0",
-        "commit": "af1c597",
-        "updated": "2026-11-12",
+        "commit": "59031fc",
+        "updated": "2026-11-19",
         "notFor": []
+      },
+      "tested": {
+        "date": "2026-11-13",
+        "target": "a local static site with a stand-in deploy CLI (nothing can upload), edited then deployed in a headless session",
+        "result": "The h1 was changed to 'Reconcile 2.0', the deploy ran once (matching the single line in deployed.log), the mod flagged it afterwards in nudge mode, and Claude then ran web-preflight on the local files (1 file in site/, 0 HTTP…",
+        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/web-preflight-mod/README.md"
       }
     },
     {
@@ -1621,15 +1663,21 @@
         "lines": 1588,
         "bytes": 30959,
         "license": "MIT",
-        "commit": "af1c5977a397b6760e7ea27fd27cafb6b2e7ad8e",
+        "commit": "59031fc314f1a9cbf9ec0a9e20b6498fd7d0e252",
         "sha256": "9fa3a48b71b2026a6d834903d0a2322ebf5dcc7cf065e441ef8041cf4184a711"
       },
       "order": 414,
       "quality": {
         "version": "0.1.0",
-        "commit": "af1c597",
-        "updated": "2026-11-12",
+        "commit": "59031fc",
+        "updated": "2026-11-19",
         "notFor": []
+      },
+      "tested": {
+        "date": "2026-11-13",
+        "target": "a local static site with a stand-in deploy CLI (nothing can upload), edited then deployed in a headless session",
+        "result": "Claude changed the h1 to \"Reconcile 2.0\", the first `wrangler pages deploy` was held by the mod, Claude loaded pre-ship-security-red-team, could not run its Bash scripts, and reported that the deploy never ran (deployed.log shows…",
+        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/pre-ship-security-red-team-mod/README.md"
       }
     },
     {
@@ -1698,15 +1746,21 @@
         "lines": 597,
         "bytes": 11488,
         "license": "MIT",
-        "commit": "af1c5977a397b6760e7ea27fd27cafb6b2e7ad8e",
+        "commit": "59031fc314f1a9cbf9ec0a9e20b6498fd7d0e252",
         "sha256": "b8a788d07ff582c241ad3489dd83f30c482caab29d18a419b7c10c4cfd7b1a72"
       },
       "order": 415,
       "quality": {
         "version": "0.1.0",
-        "commit": "af1c597",
-        "updated": "2026-11-12",
+        "commit": "59031fc",
+        "updated": "2026-11-19",
         "notFor": []
+      },
+      "tested": {
+        "date": "2026-11-13",
+        "target": "a local static site with a stand-in deploy CLI (nothing can upload), edited then deployed in a headless session",
+        "result": "Claude edited the h1, ran the deploy once (deployed.log shows one call), was told afterwards that pre-ship-performance-audit hadn't run, invoked the skill, did a reduced local-file check (181-byte HTML, no assets), and reported…",
+        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/pre-ship-performance-audit-mod/README.md"
       }
     },
     {
@@ -2149,6 +2203,12 @@
         "notFor": [
           "prose editing (wordsmith, if installed) or producing the final .docx or .pdf (the file skills)"
         ]
+      },
+      "tested": {
+        "date": "2026-11-13",
+        "target": "a synthetic mid-career CSM resume with planted weaknesses, against a real-shaped Senior CSM job ad",
+        "result": "The run gave a borderline first-screen reject, flagged the vague summary, duty-style bullets and the 15-month Dec 2020–Mar 2022 gap, mapped the resume to the job requirements, and invented no metrics, using placeholders like [X]%…",
+        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/recruiter-lens/README.md"
       }
     },
     {
@@ -2348,6 +2408,12 @@
           "writing the pandas or R code that crunches the file (use production-code)",
           "for market research outside the user's own data (use research-brief) or for the strategic roadmap that follows (use strategy-memo)"
         ]
+      },
+      "tested": {
+        "date": "2026-11-13",
+        "target": "a 14-day checkout A/B test export (182,000 sessions, two devices) with one planted tracking outage",
+        "result": "The run found B's zero orders on 2026-10-09 on both devices (4 rows, 8,000 sessions), dropped that day from both arms, and reported B beating A at 4.25% vs 3.89% (p=0.0001), with mobile up 3.01% to 3.70% (p<0.0001) and desktop…",
+        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/data-readout/README.md"
       }
     },
     {
@@ -2490,6 +2556,12 @@
           "SEO for an existing site (seo-audit)",
           "privacy and legal pages (paper-trail)"
         ]
+      },
+      "tested": {
+        "date": "2026-11-13",
+        "target": "a realistic persona: a UK accountant with 8 hours a week and £300",
+        "result": "The run recommended a Xero bookkeeping/VAT-prep retainer (5 clients at about £300 a month, 25–30 hours) with a 5-conversation demand check, text-only LinkedIn and referral channels, a 9-hour 7-day plan, and compliance flags…",
+        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/solo-income-blueprint/README.md"
       }
     },
     {
@@ -2609,14 +2681,14 @@
         "lines": 302,
         "bytes": 6084,
         "license": "MIT",
-        "commit": "af1c5977a397b6760e7ea27fd27cafb6b2e7ad8e",
+        "commit": "59031fc314f1a9cbf9ec0a9e20b6498fd7d0e252",
         "sha256": "1e8dfe3ceb472fd5ceab966ed884b027cd7e84f669755fb5a85695facc6efe87"
       },
       "order": 909,
       "quality": {
         "version": "1.0.0",
-        "commit": "af1c597",
-        "updated": "2026-11-12",
+        "commit": "59031fc",
+        "updated": "2026-11-19",
         "notFor": [
           "one person's own learning plan (use study-system)",
           "for being taught the topic (use topic-primer)",
@@ -2876,6 +2948,12 @@
           "ranking or brand-search problems (use findable or seo-sweep)",
           "writing page copy (use wordsmith)"
         ]
+      },
+      "tested": {
+        "date": "2026-11-13",
+        "target": "skillsmith.tech (plan only, nothing submitted)",
+        "result": "Ran the get-indexed script in plan mode against skillsmith.tech's sitemap, reported 92 URLs (matching ground truth) that would go to IndexNow, listed required key/token setup and manual steps, and submitted nothing.",
+        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/get-indexed/README.md"
       }
     },
     {
@@ -3329,6 +3407,12 @@
           "a one-off summary of one document, a shareable doc built from the vault (use docs)",
           "a database or Notion setup"
         ]
+      },
+      "tested": {
+        "date": "2026-11-13",
+        "target": "a real-shaped issue, PR and customer call for a fintech product",
+        "result": "The run saved 3 raw sources, wrote 9 one-idea notes with source and confidence, and answered all three questions correctly from the vault: split payments handled (merged 2026-10-21, flag on 2026-10-24), overpayments not handled…",
+        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/ship-second-brain/README.md"
       }
     },
     {
@@ -3398,6 +3482,294 @@
           "general editing such as tone changes, shortening, proofreading or fact-checking (use wordsmith)",
           "for resumes and CVs (use recruiter-lens or applicant-kit)",
           "for getting text past an AI detector"
+        ]
+      },
+      "tested": {
+        "date": "2026-11-13",
+        "target": "a 200-word product blog post with stock AI-writing patterns",
+        "result": "The run wrote draft-v2.md, a roughly 110-word rewrite, and the scan was reported clean. It keeps the 40,000/day, about-3x month-end, up-to-six-hours, 38-minute and 5h50m figures plus the unmeasured-benefit hedge, and drops the…",
+        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/straight-prose/README.md"
+      }
+    },
+    {
+      "name": "find-partners",
+      "repo": "arm-pz/find-partners",
+      "path": "skills/find-partners",
+      "group": "publish-discover",
+      "tag": "discovery",
+      "title": "Find Partners",
+      "pageTitle": "Find Partners — AI Agent Skill for Claude Code and Codex",
+      "blurb": "Finds real, non-competing businesses and publishers that share your audience, such as complementary tools, agencies, newsletters and podcasts, screens out link sellers, picks one collaboration per partner (guest post, expert quote, co-made…",
+      "stats": "6 files · 356 lines · 7 KB",
+      "install": "npx skills add arm-pz/find-partners",
+      "page": "generated",
+      "order": 924,
+      "pageSource": {
+        "description": "Finds real, non-competing businesses and publishers that share your audience, such as complementary tools, agencies, newsletters and podcasts, screens out link sellers, picks one collaboration per partner (guest post, expert quote, co-made data, integration listing, podcast) and drafts the ask, written to a partners CSV and one ask file per partner. Use whenever someone wants partners for backlinks or exposure: find sites to collaborate with, guest post opportunities, who could we co-market with, swap links for me, find link exchange partners, even if they never say partnership. Link-swap requests get the collaboration that earns the link without a swap. Step 3, the last of a three-step handover after replace-dead-tools. Not for best-of list outreach (use get-listed), dead entries on lists (use replace-dead-tools), or competitor research (use research-brief).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 81,
+            "bytes": 4314
+          },
+          {
+            "path": "evals/evals.json",
+            "lines": 36,
+            "bytes": 989
+          },
+          {
+            "path": "evals/trigger-cases.md",
+            "lines": 32,
+            "bytes": 2479
+          },
+          {
+            "path": "references/ask.md",
+            "lines": 60,
+            "bytes": 2882
+          },
+          {
+            "path": "references/handover.md",
+            "lines": 93,
+            "bytes": 4044
+          },
+          {
+            "path": "references/partners.md",
+            "lines": 54,
+            "bytes": 2771
+          }
+        ],
+        "fileCount": 6,
+        "lines": 356,
+        "bytes": 7230,
+        "license": "MIT",
+        "commit": "4143542976bf0f12aa7f1ebb44119e6907c5c1b9",
+        "sha256": "89cb22698b4b9ef3376dbf261645f403f63e439f2233adc200e9c3675e5edfda"
+      },
+      "quality": {
+        "version": "1.0.0",
+        "commit": "4143542",
+        "updated": "2026-11-17",
+        "notFor": [
+          "best-of list outreach (use get-listed)",
+          "dead entries on lists (use replace-dead-tools)",
+          "competitor research (use research-brief)"
+        ]
+      }
+    },
+    {
+      "name": "get-listed",
+      "repo": "arm-pz/get-listed",
+      "path": "skills/get-listed",
+      "group": "skill-authoring",
+      "tag": "authoring",
+      "title": "Get Listed",
+      "pageTitle": "Get Listed — AI Agent Skill for Claude Code and Codex",
+      "blurb": "Finds the best-of, top-X and alternatives articles, and the GitHub awesome-lists, that name your competitors but leave you out, finds each one's author or submission rules, and drafts a pitch, pull request or issue-form answer per list…",
+      "stats": "8 files · 607 lines · 11 KB",
+      "install": "npx skills add arm-pz/get-listed",
+      "page": "generated",
+      "order": 925,
+      "pageSource": {
+        "description": "Finds the best-of, top-X and alternatives articles, and the GitHub awesome-lists, that name your competitors but leave you out, finds each one's author or submission rules, and drafts a pitch, pull request or issue-form answer per list with a ready-to-paste entry, written to a targets CSV and one pitch file per list. Use whenever someone wants onto the roundups their competitors are on: why am I not on these best-of lists, which listicles or awesome lists mention my competitors and not me, get us into the top tools articles, find list placements for backlinks, pitch editors to add us, even if they never say listicle or outreach. Step 1 of a three-step handover; next is replace-dead-tools. Not for spotting dead tools on those lists (use replace-dead-tools), finding collaboration partners or link swaps (use find-partners), general competitor research (use research-brief), or sending email at volume (use cold-email-ops).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 120,
+            "bytes": 6591
+          },
+          {
+            "path": "evals/evals.json",
+            "lines": 40,
+            "bytes": 1097
+          },
+          {
+            "path": "evals/trigger-cases.md",
+            "lines": 37,
+            "bytes": 3157
+          },
+          {
+            "path": "references/handover.md",
+            "lines": 93,
+            "bytes": 4044
+          },
+          {
+            "path": "references/pitch.md",
+            "lines": 75,
+            "bytes": 3119
+          },
+          {
+            "path": "references/queries.md",
+            "lines": 68,
+            "bytes": 3702
+          },
+          {
+            "path": "scripts/scan_mentions.py",
+            "lines": 115,
+            "bytes": 4856
+          },
+          {
+            "path": "scripts/test_scan_mentions.py",
+            "lines": 59,
+            "bytes": 2278
+          }
+        ],
+        "fileCount": 8,
+        "lines": 607,
+        "bytes": 11626,
+        "license": "MIT",
+        "commit": "7e04f4cc7907beda3374fabbc13995f90be851ae",
+        "sha256": "685d38d00bc35fd2f33ed81ed72f2ee21eb01698409209e6bc25c625f27ffb82"
+      },
+      "quality": {
+        "version": "1.0.0",
+        "commit": "7e04f4c",
+        "updated": "2026-11-17",
+        "notFor": [
+          "spotting dead tools on those lists (use replace-dead-tools)",
+          "finding collaboration partners or link swaps (use find-partners)",
+          "general competitor research (use research-brief)",
+          "sending email at volume (use cold-email-ops)"
+        ]
+      }
+    },
+    {
+      "name": "replace-dead-tools",
+      "repo": "arm-pz/replace-dead-tools",
+      "path": "skills/replace-dead-tools",
+      "group": "skill-authoring",
+      "tag": "authoring",
+      "title": "Replace Dead Tools",
+      "pageTitle": "Replace Dead Tools — AI Agent Skill for Claude Code",
+      "blurb": "Checks every tool named on best-of and alternatives lists for shutdowns, parked domains, acquisitions and abandonment, confirms each verdict with evidence a person can open, and drafts a \"replace the dead entry with us\" pitch per affected…",
+      "stats": "8 files · 763 lines · 13 KB",
+      "install": "npx skills add arm-pz/replace-dead-tools",
+      "page": "generated",
+      "order": 926,
+      "pageSource": {
+        "description": "Checks every tool named on best-of and alternatives lists for shutdowns, parked domains, acquisitions and abandonment, confirms each verdict with evidence a person can open, and drafts a \"replace the dead entry with us\" pitch per affected list. Use whenever someone wants the dead, discontinued or acquired tools still sitting on roundup articles so they can pitch themselves as the replacement, asks which listed tools no longer exist, or wants a broken-entry angle for list outreach, even if they never say dead link building. Step 2 of a three-step handover: reads get-listed's files, or a list of article URLs, and hands over to find-partners. Not for finding the lists or their authors (use get-listed), broken links on your own site (use broken-links), or partner and link-swap outreach (use find-partners).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 93,
+            "bytes": 5128
+          },
+          {
+            "path": "evals/evals.json",
+            "lines": 36,
+            "bytes": 957
+          },
+          {
+            "path": "evals/trigger-cases.md",
+            "lines": 34,
+            "bytes": 2650
+          },
+          {
+            "path": "references/confirm.md",
+            "lines": 47,
+            "bytes": 3266
+          },
+          {
+            "path": "references/handover.md",
+            "lines": 93,
+            "bytes": 4044
+          },
+          {
+            "path": "references/replace-pitch.md",
+            "lines": 46,
+            "bytes": 1896
+          },
+          {
+            "path": "scripts/check_tools.py",
+            "lines": 318,
+            "bytes": 13912
+          },
+          {
+            "path": "scripts/test_check_tools.py",
+            "lines": 96,
+            "bytes": 5241
+          }
+        ],
+        "fileCount": 8,
+        "lines": 763,
+        "bytes": 13755,
+        "license": "MIT",
+        "commit": "1ae6e1088d582f28b2ef8c2d91bd52488fd984e8",
+        "sha256": "d707acd8c531ab5320fecab9c1492e3579076e92dd5cf57b4bcd0004eaa56feb"
+      },
+      "quality": {
+        "version": "1.0.0",
+        "commit": "1ae6e10",
+        "updated": "2026-11-17",
+        "notFor": [
+          "finding the lists or their authors (use get-listed)",
+          "broken links on your own site (use broken-links)",
+          "partner and link-swap outreach (use find-partners)"
+        ]
+      }
+    },
+    {
+      "name": "opus-playbook",
+      "repo": "arm-pz/opus-playbook",
+      "path": ".",
+      "group": "career",
+      "tag": "career",
+      "title": "Opus Playbook",
+      "pageTitle": "Opus Playbook — AI Agent Skill for Claude Code and Codex",
+      "blurb": "Playbook for a lead model (Fable) that deputes a task to Opus, or to any subagent or worker session.",
+      "stats": "6 files · 725 lines · 15 KB",
+      "install": "npx skills add arm-pz/opus-playbook",
+      "page": "generated",
+      "order": 927,
+      "pageSource": {
+        "description": "Playbook for a lead model (Fable) that deputes a task to Opus, or to any subagent or worker session. Decides whether the task is safe to hand off, writes a checkable brief, enforces its terms (scope, tools, tests, stop rules), checks what comes back with a diff-inventory script, and gives a go or no-go with evidence. Use whenever the user wants to delegate to Opus and be sure of the result, asks \"is Opus doing its job\", \"did the subagent actually do it\", \"how will you check the worker\", \"what is your go/no-go\", or when a subagent has just reported back and its result is about to be relayed or shipped, even if they never say \"verify\". Not for a defect review of code with no brief to check against (use consistent-code-review), an effort level or how far to fan out (use choose-effort), which model takes which role (use setup-claude-advisor), or pressure-testing a decision (use crash-test).",
+        "files": [
+          {
+            "path": ".gitignore",
+            "lines": 3,
+            "bytes": 29
+          },
+          {
+            "path": "SKILL.md",
+            "lines": 252,
+            "bytes": 15838
+          },
+          {
+            "path": "discovery-kit.md",
+            "lines": 170,
+            "bytes": 8445
+          },
+          {
+            "path": "references/trigger-cases.md",
+            "lines": 63,
+            "bytes": 5549
+          },
+          {
+            "path": "runs/2026-11-17-first-hand-off.md",
+            "lines": 58,
+            "bytes": 3474
+          },
+          {
+            "path": "scripts/worker_diff.py",
+            "lines": 179,
+            "bytes": 8006
+          }
+        ],
+        "fileCount": 6,
+        "lines": 725,
+        "bytes": 15772,
+        "license": "MIT",
+        "commit": "ca82759f845c40edc3d91540d6a9a286625c0451",
+        "sha256": "8093f090841da3a0a059010dc85f4dd7453a7d41fc1e36ab801b6344fd21de5d"
+      },
+      "quality": {
+        "version": "0.2.1",
+        "commit": "ca82759",
+        "updated": "2026-11-17",
+        "notFor": [
+          "a defect review of code with no brief to check against (use consistent-code-review)",
+          "an effort level or how far to fan out (use choose-effort)",
+          "which model takes which role (use setup-claude-advisor)",
+          "pressure-testing a decision (use crash-test)"
         ]
       }
     }
@@ -3760,7 +4132,7 @@
       "title": "Set up a coding agent for a repo",
       "slug": "set-up-a-coding-agent",
       "lead": true,
-      "summary": "Get a coding agent that follows the repo's rules and stays inside its usage: write or prune the rules and guardrails, tier the models by role, then pick the effort each large task deserves.",
+      "summary": "Set up a coding agent for your repo. Write or prune its rules and guardrails, choose models for each role, and match reasoning effort to the task.",
       "steps": [
         {
           "skills": [

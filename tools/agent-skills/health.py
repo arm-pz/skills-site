@@ -87,7 +87,10 @@ def main(argv=None):
                          "`python tools/agent-skills/health.py --accept-all`, regenerate the pages "
                          "with `python tools/agent-skills/gen_page.py --write`, and commit "
                          "`site/health.json` with them.\n")
-        if args.accept_all or (args.accept and not regressed and "0 improvements" not in run.stdout):
+        # A new skill has no baseline entry, so its page says "Not checked yet" until one is written.
+        # Record it on any clean night, not only on nights that also improved something.
+        changed = "0 improvements" not in run.stdout or " 0 new skills" not in run.stdout
+        if args.accept_all or (args.accept and not regressed and changed):
             written = subprocess.run(cmd + ["--write"], capture_output=True, text=True)
             if written.returncode != 0:
                 print(written.stderr, end="", file=sys.stderr)

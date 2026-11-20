@@ -1,0 +1,41 @@
+{
+  "skill": "release-gate-validator",
+  "date": "2026-11-13",
+  "target": "the saved results of a real red-team run on Invoicely, plus pasted preflight and performance tables",
+  "verdict": "PARTIAL",
+  "score": 4,
+  "summary": "The agent ran nothing against the target and reported HOLD, but redteam/ was empty so the ingester exited 2 (NOT-INGESTABLE), and it never recorded the preflight or perf lanes or ran check_gate.mjs, so HOLD was not computed by the script.",
+  "checks": [
+    {
+      "desc": "posture is HOLD",
+      "ok": true,
+      "detail": "HOLD"
+    }
+  ],
+  "met": [
+    "Ran nothing against a target; only listed directories, read git HEAD, and ran the local ingest script",
+    "Final posture is HOLD, which satisfies the hard check",
+    "Reported preflight as PASS WITH FIXES on 127.0.0.1:3100, with no TLS and no security headers",
+    "Reported perf as not measured rather than omitting it",
+    "Named reasons for HOLD: red-team lane absent and perf unmeasured"
+  ],
+  "missed": [
+    "Red-team table was not ingested: redteam/ had no results/ or group-*.md files, so the ingester returned NOT-INGESTABLE",
+    "HOLD was not computed with the script: check_gate.mjs was never run and nothing was written to .release-gate/, so the posture was asserted by the agent",
+    "The pasted preflight verdict and the perf not-measured state were shown only in chat and never recorded into the gate store",
+    "The stated reason for HOLD centers on missing evidence rather than critical red-team findings, since no findings were ingested",
+    "The agent asked the user for more input (run directory, verbatim preflight, commit) instead of recording the lanes it already had"
+  ],
+  "skill_defects": [
+    "The skill gives no path for an absent or non-ingestable red-team lane: the agent should still record that lane as absent, record the pasted preflight verbatim and perf as not-measured, and run check_gate.mjs so HOLD comes from the script",
+    "The skill does not say that a missing commit or missing per-finding rows should not block recording lanes, so the agent stopped at asking the user questions",
+    "The skill does not say how to locate or fall back when the user-supplied run directory is empty, such as checking .pre-ship-red-team/ for the run"
+  ],
+  "cost_usd": 0.08,
+  "model": "sonnet",
+  "turns": 6,
+  "seconds": 15,
+  "tool_calls": 4,
+  "files": [],
+  "error": ""
+}

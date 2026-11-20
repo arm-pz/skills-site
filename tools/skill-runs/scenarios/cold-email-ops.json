@@ -1,0 +1,12 @@
+{
+  "skill": "cold-email-ops",
+  "target": "a 60,000-sends-a-month cold-email plan across 4 clients",
+  "prompt": "I run outbound for 4 B2B clients. Next month I want to send 60,000 cold emails total (clients get 25k, 15k, 12k, 8k). Last month: 41 domains, 120 inboxes, reply rate fell from 2.1% to 1.2% across the board, and 6 domains got burned. Plan the infrastructure for next month and tell me what to watch.",
+  "rubric": [
+    "Computes inboxes and domains needed from the send target with stated per-inbox/day and per-domain assumptions, and the arithmetic is right",
+    "Sets per-domain reply-rate floors and what happens when a domain falls below",
+    "Gives a burn-replacement cadence sized to last month's 6 burned domains (warm spares)",
+    "Includes a shadow-ban or inbox-placement test and an automation error budget",
+    "Splits capacity per client and states which assumptions are its own rather than facts"
+  ]
+}

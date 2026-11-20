@@ -1,0 +1,10 @@
+I saved the prompt as `site-prompt.md` in the project folder, but I haven't tested any of it. The Bash tool was denied partway through, so I couldn't open the page or run the replay script that compares the prompt's file sections against the site. The prompt's "Checks already run" section says "None", and "Not verified" lists every check I skipped. The code may have bugs that a first browser load would catch.
+
+- **Shop:** "Tannery Row Cycles", a made-up independent workshop in Kirkstall, Leeds. You didn't name a shop, so I invented one and labelled it a concept on the page. The name, address, hours and prices are all illustrative.
+- **Placeholder contact details:** the phone number is in the UK range reserved for drama use (0113 496 0142), and the email is on `example.com`. Swap in your real details before using it.
+- **Stack:** plain HTML, CSS and JS in three files (`index.html`, `styles.css`, `main.js`). There's no build step or dependencies, and the only external request is Google Fonts.
+- **Opening hours:** an "open now / opens tomorrow at 08:00" line in the hero, worked out in Leeds time. It reads from the hours table, so that table is the only place to change them.
+- **Services and prices:** the page is a "job tag" builder, like the paper tag a workshop writes for each bike. You pick a service package (£25 to £220) and extra jobs (puncture, hydraulic bleed, wheel true and others). A kraft-card tag beside the form adds up the labour price.
+- **How to book:** a drop-off form that only accepts Tuesday to Saturday. It opens an email draft containing the job tag, with the phone number as a fallback, and there's a four-step "how booking works" section.
+
+Run it through the site-prompt skill with Bash allowed if you want the build tested and replay-checked. Otherwise, open `index.html` in a browser before trusting it.

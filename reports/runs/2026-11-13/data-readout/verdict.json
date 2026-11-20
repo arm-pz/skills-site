@@ -1,0 +1,43 @@
+{
+  "skill": "data-readout",
+  "date": "2026-11-13",
+  "target": "a 14-day checkout A/B test export (182,000 sessions, two devices) with one planted tracking outage",
+  "verdict": "PASS",
+  "score": 9,
+  "summary": "The run found B's zero orders on 2026-10-09 on both devices (4 rows, 8,000 sessions), dropped that day from both arms, and reported B beating A at 4.25% vs 3.89% (p=0.0001), with mobile up 3.01% to 3.70% (p<0.0001) and desktop flat (p=0.40).",
+  "checks": [
+    {
+      "desc": "names the day-9 gap in variant B",
+      "ok": true,
+      "detail": "10-09"
+    },
+    {
+      "desc": "reports a mobile-specific result",
+      "ok": true,
+      "detail": "mobile"
+    }
+  ],
+  "met": [
+    "Identifies B's zero orders on 2026-10-09 on both mobile and desktop and treats it as a probable tracking or deploy fault, not real behaviour",
+    "Recomputes without 10-09 for both arms and reports B beating A overall (+0.37 pts, 95% CI +0.18 to +0.55, p=0.0001), and shows the pooled flat result (p=0.48) as the source of the PM's claim",
+    "Splits by device: mobile +0.69 pts (+22.8% relative, p<0.0001) and desktop \u22120.15 pts (CI \u22120.49 to +0.19, p=0.40), so desktop is not significant",
+    "Recommends not killing B, shipping on mobile with a desktop holdout, investigating the 10-09 cause and extending desktop testing, and conditions the call on whether the 10-09 zeros were a real B failure",
+    "Lists what it could not compute or verify: cause of the outage, randomisation and SRM, primary metric, revenue-per-session significance, novelty and day-of-week effects",
+    "Figures shown are derived from the file (56 rows, 91,000 sessions per arm, 84,500 after exclusion); no invented facts"
+  ],
+  "missed": [
+    "Ground-truth significance figure could not be confirmed from the transcript, so the closeness of the p-values to it is unverified",
+    "The claim that B mobile beats A mobile on all 13 clean days and the AOV figures are stated, but the visible tool call is truncated, so they cannot be traced to a computation",
+    "Pooled AOV is described as a mix effect without a shown check"
+  ],
+  "skill_defects": [
+    "The skill does not require a sensitivity check on the exclusion rule (e.g. imputing the missing day) or an explicit sample-ratio check, so these end up only as caveats",
+    "It offers no guidance on running a significance test for revenue per session, leaving point estimates only"
+  ],
+  "cost_usd": 0.15,
+  "turns": 6,
+  "seconds": 37,
+  "tool_calls": 4,
+  "files": [],
+  "error": ""
+}

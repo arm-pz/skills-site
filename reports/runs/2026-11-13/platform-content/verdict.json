@@ -1,0 +1,36 @@
+{
+  "skill": "platform-content",
+  "date": "2026-11-13",
+  "target": "a real-shaped B2B fintech product brief with claims it must not make",
+  "verdict": "PARTIAL",
+  "score": 7,
+  "summary": "The run produced one LinkedIn post and a 6-post X thread, each with a hook, body and a 14-day no-card trial CTA, and both use the 3.5\u21921 day (n=24) figure and the attributed Stackwise quote. But the LinkedIn post names QuickBooks despite the output saying it was left out, and a few unsourced or generic claims were added.",
+  "checks": [],
+  "met": [
+    "LinkedIn post and a 6-post thread were delivered, each with hook, body and a trial CTA (14-day free trial, no card, trial link placeholder)",
+    "Platform-native structure: the LinkedIn hook is two lines before 'see more' and the body has short lines; the thread is numbered 1/\u20136/, with each post short and the CTA last",
+    "Proof is attributed: '3.5 to 1 day' is labelled as the onboarding survey (n=24), and the quote is credited to Hana Ito, Finance Lead, Stackwise",
+    "No SOC 2 or AI claims appear in either asset",
+    "Voice is plain, specific and dry, with a free tip in thread post 4 and no hype",
+    "Gaps are flagged (missing links, baselines, quote approval for social use)"
+  ],
+  "missed": [
+    "The LinkedIn post says 'It doesn't have a QuickBooks integration yet'. This puts QuickBooks in the copy even though the assumptions line claims it was left out. It is a negation rather than a false claim, but it contradicts the run's own statement and may breach a brief that says not to mention it.",
+    "The hook of both assets states '2\u20134 days' as typical for UK SaaS companies. The transcript does not show where this comes from, so it is an unverified general statistic unless the brief supplies it.",
+    "The LinkedIn test note adds 'commonly reported that LinkedIn may reach fewer people with posts that contain external links', which is not sourced from the brief.",
+    "The thread's 'mismatches surface weeks later' and similar pain-point claims are asserted as fact, not as brief-backed proof.",
+    "The '\ud83e\uddf5' emoji in thread post 1 sits slightly off a dry voice.",
+    "Extra material was added beyond the request (comment variant, test plans, GAPS, sales-copy handoff), which dilutes the two deliverables."
+  ],
+  "skill_defects": [
+    "The skill does not tell the agent to scan finished copy for forbidden terms. Negated mentions such as 'no QuickBooks integration' slip through while the output says the term was omitted.",
+    "The skill does not require that general claims, such as typical close times and 'weeks later' discovery, trace to the brief's proof. Unsourced stats and platform-reach claims get included.",
+    "The output template adds TEST, GAPS and variant sections by default. These bloat a two-asset request and add unsourced statements."
+  ],
+  "cost_usd": 0.16,
+  "turns": 4,
+  "seconds": 23,
+  "tool_calls": 2,
+  "files": [],
+  "error": ""
+}

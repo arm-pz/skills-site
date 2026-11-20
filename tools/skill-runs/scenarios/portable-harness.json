@@ -1,0 +1,20 @@
+{
+  "skill": "portable-harness",
+  "setup": "git clone -q --depth 1 https://github.com/arm-pz/skills-site site-src",
+  "target": "the skillsmith.tech source repo (local clone)",
+  "prompt": "Set up site-src/ so any coding agent behaves the same in it. Write the rules file and add guardrails where they earn their place. Local only.",
+  "checks": [
+    {
+      "desc": "a CLAUDE.md or AGENTS.md was written",
+      "cmd": "ls site-src/CLAUDE.md site-src/AGENTS.md 2>/dev/null | grep -q ."
+    }
+  ],
+  "max_turns": 100,
+  "budget_usd": 8,
+  "rubric": [
+    "Writes the working rules at the top of CLAUDE.md/AGENTS.md",
+    "Adds map sections only where grounded in the repo (e.g. generated pages vs sources, the deploy branch)",
+    "Any guardrail it installs actually runs here (e.g. the repo's unittest suite) and it shows it running",
+    "Invents no commands the repo does not have"
+  ]
+}

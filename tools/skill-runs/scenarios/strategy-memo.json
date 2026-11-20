@@ -1,0 +1,13 @@
+{
+  "skill": "strategy-memo",
+  "fixtures": "strategy",
+  "target": "a real-shaped build decision for a 3-person fintech startup (QuickBooks vs multi-entity)",
+  "prompt": "Read situation.md and write me the decision memo for the board: which do we build next quarter?",
+  "rubric": [
+    "Makes one clear recommendation with the reasoning a board can check",
+    "Uses the numbers given (58 vs ~20 waitlist pace, 10 vs 8 engineer-weeks, 2 churned to QuickBooks, 4 multi-entity asks, ~£900 plan, 14 months runway, 9% MoM) and does the arithmetic right",
+    "Names the strongest case for the option not chosen and what would change the call",
+    "Gives a 90-day plan and the metric that proves it right or wrong",
+    "Invents no market data; anything it would need is listed as an open question"
+  ]
+}

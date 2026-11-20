@@ -4,5 +4,10 @@
   X-Frame-Options: DENY
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
 
+# Stylesheets and scripts keep their names between deploys, so a browser must ask before reusing one;
+# otherwise new HTML can be drawn with a stylesheet from before the deploy.
+/assets/*
+  Cache-Control: public, max-age=0, must-revalidate
+
 /fonts/files/*
   Cache-Control: public, max-age=31536000, immutable
