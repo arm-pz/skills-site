@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The story behind Skillsmith by Caffeinity</title>
+<meta name="description" content="How Skillsmith by Caffeinity started: a template repo, a skill called Wordsmith, and a habit of turning long conversations with AI agents into instructions you can reuse.">
+<link rel="canonical" href="https://skillsmith.tech/story/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Skillsmith by Caffeinity">
+<meta property="og:title" content="The story behind Skillsmith by Caffeinity">
+<meta property="og:description" content="A template repo, a skill called Wordsmith, and a habit of turning long conversations with AI agents into instructions you can reuse.">
+<meta property="og:url" content="https://skillsmith.tech/story/">
+<meta name="twitter:card" content="summary">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="preload" href="/fonts/files/cY9AfjOCX1hbuyalUrK4397yjA.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/files/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+.story{padding-top:clamp(8px,2vw,24px)}
+.story-body{max-width:66ch}
+.story-body h2{font-size:clamp(28px,3vw,40px);line-height:1.08;margin:clamp(48px,6vw,80px) 0 18px}
+.story-body h2:first-child{margin-top:0}
+.story-body p{font-size:clamp(17px,1.3vw,19px);line-height:1.65}
+.story-body p+p{margin-top:1.05em}
+.story-body a{font-weight:600}
+.story-body .quote{margin:28px 0;padding:18px 0 18px 22px;border-left:3px solid var(--accent)}
+.story-body .quote [lang="ta"]{display:block;font-family:'Noto Sans Tamil','Tamil Sangam MN','Nirmala UI',Latha,sans-serif;font-size:clamp(19px,1.6vw,22px);font-weight:500;line-height:1.5}
+.story-body .quote span:last-child{display:block;margin-top:6px;color:var(--muted)}
+.story-by{margin-top:22px;color:var(--muted);font-size:15px}
+.story-act{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="/"><b>/</b>skillsmith <span class="brand-by">by caffeinity</span></a>
+    <div class="nav-links">
+      <a href="/skills/">Skills</a>
+      <a href="/workflows/">Workflows</a>
+      <a href="/mods/">Mods</a>
+      <a href="/story/" aria-current="page">Story</a>
+      <a href="/work/">Work with us</a>
+    </div>
+    <div class="nav-cta">
+      <a class="gh" href="https://github.com/arm-pz" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-accent btn-sm" href="/caffeinity-routing/">Start here</a>
+    </div>
+  </div>
+</nav>
+
+<header class="page-hero">
+  <div class="wrap">
+    <h1>Why this site exists.</h1>
+    <p class="lead">It started on 1 October 2026 with one template repo. Today there are more than seventy open agent skills here. This is how that happened.</p>
+    <p class="story-by">Abdul Rahman P Z</p>
+  </div>
+</header>
+
+<section class="story" aria-label="The story">
+  <div class="wrap">
+    <article class="story-body">
+
+      <h2>How it started</h2>
+      <p>I started out exploring AI coding agents. I installed Claude Code, then came across Codex. Most days I was also in Google AI Studio and Antigravity, with a bit of ChatGPT and the free version of Claude on the side. Then Qoder, Alibaba's coding agent, gave two weeks of its Pro plan to anyone who signed up, so I used that too. All along I was bookmarking posts on X, mostly prompts people had shared.</p>
+      <p>At some point I looked up what a SKILL.md file is and how a skill project is laid out. I already had plenty of repos on GitHub, so I thought, why not make one for a skill? Then, why not make it a template? So I structured one and published it as <a href="https://github.com/arm-pz/agent-skill-template" target="_blank" rel="noopener">agent-skill-template</a>. That template was the very first thing I made, before any skill.</p>
+      <p>I wanted Claude Pro by then, but I didn't want to grab a subscription and leave it sitting there. I wanted to know it was worth it, and to be sure I had time to actually work with it. When I did, I got it and spent that time experimenting with skills.</p>
+      <p>The first real skill was <a href="/wordsmith/">Wordsmith</a>. I was looking for inspiration and the words weren't coming, so I made a skill for it. I drafted it with duck.ai, Claude Code and Qoder, then ran it in ChatGPT Go as well. It was a mix of all of them.</p>
+      <p>A couple more repos followed, and writing each SKILL.md by hand got old fast. So I started telling my coding agents what I wanted and asking for it in the same structure as the others. Most of that happened in Qoder, which had a lot of models to pick from. I was making one or two skills a day, and using them every day.</p>
+      <p>Two of the skills came straight out of how I was working. Every skill's skeleton came from Claude. I'd draft it there, then run it through ChatGPT and Qwen models to see how it held up. Doing that by hand each time became <a href="/tune-skill/">tune-skill</a>. <a href="/draft-skill/">Draft-skill</a> started when I asked Claude to draft a skill for me and it talked me through how it was going about it. I told it to make that a skill.</p>
+      <p>That's the pattern behind all of them. When I hit a problem I'd ask Claude or ChatGPT, and the answer only came after a long run of back-and-forth. The next time I had the same kind of request, I didn't want to go through that whole conversation again. So I wrote down what the conversation had worked out as a structured set of instructions. That's what a skill is.</p>
+
+      <h2>Why the name</h2>
+      <p>The name comes from Wordsmith. A smith forges things by working them over and over: a goldsmith, a blacksmith. Every strike of the hammer makes the metal a little stronger. Skills work the same way. You keep forging the instructions each time you use them, and they get better.</p>
+      <p>I realised a skill has to be checked and improved regularly. Writing it is only the first strike. That's why every published skill gets checked each night, and why <a href="/tune-and-polish/">tune-and-polish</a> exists. When you use a skill, don't like the result and give it extra instructions, those instructions become part of the skill. Sometimes they go in as an optional check.</p>
+
+      <h2>Built on what people share</h2>
+      <p>People share their workflows all the time, on X, on Instagram and everywhere else: this is my workflow, this is how I prompt Claude to get this done. Many of the skills here started as one of those posts. I'd take a screenshot or copy the text, paste it into Claude and ask for a skill. I can't remember every post that went in, and naming a few would leave out the rest. So this is a thank-you to everyone who shares how they work in public.</p>
+      <p>Bookmarking prompt after prompt, and threads promising to make Claude insane, doesn't get you far. The idea is to have your own arsenal. Once I had mine, I stopped searching through bookmarks, a prompt library and my notes for the thing that worked last time, and the relief was huge. I wanted others to get the same help, so I gave it back. The Tamil line at the bottom of every page, from Thirumoolar's Thirumanthiram, says it better than I can:</p>
+      <p class="quote"><span lang="ta">யாம் பெற்ற இன்பம் பெறுக இவ்வையகம்</span><span>May this world attain the same bliss that I have attained.</span></p>
+      <p>If I was going to open source the skills, they needed a home of their own. I already owned caffeinity.com, so I put them on a subdomain where anyone could install them and anyone could work on them. That site is now skillsmith.tech.</p>
+
+      <h2>What's free, and what isn't</h2>
+      <p>Every skill here is free, and it stays free. The SKILL.md, the references and any scripts are all public on GitHub, so there's nothing to keep secret, and no reason to try.</p>
+      <p>What costs money is someone's time. The <a href="/checks/">free tools</a> always do the first step for nothing. If you'd like a person to do the next step for you, that's a small fixed price. If your team needs skills built around its own workflows and tested on its real tasks, that's <a href="/work/">custom work</a>. Neither changes the public skills.</p>
+
+      <h2>Who's behind it</h2>
+      <p>I'm Abdul Rahman P Z. I have a master's in software engineering and have worked at several multinational companies as a C# and backend developer, with hands-on cloud work on AWS. I've also just completed a B.Voc in Acupuncture Science. When AI coding agents took off, I wanted my share of the AI pie, and that's what got me exploring.</p>
+      <p>Caffeinity is caffeine plus infinity. I got the domain for a filter coffee (kaapi) brand that's still in progress, and it was lying around when the skills needed a home. It suits them anyway. What powers developers is an infinite supply of coffee.</p>
+
+      <h2>Take part</h2>
+      <p>Anyone can. Have a conversation with your agent that you keep repeating? <a href="/draft-skill/">Draft-skill</a> turns it into a skill, and <a href="/tune-skill/">tune-skill</a> checks it before you publish. Start from the same <a href="https://github.com/arm-pz/agent-skill-template" target="_blank" rel="noopener">template</a> I did if you like. If one of the skills here lets you down, open an issue on its repo. That feedback is the next strike of the hammer.</p>
+      <div class="story-act">
+        <a class="btn btn-accent" href="/draft-skill/">Draft your first skill</a>
+        <a class="btn btn-quiet" href="/skills/">Browse the skills</a>
+      </div>
+
+    </article>
+  </div>
+</section>
+
+<footer class="roast">
+  <div class="wrap">
+    <div class="meta">
+      <span>Skillsmith by <a href="https://caffeinity.com/">Caffeinity</a>: open agent skills by Abdul Rahman P Z.</span>
+      <a href="/checks/">Free tools</a>
+      <a href="/work/">Custom skills for your team</a>
+      <a href="https://github.com/arm-pz" target="_blank" rel="noopener">github.com/arm-pz</a>
+    </div>
+    <p class="kural"><span lang="ta">யாம் பெற்ற இன்பம் பெறுக இவ்வையகம்</span><span>“May this world attain the same bliss that I have attained.”</span></p>
+  </div>
+</footer>
+<script src="/assets/site.js" defer></script>
+</body>
+</html>
