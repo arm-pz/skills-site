@@ -22,9 +22,13 @@ on:
 permissions:
   contents: read
 
+# Publishing runs share one group so two never write main or deploy at once. A pull request's
+# check gets its own group: in the shared one, a newer pending run (the hourly sync, another PR)
+# silently replaced it, and the PR was left with no result. A new push to the same PR still
+# cancels its older check.
 concurrency:
-  group: publish-skills-site
-  cancel-in-progress: false
+  group: ${{ github.event_name == 'pull_request' && format('publish-pr-{0}', github.event.pull_request.number) || 'publish-skills-site' }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   check:
