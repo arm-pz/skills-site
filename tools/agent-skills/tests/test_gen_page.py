@@ -57,6 +57,15 @@ class QualityBlockTest(unittest.TestCase):
         self.assertIn("Third-party, not made by Skillsmith by Caffeinity. Needs an API key.", out)
         self.assertNotIn("Pairs with", gen_page.quality_html(ENTRY))
 
+    def test_reading_is_credited_and_escaped(self):
+        item = {"title": "Skills & Subagents", "url": "https://example.com/post", "by": "A. Writer",
+                "for": "the context budget."}
+        out = gen_page.quality_html(dict(ENTRY, reading=[item]))
+        self.assertIn('<a href="https://example.com/post" target="_blank" rel="noopener">Skills &amp; Subagents</a> '
+                      'by A. Writer, for the context budget.', out)
+        self.assertIn("Written by someone else", out)
+        self.assertNotIn("Further reading", gen_page.quality_html(ENTRY))
+
     def test_failing_check_and_mod(self):
         out = gen_page.quality_html(dict(ENTRY, quality=QUALITY), {"demo": {"fail": ["x"], "warn": []}})
         self.assertIn('<span class="qb-flag fail">1 failing</span>', out)

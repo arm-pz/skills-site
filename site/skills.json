@@ -612,7 +612,21 @@
         "target": "arm-pz/tune-skill",
         "result": "Found the repo in 0 of 5 target searches and a same-name rival; drafted the discovery kit.",
         "evidence": "/#proof"
-      }
+      },
+      "reading": [
+        {
+          "title": "AI Agent Skill Directories, Compared",
+          "url": "https://agenticskills.io/ai-skills-directories",
+          "by": "AgenticSkills",
+          "for": "how skills.sh, SkillsMP, Skills Directory and the awesome lists differ before you pick where to submit."
+        },
+        {
+          "title": "Claude Skills Directories Compared",
+          "url": "https://www.skillsdirectory.com/learn/claude-skills-directories-compared",
+          "by": "Skills Directory",
+          "for": "a side-by-side of curated, security-scanned catalogs and crawled leaderboards."
+        }
+      ]
     },
     {
       "name": "publish-pipeline",
@@ -1881,6 +1895,12 @@
           "url": "https://github.com/every-app/open-seo",
           "for": "keyword volumes, rankings, backlinks, competitor and AI-visibility data, read by your agent through its MCP server.",
           "needs": "Open source (MIT); needs a DataForSEO API key (pay per use) or an openseo.so account."
+        },
+        {
+          "name": "Firecrawl",
+          "url": "https://www.firecrawl.dev/",
+          "for": "pages that only render their content with JavaScript, fetched in a headless browser before you crawl them.",
+          "needs": "Hosted service; needs a Firecrawl account and API key."
         }
       ]
     },
@@ -2414,7 +2434,15 @@
         "target": "a 14-day checkout A/B test export (182,000 sessions, two devices) with one planted tracking outage",
         "result": "The run found B's zero orders on 2026-10-09 on both devices (4 rows, 8,000 sessions), dropped that day from both arms, and reported B beating A at 4.25% vs 3.89% (p=0.0001), with mobile up 3.01% to 3.70% (p<0.0001) and desktop…",
         "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/data-readout/README.md"
-      }
+      },
+      "pairsWith": [
+        {
+          "name": "Fastero",
+          "url": "https://fastero.com/",
+          "for": "live warehouse numbers, pulled through its connector's read-only SQL tool and handed to data-readout as the file to read.",
+          "needs": "Hosted service; needs a Fastero account connected to your data warehouse."
+        }
+      ]
     },
     {
       "name": "crash-test",
@@ -2738,7 +2766,15 @@
           "working out why usage already drained (use diagnose-usage)",
           "for plan limits, prices and which models support which levels (use product-self-knowledge)"
         ]
-      }
+      },
+      "reading": [
+        {
+          "title": "Claude Code Skills vs Subagents: Which One to Use and When",
+          "url": "https://clockedcode.com/blog/claude-code-skills-vs-subagents",
+          "by": "ClockedCode",
+          "for": "how much of each skill survives compaction (the first 5,000 tokens, inside a shared 25,000-token budget) and what CLAUDE_CODE_FORK_SUBAGENT=0 changes."
+        }
+      ]
     },
     {
       "name": "diagnose-usage",
@@ -3176,7 +3212,15 @@
           "reviewing application code (use consistent-code-review)",
           "tuning one skill's description (use tune-skill)"
         ]
-      }
+      },
+      "reading": [
+        {
+          "title": "Claude Code Skills vs Subagents: Which One to Use and When",
+          "url": "https://clockedcode.com/blog/claude-code-skills-vs-subagents",
+          "by": "ClockedCode",
+          "for": "how much of each skill survives compaction (the first 5,000 tokens, inside a shared 25,000-token budget) and what CLAUDE_CODE_FORK_SUBAGENT=0 changes."
+        }
+      ]
     },
     {
       "name": "setup-claude-advisor",

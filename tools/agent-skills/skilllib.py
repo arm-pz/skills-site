@@ -81,6 +81,18 @@ def check_pairs(pairs, owner):
         _req(pair["url"].startswith("https://"), f"{owner}: pairsWith.url must be https")
 
 
+def check_reading(reading, owner):
+    """An article by someone else that explains the problem a skill works on: titled, linked, credited."""
+    if reading is None:
+        return
+    _req(isinstance(reading, list) and reading, f"{owner}: reading must be a non-empty list")
+    for item in reading:
+        _req(isinstance(item, dict), f"{owner}: each reading entry must be an object")
+        for key in ("title", "url", "by", "for"):
+            _req(isinstance(item.get(key), str) and item[key].strip(), f"{owner}: reading.{key} required")
+        _req(item["url"].startswith("https://"), f"{owner}: reading.url must be https")
+
+
 def validate_manifest(data):
     _req(isinstance(data, dict), "manifest must be an object")
     _req(data.get("schema") == SCHEMA, f"schema must be {SCHEMA}")
@@ -172,6 +184,7 @@ def validate_manifest(data):
             _req(s["featured"] in (1, 2, 3), f"{name}: featured must be 1, 2 or 3")
             _req(s.get("tested") is not None, f"{name}: a featured skill needs a tested run")
         check_pairs(s.get("pairsWith"), name)
+        check_reading(s.get("reading"), name)
         tested = s.get("tested")
         if tested is not None:
             _req(isinstance(tested, dict), f"{name}: tested must be an object")

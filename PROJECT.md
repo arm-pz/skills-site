@@ -124,6 +124,10 @@ of it is generated except the real-world run, which is the hand-kept `tested` fi
 Add one only with evidence a visitor can open (a site path or an https URL). Without it the page says
 "No public run yet".
 
+Two optional lists add rows to the same block. `pairsWith` names a third-party tool
+(`name`, `url`, `for`, `needs`: what it costs). `reading` credits an article by someone else that explains
+the problem (`title`, `url`, `by`, `for`). Both need https URLs; `skilllib.validate_manifest` checks them.
+
 Want it faster than an hour? Give a skill repo a fine-grained token that can dispatch to
 `arm-pz/skills-site` and send `repository_dispatch` with `event_type: skill-updated`. Not required.
 

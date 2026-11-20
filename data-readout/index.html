@@ -119,6 +119,7 @@
       <div><dt>Nightly check</dt><dd>Passing<small>No failures or warnings. <a href="https://github.com/arm-pz/skills-site/blob/main/.github/workflows/health.yml" target="_blank" rel="noopener">How it is checked</a></small></dd></div>
       <div><dt>Last real-world run</dt><dd>13 Nov 2026, on a 14-day checkout A/B test export (182,000 sessions, two devices) with one planted tracking outage<small>The run found B&#x27;s zero orders on 2026-10-09 on both devices (4 rows, 8,000 sessions), dropped that day from both arms, and reported B beating A at 4.25% vs 3.89% (p=0.0001), with mobile up 3.01% to 3.70% (p&lt;0.0001) and desktop… <a href="https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/data-readout/README.md" target="_blank" rel="noopener">See the run</a></small></dd></div>
       <div class="qb-wide"><dt>Known limits</dt><dd>Not built for:<ul><li>Writing the pandas or R code that crunches the file (use production-code)</li><li>For market research outside the user&#x27;s own data (use research-brief) or for the strategic roadmap that follows (use strategy-memo)</li></ul></dd></div>
+      <div class="qb-wide"><dt>Pairs with</dt><dd><a href="https://fastero.com/" target="_blank" rel="noopener">Fastero</a> for live warehouse numbers, pulled through its connector&#x27;s read-only SQL tool and handed to data-readout as the file to read.<small>Third-party, not made by Skillsmith by Caffeinity. Hosted service; needs a Fastero account connected to your data warehouse.</small></dd></div>
     </dl>
   </div>
 </section>

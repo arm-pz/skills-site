@@ -195,13 +195,18 @@ def quality_html(entry, health=None):
         f'\n      <div class="qb-wide"><dt>Pairs with</dt><dd><a href="{esc(p["url"])}" target="_blank" '
         f'rel="noopener">{esc(p["name"])}</a> for {esc(p["for"])}<small>Third-party, not made by Skillsmith by Caffeinity. '
         f'{esc(p["needs"])}</small></dd></div>' for p in entry.get("pairsWith", []))
+    reading = "".join(
+        f'\n      <div class="qb-wide"><dt>Further reading</dt><dd><a href="{esc(r["url"])}" target="_blank" '
+        f'rel="noopener">{esc(r["title"])}</a> by {esc(r["by"])}, for {esc(r["for"])}'
+        f'<small>Written by someone else; Skillsmith by Caffeinity links it because it explains the problem well.</small></dd></div>'
+        for r in entry.get("reading", []))
     cells = "\n".join(f"      <div><dt>{k}</dt><dd>{v}</dd></div>" for k, v in rows)
     return (f'{QUALITY_START}\n<section class="qb" aria-labelledby="qb-h">\n  <div class="wrap">\n'
             f'    <h2 id="qb-h">Know what you are installing.</h2>\n'
             f'    <p class="qb-lead">Version, date and limits are read from the repo on every sync, and the '
             f'check runs every night. Real-world runs are listed only with their evidence.</p>\n'
             f'    <dl class="qb-grid">\n{cells}\n'
-            f'      <div class="qb-wide"><dt>Known limits</dt><dd>{limits_dd}</dd></div>{pairs}\n'
+            f'      <div class="qb-wide"><dt>Known limits</dt><dd>{limits_dd}</dd></div>{pairs}{reading}\n'
             f'    </dl>\n  </div>\n</section>\n{QUALITY_END}')
 
 
