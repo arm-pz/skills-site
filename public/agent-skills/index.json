@@ -48,7 +48,7 @@
       "description": "Claude Code skill that asks how heavy a task is before you start, then recommends an effort level, whether to use subagents, /goal, workflows or agent teams, the /effort command to set it, and when to check /usage.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/choose-effort.tar.gz",
-      "digest": "sha256:27b8aa1625df9e09bc9349af11034705e0c74da3d0e6a579b47b6e01e49f4887"
+      "digest": "sha256:a87e434cee717453e32f7c066ef35f204ca185a11eec8b88bd4cf0e6baefafd5"
     },
     {
       "name": "cold-email-list-gate",
@@ -104,7 +104,7 @@
       "description": "Claude Code skill that works out why your usage limit drained fast. Reads your /usage paste, checks the heavy-session causes Anthropic named (effort level, subagents, /goal, workflows, agent teams, SDK jobs) and ranks up to three culprits with one fix each.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/diagnose-usage.tar.gz",
-      "digest": "sha256:40f816a1234ee63e3e1c09e2c05eb4d1f440b436ba54d48be6c499874af98aa7"
+      "digest": "sha256:a5f99e3c59a7b8186c0dd3e190ec006899e2b257d29487477cad8035a32b9993"
     },
     {
       "name": "do-better",
@@ -363,7 +363,7 @@
       "description": "Agent skill that configures Claude Code for quota-optimised model tiering: Sonnet for the main session, Opus on call via /advisor, Haiku for read-only subagents, and Sonnet for code editing. Audits version and env flags, shows a diff preview, and never writes without explicit confirmation.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/setup-claude-advisor.tar.gz",
-      "digest": "sha256:220f26e3629401bf2e10745e3ffe02dad93da9da6caf3859a713d992e26e4d85"
+      "digest": "sha256:0a00156dc311b8f37d8d0fbc7abacab6bbe623d7f603a5d3a957bbcde6c35bdb"
     },
     {
       "name": "ship-second-brain",

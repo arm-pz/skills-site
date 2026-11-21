@@ -3073,38 +3073,37 @@
       "title": "Choose Effort",
       "pageTitle": "Choose Effort — AI Agent Skill for Claude Code and Codex",
       "blurb": "Asks the user how much effort a Claude Code task deserves before heavy work starts, then recommends an effort level, whether to fan out to subagents, goal mode, workflows or agent teams, how to set it, and when to check /usage.",
-      "stats": "2 files · 68 lines · 2 KB",
+      "stats": "2 files · 89 lines · 3 KB",
       "install": "npx skills add arm-pz/choose-effort",
       "page": "generated",
       "order": 910,
       "pageSource": {
-        "description": "Asks the user how much effort a Claude Code task deserves before heavy work starts, then recommends an effort level, whether to fan out to subagents, goal mode, workflows or agent teams, how to set it, and when to check /usage. Use when the user is about to start a large, long or unattended Claude Code task, asks what effort level to use or whether to use xhigh or max, asks how to use less usage from now on, or is about to start /goal, a workflow or an agent team. Not for working out why usage already drained (use diagnose-usage), or for plan limits, prices and which models support which levels (use product-self-knowledge).",
+        "description": "Recommends reasoning effort and an execution mode before heavy work in Claude Code or Codex, with setup instructions and a usage checkpoint. Use when the user asks which effort level to use, what the orchestrator level is, when to use Ultra, how to use less going forward, or how to set up a long run with subagents, goal mode, workflows, or agent teams. Not for past usage drains, persistent model tiers, plan limits, prices, or model support. Use diagnose-usage for past drains, setup-claude-advisor for persistent model tiers, and product-self-knowledge in Claude Code or official Codex docs for plan limits, prices, or model support.",
         "files": [
           {
             "path": "SKILL.md",
-            "lines": 49,
-            "bytes": 3604
+            "lines": 63,
+            "bytes": 5387
           },
           {
             "path": "references/trigger-cases.md",
-            "lines": 19,
-            "bytes": 1992
+            "lines": 26,
+            "bytes": 3159
           }
         ],
         "fileCount": 2,
-        "lines": 68,
-        "bytes": 2526,
+        "lines": 89,
+        "bytes": 3498,
         "license": "MIT",
-        "commit": "b881ffd292c948a1963d2c98dd2c2db071e8109f",
-        "sha256": "27b8aa1625df9e09bc9349af11034705e0c74da3d0e6a579b47b6e01e49f4887"
+        "commit": "619e39175300f8b1a3cc817be2a203e435f6b90d",
+        "sha256": "a87e434cee717453e32f7c066ef35f204ca185a11eec8b88bd4cf0e6baefafd5"
       },
       "quality": {
-        "version": "1.0.0",
-        "commit": "b881ffd",
-        "updated": "2026-11-06",
+        "version": "1.1.0",
+        "commit": "619e391",
+        "updated": "2026-11-21",
         "notFor": [
-          "working out why usage already drained (use diagnose-usage)",
-          "for plan limits, prices and which models support which levels (use product-self-knowledge)"
+          "past usage drains, persistent model tiers, plan limits, prices, or model support"
         ]
       },
       "latestRun": {
@@ -3132,17 +3131,17 @@
       "title": "Diagnose Usage",
       "pageTitle": "Diagnose Usage — AI Agent Skill for Claude Code and Codex",
       "blurb": "Diagnoses why a Claude Code session or day burned through usage limits faster than expected, and says what to change.",
-      "stats": "3 files · 86 lines · 4 KB",
+      "stats": "4 files · 119 lines · 5 KB",
       "install": "npx skills add arm-pz/diagnose-usage",
       "page": "generated",
       "order": 911,
       "pageSource": {
-        "description": "Diagnoses why a Claude Code session or day burned through usage limits faster than expected, and says what to change. Reads the user's own /usage breakdown, checks the known heavy-session causes (high effort levels, subagents inheriting effort, goal mode, workflows, agent teams, long SDK jobs), and returns up to three ranked culprits with one fix each, plus when to send /feedback. Use when the user says Claude Code usage is draining fast, they hit or are nearing their limit sooner than expected, one session cost far more than expected, or asks what /usage shows or how to cut burn in a session that already ran. Not for choosing an effort level before work starts or using less going forward (use choose-effort), or for plan limits, prices and API billing (use product-self-knowledge).",
+        "description": "Diagnoses why a completed Codex or Claude Code run used more quota or credits than expected. Use when a session, automation, or day drained usage fast, the user hit a limit sooner than expected, or they want help interpreting usage evidence for work that already ran. Compares run evidence with account usage and gives up to three supported causes, each with a change to verify. Not for choosing effort for upcoming work (use choose-effort), configuring persistent advisor or subagent model tiers (use setup-claude-advisor), or plan limits, prices, and API billing.",
         "files": [
           {
             "path": "SKILL.md",
-            "lines": 35,
-            "bytes": 3456
+            "lines": 44,
+            "bytes": 3814
           },
           {
             "path": "references/burn-sources.md",
@@ -3150,25 +3149,31 @@
             "bytes": 2849
           },
           {
+            "path": "references/codex-usage.md",
+            "lines": 18,
+            "bytes": 3101
+          },
+          {
             "path": "references/trigger-cases.md",
-            "lines": 21,
-            "bytes": 2247
+            "lines": 27,
+            "bytes": 3109
           }
         ],
-        "fileCount": 3,
-        "lines": 86,
-        "bytes": 3812,
+        "fileCount": 4,
+        "lines": 119,
+        "bytes": 5530,
         "license": "MIT",
-        "commit": "d8df9488a8b19022d2c968402521675f04c1bdb3",
-        "sha256": "40f816a1234ee63e3e1c09e2c05eb4d1f440b436ba54d48be6c499874af98aa7"
+        "commit": "a95ab4dfaf787ce39dec969bfa0b25c5b19c5ccb",
+        "sha256": "a5f99e3c59a7b8186c0dd3e190ec006899e2b257d29487477cad8035a32b9993"
       },
       "quality": {
-        "version": "1.0.0",
-        "commit": "d8df948",
-        "updated": "2026-11-06",
+        "version": "1.1.0",
+        "commit": "a95ab4d",
+        "updated": "2026-11-21",
         "notFor": [
-          "choosing an effort level before work starts or using less going forward (use choose-effort)",
-          "for plan limits, prices and API billing (use product-self-knowledge)"
+          "choosing effort for upcoming work (use choose-effort)",
+          "configuring persistent advisor or subagent model tiers (use setup-claude-advisor)",
+          "plan limits, prices, and API billing"
         ]
       },
       "latestRun": {
@@ -3627,22 +3632,17 @@
       "title": "Setup Claude Advisor",
       "pageTitle": "Setup Claude Advisor — AI Agent Skill for Claude Code",
       "blurb": "Configure Claude Code for quota-optimised model tiering: Sonnet as the main session model, Opus as the on-call advisor, Haiku for read-only subagents, and Sonnet for code-editing subagents.",
-      "stats": "4 files · 477 lines · 10 KB",
+      "stats": "4 files · 340 lines · 9 KB",
       "install": "npx skills add arm-pz/setup-claude-advisor",
       "page": "generated",
       "order": 919,
       "pageSource": {
-        "description": "Configure Claude Code for quota-optimised model tiering: Sonnet as the main session model, Opus as the on-call advisor, Haiku for read-only subagents, and Sonnet for code-editing subagents. Audits existing subagents, environment variables, and CLI version before proposing changes; writes settings, subagent files, and an advisory rule to CLAUDE.md only after the user approves a diff preview. Use whenever the user wants to set up the Opus advisor pattern, configure Claude Code model tiers, optimise their $20 plan quota by splitting models across roles, or match a subagent tree that assigns different models to different jobs, even if they never say \"advisor\" or \"tiering\". Not for diagnosing why usage already drained (use diagnose-usage), choosing an effort level before a task (use choose-effort), plan limits and prices (use product-self-knowledge), or upgrading Claude Code itself.",
+        "description": "Configure persistent advisor and subagent model tiers in Claude Code or local Codex. Use when the user wants an Opus advisor, a Codex equivalent for second opinions, or different models for review, reading, and editing across sessions, even if the user never says advisor or tiering. Audits existing configuration and previews a diff before writing with explicit approval. Not for diagnosing past usage (use diagnose-usage), choosing effort or orchestration for one task (use choose-effort), plan limits or prices, or upgrading a client.",
         "files": [
           {
             "path": "SKILL.md",
-            "lines": 133,
-            "bytes": 8509
-          },
-          {
-            "path": "discovery-kit.md",
-            "lines": 176,
-            "bytes": 9649
+            "lines": 137,
+            "bytes": 8980
           },
           {
             "path": "references/advisor-architecture.md",
@@ -3650,27 +3650,31 @@
             "bytes": 6189
           },
           {
+            "path": "references/codex-advisor.md",
+            "lines": 29,
+            "bytes": 3176
+          },
+          {
             "path": "references/trigger-cases.md",
-            "lines": 47,
-            "bytes": 4148
+            "lines": 53,
+            "bytes": 4978
           }
         ],
         "fileCount": 4,
-        "lines": 477,
-        "bytes": 10391,
+        "lines": 340,
+        "bytes": 8908,
         "license": "MIT",
-        "commit": "d3a41fa4c4d631a17848cdb835e02732b4d85149",
-        "sha256": "7caf4731debcc7f6a749aa5cfd1f71de2962c85c851d0779fdce00a72e3f2821"
+        "commit": "df0aa49bad4a0e87972bc213095c9c8150815f1d",
+        "sha256": "0a00156dc311b8f37d8d0fbc7abacab6bbe623d7f603a5d3a957bbcde6c35bdb"
       },
       "quality": {
-        "version": "0.1.2",
-        "commit": "d3a41fa",
-        "updated": "2026-11-10",
+        "version": "0.2.0",
+        "commit": "df0aa49",
+        "updated": "2026-11-21",
         "notFor": [
-          "diagnosing why usage already drained (use diagnose-usage)",
-          "choosing an effort level before a task (use choose-effort)",
-          "plan limits and prices (use product-self-knowledge)",
-          "upgrading Claude Code itself"
+          "diagnosing past usage (use diagnose-usage)",
+          "choosing effort or orchestration for one task (use choose-effort)",
+          "plan limits or prices, or upgrading a client"
         ]
       },
       "latestRun": {

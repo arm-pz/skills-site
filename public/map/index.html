@@ -49,19 +49,25 @@
 
 <section class="tone" id="check" aria-labelledby="check-title">
   <div class="wrap">
-    <h2 id="check-title">Map a goal.</h2>
-    <form class="checker" id="form" novalidate>
-      <div>
-        <label for="goal">What are you trying to get done?</label>
-        <div class="row">
-          <input type="text" id="goal" name="goal" placeholder="Is my site safe to launch on Friday?" autocomplete="off">
-          <button class="btn btn-accent" type="submit">Map it</button>
+    <div class="map-panel">
+      <h2 id="check-title">Find your workflow</h2>
+      <form class="map-form" id="form" novalidate>
+        <label for="goal">What do you want to do?</label>
+        <div class="map-input-row">
+          <input type="text" id="goal" name="goal" placeholder="Check if my site is ready to launch" autocomplete="off">
+          <button class="btn btn-accent" type="submit">Find workflow</button>
         </div>
+        <p id="status" role="status"></p>
+      </form>
+      <div class="map-examples" id="examples" hidden>
+        <h3>Try an example</h3>
+        <div class="chips" id="chips"></div>
+        <details id="more-examples" hidden>
+          <summary>More examples</summary>
+          <div class="chips" id="extra-chips"></div>
+        </details>
       </div>
-      <p class="hint">or pick one:</p>
-      <div class="chips" id="chips"></div>
-      <p id="status" role="status" aria-live="polite"></p>
-    </form>
+    </div>
     <div id="result" hidden></div>
     <noscript><p class="sub">Workflow Map needs JavaScript. Every workflow is also listed, with its steps, on the <a href="/workflows/">workflows page</a>.</p></noscript>
   </div>

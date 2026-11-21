@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Diagnose Usage — AI Agent Skill for Claude Code and Codex</title>
-<meta name="description" content="Diagnoses why a Claude Code session or day burned through usage limits faster than expected, and says what to change. Reads the user&#x27;s own /usage…">
+<meta name="description" content="Diagnoses why a completed Codex or Claude Code run used more quota or credits than expected. Use when a session, automation, or day drained usage fast…">
 <link rel="canonical" href="https://skillsmith.tech/diagnose-usage/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Skillsmith by Caffeinity">
 <meta property="og:title" content="Diagnose Usage — AI Agent Skill for Claude Code and Codex">
-<meta property="og:description" content="Diagnoses why a Claude Code session or day burned through usage limits faster than expected, and says what to change. Reads the user&#x27;s own /usage breakdown, checks the known heavy-session causes (high effort levels, subagents inheriting effort, goal mode, workflows, agent teams, long SDK jobs), and returns up to three ranked culprits with one fix each, plus when to send /feedback. Use when the user says Claude Code usage is draining fast, they hit or are nearing their limit sooner than expected, one session cost far more than expected, or asks what /usage shows or how to cut burn in a session that already ran. Not for choosing an effort level before work starts or using less going forward (use choose-effort), or for plan limits, prices and API billing (use product-self-knowledge).">
+<meta property="og:description" content="Diagnoses why a completed Codex or Claude Code run used more quota or credits than expected. Use when a session, automation, or day drained usage fast, the user hit a limit sooner than expected, or they want help interpreting usage evidence for work that already ran. Compares run evidence with account usage and gives up to three supported causes, each with a change to verify. Not for choosing effort for upcoming work (use choose-effort), configuring persistent advisor or subagent model tiers (use setup-claude-advisor), or plan limits, prices, and API billing.">
 <meta property="og:url" content="https://skillsmith.tech/diagnose-usage/">
 <meta name="twitter:card" content="summary">
 <meta name="color-scheme" content="light dark">
@@ -27,7 +27,7 @@
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "Any",
   "url": "https://skillsmith.tech/diagnose-usage/",
-  "description": "Diagnoses why a Claude Code session or day burned through usage limits faster than expected, and says what to change. Reads the user's own /usage breakdown, checks the known heavy-session causes (high effort levels, subagents inheriting effort, goal mode, workflows, agent teams, long SDK jobs), and returns up to three ranked culprits with one fix each, plus when to send /feedback. Use when the user says Claude Code usage is draining fast, they hit or are nearing their limit sooner than expected, one session cost far more than expected, or asks what /usage shows or how to cut burn in a session that already ran. Not for choosing an effort level before work starts or using less going forward (use choose-effort), or for plan limits, prices and API billing (use product-self-knowledge).",
+  "description": "Diagnoses why a completed Codex or Claude Code run used more quota or credits than expected. Use when a session, automation, or day drained usage fast, the user hit a limit sooner than expected, or they want help interpreting usage evidence for work that already ran. Compares run evidence with account usage and gives up to three supported causes, each with a change to verify. Not for choosing effort for upcoming work (use choose-effort), configuring persistent advisor or subagent model tiers (use setup-claude-advisor), or plan limits, prices, and API billing.",
   "codeRepository": "https://github.com/arm-pz/diagnose-usage",
   "license": "https://spdx.org/licenses/MIT.html",
   "publisher": {
@@ -90,22 +90,22 @@
     <div class="install-line">
       <button class="cmd" type="button" data-copy="npx skills add arm-pz/diagnose-usage" aria-label="Copy the install command"><span id="cmd">npx skills add arm-pz/diagnose-usage</span><span class="copy" aria-hidden="true">Copy</span></button>
     </div>
-    <p class="facts">3 files and 86 lines, free under MIT. Built from <a href="https://github.com/arm-pz/diagnose-usage" target="_blank" rel="noopener">arm-pz/diagnose-usage</a> at <code>d8df948</code>.</p>
+    <p class="facts">4 files and 119 lines, free under MIT. Built from <a href="https://github.com/arm-pz/diagnose-usage" target="_blank" rel="noopener">arm-pz/diagnose-usage</a> at <code>a95ab4d</code>.</p>
   </div>
 </header>
 
 <section class="purpose tone" aria-labelledby="for-h">
   <div class="wrap">
     <h2 id="for-h">What it is for</h2>
-    <p class="body">Diagnoses why a Claude Code session or day burned through usage limits faster than expected, and says what to change. Reads the user&#x27;s own /usage breakdown, checks the known heavy-session causes (high effort levels, subagents inheriting effort, goal mode, workflows, agent teams, long SDK jobs), and returns up to three ranked culprits with one fix each, plus when to send /feedback.</p>
+    <p class="body">Diagnoses why a completed Codex or Claude Code run used more quota or credits than expected. Compares run evidence with account usage and gives up to three supported causes, each with a change to verify.</p>
     <div class="uses">
     <div class="uses-col when">
       <h3>Reach for it when</h3>
-      <ul><li>The user says Claude Code usage is draining fast, they hit or are nearing their limit sooner than expected, one session cost far more than expected, or asks what /usage shows or how to cut burn in a session that already ran.</li></ul>
+      <ul><li>A session, automation, or day drained usage fast, the user hit a limit sooner than expected, or they want help interpreting usage evidence for work that already ran.</li></ul>
     </div>
     <div class="uses-col not">
       <h3>Not for</h3>
-      <ul><li>Choosing an effort level before work starts or using less going forward (use choose-effort)</li><li>For plan limits, prices and API billing (use product-self-knowledge)</li></ul>
+      <ul><li>Choosing effort for upcoming work (use choose-effort)</li><li>Configuring persistent advisor or subagent model tiers (use setup-claude-advisor)</li><li>Plan limits, prices, and API billing</li></ul>
     </div>
     </div>
   </div>
@@ -117,12 +117,12 @@
     <h2 id="qb-h">Know what you are installing.</h2>
     <p class="qb-lead">Version, date and limits are read from the repo on every sync, and the check runs every night. Real-world runs are listed only with their evidence.</p>
     <dl class="qb-grid">
-      <div><dt>Version</dt><dd>1.0.0<small>commit d8df948</small></dd></div>
-      <div><dt>Updated</dt><dd><a href="https://github.com/arm-pz/diagnose-usage/commits" target="_blank" rel="noopener">6 Nov 2026</a><small>last commit to the repo</small></dd></div>
+      <div><dt>Version</dt><dd>1.1.0<small>commit a95ab4d</small></dd></div>
+      <div><dt>Updated</dt><dd><a href="https://github.com/arm-pz/diagnose-usage/commits" target="_blank" rel="noopener">21 Nov 2026</a><small>last commit to the repo</small></dd></div>
       <div><dt>Works in</dt><dd>Claude Code, Codex, Cursor, Qoder and any agent that loads a SKILL.md<small>plain text; no API keys</small></dd></div>
       <div><dt>Nightly check</dt><dd>Passing<small>No failures or warnings. <a href="https://github.com/arm-pz/skills-site/blob/main/.github/workflows/health.yml" target="_blank" rel="noopener">How it is checked</a></small></dd></div>
       <div><dt>Last real-world run</dt><dd><strong>PARTIAL</strong> · 13 Nov 2026, on a real-shaped /usage breakdown from a session that hit 96% of its window<small>The run read the paste and ranked 14 subagents inheriting opus at xhigh (61% subagents, 88% opus) as the main cause, but it hedged the 3 Nov xhigh default as &#x27;likely&#x27; and left the subagent-override setting unspecified, and I… <a href="https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/diagnose-usage/README.md" target="_blank" rel="noopener">See the run</a></small></dd></div>
-      <div class="qb-wide"><dt>Known limits</dt><dd>Not built for:<ul><li>Choosing an effort level before work starts or using less going forward (use choose-effort)</li><li>For plan limits, prices and API billing (use product-self-knowledge)</li></ul></dd></div>
+      <div class="qb-wide"><dt>Known limits</dt><dd>Not built for:<ul><li>Choosing effort for upcoming work (use choose-effort)</li><li>Configuring persistent advisor or subagent model tiers (use setup-claude-advisor)</li><li>Plan limits, prices, and API billing</li></ul></dd></div>
     </dl>
   </div>
 </section>
@@ -131,15 +131,16 @@
 <section class="ships" aria-labelledby="ships-h">
   <div class="wrap">
     <h2 id="ships-h">Every file it installs</h2>
-    <p class="sub">Measured from the packed archive at commit <code>d8df948</code>. A skill is plain text your agent reads, so this list is all of it.</p>
+    <p class="sub">Measured from the packed archive at commit <code>a95ab4d</code>. A skill is plain text your agent reads, so this list is all of it.</p>
     <table class="files">
       <thead class="sr-only"><tr><th>File</th><th>Lines</th><th>Bytes</th></tr></thead>
       <tbody>
-        <tr><td>SKILL.md</td><td class="n">35</td><td class="n bytes">3,456 B</td></tr>
+        <tr><td>SKILL.md</td><td class="n">44</td><td class="n bytes">3,814 B</td></tr>
         <tr><td>references/burn-sources.md</td><td class="n">30</td><td class="n bytes">2,849 B</td></tr>
-        <tr><td>references/trigger-cases.md</td><td class="n">21</td><td class="n bytes">2,247 B</td></tr>
+        <tr><td>references/codex-usage.md</td><td class="n">18</td><td class="n bytes">3,101 B</td></tr>
+        <tr><td>references/trigger-cases.md</td><td class="n">27</td><td class="n bytes">3,109 B</td></tr>
       </tbody>
-      <tfoot><tr><td>3 files</td><td class="n">86</td><td class="n bytes">4 KB</td></tr></tfoot>
+      <tfoot><tr><td>4 files</td><td class="n">119</td><td class="n bytes">5 KB</td></tr></tfoot>
     </table>
   </div>
 </section>
