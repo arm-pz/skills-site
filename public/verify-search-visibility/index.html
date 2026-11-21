@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verify Search Visibility — AI Agent Skill for Claude Code</title>
+<meta name="description" content="Measure what changed after a website&#x27;s SEO or AI search fixes go live. Reuse the original queries, target URLs and AI prompts, verify the live change…">
+<link rel="canonical" href="https://skillsmith.tech/verify-search-visibility/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Skillsmith by Caffeinity">
+<meta property="og:title" content="Verify Search Visibility — AI Agent Skill for Claude Code">
+<meta property="og:description" content="Measure what changed after a website&#x27;s SEO or AI search fixes go live. Reuse the original queries, target URLs and AI prompts, verify the live change, then compare matched Search Console windows or matched citation samples. Reports which fixes shipped, which outcomes changed, and what remains unknown. Use when asked whether a deployed search visibility fix worked, whether a page gained impressions, or whether AI answers cite a page more often. Not for the initial diagnosis (use diagnose-search-visibility), implemented fixes on individual skill pages (use fix-skill-visibility), or requesting indexing (use get-indexed).">
+<meta property="og:url" content="https://skillsmith.tech/verify-search-visibility/">
+<meta name="twitter:card" content="summary">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="preload" href="/fonts/files/cY9AfjOCX1hbuyalUrK4397yjA.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/files/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "verify-search-visibility",
+  "alternateName": "Verify Search Visibility",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any",
+  "url": "https://skillsmith.tech/verify-search-visibility/",
+  "description": "Measure what changed after a website's SEO or AI search fixes go live. Reuse the original queries, target URLs and AI prompts, verify the live change, then compare matched Search Console windows or matched citation samples. Reports which fixes shipped, which outcomes changed, and what remains unknown. Use when asked whether a deployed search visibility fix worked, whether a page gained impressions, or whether AI answers cite a page more often. Not for the initial diagnosis (use diagnose-search-visibility), implemented fixes on individual skill pages (use fix-skill-visibility), or requesting indexing (use get-indexed).",
+  "codeRepository": "https://github.com/arm-pz/verify-search-visibility",
+  "license": "https://spdx.org/licenses/MIT.html",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Caffeinity",
+    "url": "https://caffeinity.com/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+<!-- gen:quality-css:start -->
+<style>
+  .qb{--qb-line:var(--rule,var(--line,color-mix(in srgb,currentColor 14%,transparent)));--qb-dim:var(--dim,var(--muted));padding:clamp(64px,9vw,128px) 0}
+  .qb h2{font-family:var(--serif);font-weight:400;font-size:clamp(34px,4.3vw,60px);line-height:1;letter-spacing:-.024em;margin:0}
+  .qb-lead{color:var(--qb-dim);max-width:58ch;margin-top:18px;font-size:17px}
+  .qb a{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em}
+  .qb-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:0 clamp(28px,4vw,64px);margin-top:clamp(32px,4vw,56px)}
+  .qb-grid>div{border-top:2px solid currentColor;padding:14px 0 30px}
+  .qb dt{font-size:14px;font-weight:600;line-height:1.3;color:var(--qb-dim)}
+  .qb dd{margin:8px 0 0;font-family:var(--serif);font-size:24px;line-height:1.15;letter-spacing:-.01em}
+  .qb dd small{display:block;font-family:var(--sans);letter-spacing:0;color:var(--qb-dim);font-size:15px;line-height:1.5;margin-top:8px}
+  .qb .qb-wide{grid-column:1/-1}
+  .qb .qb-wide dd{font-family:var(--sans);font-size:17px;line-height:1.55;letter-spacing:0;max-width:78ch}
+  .qb ul{list-style:none;margin:8px 0 0;padding:0}
+  .qb li{padding:10px 0;border-top:1px solid var(--qb-line)}
+  .qb .qb-flag{font-weight:400}
+  .qb .qb-flag.fail{box-shadow:inset 0 -.14em 0 var(--ember,var(--accent))}
+</style>
+<!-- gen:quality-css:end -->
+</head>
+<body>
+
+<nav class="nav" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="/"><b>/</b>skillsmith <span class="brand-by">by caffeinity</span></a>
+    <div class="nav-links">
+      <a href="/skills/">Skills</a>
+      <a href="/workflows/">Workflows</a>
+      <a href="/mods/">Mods</a>
+      <a href="/story/">Story</a>
+      <a href="/notes/">Notes</a>
+      <a href="/work/">Work with us</a>
+    </div>
+    <div class="nav-cta">
+      <a class="gh" href="https://github.com/arm-pz" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-accent btn-sm" href="/caffeinity-routing/">Start here</a>
+    </div>
+  </div>
+</nav>
+
+<header class="sk-hero">
+  <div class="wrap">
+    <p class="crumbs"><a href="/skills/">Skills</a><span>verify-search-visibility</span></p>
+    <h1>Verify Search Visibility</h1>
+    <p class="lead">Verifies live SEO fixes and measures changes in Google performance or AI citations against a comparable baseline.</p>
+    <div class="install-line">
+      <button class="cmd" type="button" data-copy="npx skills add arm-pz/verify-search-visibility" aria-label="Copy the install command"><span id="cmd">npx skills add arm-pz/verify-search-visibility</span><span class="copy" aria-hidden="true">Copy</span></button>
+    </div>
+    <p class="facts">2 files and 28 lines, free under MIT. Built from <a href="https://github.com/arm-pz/verify-search-visibility" target="_blank" rel="noopener">arm-pz/verify-search-visibility</a> at <code>7bbae92</code>.</p>
+  </div>
+</header>
+
+<section class="purpose tone" aria-labelledby="for-h">
+  <div class="wrap">
+    <h2 id="for-h">What it is for</h2>
+    <p class="body">Measure what changed after a website&#x27;s SEO or AI search fixes go live. Reuse the original queries, target URLs and AI prompts, verify the live change, then compare matched Search Console windows or matched citation samples. Reports which fixes shipped, which outcomes changed, and what remains unknown.</p>
+    <div class="uses">
+    <div class="uses-col when">
+      <h3>Reach for it when</h3>
+      <ul><li>Asked whether a deployed search visibility fix worked, whether a page gained impressions, or whether AI answers cite a page more often.</li></ul>
+    </div>
+    <div class="uses-col not">
+      <h3>Not for</h3>
+      <ul><li>The initial diagnosis (use diagnose-search-visibility)</li><li>Implemented fixes on individual skill pages (use fix-skill-visibility)</li><li>Requesting indexing (use get-indexed)</li></ul>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- gen:quality:start -->
+<section class="qb" aria-labelledby="qb-h">
+  <div class="wrap">
+    <h2 id="qb-h">Know what you are installing.</h2>
+    <p class="qb-lead">Version, date and limits are read from the repo on every sync, and the check runs every night. Real-world runs are listed only with their evidence.</p>
+    <dl class="qb-grid">
+      <div><dt>Version</dt><dd>0.1.0<small>commit 7bbae92</small></dd></div>
+      <div><dt>Updated</dt><dd><a href="https://github.com/arm-pz/verify-search-visibility/commits" target="_blank" rel="noopener">21 Nov 2026</a><small>last commit to the repo</small></dd></div>
+      <div><dt>Works in</dt><dd>Claude Code, Codex, Cursor, Qoder and any agent that loads a SKILL.md<small>plain text; no API keys</small></dd></div>
+      <div><dt>Nightly check</dt><dd>Not checked yet<small>It joins the nightly check after its first run. <a href="https://github.com/arm-pz/skills-site/blob/main/.github/workflows/health.yml" target="_blank" rel="noopener">How it is checked</a></small></dd></div>
+      <div><dt>Last real-world run</dt><dd>No public run yet<small>Runs are published only with their evidence.</small></dd></div>
+      <div class="qb-wide"><dt>Known limits</dt><dd>Not built for:<ul><li>The initial diagnosis (use diagnose-search-visibility)</li><li>Implemented fixes on individual skill pages (use fix-skill-visibility)</li><li>Requesting indexing (use get-indexed)</li></ul></dd></div>
+    </dl>
+  </div>
+</section>
+<!-- gen:quality:end -->
+
+<section class="ships" aria-labelledby="ships-h">
+  <div class="wrap">
+    <h2 id="ships-h">Every file it installs</h2>
+    <p class="sub">Measured from the packed archive at commit <code>7bbae92</code>. A skill is plain text your agent reads, so this list is all of it.</p>
+    <table class="files">
+      <thead class="sr-only"><tr><th>File</th><th>Lines</th><th>Bytes</th></tr></thead>
+      <tbody>
+        <tr><td>SKILL.md</td><td class="n">19</td><td class="n bytes">3,036 B</td></tr>
+        <tr><td>references/comparison-examples.md</td><td class="n">9</td><td class="n bytes">1,292 B</td></tr>
+      </tbody>
+      <tfoot><tr><td>2 files</td><td class="n">28</td><td class="n bytes">2 KB</td></tr></tfoot>
+    </table>
+  </div>
+</section>
+
+<section class="more tone" aria-labelledby="more-h">
+  <div class="wrap">
+    <h2 id="more-h">More in SEO &amp; Search</h2>
+    <ul class="related">
+      <li><a href="/seo-crawl/"><strong>SEO Crawl</strong><span>Crawls a site you own and returns deterministic, evidence-backed technical SEO findings, with blocked or unrun checks reported INCONCLUSIVE rather than a pass.</span></a></li>
+      <li><a href="/keyword-guard/"><strong>Keyword Guard</strong><span>Plans topic clusters and kills keyword cannibalization so exactly one page wins each query. The cannibalization audit is a mandatory blocker before any content change — with a sitemap fallback for when you have no Search Console access.</span></a></li>
+      <li><a href="/keyword-resolver/"><strong>Keyword Resolver</strong><span>Resolves keyword cannibalization with Keyword-Guard, then rewrites titles, H1s and meta descriptions with Wordsmith. One query, one owner — the ownership audit blocks until the map is settled, and a sitemap fallback is named as a fallback when you have no Search Console.</span></a></li>
+    </ul>
+    <div class="source">
+      <p>Read it before you install it: the skill lives at <code>.</code> in <a href="https://github.com/arm-pz/verify-search-visibility" target="_blank" rel="noopener">arm-pz/verify-search-visibility</a>.</p>
+      <a class="btn" href="https://github.com/arm-pz/verify-search-visibility" target="_blank" rel="noopener">Open the repo</a>
+    </div>
+  </div>
+</section>
+
+<footer class="roast">
+  <div class="wrap">
+    <div class="meta">
+      <span>Verify Search Visibility is an open agent skill on <a href="/">Skillsmith by Caffeinity</a>, from <a href="https://github.com/arm-pz/verify-search-visibility" target="_blank" rel="noopener">arm-pz/verify-search-visibility</a>.</span>
+      <a href="/work/">Custom skills for your team</a>
+      <a href="https://github.com/arm-pz" target="_blank" rel="noopener">github.com/arm-pz</a>
+    </div>
+    <p class="kural"><span lang="ta">யாம் பெற்ற இன்பம் பெறுக இவ்வையகம்</span><span>“May this world attain the same bliss that I have attained.”</span></p>
+  </div>
+</footer>
+
+<script src="/assets/site.js" defer></script>
+</body>
+</html>

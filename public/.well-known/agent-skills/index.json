@@ -24,7 +24,7 @@
     },
     {
       "name": "caffeinity-routing",
-      "description": "Claude Code plugin marketplace and index of arm-pz agent skills: editorial, teaching, recruiting, SEO planning, release preflight, sub-agent tournaments and repo discovery. Install with npx skills add arm-pz/caffeinity-skills.",
+      "description": "Plugin marketplace for Skillsmith by Caffeinity. Install tested AI agent skills and workflows for Claude Code and Codex, with source and evidence at skillsmith.tech.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/caffeinity-routing.tar.gz",
       "digest": "sha256:d1a45fffe54e35945e75344c35f15dafe8d8c7f5748fba2d32f36ce588790bc4"
@@ -35,6 +35,13 @@
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/career-track.tar.gz",
       "digest": "sha256:00709a334919880880352d33332c1560d973e03dd45a87f7be8a3ebd05234d00"
+    },
+    {
+      "name": "check-skill-visibility",
+      "description": "Audit Google visibility for individual agent skill pages. Compare branded and task queries, check Search Console index evidence, and produce URL-level findings. Part of Skillsmith by Caffeinity.",
+      "type": "archive",
+      "url": "https://skillsmith.tech/agent-skills/check-skill-visibility.tar.gz",
+      "digest": "sha256:9a1e228f5d73cd5215938a92eeb6b717fcf48fcd80fea1dac4504fa42cce6e74"
     },
     {
       "name": "choose-effort",
@@ -66,7 +73,7 @@
     },
     {
       "name": "course-builder",
-      "description": "Claude Code plugin marketplace and index of arm-pz agent skills: editorial, teaching, recruiting, SEO planning, release preflight, sub-agent tournaments and repo discovery. Install with npx skills add arm-pz/caffeinity-skills.",
+      "description": "Plugin marketplace for Skillsmith by Caffeinity. Install tested AI agent skills and workflows for Claude Code and Codex, with source and evidence at skillsmith.tech.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/course-builder.tar.gz",
       "digest": "sha256:1e8dfe3ceb472fd5ceab966ed884b027cd7e84f669755fb5a85695facc6efe87"
@@ -84,6 +91,13 @@
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/data-readout.tar.gz",
       "digest": "sha256:f56313444cf01ea0a6a4e87335ea7d67f18d339ea43e1861f91824d7bf611951"
+    },
+    {
+      "name": "diagnose-search-visibility",
+      "description": "Find why a homepage or service page is missing from Google or AI answers. Compare brand and task queries, check index evidence, and hand each supported finding to the right repair skill. Part of Skillsmith by Caffeinity.",
+      "type": "archive",
+      "url": "https://skillsmith.tech/agent-skills/diagnose-search-visibility.tar.gz",
+      "digest": "sha256:17f1d546577a04cec1931cdb044c86bebdcae155b27217f6f824f27704d1d14b"
     },
     {
       "name": "diagnose-usage",
@@ -126,6 +140,13 @@
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/findable-polish.tar.gz",
       "digest": "sha256:c6d9a3f648f5822a7b273d8568b52b03cb1ec7e7d4555afbc964bf4dfc5e1627"
+    },
+    {
+      "name": "fix-skill-visibility",
+      "description": "Fix evidence-backed Google visibility gaps for agent skill pages. Apply and verify changes to discovery links, canonicals, task-focused copy, and public listings. Part of Skillsmith by Caffeinity.",
+      "type": "archive",
+      "url": "https://skillsmith.tech/agent-skills/fix-skill-visibility.tar.gz",
+      "digest": "sha256:a8d77ee4016a0338fe4f9ac32368b896f6e12ead74f2c214b6b4ed6ac169a3e4"
     },
     {
       "name": "get-indexed",
@@ -178,7 +199,7 @@
     },
     {
       "name": "paper-trail",
-      "description": "Claude Code plugin marketplace and index of arm-pz agent skills: editorial, teaching, recruiting, SEO planning, release preflight, sub-agent tournaments and repo discovery. Install with npx skills add arm-pz/caffeinity-skills.",
+      "description": "Plugin marketplace for Skillsmith by Caffeinity. Install tested AI agent skills and workflows for Claude Code and Codex, with source and evidence at skillsmith.tech.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/paper-trail.tar.gz",
       "digest": "sha256:cacb21e2865f9e92d46027f87f225b3e864a21251b0b1e671c628a42ab55daa7"
@@ -360,7 +381,7 @@
     },
     {
       "name": "skill-estate",
-      "description": "Claude Code plugin marketplace and index of arm-pz agent skills: editorial, teaching, recruiting, SEO planning, release preflight, sub-agent tournaments and repo discovery. Install with npx skills add arm-pz/caffeinity-skills.",
+      "description": "Plugin marketplace for Skillsmith by Caffeinity. Install tested AI agent skills and workflows for Claude Code and Codex, with source and evidence at skillsmith.tech.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/skill-estate.tar.gz",
       "digest": "sha256:b56b11f95e76ba757f8583562823353849f1d8a87fc9362a7217f684d7916803"
@@ -423,7 +444,7 @@
     },
     {
       "name": "tune-and-ship",
-      "description": "Claude Code plugin marketplace and index of arm-pz agent skills: editorial, teaching, recruiting, SEO planning, release preflight, sub-agent tournaments and repo discovery. Install with npx skills add arm-pz/caffeinity-skills.",
+      "description": "Plugin marketplace for Skillsmith by Caffeinity. Install tested AI agent skills and workflows for Claude Code and Codex, with source and evidence at skillsmith.tech.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/tune-and-ship.tar.gz",
       "digest": "sha256:f1304d4562cee98a474722cbfee835c0c4d8dc642d31fe1419e06a642bab73ba"
@@ -448,6 +469,13 @@
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/upstream-polish.tar.gz",
       "digest": "sha256:28c327dc26fd3a29383ae0f6c9580cfe3ce6c101d71aba1fcf7faacfa88a1fbb"
+    },
+    {
+      "name": "verify-search-visibility",
+      "description": "Measure whether deployed SEO and AI search fixes improved visibility. Verify the live repair, then compare Search Console data and observed citations against the original baseline. Part of Skillsmith by Caffeinity.",
+      "type": "archive",
+      "url": "https://skillsmith.tech/agent-skills/verify-search-visibility.tar.gz",
+      "digest": "sha256:48d1652d3645b49365c71530b7ad3c9115668df56c8fcac37b60a8da4d08d690"
     },
     {
       "name": "web-preflight",

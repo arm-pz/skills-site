@@ -1,6 +1,6 @@
 # Skillsmith by Caffeinity
 
-> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: 64 skills and 7 mods mapped into 12 workflows (build a skill, get found, gate a release, grow search traffic, land a job, decide, learn, run outbound, launch a product). Plain markdown, no API keys.
+> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: 68 skills and 7 mods mapped into 12 workflows (build a skill, get found, gate a release, grow search traffic, land a job, decide, learn, run outbound, launch a product). Plain markdown, no API keys.
 
 ## Install
 
@@ -75,6 +75,10 @@ Sections: [skills](https://skillsmith.tech/skills/), [workflows](https://skillsm
 - [keyword-guard](https://skillsmith.tech/keyword-guard/): Plans topic clusters and kills keyword cannibalization so exactly one page wins each query.
 - [keyword-resolver](https://skillsmith.tech/keyword-resolver/): Resolves keyword cannibalization with Keyword-Guard, then rewrites titles, H1s and meta descriptions with Wordsmith.
 - [seo-polish](https://skillsmith.tech/seo-polish/): seo-crawl's measured findings, an optional seo-audit diagnosis, then Wordsmith drafts optimized alternatives for every High and Medium finding: titles, meta descriptions, headings and internal-link anchors.
+- [diagnose-search-visibility](https://skillsmith.tech/diagnose-search-visibility/): Diagnoses why a homepage or service page is missing from Google or AI answers, then hands each supported finding to the right repair skill.
+- [verify-search-visibility](https://skillsmith.tech/verify-search-visibility/): Verifies live SEO fixes and measures changes in Google performance or AI citations against a comparable baseline.
+- [check-skill-visibility](https://skillsmith.tech/check-skill-visibility/): Checks why individual skill pages are missing from Google and produces URL-level findings for repair.
+- [fix-skill-visibility](https://skillsmith.tech/fix-skill-visibility/): Applies and verifies fixes for individual skill pages using evidence from a completed visibility audit.
 
 ## Writing & Content
 
@@ -114,7 +118,7 @@ Sections: [skills](https://skillsmith.tech/skills/), [workflows](https://skillsm
 - [Build a skill and make it installable](https://skillsmith.tech/workflows/build-a-skill/) (Brew 1 · Pour-over): draft-skill or prompts-to-skill -> tune-skill -> prompts-to-skill-release -> skill-to-mod
 - [Get a repo, skill or plugin found](https://skillsmith.tech/workflows/get-found/) (Brew 2 · Bloom): findable -> publish-pipeline -> upstream-check -> get-indexed
 - [Decide whether a site is safe to launch](https://skillsmith.tech/workflows/launch-safely/) (Brew 3 · Espresso): web-preflight -> pre-ship-security-red-team -> pre-ship-performance-audit -> release-gate-chair or release-gate-ledger or release-gate-validator
-- [Grow organic search traffic](https://skillsmith.tech/workflows/grow-search-traffic/) (Brew 4 · Cold brew): seo-crawl -> keyword-guard -> wordsmith -> pre-ship-performance-audit -> platform-content -> get-indexed
+- [Grow organic search traffic](https://skillsmith.tech/workflows/grow-search-traffic/) (Brew 4 · Cold brew): diagnose-search-visibility -> seo-crawl -> keyword-guard -> wordsmith -> pre-ship-performance-audit -> platform-content -> get-indexed -> verify-search-visibility
 - [Land a job](https://skillsmith.tech/workflows/land-a-job/) (Brew 5 · French press): recruiter-lens -> applicant-kit -> application-pilot -> career-track
 - [Make a decision](https://skillsmith.tech/workflows/make-a-decision/) (Brew 6 · Cupping): research-brief -> data-readout -> crash-test or do-better -> strategy-memo
 - [Learn a skill](https://skillsmith.tech/workflows/learn-a-skill/) (Brew 7 · Slow drip): topic-primer -> study-system -> course-builder
