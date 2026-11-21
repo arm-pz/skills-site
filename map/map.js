@@ -3,6 +3,7 @@
 (function(){
   var T=window.Tool,M=window.WorkflowMap,$=function(id){return document.getElementById(id);};
   var form=$("form"),goal=$("goal"),statusEl=$("status"),result=$("result"),chips=$("chips");
+  var examples=$("examples"),moreExamples=$("more-examples"),extraChips=$("extra-chips");
   if(!form||!T||!M)return;
   var el=T.el,manifest=null;
   function say(msg,isErr){statusEl.textContent=msg||"";statusEl.className=isErr?"err":"";}
@@ -79,7 +80,8 @@
 
   function run(){
     var q=goal.value.trim();
-    if(!q){say("Say what you are trying to get done, or pick a goal below.",true);goal.focus();return;}
+    if(!q){goal.setAttribute("aria-invalid","true");say("Enter a goal to continue.",true);goal.focus();return;}
+    goal.removeAttribute("aria-invalid");
     say("");
     load().then(function(d){
       var ranked=M.rank(q,d);
@@ -95,17 +97,28 @@
     }).catch(function(){say("Could not load the workflow list. Reload the page and try again.",true);});
   }
   form.addEventListener("submit",function(e){e.preventDefault();run();});
+  goal.addEventListener("input",function(){
+    if(!goal.hasAttribute("aria-invalid"))return;
+    goal.removeAttribute("aria-invalid");
+    say("");
+  });
 
   /* one chip per workflow, from the same list, so the page never names a route that is gone */
   load().then(function(d){
-    (d.workflows||[]).forEach(function(flow,i){
+    var workflows=d.workflows||[];
+    var previewCount=4;
+    workflows.forEach(function(flow,i){
       var b=el("button",null,flow.title);b.type="button";
       b.addEventListener("click",function(){
-        goal.value="";say("");
-        var ranked=(d.workflows||[]).map(function(f){return {flow:f,score:0,matched:[]};});
+        goal.value="";
+        goal.removeAttribute("aria-invalid");
+        say("");
+        var ranked=workflows.map(function(f){return {flow:f,score:0,matched:[]};});
         draw(d,ranked,i,false);
       });
-      chips.appendChild(b);
+      (i<previewCount?chips:extraChips).appendChild(b);
     });
+    examples.hidden=workflows.length===0;
+    moreExamples.hidden=workflows.length<=previewCount;
   }).catch(function(){});
 })();
