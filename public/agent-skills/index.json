@@ -195,7 +195,7 @@
       "description": "Verify what a subagent says it did before you relay or ship it. Agent skill for a lead model (Fable leading Opus, or any orchestrator and worker): checkable brief, enforcement rules, a nine-step check ladder, a diff inventory script and an explicit go/no-go. For Claude Code and any agent that loads a SKILL.md. Not an Opus prompting guide.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/opus-playbook.tar.gz",
-      "digest": "sha256:8093f090841da3a0a059010dc85f4dd7453a7d41fc1e36ab801b6344fd21de5d"
+      "digest": "sha256:94020fee769bdf70a331b7fac49db0addb2867eb598edcfdbbbc10dd27671107"
     },
     {
       "name": "paper-trail",
@@ -363,7 +363,7 @@
       "description": "Agent skill that configures Claude Code for quota-optimised model tiering: Sonnet for the main session, Opus on call via /advisor, Haiku for read-only subagents, and Sonnet for code editing. Audits version and env flags, shows a diff preview, and never writes without explicit confirmation.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/setup-claude-advisor.tar.gz",
-      "digest": "sha256:7caf4731debcc7f6a749aa5cfd1f71de2962c85c851d0779fdce00a72e3f2821"
+      "digest": "sha256:220f26e3629401bf2e10745e3ffe02dad93da9da6caf3859a713d992e26e4d85"
     },
     {
       "name": "ship-second-brain",
@@ -377,7 +377,7 @@
       "description": "Agent skill that turns a website topic or landing-page brief into one self-contained build prompt: subject-native concept, final copy, every source file embedded verbatim, and a replay check that compares the rebuilt tree byte for byte. Portable SKILL.md; tested in Qoder.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/site-prompt.tar.gz",
-      "digest": "sha256:b38ae8b35dd7b185568b3c30ca0b4b5469272a752420e2b3f635f83e3134a08f"
+      "digest": "sha256:ca2eebb3182d6a29fc48570e9cc0a322d8a24b8d611cfe50eb8c779c8d47f780"
     },
     {
       "name": "skill-estate",
