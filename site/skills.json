@@ -4120,17 +4120,17 @@
       "title": "Replace Dead Tools",
       "pageTitle": "Replace Dead Tools — AI Agent Skill for Claude Code",
       "blurb": "Checks every tool named on best-of and alternatives lists for shutdowns, parked domains, acquisitions and abandonment, confirms each verdict with evidence a person can open, and drafts a \"replace the dead entry with us\" pitch per affected…",
-      "stats": "8 files · 763 lines · 13 KB",
+      "stats": "8 files · 764 lines · 13 KB",
       "install": "npx skills add arm-pz/replace-dead-tools",
       "page": "generated",
       "order": 926,
       "pageSource": {
-        "description": "Checks every tool named on best-of and alternatives lists for shutdowns, parked domains, acquisitions and abandonment, confirms each verdict with evidence a person can open, and drafts a \"replace the dead entry with us\" pitch per affected list. Use whenever someone wants the dead, discontinued or acquired tools still sitting on roundup articles so they can pitch themselves as the replacement, asks which listed tools no longer exist, or wants a broken-entry angle for list outreach, even if they never say dead link building. Step 2 of a three-step handover: reads get-listed's files, or a list of article URLs, and hands over to find-partners. Not for finding the lists or their authors (use get-listed), broken links on your own site (use broken-links), or partner and link-swap outreach (use find-partners).",
+        "description": "Checks every tool named on best-of and alternatives lists for shutdowns, parked domains, acquisitions and abandonment, confirms each verdict with evidence a person can open, and drafts a \"replace the dead entry with us\" pitch per affected list. Use whenever someone wants the dead, discontinued or acquired tools still sitting on roundup articles so they can pitch themselves as the replacement, asks which listed tools no longer exist, or wants a broken-entry angle for list outreach, even if they never say dead link building. Step 2 of a three-step handover: reads get-listed's files, or a list of article URLs, and hands over to find-partners. Not for finding the lists or their authors (use get-listed), broken links on your own site (use seo-crawl), or partner and link-swap outreach (use find-partners).",
         "files": [
           {
             "path": "SKILL.md",
             "lines": 93,
-            "bytes": 5128
+            "bytes": 5125
           },
           {
             "path": "evals/evals.json",
@@ -4139,8 +4139,8 @@
           },
           {
             "path": "evals/trigger-cases.md",
-            "lines": 34,
-            "bytes": 2650
+            "lines": 35,
+            "bytes": 2782
           },
           {
             "path": "references/confirm.md",
@@ -4169,19 +4169,19 @@
           }
         ],
         "fileCount": 8,
-        "lines": 763,
-        "bytes": 13755,
+        "lines": 764,
+        "bytes": 13808,
         "license": "MIT",
-        "commit": "1ae6e1088d582f28b2ef8c2d91bd52488fd984e8",
-        "sha256": "d707acd8c531ab5320fecab9c1492e3579076e92dd5cf57b4bcd0004eaa56feb"
+        "commit": "4096c58e28cf7c47461b9dcb922be962d88c3c5a",
+        "sha256": "faabb7a0675ff1ee6feb56ad9905340fbe46139ce2761535debab70da93e3c8d"
       },
       "quality": {
         "version": "1.0.0",
-        "commit": "1ae6e10",
-        "updated": "2026-11-17",
+        "commit": "4096c58",
+        "updated": "2026-11-21",
         "notFor": [
           "finding the lists or their authors (use get-listed)",
-          "broken links on your own site (use broken-links)",
+          "broken links on your own site (use seo-crawl)",
           "partner and link-swap outreach (use find-partners)"
         ]
       }
