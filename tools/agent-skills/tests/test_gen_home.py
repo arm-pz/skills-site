@@ -89,6 +89,19 @@ class GenHomeTest(unittest.TestCase):
         self.assertIn('<span class="chip chip-hot">chain</span>', out)
         self.assertIn('<span class="chip chip-hot">tested 24 Oct 2026</span>', out)
 
+    def test_card_claims_a_run_only_when_the_newest_run_passed(self):
+        partial = dict(TESTED, date="2026-11-13", verdict="PARTIAL")
+        alpha = dict(MANIFEST["skills"][0], tested=TESTED, latestRun=partial)
+        out = render({**MANIFEST, "skills": [alpha]})
+        self.assertNotIn("tested 24 Oct 2026", out)
+        self.assertEqual(gen_home.run_label(alpha, "shown working"), "")
+        # A pass newer than the graded run (crash-test's 18 Nov run) still counts.
+        newer = dict(alpha, tested=dict(TESTED, date="2026-11-18"))
+        self.assertEqual(gen_home.run_label(newer, "tested"), "tested 18 Nov 2026")
+        passed = dict(alpha, latestRun=dict(partial, verdict="PASS"))
+        self.assertEqual(gen_home.run_label(passed, "tested"), "tested 13 Nov 2026")
+        self.assertEqual(gen_home.run_label(MANIFEST["skills"][0], "tested"), "")
+
     def test_workflow_and_outcome_regions_link_the_workflow_page(self):
         out = render()
         self.assertIn('<a href="/alpha/">alpha</a> <span class="opt">optional</span>', out)
@@ -99,6 +112,19 @@ class GenHomeTest(unittest.TestCase):
         self.assertIn('<summary><b>Edit a page</b><i aria-hidden="true"></i><span>Pour-over</span></summary>', out)
         self.assertIn('<details class="brew" name="brew" open>', out)
         self.assertIn("Open Brew 1 · Pour-over</a>", out)
+
+    def test_lead_workflow_comes_first_and_open_on_the_menu(self):
+        first = MANIFEST["workflows"][0]
+        lead = dict(first, id="dial-in", number=2, name="Dial-in", title="Set up an agent",
+                    slug="set-up-an-agent", lead=True)
+        out = render({**MANIFEST, "workflows": [first, lead]})
+        menu = out[out.index("gen:outcomes:start"):out.index("gen:outcomes:end")]
+        self.assertLess(menu.index("Set up an agent"), menu.index("Edit a page"))
+        self.assertIn('<details class="brew" name="brew" open>\n        <summary><b>Set up an agent</b>', menu)
+        self.assertEqual(menu.count(" open>"), 1)
+        self.assertIn("Open Brew 2 · Dial-in</a>", menu)
+        listing = out[out.index("gen:workflows:start"):out.index("gen:workflows:end")]
+        self.assertLess(listing.index("Edit a page"), listing.index("Set up an agent"))
 
     def test_flagships_need_a_featured_skill_and_show_its_run(self):
         self.assertNotIn('class="flag"', render())

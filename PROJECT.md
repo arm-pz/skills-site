@@ -250,6 +250,15 @@ serves `www.skillsmith.tech` and `skills.caffeinity.com`, and two Cloudflare Red
 to `https://skillsmith.tech` with the path kept (301). Keep both hostnames attached to the Pages
 project: the redirects only fire on hostnames Cloudflare serves.
 
+Nothing in the build can see what Cloudflare does after deploy, so the nightly `edge` job in
+`health.yml` runs `tools/agent-skills/check_edge.mjs` against the live site: no page may carry
+links rewritten by Email Address Obfuscation (`href="/cdn-cgi/l/email-protection…"` or
+`data-cfemail`; wrap addresses in `<!--email_off-->`), both hostnames above must answer **301**
+(not 302) to the same path, and `/llms.txt` must state the same "N skills and M mods" as the
+homepage. It keeps one "Edge drift" issue open until clean. It was first written on 2026-11-04,
+when the rule served 302 and `/work/` served obfuscated links while every build gate passed; on
+2026-11-20 `/work/`, `/check/`, `/checks/` and `/prose/` were still being rewritten.
+
 ## Known gaps
 
 Closed on 2026-10-24:
