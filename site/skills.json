@@ -4241,6 +4241,186 @@
           "pressure-testing a decision (use crash-test)"
         ]
       }
+    },
+    {
+      "name": "diagnose-search-visibility",
+      "repo": "arm-pz/diagnose-search-visibility",
+      "path": ".",
+      "group": "seo-search",
+      "tag": "seo",
+      "title": "Diagnose Search Visibility",
+      "pageTitle": "Diagnose Search Visibility — AI Agent Skill for Claude Code",
+      "blurb": "Diagnoses why a homepage or service page is missing from Google or AI answers, then hands each supported finding to the right repair skill.",
+      "stats": "2 files · 54 lines · 4 KB",
+      "install": "npx skills add arm-pz/diagnose-search-visibility",
+      "page": "generated",
+      "order": 928,
+      "pageSource": {
+        "description": "Diagnose why a website, brand, or service page is missing from Google results or rarely cited in AI search answers. Compare expected URLs with observed results, distinguish crawl and indexing issues from brand ambiguity, query mismatch and citation gaps, and produce evidence-backed findings with repair owners and repeatable checks. Use when a site appears for its domain but not its brand, a service page is missing for its target query, or AI answers cite competing sources. Not for auditing individual agent skill pages (use check-skill-visibility), a complete sitewide SEO repair (use seo-sweep), or URL submission alone (use get-indexed).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 21,
+            "bytes": 3784
+          },
+          {
+            "path": "references/measurement-and-handoff.md",
+            "lines": 33,
+            "bytes": 4502
+          }
+        ],
+        "fileCount": 2,
+        "lines": 54,
+        "bytes": 3633,
+        "license": "MIT",
+        "commit": "cbaa0e1d174acd1c7ce153d8ef4e7c5647015a9a",
+        "sha256": "17f1d546577a04cec1931cdb044c86bebdcae155b27217f6f824f27704d1d14b"
+      },
+      "quality": {
+        "version": "0.1.0",
+        "commit": "cbaa0e1",
+        "updated": "2026-11-21",
+        "notFor": [
+          "auditing individual agent skill pages (use check-skill-visibility)",
+          "a complete sitewide SEO repair (use seo-sweep)",
+          "URL submission alone (use get-indexed)"
+        ]
+      }
+    },
+    {
+      "name": "verify-search-visibility",
+      "repo": "arm-pz/verify-search-visibility",
+      "path": ".",
+      "group": "seo-search",
+      "tag": "seo",
+      "title": "Verify Search Visibility",
+      "pageTitle": "Verify Search Visibility — AI Agent Skill for Claude Code",
+      "blurb": "Verifies live SEO fixes and measures changes in Google performance or AI citations against a comparable baseline.",
+      "stats": "2 files · 28 lines · 2 KB",
+      "install": "npx skills add arm-pz/verify-search-visibility",
+      "page": "generated",
+      "order": 929,
+      "pageSource": {
+        "description": "Measure what changed after a website's SEO or AI search fixes go live. Reuse the original queries, target URLs and AI prompts, verify the live change, then compare matched Search Console windows or matched citation samples. Reports which fixes shipped, which outcomes changed, and what remains unknown. Use when asked whether a deployed search visibility fix worked, whether a page gained impressions, or whether AI answers cite a page more often. Not for the initial diagnosis (use diagnose-search-visibility), implemented fixes on individual skill pages (use fix-skill-visibility), or requesting indexing (use get-indexed).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 19,
+            "bytes": 3036
+          },
+          {
+            "path": "references/comparison-examples.md",
+            "lines": 9,
+            "bytes": 1292
+          }
+        ],
+        "fileCount": 2,
+        "lines": 28,
+        "bytes": 1994,
+        "license": "MIT",
+        "commit": "7bbae920c1d9002480f534021e682ce8a56712a9",
+        "sha256": "48d1652d3645b49365c71530b7ad3c9115668df56c8fcac37b60a8da4d08d690"
+      },
+      "quality": {
+        "version": "0.1.0",
+        "commit": "7bbae92",
+        "updated": "2026-11-21",
+        "notFor": [
+          "the initial diagnosis (use diagnose-search-visibility)",
+          "implemented fixes on individual skill pages (use fix-skill-visibility)",
+          "requesting indexing (use get-indexed)"
+        ]
+      }
+    },
+    {
+      "name": "check-skill-visibility",
+      "repo": "arm-pz/check-skill-visibility",
+      "path": ".",
+      "group": "seo-search",
+      "tag": "seo",
+      "title": "Check Skill Visibility",
+      "pageTitle": "Check Skill Visibility — AI Agent Skill for Claude Code",
+      "blurb": "Checks why individual skill pages are missing from Google and produces URL-level findings for repair.",
+      "stats": "2 files · 41 lines · 3 KB",
+      "install": "npx skills add arm-pz/check-skill-visibility",
+      "page": "generated",
+      "order": 930,
+      "pageSource": {
+        "description": "Diagnose why individual agent skill pages are missing from Google Search even when their catalog or homepage appears. Compare exact-name and task queries with the expected landing pages, verify index status when Search Console is available, and produce page-level findings a companion skill can fix. Use when someone sees only the domain, finds a competitor or GitHub page instead of their skill, or can find a skill by name but cannot find it by what it does. Not for a sitewide SEO sweep (use seo-sweep), repo-only discoverability (use findable), or applying a completed visibility audit (use fix-skill-visibility).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 20,
+            "bytes": 3842
+          },
+          {
+            "path": "references/handoff.md",
+            "lines": 21,
+            "bytes": 2511
+          }
+        ],
+        "fileCount": 2,
+        "lines": 41,
+        "bytes": 2927,
+        "license": "MIT",
+        "commit": "793413b296e2f93711923bbaaf5a290fff854a36",
+        "sha256": "9a1e228f5d73cd5215938a92eeb6b717fcf48fcd80fea1dac4504fa42cce6e74"
+      },
+      "quality": {
+        "version": null,
+        "commit": "793413b",
+        "updated": "2026-11-21",
+        "notFor": [
+          "a sitewide SEO sweep (use seo-sweep)",
+          "repo-only discoverability (use findable)",
+          "applying a completed visibility audit (use fix-skill-visibility)"
+        ]
+      }
+    },
+    {
+      "name": "fix-skill-visibility",
+      "repo": "arm-pz/fix-skill-visibility",
+      "path": ".",
+      "group": "seo-search",
+      "tag": "seo",
+      "title": "Fix Skill Visibility",
+      "pageTitle": "Fix Skill Visibility — AI Agent Skill for Claude Code",
+      "blurb": "Applies and verifies fixes for individual skill pages using evidence from a completed visibility audit.",
+      "stats": "2 files · 32 lines · 2 KB",
+      "install": "npx skills add arm-pz/fix-skill-visibility",
+      "page": "generated",
+      "order": 931,
+      "pageSource": {
+        "description": "Apply and verify evidence-backed fixes for individual agent skill pages missing from Google, using a check-skill-visibility report or equivalent URL-level findings. Use when asked to fix a completed skill visibility diagnosis, repair identified canonical or discovery gaps, improve mismatched task copy, or correct stale listings for the affected skills. Produces a change and verification record tied to each finding. Not for a first diagnosis (use check-skill-visibility), a sitewide SEO sweep (use seo-sweep), or submission alone (use get-indexed).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 19,
+            "bytes": 3020
+          },
+          {
+            "path": "references/repairs.md",
+            "lines": 13,
+            "bytes": 1846
+          }
+        ],
+        "fileCount": 2,
+        "lines": 32,
+        "bytes": 2328,
+        "license": "MIT",
+        "commit": "c287d43e52d734b12bfb860631e1c77f07e07991",
+        "sha256": "a8d77ee4016a0338fe4f9ac32368b896f6e12ead74f2c214b6b4ed6ac169a3e4"
+      },
+      "quality": {
+        "version": null,
+        "commit": "c287d43",
+        "updated": "2026-11-21",
+        "notFor": [
+          "a first diagnosis (use check-skill-visibility)",
+          "a sitewide SEO sweep (use seo-sweep)",
+          "submission alone (use get-indexed)"
+        ]
+      }
     }
   ],
   "workflows": [
@@ -4348,8 +4528,13 @@
       "name": "Cold brew",
       "title": "Grow organic search traffic",
       "slug": "grow-search-traffic",
-      "summary": "Grow organic traffic on a site you own: crawl it for technical problems, give each query one page that wins it, then tighten the copy.",
+      "summary": "Find what your site is missing in Google and AI answers, fix the supported issues, and measure what changes after release.",
       "steps": [
+        {
+          "skills": [
+            "diagnose-search-visibility"
+          ]
+        },
         {
           "skills": [
             "seo-crawl"
@@ -4382,9 +4567,14 @@
             "get-indexed"
           ],
           "optional": true
+        },
+        {
+          "skills": [
+            "verify-search-visibility"
+          ]
         }
       ],
-      "note": "seo-polish and keyword-resolver package parts of this route; seo-sweep runs it end to end, fixes the findings in the site's code and proves each fix with a re-crawl.",
+      "note": "Start with brand and task queries. Check Google index status and AI citations separately. Use seo-sweep for source repairs and keyword-resolver for competing pages. For individual skill pages, run check-skill-visibility and then fix-skill-visibility. After deployment, verify the change and measure search outcomes against the baseline.",
       "pairsWith": [
         {
           "name": "OpenSEO",
