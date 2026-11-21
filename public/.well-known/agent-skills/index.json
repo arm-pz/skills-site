@@ -314,7 +314,7 @@
       "description": "Agent skill that checks every tool on best-of lists and awesome-lists for parked domains, shutdowns, acquisitions and archived or deleted GitHub repos, confirms each verdict with a link, and drafts a replace-the-dead-entry pitch. Blocked checks stay INCONCLUSIVE, never dead.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/replace-dead-tools.tar.gz",
-      "digest": "sha256:d707acd8c531ab5320fecab9c1492e3579076e92dd5cf57b4bcd0004eaa56feb"
+      "digest": "sha256:faabb7a0675ff1ee6feb56ad9905340fbe46139ce2761535debab70da93e3c8d"
     },
     {
       "name": "research-brief",
