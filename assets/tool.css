@@ -50,10 +50,9 @@ button.link{background:none;border:0;font:inherit;font-size:14px;color:var(--mut
   outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
-.map-form #status { margin-top: 10px; min-height: 0; }
-.map-form #status:empty { margin-top: 0; }
+.map-form #status { margin-top: 6px; min-height: 1.5em; line-height: 1.5; }
 .map-examples {
-  margin-top: 22px;
+  margin-top: 12px;
   padding-top: 18px;
   border-top: 1px solid var(--line);
 }

@@ -80,7 +80,7 @@
 
   function run(){
     var q=goal.value.trim();
-    if(!q){goal.setAttribute("aria-invalid","true");say("Enter a goal or choose an example below.",true);goal.focus();return;}
+    if(!q){goal.setAttribute("aria-invalid","true");say("Enter a goal to continue.",true);goal.focus();return;}
     goal.removeAttribute("aria-invalid");
     say("");
     load().then(function(d){
