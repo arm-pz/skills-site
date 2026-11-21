@@ -1,7 +1,4 @@
-/* /checks/, the hub of free tools. Depth for a page about checking: the picker is a card you can
-   turn, each tool card runs its sample result as it scrolls in, the three steps fill in as you
-   read them, and the floor under the hero (forge.js) ripples from the row you point at.
-   Called by motion.js only when motion is allowed; the page reads the same without it. */
+/* /checks/ tool examples, workflow steps and hero canvas feedback. */
 const $ = (s, el) => (el || document).querySelector(s);
 const $$ = (s, el) => [].slice.call((el || document).querySelectorAll(s));
 const OUT = 'expo.out';
@@ -46,58 +43,19 @@ function runDemo(gsap, card) {
 }
 
 export function hub({ gsap, ScrollTrigger, state, fine, canvas }) {
-  const hero = $('.hub-hero'), picker = $('.picker'), wide = matchMedia('(min-width:1021px)').matches;
-
-  /* ---- hero: the picker arrives turned, then follows the pointer ---- */
-  if (picker) {
-    const rows = $$('li', picker);
-    if (fine && wide) gsap.set(picker, { transformPerspective: 1100 });
-    const rest = fine && wide ? { y: -7, x: 3 } : { y: 0, x: 0 };
-    gsap.fromTo(picker, { opacity: 0, y: 70, rotationY: rest.y - 26, rotationX: rest.x + 8 },
-      { opacity: 1, y: 0, rotationY: rest.y, rotationX: rest.x, duration: 1.5, delay: 0.25, ease: OUT });
-    gsap.fromTo(rows, { opacity: 0, x: 28 }, { opacity: 1, x: 0, duration: 0.9, delay: 0.7, ease: OUT, stagger: 0.07 });
-    if (fine && wide) {
-      const rx = gsap.quickTo(picker, 'rotationX', { duration: 0.9, ease: 'power3.out' });
-      const ry = gsap.quickTo(picker, 'rotationY', { duration: 0.9, ease: 'power3.out' });
-      let ready = false;
-      setTimeout(() => { ready = true; }, 1800);
-      hero.addEventListener('pointermove', (e) => {
-        if (!ready) return;
-        const r = picker.getBoundingClientRect();
-        ry(rest.y + gsap.utils.clamp(-1, 1, (e.clientX - r.left - r.width / 2) / innerWidth * 2) * 10);
-        rx(rest.x - gsap.utils.clamp(-1, 1, (e.clientY - r.top - r.height / 2) / innerHeight * 2) * 8);
-        picker.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-        picker.style.setProperty('--my', (e.clientY - r.top) + 'px');
-      }, { passive: true });
-      hero.addEventListener('pointerleave', () => { rx(rest.x); ry(rest.y); picker.style.setProperty('--mx', '-999px'); });
-    }
-    /* the floor answers the row you point at */
-    const ping = (el) => {
-      if (!canvas) return;
-      const r = el.getBoundingClientRect(), cr = canvas.getBoundingClientRect();
+  if (canvas) {
+    const ping = (link) => {
+      const r = link.getBoundingClientRect(), cr = canvas.getBoundingClientRect();
       if (!cr.width || !cr.height) return;
       state.ox = ((r.left + r.width / 2 - cr.left) / cr.width) * 2 - 1;
       state.oy = -(((r.bottom + 40 - cr.top) / cr.height) * 2 - 1);
       state.ping = 1;
     };
-    rows.forEach((li) => {
-      const a = $('a', li);
-      a.addEventListener('pointerenter', () => ping(a));
-      a.addEventListener('focus', () => ping(a));
+    $$('.picker a').forEach((link) => {
+      link.addEventListener('pointerenter', () => ping(link));
+      link.addEventListener('focus', () => ping(link));
     });
-    setTimeout(() => ping(picker), 1500);
-
-    /* two depths on the way out: the claim leaves first, the picker lingers */
-    if (wide) {
-      const leave = { trigger: hero, start: 'top top', end: 'bottom top', scrub: true };
-      gsap.to('.hub-hero-grid > div:first-child', { yPercent: -14, ease: 'none', scrollTrigger: leave });
-      gsap.to(picker, { y: 90, ease: 'none', scrollTrigger: leave, immediateRender: false });
-    }
   }
-
-  /* the facts: six counts up, the three zeros fall to zero */
-  const from = [0, 29, 12, 40];
-  $$('.hub-facts b').forEach((b, i) => count(gsap, b, from[i] || 0, { duration: 1.6, delay: 0.9 + i * 0.12 }));
 
   /* ---- tool cards: rise out of the page, then run their sample ---- */
   const tools = $$('.tool');
