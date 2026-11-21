@@ -18,6 +18,68 @@ button.link{background:none;border:0;font:inherit;font-size:14px;color:var(--mut
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chips button{border:0;cursor:pointer;font:500 14px/1 var(--sans);color:var(--ink);background:var(--sunk);padding:10px 14px;border-radius:999px}
 .chips button:hover{box-shadow:inset 0 0 0 1.5px var(--accent)}
+.map-panel {
+  padding: clamp(20px, 4vw, 40px);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+}
+.map-form { margin-top: 24px; }
+.map-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 15px;
+  font-weight: 600;
+}
+.map-input-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+}
+.map-input-row input {
+  min-width: 0;
+  padding: 14px 16px;
+  color: var(--ink);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  font: 400 16px/1.45 var(--sans);
+}
+.map-input-row input::placeholder { color: var(--muted); }
+.map-panel :is(input, button, summary):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.map-form #status { margin-top: 10px; min-height: 0; }
+.map-form #status:empty { margin-top: 0; }
+.map-examples {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+.map-examples h3 {
+  margin-bottom: 10px;
+  color: var(--muted);
+  font: 600 14px/1.4 var(--sans);
+}
+.map-examples .chips button {
+  max-width: 100%;
+  min-height: 44px;
+  line-height: 1.35;
+  text-align: left;
+}
+.map-examples summary {
+  width: fit-content;
+  padding: 12px 2px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: .2em;
+}
+@media (max-width: 560px) {
+  .map-input-row { grid-template-columns: 1fr; }
+}
 #status{font-size:15px;color:var(--muted);min-height:1.5em}
 #status.err{color:var(--ink);font-weight:600}
 #result{margin-top:clamp(28px,4vw,48px);max-width:980px;scroll-margin-top:16px}
