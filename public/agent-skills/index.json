@@ -265,7 +265,7 @@
       "description": "Agent skill that sets up and repairs a manifest-driven CI/CD pipeline for a skills site: GitHub Actions checks each PR, discovery proposes eligible new skill repos, and merging deploys to Cloudflare Pages with a generated page per skill. Nothing publishes without review. Works with Qoder and Claude Code.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/publish-pipeline.tar.gz",
-      "digest": "sha256:d928f04c1986f7e9f7f606799367e1cffd5b6f8737d0b65f940d536f0ade594b"
+      "digest": "sha256:5cfa3fc50cfd1202b73958356bc583c45e05343a4dbdff97b56fce76a2c63e45"
     },
     {
       "name": "publish-release-gate",
@@ -461,14 +461,14 @@
       "description": "Agent skill that finds unpushed local commits and fast-forwards only the safe ones, plus checks published listings against the repos that actually ship a SKILL.md.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/upstream-check.tar.gz",
-      "digest": "sha256:60262a9ec32ef76e039c0e1e52152c19483ceb26822cd6b0a865b8850da40239"
+      "digest": "sha256:fde9f378d02b418c585a6288767f733582a4a65e044d8af93fa9c4843de14893"
     },
     {
       "name": "upstream-polish",
       "description": "Audits upstream drift/listing mismatches with Upstream-Check, generates polished fixes with Wordsmith. Reconciles repos with marketplace/site/README, fixes drifted descriptions/topics, cleans boundaries after push. Diagnosis + rewrites. Chains upstream-check → wordsmith. Not for creating skills (use draft-skill).",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/upstream-polish.tar.gz",
-      "digest": "sha256:28c327dc26fd3a29383ae0f6c9580cfe3ce6c101d71aba1fcf7faacfa88a1fbb"
+      "digest": "sha256:834417a7d0c85f3709e30b2d2271387b75adec599d442c51ef9cc7c400211759"
     },
     {
       "name": "verify-search-visibility",
