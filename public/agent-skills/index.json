@@ -212,6 +212,13 @@
       "digest": "sha256:641a197cab77d8435d0e104e4f422c49c0ca8c179e853ef791788b7f05069437"
     },
     {
+      "name": "plugin-directory-gate",
+      "description": "Agent skill that runs the Claude plugin directory's submission checklist on your Claude Code plugin before you submit: GO or HOLD, with each blocking issue, policy hold and warning by file and line. Built for organizations that aren't Verified; splits out a Markdown-only edition when scripts block you.",
+      "type": "archive",
+      "url": "https://skillsmith.tech/agent-skills/plugin-directory-gate.tar.gz",
+      "digest": "sha256:d6f01b0c40591755fecbcce981a6b45dad6ff7cfa4f988ed86f21320f894c31e"
+    },
+    {
       "name": "portable-harness",
       "description": "Agent skill that sets up CLAUDE.md / AGENTS.md rules and CI guardrails so Claude Code, Codex and Cursor behave the same on your repo",
       "type": "archive",

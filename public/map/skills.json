@@ -4431,6 +4431,61 @@
           "submission alone (use get-indexed)"
         ]
       }
+    },
+    {
+      "name": "plugin-directory-gate",
+      "repo": "arm-pz/plugin-directory-gate",
+      "path": ".",
+      "group": "skill-authoring",
+      "tag": "authoring",
+      "title": "Plugin Directory Gate",
+      "pageTitle": "Plugin Directory Gate — AI Agent Skill for Claude Code",
+      "blurb": "Checks a Claude Code plugin folder against the Claude plugin directory's submission rules and returns GO or HOLD, with each blocking issue, policy hold and warning as rule, file:line and fix (scripts, install lines even in docs…",
+      "stats": "6 files · 377 lines · 9 KB",
+      "install": "npx skills add arm-pz/plugin-directory-gate",
+      "page": "generated",
+      "order": 932,
+      "pageSource": {
+        "description": "Checks a Claude Code plugin folder against the Claude plugin directory's submission rules and returns GO or HOLD, with each blocking issue, policy hold and warning as rule, file:line and fix (scripts, install lines even in docs, download-and-run, credentials, manifest fields, frontmatter, file limits). Turns a pasted portal validation report into fixes, and says when to split out a Markdown-only directory edition instead. Use when someone asks whether a plugin will pass the Claude directory, is about to submit one there, or got back \"blocking issues\", \"policy holds\" or \"your organization isn't Verified\", even if they never say gate. Not for choosing where to list (use findable), packaging or versioning a release (use prompts-to-skill-release), or go/no-go on a site or app launch (use release-gate).",
+        "files": [
+          {
+            "path": ".gitignore",
+            "lines": 1,
+            "bytes": 13
+          },
+          {
+            "path": "SKILL.md",
+            "lines": 42,
+            "bytes": 3198
+          },
+          {
+            "path": "references/rules.md",
+            "lines": 82,
+            "bytes": 4956
+          },
+          {
+            "path": "scripts/screen.py",
+            "lines": 176,
+            "bytes": 10501
+          },
+          {
+            "path": "scripts/test_screen.py",
+            "lines": 47,
+            "bytes": 2295
+          },
+          {
+            "path": "tests.md",
+            "lines": 29,
+            "bytes": 2593
+          }
+        ],
+        "fileCount": 6,
+        "lines": 377,
+        "bytes": 9174,
+        "license": "MIT",
+        "commit": "7af6ea30bf81e7caab22b60bc1537aa28f947a7f",
+        "sha256": "d6f01b0c40591755fecbcce981a6b45dad6ff7cfa4f988ed86f21320f894c31e"
+      }
     }
   ],
   "workflows": [
