@@ -17,7 +17,7 @@ submit. Nothing here is submitted automatically: every entry below goes out unde
 
 ## Once, from your machine: GitHub topics and homepages
 
-Directories and GitHub search read repo topics and the homepage link. 39 repos are missing some.
+Directories and GitHub search read repo topics and the homepage link. Applied to every published repo on 2026-11-22 (65 changed); rerun after adding a skill.
 
 ```
 cd skills-site
@@ -46,7 +46,7 @@ padding them is the kind of signal directories delist for.
 
 ### Marketplace entry
 
-> **Caffeinity skills**: 44 open agent skills and 10 workflow agents in one Claude Code plugin:
+> **Caffeinity skills**: 68 open agent skills and 12 workflow agents in one Claude Code plugin, plus 7 mods:
 > skill authoring and tuning, release checks (exposure, security red team, performance, go/no-go),
 > SEO, writing and content, cold outbound, job search, research and decisions, learning and
 > course design. Every skill is plain markdown with its own repo, page and trigger tests; no API
@@ -56,7 +56,7 @@ padding them is the kind of signal directories delist for.
 ### Awesome-list line
 
 ```
-- [Caffeinity skills](https://github.com/arm-pz/caffeinity-skills) - 44 agent skills wired into ten workflows (skill authoring, release gates, SEO, outbound, job search, research, learning), with a router skill, workflow agents and trigger tests. Site: https://skillsmith.tech
+- [Caffeinity skills](https://github.com/arm-pz/caffeinity-skills) - 68 agent skills wired into twelve workflows (skill authoring, discovery, release gates, SEO, outbound, job search, decisions, learning, solo launches), with a router skill, workflow agents and trigger tests. Site: https://skillsmith.tech
 ```
 
 ## After submitting
