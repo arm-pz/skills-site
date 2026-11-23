@@ -186,6 +186,12 @@
       "note": [],
       "warn": []
     },
+    "plugin-directory-gate": {
+      "description_sha": "4a96cbed3009",
+      "fail": [],
+      "note": [],
+      "warn": []
+    },
     "portable-harness": {
       "description_sha": "685d65c0cdd8",
       "fail": [],
