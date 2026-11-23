@@ -219,7 +219,7 @@
       },
       "tested": {
         "date": "2026-10-24",
-        "target": "the 42 skills in this catalogue",
+        "target": "the 42 skills then in this catalogue",
         "result": "Caught one skill that strict installers could not load; fixed in that skill and in tune-skill.",
         "evidence": "/#proof"
       },
@@ -1137,7 +1137,7 @@
       },
       "tested": {
         "date": "2026-10-24",
-        "target": "skills.caffeinity.com",
+        "target": "this site (then at skills.caffeinity.com)",
         "result": "Probed 19 sensitive paths; nothing exposed and every security header in place: PASS.",
         "evidence": "/#proof"
       },
@@ -2066,7 +2066,7 @@
       },
       "tested": {
         "date": "2026-10-24",
-        "target": "skills.caffeinity.com",
+        "target": "this site (then at skills.caffeinity.com)",
         "result": "Found one broken internal link across 24 pages; the re-crawl after the fix came back clean.",
         "evidence": "/#proof"
       },
