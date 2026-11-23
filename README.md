@@ -16,7 +16,7 @@ Fork it for your own skills: list them in `site/skills.json`, then follow
 [Run locally](#run-locally). Every page is self-contained, and the shared design
 tokens live in one `:root` block per page.
 
-Related: [caffeinity-skills](https://github.com/arm-pz/caffeinity-skills) is
+Related: [caffeinity-skills](https://github.com/arm-pz/caffeinity-skills) (the one repo to star) is
 the plugin marketplace for the same skills, and
 [publish-pipeline](https://github.com/arm-pz/publish-pipeline) is the agent
 skill that sets up and repairs this kind of pipeline.
@@ -40,7 +40,8 @@ Cloudflare Pages project is connected to that branch, so each push there goes
 live in a few minutes. The job then waits for the live `version.json` to match
 and verifies the live site; if it never matches it opens one "Deploy pending"
 issue, and closes it once live matches. `.github/workflows/health.yml` runs tune-skill's regression check over
-every published skill each night. `PROJECT.md` maps the whole ecosystem.
+every published skill each night. `PROJECT.md` maps the whole ecosystem, and
+`GROWTH.md` is the plan for stars and installs.
 
 ### Connecting Cloudflare Pages (once)
 
