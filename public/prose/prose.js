@@ -1,9 +1,6 @@
 /* Prose Check page: runs /prose/prose-core.js on the pasted draft in the browser and renders the
    hits in place. The draft is never sent anywhere; this file makes no network request. */
 (function(){
-  /* Payment link. Leave it empty and the order buttons open an email instead.
-     Paste a hosted checkout URL (for example a Stripe Payment Link) to take payment directly. */
-  var PAY={edit:""};
   var MAX_CHARS=400000;
 
   /* rule id: [label, why it reads as machine-written, how to fix it] */
@@ -258,9 +255,4 @@
   plain.addEventListener("change",function(){if(live)run(false);});
   $("sample").addEventListener("click",function(){text.value=SAMPLE;focusRule="";run(true);});
   $("clear").addEventListener("click",function(){text.value="";focusRule="";say("");run(false);text.focus();});
-
-  [].forEach.call(document.querySelectorAll("[data-order]"),function(a){
-    var kind=a.getAttribute("data-order");
-    if(PAY[kind])a.href=PAY[kind];
-  });
 })();
