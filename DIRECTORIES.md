@@ -59,6 +59,8 @@ padding them is the kind of signal directories delist for.
 - [Caffeinity skills](https://github.com/arm-pz/caffeinity-skills) - 68 agent skills wired into twelve workflows (skill authoring, discovery, release gates, SEO, outbound, job search, decisions, learning, solo launches), with a router skill, workflow agents and trigger tests. Site: https://skillsmith.tech
 ```
 
+The plan for which skills to lead with and where to post is in `GROWTH.md`.
+
 ## After submitting
 
 Change the status column above, and re-check in two weeks: search the directory for the skill,
