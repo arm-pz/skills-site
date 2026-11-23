@@ -58,14 +58,14 @@
   <section class="story" aria-label="The note">
     <div class="wrap">
       <article class="story-body">
-        <p>We gave each skill or mod a task in Claude Code and kept a report of what happened. Some tasks used prepared examples. Others worked against the live site. The reports show what the agent got right, what it missed and how the run was graded. <a href="https://github.com/arm-pz/skills-site/blob/main/reports/runs/SUMMARY.md">Read all 59 results</a>.</p>
+        <p>We gave each skill or mod a task in Claude Code and kept a report of what happened. Some tasks used prepared examples. Others worked against the live site. The reports show what the agent got right, what it missed and how the run was graded. <a href="/runs/">Read all 59 results</a>.</p>
 
         <h2>What a partial run looks like</h2>
         <p>We asked <a href="/seo-sweep/">SEO Sweep</a> to crawl skillsmith.tech, fix what it found in the source and verify the changes locally. It found 12 titles over 60 characters and eight descriptions over 160. After its edits, the local crawl found zero long titles and two long descriptions.</p>
-        <p>The agent skipped parts of the workflow, including checking which page should rank for each search query. It left a long description on a generated workflow page untouched. The changes stayed local, and the run got PARTIAL. <a href="https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/seo-sweep/README.md">Read the SEO Sweep report</a>.</p>
+        <p>The agent skipped parts of the workflow, including checking which page should rank for each search query. It left a long description on a generated workflow page untouched. The changes stayed local, and the run got PARTIAL. <a href="/runs/seo-sweep/">Read the SEO Sweep report</a>.</p>
 
         <h2>How to read the verdicts</h2>
-        <p>A verdict belongs to the task in the report. For example, <a href="/get-indexed/">Get Indexed</a> passed a planning run by counting the 92 URLs in the sitemap and listing what submission would require. That task stopped at the plan. <a href="https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/get-indexed/README.md">Read the Get Indexed report</a>.</p>
+        <p>A verdict belongs to the task in the report. For example, <a href="/get-indexed/">Get Indexed</a> passed a planning run by counting the 92 URLs in the sitemap and listing what submission would require. That task stopped at the plan. <a href="/runs/get-indexed/">Read the Get Indexed report</a>.</p>
         <p>The nightly check looks for structural problems in the published skill files and broken references to other skills. The behavioral runner gives an agent a task and reviews its actions and output against a rubric. Some scenarios also check files or compare the result with a known answer. <a href="https://github.com/arm-pz/skills-site/blob/main/.github/workflows/health.yml">Nightly check</a> · <a href="https://github.com/arm-pz/skills-site/blob/main/tools/skill-runs/run.py">Behavioral runner</a>.</p>
         <p>The November batch gives us examples from Claude Code. We still need matched runs with and without a skill to measure what installing it adds. The first comparison we plan to make is for the <a href="/caffeinity-routing/">catalog router</a>. We'll give it a project with a known set of installed skills and see whether it picks the right workflow and correctly reports what's missing.</p>
       </article>

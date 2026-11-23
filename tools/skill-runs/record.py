@@ -5,7 +5,7 @@
 
 Record the latest verdict and the latest passing example independently. The summary
 lists the latest verdict for each skill and the defects attributed to the skill.
-Regenerate the pages afterwards with gen_page.py --write.
+Regenerate the pages afterwards with gen_runs.py --write, gen_page.py --write and gen_home.py --write.
 """
 
 import argparse
@@ -14,7 +14,13 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 RUNS = ROOT / "reports" / "runs"
-EVIDENCE = "https://github.com/arm-pz/skills-site/blob/main/"
+
+
+def evidence_url(run_dir):
+    """The run's own section on its /runs/<skill>/ page (rendered by gen_runs.py), keyed by
+    the report folder reports/runs/<date>/<skill>."""
+    path = Path(run_dir)
+    return f"/runs/{path.name}/#run-{path.parent.name}"
 
 
 def latest():
@@ -38,7 +44,7 @@ def rejected_evidence():
     for f in RUNS.glob("*/*/verdict.json"):
         v = json.loads(f.read_text(encoding="utf-8"))
         if v["verdict"] != "PASS":
-            out.add(EVIDENCE + f.parent.relative_to(ROOT).as_posix() + "/README.md")
+            out.add(evidence_url(f.parent.relative_to(ROOT).as_posix()))
     return out
 
 
@@ -49,7 +55,7 @@ def result_line(summary, limit=230):
 
 def evidence_for(run):
     return {"date": run["ran"], "target": run["target"], "result": result_line(run["summary"]),
-            "evidence": EVIDENCE + run["dir"] + "/README.md"}
+            "evidence": evidence_url(run["dir"])}
 
 
 def record_entry(entry, run, passing, rejected=frozenset()):

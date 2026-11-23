@@ -6,10 +6,11 @@ import subprocess
 import sys
 from pathlib import Path
 
+import gen_runs
 import skilllib
 
 
-def urls(manifest):
+def urls(manifest, runs=()):
     pages = sorted((s for s in manifest["skills"] if s["page"] != "none"),
                    key=lambda s: s["order"])
     result = [(f"{skilllib.SITE}/", "index.html")]
@@ -18,6 +19,7 @@ def urls(manifest):
     result.extend((f"{skilllib.SITE}/workflows/{f['slug']}/", f"workflows/{f['slug']}/index.html")
                   for f in manifest.get("workflows", []))
     result.extend((f"{skilllib.SITE}/{s['name']}/", f"{s['name']}/index.html") for s in pages)
+    result.extend((f"{skilllib.SITE}/runs/{name}/", f"runs/{name}/index.html") for name in runs)
     return result
 
 
@@ -28,10 +30,10 @@ def git_date(root, path, fallback):
     return value or fallback
 
 
-def render(manifest, date_for):
+def render(manifest, date_for, runs=()):
     lines = ['<?xml version="1.0" encoding="UTF-8"?>',
              '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
-    for url, path in urls(manifest):
+    for url, path in urls(manifest, runs):
         lines.append(f"  <url><loc>{url}</loc><lastmod>{date_for(path)}</lastmod></url>")
     lines.append("</urlset>")
     return "\n".join(lines) + "\n"
@@ -48,12 +50,13 @@ def main(argv=None):
     head = (subprocess.run(["git", "log", "-1", "--format=%cs"], cwd=root,
                            capture_output=True, text=True).stdout.strip()
             or dt.datetime.now(dt.timezone.utc).date().isoformat())
-    xml = render(manifest, lambda path: git_date(root, path, head))
+    runs = gen_runs.run_skills(root)
+    xml = render(manifest, lambda path: git_date(root, path, head), runs)
     out = root / "out"
     out.mkdir(exist_ok=True)
     with open(out / "sitemap.xml", "w", encoding="utf-8", newline="\n") as fh:
         fh.write(xml)
-    print(f"out/sitemap.xml: {len(urls(manifest))} urls")
+    print(f"out/sitemap.xml: {len(urls(manifest, runs))} urls")
     with open(out / "llms.txt", "w", encoding="utf-8", newline="\n") as fh:
         fh.write(skilllib.llms_txt(manifest))
     print("out/llms.txt written")

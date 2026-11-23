@@ -35,15 +35,20 @@ class SitemapTest(unittest.TestCase):
                           "https://skillsmith.tech/seo-check/",
                           "https://skillsmith.tech/resume/",
                           "https://skillsmith.tech/list/",
+                          "https://skillsmith.tech/runs/",
                           "https://skillsmith.tech/gamma/",
                           "https://skillsmith.tech/alpha/"])
+
+    def test_run_pages_follow_the_skill_pages(self):
+        self.assertEqual([u for u, _ in gen_sitemap.urls(MANIFEST, ["alpha"])][-2:],
+                         ["https://skillsmith.tech/alpha/", "https://skillsmith.tech/runs/alpha/"])
 
     def test_xml_parses(self):
         xml = gen_sitemap.render(MANIFEST, lambda path: "2026-10-21")
         root = ET.fromstring(xml)
         locs = [el.text for el in root.iter(
             "{http://www.sitemaps.org/schemas/sitemap/0.9}loc")]
-        self.assertEqual(len(locs), 19)
+        self.assertEqual(len(locs), 20)
 
 
 if __name__ == "__main__":
