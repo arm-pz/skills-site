@@ -1,6 +1,14 @@
 /* Skill Check page: fetches a public SKILL.md from GitHub (or takes pasted text), runs
    /check/check-core.js on it in the browser and renders the findings. Nothing is sent to us. */
 (function(){
+  /* Hosted PayPal checkout for one skill tune-up; the same link is on the order card in index.html. */
+  var PAYPAL_TUNEUP="https://www.paypal.com/ncp/payment/9VAUGVPVUTJHQ";
+  /* After paying, the buyer emails the transaction ID with the skill, which ties the payment to the order. */
+  function paidIntakeHref(link){
+    return "mailto:hello@skillsmith.tech?subject="+encodeURIComponent("Paid skill tune-up")+
+      "&body="+encodeURIComponent("PayPal transaction ID: \n\nSkill repo or SKILL.md link"+(link?": "+link:" (or attach the file): ")+"\n\nAnything we should know (what it fails to do, which agent you use): \n");
+  }
+
   var EXPLAIN={
     "no-frontmatter":["An agent reads a skill's name and description from the YAML block at the very top of the file. Without that block the skill cannot be listed or triggered.","Start the file with a line of three hyphens, then name: and description:, then another line of three hyphens."],
     "bad-yaml":["A strict YAML loader stops at this line, so an installer may reject the skill or cut the value short.","Wrap the value in double quotes, or write the key followed by >- and put the text on the indented lines below it."],
@@ -190,14 +198,16 @@
     p.appendChild(document.createTextNode(clean
       ?"Whether the description wins the right requests takes a reader. A tune-up is $19 for one skill at the launch price, refunded if we find nothing worth changing."
       :"A tune-up is $19 for one skill at the launch price. You get a replacement SKILL.md, each finding with its fix, and test requests. We refund you if we find nothing worth changing."));
+    p.appendChild(el("span","upsell-steps","Pay with PayPal, then email us this skill's link and your PayPal transaction ID. The two working days start when both reach us."));
     up.appendChild(p);
-    var a=el("a","btn btn-accent","See tune-up options");
-    a.href="#tuneup";
-    up.appendChild(a);
-    var email=el("a","btn btn-quiet","Email us about this skill");
-    email.href="mailto:hello@skillsmith.tech?subject="+encodeURIComponent("Skill tune-up ($19 launch price)")+
-      "&body="+encodeURIComponent("Skill repo or SKILL.md link: "+(link||"")+"\n\nAnything we should know (what it fails to do, which agent you use): \n");
-    up.appendChild(email);result.appendChild(up);
+    var acts=el("div","upsell-actions");
+    var a=el("a","btn btn-accent","Pay $19 with PayPal");
+    a.href=PAYPAL_TUNEUP;a.target="_blank";a.rel="noopener";
+    acts.appendChild(a);
+    var email=el("a","btn btn-quiet","Then email us this skill");
+    email.href=paidIntakeHref(link||"");
+    acts.appendChild(email);
+    up.appendChild(acts);result.appendChild(up);
 
     result.hidden=false;
     result.scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"});
