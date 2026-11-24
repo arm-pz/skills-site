@@ -4582,6 +4582,36 @@
           "rules mined from past sessions (use harness-audit)"
         ]
       }
+    },
+    {
+      "name": "address-findings",
+      "repo": "arm-pz/address-findings",
+      "path": ".",
+      "group": "ship-checks",
+      "tag": "build",
+      "title": "Address Findings",
+      "pageTitle": "Address Findings — AI Agent Skill for Claude Code and Codex",
+      "blurb": "Fixes the CRITICAL and HIGH findings in a consistent-code-review report for one pull request, staying inside the files that PR already changes, then reports each finding as fixed, won't fix (with evidence) or escalate.",
+      "stats": "1 file · 55 lines · 2 KB",
+      "install": "npx skills add arm-pz/address-findings",
+      "page": "generated",
+      "order": 934,
+      "pageSource": {
+        "description": "Fixes the CRITICAL and HIGH findings in a consistent-code-review report for one pull request, staying inside the files that PR already changes, then reports each finding as fixed, won't fix (with evidence) or escalate. Use when a review-report.json exists for a PR and its blocking findings need addressing, or when the pr-graph conductor calls the fixer node. Not for writing a review (use consistent-code-review), adding features, rebasing for conflicts, or merging (merge_gate.py decides that).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 55,
+            "bytes": 4483
+          }
+        ],
+        "fileCount": 1,
+        "lines": 55,
+        "bytes": 2118,
+        "license": "MIT",
+        "commit": "06ff702113c36060105ebbbc4636e3e51cdac31c",
+        "sha256": "75cf4e935ef22eb0b467c6423ba969d5114ca0b52dc72d7db51decea294f2f76"
+      }
     }
   ],
   "workflows": [
