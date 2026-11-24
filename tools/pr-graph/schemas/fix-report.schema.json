@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://skillsmith.tech/schemas/fix-report.schema.json",
+  "title": "PR graph fix report",
+  "description": "What the fixer node (address-findings) hands back to the conductor: one entry per CRITICAL or HIGH finding it was given.",
+  "type": "object",
+  "required": ["pr", "review_head_sha", "new_head_sha", "round", "results"],
+  "additionalProperties": false,
+  "properties": {
+    "pr": {"type": "integer", "minimum": 1},
+    "review_head_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "new_head_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "round": {"type": "integer", "minimum": 1, "maximum": 3},
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "status", "note"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {"type": "string", "pattern": "^[CHML][0-9]+$"},
+          "status": {"enum": ["fixed", "wont_fix", "escalate"]},
+          "commit": {"type": ["string", "null"], "pattern": "^[0-9a-f]{7,40}$"},
+          "note": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  }
+}
