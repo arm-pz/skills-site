@@ -98,14 +98,14 @@
         "lines": 416,
         "bytes": 10776,
         "license": "MIT",
-        "commit": "7cf5a23e86485768db0efebb0f5d1108eb1460b6",
+        "commit": "1b5e3f1fb39ca206d927a1003b75e136f1950b30",
         "sha256": "4699879d9bcfe460aa4870a75f432c65e96fc6c0c4497029af7cf04de40af7ff"
       },
       "order": 101,
       "quality": {
         "version": "1.1.0",
-        "commit": "7cf5a23",
-        "updated": "2026-11-22",
+        "commit": "1b5e3f1",
+        "updated": "2026-11-24",
         "notFor": [
           "a request one skill already owns (load that skill directly)",
           "not for doing a step's work itself: the named skill does it"
@@ -219,7 +219,7 @@
       },
       "tested": {
         "date": "2026-10-24",
-        "target": "the 42 skills in this catalogue",
+        "target": "the 42 skills then in this catalogue",
         "result": "Caught one skill that strict installers could not load; fixed in that skill and in tune-skill.",
         "evidence": "/#proof"
       },
@@ -453,14 +453,14 @@
         "lines": 1288,
         "bytes": 20897,
         "license": "MIT",
-        "commit": "7cf5a23e86485768db0efebb0f5d1108eb1460b6",
+        "commit": "1b5e3f1fb39ca206d927a1003b75e136f1950b30",
         "sha256": "e79c3f9cbd44fd97b950ca333c4a51b40f644416361a221b0754d0fa31e31a28"
       },
       "order": 208,
       "quality": {
         "version": "0.1.0",
-        "commit": "7cf5a23",
-        "updated": "2026-11-22",
+        "commit": "1b5e3f1",
+        "updated": "2026-11-24",
         "notFor": []
       },
       "latestRun": {
@@ -552,14 +552,14 @@
         "lines": 627,
         "bytes": 10387,
         "license": "MIT",
-        "commit": "7cf5a23e86485768db0efebb0f5d1108eb1460b6",
+        "commit": "1b5e3f1fb39ca206d927a1003b75e136f1950b30",
         "sha256": "0261e8afac9fd1c1a6bc03685149f45eae4a09c0c0b6f48f1e61b1ca60093aa9"
       },
       "order": 209,
       "quality": {
         "version": "0.1.0",
-        "commit": "7cf5a23",
-        "updated": "2026-11-22",
+        "commit": "1b5e3f1",
+        "updated": "2026-11-24",
         "notFor": []
       },
       "tested": {
@@ -626,14 +626,14 @@
         "lines": 416,
         "bytes": 8802,
         "license": "MIT",
-        "commit": "7cf5a23e86485768db0efebb0f5d1108eb1460b6",
+        "commit": "1b5e3f1fb39ca206d927a1003b75e136f1950b30",
         "sha256": "f1304d4562cee98a474722cbfee835c0c4d8dc642d31fe1419e06a642bab73ba"
       },
       "order": 210,
       "quality": {
         "version": "0.1.0",
-        "commit": "7cf5a23",
-        "updated": "2026-11-22",
+        "commit": "1b5e3f1",
+        "updated": "2026-11-24",
         "notFor": [
           "a tune with no release (use tune-skill)",
           "drafts with nothing pushed (use tune-and-polish)",
@@ -949,14 +949,14 @@
         "lines": 176,
         "bytes": 5492,
         "license": "MIT",
-        "commit": "7cf5a23e86485768db0efebb0f5d1108eb1460b6",
+        "commit": "1b5e3f1fb39ca206d927a1003b75e136f1950b30",
         "sha256": "b56b11f95e76ba757f8583562823353849f1d8a87fc9362a7217f684d7916803"
       },
       "order": 307,
       "quality": {
         "version": "1.0.0",
-        "commit": "7cf5a23",
-        "updated": "2026-11-22",
+        "commit": "1b5e3f1",
+        "updated": "2026-11-24",
         "notFor": [
           "one skill (use tune-skill)",
           "one listing (use findable)",
@@ -1137,7 +1137,7 @@
       },
       "tested": {
         "date": "2026-10-24",
-        "target": "skills.caffeinity.com",
+        "target": "this site (then at skills.caffeinity.com)",
         "result": "Probed 19 sensitive paths; nothing exposed and every security header in place: PASS.",
         "evidence": "/#proof"
       },
@@ -1511,14 +1511,14 @@
         "lines": 382,
         "bytes": 8603,
         "license": "MIT",
-        "commit": "7cf5a23e86485768db0efebb0f5d1108eb1460b6",
+        "commit": "1b5e3f1fb39ca206d927a1003b75e136f1950b30",
         "sha256": "cacb21e2865f9e92d46027f87f225b3e864a21251b0b1e671c628a42ab55daa7"
       },
       "order": 411,
       "quality": {
         "version": "1.0.0",
-        "commit": "7cf5a23",
-        "updated": "2026-11-22",
+        "commit": "1b5e3f1",
+        "updated": "2026-11-24",
         "notFor": []
       },
       "latestRun": {
@@ -1615,14 +1615,14 @@
         "lines": 950,
         "bytes": 15781,
         "license": "MIT",
-        "commit": "7cf5a23e86485768db0efebb0f5d1108eb1460b6",
+        "commit": "1b5e3f1fb39ca206d927a1003b75e136f1950b30",
         "sha256": "483f9eaa604c13a11140d9ee8ba44deaf5ae46289fd23c277f366014f623312e"
       },
       "order": 412,
       "quality": {
         "version": "0.1.0",
-        "commit": "7cf5a23",
-        "updated": "2026-11-22",
+        "commit": "1b5e3f1",
+        "updated": "2026-11-24",
         "notFor": []
       },
       "tested": {
@@ -1715,14 +1715,14 @@
         "lines": 872,
         "bytes": 15078,
         "license": "MIT",
-        "commit": "7cf5a23e86485768db0efebb0f5d1108eb1460b6",
+        "commit": "1b5e3f1fb39ca206d927a1003b75e136f1950b30",
         "sha256": "adba47438bba3c1f43fd30aa8492bdc79bc2a956b812292dc9ab09277f7c1667"
       },
       "order": 413,
       "quality": {
         "version": "0.1.0",
-        "commit": "7cf5a23",
-        "updated": "2026-11-22",
+        "commit": "1b5e3f1",
+        "updated": "2026-11-24",
         "notFor": []
       },
       "tested": {
@@ -1845,14 +1845,14 @@
         "lines": 1588,
         "bytes": 30959,
         "license": "MIT",
-        "commit": "7cf5a23e86485768db0efebb0f5d1108eb1460b6",
+        "commit": "1b5e3f1fb39ca206d927a1003b75e136f1950b30",
         "sha256": "9fa3a48b71b2026a6d834903d0a2322ebf5dcc7cf065e441ef8041cf4184a711"
       },
       "order": 414,
       "quality": {
         "version": "0.1.0",
-        "commit": "7cf5a23",
-        "updated": "2026-11-22",
+        "commit": "1b5e3f1",
+        "updated": "2026-11-24",
         "notFor": []
       },
       "tested": {
@@ -1935,14 +1935,14 @@
         "lines": 597,
         "bytes": 11489,
         "license": "MIT",
-        "commit": "7cf5a23e86485768db0efebb0f5d1108eb1460b6",
+        "commit": "1b5e3f1fb39ca206d927a1003b75e136f1950b30",
         "sha256": "c7c6f2ea1d16245d3a4c154d259877fbe004ea186bc701eac3027c58972e6ed0"
       },
       "order": 415,
       "quality": {
         "version": "0.1.0",
-        "commit": "7cf5a23",
-        "updated": "2026-11-22",
+        "commit": "1b5e3f1",
+        "updated": "2026-11-24",
         "notFor": []
       },
       "tested": {
@@ -2066,7 +2066,7 @@
       },
       "tested": {
         "date": "2026-10-24",
-        "target": "skills.caffeinity.com",
+        "target": "this site (then at skills.caffeinity.com)",
         "result": "Found one broken internal link across 24 pages; the re-crawl after the fix came back clean.",
         "evidence": "/#proof"
       },
@@ -3042,14 +3042,14 @@
         "lines": 302,
         "bytes": 6084,
         "license": "MIT",
-        "commit": "7cf5a23e86485768db0efebb0f5d1108eb1460b6",
+        "commit": "1b5e3f1fb39ca206d927a1003b75e136f1950b30",
         "sha256": "1e8dfe3ceb472fd5ceab966ed884b027cd7e84f669755fb5a85695facc6efe87"
       },
       "order": 909,
       "quality": {
         "version": "1.0.0",
-        "commit": "7cf5a23",
-        "updated": "2026-11-22",
+        "commit": "1b5e3f1",
+        "updated": "2026-11-24",
         "notFor": [
           "one person's own learning plan (use study-system)",
           "for being taught the topic (use topic-primer)",
@@ -4495,6 +4495,81 @@
           "packaging or versioning a release (use prompts-to-skill-release)",
           "go/no-go on a site or app launch (use release-gate)"
         ]
+      }
+    },
+    {
+      "name": "skill-eval-suite",
+      "repo": "arm-pz/skill-eval-suite",
+      "path": "skills/skill-eval-suite",
+      "group": "skill-authoring",
+      "tag": "authoring",
+      "title": "Skill Eval Suite",
+      "pageTitle": "Skill Eval Suite — AI Agent Skill for Claude Code and Codex",
+      "blurb": "Builds and runs the eval suite for a recurring agent loop or skill - about 5% golden, 80% real prompts graded on trajectory, 15% author-judged, with must-do, must-not and keep-working cases.",
+      "stats": "10 files · 1,894 lines · 41 KB",
+      "install": "npx skills add arm-pz/skill-eval-suite",
+      "page": "generated",
+      "order": 933,
+      "pageSource": {
+        "description": "Builds and runs the eval suite for a recurring agent loop or skill - about 5% golden, 80% real prompts graded on trajectory, 15% author-judged, with must-do, must-not and keep-working cases. Scores how often each case passes over 3+ trials, reports same-case flips instead of averages, gates on a token budget, checks a hidden holdout for overfitting, and trusts no check or judge until it fails a known-bad set. Feeds cases from real sessions, papercuts and rejected PRs. Use when the user wants to know if a skill or scheduled run is any good, asks for evals, a golden set or a scorecard, says a loop got worse or is sometimes wrong, asks whether a skill earns its tokens, or wants a failed run explained, even if they never say eval. Not for scheduling a skill (use loop-schedule), whether a description triggers (use tune-skill), filing friction mid-task (use log-papercut), or rules mined from past sessions (use harness-audit).",
+        "files": [
+          {
+            "path": "SKILL.md",
+            "lines": 149,
+            "bytes": 11365
+          },
+          {
+            "path": "references/ablation.md",
+            "lines": 40,
+            "bytes": 2920
+          },
+          {
+            "path": "references/failure-taxonomy.md",
+            "lines": 40,
+            "bytes": 3244
+          },
+          {
+            "path": "references/gates.md",
+            "lines": 99,
+            "bytes": 5828
+          },
+          {
+            "path": "references/suite.md",
+            "lines": 120,
+            "bytes": 8938
+          },
+          {
+            "path": "scripts/__pycache__/traces.cpython-314.pyc",
+            "lines": 78,
+            "bytes": 19252
+          },
+          {
+            "path": "scripts/ablation.py",
+            "lines": 178,
+            "bytes": 7596
+          },
+          {
+            "path": "scripts/intake.py",
+            "lines": 242,
+            "bytes": 10510
+          },
+          {
+            "path": "scripts/score.py",
+            "lines": 698,
+            "bytes": 35107
+          },
+          {
+            "path": "scripts/traces.py",
+            "lines": 250,
+            "bytes": 11124
+          }
+        ],
+        "fileCount": 10,
+        "lines": 1894,
+        "bytes": 42257,
+        "license": "MIT",
+        "commit": "1d03dbe7d09d9472a81b4c190d9155492a104871",
+        "sha256": "1b49cbe7a98cda85547308da874507fe4e8864412a9fe9b20215ba545c3da1d3"
       }
     }
   ],

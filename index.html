@@ -125,7 +125,7 @@ catch-all routing     <span class="ok">none</span>
     </figure>
     </div>
     <div class="wrap hero-rail" data-r>
-      <!-- gen:stats:start --><p class="stats">69 skills and 7 mods · 12 workflows · 9 categories · 0 API keys</p><!-- gen:stats:end -->
+      <!-- gen:stats:start --><p class="stats">70 skills and 7 mods · 12 workflows · 9 categories · 0 API keys</p><!-- gen:stats:end -->
       <a class="cue" href="#outcomes">Scroll<i aria-hidden="true"></i></a>
     </div>
   </header>
@@ -322,7 +322,7 @@ catch-all routing     <span class="ok">none</span>
         </div>
         <div>
           <p class="flag-blurb">Checks a site you own before you ship it, without pretending a status code is a finding. A 200 on /.env that matches the app shell is catch-all routing, a blanket 403 is an unanswered question, and a check that never ran becomes INCONCLUSIVE — never a pass.</p>
-          <p class="flag-run"><b>Shown working, 24 Oct 2026, on skills.caffeinity.com.</b> Probed 19 sensitive paths; nothing exposed and every security header in place: PASS. <a href="/#proof">See the run</a></p>
+          <p class="flag-run"><b>Shown working, 24 Oct 2026, on this site (then at skills.caffeinity.com).</b> Probed 19 sensitive paths; nothing exposed and every security header in place: PASS. <a href="/#proof">See the run</a></p>
         </div>
         <button class="cmd" type="button" data-copy="npx skills add arm-pz/web-preflight" aria-label="Copy the install command for web-preflight"><span>npx skills add arm-pz/web-preflight</span><span class="copy" aria-hidden="true">Copy</span></button>
       </article>
@@ -333,7 +333,7 @@ catch-all routing     <span class="ok">none</span>
         </div>
         <div>
           <p class="flag-blurb">Crawls a site you own and returns deterministic, evidence-backed technical SEO findings, with blocked or unrun checks reported INCONCLUSIVE rather than a pass.</p>
-          <p class="flag-run"><b>Shown working, 24 Oct 2026, on skills.caffeinity.com.</b> Found one broken internal link across 24 pages; the re-crawl after the fix came back clean. <a href="/#proof">See the run</a></p>
+          <p class="flag-run"><b>Shown working, 24 Oct 2026, on this site (then at skills.caffeinity.com).</b> Found one broken internal link across 24 pages; the re-crawl after the fix came back clean. <a href="/#proof">See the run</a></p>
         </div>
         <button class="cmd" type="button" data-copy="npx skills add arm-pz/seo-crawl" aria-label="Copy the install command for seo-crawl"><span>npx skills add arm-pz/seo-crawl</span><span class="copy" aria-hidden="true">Copy</span></button>
       </article>
@@ -344,7 +344,7 @@ catch-all routing     <span class="ok">none</span>
         </div>
         <div>
           <p class="flag-blurb">Audits and fine-tunes a skill that already exists: the description that never fires, overlap with installed siblings, stale names and counts, handoff contracts that do not hand off. Ships check_skill.py, a deterministic validator over frontmatter, folder and heading agreement, description length and reference paths that do not exist. Not for creating one from scratch; that is draft-skill.</p>
-          <p class="flag-run"><b>Shown working, 24 Oct 2026, on the 42 skills in this catalogue.</b> Caught one skill that strict installers could not load; fixed in that skill and in tune-skill. <a href="/#proof">See the run</a></p>
+          <p class="flag-run"><b>Shown working, 24 Oct 2026, on the 42 skills then in this catalogue.</b> Caught one skill that strict installers could not load; fixed in that skill and in tune-skill. <a href="/#proof">See the run</a></p>
         </div>
         <button class="cmd" type="button" data-copy="npx skills add arm-pz/tune-skill" aria-label="Copy the install command for tune-skill"><span>npx skills add arm-pz/tune-skill</span><span class="copy" aria-hidden="true">Copy</span></button>
       </article>
@@ -356,8 +356,8 @@ catch-all routing     <span class="ok">none</span>
 <section class="proof roast" id="proof" aria-labelledby="proof-h">
   <div class="wrap">
     <h2 id="proof-h">Tested on real targets, this site first.</h2>
-    <p class="sub"><a href="/notes/skill-test-results/">Read the November results for 59 skills and mods</a>, including the partial runs.</p>
-    <p class="sub">Eight runs from 23 October to 3 November 2026. Each tab shows what the skills found and what changed.</p>
+    <p class="sub"><a href="/notes/skill-test-results/">Read the November results</a>: 59 skills and mods tested, including the runs that only partly passed.</p>
+    <p class="sub">Eight runs from 23 October to 3 November 2026. Each tab shows what the skills found and what changed. Counts are as of each run; the catalogue has grown since.</p>
     <div class="shell">
         <div class="shell-bar" aria-hidden="true"><i></i><i></i><i></i><span>real runs · 23 Oct to 3 Nov 2026</span></div>
         <div class="tabs" role="tablist" aria-label="Real runs">
@@ -372,7 +372,7 @@ catch-all routing     <span class="ok">none</span>
         </div>
       <div class="pane" role="tabpanel" id="pane-seo-crawl" aria-labelledby="tab-seo-crawl">
         <div class="pane-col">
-          <p class="pane-label">seo-crawl · skills.caffeinity.com</p>
+          <p class="pane-label">seo-crawl · this site, then at skills.caffeinity.com</p>
           <h3>One broken link, found by the crawler</h3>
 <pre>pages      24 of 24 fetched
 checks     5 complete
@@ -388,13 +388,13 @@ findings   1 error · 12 info</pre>
 <pre>24 Oct · new build, 25 pages fetched
   errors 0
   warnings 25 canonical → skills.caffeinity.com
-  (expected on the preview host)</pre></div>
+  (expected: crawled on a preview URL)</pre></div>
           <p class="verdict">fixed; re-crawled 24 October</p>
         </div>
       </div>
       <div class="pane" role="tabpanel" id="pane-web-preflight" aria-labelledby="tab-web-preflight">
         <div class="pane-col">
-          <p class="pane-label">web-preflight · skills.caffeinity.com</p>
+          <p class="pane-label">web-preflight · this site, then at skills.caffeinity.com</p>
           <h3>Nothing exposed; headers in place</h3>
 <pre>http → https     301
 HSTS, CSP        present
@@ -414,7 +414,7 @@ catch-all  none</pre></div>
       </div>
       <div class="pane" role="tabpanel" id="pane-check_skill" aria-labelledby="tab-check_skill">
         <div class="pane-col">
-          <p class="pane-label">tune-skill · check_skill.py × 42 skills</p>
+          <p class="pane-label">tune-skill · check_skill.py × 42 skills, 24 Oct</p>
           <h3>One skill strict installers could not load</h3>
 <pre>SKILL.md files   42
 pass             41
@@ -434,7 +434,7 @@ WARN 16 · NOTE 2</pre>
       </div>
       <div class="pane" role="tabpanel" id="pane-regress" aria-labelledby="tab-regress">
         <div class="pane-col">
-          <p class="pane-label">tune-skill · regress.py × 44 skills</p>
+          <p class="pane-label">tune-skill · regress.py × 44 skills, 24 Oct</p>
           <h3>The family checked against itself</h3>
 <pre>skills checked   44
 regressions      0
@@ -463,7 +463,7 @@ release-gate variants: one owner
 <pre>baseline queries  0 of 5 found
 same name         hburaktasyurek/tune-skill
 skills.sh         2 of 42 listed</pre>
-          <p>The discovery kit (About text, topics, README opening, re-check date) is drafted; nothing public changes without a go-ahead.</p>
+          <p>Findable drafted the discovery kit (About text, topics, README opening, re-check date) and stopped there: it never publishes a change without the owner's approval.</p>
         </div>
         <div class="pane-col">
           <p class="pane-label">Before → after</p>
@@ -475,7 +475,7 @@ found   0 of 5 target queries</pre></div>
         SKILL.md: why it does not trigger,
         where it overlaps a sibling skill…
 check_listing.py  OK (250/350)</pre></div>
-          <p class="verdict">drafted; owner's call on the name</p>
+          <p class="verdict">kit drafted for review; renaming left to the owner</p>
         </div>
       </div>
       <div class="pane" role="tabpanel" id="pane-upstream-check" aria-labelledby="tab-upstream-check">
@@ -483,7 +483,8 @@ check_listing.py  OK (250/350)</pre></div>
           <p class="pane-label">upstream-check · listing drift</p>
           <h3>Three skills installable but unlisted</h3>
 <pre>site index.json  25
-homepage         22 (read as 27)</pre>
+homepage         22 listed
+drift check      read 27 (bug)</pre>
           <p>The drift check counted section anchors as skills and hid the difference; both bugs are fixed upstream.</p>
         </div>
         <div class="pane-col">
@@ -576,7 +577,7 @@ tracker      ready for candidate review</pre></div>
   <div class="wrap">
     <div>
       <h2 id="band-h">Need skills for your team's <em>own</em> work?</h2>
-      <p>We build custom skills and workflows, tested on your real tasks, for the agents your team already uses.</p>
+      <p>Caffeinity builds custom skills and workflows for teams on its own site. Skillsmith by Caffeinity stays open source and sells nothing.</p>
     </div>
     <a class="btn" href="/work/">Work with us</a>
   </div>

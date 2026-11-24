@@ -1,10 +1,6 @@
 /* Skill Check page: fetches a public SKILL.md from GitHub (or takes pasted text), runs
    /check/check-core.js on it in the browser and renders the findings. Nothing is sent to us. */
 (function(){
-  /* Payment links. Leave a value empty and its order buttons open an email instead.
-     Paste a hosted checkout URL (for example a Stripe Payment Link) to take payment directly. */
-  var PAY={single:"",family:""};
-
   var EXPLAIN={
     "no-frontmatter":["An agent reads a skill's name and description from the YAML block at the very top of the file. Without that block the skill cannot be listed or triggered.","Start the file with a line of three hyphens, then name: and description:, then another line of three hyphens."],
     "bad-yaml":["A strict YAML loader stops at this line, so an installer may reject the skill or cut the value short.","Wrap the value in double quotes, or write the key followed by >- and put the text on the indented lines below it."],
@@ -190,31 +186,19 @@
 
     var up=el("div","upsell"),p=el("p");
     var clean=!r.fatal&&!fails.length&&!warns.length;
-    p.appendChild(el("b",null,clean?"A script can only check the shape.":"Want it sent back fixed?"));
+    p.appendChild(el("b",null,clean?"A script can only check the shape.":"Fix it with tune-skill."));
     p.appendChild(document.createTextNode(clean
-      ?"Whether the description wins the right requests takes a reader. A tune-up is $19 for one skill at the launch price, refunded if we find nothing worth changing."
-      :"A tune-up is $19 for one skill at the launch price: a replacement SKILL.md, each finding with its fix, and test requests. Back in two working days, refunded if we find nothing worth changing."));
+      ?"Whether the description wins the right requests takes a reader. tune-skill, the open skill behind this checker, walks your agent through the rest of the audit."
+      :"tune-skill, the open skill behind this checker, has your own agent fix each finding and write test requests for the boundaries it changes."));
     up.appendChild(p);
-    var a=el("a","btn btn-accent","Order a tune-up");
-    a.href=orderHref("single",link||"");
-    up.appendChild(a);result.appendChild(up);
+    var acts=el("div","upsell-actions");
+    var a=el("a","btn btn-accent","Install tune-skill");
+    a.href="/tune-skill/";
+    acts.appendChild(a);
+    up.appendChild(acts);result.appendChild(up);
 
     result.hidden=false;
     result.scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"});
-  }
-
-  function orderHref(kind,link){
-    if(PAY[kind])return PAY[kind];
-    var subject=kind==="family"?"Family tune-up ($99)":"Skill tune-up ($19 launch price)";
-    return "mailto:hello@skillsmith.tech?subject="+encodeURIComponent(subject)+"&body="+encodeURIComponent("Skill repo or SKILL.md link: "+link+"\n\nAnything we should know (what it fails to do, which agent you use): \n");
-  }
-  [].forEach.call(document.querySelectorAll("[data-order]"),function(a){
-    var kind=a.getAttribute("data-order");
-    if(PAY[kind])a.href=PAY[kind];
-  });
-  if(PAY.single&&PAY.family){
-    var note=$("order-note");
-    if(note)note.firstChild.textContent="Prices in USD, before any local taxes. After you pay, reply to the receipt with your skill link or file; the clock starts then. More than five skills, or private ones? See ";
   }
 
   form.addEventListener("submit",function(e){
