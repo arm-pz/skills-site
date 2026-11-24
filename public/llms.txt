@@ -1,6 +1,6 @@
 # Skillsmith by Caffeinity
 
-> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: 70 skills and 7 mods mapped into 12 workflows (build a skill, get found, gate a release, grow search traffic, land a job, decide, learn, run outbound, launch a product). Plain markdown, no API keys.
+> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: 71 skills and 7 mods mapped into 12 workflows (build a skill, get found, gate a release, grow search traffic, land a job, decide, learn, run outbound, launch a product). Plain markdown, no API keys.
 
 ## Install
 
@@ -70,6 +70,7 @@ Sections: [skills](https://skillsmith.tech/skills/), [workflows](https://skillsm
 - [setup-claude-advisor](https://skillsmith.tech/setup-claude-advisor/): Configure Claude Code for quota-optimised model tiering: Sonnet as the main session model, Opus as the on-call advisor, Haiku for read-only subagents, and Sonnet for code-editing subagents.
 - [insights-to-prompts](https://skillsmith.tech/insights-to-prompts/): Turn a Claude Code /insights report into before/after rewrites of the prompts that caused friction — both the prompts you type in sessions and the prompt text inside your own skills.
 - [ship-second-brain](https://skillsmith.tech/ship-second-brain/): Builds and maintains a team second brain in one markdown folder: raw issues, PRs, specs and call notes saved first, cut into one-idea notes with a source and confidence (seen, verified, opinion), linked, verified against the source, summed…
+- [address-findings](https://skillsmith.tech/address-findings/): Fixes the CRITICAL and HIGH findings in a consistent-code-review report for one pull request, staying inside the files that PR already changes, then reports each finding as fixed, won't fix (with evidence) or escalate.
 
 ## SEO & Search
 

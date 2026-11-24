@@ -2,6 +2,13 @@
   "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
   "skills": [
     {
+      "name": "address-findings",
+      "description": "Agent skill: fix the CRITICAL and HIGH findings from a code review on one PR, inside the PR's own files, and report each as fixed, won't fix or escalate.",
+      "type": "archive",
+      "url": "https://skillsmith.tech/agent-skills/address-findings.tar.gz",
+      "digest": "sha256:75cf4e935ef22eb0b467c6423ba969d5114ca0b52dc72d7db51decea294f2f76"
+    },
+    {
       "name": "ai-team-blueprint",
       "description": "Agent skill that plans your first AI team: asks 5 questions, picks one use case, then writes 3-5 agent roles with paste-ready prompts, handoffs, a lean tool stack, QA plan and 7-day launch plan. Human approval gates built in. For Claude Code and Claude.ai.",
       "type": "archive",
