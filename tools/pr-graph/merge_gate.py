@@ -5,7 +5,7 @@
     python tools/pr-graph/merge_gate.py <pr> --review <review-report.json> --merge  # squash-merge on pass
 
 A PR passes only if ALL of these hold for its current head:
-  1. The review report is for this PR and this exact head SHA, and has no CRITICAL or HIGH finding.
+  1. The review report is for this PR, head SHA, base branch and base SHA, and has no CRITICAL or HIGH finding.
   2. Every commit-status context succeeded, every check run on the head has finished, none failed, and the `check` job succeeded.
   3. GitHub says the PR merges cleanly into its base.
   4. It has no `hold` or `needs-owner` label.
@@ -44,7 +44,7 @@ def check_review_shape(review):
     problems = []
     if not isinstance(review, dict):
         return ["review is not a JSON object"]
-    for key in ("pr", "head_sha", "round", "verdict", "findings"):
+    for key in ("pr", "head_sha", "base_ref", "base_sha", "round", "verdict", "findings"):
         if key not in review:
             problems.append(f"review is missing `{key}`")
     if problems:
@@ -53,6 +53,10 @@ def check_review_shape(review):
         problems.append("review `pr` is not an integer")
     if not isinstance(review["head_sha"], str) or not SHA.match(review["head_sha"]):
         problems.append("review `head_sha` is not a full 40-character SHA")
+    if not isinstance(review["base_ref"], str) or not review["base_ref"]:
+        problems.append("review `base_ref` must name a branch")
+    if not isinstance(review["base_sha"], str) or not SHA.fullmatch(review["base_sha"]):
+        problems.append("review `base_sha` is not a full 40-character SHA")
     if review["verdict"] not in ("pass", "fail"):
         problems.append("review `verdict` is not pass or fail")
     if not isinstance(review["findings"], list):
@@ -71,7 +75,8 @@ def is_protected(path):
 def evaluate(state, review):
     """Decide pass or fail from plain data, so it can be tested without GitHub.
 
-    state: {"number", "head_sha", "draft", "mergeable", "labels", "files", "checks"}
+    state: {"number", "head_sha", "base_ref", "base_sha", "draft", "mergeable",
+            "labels", "files", "checks", "statuses"}
       mergeable: True, False or None (GitHub still computing)
       checks: [{"name", "status", "conclusion"}]
     Returns {"pass": bool, "reasons": [...], "draft": bool}.
@@ -82,6 +87,8 @@ def evaluate(state, review):
             reasons.append(f"review is for PR #{review['pr']}, not #{state['number']}")
         if review["head_sha"] != state["head_sha"]:
             reasons.append(f"stale review: reviewed {review['head_sha'][:7]}, head is {state['head_sha'][:7]}")
+        if review["base_ref"] != state["base_ref"] or review["base_sha"] != state["base_sha"]:
+            reasons.append("stale review: base branch or commit changed")
         if review["verdict"] != "pass":
             reasons.append("review verdict is fail")
         blocking = [f["id"] if "id" in f else "?" for f in review["findings"]
@@ -160,6 +167,8 @@ def fetch_state(number):
     return {
         "number": number,
         "head_sha": sha,
+        "base_ref": pr["base"]["ref"],
+        "base_sha": pr["base"]["sha"],
         "draft": pr.get("draft", False),
         "mergeable": pr.get("mergeable"),
         "labels": [l["name"] for l in pr.get("labels", [])],

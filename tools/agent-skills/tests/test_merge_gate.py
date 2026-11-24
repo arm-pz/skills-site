@@ -19,6 +19,8 @@ OLD = "b" * 40
 def good_state():
     return {
         "number": 80,
+        "base_ref": "main",
+        "base_sha": OLD,
         "head_sha": HEAD,
         "draft": False,
         "mergeable": True,
@@ -34,7 +36,8 @@ def good_state():
 
 def good_review():
     return {
-        "pr": 80, "head_sha": HEAD, "round": 1, "verdict": "pass",
+        "pr": 80, "head_sha": HEAD, "base_ref": "main", "base_sha": OLD,
+        "round": 1, "verdict": "pass",
         "findings": [{"id": "M1", "severity": "MEDIUM", "file": "site/skills.json",
                       "line": 3, "finding": "Blurb wording"}],
     }
@@ -58,6 +61,10 @@ KNOWN_BAD = {
     "review says pass but lists a HIGH": (good_state(), with_(good_review(), findings=[
         {"id": "H2", "severity": "HIGH", "file": "x.py", "line": 1, "finding": "Race"}])),
     "stale review (head moved after review)": (good_state(), with_(good_review(), head_sha=OLD)),
+    "base advanced": (with_(good_state(), base_sha="c" * 40), good_review()),
+    "PR retargeted at same commit": (with_(good_state(), base_ref="release"), good_review()),
+    "legacy review without base": (good_state(), {k: v for k, v in good_review().items()
+                                                if k not in {"base_ref", "base_sha"}}),
     "review for a different PR": (good_state(), with_(good_review(), pr=79)),
     "malformed review (no findings key)": (good_state(), {"pr": 80, "head_sha": HEAD, "round": 1, "verdict": "pass"}),
     "short head SHA in review": (good_state(), with_(good_review(), head_sha=HEAD[:7])),
