@@ -6,7 +6,7 @@
 
 A PR passes only if ALL of these hold for its current head:
   1. The review report is for this PR and this exact head SHA, and has no CRITICAL or HIGH finding.
-  2. Every check run on the head has finished, none failed, and the `check` job succeeded.
+  2. Every commit-status context succeeded, every check run on the head has finished, none failed, and the `check` job succeeded.
   3. GitHub says the PR merges cleanly into its base.
   4. It has no `hold` or `needs-owner` label.
   5. Its diff touches no protected path (CI, agent and gate config). Those always go to a human.
@@ -102,6 +102,10 @@ def evaluate(state, review):
         elif c["name"] == REQUIRED_CHECK and c["conclusion"] != "success":
             reasons.append(f"required check `{REQUIRED_CHECK}` was {c['conclusion']}, not success")
 
+    for context, status in state["statuses"].items():
+        if status != "success":
+            reasons.append(f"commit status `{context}` is {status}")
+
     if state["mergeable"] is None:
         reasons.append("GitHub has not finished computing mergeability; retry")
     elif not state["mergeable"]:
@@ -149,6 +153,10 @@ def fetch_state(number):
     files = [f["filename"] for f in changed] + [f["previous_filename"] for f in changed
                                                 if f.get("previous_filename")]
     runs = paged(f"repos/{REPO}/commits/{sha}/check-runs")
+    # GitHub lists statuses newest first and treats context names case-insensitively.
+    statuses = {}
+    for status in paged(f"repos/{REPO}/commits/{sha}/statuses"):
+        statuses.setdefault(status["context"].casefold(), status["state"])
     return {
         "number": number,
         "head_sha": sha,
@@ -156,6 +164,7 @@ def fetch_state(number):
         "mergeable": pr.get("mergeable"),
         "labels": [l["name"] for l in pr.get("labels", [])],
         "files": files,
+        "statuses": statuses,
         "checks": [{"name": r["name"], "status": r["status"], "conclusion": r.get("conclusion")}
                    for r in runs],
     }

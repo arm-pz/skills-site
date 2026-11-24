@@ -7,6 +7,7 @@ import copy
 import sys
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "pr-graph"))
 import merge_gate
@@ -23,6 +24,7 @@ def good_state():
         "mergeable": True,
         "labels": [],
         "files": ["tools/agent-skills/gen_page.py", "site/skills.json"],
+        "statuses": {},
         "checks": [
             {"name": "check", "status": "completed", "conclusion": "success"},
             {"name": "publish", "status": "completed", "conclusion": "skipped"},
@@ -67,6 +69,9 @@ KNOWN_BAD = {
     "changes an agent definition": (with_(good_state(), files=[".claude/agents/pr-fixer.md"]), good_review()),
     "merge conflict": (with_(good_state(), mergeable=False), good_review()),
     "mergeability not computed yet": (with_(good_state(), mergeable=None), good_review()),
+    "pending commit status": (with_(good_state(), statuses={"build": "pending"}), good_review()),
+    "failed commit status": (with_(good_state(), statuses={"build": "failure"}), good_review()),
+    "errored commit status": (with_(good_state(), statuses={"build": "error"}), good_review()),
     "check failed": (with_(good_state(), checks=[
         {"name": "check", "status": "completed", "conclusion": "failure"}]), good_review()),
     "check still running": (with_(good_state(), checks=[
@@ -84,6 +89,21 @@ class MergeGateTest(unittest.TestCase):
     def test_clean_pr_passes(self):
         verdict = merge_gate.evaluate(good_state(), good_review())
         self.assertTrue(verdict["pass"], verdict["reasons"])
+
+    def test_fetch_uses_latest_status_per_context(self):
+        pr = {"state": "open", "head": {"sha": HEAD}, "base": {"sha": OLD, "ref": "main"}}
+        statuses = [{"context": "Build", "state": "success"},
+                    {"context": "lint", "state": "pending"},
+                    {"context": "build", "state": "failure"}]
+        with (
+            patch.object(merge_gate, "gh", return_value=pr),
+            patch.object(merge_gate, "paged", side_effect=[[], [], statuses]) as paged,
+        ):
+            state = merge_gate.fetch_state(80)
+        paged.assert_called_with(f"repos/{merge_gate.REPO}/commits/{HEAD}/statuses")
+        self.assertEqual(state["statuses"], {"build": "success", "lint": "pending"})
+        self.assertTrue(merge_gate.evaluate(with_(good_state(), statuses={"build": "success"}),
+                                            good_review())["pass"])
 
     def test_medium_and_low_findings_do_not_block(self):
         review = with_(good_review(), findings=[
