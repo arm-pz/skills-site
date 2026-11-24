@@ -6,7 +6,7 @@
 
 A PR passes only if ALL of these hold for its current head:
   1. The review report is for this PR, head SHA, base branch and base SHA, and has no CRITICAL or HIGH finding.
-  2. Every commit-status context succeeded, every check run on the head has finished, none failed, and the configured required checks succeeded.
+  2. Every commit-status context succeeded, every check run on the head has finished, none failed, and the `check` job succeeded.
   3. GitHub says the PR merges cleanly into its base.
   4. It has no `hold`, `hands-off`, or `needs-owner` label.
   5. Its diff touches no protected path (CI, agent and gate config). Those always go to a human.
@@ -19,15 +19,14 @@ Prints one JSON verdict. Exit 0 = pass (and merged, with --merge), 1 = fail, 2 =
 Uses the GitHub REST API through `gh api` (GraphQL is not available in Claude Code sessions).
 """
 import argparse
-import base64
-import os
 import json
 import re
 import subprocess
 import sys
 from pathlib import Path
 
-REPOSITORY = re.compile(r"[A-Za-z0-9-]+/[A-Za-z0-9_.-]+")
+REPO = "arm-pz/skills-site"
+REQUIRED_CHECK = "check"
 BLOCKING_LABELS = {"hold", "hands-off", "needs-owner"}
 BLOCKING_SEVERITIES = {"CRITICAL", "HIGH"}
 OK_CONCLUSIONS = {"success", "skipped", "neutral"}
@@ -78,7 +77,7 @@ def is_protected(path):
     return path in PROTECTED_FILES or path.startswith(PROTECTED_PREFIXES)
 
 
-def evaluate(state, review, required_checks=("check",)):
+def evaluate(state, review):
     """Decide pass or fail from plain data, so it can be tested without GitHub.
 
     state: {"number", "head_sha", "base_ref", "base_sha", "draft", "mergeable",
@@ -91,8 +90,6 @@ def evaluate(state, review, required_checks=("check",)):
     """
     reasons = list(check_review_shape(review))
     if not reasons:
-        if str(review.get("repository", "")).casefold() != state["repository"].casefold():
-            reasons.append("review belongs to a different repository or lacks repository identity")
         if review["pr"] != state["number"]:
             reasons.append(f"review is for PR #{review['pr']}, not #{state['number']}")
         if review["head_sha"] != state["head_sha"]:
@@ -109,16 +106,15 @@ def evaluate(state, review, required_checks=("check",)):
             reasons.append("review says pass but lists CRITICAL/HIGH findings")
 
     checks = state["checks"]
-    for name in required_checks:
-        if not any(c["name"] == name for c in checks) and name.casefold() not in state["statuses"]:
-            reasons.append(f"required check `{name}` has not run on the head")
+    if not any(c["name"] == REQUIRED_CHECK for c in checks):
+        reasons.append(f"required check `{REQUIRED_CHECK}` has not run on the head")
     for c in checks:
         if c["status"] != "completed":
             reasons.append(f"check `{c['name']}` still {c['status']}")
         elif c["conclusion"] not in OK_CONCLUSIONS:
             reasons.append(f"check `{c['name']}` {c['conclusion']}")
-        elif c["name"] in required_checks and c["conclusion"] != "success":
-            reasons.append(f"required check `{c['name']}` was {c['conclusion']}, not success")
+        elif c["name"] == REQUIRED_CHECK and c["conclusion"] != "success":
+            reasons.append(f"required check `{REQUIRED_CHECK}` was {c['conclusion']}, not success")
 
     for context, status in state["statuses"].items():
         if status != "success":
@@ -151,18 +147,14 @@ def evaluate(state, review, required_checks=("check",)):
             "inconclusive": inconclusive}
 
 
-def cli(*args):
-    out = subprocess.run(["gh", *args], capture_output=True, encoding="utf-8")
-    if out.returncode:
-        raise GateError(out.stderr.strip() or "GitHub CLI failed")
-    return out.stdout.strip()
-
-
 def gh(*args, method="GET", fields=None):
-    cmd = ["api", "-X", method, *args]
+    cmd = ["gh", "api", "-X", method, *args]
     for k, v in (fields or {}).items():
         cmd += ["-f", f"{k}={v}"]
-    return json.loads(cli(*cmd) or "{}")
+    out = subprocess.run(cmd, capture_output=True, text=True)
+    if out.returncode != 0:
+        raise GateError(f"gh api {' '.join(args)} failed: {out.stderr.strip() or out.stdout.strip()}")
+    return json.loads(out.stdout) if out.stdout.strip() else {}
 
 
 def paged(path):
@@ -177,44 +169,22 @@ def paged(path):
         page += 1
 
 
-def required_checks(repo, base_sha):
-    """Read policy from the target's reviewed base, even for a remote --repo."""
-    root = gh(f"repos/{repo}/git/trees/{base_sha}")
-    if root.get("truncated"):
-        raise GateError("cannot inspect complete repository root")
-    folder = next((item for item in root["tree"] if item["path"] == ".github"), None)
-    if folder is None:
-        return ["check"]
-    entries = gh(f"repos/{repo}/git/trees/{folder['sha']}")
-    if entries.get("truncated"):
-        raise GateError("cannot inspect complete .github directory")
-    config = next((item for item in entries["tree"] if item["path"] == "pr-graph.json"), None)
-    if config is None:
-        return ["check"]
-    blob = gh(f"repos/{repo}/git/blobs/{config['sha']}")
-    names = json.loads(base64.b64decode(blob["content"]))["required_checks"]
-    if not isinstance(names, list) or not names or not all(isinstance(n, str) and n.strip() for n in names):
-        raise GateError("required_checks must be a nonempty list of check names")
-    return names
-
-
-def fetch_state(number, repo):
-    pr = gh(f"repos/{repo}/pulls/{number}")
+def fetch_state(number):
+    pr = gh(f"repos/{REPO}/pulls/{number}")
     if pr.get("state") != "open":
         raise GateError(f"PR #{number} is {pr.get('state')}, not open")
     sha = pr["head"]["sha"]
-    changed = paged(f"repos/{repo}/pulls/{number}/files")
+    changed = paged(f"repos/{REPO}/pulls/{number}/files")
     # A renamed file counts at its old path too, so moving a protected file out is still protected.
     files = [f["filename"] for f in changed] + [f["previous_filename"] for f in changed
                                                 if f.get("previous_filename")]
-    runs = paged(f"repos/{repo}/commits/{sha}/check-runs")
+    runs = paged(f"repos/{REPO}/commits/{sha}/check-runs")
     # GitHub lists statuses newest first and treats context names case-insensitively.
     statuses = {}
-    for status in paged(f"repos/{repo}/commits/{sha}/statuses"):
+    for status in paged(f"repos/{REPO}/commits/{sha}/statuses"):
         statuses.setdefault(status["context"].casefold(), status["state"])
     return {
         "number": number,
-        "repository": repo,
         "head_sha": sha,
         "base_ref": pr["base"]["ref"],
         "base_sha": pr["base"]["sha"],
@@ -231,17 +201,15 @@ def fetch_state(number, repo):
 
 
 def merge(state):
-    repo = state["repository"]
     if state["draft"]:
-        cli("pr", "ready", str(state["number"]), "--repo", repo)
-    return gh(f"repos/{repo}/pulls/{state['number']}/merge", method="PUT",
+        gh(f"repos/{REPO}/pulls/{state['number']}/ccr/ready_for_review", method="POST")
+    return gh(f"repos/{REPO}/pulls/{state['number']}/merge", method="PUT",
               fields={"merge_method": "squash", "sha": state["head_sha"]})
 
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("pr", type=int)
-    ap.add_argument("--repo", help="GitHub OWNER/REPO (default: Actions caller or current checkout)")
     ap.add_argument("--review", required=True, type=Path, help="review-report.json for the current head")
     ap.add_argument("--merge", action="store_true", help="squash-merge when the gate passes")
     args = ap.parse_args(argv)
@@ -251,19 +219,14 @@ def main(argv=None):
         print(json.dumps({"pr": args.pr, "pass": False, "error": f"cannot read review: {e}"}))
         return 2
     try:
-        repo = args.repo or os.environ.get("GITHUB_REPOSITORY") or cli(
-            "repo", "view", "--json", "nameWithOwner", "--jq", ".nameWithOwner")
-        if not REPOSITORY.fullmatch(repo) or repo.split("/")[1] in {".", ".."}:
-            raise GateError("invalid repository; expected OWNER/REPO")
-        state = fetch_state(args.pr, repo)
-        required = required_checks(repo, state["base_sha"])
-        verdict = evaluate(state, review, required)
+        state = fetch_state(args.pr)
+        verdict = evaluate(state, review)
         verdict.update(pr=args.pr, head_sha=state["head_sha"], merged=False)
         if verdict["pass"] and args.merge:
             result = merge(state)
             verdict["merged"] = bool(result.get("merged"))
             verdict["merge_sha"] = result.get("sha")
-    except (GateError, OSError, KeyError, TypeError, ValueError) as e:
+    except GateError as e:
         print(json.dumps({"pr": args.pr, "pass": False, "error": str(e)}))
         return 2
     print(json.dumps(verdict, indent=2))

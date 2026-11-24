@@ -1,40 +1,11 @@
-name: Run the PR graph
-on:
-  workflow_call:
-    secrets:
-      graph_token:
-        description: Caller-scoped GitHub App installation token for PR updates
-        required: true
+name: Run PR Graph
+on: workflow_dispatch
+permissions:
+  contents: read
 jobs:
   graph:
-    # Install and authenticate the agent on an isolated, ephemeral runner with this label.
-    runs-on: [self-hosted, pr-graph]
-    permissions:
-      contents: read
-    concurrency:
-      group: pr-graph-agent-${{ github.repository }}
-      cancel-in-progress: false
-    steps:
-      - name: Require a trusted default-branch caller
-        env:
-          EVENT: ${{ github.event_name }}
-          REF: ${{ github.ref }}
-          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
-        shell: bash
-        run: |
-          [[ "$REF" == "refs/heads/$DEFAULT_BRANCH" ]]
-          [[ "$EVENT" == workflow_dispatch || "$EVENT" == schedule ]]
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          persist-credentials: false
-      - name: Run the installed conductor and publish its scorecard
-        env:
-          GH_TOKEN: ${{ secrets.graph_token }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          test -f .claude/skills/pr-graph/SKILL.md
-          claude -p --output-format text \
-            "Use the installed pr-graph skill on all open pull requests in $GITHUB_REPOSITORY. Run its fresh review, fix and re-review nodes as needed, and use its code gate for merges. Return the summary and scorecard in your final response for the Actions job summary." \
-            | tee -a "$GITHUB_STEP_SUMMARY"
+    uses: arm-pz/pr-graph/.github/workflows/pr-graph-run.yml@a9b3c6765aea4e9e66b1d2cf247d51b485a87533
+    with:
+      graph_revision: a9b3c6765aea4e9e66b1d2cf247d51b485a87533
+    secrets:
+      graph_token: ${{ secrets.PR_GRAPH_TOKEN }}
