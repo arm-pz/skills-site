@@ -50,6 +50,7 @@ KNOWN_BAD = {
     "high finding (#74 unmasked input)": (good_state(), with_(good_review(), verdict="fail", findings=[
         {"id": "H1", "severity": "HIGH", "file": "tools/skill-runs/report.py", "line": 41,
          "finding": "Unmasked user input is posted to GitHub"}])),
+    "fail verdict with only a medium finding": (good_state(), with_(good_review(), verdict="fail")),
     "critical finding": (good_state(), with_(good_review(), verdict="fail", findings=[
         {"id": "C1", "severity": "CRITICAL", "file": "x.py", "line": 1, "finding": "Deletes data"}])),
     "review says pass but lists a HIGH": (good_state(), with_(good_review(), findings=[

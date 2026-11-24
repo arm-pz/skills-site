@@ -82,6 +82,8 @@ def evaluate(state, review):
             reasons.append(f"review is for PR #{review['pr']}, not #{state['number']}")
         if review["head_sha"] != state["head_sha"]:
             reasons.append(f"stale review: reviewed {review['head_sha'][:7]}, head is {state['head_sha'][:7]}")
+        if review["verdict"] != "pass":
+            reasons.append("review verdict is fail")
         blocking = [f["id"] if "id" in f else "?" for f in review["findings"]
                     if f["severity"] in BLOCKING_SEVERITIES]
         if blocking:
