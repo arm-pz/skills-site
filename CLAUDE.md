@@ -1,14 +1,15 @@
 ## pr-merge-gate
 
-When asked to “review and merge the open PRs”, list the open pull requests and process dependencies first. Run `consistent-code-review` on each PR diff and record the reviewed head SHA and findings.
+When asked to “review and merge the open PRs”, run the **pr-graph** skill (`.claude/skills/pr-graph/SKILL.md`). It reviews each open PR with `consistent-code-review` in a fresh `pr-reviewer` subagent, fixes CRITICAL and HIGH findings with `address-findings` in a `pr-fixer` subagent, re-reviews them, and loops at most 3 rounds.
 
-Squash-merge a PR only when all four conditions hold at merge time:
+Only `tools/pr-graph/merge_gate.py <pr> --review <review-report.json> --merge` may merge. Never merge by calling the API or `gh pr merge` directly. The gate squash-merges, pinned to the reviewed head SHA, only when all of these hold:
 
-- The review has zero CRITICAL and zero HIGH findings.
-- CI is green for the reviewed head. Wait for pending checks. This repo's `check` job must pass. Its deployment `publish` job is expected to skip on pull requests.
+- The review is for the current head and has zero CRITICAL and zero HIGH findings.
+- CI is green for that head. This repo's `check` job must succeed. Its deployment `publish` job is expected to skip on pull requests.
 - GitHub confirms the PR merges without conflicts into its current base.
-- The PR has no `hold` label.
+- The PR has no `hold` or `needs-owner` label.
+- The diff touches no protected path: `.github/`, `.claude/`, `tools/pr-graph/`, `CLAUDE.md`, or the gate's own tests. Those changes are always merged by a human.
 
-After a dependency lands, rebase dependent work as needed and re-review the updated diff. Preserve published history and never force-push. If the head changes, repeat the review and CI checks. Mark eligible drafts ready for review and squash-merge with `--match-head-commit` set to the reviewed SHA.
+After a merge, re-check the remaining PRs. Any whose head or base changed go back to review. Preserve published history and never force-push. Leave held PRs open. Post a summary grouped by **merged**, **held** and **needs-owner**, with the gate's reasons for each.
 
-Leave held PRs open. Post a summary grouped by **merged**, **held**, and **needs-fix**, with the reason for each decision and any non-blocking findings.
+When a bad PR gets past the gate, add it to `KNOWN_BAD` in `tools/agent-skills/tests/test_merge_gate.py` before fixing anything else.

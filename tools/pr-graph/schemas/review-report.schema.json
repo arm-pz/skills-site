@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://skillsmith.tech/schemas/review-report.schema.json",
+  "title": "PR graph review report",
+  "description": "What the reviewer node hands to the fixer and the merge gate. One report per PR per round, for exactly one head SHA. Written next to consistent-code-review's markdown report.",
+  "type": "object",
+  "required": ["pr", "head_sha", "round", "verdict", "findings"],
+  "additionalProperties": false,
+  "properties": {
+    "pr": {"type": "integer", "minimum": 1},
+    "head_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "round": {"type": "integer", "minimum": 1, "maximum": 4},
+    "verdict": {
+      "enum": ["pass", "fail"],
+      "description": "pass only when no finding is CRITICAL or HIGH."
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "severity", "file", "line", "finding"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {"type": "string", "pattern": "^[CHML][0-9]+$", "description": "consistent-code-review's own ID, e.g. H1."},
+          "severity": {"enum": ["CRITICAL", "HIGH", "MEDIUM", "LOW"]},
+          "file": {"type": "string"},
+          "line": {"type": ["integer", "null"], "minimum": 1},
+          "finding": {"type": "string"},
+          "suggested_fix": {"type": "string"},
+          "prior_id": {"type": ["string", "null"], "description": "On a re-review: the earlier round's ID this finding continues, if any."}
+        }
+      }
+    },
+    "confirmed_fixed": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "On a re-review: earlier IDs the reviewer checked and found fixed."
+    }
+  }
+}
