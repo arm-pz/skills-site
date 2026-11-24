@@ -1,6 +1,6 @@
 # Skillsmith by Caffeinity
 
-> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: 69 skills and 7 mods mapped into 12 workflows (build a skill, get found, gate a release, grow search traffic, land a job, decide, learn, run outbound, launch a product). Plain markdown, no API keys.
+> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: 70 skills and 7 mods mapped into 12 workflows (build a skill, get found, gate a release, grow search traffic, land a job, decide, learn, run outbound, launch a product). Plain markdown, no API keys.
 
 ## Install
 
@@ -31,6 +31,7 @@ Sections: [skills](https://skillsmith.tech/skills/), [workflows](https://skillsm
 - [get-listed](https://skillsmith.tech/get-listed/): Finds the best-of, top-X and alternatives articles, and the GitHub awesome-lists, that name your competitors but leave you out, finds each one's author or submission rules, and drafts a pitch, pull request or issue-form answer per list…
 - [replace-dead-tools](https://skillsmith.tech/replace-dead-tools/): Checks every tool named on best-of and alternatives lists for shutdowns, parked domains, acquisitions and abandonment, confirms each verdict with evidence a person can open, and drafts a "replace the dead entry with us" pitch per affected…
 - [plugin-directory-gate](https://skillsmith.tech/plugin-directory-gate/): Checks a Claude Code plugin folder against the Claude plugin directory's submission rules and returns GO or HOLD, with each blocking issue, policy hold and warning as rule, file:line and fix (scripts, install lines even in docs…
+- [skill-eval-suite](https://skillsmith.tech/skill-eval-suite/): Builds and runs the eval suite for a recurring agent loop or skill - about 5% golden, 80% real prompts graded on trajectory, 15% author-judged, with must-do, must-not and keep-working cases.
 
 ## Publish & Discover
 

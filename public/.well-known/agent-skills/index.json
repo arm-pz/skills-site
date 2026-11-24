@@ -394,6 +394,13 @@
       "digest": "sha256:b56b11f95e76ba757f8583562823353849f1d8a87fc9362a7217f684d7916803"
     },
     {
+      "name": "skill-eval-suite",
+      "description": "Agent skill that builds and runs evals for other agent skills and scheduled agent loops: real prompts graded on trajectory, golden and author-judged cases, pass rates over 3+ trials, same-case flips, token budgets, a hidden holdout and a known-bad set every judge must fail. Reads Claude Code traces. Python, no dependencies.",
+      "type": "archive",
+      "url": "https://skillsmith.tech/agent-skills/skill-eval-suite.tar.gz",
+      "digest": "sha256:1b49cbe7a98cda85547308da874507fe4e8864412a9fe9b20215ba545c3da1d3"
+    },
+    {
       "name": "skill-launch",
       "description": "Launches one new skill from an idea: drafts with Draft-Skill, validates and tunes with Tune-Skill, then audits and polishes discoverability with Findable-Polish. Not for a batch of prompts you already wrote (use prompts-to-skill) or an existing skill (use tune-and-polish).",
       "type": "archive",
