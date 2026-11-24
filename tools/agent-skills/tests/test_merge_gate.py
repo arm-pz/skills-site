@@ -26,6 +26,8 @@ def good_state():
         "mergeable": True,
         "labels": [],
         "files": ["tools/agent-skills/gen_page.py", "site/skills.json"],
+        "files_listed": 2,
+        "files_expected": 2,
         "statuses": {},
         "checks": [
             {"name": "check", "status": "completed", "conclusion": "success"},
@@ -74,6 +76,10 @@ KNOWN_BAD = {
     "changes the gate itself": (with_(good_state(), files=["tools/pr-graph/merge_gate.py"]), good_review()),
     "changes CLAUDE.md rules": (with_(good_state(), files=["CLAUDE.md"]), good_review()),
     "changes an agent definition": (with_(good_state(), files=[".claude/agents/pr-fixer.md"]), good_review()),
+    "file list cut off (large PR)": (with_(good_state(), files_listed=3000, files_expected=3412), good_review()),
+    "file count unknown": (with_(good_state(), files_expected=None), good_review()),
+    "malformed inconclusive (not a list)": (good_state(), with_(good_review(), inconclusive="I1")),
+    "malformed inconclusive (entry not an object)": (good_state(), with_(good_review(), inconclusive=["I1"])),
     "merge conflict": (with_(good_state(), mergeable=False), good_review()),
     "mergeability not computed yet": (with_(good_state(), mergeable=None), good_review()),
     "pending commit status": (with_(good_state(), statuses={"build": "pending"}), good_review()),
@@ -127,6 +133,14 @@ class MergeGateTest(unittest.TestCase):
 
     def test_known_bad_set_is_large_enough_to_trust(self):
         self.assertGreaterEqual(len(KNOWN_BAD), 10)
+
+    def test_inconclusive_findings_do_not_block_but_are_reported(self):
+        review = with_(good_review(), inconclusive=[
+            {"id": "I1", "file": "tools/skill-runs/report.py", "line": 12,
+             "finding": "May leak a token", "reason": "needs a live GitHub token", "would_be": "HIGH"}])
+        verdict = merge_gate.evaluate(good_state(), review)
+        self.assertTrue(verdict["pass"], verdict["reasons"])
+        self.assertEqual(verdict["inconclusive"], ["I1"])
 
     def test_draft_passes_but_is_flagged_for_ready(self):
         verdict = merge_gate.evaluate(with_(good_state(), draft=True), good_review())

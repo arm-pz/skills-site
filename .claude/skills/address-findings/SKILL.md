@@ -23,7 +23,7 @@ Fix what the review found, nothing more. An honest "won't fix" or "escalate" is 
 ## Steps
 
 1. **Check the review is current.** Run `gh api repos/arm-pz/skills-site/pulls/<n> --jq .head.sha`. If it isn't the report's `head_sha`, stop with "stale review" and return no fix report.
-2. **Check out the PR head in a worktree:** `git fetch origin pull/<n>/head:pr-<n>` then `git worktree add <scratch>/pr-<n> pr-<n>`. Note the PR's changed files: `gh api repos/arm-pz/skills-site/pulls/<n>/files --jq '.[].filename'`.
+2. **Check out the PR head in a worktree:** `git fetch origin pull/<n>/head:pr-<n>` then `git worktree add <scratch>/pr-<n> pr-<n>`. List the PR's changed files with `gh api --paginate repos/arm-pz/skills-site/pulls/<n>/files --jq '.[].filename'`. Compare that count, before adding anything else, with `gh api repos/arm-pz/skills-site/pulls/<n> --jq .changed_files`. If they differ, stop and escalate every finding with "incomplete file list". GitHub lists at most 3,000 files. Then add each renamed file's old path (`.previous_filename`) to the PR's files for the scope check.
 3. **Take a baseline.** Run the repo's PR check: `python -m unittest discover -s tools/agent-skills/tests` plus the three `--check` commands in `.github/workflows/publish.yml`. If the baseline is already red, stop and escalate every finding with "red before fixing".
 4. **For each finding, CRITICAL first, then HIGH, in ID order:**
     1. Confirm it in the code: reproduce it, or show the line does what the finding says. If it's not real, mark `wont_fix` with the evidence, such as a test you ran or the line that disproves it.

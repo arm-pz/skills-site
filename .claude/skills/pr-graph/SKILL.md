@@ -65,6 +65,8 @@ Post one summary in the chat, or as a comment on the nightly-log issue when run 
 | PR | Rounds | Findings fixed | Won't fix | Escalated | Result | Gate reasons |
 | --- | --- | --- | --- | --- | --- | --- |
 
+Under the table, list each PR's `inconclusive` items (ID, file, reason) for a human to check. They don't block the merge, so this list is the only place they surface.
+
 ## Error recovery
 
 | Failure | Do this |

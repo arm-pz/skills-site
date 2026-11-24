@@ -10,6 +10,7 @@ A PR passes only if ALL of these hold for its current head:
   3. GitHub says the PR merges cleanly into its base.
   4. It has no `hold` or `needs-owner` label.
   5. Its diff touches no protected path (CI, agent and gate config). Those always go to a human.
+  6. GitHub listed every changed file, so check 5 saw the whole diff.
 
 A draft PR that passes everything else is marked ready, then merged (with --merge).
 The merge pins `sha` to the reviewed head, so a push after the review makes GitHub refuse it.
@@ -65,6 +66,10 @@ def check_review_shape(review):
         for i, f in enumerate(review["findings"]):
             if not isinstance(f, dict) or f.get("severity") not in ("CRITICAL", "HIGH", "MEDIUM", "LOW"):
                 problems.append(f"finding {i} has no valid severity")
+    inconclusive = review.get("inconclusive", [])
+    if not isinstance(inconclusive, list) or not all(
+            isinstance(i, dict) and isinstance(i.get("id"), str) for i in inconclusive):
+        problems.append("review `inconclusive` must be a list of objects with an `id`")
     return problems
 
 
@@ -76,7 +81,8 @@ def evaluate(state, review):
     """Decide pass or fail from plain data, so it can be tested without GitHub.
 
     state: {"number", "head_sha", "base_ref", "base_sha", "draft", "mergeable",
-            "labels", "files", "checks", "statuses"}
+            "labels", "files", "files_listed", "files_expected", "checks", "statuses"}
+      files_listed / files_expected: how many changed files GitHub listed vs. says the PR has
       mergeable: True, False or None (GitHub still computing)
       checks: [{"name", "status", "conclusion"}]
     Returns {"pass": bool, "reasons": [...], "draft": bool}.
@@ -121,11 +127,23 @@ def evaluate(state, review):
     for label in sorted(BLOCKING_LABELS & set(state["labels"])):
         reasons.append(f"labelled `{label}`")
 
+    # The protected-path check is only as good as the file list. GitHub's files API stops at
+    # 3,000 files, so a list shorter than the PR's own count fails closed.
+    if state["files_listed"] != state["files_expected"]:
+        reasons.append(f"incomplete file list: GitHub listed {state['files_listed']} of "
+                       f"{state['files_expected']} changed files")
+
     protected = sorted(p for p in state["files"] if is_protected(p))
     if protected:
         reasons.append("touches protected paths (human merge only): " + ", ".join(protected))
 
-    return {"pass": not reasons, "reasons": reasons, "draft": bool(state["draft"])}
+    # Inconclusive findings never block; they ride along so the summary can show them to a human.
+    inconclusive = []
+    if isinstance(review, dict) and isinstance(review.get("inconclusive"), list):
+        inconclusive = [i["id"] for i in review["inconclusive"]
+                        if isinstance(i, dict) and isinstance(i.get("id"), str)]
+    return {"pass": not reasons, "reasons": reasons, "draft": bool(state["draft"]),
+            "inconclusive": inconclusive}
 
 
 def gh(*args, method="GET", fields=None):
@@ -173,6 +191,8 @@ def fetch_state(number):
         "mergeable": pr.get("mergeable"),
         "labels": [l["name"] for l in pr.get("labels", [])],
         "files": files,
+        "files_listed": len(changed),
+        "files_expected": pr.get("changed_files"),
         "statuses": statuses,
         "checks": [{"name": r["name"], "status": r["status"], "conclusion": r.get("conclusion")}
                    for r in runs],
