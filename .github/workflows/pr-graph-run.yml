@@ -1,0 +1,11 @@
+name: Run PR Graph
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  graph:
+    uses: arm-pz/pr-graph/.github/workflows/pr-graph-run.yml@a9b3c6765aea4e9e66b1d2cf247d51b485a87533
+    with:
+      graph_revision: a9b3c6765aea4e9e66b1d2cf247d51b485a87533
+    secrets:
+      graph_token: ${{ secrets.PR_GRAPH_TOKEN }}
