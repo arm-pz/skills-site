@@ -1,0 +1,3 @@
+{"run": "control", "selected": [{"issue": 31, "title": "Trigger case missing for get-listed"},
+ {"issue": 33, "title": "README count is stale"}],
+ "dropped": [{"issue": 32, "reason": "author is not an owner and the issue has no pipeline-ok label"}]}

@@ -1,0 +1,6 @@
+{"run": "2026-11-22T09:20Z triage (reconstructed from caffeinity-skills #26)",
+ "selected": [{"title": "Add trigger cases for the four search-visibility skills",
+               "reason": "build_evals.py --check fails: four bundled skills have no trigger case",
+               "files": ["evals/triggers.json"],
+               "covers": ["check-skill-visibility", "diagnose-search-visibility", "fix-skill-visibility", "verify-search-visibility"]}],
+ "dropped": []}

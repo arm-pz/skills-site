@@ -1,0 +1,75 @@
+{
+  "skill_name": "skill-eval-suite",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Build me a golden set for my nightly SEO report so I know if it's any good",
+      "should_trigger": true
+    },
+    {
+      "id": 2,
+      "prompt": "Write evals for the inbox-sweep loop",
+      "should_trigger": true
+    },
+    {
+      "id": 3,
+      "prompt": "I need a scorecard that fails if the weekly digest gets worse after I change the prompt",
+      "should_trigger": true
+    },
+    {
+      "id": 4,
+      "prompt": "My scheduled competitor check reported nonsense last night, why?",
+      "should_trigger": true
+    },
+    {
+      "id": 5,
+      "prompt": "How do I know this agent is right more often than not?",
+      "should_trigger": true
+    },
+    {
+      "id": 6,
+      "prompt": "Make my seo-sweep skill run every morning and only report",
+      "should_trigger": false
+    },
+    {
+      "id": 7,
+      "prompt": "The nightly job didn't run on Tuesday",
+      "should_trigger": false
+    },
+    {
+      "id": 8,
+      "prompt": "My recruiter-lens skill doesn't trigger when I ask about my CV",
+      "should_trigger": false
+    },
+    {
+      "id": 9,
+      "prompt": "Claude keeps making the same mistake across sessions, which rule is missing?",
+      "should_trigger": false
+    },
+    {
+      "id": 10,
+      "prompt": "Run lm-evaluation-harness on Llama for MMLU",
+      "should_trigger": false
+    },
+    {
+      "id": 11,
+      "prompt": "Is the new prompt for my weekly digest actually better, or did I just get a lucky run?",
+      "should_trigger": true
+    },
+    {
+      "id": 12,
+      "prompt": "My triage agent got cheaper but I think it now opens tickets it shouldn't",
+      "should_trigger": true
+    },
+    {
+      "id": 13,
+      "prompt": "Check whether our LLM judge can be trusted before we gate PRs on it",
+      "should_trigger": true
+    },
+    {
+      "id": 14,
+      "prompt": "Log that the deploy tool rejected --since even though the help lists it",
+      "should_trigger": false
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
+  "name": "skill-eval-suite",
+  "version": "0.4.0",
+  "description": "Eval suites for agent loops and skills: 5% golden, 80% real prompts graded on trajectory, 15% author-judged; pass rates over 3+ trials, same-case flips, token budgets as gates, a hidden holdout and a known-bad set every judge must fail.",
+  "author": {
+    "name": "arm-pz",
+    "url": "https://github.com/arm-pz"
+  },
+  "homepage": "https://skillsmith.tech/skill-eval-suite/",
+  "repository": "https://github.com/arm-pz/skill-eval-suite",
+  "keywords": [
+    "evals",
+    "eval-driven-development",
+    "trajectory-eval",
+    "agent-loop",
+    "agent-skills"
+  ],
+  "skills": "./skills/"
+}
