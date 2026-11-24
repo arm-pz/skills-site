@@ -8,7 +8,7 @@ A PR passes only if ALL of these hold for its current head:
   1. The review report is for this PR, head SHA, base branch and base SHA, and has no CRITICAL or HIGH finding.
   2. Every commit-status context succeeded, every check run on the head has finished, none failed, and the `check` job succeeded.
   3. GitHub says the PR merges cleanly into its base.
-  4. It has no `hold` or `needs-owner` label.
+  4. It has no `hold`, `hands-off`, or `needs-owner` label.
   5. Its diff touches no protected path (CI, agent and gate config). Those always go to a human.
   6. GitHub listed every changed file, so check 5 saw the whole diff.
 
@@ -27,7 +27,7 @@ from pathlib import Path
 
 REPO = "arm-pz/skills-site"
 REQUIRED_CHECK = "check"
-BLOCKING_LABELS = {"hold", "needs-owner"}
+BLOCKING_LABELS = {"hold", "hands-off", "needs-owner"}
 BLOCKING_SEVERITIES = {"CRITICAL", "HIGH"}
 OK_CONCLUSIONS = {"success", "skipped", "neutral"}
 # The gate never auto-merges a change to the machinery that decides merges.
@@ -125,7 +125,7 @@ def evaluate(state, review):
     elif not state["mergeable"]:
         reasons.append("merge conflict with base")
 
-    for label in sorted(BLOCKING_LABELS & set(state["labels"])):
+    for label in sorted(BLOCKING_LABELS & {label.casefold() for label in state["labels"]}):
         reasons.append(f"labelled `{label}`")
 
     # The protected-path check is only as good as the file list. GitHub's files API stops at
