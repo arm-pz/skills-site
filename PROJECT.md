@@ -67,7 +67,7 @@ says when a bespoke page's copy may still use the old name.
 | `/skills/` | Every skill by group, with search | `skills/index.html` shell + `gen_home.py` |
 | `/mods/` | Every Claude Code mod | `mods/index.html` shell + `gen_home.py` |
 | `/workflows/` and `/workflows/<slug>/` | Every workflow, then one page each with its steps and one install block | `workflows/index.html` shell + `gen_home.py`; the per-workflow pages are fully generated from `templates/workflow-page.html` |
-| `/work/` | Custom skills service | hand-written |
+| `/work/` | Short pointer: Skillsmith is open source and has no prices or checkout; custom work is done by Caffeinity at caffeinity.com. Keep prices and payment links off this site (owner decision, 2026-11-24) | hand-written |
 | `/check/` | Skill Check: validates a SKILL.md in the browser. `check-core.js` is a port of tune-skill's `check_skill.py`; `tests/check_parity.mjs` compares the two. GitHub's API lists the files, with jsDelivr's mirror and raw.githubusercontent.com as the route when the anonymous limit is used up (all three are in `_headers` `connect-src`) | hand-written |
 | `/prose/` | Prose Check: marks stock AI writing patterns in a pasted draft, in the browser, with no network request. `prose-core.js` is a port of straight-prose's `slop_scan.py`; `tests/prose_parity.mjs` compares the two and `tests/prose_cases.mjs` runs with the unit tests | hand-written |
 | `/checks/` | The hub for the free tools | hand-written |
