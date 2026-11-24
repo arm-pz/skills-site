@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PR Graph | Pull request review and fixes for GitHub</title>
+<meta name="description" content="See how PR Graph fixes blocking review findings, verifies each fix with a fresh reviewer, and checks whether a GitHub pull request can merge.">
+<link rel="canonical" href="https://skillsmith.tech/pr-graph/">
+<meta property="og:title" content="PR Graph | Pull request review and fixes for GitHub"><meta property="og:description" content="See how PR Graph fixes blocking review findings, verifies each fix with a fresh reviewer, and checks whether a GitHub pull request can merge.">
+<meta property="og:url" content="https://skillsmith.tech/pr-graph/"><meta property="og:type" content="website">
+<meta name="color-scheme" content="light dark"><link rel="icon" href="/favicon.svg">
+<link rel="stylesheet" href="/fonts/fonts.css"><link rel="stylesheet" href="/assets/site.css?v=20261114">
+<style>
+.pg-layout {display:grid;grid-template-columns:minmax(0,3fr) minmax(16rem,2fr);gap:clamp(2rem,6vw,6rem);align-items:start}
+.pg-body {padding-block:clamp(2rem,5vw,5rem)} .pg-body h2 {margin-bottom:1rem}
+.pg-steps {padding-left:1.5rem} .pg-steps li {padding:0 0 1rem .35rem;max-width:60ch}
+.pg-card {padding:1.6rem;border:1px solid currentColor;border-radius:12px}
+.pg-card dl {margin:0 0 1rem} .pg-card dl div {display:flex;justify-content:space-between;gap:1rem;padding:.55rem 0;border-bottom:1px solid currentColor}
+.pg-card dd {font-weight:700;margin:0} .pg-setup {max-width:68ch;margin-top:3rem} .pg-setup p {margin-bottom:1rem}
+@media(max-width:740px) {.pg-layout {grid-template-columns:1fr}}
+</style>
+</head><body>
+<nav class="nav" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="/"><b>/</b>skillsmith <span class="brand-by">by caffeinity</span></a>
+    <div class="nav-links">
+      <a href="/skills/">Skills</a>
+      <a href="/workflows/">Workflows</a>
+      <a href="/checks/">Free tools</a>
+      <a href="/story/">Story</a>
+      <a href="/notes/">Notes</a>
+      <a href="/work/">Work with us</a>
+    </div>
+    <div class="nav-cta">
+      <a class="gh" href="https://github.com/arm-pz/caffeinity-skills" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-accent btn-sm" href="/work/">Custom skills</a>
+    </div>
+  </div>
+</nav>
+<main>
+<header class="page-hero"><div class="wrap">
+<h1>PR Graph</h1><p class="lead">Review GitHub pull requests, fix blocking findings, and let a fresh reviewer verify the changes before a merge.</p>
+<div class="cta"><a class="btn btn-accent" href="#example">See a real PR</a> <a class="btn btn-quiet" href="https://github.com/arm-pz/pr-graph">Source on GitHub</a></div>
+</div></header>
+<div class="wrap pg-body"><div class="pg-layout" id="example">
+<section><h2>How one pull request reached merge</h2>
+<p>On 24 November 2026, the graph reviewed the change that introduced its own merge gate in Skills Site. Here’s what happened on <a href="https://github.com/arm-pz/skills-site/pull/77">pull request #77</a>.</p>
+<ol class="pg-steps">
+<li><strong>Review.</strong> The reviewer found three ways the gate could accept a PR too soon. It could ignore a failed review verdict, miss a failing commit status, or reuse a review after the base branch changed.</li>
+<li><strong>Fix.</strong> The fixer addressed each finding in a separate commit on the PR branch. <a href="https://github.com/arm-pz/skills-site/pull/77#issuecomment-7128895975">Read the fix report</a>.</li>
+<li><strong>Re-review.</strong> A fresh reviewer confirmed all three fixes. Three medium findings remained, and the <a href="https://github.com/arm-pz/skills-site/actions/runs/45375557271/job/138380758152">CI check passed</a>.</li>
+<li><strong>Merge decision.</strong> The gate held the PR because it changed the rules for merging. It later <a href="https://github.com/arm-pz/skills-site/commit/7552f066f12d03e32fb156637948af411b2c1a49">landed on main</a> through the human-merge path.</li>
+</ol></section>
+<aside class="pg-card" aria-labelledby="score"><h2 id="score">Run scorecard</h2><dl>
+<div><dt>PR</dt><dd>#77</dd></div><div><dt>Review rounds</dt><dd>2</dd></div><div><dt>High findings fixed</dt><dd>3 of 3</dd></div><div><dt>Medium findings remaining</dt><dd>3</dd></div><div><dt>Gate decision</dt><dd>Held</dd></div><div><dt>Final PR state</dt><dd>Merged</dd></div></dl>
+<a href="https://github.com/arm-pz/skills-site/pull/77#issuecomment-7128963643">Read the recorded scorecard</a></aside></div>
+<section class="pg-setup"><h2>Use PR Graph in your repository</h2>
+<p>Pin a release commit in your GitHub Actions workflow. Choose the full review loop on a configured agent runner, or use the Python merge gate with a trusted review report. Each report identifies the repository, PR, head commit and base commit it reviewed.</p>
+<p>The standalone project includes Codex and Claude launchers. The example above ran in Skills Site before extraction.</p>
+<a class="btn btn-accent" href="https://github.com/arm-pz/pr-graph/blob/main/tools/pr-graph/README.md">Open the setup guide</a></section></div>
+</main><footer class="roast">
+  <div class="wrap">
+    <div class="meta">
+      <span>Skillsmith by <a href="https://caffeinity.com/">Caffeinity</a>: open agent skills by Abdul Rahman P Z, and custom skills built to order.</span>
+      <a href="/checks/">All free tools</a>
+      <a href="https://github.com/arm-pz" target="_blank" rel="noopener">github.com/arm-pz</a>
+    </div>
+    <p class="kural"><span lang="ta">யாம் பெற்ற இன்பம் பெறுக இவ்வையகம்</span><span>“May this world attain the same bliss that I have attained.”</span></p>
+  </div>
+</footer></body></html>
