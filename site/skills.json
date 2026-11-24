@@ -4602,15 +4602,24 @@
           {
             "path": "SKILL.md",
             "lines": 55,
-            "bytes": 4483
+            "bytes": 4828
           }
         ],
         "fileCount": 1,
         "lines": 55,
-        "bytes": 2118,
+        "bytes": 2242,
         "license": "MIT",
-        "commit": "06ff702113c36060105ebbbc4636e3e51cdac31c",
-        "sha256": "75cf4e935ef22eb0b467c6423ba969d5114ca0b52dc72d7db51decea294f2f76"
+        "commit": "e19afffc9a0be3d981a2ebeca54910eec9d5bacf",
+        "sha256": "7ef1f2d9a6f03081f38b19ec6a550f50e16996d82f6e6eedfe41a066648deed5"
+      },
+      "quality": {
+        "version": null,
+        "commit": "e19afff",
+        "updated": "2026-11-24",
+        "notFor": [
+          "writing a review (use consistent-code-review)",
+          "adding features, rebasing for conflicts, or merging (merge_gate.py decides that)"
+        ]
       }
     }
   ],
