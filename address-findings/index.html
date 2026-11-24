@@ -9,7 +9,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Skillsmith by Caffeinity">
 <meta property="og:title" content="Address Findings — AI Agent Skill for Claude Code and Codex">
-<meta property="og:description" content="Fixes the CRITICAL and HIGH findings in a consistent-code-review report for one pull request, staying inside the files that PR already changes, then reports each finding as fixed, won&#x27;t fix (with evidence) or escalate. Use when a review-report.json exists for a PR and its blocking findings need addressing, or when the pr-graph conductor calls the fixer node. Not for writing a review (use consistent-code-review), adding features, rebasing for conflicts, or merging (merge_gate.py decides that).">
+<meta property="og:description" content="Fixes the CRITICAL and HIGH findings in a consistent-code-review report for one pull request, staying inside the files that PR already changes, then reports each finding as fixed, won&#x27;t fix (with evidence) or escalate. Use whenever someone asks to address, fix or resolve the review findings, blocking comments or CRITICAL/HIGH issues on a PR and a review-report.json exists for it, even if they never say &quot;findings&quot;, or when the pr-graph conductor calls the fixer node. Not for writing a review (use consistent-code-review), adding features, rebasing for conflicts, or merging (merge_gate.py decides that).">
 <meta property="og:url" content="https://skillsmith.tech/address-findings/">
 <meta name="twitter:card" content="summary">
 <meta name="color-scheme" content="light dark">
@@ -27,7 +27,7 @@
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "Any",
   "url": "https://skillsmith.tech/address-findings/",
-  "description": "Fixes the CRITICAL and HIGH findings in a consistent-code-review report for one pull request, staying inside the files that PR already changes, then reports each finding as fixed, won't fix (with evidence) or escalate. Use when a review-report.json exists for a PR and its blocking findings need addressing, or when the pr-graph conductor calls the fixer node. Not for writing a review (use consistent-code-review), adding features, rebasing for conflicts, or merging (merge_gate.py decides that).",
+  "description": "Fixes the CRITICAL and HIGH findings in a consistent-code-review report for one pull request, staying inside the files that PR already changes, then reports each finding as fixed, won't fix (with evidence) or escalate. Use whenever someone asks to address, fix or resolve the review findings, blocking comments or CRITICAL/HIGH issues on a PR and a review-report.json exists for it, even if they never say \"findings\", or when the pr-graph conductor calls the fixer node. Not for writing a review (use consistent-code-review), adding features, rebasing for conflicts, or merging (merge_gate.py decides that).",
   "codeRepository": "https://github.com/arm-pz/address-findings",
   "license": "https://spdx.org/licenses/MIT.html",
   "publisher": {
@@ -90,19 +90,15 @@
     <div class="install-line">
       <button class="cmd" type="button" data-copy="npx skills add arm-pz/address-findings" aria-label="Copy the install command"><span id="cmd">npx skills add arm-pz/address-findings</span><span class="copy" aria-hidden="true">Copy</span></button>
     </div>
-    <p class="facts">1 file and 55 lines, free under MIT. Built from <a href="https://github.com/arm-pz/address-findings" target="_blank" rel="noopener">arm-pz/address-findings</a> at <code>e19afff</code>.</p>
+    <p class="facts">1 file and 60 lines, free under MIT. Built from <a href="https://github.com/arm-pz/address-findings" target="_blank" rel="noopener">arm-pz/address-findings</a> at <code>1f6ce5b</code>.</p>
   </div>
 </header>
 
 <section class="purpose tone" aria-labelledby="for-h">
   <div class="wrap">
     <h2 id="for-h">What it is for</h2>
-    <p class="body">Fixes the CRITICAL and HIGH findings in a consistent-code-review report for one pull request, staying inside the files that PR already changes, then reports each finding as fixed, won&#x27;t fix (with evidence) or escalate.</p>
+    <p class="body">Fixes the CRITICAL and HIGH findings in a consistent-code-review report for one pull request, staying inside the files that PR already changes, then reports each finding as fixed, won&#x27;t fix (with evidence) or escalate. Use whenever someone asks to address, fix or resolve the review findings, blocking comments or CRITICAL/HIGH issues on a PR and a review-report.json exists for it, even if they never say &quot;findings&quot;, or when the pr-graph conductor calls the fixer node.</p>
     <div class="uses">
-    <div class="uses-col when">
-      <h3>Reach for it when</h3>
-      <ul><li>A review-report.json exists for a PR and its blocking findings need addressing, or when the pr-graph conductor calls the fixer node.</li></ul>
-    </div>
     <div class="uses-col not">
       <h3>Not for</h3>
       <ul><li>Writing a review (use consistent-code-review)</li><li>Adding features, rebasing for conflicts, or merging (merge_gate.py decides that)</li></ul>
@@ -117,7 +113,7 @@
     <h2 id="qb-h">Know what you are installing.</h2>
     <p class="qb-lead">Version, date and limits are read from the repo on every sync, and the check runs every night. Real-world runs are listed only with their evidence.</p>
     <dl class="qb-grid">
-      <div><dt>Version</dt><dd>Unversioned<small>commit e19afff</small></dd></div>
+      <div><dt>Version</dt><dd>0.2.0<small>commit 1f6ce5b</small></dd></div>
       <div><dt>Updated</dt><dd><a href="https://github.com/arm-pz/address-findings/commits" target="_blank" rel="noopener">24 Nov 2026</a><small>last commit to the repo</small></dd></div>
       <div><dt>Works in</dt><dd>Claude Code, Codex, Cursor, Qoder and any agent that loads a SKILL.md<small>plain text; no API keys</small></dd></div>
       <div><dt>Nightly check</dt><dd>Not checked yet<small>It joins the nightly check after its first run. <a href="https://github.com/arm-pz/skills-site/blob/main/.github/workflows/health.yml" target="_blank" rel="noopener">How it is checked</a></small></dd></div>
@@ -131,13 +127,13 @@
 <section class="ships" aria-labelledby="ships-h">
   <div class="wrap">
     <h2 id="ships-h">Every file it installs</h2>
-    <p class="sub">Measured from the packed archive at commit <code>e19afff</code>. A skill is plain text your agent reads, so this list is all of it.</p>
+    <p class="sub">Measured from the packed archive at commit <code>1f6ce5b</code>. A skill is plain text your agent reads, so this list is all of it.</p>
     <table class="files">
       <thead class="sr-only"><tr><th>File</th><th>Lines</th><th>Bytes</th></tr></thead>
       <tbody>
-        <tr><td>SKILL.md</td><td class="n">55</td><td class="n bytes">4,828 B</td></tr>
+        <tr><td>SKILL.md</td><td class="n">60</td><td class="n bytes">5,752 B</td></tr>
       </tbody>
-      <tfoot><tr><td>1 file</td><td class="n">55</td><td class="n bytes">2 KB</td></tr></tfoot>
+      <tfoot><tr><td>1 file</td><td class="n">60</td><td class="n bytes">3 KB</td></tr></tfoot>
     </table>
   </div>
 </section>

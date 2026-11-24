@@ -4592,29 +4592,29 @@
       "title": "Address Findings",
       "pageTitle": "Address Findings — AI Agent Skill for Claude Code and Codex",
       "blurb": "Fixes the CRITICAL and HIGH findings in a consistent-code-review report for one pull request, staying inside the files that PR already changes, then reports each finding as fixed, won't fix (with evidence) or escalate.",
-      "stats": "1 file · 55 lines · 2 KB",
+      "stats": "1 file · 60 lines · 3 KB",
       "install": "npx skills add arm-pz/address-findings",
       "page": "generated",
       "order": 934,
       "pageSource": {
-        "description": "Fixes the CRITICAL and HIGH findings in a consistent-code-review report for one pull request, staying inside the files that PR already changes, then reports each finding as fixed, won't fix (with evidence) or escalate. Use when a review-report.json exists for a PR and its blocking findings need addressing, or when the pr-graph conductor calls the fixer node. Not for writing a review (use consistent-code-review), adding features, rebasing for conflicts, or merging (merge_gate.py decides that).",
+        "description": "Fixes the CRITICAL and HIGH findings in a consistent-code-review report for one pull request, staying inside the files that PR already changes, then reports each finding as fixed, won't fix (with evidence) or escalate. Use whenever someone asks to address, fix or resolve the review findings, blocking comments or CRITICAL/HIGH issues on a PR and a review-report.json exists for it, even if they never say \"findings\", or when the pr-graph conductor calls the fixer node. Not for writing a review (use consistent-code-review), adding features, rebasing for conflicts, or merging (merge_gate.py decides that).",
         "files": [
           {
             "path": "SKILL.md",
-            "lines": 55,
-            "bytes": 4828
+            "lines": 60,
+            "bytes": 5752
           }
         ],
         "fileCount": 1,
-        "lines": 55,
-        "bytes": 2242,
+        "lines": 60,
+        "bytes": 2626,
         "license": "MIT",
-        "commit": "e19afffc9a0be3d981a2ebeca54910eec9d5bacf",
-        "sha256": "7ef1f2d9a6f03081f38b19ec6a550f50e16996d82f6e6eedfe41a066648deed5"
+        "commit": "1f6ce5b909303fd420d0ba33c9477af4037feb19",
+        "sha256": "aefe7b17b0e1e01bb5de4856ce2378cd78eb2fe9ca5467fbbc322a12e8926bc1"
       },
       "quality": {
-        "version": null,
-        "commit": "e19afff",
+        "version": "0.2.0",
+        "commit": "1f6ce5b",
         "updated": "2026-11-24",
         "notFor": [
           "writing a review (use consistent-code-review)",
