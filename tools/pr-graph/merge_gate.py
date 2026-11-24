@@ -66,6 +66,10 @@ def check_review_shape(review):
         for i, f in enumerate(review["findings"]):
             if not isinstance(f, dict) or f.get("severity") not in ("CRITICAL", "HIGH", "MEDIUM", "LOW"):
                 problems.append(f"finding {i} has no valid severity")
+    inconclusive = review.get("inconclusive", [])
+    if not isinstance(inconclusive, list) or not all(
+            isinstance(i, dict) and isinstance(i.get("id"), str) for i in inconclusive):
+        problems.append("review `inconclusive` must be a list of objects with an `id`")
     return problems
 
 
@@ -134,7 +138,10 @@ def evaluate(state, review):
         reasons.append("touches protected paths (human merge only): " + ", ".join(protected))
 
     # Inconclusive findings never block; they ride along so the summary can show them to a human.
-    inconclusive = [i.get("id", "?") for i in review.get("inconclusive", [])] if isinstance(review, dict) else []
+    inconclusive = []
+    if isinstance(review, dict) and isinstance(review.get("inconclusive"), list):
+        inconclusive = [i["id"] for i in review["inconclusive"]
+                        if isinstance(i, dict) and isinstance(i.get("id"), str)]
     return {"pass": not reasons, "reasons": reasons, "draft": bool(state["draft"]),
             "inconclusive": inconclusive}
 

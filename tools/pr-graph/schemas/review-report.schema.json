@@ -38,7 +38,7 @@
       "description": "Possible problems the reviewer could neither confirm nor rule out. Never blocking, never sent to the fixer; listed in the run summary for a human.",
       "items": {
         "type": "object",
-        "required": ["id", "file", "finding", "reason"],
+        "required": ["id", "file", "finding", "reason", "would_be"],
         "additionalProperties": false,
         "properties": {
           "id": {"type": "string", "pattern": "^I[0-9]+$"},

@@ -78,6 +78,8 @@ KNOWN_BAD = {
     "changes an agent definition": (with_(good_state(), files=[".claude/agents/pr-fixer.md"]), good_review()),
     "file list cut off (large PR)": (with_(good_state(), files_listed=3000, files_expected=3412), good_review()),
     "file count unknown": (with_(good_state(), files_expected=None), good_review()),
+    "malformed inconclusive (not a list)": (good_state(), with_(good_review(), inconclusive="I1")),
+    "malformed inconclusive (entry not an object)": (good_state(), with_(good_review(), inconclusive=["I1"])),
     "merge conflict": (with_(good_state(), mergeable=False), good_review()),
     "mergeability not computed yet": (with_(good_state(), mergeable=None), good_review()),
     "pending commit status": (with_(good_state(), statuses={"build": "pending"}), good_review()),
