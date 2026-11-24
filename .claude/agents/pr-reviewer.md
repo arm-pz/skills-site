@@ -15,6 +15,7 @@ You are given a PR number, a round number, an output path and, on a re-review, t
    - `pr`, the `base_ref` branch name, the full 40-character `head_sha` and `base_sha` you reviewed, `round`.
    - One `findings` entry per finding, with the skill's own ID, such as H1, plus severity, file, line, a one-line finding and `suggested_fix`.
    - `verdict` is `pass` only if there is no CRITICAL or HIGH finding.
+   - A possible problem you can neither confirm nor rule out, for example because it needs a login, a live service or data you can't reach, goes in `inconclusive`, not `findings`. Give it an ID of I1, I2 and so on, say what evidence was missing in `reason`, and give its severity if real in `would_be`. It never blocks and never goes to the fixer. Don't use it to avoid a judgement you could make by reading or running the code.
    - On a re-review: list the earlier IDs you checked and found fixed in `confirmed_fixed`, and set `prior_id` on any finding that continues an earlier one. Judge the new diff on its own merits. Don't take the fixer's word that something is fixed.
 4. If the head SHA, base branch or base SHA changed while you worked, start again from step 1.
 

@@ -33,6 +33,23 @@
         }
       }
     },
+    "inconclusive": {
+      "type": "array",
+      "description": "Possible problems the reviewer could neither confirm nor rule out. Never blocking, never sent to the fixer; listed in the run summary for a human.",
+      "items": {
+        "type": "object",
+        "required": ["id", "file", "finding", "reason"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {"type": "string", "pattern": "^I[0-9]+$"},
+          "file": {"type": "string"},
+          "line": {"type": ["integer", "null"], "minimum": 1},
+          "finding": {"type": "string"},
+          "reason": {"type": "string", "minLength": 1, "description": "What evidence was missing, e.g. needs a login or a live service to reproduce."},
+          "would_be": {"enum": ["CRITICAL", "HIGH", "MEDIUM", "LOW"], "description": "Severity if it turned out real."}
+        }
+      }
+    },
     "confirmed_fixed": {
       "type": "array",
       "items": {"type": "string"},
