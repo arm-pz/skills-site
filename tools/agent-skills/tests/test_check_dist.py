@@ -54,6 +54,7 @@ class CheckDistTest(unittest.TestCase):
         (self.root / "out/sitemap.xml").write_text(
             '<?xml version="1.0"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
             '<url><loc>https://skillsmith.tech/</loc></url>'
+            '<url><loc>https://skillsmith.tech/pr-graph/</loc></url>'
             '<url><loc>https://skillsmith.tech/work/</loc></url>'
             '<url><loc>https://skillsmith.tech/story/</loc></url>'
             '<url><loc>https://skillsmith.tech/notes/</loc></url>'
@@ -85,6 +86,8 @@ class CheckDistTest(unittest.TestCase):
         self.write_section("skills", 2, '<a href="/alpha/">a</a><a href="/beta/">b</a>')
         self.write_section("mods", 0)
         (self.root / "dist/workflows/index.html").write_text("<title>workflows</title>")
+        (self.root / "dist/pr-graph").mkdir()
+        (self.root / "dist/pr-graph/index.html").write_text("<title>PR Graph</title>")
         (self.root / "dist/work").mkdir()
         (self.root / "dist/work/index.html").write_text("<title>work</title>")
         (self.root / "dist/story").mkdir()
