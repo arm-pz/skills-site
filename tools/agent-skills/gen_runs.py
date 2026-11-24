@@ -87,7 +87,7 @@ NAV = """<nav class="nav" aria-label="Site">
       <a href="/work/">Work with us</a>
     </div>
     <div class="nav-cta">
-      <a class="gh" href="https://github.com/arm-pz" target="_blank" rel="noopener">GitHub</a>
+      <a class="gh" href="https://github.com/arm-pz/caffeinity-skills" target="_blank" rel="noopener">GitHub</a>
       <a class="btn btn-accent btn-sm" href="/caffeinity-routing/">Start here</a>
     </div>
   </div>
