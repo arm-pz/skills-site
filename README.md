@@ -3,7 +3,8 @@
 A static site and publish pipeline for a catalog of agent skills. Each skill
 (a SKILL.md repo) or Claude Code mod gets its own landing page with a one-line
 install command; `/skills/`, `/mods/` and `/workflows/` list them by type (every workflow
-also gets its own page); the homepage leads with outcomes; and a
+also gets its own page); `/runs/` shows every graded test run from `reports/runs/`, one page per
+skill (`gen_runs.py`); the homepage leads with outcomes; and a
 `/.well-known/agent-skills/index.json` discovery index lets anyone run
 `npx skills add https://your-domain`. One GitHub Actions workflow keeps the
 manifest in step with GitHub and tests, builds and verifies the site, then

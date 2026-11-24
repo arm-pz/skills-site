@@ -8,6 +8,7 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 
 import gen_home
+import gen_runs
 import skilllib
 
 REF_RE = re.compile(r'(?:href|src)="(/[^"#?]*)"')
@@ -76,7 +77,8 @@ def check(root="."):
         locs = {el.text for el in ET.parse(sitemap_path).getroot().iter(ns + "loc")}
         expected = ({f"{skilllib.SITE}/"} | {f"{skilllib.SITE}/{s['name']}/" for s in pages}
                     | {f"{skilllib.SITE}/{name}/" for name in skilllib.STATIC_PAGES}
-                    | {f"{skilllib.SITE}/workflows/{f['slug']}/" for f in manifest.get("workflows", [])})
+                    | {f"{skilllib.SITE}/workflows/{f['slug']}/" for f in manifest.get("workflows", [])}
+                    | {f"{skilllib.SITE}/runs/{name}/" for name in gen_runs.run_skills(root)})
         need(locs == expected, f"sitemap URLs differ: missing {expected - locs}, "
                                f"extra {locs - expected}")
 

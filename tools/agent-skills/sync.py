@@ -28,6 +28,7 @@ from pathlib import Path
 import discover
 import gen_home
 import gen_page
+import gen_runs
 import skilllib
 
 OWNER = discover.OWNER
@@ -272,6 +273,7 @@ def main(argv=None):
             fh.write("\n")
         gen_page.main(["--write", "--root", str(root)])
         gen_home.main(["--write", "--root", str(root)])
+        gen_runs.main(["--write", "--root", str(root)])
     elif args.write:
         notes = [f"{name}: held, {detail}" for kind, name, detail in actions if kind == "hold"]
     for note in notes:

@@ -115,13 +115,13 @@
         "date": "2026-11-13",
         "target": "a multi-step goal across the catalog",
         "result": "The skill planned a two-brew route (Espresso with web-preflight, security red team, performance audit and release-gate-chair; then Cold brew with seo-crawl, keyword-guard, wordsmith and get-indexed), stated what each step hands…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/caffeinity-routing/README.md"
+        "evidence": "/runs/caffeinity-routing/#run-2026-11-13"
       },
       "latestRun": {
         "date": "2026-11-13",
         "target": "a multi-step goal across the catalog",
         "result": "The skill planned a two-brew route (Espresso with web-preflight, security red team, performance audit and release-gate-chair; then Cold brew with seo-crawl, keyword-guard, wordsmith and get-indexed), stated what each step hands…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/caffeinity-routing/README.md",
+        "evidence": "/runs/caffeinity-routing/#run-2026-11-13",
         "verdict": "PASS"
       }
     },
@@ -192,7 +192,7 @@
         "date": "2026-11-13",
         "target": "four real-shaped release-notes prompts from a developer's history",
         "result": "The run built a single release-notes skill at skills/release-notes/ (SKILL.md, a claim-check reference, 7 eval prompts, 9 test cases including near-misses), and check_skill.py reported 0 fail and 0 warn; the stop-before-send rule…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/prompts-to-skill/README.md",
+        "evidence": "/runs/prompts-to-skill/#run-2026-11-13",
         "verdict": "PASS"
       }
     },
@@ -251,7 +251,7 @@
         "date": "2026-11-13",
         "target": "a clone of arm-pz/keyword-resolver (packaged locally, nothing released)",
         "result": "The run set version 1.0.1 in SKILL.md, wrote a CHANGELOG and updated the README, but built no archive and executed no trigger tests (0 pass/0 fail/8 reviewed-only), then gave an install checklist and published nothing.",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/prompts-to-skill-release/README.md",
+        "evidence": "/runs/prompts-to-skill-release/#run-2026-11-13",
         "verdict": "PARTIAL"
       }
     },
@@ -288,7 +288,7 @@
         "date": "2026-11-13",
         "target": "a real-shaped 'changelog-guard' skill that should fire before every release",
         "result": "Run judged changelog-guard a good fit for a mod, built mods/changelog-guard-mod with the skill bundled unchanged (diff-confirmed), ran claude plugin validate (passed) and claude plugin test (10/10 passed), and listed hooks and…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/skill-to-mod/README.md",
+        "evidence": "/runs/skill-to-mod/#run-2026-11-13",
         "verdict": "PASS"
       }
     },
@@ -318,7 +318,7 @@
         "date": "2026-11-13",
         "target": "a new skill idea taken from idea to launch-ready (nothing published)",
         "result": "The run wrote a changelog-to-release-notes skill (SKILL.md, 3 references, README, LISTING.md, .gitignore) and published nothing, but it never ran check_skill.py or tune-skill's validator and did not use draft-skill…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/skill-launch/README.md",
+        "evidence": "/runs/skill-launch/#run-2026-11-13",
         "verdict": "PARTIAL"
       }
     },
@@ -348,7 +348,7 @@
         "date": "2026-11-13",
         "target": "a clone of arm-pz/keyword-resolver (edits local, nothing pushed)",
         "result": "The run rewrote the SKILL.md description, added two boundary owners, and reworked the README opening, but the tool list shows a Bash call to check_skill.py yet the final output says it never ran, so the zero-FAIL gate was not…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/tune-and-polish/README.md",
+        "evidence": "/runs/tune-and-polish/#run-2026-11-13",
         "verdict": "PARTIAL"
       }
     },
@@ -467,7 +467,7 @@
         "date": "2026-11-13",
         "target": "a small skill repo with a local bare remote: edit SKILL.md, then push",
         "result": "Agent edited the invoice-namer description, committed and pushed (remote shows 00c7f15 on main), the hook flagged the push twice, and tune-skill was invoked, but its check_skill.py validator was denied by Bash permissions so no…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/tune-skill-mod/README.md",
+        "evidence": "/runs/tune-skill-mod/#run-2026-11-13",
         "verdict": "PARTIAL"
       }
     },
@@ -566,13 +566,13 @@
         "date": "2026-11-13",
         "target": "a small skill repo with a local bare remote: edit SKILL.md, then tag a release",
         "result": "The combined edit/commit/tag/push command was held by the hook, the agent ran prompts-to-skill-release, which failed its preconditions (no evals/evals.json, no gate results, no packaging choice), and it reported that no edit…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/skill-release-mod/README.md"
+        "evidence": "/runs/skill-release-mod/#run-2026-11-13"
       },
       "latestRun": {
         "date": "2026-11-13",
         "target": "a small skill repo with a local bare remote: edit SKILL.md, then tag a release",
         "result": "The combined edit/commit/tag/push command was held by the hook, the agent ran prompts-to-skill-release, which failed its preconditions (no evals/evals.json, no gate results, no packaging choice), and it reported that no edit…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/skill-release-mod/README.md",
+        "evidence": "/runs/skill-release-mod/#run-2026-11-13",
         "verdict": "PASS"
       }
     },
@@ -646,7 +646,7 @@
         "date": "2026-11-13",
         "target": "a clone of arm-pz/choose-effort (tuned and fact-checked locally; release steps not run)",
         "result": "The run fact-checked choose-effort against Anthropic docs (6 confirmed, 3 corrected, 1 added), edited SKILL.md to 1.0.1, wrote references/sources.md and gave draft release notes and commands, but it did not run tune-skill or…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/tune-and-ship/README.md",
+        "evidence": "/runs/tune-and-ship/#run-2026-11-13",
         "verdict": "PARTIAL"
       }
     },
@@ -775,7 +775,7 @@
         "date": "2026-11-13",
         "target": "this site's real publish pipeline (read-only audit)",
         "result": "The run read publish.yml, sync.py, discover.py, skilllib.py, build.py, check_dist.py, verify.mjs and health.yml and reported hold reasons and fragile points, but the hard check on audit.md failed and the final message gives no…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/publish-pipeline/README.md",
+        "evidence": "/runs/publish-pipeline/#run-2026-11-13",
         "verdict": "PARTIAL"
       }
     },
@@ -861,7 +861,7 @@
         "date": "2026-11-13",
         "target": "the README of arm-pz/seo-polish against live searches",
         "result": "The run read the README and SKILL.md and wrote a 7-problem findability report with 2-3 rewrite options each, but it ran zero live searches, so it never checked where the repo appears; the query table is guesses.",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/findable-polish/README.md",
+        "evidence": "/runs/findable-polish/#run-2026-11-13",
         "verdict": "PARTIAL"
       }
     },
@@ -890,7 +890,7 @@
         "date": "2026-11-13",
         "target": "three skill repos and their live listing on skillsmith.tech (nothing pushed)",
         "result": "The run read local refs for three repos (all matching origin at last fetch), found drift in keyword-guard README and the seo-polish index entry, and drafted rewrites, but never fetched upstream, never read the real…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/upstream-polish/README.md",
+        "evidence": "/runs/upstream-polish/#run-2026-11-13",
         "verdict": "PARTIAL"
       }
     },
@@ -968,7 +968,7 @@
         "date": "2026-11-13",
         "target": "seven arm-pz skill repos and the live skillsmith.tech listing (inventory phase only)",
         "result": "The run inventoried all 7 repos and matched them to the 62-entry live listing without changing anything public, but it never read the straight-prose or wordsmith files it reported on, left out versions and licenses, and said Bash…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/skill-estate/README.md",
+        "evidence": "/runs/skill-estate/#run-2026-11-13",
         "verdict": "PARTIAL"
       }
     },
@@ -1048,7 +1048,7 @@
         "date": "2026-11-13",
         "target": "a one-file build prompt for a local business website",
         "result": "The run wrote site-prompt.md embedding three full files (index.html, styles.css, main.js) for an invented Leeds shop 'Tannery Row Cycles', but never built, served or tested the site, and the prompt states 'Checks already run:…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/site-prompt/README.md",
+        "evidence": "/runs/site-prompt/#run-2026-11-13",
         "verdict": "PARTIAL"
       }
     },
@@ -1110,7 +1110,7 @@
         "date": "2026-11-13",
         "target": "a lead-list cleaning CLI with tests, built on a real-shaped provider export",
         "result": "The run produced a stdlib clean_leads.py and 12 unit tests; the hard checks pass and clean.csv has 7 kept rows with the info@, gmail and 2,600-employee rows gone, but the final report says nothing was run and states the wrong…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/production-code/README.md",
+        "evidence": "/runs/production-code/#run-2026-11-13",
         "verdict": "PARTIAL"
       }
     },
@@ -1167,7 +1167,7 @@
         "date": "2026-11-13",
         "target": "Invoicely, a local invoicing app with 6 planted authorization and session flaws",
         "result": "The run executed live curl checks and confirmed 4 of the 6 planted flaws (IDOR on /api/invoices/101, open /api/admin/users returning plaintext passwords, role escalation via PATCH /api/me, open redirect) plus plaintext passwords…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/pre-ship-security-red-team/README.md",
+        "evidence": "/runs/pre-ship-security-red-team/#run-2026-11-13",
         "verdict": "PARTIAL"
       }
     },
@@ -1195,7 +1195,7 @@
         "date": "2026-11-13",
         "target": "Ledgerboard, a local marketing page and stats API with 6 planted slow-downs",
         "result": "The run took 3 Lighthouse mobile baselines and 3 after-runs and fixed render-blocking, font, compression and the N+1 (936→32 ms, FCP 4842→1457 ms, score 36→48), but left the 6.4 MB hero and 450 ms busy-wait unfixed and LCP stayed…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/pre-ship-performance-audit/README.md",
+        "evidence": "/runs/pre-ship-performance-audit/#run-2026-11-13",
         "verdict": "PARTIAL"
       }
     },
@@ -1263,7 +1263,7 @@
         "date": "2026-11-13",
         "target": "Invoicely, a local invoicing app with 6 planted authorization and session flaws",
         "result": "The run kept three separate lane verdicts (exposure PASS WITH FIXES, app-tests HOLD, perf not-measured), recorded them in one ledger, and check_gate.mjs computed overall HOLD (R1, R2, R4, R8); app-tests ran 14 scenarios with 7…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/release-gate-chair/README.md",
+        "evidence": "/runs/release-gate-chair/#run-2026-11-13",
         "verdict": "PASS"
       }
     },
@@ -1344,7 +1344,7 @@
         "date": "2026-11-13",
         "target": "Invoicely, a local invoicing app with 6 planted authorization and session flaws",
         "result": "Run produced three separate lane verdicts (exposure PASS WITH FIXES, app-tests HOLD, perf untested) and an overall HOLD via check_gate.mjs, with live evidence for the IDOR, open admin API and role escalation, but missed cookie…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/release-gate-ledger/README.md",
+        "evidence": "/runs/release-gate-ledger/#run-2026-11-13",
         "verdict": "PARTIAL"
       }
     },
@@ -1415,7 +1415,7 @@
         "date": "2026-11-13",
         "target": "the saved results of a real red-team run on Invoicely, plus pasted preflight and performance tables",
         "result": "The agent ran nothing against the target and reported HOLD, but redteam/ was empty so the ingester exited 2 (NOT-INGESTABLE), and it never recorded the preflight or perf lanes or ran check_gate.mjs, so HOLD was not computed by…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/release-gate-validator/README.md",
+        "evidence": "/runs/release-gate-validator/#run-2026-11-13",
         "verdict": "PARTIAL"
       }
     },
@@ -1442,7 +1442,7 @@
         "date": "2026-11-13",
         "target": "a local static site with a stand-in deploy CLI (nothing can upload), edited then deployed in a headless session",
         "result": "After editing the h1, the first `wrangler pages deploy` was held, Claude tried the release-gate skill, found it unavailable, stopped, and reported honestly that nothing was deployed, committed or pushed (deployed.log: never…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/ship-sentinel/README.md",
+        "evidence": "/runs/ship-sentinel/#run-2026-11-13",
         "verdict": "PARTIAL"
       }
     },
@@ -1525,7 +1525,7 @@
         "date": "2026-11-13",
         "target": "a real-shaped fact sheet for a UK B2B SaaS that processes invoice data",
         "result": "The run wrote all four pages from facts.md with visible gaps (company number, cookie name/duration, etc.) and no model-training decision, but check_pages.py reported 28 FAILs from unresolved [NEEDS] markers, and the pages lack an…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/paper-trail/README.md",
+        "evidence": "/runs/paper-trail/#run-2026-11-13",
         "verdict": "PARTIAL"
       }
     },
@@ -1629,13 +1629,13 @@
         "date": "2026-11-13",
         "target": "a local static site with a stand-in deploy CLI (nothing can upload), edited then deployed in a headless session",
         "result": "The agent edited the h1 to 'Reconcile 2.0', the first wrangler deploy was held by the hook pointing to release-gate-chair, the agent invoked that skill, was then denied Bash in don't-ask mode, did not retry or bypass, and…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/release-gate-mod/README.md"
+        "evidence": "/runs/release-gate-mod/#run-2026-11-13"
       },
       "latestRun": {
         "date": "2026-11-13",
         "target": "a local static site with a stand-in deploy CLI (nothing can upload), edited then deployed in a headless session",
         "result": "The agent edited the h1 to 'Reconcile 2.0', the first wrangler deploy was held by the hook pointing to release-gate-chair, the agent invoked that skill, was then denied Bash in don't-ask mode, did not retry or bypass, and…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/release-gate-mod/README.md",
+        "evidence": "/runs/release-gate-mod/#run-2026-11-13",
         "verdict": "PASS"
       }
     },
@@ -1729,13 +1729,13 @@
         "date": "2026-11-13",
         "target": "a local static site with a stand-in deploy CLI (nothing can upload), edited then deployed in a headless session",
         "result": "The h1 was changed to 'Reconcile 2.0', the deploy ran once (matching the single line in deployed.log), the mod flagged it afterwards in nudge mode, and Claude then ran web-preflight on the local files (1 file in site/, 0 HTTP…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/web-preflight-mod/README.md"
+        "evidence": "/runs/web-preflight-mod/#run-2026-11-13"
       },
       "latestRun": {
         "date": "2026-11-13",
         "target": "a local static site with a stand-in deploy CLI (nothing can upload), edited then deployed in a headless session",
         "result": "The h1 was changed to 'Reconcile 2.0', the deploy ran once (matching the single line in deployed.log), the mod flagged it afterwards in nudge mode, and Claude then ran web-preflight on the local files (1 file in site/, 0 HTTP…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/web-preflight-mod/README.md",
+        "evidence": "/runs/web-preflight-mod/#run-2026-11-13",
         "verdict": "PASS"
       }
     },
@@ -1859,13 +1859,13 @@
         "date": "2026-11-13",
         "target": "a local static site with a stand-in deploy CLI (nothing can upload), edited then deployed in a headless session",
         "result": "Claude changed the h1 to \"Reconcile 2.0\", the first `wrangler pages deploy` was held by the mod, Claude loaded pre-ship-security-red-team, could not run its Bash scripts, and reported that the deploy never ran (deployed.log shows…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/pre-ship-security-red-team-mod/README.md"
+        "evidence": "/runs/pre-ship-security-red-team-mod/#run-2026-11-13"
       },
       "latestRun": {
         "date": "2026-11-13",
         "target": "a local static site with a stand-in deploy CLI (nothing can upload), edited then deployed in a headless session",
         "result": "Claude changed the h1 to \"Reconcile 2.0\", the first `wrangler pages deploy` was held by the mod, Claude loaded pre-ship-security-red-team, could not run its Bash scripts, and reported that the deploy never ran (deployed.log shows…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/pre-ship-security-red-team-mod/README.md",
+        "evidence": "/runs/pre-ship-security-red-team-mod/#run-2026-11-13",
         "verdict": "PASS"
       }
     },
@@ -1949,13 +1949,13 @@
         "date": "2026-11-13",
         "target": "a local static site with a stand-in deploy CLI (nothing can upload), edited then deployed in a headless session",
         "result": "Claude edited the h1, ran the deploy once (deployed.log shows one call), was told afterwards that pre-ship-performance-audit hadn't run, invoked the skill, did a reduced local-file check (181-byte HTML, no assets), and reported…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/pre-ship-performance-audit-mod/README.md"
+        "evidence": "/runs/pre-ship-performance-audit-mod/#run-2026-11-13"
       },
       "latestRun": {
         "date": "2026-11-13",
         "target": "a local static site with a stand-in deploy CLI (nothing can upload), edited then deployed in a headless session",
         "result": "Claude edited the h1, ran the deploy once (deployed.log shows one call), was told afterwards that pre-ship-performance-audit hadn't run, invoked the skill, did a reduced local-file check (181-byte HTML, no assets), and reported…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/pre-ship-performance-audit-mod/README.md",
+        "evidence": "/runs/pre-ship-performance-audit-mod/#run-2026-11-13",
         "verdict": "PASS"
       }
     },
@@ -2120,7 +2120,7 @@
         "date": "2026-11-13",
         "target": "skillsmith.tech (sitemap fallback, no Search Console)",
         "result": "The run wrote keyword-map.md using the sitemap fallback and invented no volumes or rankings, but it audited only 13 of the sitemap's URLs (the run says 89, the ground truth has 92) and missed the tune-skill, web-preflight and…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/keyword-guard/README.md",
+        "evidence": "/runs/keyword-guard/#run-2026-11-13",
         "verdict": "PARTIAL"
       }
     },
@@ -2149,7 +2149,7 @@
         "date": "2026-11-13",
         "target": "skillsmith.tech (sitemap fallback, no Search Console)",
         "result": "The run wrote resolution.md with an ownership map and rewrites for all four tune-* pages (titles 42-50 chars, metas 150-153), but it never captured the live current titles, H1s or metas, so it has no real 'before' text and says…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/keyword-resolver/README.md",
+        "evidence": "/runs/keyword-resolver/#run-2026-11-13",
         "verdict": "PARTIAL"
       }
     },
@@ -2178,7 +2178,7 @@
         "date": "2026-11-13",
         "target": "skillsmith.tech (92 live pages)",
         "result": "The run crawled only 25 of 92 sitemap pages and reported 3 length findings plus 13 truncated descriptions; ground truth shows 12 titles over 60 chars and 8 descriptions over 160, so most real findings were missed and some claims…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/seo-polish/README.md",
+        "evidence": "/runs/seo-polish/#run-2026-11-13",
         "verdict": "PARTIAL"
       }
     },
@@ -2207,7 +2207,7 @@
         "date": "2026-11-13",
         "target": "a 200-word product blog post draft with clichés, hedges and real numbers",
         "result": "The run wrote draft-tight.md, kept 40,000, triples, up to six hours, 38 min vs 5h50 and the unmeasured-benefit hedge, and cut most fluff, but left 'Experts agree' in the file and the summary says the cut list is mostly complete.",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/wordsmith/README.md",
+        "evidence": "/runs/wordsmith/#run-2026-11-13",
         "verdict": "PARTIAL"
       }
     },
@@ -2265,7 +2265,7 @@
         "date": "2026-11-13",
         "target": "a real-shaped B2B fintech product brief with claims it must not make",
         "result": "The run produced one LinkedIn post and a 6-post X thread, each with a hook, body and a 14-day no-card trial CTA, and both use the 3.5→1 day (n=24) figure and the attributed Stackwise quote. But the LinkedIn post names QuickBooks…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/platform-content/README.md",
+        "evidence": "/runs/platform-content/#run-2026-11-13",
         "verdict": "PARTIAL"
       }
     },
@@ -2322,7 +2322,7 @@
         "date": "2026-11-13",
         "target": "a real-shaped B2B fintech product brief with claims it must not make",
         "result": "The run produced a landing page with four headline options and a 3-email checklist sequence with correct prices (£149/£349, 14-day no-card trial), a verbatim attributed quote and the 3.5-to-1-day figure (n=24) attributed to the…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/sales-copy/README.md",
+        "evidence": "/runs/sales-copy/#run-2026-11-13",
         "verdict": "PARTIAL"
       }
     },
@@ -2374,7 +2374,7 @@
         "date": "2026-11-13",
         "target": "a 10-row provider sample of a 2,400-row cold-email list against a written ICP",
         "result": "Returned HOLD on provider A's 10-row sample with 4 rows on ICP and 6 off, each with a reason, plus a re-run condition and a note on provider B; it also named a suppression row ('Brightfold') that is not in the sample and did not…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/cold-email-list-gate/README.md",
+        "evidence": "/runs/cold-email-list-gate/#run-2026-11-13",
         "verdict": "PARTIAL"
       }
     },
@@ -2438,7 +2438,7 @@
         "date": "2026-11-13",
         "target": "a 60,000-sends-a-month cold-email plan across 4 clients",
         "result": "The run hand-computed 275 inboxes and 93 domains for 60k sends (vs 120 inboxes and about 35 healthy domains on hand) with per-client splits and a 1% domain floor, but it gave no explicit warm-spare count for the 6 burns and no…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/cold-email-ops/README.md",
+        "evidence": "/runs/cold-email-ops/#run-2026-11-13",
         "verdict": "PARTIAL"
       }
     },
@@ -2466,13 +2466,13 @@
         "date": "2026-11-13",
         "target": "a synthetic mid-career CSM resume with planted weaknesses, against a real-shaped Senior CSM job ad",
         "result": "The run gave a borderline first-screen reject, flagged the vague summary, duty-style bullets and the 15-month Dec 2020–Mar 2022 gap, mapped the resume to the job requirements, and invented no metrics, using placeholders like [X]%…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/recruiter-lens/README.md"
+        "evidence": "/runs/recruiter-lens/#run-2026-11-13"
       },
       "latestRun": {
         "date": "2026-11-13",
         "target": "a synthetic mid-career CSM resume with planted weaknesses, against a real-shaped Senior CSM job ad",
         "result": "The run gave a borderline first-screen reject, flagged the vague summary, duty-style bullets and the 15-month Dec 2020–Mar 2022 gap, mapped the resume to the job requirements, and invented no metrics, using placeholders like [X]%…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/recruiter-lens/README.md",
+        "evidence": "/runs/recruiter-lens/#run-2026-11-13",
         "verdict": "PASS"
       }
     },
@@ -2500,7 +2500,7 @@
         "date": "2026-11-13",
         "target": "a synthetic CSM resume, the candidate's own fact notes, and a Senior CSM job ad",
         "result": "The run wrote resume-ledgerline.md with the real figures (64 accounts, about £2.1M ARR, churn 14%→9%, onboarding 19→11 days), a caveated churn bullet, an honest carer/SQL-course entry and no management claim, but the new summary…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/applicant-kit/README.md",
+        "evidence": "/runs/applicant-kit/#run-2026-11-13",
         "verdict": "PARTIAL"
       },
       "tested": {
@@ -2534,7 +2534,7 @@
         "date": "2026-11-13",
         "target": "a five-role job-search tracker with one stalled recruiter thread and one upcoming panel",
         "result": "The run flagged Paystack Labs (35 days quiet) and drafted a follow-up to Amira, recommended marking Quillbook no-reply, left Fernway alone, and gave a Tallyhub panel plan, but the Tallyhub briefing was not written and the drafts…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/application-pilot/README.md",
+        "evidence": "/runs/application-pilot/#run-2026-11-13",
         "verdict": "PARTIAL"
       },
       "tested": {
@@ -2595,7 +2595,7 @@
         "date": "2026-11-13",
         "target": "a synthetic CSM's negotiation for a £58–68k Senior CSM offer",
         "result": "The run gave a £65k counter (about +33% on £49k, inside the £58–68k band), a word-for-word call script, anchoring on 64 accounts/£2.1M ARR, churn 14%→9% and onboarding 19→11 days, and a deflection for the £49k question, but it…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/career-track/README.md",
+        "evidence": "/runs/career-track/#run-2026-11-13",
         "verdict": "PARTIAL"
       }
     },
@@ -2657,7 +2657,7 @@
         "date": "2026-11-13",
         "target": "UK Making Tax Digital for Income Tax: thresholds and dates, from public sources",
         "result": "The run correctly concluded the user (about £47,000 combined gross income) starts MTD for Income Tax on 6 April 2027 under the £30,000 threshold, cited gov.uk pages and listed the changes, but left the tax-year basis of the test…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/research-brief/README.md",
+        "evidence": "/runs/research-brief/#run-2026-11-13",
         "verdict": "PARTIAL"
       }
     },
@@ -2718,13 +2718,13 @@
         "date": "2026-11-13",
         "target": "a 14-day checkout A/B test export (182,000 sessions, two devices) with one planted tracking outage",
         "result": "The run found B's zero orders on 2026-10-09 on both devices (4 rows, 8,000 sessions), dropped that day from both arms, and reported B beating A at 4.25% vs 3.89% (p=0.0001), with mobile up 3.01% to 3.70% (p<0.0001) and desktop…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/data-readout/README.md"
+        "evidence": "/runs/data-readout/#run-2026-11-13"
       },
       "latestRun": {
         "date": "2026-11-13",
         "target": "a 14-day checkout A/B test export (182,000 sessions, two devices) with one planted tracking outage",
         "result": "The run found B's zero orders on 2026-10-09 on both devices (4 rows, 8,000 sessions), dropped that day from both arms, and reported B beating A at 4.25% vs 3.89% (p=0.0001), with mobile up 3.01% to 3.70% (p<0.0001) and desktop…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/data-readout/README.md",
+        "evidence": "/runs/data-readout/#run-2026-11-13",
         "verdict": "PASS"
       },
       "pairsWith": [
@@ -2760,7 +2760,7 @@
         "date": "2026-11-13",
         "target": "this site's real publish pipeline (publish.yml, sync.py, README) and a proposed redesign",
         "result": "The run read publish.yml, sync.py and README.md, ran Skeptic and Contrarian sub-agents, and recommended keeping a slower cron as backstop alongside the dispatch, but it skipped the adversarial rebuttal round and its dissent log…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/crash-test/README.md",
+        "evidence": "/runs/crash-test/#run-2026-11-13",
         "verdict": "PARTIAL"
       },
       "tested": {
@@ -2844,7 +2844,7 @@
         "date": "2026-11-13",
         "target": "a real-shaped build decision for a 3-person fintech startup (QuickBooks vs multi-entity)",
         "result": "The memo recommends multi-entity first (8 vs 10 engineer-weeks) with a pre-sell test, uses most supplied figures and flags gaps honestly, but its headline ~+£2.7k MRR upside rests on an invented assumption and the 90-day plan…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/strategy-memo/README.md",
+        "evidence": "/runs/strategy-memo/#run-2026-11-13",
         "verdict": "PARTIAL"
       }
     },
@@ -2901,13 +2901,13 @@
         "date": "2026-11-13",
         "target": "a realistic persona: a UK accountant with 8 hours a week and £300",
         "result": "The run recommended a Xero bookkeeping/VAT-prep retainer (5 clients at about £300 a month, 25–30 hours) with a 5-conversation demand check, text-only LinkedIn and referral channels, a 9-hour 7-day plan, and compliance flags…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/solo-income-blueprint/README.md"
+        "evidence": "/runs/solo-income-blueprint/#run-2026-11-13"
       },
       "latestRun": {
         "date": "2026-11-13",
         "target": "a realistic persona: a UK accountant with 8 hours a week and £300",
         "result": "The run recommended a Xero bookkeeping/VAT-prep retainer (5 clients at about £300 a month, 25–30 hours) with a 5-conversation demand check, text-only LinkedIn and referral channels, a 9-hour 7-day plan, and compliance flags…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/solo-income-blueprint/README.md",
+        "evidence": "/runs/solo-income-blueprint/#run-2026-11-13",
         "verdict": "PASS"
       }
     },
@@ -2937,7 +2937,7 @@
         "date": "2026-11-13",
         "target": "teaching double-entry bookkeeping to a software engineer from zero",
         "result": "The skill gave a code-analogy primer and correctly caught the 'both are debits' misconception (Cash +100 debit, Revenue -100 credit), but it front-loaded a long lecture before asking anything and issued multiple mini-checks in…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/topic-primer/README.md",
+        "evidence": "/runs/topic-primer/#run-2026-11-13",
         "verdict": "PARTIAL"
       }
     },
@@ -2993,7 +2993,7 @@
         "date": "2026-11-13",
         "target": "a 6-month conversational-Portuguese plan for a busy adult",
         "result": "The run wrote a 26-week, 5 h/week system with five gated stages, a 60/90/90/50-minute weekly routine, an expanding-interval card schedule and a prepaid weekly tutor slot, but it uses the Spanish transfer only thinly and gives no…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/study-system/README.md",
+        "evidence": "/runs/study-system/#run-2026-11-13",
         "verdict": "PARTIAL"
       }
     },
@@ -3060,7 +3060,7 @@
         "date": "2026-11-13",
         "target": "a 6-week SQL evening workshop for customer success managers",
         "result": "The run wrote a 6-module, 12-hour SQL course.json with 6 outcomes and a 2-criterion rubric, ran check_course.py once and reported 0 FAIL/0 WARN, but never fixed anything and left some coverage gaps.",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/course-builder/README.md",
+        "evidence": "/runs/course-builder/#run-2026-11-13",
         "verdict": "PARTIAL"
       }
     },
@@ -3110,7 +3110,7 @@
         "date": "2026-11-13",
         "target": "a large unattended refactor in Claude Code",
         "result": "The skill asked two clarifying questions, then in the same turn recommended `/effort high`, mostly serial execution, batches of 10-15 files and `/usage` checks, but it never waited for the answers and its fallback and permission…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/choose-effort/README.md",
+        "evidence": "/runs/choose-effort/#run-2026-11-13",
         "verdict": "PARTIAL"
       },
       "reading": [
@@ -3180,7 +3180,7 @@
         "date": "2026-11-13",
         "target": "a real-shaped /usage breakdown from a session that hit 96% of its window",
         "result": "The run read the paste and ranked 14 subagents inheriting opus at xhigh (61% subagents, 88% opus) as the main cause, but it hedged the 3 Nov xhigh default as 'likely' and left the subagent-override setting unspecified, and I…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/diagnose-usage/README.md",
+        "evidence": "/runs/diagnose-usage/#run-2026-11-13",
         "verdict": "PARTIAL"
       }
     },
@@ -3239,7 +3239,7 @@
         "date": "2026-11-13",
         "target": "skillsmith.tech and its source repo (fixes local only, nothing pushed or submitted)",
         "result": "The run crawled the live site, found the 12 over-long titles and 8 over-long descriptions that match ground truth, shortened them and re-crawled locally to show 12 to 0 titles and 8 to 2 descriptions, but it edited the output…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/seo-sweep/README.md",
+        "evidence": "/runs/seo-sweep/#run-2026-11-13",
         "verdict": "PARTIAL"
       }
     },
@@ -3300,7 +3300,7 @@
         "date": "2026-11-13",
         "target": "real Claude Code session files from this batch of runs",
         "result": "The run searched with the bundled script and found one candidate, claude:eda1adb5 (2026-11-13, workspace /tmp/run-ship-second-brain-69r37__h/project), which matches the ground truth, but it gave no decisions because it never read…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/session-retrace/README.md",
+        "evidence": "/runs/session-retrace/#run-2026-11-13",
         "verdict": "PARTIAL"
       }
     },
@@ -3362,13 +3362,13 @@
         "date": "2026-11-13",
         "target": "skillsmith.tech (plan only, nothing submitted)",
         "result": "Ran the get-indexed script in plan mode against skillsmith.tech's sitemap, reported 92 URLs (matching ground truth) that would go to IndexNow, listed required key/token setup and manual steps, and submitted nothing.",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/get-indexed/README.md"
+        "evidence": "/runs/get-indexed/#run-2026-11-13"
       },
       "latestRun": {
         "date": "2026-11-13",
         "target": "skillsmith.tech (plan only, nothing submitted)",
         "result": "Ran the get-indexed script in plan mode against skillsmith.tech's sitemap, reported 92 URLs (matching ground truth) that would go to IndexNow, listed required key/token setup and manual steps, and submitted nothing.",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/get-indexed/README.md",
+        "evidence": "/runs/get-indexed/#run-2026-11-13",
         "verdict": "PASS"
       }
     },
@@ -3481,7 +3481,7 @@
         "date": "2026-11-13",
         "target": "a 2-person accounting practice that wants an AI team",
         "result": "The run asked five questions first, recommended the receipt/statement chase, and wrote a 3-agent blueprint with prompts, approval gates, a QA plan and a 7-day plan, but its price figures are unsupported estimates and it did not…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/ai-team-blueprint/README.md",
+        "evidence": "/runs/ai-team-blueprint/#run-2026-11-13",
         "verdict": "PARTIAL"
       }
     },
@@ -3549,7 +3549,7 @@
         "date": "2026-11-13",
         "target": "the skillsmith.tech source repo (local clone)",
         "result": "The run wrote AGENTS.md (12 rules at top) plus a CLAUDE.md containing only @AGENTS.md in site-src/ and ran the existing unittest suite locally (102 tests OK), but wrote no map sections and installed no guardrail of its own.",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/portable-harness/README.md",
+        "evidence": "/runs/portable-harness/#run-2026-11-13",
         "verdict": "PARTIAL"
       }
     },
@@ -3611,7 +3611,7 @@
         "date": "2026-11-13",
         "target": "the skillsmith.tech repo plus real Claude Code session files from this batch",
         "result": "The audit found no CLAUDE.md, settings or hooks in site-src or at user level, mined only 1 session (its own invocation, 0 corrections), made one real finding (no instruction file) and one non-actionable one, applied nothing, and…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/harness-audit/README.md",
+        "evidence": "/runs/harness-audit/#run-2026-11-13",
         "verdict": "PARTIAL"
       },
       "reading": [
@@ -3681,7 +3681,7 @@
         "date": "2026-11-13",
         "target": "a fresh Claude Code install (isolated home directory)",
         "result": "The run showed a complete plan (settings.json with model=sonnet and advisorModel=opus, 3 subagents, an advisor section in CLAUDE.md) and waited for approval, but the Bash pre-flight and all 5 Write calls were denied, so nothing…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/setup-claude-advisor/README.md",
+        "evidence": "/runs/setup-claude-advisor/#run-2026-11-13",
         "verdict": "PARTIAL"
       }
     },
@@ -3748,7 +3748,7 @@
         "date": "2026-11-13",
         "target": "real Claude Code session files from this batch (no /insights report present)",
         "result": "The run found no ~/.claude/usage-data report and produced zero rewrites, telling the user to run /insights; it did not fall back to the available session transcripts and its claim that Bash was denied is not supported by the…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/insights-to-prompts/README.md",
+        "evidence": "/runs/insights-to-prompts/#run-2026-11-13",
         "verdict": "PARTIAL"
       }
     },
@@ -3821,7 +3821,7 @@
         "date": "2026-11-13",
         "target": "four real-shaped release-notes prompts checked against the live catalog",
         "result": "The run mapped the 4 prompts to 4 ordered steps with gates, marked 2 steps as reuse of wordsmith and 2 as new skills (summarize-changes-since-tag, verify-release-notes), and wrote workflow, chain SKILL.md, 2 briefs and trigger…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/prompts-to-workflow/README.md",
+        "evidence": "/runs/prompts-to-workflow/#run-2026-11-13",
         "verdict": "PARTIAL"
       }
     },
@@ -3877,13 +3877,13 @@
         "date": "2026-11-13",
         "target": "a real-shaped issue, PR and customer call for a fintech product",
         "result": "The run saved 3 raw sources, wrote 9 one-idea notes with source and confidence, and answered all three questions correctly from the vault: split payments handled (merged 2026-10-21, flag on 2026-10-24), overpayments not handled…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/ship-second-brain/README.md"
+        "evidence": "/runs/ship-second-brain/#run-2026-11-13"
       },
       "latestRun": {
         "date": "2026-11-13",
         "target": "a real-shaped issue, PR and customer call for a fintech product",
         "result": "The run saved 3 raw sources, wrote 9 one-idea notes with source and confidence, and answered all three questions correctly from the vault: split payments handled (merged 2026-10-21, flag on 2026-10-24), overpayments not handled…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/ship-second-brain/README.md",
+        "evidence": "/runs/ship-second-brain/#run-2026-11-13",
         "verdict": "PASS"
       }
     },
@@ -3960,13 +3960,13 @@
         "date": "2026-11-13",
         "target": "a 200-word product blog post with stock AI-writing patterns",
         "result": "The run wrote draft-v2.md, a roughly 110-word rewrite, and the scan was reported clean. It keeps the 40,000/day, about-3x month-end, up-to-six-hours, 38-minute and 5h50m figures plus the unmeasured-benefit hedge, and drops the…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/straight-prose/README.md"
+        "evidence": "/runs/straight-prose/#run-2026-11-13"
       },
       "latestRun": {
         "date": "2026-11-13",
         "target": "a 200-word product blog post with stock AI-writing patterns",
         "result": "The run wrote draft-v2.md, a roughly 110-word rewrite, and the scan was reported clean. It keeps the 40,000/day, about-3x month-end, up-to-six-hours, 38-minute and 5h50m figures plus the unmeasured-benefit hedge, and drops the…",
-        "evidence": "https://github.com/arm-pz/skills-site/blob/main/reports/runs/2026-11-13/straight-prose/README.md",
+        "evidence": "/runs/straight-prose/#run-2026-11-13",
         "verdict": "PASS"
       }
     },

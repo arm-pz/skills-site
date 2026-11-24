@@ -53,6 +53,7 @@ jobs:
         run: |
           python tools/agent-skills/gen_home.py --check
           python tools/agent-skills/gen_page.py --check
+          python tools/agent-skills/gen_runs.py --check
       - name: sync preview (read-only)
         env:
           GH_TOKEN: ${{ github.token }}
@@ -106,6 +107,7 @@ jobs:
         run: |
           python tools/agent-skills/gen_home.py --check
           python tools/agent-skills/gen_page.py --check
+          python tools/agent-skills/gen_runs.py --check
       - name: build
         env:
           GH_TOKEN: ${{ github.token }}
