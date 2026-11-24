@@ -102,6 +102,41 @@ with tempfile.TemporaryDirectory() as tmp:
     calls = [json.loads(l)[:2] for l in (t / "gh.log").read_text().splitlines()]
     expect("missing label created then issue filed", ["label", "create"] in calls and "filed" in out, calls)
 
+    # The raw error pattern never leaves the machine: copied from an error, it can carry user input.
+    (t / "gh.log").unlink()
+    pat = [a if a != "rejected time" else r"denied for alice@corp\.com ticket 4417" for a in FILE]
+    pat[pat.index("--happened") + 1] = "leak probe failure"
+    code, out, err = run(*pat, "--repo", "o/r")
+    sent = (t / "gh.log").read_text()
+    body = next(json.loads(l) for l in sent.splitlines() if json.loads(l)[:2] == ["issue", "create"])
+    body = body[body.index("--body") + 1]
+    rec_sent = json.loads(body.split("```json", 1)[1].split("```", 1)[0])
+    expect("error pattern not in the issue body or any gh call", "alice" not in sent and "4417" not in sent
+           and "error_pattern" not in rec_sent, rec_sent)
+    expect("issue says a local pattern exists", rec_sent.get("has_error_pattern") is True, rec_sent)
+    kept = [json.loads(l) for l in q.read_text().splitlines() if "leak probe" in l]
+    expect("error pattern kept in the local queue", kept and kept[0]["error_pattern"].startswith("denied for"), kept)
+
+    # Concurrent writers: no report and no count increment may be lost.
+    cq = t / "concurrent.jsonl"
+    cenv = {**base_env, "PAPERCUT_QUEUE": str(cq)}
+    procs = []
+    for i in range(24):
+        args = list(FILE)
+        if i % 2:  # half file distinct papercuts, half repeat one fingerprint
+            args[args.index("--happened") + 1] = f"distinct failure kind {chr(97 + i)}{chr(97 + i)}"
+        procs.append(subprocess.Popen([sys.executable, "-I", str(SCRIPT), *args], env=cenv,
+                                      stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True))
+    errs = [pr.communicate()[1] for pr in procs]
+    rows = [json.loads(l) for l in cq.read_text().splitlines()]
+    shared = [r for r in rows if "rejected time" in r["happened"]]
+    expect("24 concurrent writers: 12 distinct rows and the shared count kept",
+           len(rows) == 13 and len(shared) == 1 and shared[0]["count"] == 12 and all(p.returncode == 0 for p in procs),
+           (len(rows), [r["count"] for r in shared], [e for e in errs if e][:2]))
+    expect("no temp files left behind", sorted(x.name for x in t.iterdir() if x.name.startswith("concurrent")) == ["concurrent.jsonl", "concurrent.jsonl.lock"]
+           or sorted(x.name for x in t.iterdir() if x.name.startswith("concurrent")) == ["concurrent.jsonl"],
+           sorted(x.name for x in t.iterdir() if x.name.startswith("concurrent")))
+
     # list: local + GitHub merged, filters
     code, out, err = run("list", "--skill", "deploy", "--repo", "o/r")
     rows = [json.loads(l) for l in out.splitlines()]

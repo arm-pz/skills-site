@@ -312,17 +312,21 @@ with tempfile.TemporaryDirectory() as tmp:
 
     issues = [{"number": 3, "url": "i3", "state": "OPEN", "body": "x\n```json\n" + json.dumps(
         {"fingerprint": "aaaabbbbcccc", "skill": "seo-crawl", "tool": "fetch", "happened": "403",
-         "fix": "send UA", "error_pattern": "403", "count": 3}) + "\n```"},
+         "fix": "send UA", "has_error_pattern": True, "count": 3}) + "\n```"},
               {"number": 4, "url": "i4", "state": "OPEN", "body": "no json here"}]
     (t / "issues.json").write_text(json.dumps(issues))
     (t / "queue.jsonl").write_text(json.dumps({"fingerprint": "aaaabbbbcccc", "skill": "seo-crawl", "tool": "fetch",
-                                               "happened": "403", "fix": "send UA", "count": 2, "reproducible": True}) + "\n")
+                                               "happened": "403", "fix": "send UA", "count": 2, "reproducible": True,
+                                               "error_pattern": "403"}) + "\n")
     code, out, _ = run("intake.py", "papercuts", t / "issues.json", "--skill", "seo-crawl")
     r = json.loads(out.splitlines()[0])
-    expect("papercuts from gh issues: grouped, error pattern becomes a check",
-           len(out.splitlines()) == 1 and "x3" in r["source"] and {"type": "no_error_matching", "value": "403"} in r["checks"], r)
+    expect("papercuts from gh issues: grouped; the pattern is noted as local, not invented",
+           len(out.splitlines()) == 1 and "x3" in r["source"] and not any(c["type"] == "no_error_matching" for c in r["checks"])
+           and "local papercut queue" in r["notes"], r)
     code, out, _ = run("intake.py", "papercuts", t / "queue.jsonl")
-    expect("papercuts from queue: reproducible becomes golden", json.loads(out)["tier"] == "golden", out)
+    q = json.loads(out)
+    expect("papercuts from queue: reproducible becomes golden, local pattern becomes a check",
+           q["tier"] == "golden" and {"type": "no_error_matching", "value": "403"} in q["checks"], q)
 
     cand = t / "cand.jsonl"
     cand.write_text("".join(l + "\n" for l in run("intake.py", "prs", t / "prs.json", "--agent", "claude-bot")[1].splitlines()))

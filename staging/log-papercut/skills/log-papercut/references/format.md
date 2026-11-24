@@ -4,7 +4,7 @@ Open this when writing anything that reads papercuts: a nightly pipeline, a dash
 
 ## Record
 
-One JSON object per line in the queue (`$PAPERCUT_QUEUE`, default `~/.papercuts/queue.jsonl`), and the same object in a fenced `json` block in the issue body.
+One JSON object per line in the queue (`$PAPERCUT_QUEUE`, default `~/.papercuts/queue.jsonl`). The issue body carries the same object in a fenced `json` block, minus `error_pattern` (see below).
 
 | Field | Meaning |
 | --- | --- |
@@ -19,11 +19,13 @@ One JSON object per line in the queue (`$PAPERCUT_QUEUE`, default `~/.papercuts/
 | `fix` | what should change, and where. Never "try again" |
 | `workaround` | what got the agent past it, if anything |
 | `severity` | `blocked`, `slowed` or `cosmetic` |
-| `error_pattern` | regex matching the error text; becomes a `no_error_matching` check in skill-eval-suite |
+| `error_pattern` | regex matching the error text; becomes a `no_error_matching` check in skill-eval-suite. **Local queue only**: a pattern copied from an error can carry user input, so issues carry `has_error_pattern: true` instead |
 | `reproducible` | true when a fixed input triggers it every time; skill-eval-suite makes it a golden case |
 | `agent`, `session` | who hit it, for reading the trace |
 
-All text is masked for secrets and emails, home directories become `~`, and each field is capped at 500 characters.
+All text is masked for secrets and emails, home directories become `~`, and each field is capped at 500 characters. `error_pattern` is a regex and is not masked, which is why it never leaves the machine.
+
+Writes to the queue hold an exclusive lock on `<queue>.lock` for the whole read-modify-write and replace the file atomically, so agents filing at the same time lose neither reports nor counts.
 
 ## GitHub issue
 

@@ -57,7 +57,7 @@ masked, each field is capped, and no prompt text or file contents go in. Full fo
 ## Status
 
 `SKILL.md` passes tune-skill's `check_skill.py` (0 FAIL, 0 WARN) and `--lint` (3 of 3). `python -I
-tests/test_papercut.py` runs 15 checks against a fake `gh`, all passing. Trigger cases were judged by
+tests/test_papercut.py` runs 20 checks against a fake `gh`, all passing. Trigger cases were judged by
 hand; the skill has not yet run always-on in a live agent.
 
 ## License

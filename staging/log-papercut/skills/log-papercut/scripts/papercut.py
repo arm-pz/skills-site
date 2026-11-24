@@ -19,6 +19,7 @@ Text is masked for secrets and emails, home directories become ~, and each field
 report carries no prompt text or file contents. Standard library only.
 """
 import argparse
+import contextlib
 import datetime as dt
 import hashlib
 import json
@@ -26,7 +27,14 @@ import os
 import re
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
+
+try:
+    import fcntl
+except ImportError:  # Windows
+    fcntl = None
+    import msvcrt
 
 FIELD_MAX = 500
 SEVERITIES = ("blocked", "slowed", "cosmetic")
@@ -77,6 +85,49 @@ def read_queue(path):
     return out
 
 
+@contextlib.contextmanager
+def locked(path):
+    """Exclusive lock on PATH.lock for a whole read-modify-write of the queue."""
+    lock = path.with_name(path.name + ".lock")
+    with open(lock, "a+") as fh:
+        if fcntl:
+            fcntl.flock(fh, fcntl.LOCK_EX)
+        else:
+            fh.seek(0)
+            msvcrt.locking(fh.fileno(), msvcrt.LK_LOCK, 1)
+        try:
+            yield
+        finally:
+            if fcntl:
+                fcntl.flock(fh, fcntl.LOCK_UN)
+            else:
+                fh.seek(0)
+                msvcrt.locking(fh.fileno(), msvcrt.LK_UNLCK, 1)
+
+
+def write_atomic(path, entries):
+    """Write the queue to a temp file in the same folder, then replace it in one step."""
+    fd, tmp = tempfile.mkstemp(dir=path.parent, prefix=path.name + ".", suffix=".tmp")
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as fh:
+            fh.write("".join(json.dumps(e, ensure_ascii=False) + "\n" for e in entries))
+            fh.flush()
+            os.fsync(fh.fileno())
+        os.replace(tmp, path)
+    except BaseException:
+        with contextlib.suppress(OSError):
+            os.unlink(tmp)
+        raise
+
+
+def outbound(rec):
+    """The record as it may leave the machine. The raw error pattern is copied from an error and can
+    carry user input, so it stays in the local queue; the issue only says that one exists."""
+    out = {k: v for k, v in rec.items() if k != "error_pattern"}
+    out["has_error_pattern"] = bool(rec.get("error_pattern"))
+    return out
+
+
 def gh(*args):
     p = subprocess.run(["gh", *args], capture_output=True, text=True)
     return p.returncode, p.stdout.strip(), p.stderr.strip()
@@ -89,7 +140,7 @@ def issue_body(rec):
         "", f"**Tried:** {rec['tried']}", "", f"**Expected:** {rec['expected']}", "",
         f"**Happened:** {rec['happened']}", "", f"**Fix:** {rec['fix']}", "",
         f"**Workaround:** {rec.get('workaround') or 'none found'}", "",
-        "```json", json.dumps(rec, indent=2, ensure_ascii=False), "```", "",
+        "```json", json.dumps(outbound(rec), indent=2, ensure_ascii=False), "```", "",
         f"<!-- papercut:{rec['fingerprint']} -->"])
 
 
@@ -142,17 +193,20 @@ def cmd_file(a):
                 "first_seen": now, "last_seen": now, "count": 1})
     path = queue_path(a.queue)
     path.parent.mkdir(parents=True, exist_ok=True)
-    entries = read_queue(path)
-    hit = next((e for e in entries if e.get("fingerprint") == rec["fingerprint"]), None)
-    if hit:
-        hit["count"] = int(hit.get("count", 1)) + 1
-        hit["last_seen"] = now
-        if rec["workaround"] and not hit.get("workaround"):
-            hit["workaround"] = rec["workaround"]
-        rec = {**hit, "agent": rec["agent"], "session": rec["session"], "workaround": hit.get("workaround")}
-    else:
-        entries.append(rec)
-    path.write_text("".join(json.dumps(e, ensure_ascii=False) + "\n" for e in entries), encoding="utf-8")
+    with locked(path):  # several agents can file at once; none may lose a report or a count
+        entries = read_queue(path)
+        hit = next((e for e in entries if e.get("fingerprint") == rec["fingerprint"]), None)
+        if hit:
+            hit["count"] = int(hit.get("count", 1)) + 1
+            hit["last_seen"] = now
+            if rec["workaround"] and not hit.get("workaround"):
+                hit["workaround"] = rec["workaround"]
+            if rec["error_pattern"] and not hit.get("error_pattern"):
+                hit["error_pattern"] = rec["error_pattern"]
+            rec = {**hit, "agent": rec["agent"], "session": rec["session"], "workaround": hit.get("workaround")}
+        else:
+            entries.append(rec)
+        write_atomic(path, entries)
     print(f"papercut {rec['fingerprint']} {'seen again' if hit else 'filed'} (count {rec['count']}) in {path}")
     repo = a.repo or os.environ.get("PAPERCUT_REPO")
     if repo:

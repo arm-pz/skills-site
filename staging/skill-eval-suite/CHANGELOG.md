@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.1 — unreleased
+
+- `intake.py papercuts`: log-papercut issues no longer carry the raw error pattern (it stays in the filer's local queue). From issues, the candidate notes that a pattern exists instead of a `no_error_matching` check; from the local queue, the check is still added.
+
 ## 0.4.0 — 2026-11-24
 
 - Pipeline gate checks for triage-and-PR loops, each reading a context file next to the suite: `triage_skips_open_pr` (duplicate PR work), `triage_trusted_source` (issues from non-owners without `pipeline-ok`), `diff_within_spec` (files outside the spec's Files list). `.diff` and `.patch` outputs are read.

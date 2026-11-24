@@ -132,11 +132,15 @@ def from_papercuts(path, skill):
     cases = []
     for fp, g in sorted(groups.items(), key=lambda kv: -kv[1]["count"]):
         r = g["first"]
+        note_pattern = False
         checks = [{"type": "finished"}]
         if r.get("tool"):
             checks.append({"type": "max_tool_errors", "value": 0, "draft": True})
         if r.get("error_pattern"):
             checks.append({"type": "no_error_matching", "value": r["error_pattern"]})
+        elif r.get("has_error_pattern"):
+            # Issues never carry the raw pattern; it stays in the filer's local queue.
+            note_pattern = True
         cases.append({
             "id": f"p-{fp[:8]}", "tier": "golden" if r.get("reproducible") else "real",
             "kind": "regression", "source": f"papercut {fp} x{g['count']}"
@@ -145,7 +149,8 @@ def from_papercuts(path, skill):
             "tried": short(r.get("tried")), "expected": short(r.get("expected")),
             "happened": short(r.get("happened")), "fix": short(r.get("fix")),
             "checks": checks,
-            "notes": "needs the prompt that hits this path; add it once the fix lands so the case guards it"})
+            "notes": "needs the prompt that hits this path; add it once the fix lands so the case guards it"
+            + ("; the error pattern is in the filer's local papercut queue: run intake on that queue to add a no_error_matching check" if note_pattern else "")})
     return cases
 
 
