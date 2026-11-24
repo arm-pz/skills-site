@@ -1,0 +1,7 @@
+[
+  {"number": 24, "state": "open", "repo": "arm-pz/caffeinity-skills",
+   "title": "Add a trigger case for plugin-directory-gate (as opened: cases for the four search-visibility skills)",
+   "opened": "2026-11-22T02:42:11Z",
+   "files": ["evals/triggers.json"],
+   "covers": ["check-skill-visibility", "diagnose-search-visibility", "fix-skill-visibility", "verify-search-visibility"]}
+]
