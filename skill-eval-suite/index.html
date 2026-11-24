@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skill Eval Suite — AI Agent Skill for Claude Code and Codex</title>
+<meta name="description" content="Builds and runs the eval suite for a recurring agent loop or skill - about 5% golden, 80% real prompts graded on trajectory, 15% author-judged, with…">
+<link rel="canonical" href="https://skillsmith.tech/skill-eval-suite/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Skillsmith by Caffeinity">
+<meta property="og:title" content="Skill Eval Suite — AI Agent Skill for Claude Code and Codex">
+<meta property="og:description" content="Builds and runs the eval suite for a recurring agent loop or skill - about 5% golden, 80% real prompts graded on trajectory, 15% author-judged, with must-do, must-not and keep-working cases. Scores how often each case passes over 3+ trials, reports same-case flips instead of averages, gates on a token budget, checks a hidden holdout for overfitting, and trusts no check or judge until it fails a known-bad set. Feeds cases from real sessions, papercuts and rejected PRs. Use when the user wants to know if a skill or scheduled run is any good, asks for evals, a golden set or a scorecard, says a loop got worse or is sometimes wrong, asks whether a skill earns its tokens, or wants a failed run explained, even if they never say eval. Not for scheduling a skill (use loop-schedule), whether a description triggers (use tune-skill), filing friction mid-task (use log-papercut), or rules mined from past sessions (use harness-audit).">
+<meta property="og:url" content="https://skillsmith.tech/skill-eval-suite/">
+<meta name="twitter:card" content="summary">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="preload" href="/fonts/files/cY9AfjOCX1hbuyalUrK4397yjA.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/files/pxiTypc9vsFDm051Uf6KVwgkfoSxQ0GsQv8ToedPibnr0SZe1Q.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "skill-eval-suite",
+  "alternateName": "Skill Eval Suite",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any",
+  "url": "https://skillsmith.tech/skill-eval-suite/",
+  "description": "Builds and runs the eval suite for a recurring agent loop or skill - about 5% golden, 80% real prompts graded on trajectory, 15% author-judged, with must-do, must-not and keep-working cases. Scores how often each case passes over 3+ trials, reports same-case flips instead of averages, gates on a token budget, checks a hidden holdout for overfitting, and trusts no check or judge until it fails a known-bad set. Feeds cases from real sessions, papercuts and rejected PRs. Use when the user wants to know if a skill or scheduled run is any good, asks for evals, a golden set or a scorecard, says a loop got worse or is sometimes wrong, asks whether a skill earns its tokens, or wants a failed run explained, even if they never say eval. Not for scheduling a skill (use loop-schedule), whether a description triggers (use tune-skill), filing friction mid-task (use log-papercut), or rules mined from past sessions (use harness-audit).",
+  "codeRepository": "https://github.com/arm-pz/skill-eval-suite",
+  "license": "https://spdx.org/licenses/MIT.html",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Caffeinity",
+    "url": "https://caffeinity.com/"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+<!-- gen:quality-css:start -->
+<style>
+  .qb{--qb-line:var(--rule,var(--line,color-mix(in srgb,currentColor 14%,transparent)));--qb-dim:var(--dim,var(--muted));padding:clamp(64px,9vw,128px) 0}
+  .qb h2{font-family:var(--serif);font-weight:400;font-size:clamp(34px,4.3vw,60px);line-height:1;letter-spacing:-.024em;margin:0}
+  .qb-lead{color:var(--qb-dim);max-width:58ch;margin-top:18px;font-size:17px}
+  .qb a{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em}
+  .qb-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:0 clamp(28px,4vw,64px);margin-top:clamp(32px,4vw,56px)}
+  .qb-grid>div{border-top:2px solid currentColor;padding:14px 0 30px}
+  .qb dt{font-size:14px;font-weight:600;line-height:1.3;color:var(--qb-dim)}
+  .qb dd{margin:8px 0 0;font-family:var(--serif);font-size:24px;line-height:1.15;letter-spacing:-.01em}
+  .qb dd small{display:block;font-family:var(--sans);letter-spacing:0;color:var(--qb-dim);font-size:15px;line-height:1.5;margin-top:8px}
+  .qb .qb-wide{grid-column:1/-1}
+  .qb .qb-wide dd{font-family:var(--sans);font-size:17px;line-height:1.55;letter-spacing:0;max-width:78ch}
+  .qb ul{list-style:none;margin:8px 0 0;padding:0}
+  .qb li{padding:10px 0;border-top:1px solid var(--qb-line)}
+  .qb .qb-flag{font-weight:400}
+  .qb .qb-flag.fail{box-shadow:inset 0 -.14em 0 var(--ember,var(--accent))}
+</style>
+<!-- gen:quality-css:end -->
+</head>
+<body>
+
+<nav class="nav" aria-label="Site">
+  <div class="wrap">
+    <a class="brand" href="/"><b>/</b>skillsmith <span class="brand-by">by caffeinity</span></a>
+    <div class="nav-links">
+      <a href="/skills/">Skills</a>
+      <a href="/workflows/">Workflows</a>
+      <a href="/mods/">Mods</a>
+      <a href="/story/">Story</a>
+      <a href="/notes/">Notes</a>
+      <a href="/work/">Work with us</a>
+    </div>
+    <div class="nav-cta">
+      <a class="gh" href="https://github.com/arm-pz" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-accent btn-sm" href="/caffeinity-routing/">Start here</a>
+    </div>
+  </div>
+</nav>
+
+<header class="sk-hero">
+  <div class="wrap">
+    <p class="crumbs"><a href="/skills/">Skills</a><span>skill-eval-suite</span></p>
+    <h1>Skill Eval Suite</h1>
+    <p class="lead">Builds and runs the eval suite for a recurring agent loop or skill - about 5% golden, 80% real prompts graded on trajectory, 15% author-judged, with must-do, must-not and keep-working cases.</p>
+    <div class="install-line">
+      <button class="cmd" type="button" data-copy="npx skills add arm-pz/skill-eval-suite" aria-label="Copy the install command"><span id="cmd">npx skills add arm-pz/skill-eval-suite</span><span class="copy" aria-hidden="true">Copy</span></button>
+    </div>
+    <p class="facts">10 files and 1,894 lines, free under MIT. Built from <a href="https://github.com/arm-pz/skill-eval-suite" target="_blank" rel="noopener">arm-pz/skill-eval-suite</a> at <code>1d03dbe</code>.</p>
+  </div>
+</header>
+
+<section class="purpose tone" aria-labelledby="for-h">
+  <div class="wrap">
+    <h2 id="for-h">What it is for</h2>
+    <p class="body">Builds and runs the eval suite for a recurring agent loop or skill - about 5% golden, 80% real prompts graded on trajectory, 15% author-judged, with must-do, must-not and keep-working cases. Scores how often each case passes over 3+ trials, reports same-case flips instead of averages, gates on a token budget, checks a hidden holdout for overfitting, and trusts no check or judge until it fails a known-bad set. Feeds cases from real sessions, papercuts and rejected PRs.</p>
+    <div class="uses">
+    <div class="uses-col when">
+      <h3>Reach for it when</h3>
+      <ul><li>The user wants to know if a skill or scheduled run is any good, asks for evals, a golden set or a scorecard, says a loop got worse or is sometimes wrong, asks whether a skill earns its tokens, or wants a failed run explained, even if they never say eval.</li></ul>
+    </div>
+    <div class="uses-col not">
+      <h3>Not for</h3>
+      <ul><li>Scheduling a skill (use loop-schedule)</li><li>Whether a description triggers (use tune-skill)</li><li>Filing friction mid-task (use log-papercut)</li><li>Rules mined from past sessions (use harness-audit)</li></ul>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- gen:quality:start -->
+<section class="qb" aria-labelledby="qb-h">
+  <div class="wrap">
+    <h2 id="qb-h">Know what you are installing.</h2>
+    <p class="qb-lead">Version, date and limits are read from the repo on every sync, and the check runs every night. Real-world runs are listed only with their evidence.</p>
+    <dl class="qb-grid">
+      <div><dt>Version</dt><dd>Unversioned<small>commit 1d03dbe</small></dd></div>
+      <div><dt>Updated</dt><dd>Not recorded yet</dd></div>
+      <div><dt>Works in</dt><dd>Claude Code, Codex, Cursor, Qoder and any agent that loads a SKILL.md<small>plain text; no API keys</small></dd></div>
+      <div><dt>Nightly check</dt><dd>Not checked yet<small>It joins the nightly check after its first run. <a href="https://github.com/arm-pz/skills-site/blob/main/.github/workflows/health.yml" target="_blank" rel="noopener">How it is checked</a></small></dd></div>
+      <div><dt>Last real-world run</dt><dd>No public run yet<small>Runs are published only with their evidence.</small></dd></div>
+      <div class="qb-wide"><dt>Known limits</dt><dd>Not built for:<ul><li>Scheduling a skill (use loop-schedule)</li><li>Whether a description triggers (use tune-skill)</li><li>Filing friction mid-task (use log-papercut)</li><li>Rules mined from past sessions (use harness-audit)</li></ul></dd></div>
+    </dl>
+  </div>
+</section>
+<!-- gen:quality:end -->
+
+<section class="ships" aria-labelledby="ships-h">
+  <div class="wrap">
+    <h2 id="ships-h">Every file it installs</h2>
+    <p class="sub">Measured from the packed archive at commit <code>1d03dbe</code>. A skill is plain text your agent reads, so this list is all of it.</p>
+    <table class="files">
+      <thead class="sr-only"><tr><th>File</th><th>Lines</th><th>Bytes</th></tr></thead>
+      <tbody>
+        <tr><td>SKILL.md</td><td class="n">149</td><td class="n bytes">11,365 B</td></tr>
+        <tr><td>references/ablation.md</td><td class="n">40</td><td class="n bytes">2,920 B</td></tr>
+        <tr><td>references/failure-taxonomy.md</td><td class="n">40</td><td class="n bytes">3,244 B</td></tr>
+        <tr><td>references/gates.md</td><td class="n">99</td><td class="n bytes">5,828 B</td></tr>
+        <tr><td>references/suite.md</td><td class="n">120</td><td class="n bytes">8,938 B</td></tr>
+        <tr><td>scripts/__pycache__/traces.cpython-314.pyc</td><td class="n">78</td><td class="n bytes">19,252 B</td></tr>
+        <tr><td>scripts/ablation.py</td><td class="n">178</td><td class="n bytes">7,596 B</td></tr>
+        <tr><td>scripts/intake.py</td><td class="n">242</td><td class="n bytes">10,510 B</td></tr>
+        <tr><td>scripts/score.py</td><td class="n">698</td><td class="n bytes">35,107 B</td></tr>
+        <tr><td>scripts/traces.py</td><td class="n">250</td><td class="n bytes">11,124 B</td></tr>
+      </tbody>
+      <tfoot><tr><td>10 files</td><td class="n">1,894</td><td class="n bytes">41 KB</td></tr></tfoot>
+    </table>
+  </div>
+</section>
+
+<section class="more tone" aria-labelledby="more-h">
+  <div class="wrap">
+    <h2 id="more-h">More in Skill Authoring</h2>
+    <ul class="related">
+      <li><a href="/draft-skill/"><strong>Draft Skill</strong><span>Creates a new agent skill from a plain idea: confirms the purpose before writing anything, checks the installed siblings for overlap, splits scripts from references from assets, writes a description that actually triggers, then validates it with check_skill.py. Written from scratch, so it carries no text from Qoder&#x27;s built-in skill-creator, which ships without a licence permitting redistribution.</span></a></li>
+      <li><a href="/prompts-to-skill/"><strong>Prompts To Skill</strong><span>Turns a list of your own prompts into a finished, tested skill, one skill per prompt: an intent interview, an overlap check against what is already installed, a draft written with draft-skill, trigger test cases that include near-misses, and a tune-skill gate at the end. It needs draft-skill and tune-skill and stops with a clear message if either is missing.</span></a></li>
+      <li><a href="/tune-skill/"><strong>Tune Skill</strong><span>Audits and fine-tunes a skill that already exists: the description that never fires, overlap with installed siblings, stale names and counts, handoff contracts that do not hand off. Ships check_skill.py, a deterministic validator over frontmatter, folder and heading agreement, description length and reference paths that do not exist. Not for creating one from scratch; that is draft-skill.</span></a></li>
+    </ul>
+    <div class="source">
+      <p>Read it before you install it: the skill lives at <code>skills/skill-eval-suite</code> in <a href="https://github.com/arm-pz/skill-eval-suite" target="_blank" rel="noopener">arm-pz/skill-eval-suite</a>.</p>
+      <a class="btn" href="https://github.com/arm-pz/skill-eval-suite" target="_blank" rel="noopener">Open the repo</a>
+    </div>
+  </div>
+</section>
+
+<footer class="roast">
+  <div class="wrap">
+    <div class="meta">
+      <span>Skill Eval Suite is an open agent skill on <a href="/">Skillsmith by Caffeinity</a>, from <a href="https://github.com/arm-pz/skill-eval-suite" target="_blank" rel="noopener">arm-pz/skill-eval-suite</a>.</span>
+      <a href="/work/">Custom skills for your team</a>
+      <a href="https://github.com/arm-pz" target="_blank" rel="noopener">github.com/arm-pz</a>
+    </div>
+    <p class="kural"><span lang="ta">யாம் பெற்ற இன்பம் பெறுக இவ்வையகம்</span><span>“May this world attain the same bliss that I have attained.”</span></p>
+  </div>
+</footer>
+
+<script src="/assets/site.js" defer></script>
+</body>
+</html>
