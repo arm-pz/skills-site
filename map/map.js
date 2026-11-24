@@ -72,7 +72,7 @@
       }
     }
     var none=el("div");none.appendChild(el("b",null,"Nothing fits?"));
-    var np=el("p",null,"We build the missing skill for your team at a fixed price. ");var wl=el("a",null,"See custom work");wl.href="/work/";np.appendChild(wl);
+    var np=el("p",null,"Caffeinity can build the missing skill for your team. ");var wl=el("a",null,"See custom work");wl.href="/work/";np.appendChild(wl);
     none.appendChild(np);after.appendChild(none);
     result.appendChild(after);
     result.hidden=false;T.reveal(result);
