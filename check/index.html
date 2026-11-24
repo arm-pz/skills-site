@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Free SKILL.md Validator | Skillsmith by Caffeinity</title>
-<meta name="description" content="Paste a SKILL.md or a GitHub link and see what would stop an agent from loading or triggering it. Free, runs in your browser, no sign-up. Fixes from $19.">
+<meta name="description" content="Paste a SKILL.md or a GitHub link and see what would stop an agent from loading or triggering it. Free, runs in your browser, no sign-up.">
 <link rel="canonical" href="https://skillsmith.tech/check/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Skillsmith by Caffeinity">
@@ -51,9 +51,7 @@
 .upsell{margin-top:28px;padding:22px 24px;border-radius:var(--r-lg);background:var(--roast);color:var(--roast-ink);display:flex;flex-wrap:wrap;gap:16px 28px;align-items:center;justify-content:space-between}
 .upsell p{max-width:52ch;font-size:16px}
 .upsell b{display:block;font-family:var(--serif);font-weight:400;font-size:24px;line-height:1.15;margin-bottom:6px}
-.upsell-steps{display:block;margin-top:8px;font-size:15px;opacity:.85}
 .upsell-actions{display:flex;flex-wrap:wrap;gap:10px}
-.plan .pay-next{font-size:14px;color:var(--muted);margin-top:10px}
 .numbers{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:clamp(28px,4vw,48px)}
 .numbers div{background:var(--surface);padding:22px}
 .numbers b{display:block;font-family:var(--serif);font-weight:400;font-size:clamp(36px,4vw,56px);line-height:1;letter-spacing:-.02em}
@@ -84,7 +82,7 @@
     </div>
     <div class="nav-cta">
       <a class="gh" href="https://github.com/arm-pz" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn btn-accent btn-sm" href="#tuneup">Get it fixed</a>
+      <a class="btn btn-accent btn-sm" href="#tuneup">Fix it</a>
     </div>
   </div>
 </nav>
@@ -167,57 +165,31 @@
 
 <section id="tuneup" aria-labelledby="tuneup-title">
   <div class="wrap">
-    <h2 id="tuneup-title">Fix it yourself, or hand it to us.</h2>
-    <p class="sub">The checker finds what a script can find. The harder problems need a reader: a description that promises what the body does not do, two skills that answer the same request, a handoff with no format. That is what a tune-up covers.</p>
+    <h2 id="tuneup-title">Fix it with the open skill.</h2>
+    <p class="sub">The checker finds what a script can find. The harder problems need a reader: a description that promises what the body does not do, two skills that answer the same request, a handoff with no format. tune-skill walks your own agent through all of it.</p>
 
     <div class="plans">
-      <article class="plan">
+      <article class="plan roast">
         <span class="tag">Do it yourself</span>
         <h3>tune-skill</h3>
-        <p class="price">$0</p>
-        <p class="for">The open skill we use for every tune-up. Your own agent runs it.</p>
+        <p class="price">Free <small>open source, MIT</small></p>
+        <p class="for">The open skill behind this checker. Your own agent runs it.</p>
         <ul>
           <li>The full audit checklist, not only the scripted checks</li>
+          <li>Near-miss test requests for each boundary it changes</li>
           <li>Works in Claude Code, Cursor, Codex and any agent that reads a SKILL.md</li>
           <li>You spend your own tokens and review the edits yourself</li>
         </ul>
-        <a class="btn btn-quiet" href="/tune-skill/">Install tune-skill</a>
-      </article>
-
-      <article class="plan roast">
-        <span class="tag">One skill</span>
-        <h3>Tune-up</h3>
-        <p class="price">$19 <small>per skill. Launch price, usually $29</small></p>
-        <p class="for">We audit one skill by hand and send it back fixed.</p>
-        <ul>
-          <li>Your SKILL.md returned as a ready-to-commit replacement file</li>
-          <li>Every finding with the quoted line, its severity and the smallest fix</li>
-          <li>Near-miss test requests for each boundary we changed</li>
-          <li>Small edits in your voice, not a rewrite</li>
-          <li>Back within two working days once we have your payment and skill</li>
-          <li>Full refund if we find nothing worth changing</li>
-        </ul>
-        <a class="btn btn-accent" href="https://www.paypal.com/ncp/payment/9VAUGVPVUTJHQ">Pay $19 with PayPal</a>
-        <p class="pay-next">Then <!--email_off--><a href="mailto:hello@skillsmith.tech?subject=Paid%20skill%20tune-up&amp;body=PayPal%20transaction%20ID%3A%20%0A%0ASkill%20repo%20or%20SKILL.md%20links%20(up%20to%20five%20for%20the%20family%20tune-up)%3A%20%0A%0AAnything%20we%20should%20know%3A%20%0A">email us your skill link and PayPal transaction ID</a><!--/email_off-->. Public skills only.</p>
+        <a class="btn btn-accent" href="/tune-skill/">Install tune-skill</a>
       </article>
 
       <article class="plan">
-        <span class="tag">A set that works together</span>
-        <h3>Family tune-up</h3>
-        <p class="price">$99 <small>up to 5 skills</small></p>
-        <p class="for">For skills that share a repo or hand work to each other.</p>
-        <ul>
-          <li>Everything in the tune-up, for each skill</li>
-          <li>Overlap check: each request gets exactly one owner</li>
-          <li>Handoffs between the skills given one shared format</li>
-          <li>A saved baseline so a later edit cannot quietly break a sibling</li>
-          <li>Back within three working days once we have your payment and skills</li>
-        </ul>
-        <a class="btn btn-quiet" href="https://www.paypal.com/ncp/payment/2KSQGF587ZHDE">Pay $99 with PayPal</a>
-        <p class="pay-next">Then <!--email_off--><a href="mailto:hello@skillsmith.tech?subject=Paid%20skill%20tune-up&amp;body=PayPal%20transaction%20ID%3A%20%0A%0ASkill%20repo%20or%20SKILL.md%20links%20(up%20to%20five%20for%20the%20family%20tune-up)%3A%20%0A%0AAnything%20we%20should%20know%3A%20%0A">email us up to five skill links and your PayPal transaction ID</a><!--/email_off-->. Public skills only.</p>
+        <span class="tag">Custom work</span>
+        <h3>Want a person to do it?</h3>
+        <p class="for">Skillsmith by Caffeinity is open source and sells nothing. Hand tune-ups and custom skills for teams are done by Caffeinity, on its own site.</p>
+        <a class="btn btn-quiet" href="https://caffeinity.com/">Ask Caffeinity</a>
       </article>
     </div>
-    <p class="small" style="margin-top:20px">After payment, <!--email_off--><a href="mailto:hello@skillsmith.tech?subject=Paid%20skill%20tune-up&amp;body=PayPal%20transaction%20ID%3A%20%0A%0ASkill%20repo%20or%20SKILL.md%20links%20(up%20to%20five%20for%20the%20family%20tune-up)%3A%20%0A%0AAnything%20we%20should%20know%3A%20%0A">email your skill links and PayPal transaction ID</a><!--/email_off-->. The clock starts when both reach us. Prices are in USD, before local taxes. For private skills or more than five skills, see <a href="/work/">custom work</a>; if you paid for one of those by mistake, we refund you in full.</p>
   </div>
 </section>
 
@@ -238,18 +210,6 @@
         <p>No. Fix every FAIL. A WARN is a question to answer: a skill with no neighbours does not need a "Not for" line, and a heading that differs from the name on purpose is fine.</p>
       </details>
       <details>
-        <summary>What exactly do I get for $19?</summary>
-        <p>One email with three things: your SKILL.md as a replacement file, a list of findings that each quote the line and give the smallest fix, and a short set of test requests that should and should not trigger the skill. We tell you which checks we ran and which we could not.</p>
-      </details>
-      <details>
-        <summary>What is the refund policy?</summary>
-        <p>If the audit finds nothing worth changing, we refund the full amount without being asked. If you are unhappy with what you get back, reply within 14 days and we refund you. Refunds go back to the original payment method.</p>
-      </details>
-      <details>
-        <summary>Can you tune a private skill?</summary>
-        <p>Yes. Paste the file into your order email with anything sensitive removed. We read it to do the work and do not publish or reuse it. We never need access to your repo, your systems or your API keys.</p>
-      </details>
-      <details>
         <summary>What about GitHub's rate limit?</summary>
         <p>GitHub allows 60 anonymous lookups an hour from one network address, which a shared office or mobile network can use up. When that happens the page finds the skill through jsDelivr's public mirror instead and the check carries on. One check is skipped on that route, whether the files the body points to exist, and the result says so.</p>
       </details>
@@ -260,9 +220,9 @@
 <section class="contact ember" id="contact" aria-labelledby="contact-title">
   <div class="wrap">
     <div>
-      <h2 id="contact-title">Send us the skill that misfires.</h2>
-      <p>Tell us what it should do and what it does instead. A one-skill tune-up is $19 at the launch price (usually $29), with a full refund if we find nothing to change.</p>
-      <p><!--email_off--><a class="mail" href="mailto:hello@skillsmith.tech?subject=Skill%20tune-up%20(%2419%20launch%20price)">hello@skillsmith.tech</a><!--/email_off--></p>
+      <h2 id="contact-title">Found a check that is wrong?</h2>
+      <p>Tell us which skill you checked and what the result got wrong. The checker is open source, and a false alarm is a bug we want to fix.</p>
+      <p><!--email_off--><a class="mail" href="mailto:hello@skillsmith.tech?subject=Skill%20Check%20result">hello@skillsmith.tech</a><!--/email_off--></p>
     </div>
   </div>
 </section>

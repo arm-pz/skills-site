@@ -256,12 +256,6 @@ button.link{background:none;border:0;font:inherit;font-size:14px;color:var(--mut
 .demo-gate b{font:400 26px/1 var(--serif);letter-spacing:-.02em}
 .demo-route{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
 .demo-route b{color:var(--accent);font-weight:600}
-.offerbar{font-size:15px}
-.offerbar .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px 16px;padding-top:11px;padding-bottom:11px;text-align:center}
-.offerbar b{font-weight:600}
-.offerbar a{color:var(--accent);font-weight:600;white-space:nowrap}
-.offerbar a::after{content:" \2192"}
-.offerbar .pill{font:600 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;background:var(--accent);color:var(--accent-ink);padding:5px 8px;border-radius:999px}
 .flowline{display:flex;flex-direction:column;gap:8px}
 .flow-k{font:500 12px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .flow-steps{display:flex;flex-wrap:wrap;gap:6px}
@@ -275,7 +269,7 @@ button.link{background:none;border:0;font:inherit;font-size:14px;color:var(--mut
 .steps li{counter-increment:step;border-top:2px solid var(--ink);padding-top:18px}
 .steps li::before{content:counter(step,decimal-leading-zero);display:block;font:500 13px/1 var(--mono);color:var(--accent);margin-bottom:clamp(28px,4vw,56px)}
 .steps p{color:var(--muted);margin-top:10px;font-size:16px;max-width:38ch}
-#pricing h2{max-width:24ch}
+#free h2{max-width:24ch}
 .plan li a{font-weight:600}
 .hub-fine{margin-top:20px;max-width:54ch}
 .plan li,.plan .for,.tool .q,.rules p,.steps p,.hub-fine,.faq p{text-wrap:pretty}
