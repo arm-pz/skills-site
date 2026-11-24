@@ -1,0 +1,14 @@
+{
+  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
+  "name": "eval-harness",
+  "version": "0.1.0",
+  "description": "Builds the golden set and scorecard for a recurring agent loop or skill: frozen fixtures, checkable cases, a one-command scorer that fails on regression, and a trace reader that names why a run failed.",
+  "author": {
+    "name": "arm-pz",
+    "url": "https://github.com/arm-pz"
+  },
+  "homepage": "https://skillsmith.tech/eval-harness/",
+  "repository": "https://github.com/arm-pz/eval-harness",
+  "keywords": ["evals", "golden-set", "agent-loop", "regression-testing", "agent-skills"],
+  "skills": "./skills/"
+}
