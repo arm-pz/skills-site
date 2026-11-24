@@ -37,8 +37,12 @@ def mask(text):
     return text
 
 
-def clip(text, n):
-    text = mask(text if isinstance(text, str) else json.dumps(text, ensure_ascii=False))
+def clip(text, n, raw=False):
+    """Mask and shorten for printing. raw=True (used by score.py) keeps the full, unmasked text."""
+    text = text if isinstance(text, str) else json.dumps(text, ensure_ascii=False)
+    if raw:
+        return text
+    text = mask(text)
     return text if len(text) <= n else text[:n] + f"… [+{len(text) - n} chars]"
 
 
@@ -70,13 +74,25 @@ def pick_file(path):
     return p if p.is_file() else None
 
 
-def parse_jsonl(lines, max_text):
+def sum_usage(usages):
+    """Total tokens across API messages: input, output, cache reads and cache writes."""
+    if not usages:
+        return None
+    keys = {"input": "input_tokens", "output": "output_tokens",
+            "cache_read": "cache_read_input_tokens", "cache_write": "cache_creation_input_tokens"}
+    t = {k: sum(int(u.get(v) or 0) for u in usages) for k, v in keys.items()}
+    t["total"] = sum(t.values())
+    return t
+
+
+def parse_jsonl(lines, max_text=600, raw=False):
     calls, by_id = [], {}
     first_prompt, final_text, end, meta = None, None, None, {}
+    usage_by_msg, result_usage = {}, None
     started = ended = None
-    for raw in lines:
+    for line in lines:
         try:
-            ev = json.loads(raw)
+            ev = json.loads(line)
         except json.JSONDecodeError:
             continue
         if not isinstance(ev, dict):
@@ -94,6 +110,8 @@ def parse_jsonl(lines, max_text):
             for k in ("num_turns", "total_cost_usd", "duration_ms"):
                 if k in ev:
                     meta[k] = ev[k]
+            if isinstance(ev.get("usage"), dict):
+                result_usage = ev["usage"]
             continue
         if etype == "system" and ev.get("subtype") == "init":
             meta["model"] = ev.get("model")
@@ -111,21 +129,25 @@ def parse_jsonl(lines, max_text):
                 err = bool(r.get("is_error"))
                 if call is not None:
                     call["error"] = err
-                    call["result"] = clip(text, 200)
+                    call["result"] = clip(text, 200, raw)
                     call["denied"] = bool(err and DENIAL_RE.search(text))
             if not results and first_prompt is None:
                 t = content_text(content)
                 if t.strip():
-                    first_prompt = clip(t, max_text)
+                    first_prompt = clip(t, max_text, raw)
         elif etype == "assistant" or msg.get("role") == "assistant":
             meta.setdefault("model", msg.get("model"))
+            if isinstance(msg.get("usage"), dict):
+                # One API message can be logged as several events (one per content block), each
+                # carrying the same usage: count it once per message id.
+                usage_by_msg[msg.get("id") or f"_{len(usage_by_msg)}"] = msg["usage"]
             items = content if isinstance(content, list) else [{"type": "text", "text": content or ""}]
             for c in items:
                 if not isinstance(c, dict):
                     continue
                 if c.get("type") == "tool_use":
                     call = {"n": len(calls) + 1, "name": c.get("name"),
-                            "input": clip(c.get("input"), 160), "error": False, "denied": False}
+                            "input": clip(c.get("input"), 160, raw), "error": False, "denied": False}
                     calls.append(call)
                     by_id[c.get("id")] = call
                 elif c.get("type") == "text" and c.get("text", "").strip():
@@ -142,6 +164,7 @@ def parse_jsonl(lines, max_text):
         flags.append("permission_denials")
     if end not in ("success", "unknown"):
         flags.append(f"ended_{end}")
+    tokens = sum_usage([result_usage] if result_usage else list(usage_by_msg.values()))
     tool_counts = {}
     for c in calls:
         tool_counts[c["name"]] = tool_counts.get(c["name"], 0) + 1
@@ -149,7 +172,8 @@ def parse_jsonl(lines, max_text):
             "started": started, "ended": ended, "end": end, "flags": flags,
             "prompt": first_prompt, "tool_counts": tool_counts,
             "tool_errors": len(errors), "permission_denials": sum(c["denied"] for c in calls),
-            "calls": calls, "final_text": clip(final_text, max_text) if final_text else None}
+            "tokens": tokens,
+            "calls": calls, "final_text": clip(final_text, max_text, raw) if final_text else None}
 
 
 def parse_plain(lines, max_text):
@@ -159,6 +183,20 @@ def parse_plain(lines, max_text):
     return {"format": "plain", "lines": len(lines), "error_lines": hits[:50],
             "error_line_count": len(hits), "flags": ["error_lines"] if hits else [],
             "tail": clip(tail, max_text)}
+
+
+def load(path, raw=False):
+    """Parse one trace file. Returns the same dict main() prints."""
+    f = Path(path)
+    lines = f.read_text(encoding="utf-8", errors="replace").splitlines()
+    parsed = sum(1 for l in lines[:50] if l.strip().startswith("{"))
+    nonblank = sum(1 for l in lines[:50] if l.strip())
+    if nonblank and parsed / nonblank > 0.8:
+        out = parse_jsonl(lines, raw=raw)
+    else:
+        out = parse_plain(lines, 600)
+    out["file"] = str(f)
+    return out
 
 
 def main(argv=None):
@@ -175,6 +213,8 @@ def main(argv=None):
     nonblank = sum(1 for l in lines[:50] if l.strip())
     out = parse_jsonl(lines, a.max_text) if nonblank and parsed / nonblank > 0.8 else parse_plain(lines, a.max_text)
     out["file"] = str(f)
+    # Skill invocations, so a reader sees which skills the run loaded without scanning every call.
+    out["skills"] = [c["input"] for c in out.get("calls", []) if c["name"] == "Skill"]
     print(json.dumps(out, indent=2, ensure_ascii=False))
     return 0
 

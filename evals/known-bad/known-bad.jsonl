@@ -1,0 +1,1 @@
+{"id": "kb-001-health-repeat", "tier": "real", "source": "skills-site#24, comments of 2026-11-19 and 2026-11-20", "why": "the nightly health loop re-posted the same regression and the same NEW SKILL list unchanged for days; a report that only repeats yesterday's items is a dedup failure", "checks": [{"type": "not_in_previous", "value": "^(REGRESSION|NEW SKILL)"}]}
