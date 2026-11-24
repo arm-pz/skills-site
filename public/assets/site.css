@@ -668,3 +668,9 @@ body:has(> .sk-hero) .uses h3{border-bottom-color:var(--ink)}
   .flag{position:static}
   html{scroll-behavior:auto}
 }
+
+/* Star prompt under a free tool's result (assets/star.js) */
+.star-cta{margin-top:20px;padding:18px 22px;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--surface);display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between}
+.star-cta p{max-width:60ch;font-size:15px;color:var(--muted)}
+.star-cta b{display:block;color:var(--ink);font-size:16px;margin-bottom:4px}
+.star-cta .star-btn{white-space:nowrap}

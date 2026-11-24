@@ -3,107 +3,167 @@
   <url><loc>https://skillsmith.tech/</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://skillsmith.tech/work/</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://skillsmith.tech/story/</loc><lastmod>2026-11-24</lastmod></url>
-  <url><loc>https://skillsmith.tech/notes/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/notes/web-preflight/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/notes/skill-test-results/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://skillsmith.tech/notes/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/notes/web-preflight/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/notes/skill-test-results/</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://skillsmith.tech/skills/</loc><lastmod>2026-11-24</lastmod></url>
-  <url><loc>https://skillsmith.tech/mods/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/workflows/</loc><lastmod>2026-11-21</lastmod></url>
+  <url><loc>https://skillsmith.tech/mods/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/workflows/</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://skillsmith.tech/seo/</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://skillsmith.tech/check/</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://skillsmith.tech/prose/</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://skillsmith.tech/checks/</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://skillsmith.tech/map/</loc><lastmod>2026-11-24</lastmod></url>
-  <url><loc>https://skillsmith.tech/seo-check/</loc><lastmod>2026-11-21</lastmod></url>
-  <url><loc>https://skillsmith.tech/resume/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/list/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/workflows/build-a-skill/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/workflows/get-found/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/workflows/launch-safely/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/workflows/grow-search-traffic/</loc><lastmod>2026-11-21</lastmod></url>
-  <url><loc>https://skillsmith.tech/workflows/land-a-job/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/workflows/make-a-decision/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/workflows/learn-a-skill/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/workflows/run-cold-outbound/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/workflows/launch-a-product/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/workflows/maintain-skills/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/workflows/audit-a-skill-estate/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/workflows/set-up-a-coding-agent/</loc><lastmod>2026-11-21</lastmod></url>
+  <url><loc>https://skillsmith.tech/seo-check/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/resume/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/list/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/workflows/build-a-skill/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/workflows/get-found/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/workflows/launch-safely/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/workflows/grow-search-traffic/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/workflows/land-a-job/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/workflows/make-a-decision/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/workflows/learn-a-skill/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/workflows/run-cold-outbound/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/workflows/launch-a-product/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/workflows/maintain-skills/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/workflows/audit-a-skill-estate/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/workflows/set-up-a-coding-agent/</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://skillsmith.tech/caffeinity-routing/</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://skillsmith.tech/draft-skill/</loc><lastmod>2026-11-13</lastmod></url>
-  <url><loc>https://skillsmith.tech/prompts-to-skill/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://skillsmith.tech/prompts-to-skill/</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://skillsmith.tech/tune-skill/</loc><lastmod>2026-11-24</lastmod></url>
-  <url><loc>https://skillsmith.tech/prompts-to-skill-release/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/skill-to-mod/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/skill-launch/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/tune-and-polish/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://skillsmith.tech/prompts-to-skill-release/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/skill-to-mod/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/skill-launch/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/tune-and-polish/</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://skillsmith.tech/tune-skill-mod/</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://skillsmith.tech/skill-release-mod/</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://skillsmith.tech/tune-and-ship/</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://skillsmith.tech/findable/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/publish-pipeline/</loc><lastmod>2026-11-22</lastmod></url>
-  <url><loc>https://skillsmith.tech/upstream-check/</loc><lastmod>2026-11-22</lastmod></url>
-  <url><loc>https://skillsmith.tech/findable-polish/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/upstream-polish/</loc><lastmod>2026-11-22</lastmod></url>
+  <url><loc>https://skillsmith.tech/publish-pipeline/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/upstream-check/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/findable-polish/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/upstream-polish/</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://skillsmith.tech/skill-estate/</loc><lastmod>2026-11-24</lastmod></url>
-  <url><loc>https://skillsmith.tech/site-prompt/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/production-code/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://skillsmith.tech/site-prompt/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/production-code/</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://skillsmith.tech/web-preflight/</loc><lastmod>2026-11-24</lastmod></url>
-  <url><loc>https://skillsmith.tech/pre-ship-security-red-team/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/pre-ship-performance-audit/</loc><lastmod>2026-11-22</lastmod></url>
-  <url><loc>https://skillsmith.tech/release-gate-chair/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/release-gate-ledger/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/release-gate-validator/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/ship-sentinel/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://skillsmith.tech/pre-ship-security-red-team/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/pre-ship-performance-audit/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/release-gate-chair/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/release-gate-ledger/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/release-gate-validator/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/ship-sentinel/</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://skillsmith.tech/paper-trail/</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://skillsmith.tech/release-gate-mod/</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://skillsmith.tech/web-preflight-mod/</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://skillsmith.tech/pre-ship-security-red-team-mod/</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://skillsmith.tech/pre-ship-performance-audit-mod/</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://skillsmith.tech/seo-crawl/</loc><lastmod>2026-11-24</lastmod></url>
-  <url><loc>https://skillsmith.tech/keyword-guard/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/keyword-resolver/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/seo-polish/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/wordsmith/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/platform-content/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/sales-copy/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/cold-email-list-gate/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/cold-email-ops/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/recruiter-lens/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/applicant-kit/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/application-pilot/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/career-track/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/research-brief/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/data-readout/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/crash-test/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://skillsmith.tech/keyword-guard/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/keyword-resolver/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/seo-polish/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/wordsmith/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/platform-content/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/sales-copy/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/cold-email-list-gate/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/cold-email-ops/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/recruiter-lens/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/applicant-kit/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/application-pilot/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/career-track/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/research-brief/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/data-readout/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/crash-test/</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://skillsmith.tech/do-better/</loc><lastmod>2026-11-13</lastmod></url>
-  <url><loc>https://skillsmith.tech/strategy-memo/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/solo-income-blueprint/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/topic-primer/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/study-system/</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://skillsmith.tech/strategy-memo/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/solo-income-blueprint/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/topic-primer/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/study-system/</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://skillsmith.tech/course-builder/</loc><lastmod>2026-11-24</lastmod></url>
-  <url><loc>https://skillsmith.tech/choose-effort/</loc><lastmod>2026-11-21</lastmod></url>
-  <url><loc>https://skillsmith.tech/diagnose-usage/</loc><lastmod>2026-11-21</lastmod></url>
-  <url><loc>https://skillsmith.tech/seo-sweep/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/session-retrace/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/get-indexed/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/consistent-code-review/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/ai-team-blueprint/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/portable-harness/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/harness-audit/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/setup-claude-advisor/</loc><lastmod>2026-11-21</lastmod></url>
-  <url><loc>https://skillsmith.tech/insights-to-prompts/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/prompts-to-workflow/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/ship-second-brain/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/straight-prose/</loc><lastmod>2026-11-20</lastmod></url>
-  <url><loc>https://skillsmith.tech/find-partners/</loc><lastmod>2026-11-22</lastmod></url>
-  <url><loc>https://skillsmith.tech/get-listed/</loc><lastmod>2026-11-22</lastmod></url>
-  <url><loc>https://skillsmith.tech/replace-dead-tools/</loc><lastmod>2026-11-22</lastmod></url>
-  <url><loc>https://skillsmith.tech/opus-playbook/</loc><lastmod>2026-11-22</lastmod></url>
-  <url><loc>https://skillsmith.tech/diagnose-search-visibility/</loc><lastmod>2026-11-22</lastmod></url>
-  <url><loc>https://skillsmith.tech/verify-search-visibility/</loc><lastmod>2026-11-22</lastmod></url>
-  <url><loc>https://skillsmith.tech/check-skill-visibility/</loc><lastmod>2026-11-22</lastmod></url>
-  <url><loc>https://skillsmith.tech/fix-skill-visibility/</loc><lastmod>2026-11-22</lastmod></url>
-  <url><loc>https://skillsmith.tech/plugin-directory-gate/</loc><lastmod>2026-11-23</lastmod></url>
+  <url><loc>https://skillsmith.tech/choose-effort/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/diagnose-usage/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/seo-sweep/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/session-retrace/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/get-indexed/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/consistent-code-review/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/ai-team-blueprint/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/portable-harness/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/harness-audit/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/setup-claude-advisor/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/insights-to-prompts/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/prompts-to-workflow/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/ship-second-brain/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/straight-prose/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/find-partners/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/get-listed/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/replace-dead-tools/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/opus-playbook/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/diagnose-search-visibility/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/verify-search-visibility/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/check-skill-visibility/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/fix-skill-visibility/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/plugin-directory-gate/</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://skillsmith.tech/skill-eval-suite/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/ai-team-blueprint/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/applicant-kit/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/application-pilot/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/caffeinity-routing/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/career-track/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/choose-effort/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/cold-email-list-gate/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/cold-email-ops/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/course-builder/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/crash-test/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/data-readout/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/diagnose-usage/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/findable-polish/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/get-indexed/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/harness-audit/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/insights-to-prompts/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/keyword-guard/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/keyword-resolver/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/paper-trail/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/platform-content/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/portable-harness/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/pre-ship-performance-audit/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/pre-ship-performance-audit-mod/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/pre-ship-security-red-team/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/pre-ship-security-red-team-mod/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/production-code/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/prompts-to-skill/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/prompts-to-skill-release/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/prompts-to-workflow/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/publish-pipeline/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/recruiter-lens/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/release-gate-chair/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/release-gate-ledger/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/release-gate-mod/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/release-gate-validator/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/research-brief/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/sales-copy/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/seo-polish/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/seo-sweep/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/session-retrace/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/setup-claude-advisor/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/ship-second-brain/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/ship-sentinel/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/site-prompt/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/skill-estate/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/skill-launch/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/skill-release-mod/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/skill-to-mod/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/solo-income-blueprint/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/straight-prose/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/strategy-memo/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/study-system/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/topic-primer/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/tune-and-polish/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/tune-and-ship/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/tune-skill-mod/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/upstream-polish/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/web-preflight-mod/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://skillsmith.tech/runs/wordsmith/</loc><lastmod>2026-11-24</lastmod></url>
 </urlset>
