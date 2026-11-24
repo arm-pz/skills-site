@@ -85,7 +85,8 @@ def evaluate(state, review):
       files_listed / files_expected: how many changed files GitHub listed vs. says the PR has
       mergeable: True, False or None (GitHub still computing)
       checks: [{"name", "status", "conclusion"}]
-    Returns {"pass": bool, "reasons": [...], "draft": bool}.
+    Returns {"pass": bool, "reasons": [...], "draft": bool, "inconclusive": [ids]}.
+    Inconclusive IDs never affect "pass"; they are passed through for the run summary.
     """
     reasons = list(check_review_shape(review))
     if not reasons:
