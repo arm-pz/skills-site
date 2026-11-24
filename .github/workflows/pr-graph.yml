@@ -1,0 +1,46 @@
+name: PR graph merge gate
+on:
+  workflow_call:
+    inputs:
+      pr:
+        required: true
+        type: number
+      review:
+        description: JSON report from the trusted review node
+        required: true
+        type: string
+      merge:
+        default: false
+        type: boolean
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      checks: read
+      statuses: read
+    steps:
+      - name: Require a trusted default-branch caller
+        env:
+          EVENT: ${{ github.event_name }}
+          REF: ${{ github.ref }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          [[ "$REF" == "refs/heads/$DEFAULT_BRANCH" ]]
+          [[ "$EVENT" == workflow_dispatch || "$EVENT" == schedule ]]
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Evaluate caller PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REVIEW: ${{ inputs.review }}
+          PR_NUMBER: ${{ inputs.pr }}
+          MERGE: ${{ inputs.merge }}
+        run: |
+          printf '%s' "$REVIEW" > "$RUNNER_TEMP/review.json"
+          args=("$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --review "$RUNNER_TEMP/review.json")
+          if [[ "$MERGE" == true ]]; then args+=(--merge); fi
+          python3 tools/pr-graph/merge_gate.py "${args[@]}"

@@ -4,9 +4,10 @@
   "title": "PR graph review report",
   "description": "What the reviewer node hands to the fixer and the merge gate. One report per PR per round, for exactly one head SHA. Written next to consistent-code-review's markdown report.",
   "type": "object",
-  "required": ["pr", "head_sha", "base_ref", "base_sha", "round", "verdict", "findings"],
+  "required": ["repository", "pr", "head_sha", "base_ref", "base_sha", "round", "verdict", "findings"],
   "additionalProperties": false,
   "properties": {
+    "repository": {"type": "string", "pattern": "^[A-Za-z0-9-]+/[A-Za-z0-9_.-]+$"},
     "pr": {"type": "integer", "minimum": 1},
     "head_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
     "base_ref": {"type": "string", "minLength": 1},

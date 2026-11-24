@@ -4,9 +4,10 @@
   "title": "PR graph fix report",
   "description": "What the fixer node (address-findings) hands back to the conductor: one entry per CRITICAL or HIGH finding it was given.",
   "type": "object",
-  "required": ["pr", "review_head_sha", "new_head_sha", "round", "results"],
+  "required": ["repository", "pr", "review_head_sha", "new_head_sha", "round", "results"],
   "additionalProperties": false,
   "properties": {
+    "repository": {"type": "string", "pattern": "^[A-Za-z0-9-]+/[A-Za-z0-9_.-]+$"},
     "pr": {"type": "integer", "minimum": 1},
     "review_head_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
     "new_head_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},

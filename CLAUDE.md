@@ -1,5 +1,7 @@
 ## pr-merge-gate
 
+For adoption in other repositories, see [the reusable PR graph](tools/pr-graph/README.md).
+
 When asked to “review and merge the open PRs”, run the **pr-graph** skill (`.claude/skills/pr-graph/SKILL.md`). It reviews each open PR with `consistent-code-review` in a fresh `pr-reviewer` subagent, fixes CRITICAL and HIGH findings with `address-findings` in a `pr-fixer` subagent, re-reviews them, and loops at most 3 rounds.
 
 Only `tools/pr-graph/merge_gate.py <pr> --review <review-report.json> --merge` may merge. Never merge by calling the API or `gh pr merge` directly. The gate squash-merges, pinned to the reviewed head SHA, only when all of these hold:

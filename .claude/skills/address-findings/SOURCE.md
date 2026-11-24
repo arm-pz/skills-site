@@ -1,5 +1,3 @@
-# Vendored copy
+# Source
 
-The source of truth for this skill is [arm-pz/address-findings](https://github.com/arm-pz/address-findings).
-This copy is here so the pr-graph's `pr-fixer` node can load it in any session on this repo.
-Make changes in arm-pz/address-findings first, then copy its SKILL.md here unchanged.
+This repo-local variant of [arm-pz/address-findings](https://github.com/arm-pz/address-findings) adds the PR graph’s repository-bound handoff, target-specific baseline and label rules. Review these adaptations when syncing upstream.

@@ -3,6 +3,7 @@
 The known-bad set is the point: every case in it must FAIL the gate, or the gate is not
 trusted to merge anything. Add a case here whenever a bad PR gets past a review.
 """
+import base64
 import copy
 import sys
 import unittest
@@ -18,6 +19,7 @@ OLD = "b" * 40
 
 def good_state():
     return {
+        "repository": "demo/project",
         "number": 80,
         "base_ref": "main",
         "base_sha": OLD,
@@ -38,7 +40,7 @@ def good_state():
 
 def good_review():
     return {
-        "pr": 80, "head_sha": HEAD, "base_ref": "main", "base_sha": OLD,
+        "repository": "demo/project", "pr": 80, "head_sha": HEAD, "base_ref": "main", "base_sha": OLD,
         "round": 1, "verdict": "pass",
         "findings": [{"id": "M1", "severity": "MEDIUM", "file": "site/skills.json",
                       "line": 3, "finding": "Blurb wording"}],
@@ -102,6 +104,26 @@ KNOWN_BAD = {
 
 
 class MergeGateTest(unittest.TestCase):
+    def test_other_repository_report_fails_with_identical_shas(self):
+        review = with_(good_review(), repository="other/project")
+        self.assertFalse(merge_gate.evaluate(good_state(), review)["pass"])
+
+    def test_policy_uses_target_base_and_keeps_check_default(self):
+        root = {"tree": [{"path": ".github", "sha": "folder"}]}
+        directory = {"tree": [{"path": "pr-graph.json", "sha": "policy"}]}
+        blob = {"content": base64.b64encode(b'{"required_checks":["build"]}').decode()}
+        with patch.object(merge_gate, "gh", side_effect=[root, directory, blob]) as request:
+            self.assertEqual(merge_gate.required_checks("example/target", OLD), ["build"])
+            self.assertEqual(request.call_args_list[0].args, (f"repos/example/target/git/trees/{OLD}",))
+        with patch.object(merge_gate, "gh", return_value={"tree": []}):
+            self.assertEqual(merge_gate.required_checks("example/target", OLD), ["check"])
+
+    def test_project_specific_checks(self):
+        state = with_(good_state(), checks=[{"name": "build", "status": "completed", "conclusion": "success"}],
+                      statuses={"lint": "success"})
+        self.assertTrue(merge_gate.evaluate(state, good_review(), ["build", "lint"])["pass"])
+        self.assertFalse(merge_gate.evaluate(state, good_review(), ["build", "test"])["pass"])
+
     def test_clean_pr_passes(self):
         verdict = merge_gate.evaluate(good_state(), good_review())
         self.assertTrue(verdict["pass"], verdict["reasons"])
@@ -115,8 +137,8 @@ class MergeGateTest(unittest.TestCase):
             patch.object(merge_gate, "gh", return_value=pr),
             patch.object(merge_gate, "paged", side_effect=[[], [], statuses]) as paged,
         ):
-            state = merge_gate.fetch_state(80)
-        paged.assert_called_with(f"repos/{merge_gate.REPO}/commits/{HEAD}/statuses")
+            state = merge_gate.fetch_state(80, "demo/project")
+        paged.assert_called_with(f"repos/demo/project/commits/{HEAD}/statuses")
         self.assertEqual(state["statuses"], {"build": "success", "lint": "pending"})
         self.assertTrue(merge_gate.evaluate(with_(good_state(), statuses={"build": "success"}),
                                             good_review())["pass"])
