@@ -30,7 +30,7 @@ _spec = importlib.util.spec_from_file_location("traces", Path(__file__).resolve(
 traces = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(traces)
 
-OUTPUT_EXTS = (".txt", ".md", ".json", ".out", ".html")
+OUTPUT_EXTS = (".txt", ".md", ".json", ".out", ".html", ".diff", ".patch")
 
 
 def outputs(arm):

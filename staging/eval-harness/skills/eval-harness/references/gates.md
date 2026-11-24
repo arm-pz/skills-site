@@ -51,6 +51,8 @@ above 60k = fail even when correct"). `max_tokens` does the same per case. `--to
 `total` (default: input, output and cache), `output`, `input` or `input+output`. The scorecard prints the
 bill on every run: median, max, total, and which cases went over.
 
+Two finer gates: `skill_tokens` caps one skill's cost per invocation (its token window, so a skill's change can be judged by its own cost, not the whole session's), and `max_context` caps the largest single request, which catches a run that drags a huge tool result through every later turn.
+
 Set the budget from a clean baseline: around 3× its median is a reasonable first gate; tighten as the
 skill gets cheaper.
 
@@ -78,6 +80,8 @@ one from another model family catches.
   names the entries a check let through: that check is untrusted until fixed.
 - For a judge, put its rubric in the entry's checks and have it grade the outputs blind, mixed in with
   real ones, so it cannot tell which are the test.
+- Give every entry a **control**: a correct output the same check must pass. A check that fails everything also "catches" every known-bad; the controls expose it.
+- Seed it with real incidents first, then synthetic fixtures for rules no incident has tested yet. Pipeline gates (`triage_skips_open_pr`, `triage_trusted_source`, `diff_within_spec`) are written for exactly these.
 - Use the cheapest judge that still fails all known-bads.
 - Grow it from every failed log (step 10). About ten real entries make a strong set.
 

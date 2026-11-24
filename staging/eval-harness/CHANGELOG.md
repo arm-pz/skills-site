@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.0 — 2026-11-24
+
+- Pipeline gate checks for triage-and-PR loops, each reading a context file next to the suite: `triage_skips_open_pr` (duplicate PR work), `triage_trusted_source` (issues from non-owners without `pipeline-ok`), `diff_within_spec` (files outside the spec's Files list). `.diff` and `.patch` outputs are read.
+- Token windows in `traces.py`: `tokens_by_skill` (each API message's tokens go to the skill active when it was sent, Uber's cost-per-invocation method; windows add up to the total), `tokens_subagents`, `peak_context`. Repeated log events of one API message count once, at their final usage.
+- New checks `skill_tokens` (cost per invocation of one skill) and `max_context`.
+- Known-bad entries now pair with controls that must pass.
+- `tests/test_scripts.py`: 60 checks, all passing.
+
 ## 0.3.0 — 2026-11-24
 
 Eval-driven development rules on top of 0.2.0.

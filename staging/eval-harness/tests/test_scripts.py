@@ -205,6 +205,42 @@ with tempfile.TemporaryDirectory() as tmp:
     code, _, _ = run("score.py", t / "kbj.jsonl", kb, "--expect-fail")
     expect("known-bad: an ungraded judge is pending, exit 2", code == 2)
 
+    # Pipeline gates: duplicate PR work, untrusted issue source, diff outside the spec.
+    gd = t / "gates"; (gd / "ctx").mkdir(parents=True); gb = t / "gate-bad"; gb.mkdir(); gg = t / "gate-good"; gg.mkdir()
+    (gd / "ctx" / "prs.json").write_text(json.dumps([{"number": 24, "state": "open", "files": ["evals/triggers.json"], "covers": ["skill-a", "skill-b"]},
+                                                     {"number": 20, "state": "merged", "files": ["README.md"], "covers": []}]))
+    (gd / "ctx" / "issues.json").write_text(json.dumps([{"number": 31, "author": {"login": "owner"}, "labels": []},
+                                                        {"number": 32, "author": {"login": "stranger"}, "labels": [{"name": "bug"}]},
+                                                        {"number": 33, "author": {"login": "friend"}, "labels": [{"name": "pipeline-ok"}]}]))
+    (gd / "ctx" / "spec.md").write_text("# Spec\n\n## Files\n- `evals/triggers.json`\n- evals/routing/*.json\n\n## Notes\nnone\n")
+    jsonl(gd / "gates.jsonl", [
+        {"id": "dup", "tier": "golden", "intent": "must_not", "source": "x", "checks": [{"type": "triage_skips_open_pr", "open_prs": "ctx/prs.json"}]},
+        {"id": "src", "tier": "golden", "intent": "must_not", "source": "x", "checks": [{"type": "triage_trusted_source", "issues": "ctx/issues.json", "owners": ["owner"]}]},
+        {"id": "spec", "tier": "golden", "intent": "must_not", "source": "x", "checks": [{"type": "diff_within_spec", "spec": "ctx/spec.md"}]}])
+    (gb / "dup.json").write_text(json.dumps({"selected": [{"title": "cases for a and b", "covers": ["skill-b"], "files": []}]}))
+    (gg / "dup.json").write_text(json.dumps({"selected": [{"title": "readme", "files": ["README.md"]}], "dropped": [{"title": "cases for a and b"}]}))
+    (gb / "src.json").write_text(json.dumps({"selected": [{"issue": 31}, {"issue": 32}]}))
+    (gg / "src.json").write_text(json.dumps({"selected": [{"issue": 31}, {"issue": 33}]}))
+    diff = ("diff --git a/evals/triggers.json b/evals/triggers.json\n--- a/evals/triggers.json\n+++ b/evals/triggers.json\n@@ -1 +1 @@\n-x\n+y\n"
+            "diff --git a/evals/routing/r.json b/evals/routing/r.json\n--- a/evals/routing/r.json\n+++ b/evals/routing/r.json\n")
+    (gg / "spec.diff").write_text(diff)
+    (gb / "spec.diff").write_text(diff + "diff --git a/scripts/build.py b/scripts/build.py\n--- a/scripts/build.py\n+++ b/scripts/build.py\n")
+    code, out, err = run("score.py", gd / "gates.jsonl", gb, "--expect-fail")
+    v = json.loads(out)
+    ev = {r["id"]: " ".join(r["evidence"]) for r in v["rows"]}
+    expect("gates: all three bad outputs caught", code == 0 and v["caught"] == 3, v)
+    expect("gates: evidence names the open PR, the stranger and the off-spec file",
+           "open PR #24 on skill-b" in ev["dup"] and "#32 by stranger" in ev["src"] and "scripts/build.py" in ev["spec"], ev)
+    code, out, _ = run("score.py", gd / "gates.jsonl", gg, "--repeat", gg, "--repeat", gg, "--out", t / "gg")
+    expect("gates: the good outputs pass (merged PRs and labelled issues are fine)", code == 0
+           and all(r["state"] == "pass" for r in json.loads((t / "gg.json").read_text())["cases"]), out)
+    code, out, _ = run("score.py", gd / "gates.jsonl", gg, "--expect-fail")
+    expect("gates: a check that passes good outputs cannot be trusted on them", code == 1 and len(json.loads(out)["missed"]) == 3)
+    (gb / "dup.json").write_text("not json")
+    run("score.py", gd / "gates.jsonl", gb, "--out", t / "gbad")
+    det = next(r for r in json.loads((t / "gbad.json").read_text())["cases"] if r["id"] == "dup")["failing"]
+    expect("gates: unreadable output fails with a reason, no crash", any("unreadable" in f for f in det), det)
+
     # Forbidden tool, error matching, max_calls.
     jsonl(t / "traj.jsonl", [{"id": "x", "tier": "real", "source": "s", "checks": [
         {"type": "tool_not_called", "value": "Bash:rm -rf"}, {"type": "no_error_matching", "value": "403"},
@@ -328,6 +364,48 @@ with tempfile.TemporaryDirectory() as tmp:
     (t / "pairs" / "verdicts.json").write_text(json.dumps({k: "tie" for k in verdicts}))
     code, out, _ = run("ablation.py", "score", t / "pairs")
     expect("score: all ties -> no clear difference", json.loads(out)["verdict"] == "no clear difference")
+
+# ---------- token windows ----------
+def usage(i, o, cr=0, cw=0):
+    return {"input_tokens": i, "output_tokens": o, "cache_read_input_tokens": cr, "cache_creation_input_tokens": cw}
+
+
+tw = [
+    {"type": "user", "message": {"role": "user", "content": "<command-name>/seo-crawl</command-name> acme.com"}},
+    # m1 is logged twice (two content blocks); the last usage is the final one and counts once.
+    {"type": "assistant", "message": {"role": "assistant", "id": "m1", "usage": usage(100, 5), "content": [{"type": "text", "text": "Crawling."}]}},
+    {"type": "assistant", "message": {"role": "assistant", "id": "m1", "usage": usage(100, 20), "content": [
+        {"type": "tool_use", "id": "t1", "name": "Skill", "input": {"skill": "seo-check"}}]}},
+    {"type": "user", "message": {"role": "user", "content": [{"type": "tool_result", "tool_use_id": "t1", "content": "loaded"}]}},
+    {"type": "assistant", "message": {"role": "assistant", "id": "m2", "usage": usage(300, 50, cr=1000), "content": [{"type": "text", "text": "Checked."}]}},
+    {"type": "assistant", "isSidechain": True, "message": {"role": "assistant", "id": "m3", "usage": usage(40, 10), "content": [{"type": "text", "text": "sub"}]}},
+    {"type": "assistant", "message": {"role": "assistant", "id": "m4", "usage": usage(200, 30), "content": [
+        {"type": "tool_use", "id": "t2", "name": "Skill", "input": {"skill": "seo-check"}}]}},
+    {"type": "assistant", "message": {"role": "assistant", "id": "m5", "usage": usage(500, 100, cw=2000), "content": [{"type": "text", "text": "Done."}]}},
+]
+with tempfile.TemporaryDirectory() as tmp:
+    f = Path(tmp) / "w.trace.jsonl"
+    f.write_text("\n".join(json.dumps(e) for e in tw) + "\n")
+    code, out, _ = run("traces.py", f)
+    d = json.loads(out)
+    by = d["tokens_by_skill"]
+    expect("tokens: repeated message id counted once, last value kept", d["tokens"]["output"] == 20 + 50 + 10 + 30 + 100, d["tokens"])
+    expect("tokens: slash command opens a window; Skill call switches it from the next message",
+           by["seo-crawl"]["tokens"]["total"] == 120 and by["seo-crawl"]["invocations"] == 1
+           and by["seo-check"]["invocations"] == 2 and by["seo-check"]["tokens"]["total"] == 1350 + 50 + 230 + 2600, by)
+    expect("tokens: windows add up to the total", sum(v["tokens"]["total"] for v in by.values()) == d["tokens"]["total"], by)
+    expect("tokens: subagent messages split out", d["tokens_subagents"]["total"] == 50, d["tokens_subagents"])
+    expect("tokens: peak context is the largest input side", d["peak_context"] == 2500, d["peak_context"])
+    jsonl(Path(tmp) / "c.jsonl", [{"id": "w", "tier": "real", "intent": "must_do", "source": "x", "checks": [
+        {"type": "skill_tokens", "skill": "seo-check", "value": 2000},
+        {"type": "skill_tokens", "skill": "seo-crawl", "value": 2000},
+        {"type": "max_context", "value": 2000},
+        {"type": "skill_tokens", "skill": "never-ran", "value": 10}]}])
+    run("score.py", Path(tmp) / "c.jsonl", tmp, "--out", Path(tmp) / "c")
+    fl = json.loads((Path(tmp) / "c.json").read_text())["cases"][0]["failing"]
+    expect("skill_tokens per invocation, max_context, missing skill",
+           any("2,115 tokens per invocation of seo-check" in x for x in fl) and not any("seo-crawl" in x for x in fl)
+           and any("peak context 2,500" in x for x in fl) and any("never-ran" in x for x in fl), fl)
 
 # ---------- traces ----------
 code, out, _ = run("traces.py", FIX / "session.jsonl")

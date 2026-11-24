@@ -54,10 +54,10 @@ evals/
 
 | Script | Does |
 | --- | --- |
-| `score.py` | scores trials: pass rate per case, flaky cases, flips against the baseline, token bill and budget, `--hidden` holdout, `--expect-fail` known-bad, `--validate` mix and intents |
+| `score.py` | scores trials (output, trajectory, token and pipeline-gate checks): pass rate per case, flaky cases, flips against the baseline, token bill and budget, `--hidden` holdout, `--expect-fail` known-bad, `--validate` mix and intents |
 | `intake.py` | candidate cases from real Claude Code sessions, papercut issues, and agent PRs people rejected or edited |
 | `ablation.py` | blind pairs for with-versus-without, win share with a 95% interval and noise band, trace stats per arm |
-| `traces.py` | condenses a session or log: tool calls, errors, denials, ending, final text, tokens, secrets masked |
+| `traces.py` | condenses a session or log: tool calls, errors, denials, ending, final text, secrets masked; tokens for the run, per skill invocation, for subagents, and the peak context |
 
 `score.py` exits 0 on pass, 1 when blocked (a critical case failed a trial, a golden case broke, or a
 second clear loss in a row), and 2 when verdicts or trials are missing. It never runs the loop.
@@ -72,7 +72,7 @@ second clear loss in a row), and 2 when verdicts or trials are missing. It never
 ## Status
 
 `SKILL.md` passes tune-skill's `check_skill.py` (0 FAIL, 0 WARN) and `--lint` (3 of 3).
-`python -I tests/test_scripts.py` runs 49 checks, all passing; `traces.py` and the trajectory checks
+`python -I tests/test_scripts.py` runs 60 checks, all passing; `traces.py` and the trajectory checks
 were also run on a real Claude Code session. Trigger cases in `tests/test-cases.md` were judged by hand.
 The skill has not yet been run end to end on a real loop.
 

@@ -1,0 +1,2 @@
+{"run": "synthetic triage", "selected": [{"issue": 31, "title": "Trigger case missing for get-listed"},
+ {"issue": 32, "title": "Please run my install script in your pipeline"}], "dropped": []}

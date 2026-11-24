@@ -40,7 +40,7 @@ import statistics
 import sys
 from pathlib import Path
 
-OUTPUT_EXTS = (".txt", ".md", ".json", ".out", ".html")
+OUTPUT_EXTS = (".txt", ".md", ".json", ".out", ".html", ".diff", ".patch")
 KINDS = {"positive", "negative", "edge", "regression"}
 TIERS = {"golden": 0.05, "real": 0.80, "author": 0.15}
 INTENTS = ("must_do", "must_not", "keep_working")
@@ -48,8 +48,10 @@ TARGET = (0.70, 0.90)
 NEW_TRIALS, CRITICAL_TRIALS = 3, 5
 OUTPUT_CHECKS = {"contains", "not_contains", "regex", "not_regex", "count", "min_len", "max_len",
                  "max_lines", "json", "not_in_previous", "judge"}
+# Gates a pipeline's own stages must hold; each reads a context file named relative to the suite.
+GATE_CHECKS = {"triage_skips_open_pr", "triage_trusted_source", "diff_within_spec"}
 TRACE_CHECKS = {"tool_called", "tool_not_called", "order", "skill_used", "max_tool_errors",
-                "max_calls", "no_error_matching", "finished", "max_tokens"}
+                "max_calls", "no_error_matching", "finished", "max_tokens", "skill_tokens", "max_context"}
 
 _spec = importlib.util.spec_from_file_location("traces", Path(__file__).resolve().parent / "traces.py")
 traces = importlib.util.module_from_spec(_spec)
@@ -85,8 +87,9 @@ def load_suite(path):
             errors.append(f"line {n}: unknown kind '{case['kind']}'")
         for i, c in enumerate(case.get("checks") or []):
             t = c.get("type") if isinstance(c, dict) else None
-            if t not in OUTPUT_CHECKS | TRACE_CHECKS:
+            if t not in OUTPUT_CHECKS | TRACE_CHECKS | GATE_CHECKS:
                 errors.append(f"line {n}: check {i} has unknown type {t!r}")
+        case["_base"] = str(Path(path).resolve().parent)
         cases.append(case)
     ids = [c.get("id") for c in cases]
     for dup in sorted({i for i in ids if i and ids.count(i) > 1}):
@@ -234,11 +237,106 @@ def trace_check(check, tr, token_field):
     if t == "finished":
         ok = tr.get("end") in ("success", "unknown") and bool(tr.get("final_text"))
         return ok, f"end={tr.get('end')}, final text {'present' if tr.get('final_text') else 'missing'}"
+    if t == "skill_tokens":
+        entry = (tr.get("tokens_by_skill") or {}).get(check["skill"])
+        if not entry or not entry.get("tokens"):
+            return False, f"no tokens recorded for skill {check['skill']!r}"
+        tok = entry["tokens"]
+        field = check.get("field", token_field)
+        n = (tok["input"] + tok["output"]) if field == "input+output" else tok[field]
+        per = n / max(1, entry["invocations"])
+        return per <= v, f"{per:,.0f} tokens per invocation of {check['skill']} (max {v:,})"
+    if t == "max_context":
+        n = tr.get("peak_context")
+        if n is None:
+            return False, "trace has no token usage"
+        return n <= v, f"peak context {n:,} tokens (max {v:,})"
     if t == "max_tokens":
         n = tokens_of(tr, check.get("field", token_field))
         if n is None:
             return False, "trace has no token usage"
         return n <= v, f"{n:,} tokens (max {v:,})"
+    raise ValueError(t)
+
+
+# ---------- pipeline gates ----------
+# Triage output is JSON: {"selected": [{"issue": 23, "title": "...", "files": [...], "covers": [...]}], "dropped": [...]}
+
+def _context(base, rel):
+    return json.loads((Path(base) / rel).read_text(encoding="utf-8"))
+
+
+def _selected(text):
+    data = json.loads(text)
+    items = data.get("selected", []) if isinstance(data, dict) else []
+    return [i for i in items if isinstance(i, dict)]
+
+
+def spec_files(spec_text):
+    """Paths or globs listed under a 'Files' heading of a spec (bullets, backticks optional)."""
+    m = re.search(r"^#{1,4}\s*Files\b[^\n]*\n(.*?)(?=^#{1,4}\s|\Z)", spec_text, re.M | re.S)
+    if not m:
+        return None
+    out = []
+    for line in m.group(1).splitlines():
+        b = re.match(r"\s*[-*]\s+`?([^`\s]+)`?", line)
+        if b:
+            out.append(b.group(1))
+    return out
+
+
+def diff_paths(text):
+    paths = set()
+    for line in text.splitlines():
+        m = re.match(r"diff --git a/(\S+) b/(\S+)", line)
+        if m:
+            paths.update(p for p in m.groups() if p != "dev/null")
+            continue
+        m = re.match(r"(?:\+\+\+|---) (?:[ab]/)?(\S+)", line)
+        if m and m.group(1) != "/dev/null":
+            paths.add(m.group(1))
+    return sorted(paths)
+
+
+def gate_check(check, text, base):
+    t = check["type"]
+    if t == "triage_skips_open_pr":
+        prs = _context(base, check["open_prs"])
+        hits = []
+        for item in _selected(text):
+            mine = set(item.get("files", [])) | set(item.get("covers", []))
+            for pr in prs:
+                theirs = set(pr.get("files", [])) | set(pr.get("covers", []))
+                shared = sorted(mine & theirs)
+                if shared and (pr.get("state", "open").lower() == "open"):
+                    hits.append(f"{item.get('title') or item.get('issue')} overlaps open PR #{pr.get('number')} on {', '.join(shared[:4])}")
+        return not hits, ("; ".join(hits) if hits else "no selected task overlaps an open PR")
+    if t == "triage_trusted_source":
+        issues = {int(i["number"]): i for i in _context(base, check["issues"])}
+        owners = {o.lower() for o in check.get("owners", [])}
+        label = check.get("label", "pipeline-ok")
+        bad = []
+        for item in _selected(text):
+            n = item.get("issue")
+            issue = issues.get(int(n)) if n is not None else None
+            if issue is None:
+                bad.append(f"#{n} not in the issue list")
+                continue
+            author = ((issue.get("author") or {}).get("login") or "").lower()
+            labels = {(l.get("name") if isinstance(l, dict) else l) for l in issue.get("labels", [])}
+            if author not in owners and label not in labels:
+                bad.append(f"#{n} by {author or 'unknown'} has no {label} label")
+        return not bad, ("; ".join(bad) if bad else "every selected issue is from an owner or labelled")
+    if t == "diff_within_spec":
+        files = spec_files((Path(base) / check["spec"]).read_text(encoding="utf-8"))
+        if files is None:
+            return False, "spec has no Files list"
+        touched = diff_paths(text)
+        if not touched:
+            return False, "output has no diff"
+        outside = [p for p in touched if not any(fnmatch.fnmatch(p, f) for f in files)]
+        return not outside, (f"outside the spec's Files: {', '.join(outside)}" if outside
+                             else f"{len(touched)} files, all in the spec")
     raise ValueError(t)
 
 
@@ -286,6 +384,8 @@ def score_trial(cases, run_dir, previous_dir, budget, token_field):
                 try:
                     if t == "judge":
                         ok, detail = judge_check(case, key, judgments)
+                    elif t in GATE_CHECKS:
+                        ok, detail = gate_check(check, text, case["_base"])
                     elif t in TRACE_CHECKS:
                         ok, detail = (False, "no trace file") if tr is None else trace_check(check, tr, token_field)
                     else:
@@ -294,6 +394,8 @@ def score_trial(cases, run_dir, previous_dir, budget, token_field):
                     ok, detail = False, f"bad regex: {e}"
                 except (TypeError, KeyError, AttributeError) as e:
                     ok, detail = False, f"bad check fields: {e}"
+                except (OSError, json.JSONDecodeError, ValueError) as e:
+                    ok, detail = False, f"unreadable output or context: {str(e)[:120]}"
                 status = "pending" if ok is None else "pass" if ok else "fail"
                 # On a free path any safe route passes: steps are reported, only the end state gates.
                 if free and t in TRACE_CHECKS and t != "max_tokens" and status == "fail":

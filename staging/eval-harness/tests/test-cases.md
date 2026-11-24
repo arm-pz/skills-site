@@ -31,9 +31,11 @@ Judged by hand from the descriptions of eval-harness, tune-skill, harness-audit 
 
 ## Script tests (run)
 
-`python -I tests/test_scripts.py`: 49 checks, all passing on 2026-11-24. Covers:
+`python -I tests/test_scripts.py`: 60 checks, all passing on 2026-11-24. Covers:
 
 - **score.py:** tier mix and intent coverage; pending and author-only verdicts; new cases held until 3 trials and critical ones until 5; flaky cases and the noise band; fixed and broke reported as a trade-off; a single clear loss warning and a repeated one blocking; golden and critical strictness; the token budget failing correct runs; `max_tokens`; the free path; the hidden holdout leaking no ids and flagging overfitting; a known-bad set catching skills-site#24's repeated nightly report and marking a weak check untrusted; trajectory checks, slash-command skill use, per-file dedup and unusable suites.
+- **pipeline gates:** duplicate PR work, an untrusted issue source and a diff outside the spec are each caught with evidence; the good outputs pass; unreadable output fails with a reason.
+- **token windows:** a repeated message id counts once at its final usage, a typed /command and a Skill call each open a window, windows add up to the total, subagent tokens split out, peak context, and the `skill_tokens` and `max_context` checks.
 - **intake.py:** sessions found by Skill call and by slash command, with prompts masked; agent PRs split into rejected and edited, with the reviewer's words in the rubric; papercuts grouped from GitHub issues and from the queue.
 - **ablation.py:** blind pairs with the key kept outside the folder, randomised order, the win share with its noise band, and trace stats per arm.
 - **traces.py:** tool calls, errors, denials, endings, masking, plain logs.

@@ -89,6 +89,9 @@ def parse_jsonl(lines, max_text=600, raw=False):
     calls, by_id = [], {}
     first_prompt, final_text, end, meta = None, None, None, {}
     usage_by_msg, result_usage = {}, None
+    # Cost per skill, as Uber measures it: each API message's tokens go to the skill that was active
+    # when the message was sent. A Skill call switches the active skill from the next message on.
+    msg_skill, msg_side, invocations, active = {}, {}, {}, None
     started = ended = None
     for line in lines:
         try:
@@ -135,12 +138,20 @@ def parse_jsonl(lines, max_text=600, raw=False):
                 t = content_text(content)
                 if t.strip():
                     first_prompt = clip(t, max_text, raw)
+                    typed = re.search(r"(?:^|<command-name>)/([A-Za-z0-9_:-]+)", t.strip())
+                    if typed:
+                        active = typed.group(1)
+                        invocations[active] = invocations.get(active, 0) + 1
         elif etype == "assistant" or msg.get("role") == "assistant":
             meta.setdefault("model", msg.get("model"))
             if isinstance(msg.get("usage"), dict):
                 # One API message can be logged as several events (one per content block), each
-                # carrying the same usage: count it once per message id.
-                usage_by_msg[msg.get("id") or f"_{len(usage_by_msg)}"] = msg["usage"]
+                # carrying the usage: count it once per message id, keeping the last (final) value.
+                mid = msg.get("id") or f"_{len(usage_by_msg)}"
+                usage_by_msg[mid] = msg["usage"]
+                msg_skill.setdefault(mid, active)
+                msg_side.setdefault(mid, bool(ev.get("isSidechain")))
+            next_active = active
             items = content if isinstance(content, list) else [{"type": "text", "text": content or ""}]
             for c in items:
                 if not isinstance(c, dict):
@@ -150,8 +161,14 @@ def parse_jsonl(lines, max_text=600, raw=False):
                             "input": clip(c.get("input"), 160, raw), "error": False, "denied": False}
                     calls.append(call)
                     by_id[c.get("id")] = call
+                    if c.get("name") == "Skill" and isinstance(c.get("input"), dict):
+                        name = c["input"].get("skill") or c["input"].get("command")
+                        if name:
+                            next_active = str(name).lstrip("/")
+                            invocations[next_active] = invocations.get(next_active, 0) + 1
                 elif c.get("type") == "text" and c.get("text", "").strip():
                     final_text = c["text"]
+            active = next_active
     errors = [c for c in calls if c["error"]]
     if end is None:
         end = "unknown" if calls or final_text else "empty"
@@ -165,6 +182,15 @@ def parse_jsonl(lines, max_text=600, raw=False):
     if end not in ("success", "unknown"):
         flags.append(f"ended_{end}")
     tokens = sum_usage([result_usage] if result_usage else list(usage_by_msg.values()))
+    by_skill = {}
+    for mid, u in usage_by_msg.items():
+        by_skill.setdefault(msg_skill.get(mid) or "(no skill)", []).append(u)
+    by_skill = {k: {"invocations": invocations.get(k, 0), "tokens": sum_usage(v)} for k, v in by_skill.items()}
+    for k, n in invocations.items():
+        by_skill.setdefault(k, {"invocations": n, "tokens": None})
+    side = [u for mid, u in usage_by_msg.items() if msg_side.get(mid)]
+    peak = max((int(u.get("input_tokens") or 0) + int(u.get("cache_read_input_tokens") or 0)
+                + int(u.get("cache_creation_input_tokens") or 0) for u in usage_by_msg.values()), default=None)
     tool_counts = {}
     for c in calls:
         tool_counts[c["name"]] = tool_counts.get(c["name"], 0) + 1
@@ -172,7 +198,8 @@ def parse_jsonl(lines, max_text=600, raw=False):
             "started": started, "ended": ended, "end": end, "flags": flags,
             "prompt": first_prompt, "tool_counts": tool_counts,
             "tool_errors": len(errors), "permission_denials": sum(c["denied"] for c in calls),
-            "tokens": tokens,
+            "tokens": tokens, "tokens_by_skill": by_skill, "peak_context": peak,
+            "tokens_subagents": sum_usage(side) if side else None,
             "calls": calls, "final_text": clip(final_text, max_text, raw) if final_text else None}
 
 

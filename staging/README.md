@@ -9,7 +9,7 @@ About, push. The hourly sync picks it up. Then delete the folder here.
 
 | Folder | Ladder level | Status |
 | --- | --- | --- |
-| `eval-harness/` | 3 | 0.3.0, drafted 2026-11-24: Uber's suite mix plus EDD gates; 49 script checks pass; not yet run on a real loop |
+| `eval-harness/` | 3 | 0.4.0, drafted 2026-11-24: Uber suite mix, EDD gates, pipeline gate checks, per-skill token windows; 60 script checks pass; not yet run on a real loop |
 | `log-papercut/` | 3 (feeds it) | 0.1.0, drafted 2026-11-24: always-on friction reports; 15 script checks pass with a fake `gh` |
 
-`evals/known-bad/` at the repo root is this site's own known-bad set, seeded from skills-site#24.
+`evals/known-bad/` at the repo root is this site's own known-bad set, with four entries (two real incidents, two synthetic) and a control for each.

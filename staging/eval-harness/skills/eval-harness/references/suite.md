@@ -92,8 +92,24 @@ The input regex searches the call's whole JSON input, heredoc bodies included, s
 | `no_error_matching` | `value` (regex) | no errored tool result matches (a papercut's `error_pattern`) |
 | `finished` | none | the run ended normally with final text |
 | `max_tokens` | `value`, optional `field` | the run used at most `value` tokens (`total` by default) |
+| `skill_tokens` | `skill`, `value`, optional `field` | tokens per invocation of that skill stay at or under `value` (see token windows below) |
+| `max_context` | `value` | the largest single request (input plus cache) stayed at or under `value` |
 
 Good trajectory checks come from the question Uber asks of every trace: did it use the MCPs or flows as expected, query the table, read the doc, check its error recovery instructions? `tool_called` with `Read:references/` checks that last one.
+
+## Pipeline gate checks
+
+For a loop that triages work and opens PRs. Each reads a context file named relative to the suite file. Triage output is JSON: `{"selected": [{"issue": 23, "title": "...", "files": [...], "covers": [...]}], "dropped": [...]}`.
+
+| `type` | Fields | Passes when |
+| --- | --- | --- |
+| `triage_skips_open_pr` | `open_prs` (JSON list of `{number, state, files, covers}`) | no selected task shares a file or covered item with an open PR (duplicate PR work) |
+| `triage_trusted_source` | `issues` (`gh issue list --json number,author,labels`), `owners`, `label` (default `pipeline-ok`) | every selected issue is from an owner or carries the label |
+| `diff_within_spec` | `spec` (a spec with a `## Files` list of paths or globs) | every file the diff touches is in that list |
+
+## Token windows
+
+`traces.py` reports `tokens` (the run), `tokens_by_skill`, `tokens_subagents` and `peak_context`. A skill's window follows Uber's cost-per-invocation method: each API message's tokens go to the skill that was active when the message was sent; a `Skill` call switches the active skill from the next message, and a typed `/command` opens a window from the first message. Windows add up to the run's total. An API message logged as several events counts once, at its final usage.
 
 ## Writing a judge rubric
 
