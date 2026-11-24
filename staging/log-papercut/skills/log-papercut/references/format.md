@@ -1,6 +1,6 @@
 # Papercut format
 
-Open this when writing anything that reads papercuts: a nightly pipeline, a dashboard, or eval-harness's `intake.py papercuts`.
+Open this when writing anything that reads papercuts: a nightly pipeline, a dashboard, or the skill-eval-suite `intake.py papercuts`.
 
 ## Record
 
@@ -19,8 +19,8 @@ One JSON object per line in the queue (`$PAPERCUT_QUEUE`, default `~/.papercuts/
 | `fix` | what should change, and where. Never "try again" |
 | `workaround` | what got the agent past it, if anything |
 | `severity` | `blocked`, `slowed` or `cosmetic` |
-| `error_pattern` | regex matching the error text; becomes a `no_error_matching` check in eval-harness |
-| `reproducible` | true when a fixed input triggers it every time; eval-harness makes it a golden case |
+| `error_pattern` | regex matching the error text; becomes a `no_error_matching` check in skill-eval-suite |
+| `reproducible` | true when a fixed input triggers it every time; skill-eval-suite makes it a golden case |
 | `agent`, `session` | who hit it, for reading the trace |
 
 All text is masked for secrets and emails, home directories become `~`, and each field is capped at 500 characters.
@@ -34,7 +34,7 @@ All text is masked for secrets and emails, home directories become `~`, and each
 
 ## Lifecycle a pipeline can follow
 
-Uber's papercut loop, adapted: grouped → triaged → root cause → fixed → evaluated → approved → measured. Suggested labels on top of `papercut`: `papercut:triaged`, `papercut:fixing`, `papercut:fixed`. Close the issue only after the fix has shipped and the regression case eval-harness made from it passes on a real run.
+Uber's papercut loop, adapted: grouped → triaged → root cause → fixed → evaluated → approved → measured. Suggested labels on top of `papercut`: `papercut:triaged`, `papercut:fixing`, `papercut:fixed`. Close the issue only after the fix has shipped and the regression case skill-eval-suite made from it passes on a real run.
 
 Read open ones with:
 

@@ -1,24 +1,32 @@
 # log-papercut
 
-An always-on agent skill that turns friction into fixes. When a skill, tool, command or doc does not
-behave the way its instructions say (a flag the help lists but the tool rejects, a command that exits 0
-on an error, a query that returns nothing when it should match, a skill step with the wrong unit), the
-agent files a structured **papercut** in one command, then carries on with its workaround.
-
-The idea and the name come from Uber Engineering's post on evaluating a million skill invocations a
-month: agents filed thousands of papercuts in three months, and the fixes made workflows more reliable
-and cheaper. This is a small, open version for any repo.
-
-## Install
+An always-on agent skill that turns agent friction into GitHub issues. When a skill, tool, command or
+doc does not behave the way its instructions say (a flag the help lists but the tool rejects, a command
+that exits 0 on an error, a query that returns nothing when it should match, a skill step with the
+wrong unit), the agent files a structured **papercut** in one command, then carries on with its
+workaround. Repeats group by fingerprint into one issue.
 
 ```
 npx skills add arm-pz/log-papercut --skill log-papercut
 ```
 
-Or copy `skills/log-papercut/` into `~/.claude/skills/`, `~/.codex/skills/` or `~/.qoder/skills/`.
-Python 3.9+; `gh` signed in if you want GitHub issues.
+## Ask it things like
 
-To have papercuts land as GitHub issues, set the repo once:
+It mostly runs without being asked. You can also say:
+
+- "File a papercut for the timeout we just hit."
+- "Have we seen this gh error before? Is there a workaround?"
+- "Send papercuts from this repo to arm-pz/skills-site."
+
+The name and idea come from Uber Engineering's post on evaluating a million skill invocations a month,
+where agents filed thousands of papercuts with a skill of the same name; this is an open, independent
+version. Unlike the papercuts CLIs on GitHub, it is an agent skill, and its fixed papercuts become
+regression cases in [skill-eval-suite](https://github.com/arm-pz/skill-eval-suite).
+
+## Install options
+
+The command above, or copy `skills/log-papercut/` into `~/.claude/skills/`, `~/.codex/skills/` or
+`~/.qoder/skills/`. Python 3.9+; `gh` signed in if you want GitHub issues:
 
 ```
 export PAPERCUT_REPO=your-org/your-skills-repo
@@ -37,14 +45,14 @@ masked, each field is capped, and no prompt text or file contents go in. Full fo
 
 - A GitHub issue labelled `papercut` (or a "Seen again" comment on the open one), for a nightly
   pipeline to group and triage.
-- [eval-harness](https://github.com/arm-pz/eval-harness) turns each fixed papercut into a regression
+- [skill-eval-suite](https://github.com/arm-pz/skill-eval-suite) turns each fixed papercut into a regression
   case (`intake.py papercuts`), so the fix stays fixed.
 
 ## Boundaries
 
 - **Handles:** reporting friction the agent hit in a skill, tool or doc, mid-task.
 - **Does not handle:** bugs in your own code (that is the task), scoring a skill's output
-  (`eval-harness`), or rules mined from many sessions (`harness-audit`).
+  (`skill-eval-suite`), or rules mined from many sessions (`harness-audit`).
 
 ## Status
 

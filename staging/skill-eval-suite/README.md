@@ -1,9 +1,26 @@
-# eval-harness
+# skill-eval-suite
 
-An AI agent skill that tells you whether a recurring agent loop or skill is actually any good, and
-keeps telling you as it changes. It builds the eval suite from the loop's own history, scores it the
-way agent evals really behave (as rates over repeated trials, as flips on the same cases, against a
-token budget), and reads the trace when a case fails.
+Evals for agent skills and scheduled agent loops. An agent skill for Claude Code (and other Agent
+Skills clients) that builds an eval suite from a loop's own history and tells you whether the skill is
+any good: real prompts graded on trajectory, pass rates over 3+ trials, which cases a change fixed or
+broke, token budgets as gates, a hidden holdout, and a known-bad set every judge must fail first.
+
+```
+npx skills add arm-pz/skill-eval-suite --skill skill-eval-suite
+```
+
+## Ask it things like
+
+- "Build an eval suite for my nightly SEO report."
+- "Is the new prompt actually better, or did I get a lucky run?"
+- "Can we trust our LLM judge before we gate PRs on it?"
+- "Does this skill earn its tokens, or should we cut it?"
+- "My scheduled competitor check reported nonsense last night. Why?"
+
+Not to be confused with EleutherAI's lm-evaluation-harness (benchmarks models) or hamelsmu/evals-skills
+(helps you build evals for an AI product); this one evaluates agent skills and loops. Sibling:
+[log-papercut](https://github.com/arm-pz/log-papercut) has agents file friction as they hit it, and
+its fixed papercuts become regression cases here.
 
 Level 3 of the agent ladder: `loop-schedule` makes a loop run (level 2), this one says whether its
 output is right, and `action-gate` lets it act only once this level's exit test passes (level 4).
@@ -12,28 +29,17 @@ output is right, and `action-gate` lets it act only once this level's exit test 
 
 - **Uber Engineering, "How Uber Evals 1 Million Agent Skill Invocations a Month" (2026-11-23):**
   the suite mix (about 5% golden with tool mocks, 80% real prompts graded on trajectory, 15% judged by
-  the author), a 70–90% target pass rate, blind with-versus-without ablation, papercuts and
-  rejected PRs fed back as cases.
+  the author), a 70–90% target pass rate, blind with-versus-without ablation, cost per skill
+  invocation, papercuts and rejected PRs fed back as cases.
 - **An eval-driven development cheat sheet:** pass rates over 3+ trials, must-do / must-not /
   keep-working cases, a hidden holdout, a known-bad set every judge must fail, same-case flips instead
   of averages, and cost as a pass/fail gate.
 
-## Install
+## Install options
 
-```
-npx skills add arm-pz/eval-harness --skill eval-harness
-```
-
-Or copy `skills/eval-harness/` into `~/.claude/skills/`, `~/.codex/skills/` or `~/.qoder/skills/`.
-Python 3.9+, nothing else. Pairs with [log-papercut](https://github.com/arm-pz/log-papercut).
-
-## Ask it things like
-
-- "Is my nightly SEO report any good? Build it a proper eval suite."
-- "Is the new prompt actually better, or did I get a lucky run?"
-- "Can we trust our LLM judge before we gate PRs on it?"
-- "Does this skill earn its tokens, or should we cut it?"
-- "My scheduled competitor check reported nonsense last night. Why?"
+The command above, or copy `skills/skill-eval-suite/` into `~/.claude/skills/`, `~/.codex/skills/` or
+`~/.qoder/skills/`. Python 3.9+, nothing else. Trajectory and token checks read Claude Code session
+traces.
 
 ## What it writes in your project
 
@@ -66,8 +72,8 @@ second clear loss in a row), and 2 when verdicts or trials are missing. It never
 
 - **Handles:** eval suites, scoring, gates and failure diagnosis for a loop or skill's behaviour.
 - **Does not handle:** scheduling (`loop-schedule`), description triggering (`tune-skill`), filing
-  friction mid-task (`log-papercut`), standing rules from many sessions (`harness-audit`), or
-  benchmarking a model (EleutherAI's `lm-evaluation-harness`).
+  friction mid-task (`log-papercut`), standing rules from many sessions (`harness-audit`),
+  benchmarking a model, or building evals for an AI product.
 
 ## Status
 

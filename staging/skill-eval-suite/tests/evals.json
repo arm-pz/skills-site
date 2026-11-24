@@ -1,5 +1,5 @@
 {
-  "skill_name": "eval-harness",
+  "skill_name": "skill-eval-suite",
   "evals": [
     {
       "id": 1,

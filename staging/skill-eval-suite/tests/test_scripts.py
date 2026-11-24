@@ -1,4 +1,4 @@
-"""Self-check for eval-harness's scripts. Run: python -I tests/test_scripts.py"""
+"""Self-check for the skill-eval-suite scripts. Run: python -I tests/test_scripts.py"""
 import json
 import subprocess
 import sys
@@ -6,7 +6,7 @@ import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SCRIPTS = ROOT / "skills" / "eval-harness" / "scripts"
+SCRIPTS = ROOT / "skills" / "skill-eval-suite" / "scripts"
 FIX = Path(__file__).resolve().parent / "fixtures"
 failures = []
 

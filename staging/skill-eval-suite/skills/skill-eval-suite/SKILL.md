@@ -1,10 +1,10 @@
 ---
-name: eval-harness
+name: skill-eval-suite
 description: Builds and runs the eval suite for a recurring agent loop or skill - about 5% golden, 80% real prompts graded on trajectory, 15% author-judged, with must-do, must-not and keep-working cases. Scores how often each case passes over 3+ trials, reports same-case flips instead of averages, gates on a token budget, checks a hidden holdout for overfitting, and trusts no check or judge until it fails a known-bad set. Feeds cases from real sessions, papercuts and rejected PRs. Use when the user wants to know if a skill or scheduled run is any good, asks for evals, a golden set or a scorecard, says a loop got worse or is sometimes wrong, asks whether a skill earns its tokens, or wants a failed run explained, even if they never say eval. Not for scheduling a skill (use loop-schedule), whether a description triggers (use tune-skill), filing friction mid-task (use log-papercut), or rules mined from past sessions (use harness-audit).
 version: 0.4.0
 ---
 
-# eval-harness
+# skill-eval-suite
 
 A loop is worth trusting once something other than its author says it is right. This skill builds that from the loop's own history (the prompts it got, the paths it took, the PRs people rejected, the papercuts agents filed) and scores it the way evals actually behave: as rates over repeated trials, as flips on the same cases, and against a budget.
 

@@ -1,6 +1,6 @@
 ---
 name: log-papercut
-description: Files a structured papercut when a skill, tool, command or doc does not behave the way its instructions say, then carries on with the workaround. Records what was tried, what was expected, what happened and what would fix it, groups repeats by fingerprint, keeps a local queue, and opens or updates a GitHub issue labelled papercut for a nightly pipeline to pick up. Use whenever, in any task, a flag the help lists is rejected, a command exits 0 on an error, a query returns nothing when it should match, a skill step or doc is wrong, or you spend several turns working around the same error, even if the user never asks for a bug report. Not for bugs in the user's own code (fix them as the task), for scoring whether a skill's output is good (use eval-harness), or for rules mined from many past sessions (use harness-audit).
+description: Files a structured papercut when a skill, tool, command or doc does not behave the way its instructions say, then carries on with the workaround. Records what was tried, what was expected, what happened and what would fix it, groups repeats by fingerprint, keeps a local queue, and opens or updates a GitHub issue labelled papercut for a nightly pipeline to pick up. Use whenever, in any task, a flag the help lists is rejected, a command exits 0 on an error, a query returns nothing when it should match, a skill step or doc is wrong, or you spend several turns working around the same error, even if the user never asks for a bug report. Not for bugs in the user's own code (fix them as the task), for scoring whether a skill's output is good (use skill-eval-suite), or for rules mined from many past sessions (use harness-audit).
 version: 0.1.0
 ---
 
@@ -51,7 +51,7 @@ Check the output for a matching `happened`. If one lists a `workaround`, try it 
       --workaround "<what got you past it, if anything>" --severity blocked|slowed|cosmetic \
       --error-pattern "<regex that matches the error text>" --agent "<agent and model>" --session <id>
 
-Use `--skill none` for friction in a bare tool. Add `--reproducible` when a fixed input triggers it every time; eval-harness then makes it a golden case. Confirm the script prints `papercut <fingerprint> filed` or `seen again`; with a repo set it also prints `filed <url>` or `commented on <url>`. On exit 2, read the error, correct the field it names and run it once more.
+Use `--skill none` for friction in a bare tool. Add `--reproducible` when a fixed input triggers it every time; skill-eval-suite then makes it a golden case. Confirm the script prints `papercut <fingerprint> filed` or `seen again`; with a repo set it also prints `filed <url>` or `commented on <url>`. On exit 2, read the error, correct the field it names and run it once more.
 
 ### 4. Carry on and say so
 
@@ -69,7 +69,7 @@ Finish the user's task with the workaround. Before your final message, run `pyth
 
 ## Where papercuts go next
 
-`references/format.md` is the record and issue format, for anything that reads them. A nightly pipeline lists open `papercut` issues, groups them by fingerprint, and hands the top groups to triage. eval-harness turns each fixed papercut into a regression case (`intake.py papercuts`), so the fix stays fixed.
+`references/format.md` is the record and issue format, for anything that reads them. A nightly pipeline lists open `papercut` issues, groups them by fingerprint, and hands the top groups to triage. skill-eval-suite turns each fixed papercut into a regression case (`intake.py papercuts`), so the fix stays fixed.
 
 ## Report
 

@@ -1,6 +1,6 @@
 # Trigger test cases
 
-Judged by hand from the descriptions of log-papercut, eval-harness and harness-audit. Not run in a live agent. Most triggers happen mid-task, with no user message asking for a report, which a hand check cannot fully simulate.
+Judged by hand from the descriptions of log-papercut, skill-eval-suite and harness-audit. Not run in a live agent. Most triggers happen mid-task, with no user message asking for a report, which a hand check cannot fully simulate.
 
 | # | Situation | Expected skill | Pass condition | Hand result |
 | --- | --- | --- | --- | --- |
@@ -11,7 +11,7 @@ Judged by hand from the descriptions of log-papercut, eval-harness and harness-a
 | 5 | Third attempt at the same MCP auth error | log-papercut | "keep fighting the same error" signal | pass |
 | 6 | "My app's login form throws a 500, fix it" | none (the task) | no papercut: the user's own code | pass |
 | 7 | Own typo in a bash command | none | no papercut: not friction in a skill or tool | pass, closest call: an error in a tool call; the Ground rules decide it |
-| 8 | "Is my nightly report any good?" | eval-harness | log-papercut does not trigger | pass |
+| 8 | "Is my nightly report any good?" | skill-eval-suite | log-papercut does not trigger | pass |
 | 9 | Same mistake across sessions | harness-audit | log-papercut does not trigger | pass |
 | 10 | "Open a GitHub issue for the bug in our checkout page" | none | a bug report about the user's product, not agent friction | pass by description |
 

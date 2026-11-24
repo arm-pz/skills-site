@@ -5,7 +5,7 @@ before it is trusted to gate anything ("every metric must fail the known-bad set
 Each entry also has a **control**: a correct output the same check must pass, so a check that fails
 everything cannot look trustworthy.
 
-Run both from the repo root (`score.py` is eval-harness's, at `staging/eval-harness/skills/eval-harness/scripts/` until it has its own repo):
+Run both from the repo root (`score.py` is skill-eval-suite's, at `staging/skill-eval-suite/skills/skill-eval-suite/scripts/` until it has its own repo):
 
     python score.py evals/known-bad/known-bad.jsonl evals/known-bad/outputs --previous evals/known-bad/previous --expect-fail
     python score.py evals/known-bad/known-bad.jsonl evals/known-bad/controls --repeat evals/known-bad/controls --repeat evals/known-bad/controls --previous evals/known-bad/controls-previous
