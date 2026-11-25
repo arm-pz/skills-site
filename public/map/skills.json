@@ -98,13 +98,13 @@
         "lines": 416,
         "bytes": 10776,
         "license": "MIT",
-        "commit": "34e7ff965eac0b761ee0766a039fe8bdb4513003",
+        "commit": "7bd3d7d320d4ff17539e3f43893dfb1fd02538d3",
         "sha256": "4699879d9bcfe460aa4870a75f432c65e96fc6c0c4497029af7cf04de40af7ff"
       },
       "order": 101,
       "quality": {
         "version": "1.1.0",
-        "commit": "34e7ff9",
+        "commit": "7bd3d7d",
         "updated": "2026-11-24",
         "notFor": [
           "a request one skill already owns (load that skill directly)",
@@ -453,13 +453,13 @@
         "lines": 1288,
         "bytes": 20897,
         "license": "MIT",
-        "commit": "34e7ff965eac0b761ee0766a039fe8bdb4513003",
+        "commit": "7bd3d7d320d4ff17539e3f43893dfb1fd02538d3",
         "sha256": "e79c3f9cbd44fd97b950ca333c4a51b40f644416361a221b0754d0fa31e31a28"
       },
       "order": 208,
       "quality": {
         "version": "0.1.0",
-        "commit": "34e7ff9",
+        "commit": "7bd3d7d",
         "updated": "2026-11-24",
         "notFor": []
       },
@@ -552,13 +552,13 @@
         "lines": 627,
         "bytes": 10387,
         "license": "MIT",
-        "commit": "34e7ff965eac0b761ee0766a039fe8bdb4513003",
+        "commit": "7bd3d7d320d4ff17539e3f43893dfb1fd02538d3",
         "sha256": "0261e8afac9fd1c1a6bc03685149f45eae4a09c0c0b6f48f1e61b1ca60093aa9"
       },
       "order": 209,
       "quality": {
         "version": "0.1.0",
-        "commit": "34e7ff9",
+        "commit": "7bd3d7d",
         "updated": "2026-11-24",
         "notFor": []
       },
@@ -626,13 +626,13 @@
         "lines": 416,
         "bytes": 8802,
         "license": "MIT",
-        "commit": "34e7ff965eac0b761ee0766a039fe8bdb4513003",
+        "commit": "7bd3d7d320d4ff17539e3f43893dfb1fd02538d3",
         "sha256": "f1304d4562cee98a474722cbfee835c0c4d8dc642d31fe1419e06a642bab73ba"
       },
       "order": 210,
       "quality": {
         "version": "0.1.0",
-        "commit": "34e7ff9",
+        "commit": "7bd3d7d",
         "updated": "2026-11-24",
         "notFor": [
           "a tune with no release (use tune-skill)",
@@ -949,13 +949,13 @@
         "lines": 176,
         "bytes": 5492,
         "license": "MIT",
-        "commit": "34e7ff965eac0b761ee0766a039fe8bdb4513003",
+        "commit": "7bd3d7d320d4ff17539e3f43893dfb1fd02538d3",
         "sha256": "b56b11f95e76ba757f8583562823353849f1d8a87fc9362a7217f684d7916803"
       },
       "order": 307,
       "quality": {
         "version": "1.0.0",
-        "commit": "34e7ff9",
+        "commit": "7bd3d7d",
         "updated": "2026-11-24",
         "notFor": [
           "one skill (use tune-skill)",
@@ -1511,13 +1511,13 @@
         "lines": 382,
         "bytes": 8603,
         "license": "MIT",
-        "commit": "34e7ff965eac0b761ee0766a039fe8bdb4513003",
+        "commit": "7bd3d7d320d4ff17539e3f43893dfb1fd02538d3",
         "sha256": "cacb21e2865f9e92d46027f87f225b3e864a21251b0b1e671c628a42ab55daa7"
       },
       "order": 411,
       "quality": {
         "version": "1.0.0",
-        "commit": "34e7ff9",
+        "commit": "7bd3d7d",
         "updated": "2026-11-24",
         "notFor": []
       },
@@ -1615,13 +1615,13 @@
         "lines": 950,
         "bytes": 15781,
         "license": "MIT",
-        "commit": "34e7ff965eac0b761ee0766a039fe8bdb4513003",
+        "commit": "7bd3d7d320d4ff17539e3f43893dfb1fd02538d3",
         "sha256": "483f9eaa604c13a11140d9ee8ba44deaf5ae46289fd23c277f366014f623312e"
       },
       "order": 412,
       "quality": {
         "version": "0.1.0",
-        "commit": "34e7ff9",
+        "commit": "7bd3d7d",
         "updated": "2026-11-24",
         "notFor": []
       },
@@ -1715,13 +1715,13 @@
         "lines": 872,
         "bytes": 15078,
         "license": "MIT",
-        "commit": "34e7ff965eac0b761ee0766a039fe8bdb4513003",
+        "commit": "7bd3d7d320d4ff17539e3f43893dfb1fd02538d3",
         "sha256": "adba47438bba3c1f43fd30aa8492bdc79bc2a956b812292dc9ab09277f7c1667"
       },
       "order": 413,
       "quality": {
         "version": "0.1.0",
-        "commit": "34e7ff9",
+        "commit": "7bd3d7d",
         "updated": "2026-11-24",
         "notFor": []
       },
@@ -1845,13 +1845,13 @@
         "lines": 1588,
         "bytes": 30959,
         "license": "MIT",
-        "commit": "34e7ff965eac0b761ee0766a039fe8bdb4513003",
+        "commit": "7bd3d7d320d4ff17539e3f43893dfb1fd02538d3",
         "sha256": "9fa3a48b71b2026a6d834903d0a2322ebf5dcc7cf065e441ef8041cf4184a711"
       },
       "order": 414,
       "quality": {
         "version": "0.1.0",
-        "commit": "34e7ff9",
+        "commit": "7bd3d7d",
         "updated": "2026-11-24",
         "notFor": []
       },
@@ -1935,13 +1935,13 @@
         "lines": 597,
         "bytes": 11489,
         "license": "MIT",
-        "commit": "34e7ff965eac0b761ee0766a039fe8bdb4513003",
+        "commit": "7bd3d7d320d4ff17539e3f43893dfb1fd02538d3",
         "sha256": "c7c6f2ea1d16245d3a4c154d259877fbe004ea186bc701eac3027c58972e6ed0"
       },
       "order": 415,
       "quality": {
         "version": "0.1.0",
-        "commit": "34e7ff9",
+        "commit": "7bd3d7d",
         "updated": "2026-11-24",
         "notFor": []
       },
@@ -3042,13 +3042,13 @@
         "lines": 302,
         "bytes": 6084,
         "license": "MIT",
-        "commit": "34e7ff965eac0b761ee0766a039fe8bdb4513003",
+        "commit": "7bd3d7d320d4ff17539e3f43893dfb1fd02538d3",
         "sha256": "1e8dfe3ceb472fd5ceab966ed884b027cd7e84f669755fb5a85695facc6efe87"
       },
       "order": 909,
       "quality": {
         "version": "1.0.0",
-        "commit": "34e7ff9",
+        "commit": "7bd3d7d",
         "updated": "2026-11-24",
         "notFor": [
           "one person's own learning plan (use study-system)",
