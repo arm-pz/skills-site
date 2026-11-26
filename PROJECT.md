@@ -192,11 +192,11 @@ order; check with `route_check.py`.
 | Workflow 4 · grow-search-traffic | Grow organic search traffic | seo-crawl → keyword-guard → wordsmith → pre-ship-performance-audit (optional) → platform-content (optional) → get-indexed (optional) |
 | Workflow 5 · land-a-job | Land a job | recruiter-lens → applicant-kit → application-pilot → career-track (optional) |
 | Workflow 6 · decision-memo | Make a decision | research-brief → data-readout (optional) → crash-test or do-better → strategy-memo |
-| Workflow 7 · learn-any-topic | Learn a skill | topic-primer → study-system → course-builder (optional, for a class) |
+| Workflow 7 · learn-any-topic | Learn any topic | topic-primer → study-system → course-builder (optional, for a class) |
 | Workflow 8 · run-cold-outbound | Run cold outbound | cold-email-list-gate → cold-email-ops → sales-copy |
 | Workflow 9 · launch-a-product | Launch a one-person product | solo-income-blueprint → site-prompt → production-code → paper-trail → release-gate-chair → platform-content |
 | Workflow 10 · maintain-skills | Maintain the skill family | tune-skill (regress.py) → prompts-to-skill-release (optional) → upstream-check; tune-and-ship for one published skill at a time |
-| Workflow 11 · audit-agent-skills | Stand up or audit a skill estate | skill-estate: the whole sweep this project was, in eight gated phases (inventory, listings, tune, gaps, publish and bundle, trigger tests, discovery, maintenance loop) |
+| Workflow 11 · audit-agent-skills | Stand up or audit a set of agent skills | skill-estate: the whole sweep this project was, in eight gated phases (inventory, listings, tune, gaps, publish and bundle, trigger tests, discovery, maintenance loop) |
 | Workflow 12 · set-up-a-coding-agent | Set up a coding agent for a repo | portable-harness or harness-audit → setup-claude-advisor (optional) → diagnose-usage (optional) → choose-effort (optional) |
 
 Each workflow has an agent in the `caffeinity` plugin: skill-builder, discovery-lead,

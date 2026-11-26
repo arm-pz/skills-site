@@ -4855,7 +4855,7 @@
       "id": "learn-any-topic",
       "number": 7,
       "name": "learn-any-topic",
-      "title": "Learn a skill",
+      "title": "Learn any topic",
       "slug": "learn-any-topic",
       "aliases": [
         "learn-a-skill"
@@ -4978,7 +4978,7 @@
       "id": "audit-agent-skills",
       "number": 11,
       "name": "audit-agent-skills",
-      "title": "Stand up or audit a skill estate",
+      "title": "Stand up or audit a set of agent skills",
       "slug": "audit-agent-skills",
       "aliases": [
         "audit-a-skill-estate"
