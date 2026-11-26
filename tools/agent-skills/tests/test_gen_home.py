@@ -24,7 +24,7 @@ MANIFEST = {
          "tag": "release", "title": "Beta", "blurb": "Ships.", "stats": "2 files",
          "install": "npx skills add arm-pz/beta", "page": "none", "order": 2},
     ],
-    "workflows": [{"id": "pour-over", "number": 1, "name": "Pour-over", "title": "Edit a page",
+    "workflows": [{"id": "build-a-skill", "number": 1, "name": "build-a-skill", "title": "Edit a page",
                    "slug": "edit-a-page", "summary": "Edit it & ship it.",
                    "steps": [{"skills": ["alpha"]}, {"skills": ["alpha"], "optional": True}],
                    "note": "One & done."}],
@@ -106,23 +106,23 @@ class GenHomeTest(unittest.TestCase):
         out = render()
         self.assertIn('<a href="/alpha/">alpha</a> <span class="opt">optional</span>', out)
         self.assertIn("One &amp; done.", out)
-        self.assertIn('<p class="flow-id">Brew 1 · Pour-over</p>', out)
+        self.assertIn('<p class="flow-id">Workflow 1 · build-a-skill</p>', out)
         self.assertIn('<h3><a href="/workflows/edit-a-page/">Edit a page</a></h3>', out)
         self.assertIn('<a class="outcome" href="/workflows/edit-a-page/">', out)
-        self.assertIn('<summary><b>Edit a page</b><i aria-hidden="true"></i><span>Pour-over</span></summary>', out)
+        self.assertIn('<summary><b>Edit a page</b><i aria-hidden="true"></i><span>build-a-skill</span></summary>', out)
         self.assertIn('<details class="brew" name="brew" open>', out)
-        self.assertIn("Open Brew 1 · Pour-over</a>", out)
+        self.assertIn("Open Workflow 1 · build-a-skill</a>", out)
 
     def test_lead_workflow_comes_first_and_open_on_the_menu(self):
         first = MANIFEST["workflows"][0]
-        lead = dict(first, id="dial-in", number=2, name="Dial-in", title="Set up an agent",
+        lead = dict(first, id="set-up-a-coding-agent", number=2, name="set-up-a-coding-agent", title="Set up an agent",
                     slug="set-up-an-agent", lead=True)
         out = render({**MANIFEST, "workflows": [first, lead]})
         menu = out[out.index("gen:outcomes:start"):out.index("gen:outcomes:end")]
         self.assertLess(menu.index("Set up an agent"), menu.index("Edit a page"))
         self.assertIn('<details class="brew" name="brew" open>\n        <summary><b>Set up an agent</b>', menu)
         self.assertEqual(menu.count(" open>"), 1)
-        self.assertIn("Open Brew 2 · Dial-in</a>", menu)
+        self.assertIn("Open Workflow 2 · set-up-a-coding-agent</a>", menu)
         listing = out[out.index("gen:workflows:start"):out.index("gen:workflows:end")]
         self.assertLess(listing.index("Edit a page"), listing.index("Set up an agent"))
 

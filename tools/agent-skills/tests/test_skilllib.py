@@ -202,7 +202,7 @@ class ManifestTest(unittest.TestCase):
             skilllib.validate_manifest(data)
 
     def test_workflow_needs_a_unique_slug_and_a_summary(self):
-        flow = {"id": "pour-over", "number": 1, "name": "Pour-over", "title": "Demo",
+        flow = {"id": "build-a-skill", "number": 1, "name": "build-a-skill", "title": "Demo",
                 "slug": "demo-flow", "summary": "Does it.", "steps": [{"skills": ["demo"]}]}
         for bad in ({"slug": "Demo Flow"}, {"summary": " "}):
             data = self.manifest()
@@ -244,9 +244,9 @@ class ManifestTest(unittest.TestCase):
                 skilllib.validate_manifest(data)
 
     def test_only_one_workflow_can_lead(self):
-        flow = {"id": "pour-over", "number": 1, "name": "Pour-over", "title": "Demo",
+        flow = {"id": "build-a-skill", "number": 1, "name": "build-a-skill", "title": "Demo",
                 "slug": "demo-flow", "summary": "Does it.", "steps": [{"skills": ["demo"]}]}
-        other = dict(flow, id="bloom", number=2, slug="other-flow")
+        other = dict(flow, id="get-found", number=2, slug="other-flow")
         data = self.manifest()
         data["workflows"] = [dict(flow, lead=True), other]
         skilllib.validate_manifest(data)
@@ -259,10 +259,23 @@ class ManifestTest(unittest.TestCase):
 
     def test_workflow_steps_must_have_pages(self):
         data = self.manifest()
-        data["workflows"] = [{"id": "pour-over", "number": 1, "name": "Pour-over", "title": "Demo",
+        data["workflows"] = [{"id": "build-a-skill", "number": 1, "name": "build-a-skill", "title": "Demo",
                               "slug": "demo-flow", "summary": "Does it.", "steps": [{"skills": ["demo"]}]}]
         skilllib.validate_manifest(data)
         data["workflows"][0]["steps"].append({"skills": ["ghost"]})
+        with self.assertRaises(skilllib.ManifestError):
+            skilllib.validate_manifest(data)
+
+    def test_workflow_aliases_redirect_old_slugs(self):
+        data = self.manifest()
+        data["workflows"] = [{"id": "demo-flow", "number": 1, "name": "demo-flow", "title": "Demo",
+                              "slug": "demo-flow", "aliases": ["old-flow"], "summary": "Does it.",
+                              "steps": [{"skills": ["demo"]}]}]
+        skilllib.validate_manifest(data)
+        rules = skilllib.redirects(data)
+        self.assertIn("/workflows/old-flow/ /workflows/demo-flow/ 301", rules)
+        self.assertIn("/workflows/old-flow /workflows/demo-flow/ 301", rules)
+        data["workflows"][0]["aliases"] = ["demo-flow"]
         with self.assertRaises(skilllib.ManifestError):
             skilllib.validate_manifest(data)
 
