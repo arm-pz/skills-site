@@ -24,7 +24,7 @@
         "description is 1007 characters, close to the 1024 limit"
       ]
     },
-    "caffeinity-routing": {
+    "workflow-router": {
       "description_sha": "0630e86a9462",
       "fail": [],
       "note": [],

@@ -1,5 +1,5 @@
 {
-  "skill": "caffeinity-routing",
+  "skill": "workflow-router",
   "target": "a multi-step goal across the catalog",
   "prompt": "I'm launching a small SaaS web app next week. I want it safe to ship, fast, and found on Google afterwards. Which of your skills do I run, in what order, and what does each hand the next?",
   "checks": [

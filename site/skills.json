@@ -59,16 +59,19 @@
   ],
   "skills": [
     {
-      "name": "caffeinity-routing",
+      "name": "workflow-router",
+      "aliases": [
+        "caffeinity-routing"
+      ],
       "repo": "arm-pz/caffeinity-skills",
-      "path": "plugins/caffeinity-routing/skills/caffeinity-routing",
+      "path": "plugins/workflow-router/skills/workflow-router",
       "group": "start-here",
       "tag": "routing",
-      "title": "Caffeinity Routing",
-      "pageTitle": "Caffeinity Routing — AI Agent Skill for Claude Code",
+      "title": "Workflow Router",
+      "pageTitle": "Workflow Router — AI Agent Skill for Claude Code",
       "blurb": "Start here. Tell it the outcome you want and it picks one of twelve workflows, lists the skills in order with what each hands the next, and names the ones you have not installed instead of improvising their work.",
       "stats": "4 files · 416 lines · 11 KB",
-      "install": "npx skills add arm-pz/caffeinity-skills --skill caffeinity-routing",
+      "install": "npx skills add arm-pz/caffeinity-skills --skill workflow-router",
       "page": "generated",
       "pageSource": {
         "description": "Picks which caffeinity skills to run, in what order, for a goal that spans more than one of them, and says what each step hands the next: build and publish a skill, get a project found, pass a release gate, grow organic search traffic, run a job search, make a decision, learn a skill, run cold outbound, launch a one-person product, set up a coding agent for a repo, or set up and keep the skills themselves healthy. Checks which of those skills are installed and names the missing ones instead of improvising their work. Use whenever someone asks which skill to use, what to run first, how the skills fit together, or describes a multi-step outcome such as \"take this idea to a published skill\" or \"get my site ready to ship and ranking\", even if they never name a skill. Not for a request one skill already owns (load that skill directly), and not for doing a step's work itself: the named skill does it.",
@@ -589,7 +592,7 @@
       "install": "npx skills add arm-pz/caffeinity-skills --skill tune-and-ship",
       "page": "generated",
       "pageSource": {
-        "description": "Takes one published skill at a time from as-is to tuned, fact-checked, released and live, then moves to the next one in the catalog. Each run tunes the skill with tune-skill, checks every version number, flag, price and command it states against the primary source, re-reads its siblings' real SKILL.md files, polishes the listing with findable-polish, writes the version and release notes, opens one PR, and after the merge confirms the site page and marketplace copy are live. Use whenever the user wants to fine-tune their other skills, work through the catalog, give a published skill the full treatment, fact-check a skill's claims, or ship a tune instead of drafting it, even if they never say \"ship\". Not for a tune with no release (use tune-skill), drafts with nothing pushed (use tune-and-polish), a new skill (use skill-launch), regressions from the nightly health check (use caffeinity-routing's maintain-skills workflow), or a whole collection (use skill-estate).",
+        "description": "Takes one published skill at a time from as-is to tuned, fact-checked, released and live, then moves to the next one in the catalog. Each run tunes the skill with tune-skill, checks every version number, flag, price and command it states against the primary source, re-reads its siblings' real SKILL.md files, polishes the listing with findable-polish, writes the version and release notes, opens one PR, and after the merge confirms the site page and marketplace copy are live. Use whenever the user wants to fine-tune their other skills, work through the catalog, give a published skill the full treatment, fact-check a skill's claims, or ship a tune instead of drafting it, even if they never say \"ship\". Not for a tune with no release (use tune-skill), drafts with nothing pushed (use tune-and-polish), a new skill (use skill-launch), regressions from the nightly health check (use workflow-router's maintain-skills workflow), or a whole collection (use skill-estate).",
         "files": [
           {
             "path": "SKILL.md",
@@ -638,7 +641,7 @@
           "a tune with no release (use tune-skill)",
           "drafts with nothing pushed (use tune-and-polish)",
           "a new skill (use skill-launch)",
-          "regressions from the nightly health check (use caffeinity-routing's maintain-skills workflow)",
+          "regressions from the nightly health check (use workflow-router's maintain-skills workflow)",
           "a whole collection (use skill-estate)"
         ]
       },
@@ -922,7 +925,7 @@
       "install": "npx skills add arm-pz/caffeinity-skills --skill skill-estate",
       "page": "generated",
       "pageSource": {
-        "description": "Takes a whole collection of agent skill repos from scattered to published, consistent and self-maintaining, in gated phases: inventory every repo, reconcile site, marketplace and README listings, test and tune the family, close workflow gaps, wire publishing so new skill repos go live on their own, bundle a plugin with agents, add trigger tests and directory listings, and leave a maintenance loop and a map. Each phase hands off to the skill that owns it and ends in PRs. Use when someone's skills site and GitHub disagree, wants all their skill repos audited or cleaned up, wants new skills to publish themselves, or wants that cleanup repeated on another org, even if they never say estate. Not for one skill (use tune-skill), one listing (use findable), the site pipeline alone (use publish-pipeline), or weekly upkeep (use caffeinity-routing's maintain-skills workflow).",
+        "description": "Takes a whole collection of agent skill repos from scattered to published, consistent and self-maintaining, in gated phases: inventory every repo, reconcile site, marketplace and README listings, test and tune the family, close workflow gaps, wire publishing so new skill repos go live on their own, bundle a plugin with agents, add trigger tests and directory listings, and leave a maintenance loop and a map. Each phase hands off to the skill that owns it and ends in PRs. Use when someone's skills site and GitHub disagree, wants all their skill repos audited or cleaned up, wants new skills to publish themselves, or wants that cleanup repeated on another org, even if they never say estate. Not for one skill (use tune-skill), one listing (use findable), the site pipeline alone (use publish-pipeline), or weekly upkeep (use workflow-router's maintain-skills workflow).",
         "files": [
           {
             "path": "SKILL.md",
@@ -961,7 +964,7 @@
           "one skill (use tune-skill)",
           "one listing (use findable)",
           "the site pipeline alone (use publish-pipeline)",
-          "weekly upkeep (use caffeinity-routing's maintain-skills workflow)"
+          "weekly upkeep (use workflow-router's maintain-skills workflow)"
         ]
       },
       "latestRun": {
