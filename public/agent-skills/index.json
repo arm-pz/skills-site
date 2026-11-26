@@ -34,7 +34,7 @@
       "description": "Plugin marketplace for Skillsmith by Caffeinity. Install tested AI agent skills and workflows for Claude Code and Codex, with source and evidence at skillsmith.tech.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/caffeinity-routing.tar.gz",
-      "digest": "sha256:4699879d9bcfe460aa4870a75f432c65e96fc6c0c4497029af7cf04de40af7ff"
+      "digest": "sha256:2dfee6b3e93d352bc8747bff75d9b630322d7ebac373dfc8c73388f8e786a815"
     },
     {
       "name": "career-track",
@@ -209,7 +209,7 @@
       "description": "Plugin marketplace for Skillsmith by Caffeinity. Install tested AI agent skills and workflows for Claude Code and Codex, with source and evidence at skillsmith.tech.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/paper-trail.tar.gz",
-      "digest": "sha256:cacb21e2865f9e92d46027f87f225b3e864a21251b0b1e671c628a42ab55daa7"
+      "digest": "sha256:aa899229f4acf3958153101b486761c1a158737941d2a0cbfb143ff18ebb0572"
     },
     {
       "name": "platform-content",
@@ -398,7 +398,7 @@
       "description": "Plugin marketplace for Skillsmith by Caffeinity. Install tested AI agent skills and workflows for Claude Code and Codex, with source and evidence at skillsmith.tech.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/skill-estate.tar.gz",
-      "digest": "sha256:b56b11f95e76ba757f8583562823353849f1d8a87fc9362a7217f684d7916803"
+      "digest": "sha256:3152b9ff53ccf8efffa87b5107a6e4ecbe13eaf36619a1763e90dc43f8506750"
     },
     {
       "name": "skill-eval-suite",
@@ -468,7 +468,7 @@
       "description": "Plugin marketplace for Skillsmith by Caffeinity. Install tested AI agent skills and workflows for Claude Code and Codex, with source and evidence at skillsmith.tech.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/tune-and-ship.tar.gz",
-      "digest": "sha256:f1304d4562cee98a474722cbfee835c0c4d8dc642d31fe1419e06a642bab73ba"
+      "digest": "sha256:cb7c476abd54ad132d51ccdb5772f90e000c58307785d4fc690274dd8edd24bf"
     },
     {
       "name": "tune-skill",
