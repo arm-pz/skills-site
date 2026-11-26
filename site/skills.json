@@ -70,7 +70,7 @@
       "title": "Workflow Router",
       "pageTitle": "Workflow Router — AI Agent Skill for Claude Code",
       "blurb": "Start here. Tell it the outcome you want and it picks one of twelve workflows, lists the skills in order with what each hands the next, and names the ones you have not installed instead of improvising their work.",
-      "stats": "4 files · 416 lines · 11 KB",
+      "stats": "4 files · 424 lines · 11 KB",
       "install": "npx skills add arm-pz/caffeinity-skills --skill workflow-router",
       "page": "generated",
       "pageSource": {
@@ -79,35 +79,35 @@
           {
             "path": "SKILL.md",
             "lines": 90,
-            "bytes": 6771
+            "bytes": 7010
           },
           {
             "path": "references/trigger-cases.md",
             "lines": 30,
-            "bytes": 2888
+            "bytes": 2965
           },
           {
             "path": "references/workflows.md",
             "lines": 152,
-            "bytes": 13564
+            "bytes": 13751
           },
           {
             "path": "scripts/route_check.py",
-            "lines": 144,
-            "bytes": 5774
+            "lines": 152,
+            "bytes": 6429
           }
         ],
         "fileCount": 4,
-        "lines": 416,
-        "bytes": 10776,
+        "lines": 424,
+        "bytes": 11051,
         "license": "MIT",
-        "commit": "31d33ed8eee676cb795079fa3eaea0166dc525bc",
-        "sha256": "4699879d9bcfe460aa4870a75f432c65e96fc6c0c4497029af7cf04de40af7ff"
+        "commit": "18f7237571547a654c22ba2c0836fcd6a560e2f3",
+        "sha256": "2dfee6b3e93d352bc8747bff75d9b630322d7ebac373dfc8c73388f8e786a815"
       },
       "order": 101,
       "quality": {
         "version": "1.1.0",
-        "commit": "31d33ed",
+        "commit": "18f7237",
         "updated": "2026-11-26",
         "notFor": [
           "a request one skill already owns (load that skill directly)",
@@ -456,13 +456,13 @@
         "lines": 1288,
         "bytes": 20897,
         "license": "MIT",
-        "commit": "31d33ed8eee676cb795079fa3eaea0166dc525bc",
+        "commit": "18f7237571547a654c22ba2c0836fcd6a560e2f3",
         "sha256": "e79c3f9cbd44fd97b950ca333c4a51b40f644416361a221b0754d0fa31e31a28"
       },
       "order": 208,
       "quality": {
         "version": "0.1.0",
-        "commit": "31d33ed",
+        "commit": "18f7237",
         "updated": "2026-11-26",
         "notFor": []
       },
@@ -555,13 +555,13 @@
         "lines": 627,
         "bytes": 10387,
         "license": "MIT",
-        "commit": "31d33ed8eee676cb795079fa3eaea0166dc525bc",
+        "commit": "18f7237571547a654c22ba2c0836fcd6a560e2f3",
         "sha256": "0261e8afac9fd1c1a6bc03685149f45eae4a09c0c0b6f48f1e61b1ca60093aa9"
       },
       "order": 209,
       "quality": {
         "version": "0.1.0",
-        "commit": "31d33ed",
+        "commit": "18f7237",
         "updated": "2026-11-26",
         "notFor": []
       },
@@ -597,7 +597,7 @@
           {
             "path": "SKILL.md",
             "lines": 133,
-            "bytes": 7191
+            "bytes": 7215
           },
           {
             "path": "references/fact-check.md",
@@ -617,7 +617,7 @@
           {
             "path": "references/trigger-cases.md",
             "lines": 41,
-            "bytes": 3111
+            "bytes": 3135
           },
           {
             "path": "scripts/queue.py",
@@ -627,15 +627,15 @@
         ],
         "fileCount": 6,
         "lines": 416,
-        "bytes": 8802,
+        "bytes": 8801,
         "license": "MIT",
-        "commit": "31d33ed8eee676cb795079fa3eaea0166dc525bc",
-        "sha256": "f1304d4562cee98a474722cbfee835c0c4d8dc642d31fe1419e06a642bab73ba"
+        "commit": "18f7237571547a654c22ba2c0836fcd6a560e2f3",
+        "sha256": "cb7c476abd54ad132d51ccdb5772f90e000c58307785d4fc690274dd8edd24bf"
       },
       "order": 210,
       "quality": {
         "version": "0.1.0",
-        "commit": "31d33ed",
+        "commit": "18f7237",
         "updated": "2026-11-26",
         "notFor": [
           "a tune with no release (use tune-skill)",
@@ -930,7 +930,7 @@
           {
             "path": "SKILL.md",
             "lines": 79,
-            "bytes": 5107
+            "bytes": 5131
           },
           {
             "path": "references/brief.md",
@@ -940,25 +940,25 @@
           {
             "path": "references/phases.md",
             "lines": 43,
-            "bytes": 4141
+            "bytes": 4165
           },
           {
             "path": "references/trigger-cases.md",
             "lines": 28,
-            "bytes": 2009
+            "bytes": 2021
           }
         ],
         "fileCount": 4,
         "lines": 176,
-        "bytes": 5492,
+        "bytes": 5500,
         "license": "MIT",
-        "commit": "31d33ed8eee676cb795079fa3eaea0166dc525bc",
-        "sha256": "b56b11f95e76ba757f8583562823353849f1d8a87fc9362a7217f684d7916803"
+        "commit": "18f7237571547a654c22ba2c0836fcd6a560e2f3",
+        "sha256": "3152b9ff53ccf8efffa87b5107a6e4ecbe13eaf36619a1763e90dc43f8506750"
       },
       "order": 307,
       "quality": {
         "version": "1.0.0",
-        "commit": "31d33ed",
+        "commit": "18f7237",
         "updated": "2026-11-26",
         "notFor": [
           "one skill (use tune-skill)",
@@ -1482,7 +1482,7 @@
           {
             "path": "SKILL.md",
             "lines": 82,
-            "bytes": 4918
+            "bytes": 4930
           },
           {
             "path": "references/facts.md",
@@ -1512,15 +1512,15 @@
         ],
         "fileCount": 6,
         "lines": 382,
-        "bytes": 8603,
+        "bytes": 8599,
         "license": "MIT",
-        "commit": "31d33ed8eee676cb795079fa3eaea0166dc525bc",
-        "sha256": "cacb21e2865f9e92d46027f87f225b3e864a21251b0b1e671c628a42ab55daa7"
+        "commit": "18f7237571547a654c22ba2c0836fcd6a560e2f3",
+        "sha256": "aa899229f4acf3958153101b486761c1a158737941d2a0cbfb143ff18ebb0572"
       },
       "order": 411,
       "quality": {
         "version": "1.0.0",
-        "commit": "31d33ed",
+        "commit": "18f7237",
         "updated": "2026-11-26",
         "notFor": []
       },
@@ -1618,13 +1618,13 @@
         "lines": 950,
         "bytes": 15781,
         "license": "MIT",
-        "commit": "31d33ed8eee676cb795079fa3eaea0166dc525bc",
+        "commit": "18f7237571547a654c22ba2c0836fcd6a560e2f3",
         "sha256": "483f9eaa604c13a11140d9ee8ba44deaf5ae46289fd23c277f366014f623312e"
       },
       "order": 412,
       "quality": {
         "version": "0.1.0",
-        "commit": "31d33ed",
+        "commit": "18f7237",
         "updated": "2026-11-26",
         "notFor": []
       },
@@ -1718,13 +1718,13 @@
         "lines": 872,
         "bytes": 15078,
         "license": "MIT",
-        "commit": "31d33ed8eee676cb795079fa3eaea0166dc525bc",
+        "commit": "18f7237571547a654c22ba2c0836fcd6a560e2f3",
         "sha256": "adba47438bba3c1f43fd30aa8492bdc79bc2a956b812292dc9ab09277f7c1667"
       },
       "order": 413,
       "quality": {
         "version": "0.1.0",
-        "commit": "31d33ed",
+        "commit": "18f7237",
         "updated": "2026-11-26",
         "notFor": []
       },
@@ -1848,13 +1848,13 @@
         "lines": 1588,
         "bytes": 30959,
         "license": "MIT",
-        "commit": "31d33ed8eee676cb795079fa3eaea0166dc525bc",
+        "commit": "18f7237571547a654c22ba2c0836fcd6a560e2f3",
         "sha256": "9fa3a48b71b2026a6d834903d0a2322ebf5dcc7cf065e441ef8041cf4184a711"
       },
       "order": 414,
       "quality": {
         "version": "0.1.0",
-        "commit": "31d33ed",
+        "commit": "18f7237",
         "updated": "2026-11-26",
         "notFor": []
       },
@@ -1938,13 +1938,13 @@
         "lines": 597,
         "bytes": 11489,
         "license": "MIT",
-        "commit": "31d33ed8eee676cb795079fa3eaea0166dc525bc",
+        "commit": "18f7237571547a654c22ba2c0836fcd6a560e2f3",
         "sha256": "c7c6f2ea1d16245d3a4c154d259877fbe004ea186bc701eac3027c58972e6ed0"
       },
       "order": 415,
       "quality": {
         "version": "0.1.0",
-        "commit": "31d33ed",
+        "commit": "18f7237",
         "updated": "2026-11-26",
         "notFor": []
       },
@@ -3045,13 +3045,13 @@
         "lines": 302,
         "bytes": 6084,
         "license": "MIT",
-        "commit": "31d33ed8eee676cb795079fa3eaea0166dc525bc",
+        "commit": "18f7237571547a654c22ba2c0836fcd6a560e2f3",
         "sha256": "1e8dfe3ceb472fd5ceab966ed884b027cd7e84f669755fb5a85695facc6efe87"
       },
       "order": 909,
       "quality": {
         "version": "1.0.0",
-        "commit": "31d33ed",
+        "commit": "18f7237",
         "updated": "2026-11-26",
         "notFor": [
           "one person's own learning plan (use study-system)",
