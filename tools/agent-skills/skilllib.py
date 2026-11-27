@@ -15,7 +15,7 @@ OWNER = "arm-pz"
 # holds one generated page per workflow, and /runs/ one per skill with a test run (gen_runs.py). RESERVED are section names kept for what comes next.
 STATIC_PAGES = ["pr-graph", "work", "story", "notes", "notes/web-preflight", "notes/skill-test-results", "skills", "mods", "workflows", "seo", "check", "prose",
                 "checks", "map", "seo-check", "resume", "list", "runs"]
-RESERVED = STATIC_PAGES + ["agents", "subagents", "harnesses"]
+RESERVED = STATIC_PAGES + ["agents", "subagents", "harnesses", "schemas"]
 INDEX_SCHEMA = "https://schemas.agentskills.io/discovery/0.2.0/schema.json"
 NAME_RE = re.compile(r"^[a-z0-9-]{1,64}$")
 GROUP_IDS = ("start-here", "writing-growth", "career", "thinking-learning", "skill-authoring",
