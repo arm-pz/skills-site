@@ -9,12 +9,12 @@
 #   bash tools/agent-skills/deploy.sh --dry-run  # build and gate only
 #
 # Needs: python3, node 20+, `gh auth login` (the build reads each skill repo), and wrangler access
-# to the Cloudflare Pages project `skills`.
+# to the Cloudflare Pages project `skills-site`.
 set -euo pipefail
 cd "$(dirname "$0")/../.."
 
 SITE=https://skillsmith.tech
-PROJECT=skills
+PROJECT=skills-site
 WRANGLER="npx --yes wrangler@4.151.1"
 force=0 dry=0
 for arg in "$@"; do
@@ -58,7 +58,8 @@ if ! $WRANGLER whoami >/dev/null 2>&1; then
 fi
 
 say "deploy dist/ to Pages project $PROJECT"
-$WRANGLER pages deploy dist --project-name "$PROJECT" --branch main
+# `deploy` is the project's production branch; any other branch name only makes a preview.
+$WRANGLER pages deploy dist --project-name "$PROJECT" --branch deploy
 
 say "prove the live site"
 bust=$(git rev-parse --short HEAD)-$(date +%s)
