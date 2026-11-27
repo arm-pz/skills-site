@@ -10,7 +10,7 @@ disagree, the repo wins; fix this file.
 | --- | --- |
 | `arm-pz/<skill>` (one per skill) | The skills themselves: one `SKILL.md` per repo, at `SKILL.md`, `<repo>/SKILL.md` or `skills/<repo>/SKILL.md`. Installed with `npx skills add arm-pz/<repo>`. |
 | `arm-pz/skills-site` (this repo) | skillsmith.tech (formerly skills.caffeinity.com, which now redirects to it): the hub, one page per skill, both discovery indexes, archives, sitemap, and all the automation below. `site/skills.json` is the single list of what is published. |
-| `arm-pz/caffeinity-skills` | Plugin marketplace for Claude Code (`.claude-plugin/marketplace.json`) and Codex (`.agents/plugins/marketplace.json`). Holds the mods (`mods/*`), `plugins/caffeinity-routing` (the start-here router), five skills that live only here (`plugins/paper-trail`, `plugins/course-builder`, `plugins/skill-estate`, `plugins/tune-and-ship`, `plugins/agent-audit`) and `plugins/caffeinity`: every skill plus twelve workflow agents in one install, generated hourly by `scripts/build_plugin.py`. |
+| `arm-pz/caffeinity-skills` | Plugin marketplace for Claude Code (`.claude-plugin/marketplace.json`) and Codex (`.agents/plugins/marketplace.json`). Holds the mods (`mods/*`), `plugins/workflow-router` (the start-here router), five skills that live only here (`plugins/paper-trail`, `plugins/course-builder`, `plugins/skill-estate`, `plugins/tune-and-ship`, `plugins/agent-audit`) and `plugins/caffeinity`: every skill plus twelve workflow agents in one install, generated hourly by `scripts/build_plugin.py`. |
 | `arm-pz/arm-pz` | The GitHub profile README. Its skills block is generated from `site/skills.json`. |
 | `arm-pz/ship-sentinel` | A Claude Code mod (no SKILL.md) that holds `git push` and deploys until the check skills have run. Listed on the site as a mod. |
 | `caffeinity-skills/mods/*` | Six more mods made with skill-to-mod (release-gate, web-preflight, security red team, performance audit, tune-skill, skill-release). Each has a generated page measured from its `.claude-plugin/plugin.json`, refreshed by the sync like any skill. Mods get pages, not archives or discovery-index entries. |
@@ -180,7 +180,7 @@ To accept an intended change (a new WARN you decided to keep):
 Twelve workflows. Each has a number, a plain name and a goal ("Workflow 3 · launch-safely: Decide
 whether a site is safe to launch"); older notes call them W1 to W12, and `route_check.py` still
 accepts those ids. Defined once in `site/skills.json` (`workflows`) and in
-`caffeinity-skills/plugins/caffeinity-routing/skills/caffeinity-routing/references/workflows.md`
+`caffeinity-skills/plugins/workflow-router/skills/workflow-router/references/workflows.md`
 (the router's copy, with each step's input and output). They must name the same skills in the same
 order; check with `route_check.py`.
 
@@ -202,15 +202,15 @@ order; check with `route_check.py`.
 Each workflow has an agent in the `caffeinity` plugin: skill-builder, discovery-lead,
 release-gatekeeper, seo-lead, job-search-coach, decision-analyst, learning-coach, outbound-lead,
 solo-launcher, skill-maintainer, estate-lead and harness-lead (Workflow 1 · build-a-skill to Workflow 12 · set-up-a-coding-agent). Codex has no subagents; there the
-`caffeinity-routing` skill names the workflow and the next skill.
+`workflow-router` skill names the workflow and the next skill.
 
 ### Changing a workflow
 
-1. Edit `references/workflows.md` in caffeinity-routing and `workflows` in `site/skills.json`
+1. Edit `references/workflows.md` in workflow-router and `workflows` in `site/skills.json`
    together; never renumber (other skills cite Workflow 3 · launch-safely and Workflow 4 · grow-search-traffic). Each
    workflow in the manifest also needs a `slug` (its page, `/workflows/<slug>/`, named by the
    outcome: `land-a-job`) and a one-sentence `summary`; changing a slug changes a public URL.
-2. Run `python -I plugins/caffeinity-routing/tests/test_route_check.py` and
+2. Run `python -I plugins/workflow-router/tests/test_route_check.py` and
    `python scripts/build_plugin.py --agents-only` in caffeinity-skills; add the agent to
    `plugins/caffeinity/agents.json` for a new workflow.
 3. A skill that lives in caffeinity-skills needs an `install` of
@@ -284,7 +284,7 @@ Still open:
 - **Trigger tests** run with `bash scripts/run_evals.sh` in caffeinity-skills (about $5, on your login,
   never in CI). Baseline 2026-10-24: 43/52; nine skills under-trigger on direct requests; those are
   Workflow 10 · maintain-skills's next tuning targets.
-- **Descriptions past 850 of the 1,024-character limit** (caffeinity-routing 862, study-system 875) leave little
+- **Descriptions past 850 of the 1,024-character limit** (workflow-router 862, study-system 875) leave little
   room for a new boundary; the next edit should cut before it adds.
 - Bespoke pages carry hand-written stats (for example tune-skill's file count) that the sync does
   not refresh. Regenerate or edit them when a skill grows.

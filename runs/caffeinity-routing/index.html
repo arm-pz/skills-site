@@ -4,12 +4,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Caffeinity Routing: test run | Skillsmith by Caffeinity</title>
+<title>caffeinity-routing: test run | Skillsmith by Caffeinity</title>
 <meta name="description" content="PASS, 8/10: The skill planned a two-brew route (Espresso with web-preflight, security red team, performance audit and release-gate-chair; then Cold brew…">
 <link rel="canonical" href="https://skillsmith.tech/runs/caffeinity-routing/">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Skillsmith by Caffeinity">
-<meta property="og:title" content="Caffeinity Routing: test run | Skillsmith by Caffeinity">
+<meta property="og:title" content="caffeinity-routing: test run | Skillsmith by Caffeinity">
 <meta property="og:description" content="PASS, 8/10: The skill planned a two-brew route (Espresso with web-preflight, security red team, performance audit and release-gate-chair; then Cold brew…">
 <meta property="og:url" content="https://skillsmith.tech/runs/caffeinity-routing/">
 <meta name="twitter:card" content="summary">
@@ -74,7 +74,7 @@
     </div>
     <div class="nav-cta">
       <a class="gh" href="https://github.com/arm-pz/caffeinity-skills" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn btn-accent btn-sm" href="/caffeinity-routing/">Start here</a>
+      <a class="btn btn-accent btn-sm" href="/workflow-router/">Start here</a>
     </div>
   </div>
 </nav>
@@ -82,8 +82,8 @@
 <main>
 <header class="page-hero rn-hero">
   <div class="wrap">
-    <p class="crumbs"><a href="/runs/">Test runs</a><a href="/caffeinity-routing/">Caffeinity Routing</a><span>13 Nov 2026</span></p>
-    <h1>How Caffeinity Routing did on a real task.</h1>
+    <p class="crumbs"><a href="/runs/">Test runs</a><span>13 Nov 2026</span></p>
+    <h1>How caffeinity-routing did on a real task.</h1>
     <p class="lead">The skill planned a two-brew route (Espresso with web-preflight, security red team, performance audit and release-gate-chair; then Cold brew with seo-crawl, keyword-guard, wordsmith and get-indexed), stated what each step hands on, and flagged the sign-off points, without running anything.</p>
     <p class="rn-meta"><span class="rn-verdict pass">PASS</span><span>8/10</span><span>13 Nov 2026</span><span>$0.10</span><span>13 s</span></p>
   </div>
@@ -91,7 +91,7 @@
 
 <article id="run-2026-11-13" class="rn-run">
 <section class="rn-numsec" aria-label="The run in numbers"><div class="wrap"><dl class="rn-nums"><div><dt>Verdict</dt><dd><span class="rn-verdict pass">PASS</span><small>8/10 against the rubric</small></dd></div><div><dt>Ran on</dt><dd>13 Nov 2026</dd></div><div><dt>Cost</dt><dd>$0.10<small>the agent's run, as Claude Code reported it</small></dd></div><div><dt>Time</dt><dd>13 s</dd></div><div><dt>Turns</dt><dd>4<small>2 tool calls</small></dd></div></dl></div></section>
-<section class="tone rn-body" aria-labelledby="run-2026-11-13-task"><div class="wrap"><h2 id="run-2026-11-13-task">The task.</h2><p><b>Target:</b> a multi-step goal across the catalog</p><p>The prompt Caffeinity Routing was given, word for word:</p><pre class="rn-pre">I&#x27;m launching a small SaaS web app next week. I want it safe to ship, fast, and found on Google afterwards. Which of your skills do I run, in what order, and what does each hand the next?</pre><p class="rn-note">Run headless in a clean project with only this skill installed. Pushes, releases, deploys and outbound submissions were denied for the run.</p></div></section>
+<section class="tone rn-body" aria-labelledby="run-2026-11-13-task"><div class="wrap"><h2 id="run-2026-11-13-task">The task.</h2><p><b>Target:</b> a multi-step goal across the catalog</p><p>The prompt caffeinity-routing was given, word for word:</p><pre class="rn-pre">I&#x27;m launching a small SaaS web app next week. I want it safe to ship, fast, and found on Google afterwards. Which of your skills do I run, in what order, and what does each hand the next?</pre><p class="rn-note">Run headless in a clean project with only this skill installed. Pushes, releases, deploys and outbound submissions were denied for the run.</p></div></section>
 <section class="rn-body" aria-labelledby="run-2026-11-13-graded"><div class="wrap"><h2 id="run-2026-11-13-graded">How it was graded.</h2><p>The run was judged against this rubric:</p><ul class="rn-list rubric"><li>Picks real catalog skills only, in a sensible order (ship checks before launch, SEO after)</li><li>Covers exposure (web-preflight), security (pre-ship-security-red-team), performance (pre-ship-performance-audit) or the release-gate chair that runs all three</li><li>Covers being found (seo-crawl/seo-sweep, get-indexed, findable or keyword-guard)</li><li>States what each step hands the next</li><li>Says which steps need the user&#x27;s go-ahead</li></ul><p style="margin-top:28px">And these hard checks, which pass or fail on their own:</p><ul class="rn-list"><li class="ok">routes through the release gate lanes <span class="rn-note">(web-preflight)</span></li><li class="ok">includes an indexing step <span class="rn-note">(seo-crawl)</span></li></ul></div></section>
 <section class="rn-body" aria-label="Met and missed"><div class="wrap rn-cols"><div><h2>What it got right.</h2><ul class="rn-list met"><li>Uses only catalog skills (web-preflight, pre-ship-security-red-team, pre-ship-performance-audit, release-gate-chair, seo-crawl, keyword-guard, wordsmith, get-indexed), with ship checks before SEO</li><li>Covers exposure, security and performance lanes plus the release-gate-chair that takes the three reports (hard check: routes through the release gate lanes)</li><li>Covers being found with seo-crawl, keyword-guard and get-indexed (hard check: includes an indexing step)</li><li>States what each step takes and hands on, e.g. a verdict per host, findings with evidence, before/after numbers, a HOLD/ready posture, findings JSON with stable IDs, a keyword map</li><li>Says that HOLD stops the workflow, that keyword-map sign-off is required, and that isolated, non-production environments are needed; ends by asking whether to start step 1</li></ul></div><div><h2>What it missed.</h2><ul class="rn-list missed"><li>Go-ahead requirements are only partly explicit: only the keyword-map sign-off and the closing question are stated as approvals. It does not say that get-indexed (submitting to IndexNow, resubmitting the sitemap) or the deploy needs the user&#x27;s go-ahead, or that the security test needs authorization.</li><li>The final output claims none of the skills are installed, but the tool calls show only route_check.py runs on &#x27;espresso&#x27; and &#x27;cold-&#x27;, with no explicit check of the installed skills. This is weakly verified.</li></ul></div></div></section>
 <section class="tone rn-body" aria-labelledby="run-2026-11-13-defects"><div class="wrap"><h2 id="run-2026-11-13-defects">What the run showed is wrong with the skill.</h2><p>Problems the grader put down to the skill itself, not to the run's setup. Each one goes on the fix list for the next version.</p><ul class="rn-list defects"><li>The routing skill does not prompt for an explicit go-ahead on outward-facing steps such as get-indexed submissions and deploys, so the approval list in its output is incomplete.</li><li>Install status appears to be asserted without a verification step in the skill&#x27;s script calls.</li></ul></div></section>
@@ -141,8 +141,7 @@ Install the four Brew 3 skills, then start step 1 with `web-preflight` on your s
 <section class="roast" aria-labelledby="next-h">
   <div class="wrap">
     <h2 id="next-h">Try it on your own task.</h2>
-    <div class="console"><pre>npx skills add arm-pz/caffeinity-skills --skill caffeinity-routing</pre><button class="btn btn-accent" type="button" data-copy="npx skills add arm-pz/caffeinity-skills --skill caffeinity-routing">Copy</button></div>
-    <p class="alt"><a href="/caffeinity-routing/">What Caffeinity Routing does and what it is not for</a> · <a href="/runs/">Every test run</a> · <a href="https://github.com/arm-pz/skills-site/blob/main/tools/skill-runs/run.py">How runs are set up</a>.</p>
+    <p class="alt"><a href="/runs/">Every test run</a> · <a href="https://github.com/arm-pz/skills-site/blob/main/tools/skill-runs/run.py">How runs are set up</a>.</p>
   </div>
 </section>
 </main>
