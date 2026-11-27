@@ -1,6 +1,6 @@
 # Controlled routing eval
 
-Does installing `caffeinity-routing` improve workflow recommendations in Claude Code? Both arms get the same task, catalog snapshot, model and local skill inventory. The router arm also gets `caffeinity-routing`. There are four cases and three repeats for each arm, for 24 fresh sessions. The first arm alternates between repeats. The tasks request a plan and the runner limits tools to reading the local project and checking its inventory.
+Does installing `workflow-router` improve workflow recommendations in Claude Code? Both arms get the same task, catalog snapshot, model and local skill inventory. The router arm also gets `workflow-router`. There are four cases and three repeats for each arm, for 24 fresh sessions. The first arm alternates between repeats. The tasks request a plan and the runner limits tools to reading the local project and checking its inventory.
 
 The cases cover publishing and discovery, the same goal phrased differently, a request that one skill owns, and a workflow with a mix of installed and missing skills. The program scores workflow order, inventory accuracy and required approvals separately. It records router activation from the Skill tool trace. Mentioning the router in an answer does not count as activation. The near-miss expects no router activation.
 

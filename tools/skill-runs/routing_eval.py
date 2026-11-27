@@ -12,7 +12,7 @@ from pathlib import Path
 import run
 
 
-ROUTER = "caffeinity-routing"
+ROUTER = "workflow-router"
 BASE_SKILLS = ("draft-skill", "findable", "wordsmith")
 CASES = {
     "publish-and-discover": {
@@ -68,8 +68,8 @@ OUTPUT_INSTRUCTIONS = (
     "public changes or submissions under approval_points."
 )
 TOOLS = ("Read", "Glob", "Grep", "Skill", "Bash")
-ALLOW = (*TOOLS[:-1], "Bash(python .claude/skills/caffeinity-routing/scripts/route_check.py *)",
-         "Bash(python3 .claude/skills/caffeinity-routing/scripts/route_check.py *)")
+ALLOW = (*TOOLS[:-1], "Bash(python .claude/skills/workflow-router/scripts/route_check.py *)",
+         "Bash(python3 .claude/skills/workflow-router/scripts/route_check.py *)")
 
 
 def score(case, answer, installed, activated, arm, known_skills):

@@ -19,7 +19,7 @@ const GOALS=[
   ["I burn through my Claude Code usage limit too fast","set-up-a-coding-agent"],
   ["clean my lead list before a cold email campaign","run-cold-outbound"],
   ["I want to start a small online business","launch-a-product"],
-  ["learn linear algebra from scratch","learn-a-skill"],
+  ["learn linear algebra from scratch","learn-any-topic"],
 ];
 const slugs=new Set(manifest.workflows.map(f=>f.slug));
 for(const [goal,want] of GOALS){

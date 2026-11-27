@@ -162,7 +162,7 @@ def render_workflows(manifest):
 
 
 def render_outcomes(manifest):
-    """The homepage's brew menu: one row per workflow, named by its outcome.
+    """The homepage's workflow menu: one row per workflow, named by its outcome.
 
     Each row is a <details> that opens to the recipe (the skills in order) and a link to the
     workflow's page. They share a name, so browsers that support it keep one open at a time;

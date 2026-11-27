@@ -39,6 +39,17 @@ def check(root="."):
     need((dist / ".well-known/skills.json").is_file(),
          "missing dist/.well-known/skills.json")
 
+    schemas_dir = root / "schemas"
+    if schemas_dir.is_dir():
+        for schema_file in sorted(schemas_dir.glob("*.json")):
+            dist_schema = dist / "schemas" / schema_file.name
+            need(dist_schema.is_file(), f"missing dist/schemas/{schema_file.name}")
+            if dist_schema.is_file():
+                try:
+                    json.loads(dist_schema.read_text(encoding="utf-8"))
+                except (OSError, json.JSONDecodeError) as err:
+                    need(False, f"invalid JSON in dist/schemas/{schema_file.name}: {err}")
+
     out_index = root / "out" / "index.json"
     dist_index = dist / "agent-skills" / "index.json"
     well_index = dist / ".well-known/agent-skills/index.json"

@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://skillsmith.tech/schemas/workflow-graph.schema.json",
+  "title": "Skillsmith workflow graph",
+  "description": "Declarative specification for typed, loop-backed, code-gated agent workflow graphs.",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "title",
+    "version",
+    "description",
+    "trigger",
+    "limits",
+    "labels",
+    "protected_paths",
+    "nodes",
+    "edges"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {"type": "string"},
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+    "brew": {"type": ["integer", "null"], "minimum": 1},
+    "name": {"type": "string", "minLength": 1},
+    "title": {"type": "string", "minLength": 1},
+    "version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "description": {"type": "string", "minLength": 1},
+    "trigger": {
+      "type": "object",
+      "required": ["sources"],
+      "additionalProperties": false,
+      "properties": {
+        "sources": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["type"],
+            "properties": {
+              "type": {"enum": ["github_issue", "script", "manual", "hook", "pull_request"]},
+              "repository": {"type": "string"},
+              "title": {"type": "string"},
+              "producer": {"type": "string"},
+              "command": {"type": "string"},
+              "schedule": {"type": "string"},
+              "workflow": {"type": "string"},
+              "enforced_by": {"type": "array", "items": {"type": "string"}}
+            }
+          }
+        }
+      }
+    },
+    "limits": {
+      "type": "object",
+      "required": ["max_rounds", "on_round_cap"],
+      "additionalProperties": false,
+      "properties": {
+        "max_rounds": {"type": "integer", "minimum": 1},
+        "on_round_cap": {"enum": ["needs-owner", "hold", "stop"]}
+      }
+    },
+    "labels": {
+      "type": "object",
+      "required": ["hold", "hands-off", "needs-owner"],
+      "additionalProperties": false,
+      "properties": {
+        "hold": {"type": "string", "minLength": 1},
+        "hands-off": {"type": "string", "minLength": 1},
+        "needs-owner": {"type": "string", "minLength": 1}
+      }
+    },
+    "protected_paths": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "required_checks": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "live_state": {
+      "type": "object",
+      "required": ["required"],
+      "additionalProperties": false,
+      "properties": {
+        "required": {"type": "array", "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "nodes": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["id", "kind"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9_-]*$"},
+          "kind": {"enum": ["script", "agent", "hybrid", "gate", "graph"]},
+          "runner": {"type": "string"},
+          "agent": {"type": "string"},
+          "skill": {"type": "string"},
+          "script": {"type": "string"},
+          "graph": {"type": "string"},
+          "uses": {"type": "array", "items": {"type": "string"}},
+          "fresh_eyes": {"type": "boolean"},
+          "optional": {"type": "boolean"},
+          "condition": {"type": "string"},
+          "fan_out_group": {"type": "string"},
+          "fan_in_from": {"type": "string"},
+          "inputs": {"type": "array", "items": {"type": "string"}},
+          "output": {
+            "type": "object",
+            "required": ["file", "schema"],
+            "additionalProperties": false,
+            "properties": {
+              "file": {"type": "string", "minLength": 1},
+              "schema": {"type": "string", "minLength": 1}
+            }
+          },
+          "exit_codes": {
+            "type": "object",
+            "properties": {
+              "0": {"type": "string"},
+              "1": {"type": "string"},
+              "2": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["from", "to"],
+        "additionalProperties": false,
+        "properties": {
+          "from": {
+            "anyOf": [
+              {"type": "string", "minLength": 1},
+              {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}}
+            ]
+          },
+          "to": {
+            "anyOf": [
+              {"type": "string", "minLength": 1},
+              {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}}
+            ]
+          },
+          "mode": {"enum": ["sequential", "parallel", "fan_in", "selective_parallel"]},
+          "when": {"type": "string", "minLength": 1},
+          "set_round": {"type": "integer", "minimum": 1},
+          "increment_round": {"type": "integer", "minimum": 1},
+          "loop_back": {"type": "boolean"},
+          "re_run_rule": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  }
+}
