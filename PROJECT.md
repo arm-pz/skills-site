@@ -63,7 +63,7 @@ says when a bespoke page's copy may still use the old name.
 
 | Path | What | Made by |
 | --- | --- | --- |
-| `/` | Outcome-led front door: the claim beside the brew menu (one row per workflow, opening to its recipe), three featured skills, proof runs, install, custom work | `index.html` shell; `gen_home.py` fills its regions |
+| `/` | Outcome-led front door: the claim beside the workflow menu (one row per workflow, opening to its recipe), three featured skills, proof runs, install, custom work | `index.html` shell; `gen_home.py` fills its regions |
 | `/skills/` | Every skill by group, with search | `skills/index.html` shell + `gen_home.py` |
 | `/mods/` | Every Claude Code mod | `mods/index.html` shell + `gen_home.py` |
 | `/workflows/` and `/workflows/<slug>/` | Every workflow, then one page each with its steps and one install block | `workflows/index.html` shell + `gen_home.py`; the per-workflow pages are fully generated from `templates/workflow-page.html` |
@@ -151,7 +151,7 @@ nightly  skills-site  health.yml  (cron 41 3 * * *)
     improvement → site/health.json updated and committed
 ```
 
-The loop closes through workflow Brew 10 · Descale (below): the `skill-maintainer` agent, or a person, runs
+The loop closes through workflow Workflow 10 · maintain-skills (below): the `skill-maintainer` agent, or a person, runs
 tune-skill's `regress.py` on the family, fixes each regression in the skill's own repo, re-releases
 a skill whose behaviour changed, and runs upstream-check so nothing stays local. When the PR
 merges, the next night records the improvement and closes the issue.
@@ -159,14 +159,14 @@ merges, the next night records the improvement and closes the issue.
 ```
 health.yml (nightly)  ──regression──▶  "Skill health" issue
         ▲                                     │
-        │                         weekly scheduled session runs Brew 10 · Descale
+        │                         weekly scheduled session runs Workflow 10 · maintain-skills
         │                         (or skill-maintainer on demand)
         │                                     ▼
   next night records the      tune-skill fix ─▶ PR in the skill's repo ─▶ merge
   improvement in health.json  ◀──────────── sync.py refreshes the page within the hour
 ```
 
-A weekly scheduled Claude Code session (Mondays) runs Brew 10 · Descale over every published skill and opens one
+A weekly scheduled Claude Code session (Mondays) runs Workflow 10 · maintain-skills over every published skill and opens one
 PR per repo it fixes. It never merges, deploys or accepts a baseline on its own. Because the
 job pulls tune-skill's scripts at HEAD, an improvement to the checker reaches every skill the next
 night. Skills that live elsewhere but are handed off to are listed in `EXTERNAL` in
@@ -175,9 +175,9 @@ night. Skills that live elsewhere but are handed off to are listed in `EXTERNAL`
 To accept an intended change (a new WARN you decided to keep):
 `python tools/agent-skills/health.py --accept-all` and `python tools/agent-skills/gen_page.py --write`, then commit `site/health.json` and the pages.
 
-## The brews (workflows across skills)
+## The workflows (across skills)
 
-Twelve brews. Each has a number, a coffee name and a plain goal ("Brew 3 · Espresso: Decide
+Twelve workflows. Each has a number, a plain name and a goal ("Workflow 3 · launch-safely: Decide
 whether a site is safe to launch"); older notes call them W1 to W12, and `route_check.py` still
 accepts those ids. Defined once in `site/skills.json` (`workflows`) and in
 `caffeinity-skills/plugins/caffeinity-routing/skills/caffeinity-routing/references/workflows.md`
@@ -186,28 +186,28 @@ order; check with `route_check.py`.
 
 | # | Goal | Route |
 | --- | --- | --- |
-| Brew 1 · Pour-over | Build a skill and make it installable | draft-skill or prompts-to-skill → tune-skill → prompts-to-skill-release → skill-to-mod (optional) |
-| Brew 2 · Bloom | Get a repo, skill or plugin found | findable → publish-pipeline → upstream-check → get-indexed (optional) |
-| Brew 3 · Espresso | Decide whether a site is safe to launch | web-preflight → pre-ship-security-red-team → pre-ship-performance-audit → release-gate-chair / -ledger / -validator |
-| Brew 4 · Cold brew | Grow organic search traffic | seo-crawl → keyword-guard → wordsmith → pre-ship-performance-audit (optional) → platform-content (optional) → get-indexed (optional) |
-| Brew 5 · French press | Land a job | recruiter-lens → applicant-kit → application-pilot → career-track (optional) |
-| Brew 6 · Cupping | Make a decision | research-brief → data-readout (optional) → crash-test or do-better → strategy-memo |
-| Brew 7 · Slow drip | Learn a skill | topic-primer → study-system → course-builder (optional, for a class) |
-| Brew 8 · Nitro | Run cold outbound | cold-email-list-gate → cold-email-ops → sales-copy |
-| Brew 9 · Moka pot | Launch a one-person product | solo-income-blueprint → site-prompt → production-code → paper-trail → release-gate-chair → platform-content |
-| Brew 10 · Descale | Maintain the skill family | tune-skill (regress.py) → prompts-to-skill-release (optional) → upstream-check; tune-and-ship for one published skill at a time |
-| Brew 11 · Estate roast | Stand up or audit a skill estate | skill-estate: the whole sweep this project was, in eight gated phases (inventory, listings, tune, gaps, publish and bundle, trigger tests, discovery, maintenance loop) |
-| Brew 12 · Dial-in | Set up a coding agent for a repo | portable-harness or harness-audit → setup-claude-advisor (optional) → diagnose-usage (optional) → choose-effort (optional) |
+| Workflow 1 · build-a-skill | Build a skill and make it installable | draft-skill or prompts-to-skill → tune-skill → prompts-to-skill-release → skill-to-mod (optional) |
+| Workflow 2 · get-found | Get a repo, skill or plugin found | findable → publish-pipeline → upstream-check → get-indexed (optional) |
+| Workflow 3 · launch-safely | Decide whether a site is safe to launch | web-preflight → pre-ship-security-red-team → pre-ship-performance-audit → release-gate-chair / -ledger / -validator |
+| Workflow 4 · grow-search-traffic | Grow organic search traffic | seo-crawl → keyword-guard → wordsmith → pre-ship-performance-audit (optional) → platform-content (optional) → get-indexed (optional) |
+| Workflow 5 · land-a-job | Land a job | recruiter-lens → applicant-kit → application-pilot → career-track (optional) |
+| Workflow 6 · decision-memo | Make a decision | research-brief → data-readout (optional) → crash-test or do-better → strategy-memo |
+| Workflow 7 · learn-any-topic | Learn any topic | topic-primer → study-system → course-builder (optional, for a class) |
+| Workflow 8 · run-cold-outbound | Run cold outbound | cold-email-list-gate → cold-email-ops → sales-copy |
+| Workflow 9 · launch-a-product | Launch a one-person product | solo-income-blueprint → site-prompt → production-code → paper-trail → release-gate-chair → platform-content |
+| Workflow 10 · maintain-skills | Maintain the skill family | tune-skill (regress.py) → prompts-to-skill-release (optional) → upstream-check; tune-and-ship for one published skill at a time |
+| Workflow 11 · audit-agent-skills | Stand up or audit a set of agent skills | skill-estate: the whole sweep this project was, in eight gated phases (inventory, listings, tune, gaps, publish and bundle, trigger tests, discovery, maintenance loop) |
+| Workflow 12 · set-up-a-coding-agent | Set up a coding agent for a repo | portable-harness or harness-audit → setup-claude-advisor (optional) → diagnose-usage (optional) → choose-effort (optional) |
 
 Each workflow has an agent in the `caffeinity` plugin: skill-builder, discovery-lead,
 release-gatekeeper, seo-lead, job-search-coach, decision-analyst, learning-coach, outbound-lead,
-solo-launcher, skill-maintainer, estate-lead and harness-lead (Brew 1 · Pour-over to Brew 12 · Dial-in). Codex has no subagents; there the
+solo-launcher, skill-maintainer, estate-lead and harness-lead (Workflow 1 · build-a-skill to Workflow 12 · set-up-a-coding-agent). Codex has no subagents; there the
 `caffeinity-routing` skill names the workflow and the next skill.
 
 ### Changing a workflow
 
 1. Edit `references/workflows.md` in caffeinity-routing and `workflows` in `site/skills.json`
-   together; never renumber (other skills cite Brew 3 · Espresso and Brew 4 · Cold brew). Each
+   together; never renumber (other skills cite Workflow 3 · launch-safely and Workflow 4 · grow-search-traffic). Each
    workflow in the manifest also needs a `slug` (its page, `/workflows/<slug>/`, named by the
    outcome: `land-a-job`) and a one-sentence `summary`; changing a slug changes a public URL.
 2. Run `python -I plugins/caffeinity-routing/tests/test_route_check.py` and
@@ -220,7 +220,7 @@ solo-launcher, skill-maintainer, estate-lead and harness-lead (Brew 1 · Pour-ov
 
 ## Adding or changing a skill
 
-1. **New skill:** Brew 1 · Pour-over. draft-skill (or prompts-to-skill), then tune-skill, then
+1. **New skill:** Workflow 1 · build-a-skill. draft-skill (or prompts-to-skill), then tune-skill, then
    prompts-to-skill-release. Make the repo public, fill in its About. The site picks it up within
    the hour; check the run summary for its guessed group, and move it in `site/skills.json` if needed.
 2. **Rename a repo** (findable's name decision): rename on GitHub. The redirect does the rest.
@@ -266,12 +266,12 @@ Closed on 2026-10-24:
 - skills.caffeinity.com deploys itself: the `skills-site` Pages project serves the `deploy`
   branch, so every merge is live within the hour. Issue #8 closed on the first verified run.
 
-- Brew 9 · Moka pot sent policy pages to `paper-trail`, which did not exist. It does now (caffeinity-skills).
+- Workflow 9 · launch-a-product sent policy pages to `paper-trail`, which did not exist. It does now (caffeinity-skills).
 - study-system sent class curricula to an unpublished skill. `course-builder` owns them now.
 - The three release-gate skills required `caffeinity-stack`, which is not public. They read it
   only when it is installed.
-- Nothing ran the health loop's fixes. Brew 10 · Descale, the skill-maintainer agent and the weekly session do.
-- Brew 4 · Cold brew ended at the rewrite; `platform-content` now carries the owner pages out (optional).
+- Nothing ran the health loop's fixes. Workflow 10 · maintain-skills, the skill-maintainer agent and the weekly session do.
+- Workflow 4 · grow-search-traffic ended at the rewrite; `platform-content` now carries the owner pages out (optional).
 
 Still open:
 
@@ -283,7 +283,7 @@ Still open:
   `python tools/agent-skills/repo_metadata.py --apply` once to add topics and homepages.
 - **Trigger tests** run with `bash scripts/run_evals.sh` in caffeinity-skills (about $5, on your login,
   never in CI). Baseline 2026-10-24: 43/52; nine skills under-trigger on direct requests; those are
-  Brew 10 · Descale's next tuning targets.
+  Workflow 10 · maintain-skills's next tuning targets.
 - **Descriptions past 850 of the 1,024-character limit** (caffeinity-routing 862, study-system 875) leave little
   room for a new boundary; the next edit should cut before it adds.
 - Bespoke pages carry hand-written stats (for example tune-skill's file count) that the sync does

@@ -245,9 +245,9 @@ def validate_manifest(data):
     numbers = set()
     slugs = set()
     for f in flows:
-        # A workflow is a brew: an id slug ("cold-brew"), its number and name ("Brew 4 · Cold brew").
+        # A workflow has an id slug ("grow-search-traffic"), its number and name ("Workflow 4 · grow-search-traffic").
         _req(isinstance(f, dict) and re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", str(f.get("id"))),
-             "workflow id must be a lowercase slug such as cold-brew")
+             "workflow id must be a lowercase slug such as grow-search-traffic")
         _req(f["id"] not in seen, f"duplicate workflow {f['id']}")
         seen.add(f["id"])
         _req(isinstance(f.get("number"), int) and f["number"] > 0 and f["number"] not in numbers,
@@ -260,6 +260,13 @@ def validate_manifest(data):
              f"{f['id']}: slug must be a lowercase slug such as land-a-job")
         _req(f["slug"] not in slugs, f"{f['id']}: duplicate slug {f['slug']!r}")
         slugs.add(f["slug"])
+        # aliases are the workflow's old slugs; _redirects sends /workflows/<alias>/ to its page.
+        aliases = f.get("aliases", [])
+        _req(isinstance(aliases, list) and all(re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", str(a)) for a in aliases),
+             f"{f['id']}: aliases must be a list of old slugs")
+        for a in aliases:
+            _req(a not in slugs, f"{f['id']}: alias {a!r} is already a workflow slug")
+            slugs.add(a)
         _req(isinstance(f.get("summary"), str) and f["summary"].strip(), f"{f['id']}: summary required")
         # lead puts one workflow first, and open, on the homepage menu; its number does not change.
         _req(f.get("lead") in (None, True), f"{f['id']}: lead must be true or left out")
@@ -463,7 +470,7 @@ def pack(files):
 
 
 def redirects(manifest):
-    """Cloudflare Pages _redirects lines sending a renamed skill's old URLs to the new ones."""
+    """Cloudflare Pages _redirects lines sending a renamed skill's or workflow's old URLs to the new ones."""
     lines = []
     for s in sorted(manifest["skills"], key=lambda s: s["name"]):
         for old in s.get("aliases", []):
@@ -472,6 +479,10 @@ def redirects(manifest):
                 lines.append(f"/{old} /{s['name']}/ 301")
             if s.get("kind", "skill") == "skill":
                 lines.append(f"/agent-skills/{old}.tar.gz /agent-skills/{s['name']}.tar.gz 301")
+    for f in sorted(manifest.get("workflows", []), key=lambda f: f["slug"]):
+        for old in f.get("aliases", []):
+            lines.append(f"/workflows/{old}/ /workflows/{f['slug']}/ 301")
+            lines.append(f"/workflows/{old} /workflows/{f['slug']}/ 301")
     return "".join(line + "\n" for line in lines)
 
 
@@ -523,7 +534,7 @@ def llms_txt(manifest):
         out.append("")
     flows = manifest.get("workflows", [])
     if flows:
-        out += ["## Brews (workflows)", ""]
+        out += ["## Workflows", ""]
         for f in flows:
             steps = " -> ".join(" or ".join(st["skills"]) for st in f["steps"])
             out.append(f"- [{f['title']}]({SITE}/workflows/{f['slug']}/) ({brew_label(f)}): {steps}")
@@ -532,7 +543,7 @@ def llms_txt(manifest):
 
 
 def brew_label(flow):
-    return f"Brew {flow['number']} · {flow['name']}"
+    return f"Workflow {flow['number']} · {flow['name']}"
 
 
 def sha256_hex(blob):

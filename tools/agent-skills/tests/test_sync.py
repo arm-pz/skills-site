@@ -73,7 +73,7 @@ class SyncTest(unittest.TestCase):
                        for i, g in enumerate(skilllib.GROUP_IDS, 1)],
             "skills": [entry("keeper", quality={"version": None, "commit": "aaaaaaa",
                                                 "updated": "2026-10-24", "notFor": []})],
-            "workflows": [{"id": "pour-over", "number": 1, "name": "Pour-over", "title": "Flow",
+            "workflows": [{"id": "build-a-skill", "number": 1, "name": "build-a-skill", "title": "Flow",
                            "slug": "flow", "summary": "Does it.", "steps": [{"skills": ["keeper"]}]}],
         }
 

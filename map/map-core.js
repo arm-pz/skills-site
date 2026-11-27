@@ -6,18 +6,18 @@
   /* Everyday words people use for each workflow, keyed by its id in the manifest. A workflow
      without an entry here still matches on its own title, summary and skills. */
   var WORDS={
-    "pour-over":"skill skills prompt prompts create write author draft package release publish installable template agent-skill skill.md",
-    "bloom":"found find discover discovery discoverable findable visibility visible github repo repository stars readme listing directory directories nobody indexed plugin mcp",
-    "espresso":"launch launching safe safely ship shipping deploy deployment security secure hack hacked vulnerability vulnerabilities exposed leak performance slow speed fast production ready live preflight release pentest",
-    "cold-brew":"seo search traffic google rank ranking rankings keyword keywords organic content blog visitors serp cannibalization impressions clicks",
-    "french-press":"job jobs resume cv recruiter recruiters interview interviews hire hired hiring linkedin application applications apply applying career cover letter offer",
-    "cupping":"should buy vendor versus vs pick decide decision decisions choose choice option options research compare comparison strategy whether memo analysis analyse analyze data numbers tradeoff pros cons",
-    "slow-drip":"learn learning study studying teach teaching course curriculum understand topic lesson lessons exam practice tutor beginner",
-    "nitro":"cold email emails outbound lead leads list prospect prospects prospecting sales outreach send sending deliverability inbox campaign sequence b2b",
-    "moka-pot":"product business startup solo income money side project saas landing page website site idea sell online indie founder customers revenue mvp",
-    "descale":"maintain maintenance update updates regress regression health broken stale upkeep drift nightly",
-    "estate-roast":"audit estate collection inventory portfolio marketplace catalogue catalog dozens many whole all",
-    "dial-in":"claude code codex cursor coding agent agents setup set configure configuration claude.md agents.md harness rules usage limit limits quota tokens effort model hooks"
+    "build-a-skill":"skill skills prompt prompts create write author draft package release publish installable template agent-skill skill.md",
+    "get-found":"found find discover discovery discoverable findable visibility visible github repo repository stars readme listing directory directories nobody indexed plugin mcp",
+    "launch-safely":"launch launching safe safely ship shipping deploy deployment security secure hack hacked vulnerability vulnerabilities exposed leak performance slow speed fast production ready live preflight release pentest",
+    "grow-search-traffic":"seo search traffic google rank ranking rankings keyword keywords organic content blog visitors serp cannibalization impressions clicks",
+    "land-a-job":"job jobs resume cv recruiter recruiters interview interviews hire hired hiring linkedin application applications apply applying career cover letter offer",
+    "decision-memo":"should buy vendor versus vs pick decide decision decisions choose choice option options research compare comparison strategy whether memo analysis analyse analyze data numbers tradeoff pros cons",
+    "learn-any-topic":"learn learning study studying teach teaching course curriculum understand topic lesson lessons exam practice tutor beginner",
+    "run-cold-outbound":"cold email emails outbound lead leads list prospect prospects prospecting sales outreach send sending deliverability inbox campaign sequence b2b",
+    "launch-a-product":"product business startup solo income money side project saas landing page website site idea sell online indie founder customers revenue mvp",
+    "maintain-skills":"maintain maintenance update updates regress regression health broken stale upkeep drift nightly",
+    "audit-agent-skills":"audit estate collection inventory portfolio marketplace catalogue catalog dozens many whole all",
+    "set-up-a-coding-agent":"claude code codex cursor coding agent agents setup set configure configuration claude.md agents.md harness rules usage limit limits quota tokens effort model hooks"
   };
   function stem(w){
     if(w.length>5&&/ing$/.test(w))return w.slice(0,-3);

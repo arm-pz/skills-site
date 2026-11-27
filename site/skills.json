@@ -66,7 +66,7 @@
       "tag": "routing",
       "title": "Caffeinity Routing",
       "pageTitle": "Caffeinity Routing — AI Agent Skill for Claude Code",
-      "blurb": "Start here. Tell it the outcome you want and it picks one of twelve brews (workflows), lists the skills in order with what each hands the next, and names the ones you have not installed instead of improvising their work.",
+      "blurb": "Start here. Tell it the outcome you want and it picks one of twelve workflows, lists the skills in order with what each hands the next, and names the ones you have not installed instead of improvising their work.",
       "stats": "4 files · 424 lines · 11 KB",
       "install": "npx skills add arm-pz/caffeinity-skills --skill caffeinity-routing",
       "page": "generated",
@@ -114,13 +114,13 @@
       "tested": {
         "date": "2026-11-13",
         "target": "a multi-step goal across the catalog",
-        "result": "The skill planned a two-brew route (Espresso with web-preflight, security red team, performance audit and release-gate-chair; then Cold brew with seo-crawl, keyword-guard, wordsmith and get-indexed), stated what each step hands…",
+        "result": "The skill planned a two-workflow route (launch-safely with web-preflight, security red team, performance audit and release-gate-chair; then grow-search-traffic with seo-crawl, keyword-guard, wordsmith and get-indexed), stated what each step hands…",
         "evidence": "/runs/caffeinity-routing/#run-2026-11-13"
       },
       "latestRun": {
         "date": "2026-11-13",
         "target": "a multi-step goal across the catalog",
-        "result": "The skill planned a two-brew route (Espresso with web-preflight, security red team, performance audit and release-gate-chair; then Cold brew with seo-crawl, keyword-guard, wordsmith and get-indexed), stated what each step hands…",
+        "result": "The skill planned a two-workflow route (launch-safely with web-preflight, security red team, performance audit and release-gate-chair; then grow-search-traffic with seo-crawl, keyword-guard, wordsmith and get-indexed), stated what each step hands…",
         "evidence": "/runs/caffeinity-routing/#run-2026-11-13",
         "verdict": "PASS"
       }
@@ -4625,9 +4625,9 @@
   ],
   "workflows": [
     {
-      "id": "pour-over",
+      "id": "build-a-skill",
       "number": 1,
-      "name": "Pour-over",
+      "name": "build-a-skill",
       "title": "Build a skill and make it installable",
       "slug": "build-a-skill",
       "summary": "Go from an idea or a pile of prompts to a tested skill anyone can install: draft it, tune its trigger, then package and release it.",
@@ -4658,9 +4658,9 @@
       "note": "skill-launch runs the first steps as one chain; tune-skill-mod and skill-release-mod hold pushes and releases until steps two and three have run."
     },
     {
-      "id": "bloom",
+      "id": "get-found",
       "number": 2,
-      "name": "Bloom",
+      "name": "get-found",
       "title": "Get a repo, skill or plugin found",
       "slug": "get-found",
       "summary": "Make a repo, skill or plugin show up for what it does: fix how it is described and listed, publish it, then check every listing matches what is live.",
@@ -4690,9 +4690,9 @@
       "note": "findable-polish and upstream-polish add the rewrite; get-indexed applies when publishing put new or changed pages live."
     },
     {
-      "id": "espresso",
+      "id": "launch-safely",
       "number": 3,
-      "name": "Espresso",
+      "name": "launch-safely",
       "title": "Decide whether a site is safe to launch",
       "slug": "launch-safely",
       "summary": "Get one honest answer to \"can we ship?\": check for exposed files, red-team the app, audit its speed, then let a release gate weigh the three verdicts.",
@@ -4723,9 +4723,9 @@
       "note": "ship-sentinel holds git push and deploys until the gate has run."
     },
     {
-      "id": "cold-brew",
+      "id": "grow-search-traffic",
       "number": 4,
-      "name": "Cold brew",
+      "name": "grow-search-traffic",
       "title": "Grow organic search traffic",
       "slug": "grow-search-traffic",
       "summary": "Find what your site is missing in Google and AI answers, fix the supported issues, and measure what changes after release.",
@@ -4785,9 +4785,9 @@
       ]
     },
     {
-      "id": "french-press",
+      "id": "land-a-job",
       "number": 5,
-      "name": "French press",
+      "name": "land-a-job",
       "title": "Land a job",
       "slug": "land-a-job",
       "summary": "Run a job search without inventing credentials: see your resume the way recruiters screen it, write the tailored version, then manage the applications.",
@@ -4817,11 +4817,14 @@
       "note": "It never submits an application for you."
     },
     {
-      "id": "cupping",
+      "id": "decision-memo",
       "number": 6,
-      "name": "Cupping",
+      "name": "decision-memo",
       "title": "Make a decision",
-      "slug": "make-a-decision",
+      "slug": "decision-memo",
+      "aliases": [
+        "make-a-decision"
+      ],
       "summary": "Turn a hard question into a decision you can defend: gather sourced evidence, read your own numbers, attack the options, then write the memo.",
       "steps": [
         {
@@ -4849,11 +4852,14 @@
       ]
     },
     {
-      "id": "slow-drip",
+      "id": "learn-any-topic",
       "number": 7,
-      "name": "Slow drip",
-      "title": "Learn a skill",
-      "slug": "learn-a-skill",
+      "name": "learn-any-topic",
+      "title": "Learn any topic",
+      "slug": "learn-any-topic",
+      "aliases": [
+        "learn-a-skill"
+      ],
       "summary": "Learn any topic from zero: get taught concept by concept, then build the practice system that makes it stick.",
       "steps": [
         {
@@ -4876,9 +4882,9 @@
       "note": "course-builder applies when the learner is a class or cohort, not one person."
     },
     {
-      "id": "nitro",
+      "id": "run-cold-outbound",
       "number": 8,
-      "name": "Nitro",
+      "name": "run-cold-outbound",
       "title": "Run cold outbound",
       "slug": "run-cold-outbound",
       "summary": "Send cold email that lands: check the lead list before it loads, size and protect the sending setup, then write the copy.",
@@ -4901,9 +4907,9 @@
       ]
     },
     {
-      "id": "moka-pot",
+      "id": "launch-a-product",
       "number": 9,
-      "name": "Moka pot",
+      "name": "launch-a-product",
       "title": "Launch a one-person product",
       "slug": "launch-a-product",
       "summary": "Take a one-person product from plan to launch: pick the offer, build the site and code, write the policy pages, pass the release gate, then announce it.",
@@ -4939,12 +4945,12 @@
           ]
         }
       ],
-      "note": "Step five is the whole of Brew 3 · Espresso; paper-trail gives the gate the policy pages to check."
+      "note": "Step five is the whole of Workflow 3 · launch-safely; paper-trail gives the gate the policy pages to check."
     },
     {
-      "id": "descale",
+      "id": "maintain-skills",
       "number": 10,
-      "name": "Descale",
+      "name": "maintain-skills",
       "title": "Maintain the skill family",
       "slug": "maintain-skills",
       "summary": "Keep a family of skills healthy after release: tune what drifted, re-release what changed, and confirm every listing still matches.",
@@ -4969,11 +4975,14 @@
       "note": "The nightly health job opens the issue this starts from; a weekly scheduled session runs it and opens PRs. For one published skill at a time, tune-and-ship takes it from a tune and a fact check through to a release and a confirmed live page."
     },
     {
-      "id": "estate-roast",
+      "id": "audit-agent-skills",
       "number": 11,
-      "name": "Estate roast",
-      "title": "Stand up or audit a skill estate",
-      "slug": "audit-a-skill-estate",
+      "name": "audit-agent-skills",
+      "title": "Stand up or audit a set of agent skills",
+      "slug": "audit-agent-skills",
+      "aliases": [
+        "audit-a-skill-estate"
+      ],
       "summary": "Inventory and repair a whole collection of skills in one gated run, from repos and listings to the workflows that connect them.",
       "steps": [
         {
@@ -4982,12 +4991,12 @@
           ]
         }
       ],
-      "note": "One run over the whole collection in eight gated phases; Brew 10 · Descale keeps it healthy afterwards."
+      "note": "One run over the whole collection in eight gated phases; Workflow 10 · maintain-skills keeps it healthy afterwards."
     },
     {
-      "id": "dial-in",
+      "id": "set-up-a-coding-agent",
       "number": 12,
-      "name": "Dial-in",
+      "name": "set-up-a-coding-agent",
       "title": "Set up a coding agent for a repo",
       "slug": "set-up-a-coding-agent",
       "lead": true,
