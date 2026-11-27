@@ -28,6 +28,14 @@ EXTERNAL = [
     "job-application-agent",                  # third-party, denied in site/deny.json
 ]
 
+# Family skills that a published skill already hands off to but that are not published yet.
+# They are not dangling, but they are not installable either, so every nightly report lists them.
+# Remove an entry once the skill ships (or once nothing hands off to it any more).
+PENDING = {
+    "log-papercut": "drafted in staging/log-papercut; publish it as arm-pz/log-papercut",
+    "loop-schedule": "agent ladder level 2, not written yet",
+}
+
 
 def unpack(files, dest):
     """Write a tarball's files under dest. A path that escapes dest is dropped, not written."""
@@ -50,7 +58,13 @@ def stage(manifest, family, tools, fetch):
         files = skilllib.select_skill_files(skilllib.expand_tarball(fetch(skill["repo"])), skill["path"])
         unpack(files, family / skill["name"])
     legacy = [s["name"] for s in manifest["skills"] if s.get("repo") is None]
-    return EXTERNAL + legacy
+    return EXTERNAL + list(PENDING) + legacy
+
+
+def pending_note():
+    """The handoff targets accepted only because they are on the way, so they stay visible."""
+    lines = "".join(f"- `{name}`: {why}\n" for name, why in sorted(PENDING.items()))
+    return f"Handoffs to skills that are not published yet, accepted until they ship:\n\n{lines}\n" if lines else ""
 
 
 def main(argv=None):
@@ -82,6 +96,7 @@ def main(argv=None):
             with open(args.report, "w", encoding="utf-8") as fh:
                 fh.write("Nightly `regress.py` over every skill published on skillsmith.tech.\n\n")
                 fh.write("```\n" + run.stdout + "```\n\n")
+                fh.write(pending_note())
                 fh.write("Fix each regression in its repo with tune-skill; the next nightly run "
                          "records the fix. If a regression is intended, accept it with "
                          "`python tools/agent-skills/health.py --accept-all`, regenerate the pages "

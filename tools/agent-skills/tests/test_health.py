@@ -41,6 +41,23 @@ class StageTest(unittest.TestCase):
             self.assertTrue((tools / "scripts" / "regress.py").is_file())
             self.assertIn("old-gate", external)
             self.assertIn("seo-audit", external)
+            for name in health.PENDING:
+                self.assertIn(name, external)
+
+
+class PendingNoteTest(unittest.TestCase):
+    def test_lists_every_pending_skill_with_its_reason(self):
+        note = health.pending_note()
+        for name, why in health.PENDING.items():
+            self.assertIn(f"`{name}`: {why}", note)
+
+    def test_says_nothing_when_nothing_is_pending(self):
+        saved = dict(health.PENDING)
+        health.PENDING.clear()
+        try:
+            self.assertEqual(health.pending_note(), "")
+        finally:
+            health.PENDING.update(saved)
 
 
 if __name__ == "__main__":
