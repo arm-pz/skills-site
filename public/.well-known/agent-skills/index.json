@@ -510,7 +510,7 @@
       "description": "Plugin marketplace for Skillsmith by Caffeinity. Install tested AI agent skills and workflows for Claude Code and Codex, with source and evidence at skillsmith.tech.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/workflow-router.tar.gz",
-      "digest": "sha256:aa882ad5668c767273d4be6e3433514eea2d38d52e6f67d9cdb5162679383f78"
+      "digest": "sha256:a7f2b3e6e00a0f7cb2fbf5f7f47ceeeaea64084d62a6a121edee856c28e74f41"
     }
   ]
 }
