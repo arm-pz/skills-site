@@ -10,8 +10,7 @@ About, push. The hourly sync picks it up. Then delete the folder here.
 | Folder | Ladder level | Status |
 | --- | --- | --- |
 | `skill-eval-suite/` | 3 | 0.4.0, drafted 2026-11-24 (first named eval-harness, renamed to avoid collisions): Uber suite mix, EDD gates, pipeline gate checks, per-skill token windows; 60 script checks pass; not yet run on a real loop |
-| `log-papercut/` | 3 (feeds it) | 0.1.0, drafted 2026-11-24: always-on friction reports; 20 script checks pass with a fake `gh` |
 
 `evals/known-bad/` at the repo root is this site's own known-bad set, with four entries (two real incidents, two synthetic) and a control for each.
 
-`discovery/` holds the findable kit for both skills: About text, topics, release notes, site pages, distribution list and the commands to publish them.
+`discovery/` holds the findable kit for skill-eval-suite and log-papercut (log-papercut is now published as arm-pz/log-papercut, so its folder is gone from here): About text, topics, release notes, site pages, distribution list and the commands to publish them.

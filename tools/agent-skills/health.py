@@ -32,7 +32,6 @@ EXTERNAL = [
 # They are not dangling, but they are not installable either, so every nightly report lists them.
 # Remove an entry once the skill ships (or once nothing hands off to it any more).
 PENDING = {
-    "log-papercut": "drafted in staging/log-papercut; publish it as arm-pz/log-papercut",
     "loop-schedule": "agent ladder level 2, not written yet",
 }
 
