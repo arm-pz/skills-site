@@ -187,6 +187,16 @@ class CheckDistTest(unittest.TestCase):
         (self.root / "dist/llms.txt").write_text(text + "stale\n", encoding="utf-8")
         self.assertTrue(check_dist.check(self.root))
 
+    def test_schemas_must_be_copied_and_valid_json(self):
+        (self.root / "schemas").mkdir()
+        (self.root / "schemas/workflow-graph.schema.json").write_text('{"type": "object"}', encoding="utf-8")
+        self.assertTrue(check_dist.check(self.root))  # missing dist/schemas/workflow-graph.schema.json
+        (self.root / "dist/schemas").mkdir()
+        (self.root / "dist/schemas/workflow-graph.schema.json").write_text("{bad", encoding="utf-8")
+        self.assertTrue(check_dist.check(self.root))  # invalid JSON
+        (self.root / "dist/schemas/workflow-graph.schema.json").write_text('{"type": "object"}', encoding="utf-8")
+        self.assertEqual(check_dist.check(self.root), [])
+
 
 if __name__ == "__main__":
     unittest.main()
