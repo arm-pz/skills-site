@@ -30,13 +30,6 @@
       "digest": "sha256:5ddd486bd6fcc8048c862aac68063362571f86908f3d7e9f0f32984b251eaae2"
     },
     {
-      "name": "caffeinity-routing",
-      "description": "Plugin marketplace for Skillsmith by Caffeinity. Install tested AI agent skills and workflows for Claude Code and Codex, with source and evidence at skillsmith.tech.",
-      "type": "archive",
-      "url": "https://skillsmith.tech/agent-skills/caffeinity-routing.tar.gz",
-      "digest": "sha256:2dfee6b3e93d352bc8747bff75d9b630322d7ebac373dfc8c73388f8e786a815"
-    },
-    {
       "name": "career-track",
       "description": "Agent skill for the moves around a career: a positioning line, the promotion case, review self-assessments, salary scripts, a pivot path, executive presence, a dated network map and ninety-day milestones. Missing numbers stay labelled gaps, never invented.",
       "type": "archive",
@@ -398,7 +391,7 @@
       "description": "Plugin marketplace for Skillsmith by Caffeinity. Install tested AI agent skills and workflows for Claude Code and Codex, with source and evidence at skillsmith.tech.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/skill-estate.tar.gz",
-      "digest": "sha256:3152b9ff53ccf8efffa87b5107a6e4ecbe13eaf36619a1763e90dc43f8506750"
+      "digest": "sha256:abfbc87173233388ad673f65e9f5f93398ee4be7467e9fde41a19f4f8eaea93c"
     },
     {
       "name": "skill-eval-suite",
@@ -468,7 +461,7 @@
       "description": "Plugin marketplace for Skillsmith by Caffeinity. Install tested AI agent skills and workflows for Claude Code and Codex, with source and evidence at skillsmith.tech.",
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/tune-and-ship.tar.gz",
-      "digest": "sha256:cb7c476abd54ad132d51ccdb5772f90e000c58307785d4fc690274dd8edd24bf"
+      "digest": "sha256:e251bd35aaa98277f1890c428168174b5a4b51b8a5cb046e19e9e42f648dacf7"
     },
     {
       "name": "tune-skill",
@@ -511,6 +504,13 @@
       "type": "archive",
       "url": "https://skillsmith.tech/agent-skills/wordsmith.tar.gz",
       "digest": "sha256:f696e0284ff7d7765756994b14f27453f084229c0c5d45b06fc1ef5909b3287f"
+    },
+    {
+      "name": "workflow-router",
+      "description": "Plugin marketplace for Skillsmith by Caffeinity. Install tested AI agent skills and workflows for Claude Code and Codex, with source and evidence at skillsmith.tech.",
+      "type": "archive",
+      "url": "https://skillsmith.tech/agent-skills/workflow-router.tar.gz",
+      "digest": "sha256:aa882ad5668c767273d4be6e3433514eea2d38d52e6f67d9cdb5162679383f78"
     }
   ]
 }

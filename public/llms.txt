@@ -13,7 +13,7 @@ Sections: [skills](https://skillsmith.tech/skills/), [workflows](https://skillsm
 
 ## Start Here
 
-- [caffeinity-routing](https://skillsmith.tech/caffeinity-routing/): Start here. Tell it the outcome you want and it picks one of twelve brews (workflows), lists the skills in order with what each hands the next, and names the ones you have not installed instead of improvising their work.
+- [workflow-router](https://skillsmith.tech/workflow-router/): Start here. Tell it the outcome you want and it picks one of twelve workflows, lists the skills in order with what each hands the next, and names the ones you have not installed instead of improvising their work.
 
 ## Skill Authoring
 
@@ -116,17 +116,17 @@ Sections: [skills](https://skillsmith.tech/skills/), [workflows](https://skillsm
 - [study-system](https://skillsmith.tech/study-system/): Builds the system around a skill you are acquiring: the minimum components, a beginner-to-practitioner roadmap, deliberate practice, spaced repetition and an honest mastery check.
 - [course-builder](https://skillsmith.tech/course-builder/): A course for a class or cohort: measurable outcomes, modules in prerequisite order, an assessment for every outcome and a time budget that fits, checked by a script before the first session.
 
-## Brews (workflows)
+## Workflows
 
-- [Build a skill and make it installable](https://skillsmith.tech/workflows/build-a-skill/) (Brew 1 · Pour-over): draft-skill or prompts-to-skill -> tune-skill -> prompts-to-skill-release -> skill-to-mod
-- [Get a repo, skill or plugin found](https://skillsmith.tech/workflows/get-found/) (Brew 2 · Bloom): findable -> publish-pipeline -> upstream-check -> get-indexed
-- [Decide whether a site is safe to launch](https://skillsmith.tech/workflows/launch-safely/) (Brew 3 · Espresso): web-preflight -> pre-ship-security-red-team -> pre-ship-performance-audit -> release-gate-chair or release-gate-ledger or release-gate-validator
-- [Grow organic search traffic](https://skillsmith.tech/workflows/grow-search-traffic/) (Brew 4 · Cold brew): diagnose-search-visibility -> seo-crawl -> keyword-guard -> wordsmith -> pre-ship-performance-audit -> platform-content -> get-indexed -> verify-search-visibility
-- [Land a job](https://skillsmith.tech/workflows/land-a-job/) (Brew 5 · French press): recruiter-lens -> applicant-kit -> application-pilot -> career-track
-- [Make a decision](https://skillsmith.tech/workflows/make-a-decision/) (Brew 6 · Cupping): research-brief -> data-readout -> crash-test or do-better -> strategy-memo
-- [Learn a skill](https://skillsmith.tech/workflows/learn-a-skill/) (Brew 7 · Slow drip): topic-primer -> study-system -> course-builder
-- [Run cold outbound](https://skillsmith.tech/workflows/run-cold-outbound/) (Brew 8 · Nitro): cold-email-list-gate -> cold-email-ops -> sales-copy
-- [Launch a one-person product](https://skillsmith.tech/workflows/launch-a-product/) (Brew 9 · Moka pot): solo-income-blueprint -> site-prompt -> production-code -> paper-trail -> release-gate-chair -> platform-content
-- [Maintain the skill family](https://skillsmith.tech/workflows/maintain-skills/) (Brew 10 · Descale): tune-skill -> prompts-to-skill-release -> upstream-check
-- [Stand up or audit a skill estate](https://skillsmith.tech/workflows/audit-a-skill-estate/) (Brew 11 · Estate roast): skill-estate
-- [Set up a coding agent for a repo](https://skillsmith.tech/workflows/set-up-a-coding-agent/) (Brew 12 · Dial-in): portable-harness or harness-audit -> setup-claude-advisor -> diagnose-usage -> choose-effort
+- [Build a skill and make it installable](https://skillsmith.tech/workflows/build-a-skill/) (Workflow 1 · build-a-skill): draft-skill or prompts-to-skill -> tune-skill -> prompts-to-skill-release -> skill-to-mod
+- [Get a repo, skill or plugin found](https://skillsmith.tech/workflows/get-found/) (Workflow 2 · get-found): findable -> publish-pipeline -> upstream-check -> get-indexed
+- [Decide whether a site is safe to launch](https://skillsmith.tech/workflows/launch-safely/) (Workflow 3 · launch-safely): web-preflight -> pre-ship-security-red-team -> pre-ship-performance-audit -> release-gate-chair or release-gate-ledger or release-gate-validator
+- [Grow organic search traffic](https://skillsmith.tech/workflows/grow-search-traffic/) (Workflow 4 · grow-search-traffic): diagnose-search-visibility -> seo-crawl -> keyword-guard -> wordsmith -> pre-ship-performance-audit -> platform-content -> get-indexed -> verify-search-visibility
+- [Land a job](https://skillsmith.tech/workflows/land-a-job/) (Workflow 5 · land-a-job): recruiter-lens -> applicant-kit -> application-pilot -> career-track
+- [Make a decision](https://skillsmith.tech/workflows/decision-memo/) (Workflow 6 · decision-memo): research-brief -> data-readout -> crash-test or do-better -> strategy-memo
+- [Learn any topic](https://skillsmith.tech/workflows/learn-any-topic/) (Workflow 7 · learn-any-topic): topic-primer -> study-system -> course-builder
+- [Run cold outbound](https://skillsmith.tech/workflows/run-cold-outbound/) (Workflow 8 · run-cold-outbound): cold-email-list-gate -> cold-email-ops -> sales-copy
+- [Launch a one-person product](https://skillsmith.tech/workflows/launch-a-product/) (Workflow 9 · launch-a-product): solo-income-blueprint -> site-prompt -> production-code -> paper-trail -> release-gate-chair -> platform-content
+- [Maintain the skill family](https://skillsmith.tech/workflows/maintain-skills/) (Workflow 10 · maintain-skills): tune-skill -> prompts-to-skill-release -> upstream-check
+- [Stand up or audit a set of agent skills](https://skillsmith.tech/workflows/audit-agent-skills/) (Workflow 11 · audit-agent-skills): skill-estate
+- [Set up a coding agent for a repo](https://skillsmith.tech/workflows/set-up-a-coding-agent/) (Workflow 12 · set-up-a-coding-agent): portable-harness or harness-audit -> setup-claude-advisor -> diagnose-usage -> choose-effort

@@ -1,0 +1,9 @@
+/caffeinity-routing/ /workflow-router/ 301
+/caffeinity-routing /workflow-router/ 301
+/agent-skills/caffeinity-routing.tar.gz /agent-skills/workflow-router.tar.gz 301
+/workflows/audit-a-skill-estate/ /workflows/audit-agent-skills/ 301
+/workflows/audit-a-skill-estate /workflows/audit-agent-skills/ 301
+/workflows/make-a-decision/ /workflows/decision-memo/ 301
+/workflows/make-a-decision /workflows/decision-memo/ 301
+/workflows/learn-a-skill/ /workflows/learn-any-topic/ 301
+/workflows/learn-a-skill /workflows/learn-any-topic/ 301

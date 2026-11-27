@@ -59,16 +59,19 @@
   ],
   "skills": [
     {
-      "name": "caffeinity-routing",
+      "name": "workflow-router",
+      "aliases": [
+        "caffeinity-routing"
+      ],
       "repo": "arm-pz/caffeinity-skills",
-      "path": "plugins/caffeinity-routing/skills/caffeinity-routing",
+      "path": "plugins/workflow-router/skills/workflow-router",
       "group": "start-here",
       "tag": "routing",
-      "title": "Caffeinity Routing",
-      "pageTitle": "Caffeinity Routing — AI Agent Skill for Claude Code",
-      "blurb": "Start here. Tell it the outcome you want and it picks one of twelve brews (workflows), lists the skills in order with what each hands the next, and names the ones you have not installed instead of improvising their work.",
+      "title": "Workflow Router",
+      "pageTitle": "Workflow Router — AI Agent Skill for Claude Code",
+      "blurb": "Start here. Tell it the outcome you want and it picks one of twelve workflows, lists the skills in order with what each hands the next, and names the ones you have not installed instead of improvising their work.",
       "stats": "4 files · 424 lines · 11 KB",
-      "install": "npx skills add arm-pz/caffeinity-skills --skill caffeinity-routing",
+      "install": "npx skills add arm-pz/caffeinity-skills --skill workflow-router",
       "page": "generated",
       "pageSource": {
         "description": "Picks which caffeinity skills to run, in what order, for a goal that spans more than one of them, and says what each step hands the next: build and publish a skill, get a project found, pass a release gate, grow organic search traffic, run a job search, make a decision, learn a skill, run cold outbound, launch a one-person product, set up a coding agent for a repo, or set up and keep the skills themselves healthy. Checks which of those skills are installed and names the missing ones instead of improvising their work. Use whenever someone asks which skill to use, what to run first, how the skills fit together, or describes a multi-step outcome such as \"take this idea to a published skill\" or \"get my site ready to ship and ranking\", even if they never name a skill. Not for a request one skill already owns (load that skill directly), and not for doing a step's work itself: the named skill does it.",
@@ -76,12 +79,12 @@
           {
             "path": "SKILL.md",
             "lines": 90,
-            "bytes": 7010
+            "bytes": 7004
           },
           {
             "path": "references/trigger-cases.md",
             "lines": 30,
-            "bytes": 2965
+            "bytes": 2938
           },
           {
             "path": "references/workflows.md",
@@ -91,21 +94,21 @@
           {
             "path": "scripts/route_check.py",
             "lines": 152,
-            "bytes": 6429
+            "bytes": 6426
           }
         ],
         "fileCount": 4,
         "lines": 424,
         "bytes": 11051,
         "license": "MIT",
-        "commit": "18f7237571547a654c22ba2c0836fcd6a560e2f3",
-        "sha256": "2dfee6b3e93d352bc8747bff75d9b630322d7ebac373dfc8c73388f8e786a815"
+        "commit": "6c63c29dbc652f7febd9a3cc276b1ac81219c931",
+        "sha256": "aa882ad5668c767273d4be6e3433514eea2d38d52e6f67d9cdb5162679383f78"
       },
       "order": 101,
       "quality": {
         "version": "1.1.0",
-        "commit": "18f7237",
-        "updated": "2026-11-26",
+        "commit": "6c63c29",
+        "updated": "2026-11-27",
         "notFor": [
           "a request one skill already owns (load that skill directly)",
           "not for doing a step's work itself: the named skill does it"
@@ -114,13 +117,13 @@
       "tested": {
         "date": "2026-11-13",
         "target": "a multi-step goal across the catalog",
-        "result": "The skill planned a two-brew route (Espresso with web-preflight, security red team, performance audit and release-gate-chair; then Cold brew with seo-crawl, keyword-guard, wordsmith and get-indexed), stated what each step hands…",
+        "result": "The skill planned a two-workflow route (launch-safely with web-preflight, security red team, performance audit and release-gate-chair; then grow-search-traffic with seo-crawl, keyword-guard, wordsmith and get-indexed), stated what each step hands…",
         "evidence": "/runs/caffeinity-routing/#run-2026-11-13"
       },
       "latestRun": {
         "date": "2026-11-13",
         "target": "a multi-step goal across the catalog",
-        "result": "The skill planned a two-brew route (Espresso with web-preflight, security red team, performance audit and release-gate-chair; then Cold brew with seo-crawl, keyword-guard, wordsmith and get-indexed), stated what each step hands…",
+        "result": "The skill planned a two-workflow route (launch-safely with web-preflight, security red team, performance audit and release-gate-chair; then grow-search-traffic with seo-crawl, keyword-guard, wordsmith and get-indexed), stated what each step hands…",
         "evidence": "/runs/caffeinity-routing/#run-2026-11-13",
         "verdict": "PASS"
       }
@@ -453,14 +456,14 @@
         "lines": 1288,
         "bytes": 20897,
         "license": "MIT",
-        "commit": "18f7237571547a654c22ba2c0836fcd6a560e2f3",
+        "commit": "6c63c29dbc652f7febd9a3cc276b1ac81219c931",
         "sha256": "e79c3f9cbd44fd97b950ca333c4a51b40f644416361a221b0754d0fa31e31a28"
       },
       "order": 208,
       "quality": {
         "version": "0.1.0",
-        "commit": "18f7237",
-        "updated": "2026-11-26",
+        "commit": "6c63c29",
+        "updated": "2026-11-27",
         "notFor": []
       },
       "latestRun": {
@@ -552,14 +555,14 @@
         "lines": 627,
         "bytes": 10387,
         "license": "MIT",
-        "commit": "18f7237571547a654c22ba2c0836fcd6a560e2f3",
+        "commit": "6c63c29dbc652f7febd9a3cc276b1ac81219c931",
         "sha256": "0261e8afac9fd1c1a6bc03685149f45eae4a09c0c0b6f48f1e61b1ca60093aa9"
       },
       "order": 209,
       "quality": {
         "version": "0.1.0",
-        "commit": "18f7237",
-        "updated": "2026-11-26",
+        "commit": "6c63c29",
+        "updated": "2026-11-27",
         "notFor": []
       },
       "tested": {
@@ -589,12 +592,12 @@
       "install": "npx skills add arm-pz/caffeinity-skills --skill tune-and-ship",
       "page": "generated",
       "pageSource": {
-        "description": "Takes one published skill at a time from as-is to tuned, fact-checked, released and live, then moves to the next one in the catalog. Each run tunes the skill with tune-skill, checks every version number, flag, price and command it states against the primary source, re-reads its siblings' real SKILL.md files, polishes the listing with findable-polish, writes the version and release notes, opens one PR, and after the merge confirms the site page and marketplace copy are live. Use whenever the user wants to fine-tune their other skills, work through the catalog, give a published skill the full treatment, fact-check a skill's claims, or ship a tune instead of drafting it, even if they never say \"ship\". Not for a tune with no release (use tune-skill), drafts with nothing pushed (use tune-and-polish), a new skill (use skill-launch), regressions from the nightly health check (use caffeinity-routing's maintain-skills workflow), or a whole collection (use skill-estate).",
+        "description": "Takes one published skill at a time from as-is to tuned, fact-checked, released and live, then moves to the next one in the catalog. Each run tunes the skill with tune-skill, checks every version number, flag, price and command it states against the primary source, re-reads its siblings' real SKILL.md files, polishes the listing with findable-polish, writes the version and release notes, opens one PR, and after the merge confirms the site page and marketplace copy are live. Use whenever the user wants to fine-tune their other skills, work through the catalog, give a published skill the full treatment, fact-check a skill's claims, or ship a tune instead of drafting it, even if they never say \"ship\". Not for a tune with no release (use tune-skill), drafts with nothing pushed (use tune-and-polish), a new skill (use skill-launch), regressions from the nightly health check (use workflow-router's maintain-skills workflow), or a whole collection (use skill-estate).",
         "files": [
           {
             "path": "SKILL.md",
             "lines": 133,
-            "bytes": 7215
+            "bytes": 7209
           },
           {
             "path": "references/fact-check.md",
@@ -614,7 +617,7 @@
           {
             "path": "references/trigger-cases.md",
             "lines": 41,
-            "bytes": 3135
+            "bytes": 3126
           },
           {
             "path": "scripts/queue.py",
@@ -624,21 +627,21 @@
         ],
         "fileCount": 6,
         "lines": 416,
-        "bytes": 8801,
+        "bytes": 8798,
         "license": "MIT",
-        "commit": "18f7237571547a654c22ba2c0836fcd6a560e2f3",
-        "sha256": "cb7c476abd54ad132d51ccdb5772f90e000c58307785d4fc690274dd8edd24bf"
+        "commit": "6c63c29dbc652f7febd9a3cc276b1ac81219c931",
+        "sha256": "e251bd35aaa98277f1890c428168174b5a4b51b8a5cb046e19e9e42f648dacf7"
       },
       "order": 210,
       "quality": {
         "version": "0.1.0",
-        "commit": "18f7237",
-        "updated": "2026-11-26",
+        "commit": "6c63c29",
+        "updated": "2026-11-27",
         "notFor": [
           "a tune with no release (use tune-skill)",
           "drafts with nothing pushed (use tune-and-polish)",
           "a new skill (use skill-launch)",
-          "regressions from the nightly health check (use caffeinity-routing's maintain-skills workflow)",
+          "regressions from the nightly health check (use workflow-router's maintain-skills workflow)",
           "a whole collection (use skill-estate)"
         ]
       },
@@ -922,12 +925,12 @@
       "install": "npx skills add arm-pz/caffeinity-skills --skill skill-estate",
       "page": "generated",
       "pageSource": {
-        "description": "Takes a whole collection of agent skill repos from scattered to published, consistent and self-maintaining, in gated phases: inventory every repo, reconcile site, marketplace and README listings, test and tune the family, close workflow gaps, wire publishing so new skill repos go live on their own, bundle a plugin with agents, add trigger tests and directory listings, and leave a maintenance loop and a map. Each phase hands off to the skill that owns it and ends in PRs. Use when someone's skills site and GitHub disagree, wants all their skill repos audited or cleaned up, wants new skills to publish themselves, or wants that cleanup repeated on another org, even if they never say estate. Not for one skill (use tune-skill), one listing (use findable), the site pipeline alone (use publish-pipeline), or weekly upkeep (use caffeinity-routing's maintain-skills workflow).",
+        "description": "Takes a whole collection of agent skill repos from scattered to published, consistent and self-maintaining, in gated phases: inventory every repo, reconcile site, marketplace and README listings, test and tune the family, close workflow gaps, wire publishing so new skill repos go live on their own, bundle a plugin with agents, add trigger tests and directory listings, and leave a maintenance loop and a map. Each phase hands off to the skill that owns it and ends in PRs. Use when someone's skills site and GitHub disagree, wants all their skill repos audited or cleaned up, wants new skills to publish themselves, or wants that cleanup repeated on another org, even if they never say estate. Not for one skill (use tune-skill), one listing (use findable), the site pipeline alone (use publish-pipeline), or weekly upkeep (use workflow-router's maintain-skills workflow).",
         "files": [
           {
             "path": "SKILL.md",
             "lines": 79,
-            "bytes": 5131
+            "bytes": 5125
           },
           {
             "path": "references/brief.md",
@@ -937,31 +940,31 @@
           {
             "path": "references/phases.md",
             "lines": 43,
-            "bytes": 4165
+            "bytes": 4159
           },
           {
             "path": "references/trigger-cases.md",
             "lines": 28,
-            "bytes": 2021
+            "bytes": 2012
           }
         ],
         "fileCount": 4,
         "lines": 176,
-        "bytes": 5500,
+        "bytes": 5502,
         "license": "MIT",
-        "commit": "18f7237571547a654c22ba2c0836fcd6a560e2f3",
-        "sha256": "3152b9ff53ccf8efffa87b5107a6e4ecbe13eaf36619a1763e90dc43f8506750"
+        "commit": "6c63c29dbc652f7febd9a3cc276b1ac81219c931",
+        "sha256": "abfbc87173233388ad673f65e9f5f93398ee4be7467e9fde41a19f4f8eaea93c"
       },
       "order": 307,
       "quality": {
         "version": "1.0.0",
-        "commit": "18f7237",
-        "updated": "2026-11-26",
+        "commit": "6c63c29",
+        "updated": "2026-11-27",
         "notFor": [
           "one skill (use tune-skill)",
           "one listing (use findable)",
           "the site pipeline alone (use publish-pipeline)",
-          "weekly upkeep (use caffeinity-routing's maintain-skills workflow)"
+          "weekly upkeep (use workflow-router's maintain-skills workflow)"
         ]
       },
       "latestRun": {
@@ -1511,14 +1514,14 @@
         "lines": 382,
         "bytes": 8599,
         "license": "MIT",
-        "commit": "18f7237571547a654c22ba2c0836fcd6a560e2f3",
+        "commit": "6c63c29dbc652f7febd9a3cc276b1ac81219c931",
         "sha256": "aa899229f4acf3958153101b486761c1a158737941d2a0cbfb143ff18ebb0572"
       },
       "order": 411,
       "quality": {
         "version": "1.0.0",
-        "commit": "18f7237",
-        "updated": "2026-11-26",
+        "commit": "6c63c29",
+        "updated": "2026-11-27",
         "notFor": []
       },
       "latestRun": {
@@ -1615,14 +1618,14 @@
         "lines": 950,
         "bytes": 15781,
         "license": "MIT",
-        "commit": "18f7237571547a654c22ba2c0836fcd6a560e2f3",
+        "commit": "6c63c29dbc652f7febd9a3cc276b1ac81219c931",
         "sha256": "483f9eaa604c13a11140d9ee8ba44deaf5ae46289fd23c277f366014f623312e"
       },
       "order": 412,
       "quality": {
         "version": "0.1.0",
-        "commit": "18f7237",
-        "updated": "2026-11-26",
+        "commit": "6c63c29",
+        "updated": "2026-11-27",
         "notFor": []
       },
       "tested": {
@@ -1715,14 +1718,14 @@
         "lines": 872,
         "bytes": 15078,
         "license": "MIT",
-        "commit": "18f7237571547a654c22ba2c0836fcd6a560e2f3",
+        "commit": "6c63c29dbc652f7febd9a3cc276b1ac81219c931",
         "sha256": "adba47438bba3c1f43fd30aa8492bdc79bc2a956b812292dc9ab09277f7c1667"
       },
       "order": 413,
       "quality": {
         "version": "0.1.0",
-        "commit": "18f7237",
-        "updated": "2026-11-26",
+        "commit": "6c63c29",
+        "updated": "2026-11-27",
         "notFor": []
       },
       "tested": {
@@ -1845,14 +1848,14 @@
         "lines": 1588,
         "bytes": 30959,
         "license": "MIT",
-        "commit": "18f7237571547a654c22ba2c0836fcd6a560e2f3",
+        "commit": "6c63c29dbc652f7febd9a3cc276b1ac81219c931",
         "sha256": "9fa3a48b71b2026a6d834903d0a2322ebf5dcc7cf065e441ef8041cf4184a711"
       },
       "order": 414,
       "quality": {
         "version": "0.1.0",
-        "commit": "18f7237",
-        "updated": "2026-11-26",
+        "commit": "6c63c29",
+        "updated": "2026-11-27",
         "notFor": []
       },
       "tested": {
@@ -1935,14 +1938,14 @@
         "lines": 597,
         "bytes": 11489,
         "license": "MIT",
-        "commit": "18f7237571547a654c22ba2c0836fcd6a560e2f3",
+        "commit": "6c63c29dbc652f7febd9a3cc276b1ac81219c931",
         "sha256": "c7c6f2ea1d16245d3a4c154d259877fbe004ea186bc701eac3027c58972e6ed0"
       },
       "order": 415,
       "quality": {
         "version": "0.1.0",
-        "commit": "18f7237",
-        "updated": "2026-11-26",
+        "commit": "6c63c29",
+        "updated": "2026-11-27",
         "notFor": []
       },
       "tested": {
@@ -3042,14 +3045,14 @@
         "lines": 302,
         "bytes": 6084,
         "license": "MIT",
-        "commit": "18f7237571547a654c22ba2c0836fcd6a560e2f3",
+        "commit": "6c63c29dbc652f7febd9a3cc276b1ac81219c931",
         "sha256": "1e8dfe3ceb472fd5ceab966ed884b027cd7e84f669755fb5a85695facc6efe87"
       },
       "order": 909,
       "quality": {
         "version": "1.0.0",
-        "commit": "18f7237",
-        "updated": "2026-11-26",
+        "commit": "6c63c29",
+        "updated": "2026-11-27",
         "notFor": [
           "one person's own learning plan (use study-system)",
           "for being taught the topic (use topic-primer)",
@@ -4625,9 +4628,9 @@
   ],
   "workflows": [
     {
-      "id": "pour-over",
+      "id": "build-a-skill",
       "number": 1,
-      "name": "Pour-over",
+      "name": "build-a-skill",
       "title": "Build a skill and make it installable",
       "slug": "build-a-skill",
       "summary": "Go from an idea or a pile of prompts to a tested skill anyone can install: draft it, tune its trigger, then package and release it.",
@@ -4658,9 +4661,9 @@
       "note": "skill-launch runs the first steps as one chain; tune-skill-mod and skill-release-mod hold pushes and releases until steps two and three have run."
     },
     {
-      "id": "bloom",
+      "id": "get-found",
       "number": 2,
-      "name": "Bloom",
+      "name": "get-found",
       "title": "Get a repo, skill or plugin found",
       "slug": "get-found",
       "summary": "Make a repo, skill or plugin show up for what it does: fix how it is described and listed, publish it, then check every listing matches what is live.",
@@ -4690,9 +4693,9 @@
       "note": "findable-polish and upstream-polish add the rewrite; get-indexed applies when publishing put new or changed pages live."
     },
     {
-      "id": "espresso",
+      "id": "launch-safely",
       "number": 3,
-      "name": "Espresso",
+      "name": "launch-safely",
       "title": "Decide whether a site is safe to launch",
       "slug": "launch-safely",
       "summary": "Get one honest answer to \"can we ship?\": check for exposed files, red-team the app, audit its speed, then let a release gate weigh the three verdicts.",
@@ -4723,9 +4726,9 @@
       "note": "ship-sentinel holds git push and deploys until the gate has run."
     },
     {
-      "id": "cold-brew",
+      "id": "grow-search-traffic",
       "number": 4,
-      "name": "Cold brew",
+      "name": "grow-search-traffic",
       "title": "Grow organic search traffic",
       "slug": "grow-search-traffic",
       "summary": "Find what your site is missing in Google and AI answers, fix the supported issues, and measure what changes after release.",
@@ -4785,9 +4788,9 @@
       ]
     },
     {
-      "id": "french-press",
+      "id": "land-a-job",
       "number": 5,
-      "name": "French press",
+      "name": "land-a-job",
       "title": "Land a job",
       "slug": "land-a-job",
       "summary": "Run a job search without inventing credentials: see your resume the way recruiters screen it, write the tailored version, then manage the applications.",
@@ -4817,11 +4820,14 @@
       "note": "It never submits an application for you."
     },
     {
-      "id": "cupping",
+      "id": "decision-memo",
       "number": 6,
-      "name": "Cupping",
+      "name": "decision-memo",
       "title": "Make a decision",
-      "slug": "make-a-decision",
+      "slug": "decision-memo",
+      "aliases": [
+        "make-a-decision"
+      ],
       "summary": "Turn a hard question into a decision you can defend: gather sourced evidence, read your own numbers, attack the options, then write the memo.",
       "steps": [
         {
@@ -4849,11 +4855,14 @@
       ]
     },
     {
-      "id": "slow-drip",
+      "id": "learn-any-topic",
       "number": 7,
-      "name": "Slow drip",
-      "title": "Learn a skill",
-      "slug": "learn-a-skill",
+      "name": "learn-any-topic",
+      "title": "Learn any topic",
+      "slug": "learn-any-topic",
+      "aliases": [
+        "learn-a-skill"
+      ],
       "summary": "Learn any topic from zero: get taught concept by concept, then build the practice system that makes it stick.",
       "steps": [
         {
@@ -4876,9 +4885,9 @@
       "note": "course-builder applies when the learner is a class or cohort, not one person."
     },
     {
-      "id": "nitro",
+      "id": "run-cold-outbound",
       "number": 8,
-      "name": "Nitro",
+      "name": "run-cold-outbound",
       "title": "Run cold outbound",
       "slug": "run-cold-outbound",
       "summary": "Send cold email that lands: check the lead list before it loads, size and protect the sending setup, then write the copy.",
@@ -4901,9 +4910,9 @@
       ]
     },
     {
-      "id": "moka-pot",
+      "id": "launch-a-product",
       "number": 9,
-      "name": "Moka pot",
+      "name": "launch-a-product",
       "title": "Launch a one-person product",
       "slug": "launch-a-product",
       "summary": "Take a one-person product from plan to launch: pick the offer, build the site and code, write the policy pages, pass the release gate, then announce it.",
@@ -4939,12 +4948,12 @@
           ]
         }
       ],
-      "note": "Step five is the whole of Brew 3 · Espresso; paper-trail gives the gate the policy pages to check."
+      "note": "Step five is the whole of Workflow 3 · launch-safely; paper-trail gives the gate the policy pages to check."
     },
     {
-      "id": "descale",
+      "id": "maintain-skills",
       "number": 10,
-      "name": "Descale",
+      "name": "maintain-skills",
       "title": "Maintain the skill family",
       "slug": "maintain-skills",
       "summary": "Keep a family of skills healthy after release: tune what drifted, re-release what changed, and confirm every listing still matches.",
@@ -4969,11 +4978,14 @@
       "note": "The nightly health job opens the issue this starts from; a weekly scheduled session runs it and opens PRs. For one published skill at a time, tune-and-ship takes it from a tune and a fact check through to a release and a confirmed live page."
     },
     {
-      "id": "estate-roast",
+      "id": "audit-agent-skills",
       "number": 11,
-      "name": "Estate roast",
-      "title": "Stand up or audit a skill estate",
-      "slug": "audit-a-skill-estate",
+      "name": "audit-agent-skills",
+      "title": "Stand up or audit a set of agent skills",
+      "slug": "audit-agent-skills",
+      "aliases": [
+        "audit-a-skill-estate"
+      ],
       "summary": "Inventory and repair a whole collection of skills in one gated run, from repos and listings to the workflows that connect them.",
       "steps": [
         {
@@ -4982,12 +4994,12 @@
           ]
         }
       ],
-      "note": "One run over the whole collection in eight gated phases; Brew 10 · Descale keeps it healthy afterwards."
+      "note": "One run over the whole collection in eight gated phases; Workflow 10 · maintain-skills keeps it healthy afterwards."
     },
     {
-      "id": "dial-in",
+      "id": "set-up-a-coding-agent",
       "number": 12,
-      "name": "Dial-in",
+      "name": "set-up-a-coding-agent",
       "title": "Set up a coding agent for a repo",
       "slug": "set-up-a-coding-agent",
       "lead": true,
