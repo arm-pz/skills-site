@@ -123,6 +123,28 @@ class ManifestTest(unittest.TestCase):
                                dict(skill, name="hidden", page="none")])
         self.assertIn("1 skill and 1 mod mapped into", skilllib.llms_txt(data))
 
+    def test_llms_sets_the_brand_apart_and_answers_the_faq(self):
+        text = skilllib.llms_txt(self.manifest())
+        self.assertIn("Not affiliated with skillsmith.app", text)
+        self.assertIn("MIT licensed", text)
+        for heading in ("## Key Pages", "## Common Tasks", "## FAQ"):
+            self.assertIn(heading, text)
+        self.assertIn(f"{skilllib.SITE}/runs/", text)
+        self.assertIn(f"{skilllib.SITE}/llms-full.txt", text)
+
+    def test_llms_full_carries_limits_and_latest_run(self):
+        data = self.manifest()
+        skill = data["skills"][0]
+        skill["quality"] = {"notFor": ["editing an existing skill (use tune-skill)"]}
+        skill["latestRun"] = {"date": "2026-11-13", "target": "a demo task", "result": "It worked.",
+                              "evidence": "/runs/demo/#run-2026-11-13", "verdict": "PASS"}
+        text = skilllib.llms_full_txt(data)
+        self.assertIn("### demo", text)
+        self.assertIn("- Not for: editing an existing skill (use tune-skill)", text)
+        self.assertIn("- Latest graded run (PASS, 2026-11-13): a demo task. It worked. "
+                      f"{skilllib.SITE}/runs/demo/#run-2026-11-13", text)
+        self.assertIn(f"{skilllib.SITE}/llms.txt", text)
+
     def test_duplicate_order_fails(self):
         data = self.manifest()
         data["skills"].append(dict(data["skills"][0], name="other", repo="arm-pz/other"))

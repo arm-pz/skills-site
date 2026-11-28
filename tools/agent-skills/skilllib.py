@@ -503,34 +503,96 @@ def count_label(cards):
     return " and ".join(parts) or "0 skills"
 
 
-def llms_txt(manifest):
-    """/llms.txt: what the site offers, for agents and AI search, rendered from the manifest."""
+def _llms_pages(manifest):
     order = {g["id"]: g["order"] for g in manifest["groups"]}
-    pages = sorted((s for s in manifest["skills"] if s["page"] != "none"),
-                   key=lambda s: (order[s["group"]], s["order"]))
+    return sorted((s for s in manifest["skills"] if s["page"] != "none"),
+                  key=lambda s: (order[s["group"]], s["order"]))
+
+
+# Key pages for /llms.txt, one line each. Section pages only: skill pages are listed below them.
+LLMS_KEY_PAGES = [
+    ("skills", "Skills", "every skill by job, each with a one-line install"),
+    ("workflows", "Workflows", "{flows} workflows that chain skills for one outcome, step by step"),
+    ("mods", "Mods", "Claude Code plugins with hooks that hold a git push or release until checks pass"),
+    ("runs", "Test runs", "each skill given a real task in Claude Code and graded against a rubric: "
+                          "verdict, what it missed and what it cost"),
+    ("map", "Workflow Map", "describe a goal and see the matching workflow as a graph with install commands"),
+    ("checks", "Free checks", "validate a SKILL.md, page HTML, prose, a resume or a lead list in the browser, no sign-up"),
+    ("work", "Custom work", "custom agent skills for teams, built by Caffeinity"),
+]
+
+
+def _llms_header(manifest, pages, full=False):
+    flows = manifest.get("workflows", [])
+    runs = sum(1 for s in pages if s.get("latestRun"))
     out = ["# Skillsmith by Caffeinity", "",
            "> Open agent skills for Claude Code, Codex, Cursor and any agent that reads a SKILL.md: "
-           f"{count_label(pages)} mapped into {len(manifest.get('workflows', []))} workflows "
+           f"{count_label(pages)} mapped into {len(flows)} workflows "
            "(build a skill, get found, gate a release, grow search traffic, land a job, decide, "
-           "learn, run outbound, launch a product). Plain markdown, no API keys.", "",
-           "## Install", "",
-           "- Claude Code, every skill plus twelve workflow agents: "
-           + " then ".join(f"`{c}`" for c in INSTALL["claude"]),
-           "- Codex: " + " ".join(f"`{c}`" for c in INSTALL["codex"])
-           + ", then install caffeinity from the Plugins directory",
-           "- Any agent, one skill: " + " ".join(f"`{c}`" for c in INSTALL["any"]),
-           f"- Discovery index: {SITE}/.well-known/agent-skills/index.json", "",
-           f"Sections: [skills]({SITE}/skills/), [workflows]({SITE}/workflows/), [mods]({SITE}/mods/), "
-           f"[custom work]({SITE}/work/). Skillsmith by Caffeinity is made by Caffeinity (https://caffeinity.com/).", ""]
+           "learn, run outbound, launch a product). MIT licensed, free, no account and no API keys.", "",
+           "Not affiliated with skillsmith.app or the @skillsmith npm packages. Skillsmith by Caffeinity "
+           "lives at skillsmith.tech and installs from GitHub: arm-pz/caffeinity-skills, or arm-pz/<skill> "
+           "for one skill.", ""]
+    out += [f"Every section and skill in detail: {SITE}/llms-full.txt" if not full
+            else f"Short version: {SITE}/llms.txt", ""]
+    out += ["## Install", "",
+            "- Claude Code, every skill plus twelve workflow agents: "
+            + " then ".join(f"`{c}`" for c in INSTALL["claude"]),
+            "- Codex: " + " ".join(f"`{c}`" for c in INSTALL["codex"])
+            + ", then install caffeinity from the Plugins directory",
+            "- Any agent, one skill: " + " ".join(f"`{c}`" for c in INSTALL["any"]),
+            f"- Discovery index: {SITE}/.well-known/agent-skills/index.json", "",
+            "## Key Pages", "",
+            f"- [Home]({SITE}/): what the skills do, grouped by outcome"]
+    out += [f"- [{label}]({SITE}/{path}/): {line.format(flows=len(flows))}" for path, label, line in LLMS_KEY_PAGES]
+    out += ["", "## Common Tasks", "",
+            "- Find the skills for a goal. Ask your assistant: \"Use workflow-router: I want to <outcome>.\" "
+            f"It picks a workflow and names the skills in order. Or describe the goal at {SITE}/map/",
+            "- Install everything in Claude Code: " + " then ".join(f"`{c}`" for c in INSTALL["claude"]),
+            "- Install one skill in any agent: `npx skills add arm-pz/<skill>`, "
+            "for example `npx skills add arm-pz/tune-skill`",
+            "- Check a SKILL.md before you publish it. Ask your assistant: \"Run tune-skill on this skill.\" "
+            f"Or paste it at {SITE}/check/",
+            f"- See how a skill did on a real task: {SITE}/runs/<skill>/", "",
+            "## FAQ", "",
+            "Q: Is Skillsmith by Caffeinity free?",
+            "A: Yes. Every skill is MIT licensed and free, with no account, no API keys and no usage quota.", "",
+            "Q: Which agents does it work with?",
+            "A: Claude Code and Codex through their plugin systems, and Cursor or any other agent that reads "
+            "a SKILL.md through `npx skills add`.", "",
+            "Q: What is an agent skill?",
+            "A: A folder with a SKILL.md: markdown instructions with a YAML frontmatter name and description "
+            "that tell the agent when to load it, plus any scripts or references it needs.", "",
+            "Q: How do I install one skill?",
+            "A: Run `npx skills add arm-pz/<skill>`, or install the caffeinity plugin to get all of them.", "",
+            "Q: How is this different from an MCP skill registry?",
+            "A: The skills install as files your agent reads directly. There is no server to run, "
+            "no sign-in and no call limit.", "",
+            "Q: How do I know a skill works?",
+            f"A: {runs} of them have a public graded test run at {SITE}/runs/ showing the task, the verdict, "
+            "what the skill missed and the cost.", "",
+            "Q: Who makes it?",
+            "A: Caffeinity (https://caffeinity.com/), which also builds custom skills for teams.", ""]
+    return out
+
+
+def _llms_lead(blurb):
+    parts = re.findall(r".+?[.!?](?=\s|$)", " ".join(blurb.split())) or [blurb]
+    lead = parts[0] if len(parts[0]) >= 40 or len(parts) == 1 else f"{parts[0]} {parts[1].strip()}"
+    return lead.strip()
+
+
+def llms_txt(manifest):
+    """/llms.txt: what the site offers, for agents and AI search, rendered from the manifest."""
+    pages = _llms_pages(manifest)
+    out = _llms_header(manifest, pages)
     for g in sorted(manifest["groups"], key=lambda g: g["order"]):
         rows = [s for s in pages if s["group"] == g["id"]]
         if not rows:
             continue
         out += [f"## {g['title']}", ""]
         for s in rows:
-            parts = re.findall(r".+?[.!?](?=\s|$)", " ".join(s["blurb"].split())) or [s["blurb"]]
-            lead = parts[0] if len(parts[0]) >= 40 or len(parts) == 1 else f"{parts[0]} {parts[1].strip()}"
-            out.append(f"- [{s['name']}]({SITE}/{s['name']}/): {lead.strip()}")
+            out.append(f"- [{s['name']}]({SITE}/{s['name']}/): {_llms_lead(s['blurb'])}")
         out.append("")
     flows = manifest.get("workflows", [])
     if flows:
@@ -539,6 +601,44 @@ def llms_txt(manifest):
             steps = " -> ".join(" or ".join(st["skills"]) for st in f["steps"])
             out.append(f"- [{f['title']}]({SITE}/workflows/{f['slug']}/) ({brew_label(f)}): {steps}")
         out.append("")
+    return "\n".join(out)
+
+
+def llms_full_txt(manifest):
+    """/llms-full.txt: llms.txt with each skill's full description, install, limits and latest
+    graded run, and each workflow's summary and steps."""
+    pages = _llms_pages(manifest)
+    out = _llms_header(manifest, pages, full=True)
+    for g in sorted(manifest["groups"], key=lambda g: g["order"]):
+        rows = [s for s in pages if s["group"] == g["id"]]
+        if not rows:
+            continue
+        out += [f"## {g['title']}", ""]
+        for s in rows:
+            kind = "Mod" if s.get("kind") == "mod" else "Skill"
+            out += [f"### {s['name']}", "", f"{kind} page: {SITE}/{s['name']}/", "",
+                    " ".join(s["blurb"].split()), "", f"- Install: `{s['install']}`"]
+            not_for = s.get("quality", {}).get("notFor")
+            if not_for:
+                out.append("- Not for: " + "; ".join(not_for))
+            run = s.get("latestRun")
+            if run:
+                verdict = f"{run['verdict']}, " if run.get("verdict") else ""
+                out.append(f"- Latest graded run ({verdict}{run['date']}): {run['target']}. "
+                           f"{' '.join(run['result'].split())} {SITE}{run['evidence']}")
+            out.append("")
+    flows = manifest.get("workflows", [])
+    if flows:
+        out += ["## Workflows", ""]
+        for f in flows:
+            out += [f"### {f['title']}", "", f"{brew_label(f)}: {SITE}/workflows/{f['slug']}/", "",
+                    f["summary"], ""]
+            for i, st in enumerate(f["steps"], 1):
+                opt = " (optional)" if st.get("optional") else ""
+                out.append(f"{i}. " + " or ".join(st["skills"]) + opt)
+            if f.get("note"):
+                out += ["", f["note"]]
+            out.append("")
     return "\n".join(out)
 
 

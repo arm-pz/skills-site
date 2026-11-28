@@ -34,7 +34,8 @@ push a public arm-pz repo with one SKILL.md and a repo About
        sync.py --write   add · refresh · rename · remove · hold
        unit tests → build → sitemap + _redirects → dist + version.json → check_dist → verify
        commit the sync to main as github-actions[bot]
-       the same build writes /llms.txt (install commands + every skill) for agents and AI search
+       the same build writes /llms.txt (install, key pages, common tasks, FAQ, every skill) and
+       /llms-full.txt (each skill's full blurb, limits and latest graded run) for agents and AI search
        commit the gated dist/ to the `deploy` branch (public/), only when the build changed
   └─ minutes later: Cloudflare Pages (Git-connected to `deploy`) pulls and serves it
        the same job waits for the live version.json to match, verifies live, and opens one
