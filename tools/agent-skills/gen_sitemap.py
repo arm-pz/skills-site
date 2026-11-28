@@ -59,7 +59,9 @@ def main(argv=None):
     print(f"out/sitemap.xml: {len(urls(manifest, runs))} urls")
     with open(out / "llms.txt", "w", encoding="utf-8", newline="\n") as fh:
         fh.write(skilllib.llms_txt(manifest))
-    print("out/llms.txt written")
+    with open(out / "llms-full.txt", "w", encoding="utf-8", newline="\n") as fh:
+        fh.write(skilllib.llms_full_txt(manifest))
+    print("out/llms.txt and out/llms-full.txt written")
     rules = skilllib.redirects(manifest)
     with open(out / "_redirects", "w", encoding="utf-8", newline="\n") as fh:
         fh.write(rules)

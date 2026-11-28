@@ -96,6 +96,9 @@ def check(root="."):
     llms = dist / "llms.txt"
     need(llms.is_file() and llms.read_text(encoding="utf-8") == skilllib.llms_txt(manifest),
          "dist/llms.txt is missing or differs from the manifest")
+    llms_full = dist / "llms-full.txt"
+    need(llms_full.is_file() and llms_full.read_text(encoding="utf-8") == skilllib.llms_full_txt(manifest),
+         "dist/llms-full.txt is missing or differs from the manifest")
 
     redirects = dist / "_redirects"
     need(redirects.is_file(), "missing dist/_redirects")

@@ -35,6 +35,7 @@ class BrandTest(unittest.TestCase):
         import json
         manifest = json.loads((ROOT / "site" / "skills.json").read_text(encoding="utf-8"))
         self.assertFalse(BARE.search(skilllib.llms_txt(manifest)))
+        self.assertFalse(BARE.search(skilllib.llms_full_txt(manifest)))
 
 
 if __name__ == "__main__":

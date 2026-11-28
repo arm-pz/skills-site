@@ -51,6 +51,7 @@ class CheckDistTest(unittest.TestCase):
         }
         (self.root / "site/skills.json").write_text(json.dumps(manifest))
         (self.root / "dist/llms.txt").write_text(skilllib.llms_txt(manifest), encoding="utf-8")
+        (self.root / "dist/llms-full.txt").write_text(skilllib.llms_full_txt(manifest), encoding="utf-8")
         (self.root / "out/sitemap.xml").write_text(
             '<?xml version="1.0"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
             '<url><loc>https://skillsmith.tech/</loc></url>'
@@ -133,6 +134,7 @@ class CheckDistTest(unittest.TestCase):
              "stats": "1", "install": "/plugin install watch", "page": "bespoke", "order": 3})
         path.write_text(json.dumps(manifest))
         (self.root / "dist/llms.txt").write_text(skilllib.llms_txt(manifest), encoding="utf-8")
+        (self.root / "dist/llms-full.txt").write_text(skilllib.llms_full_txt(manifest), encoding="utf-8")
         sitemap = (self.root / "out/sitemap.xml").read_text().replace(
             "</urlset>", "<url><loc>https://skillsmith.tech/watch/</loc></url></urlset>")
         (self.root / "out/sitemap.xml").write_text(sitemap)
@@ -185,6 +187,14 @@ class CheckDistTest(unittest.TestCase):
         self.assertIn("/plugin install caffeinity@caffeinity-skills", text)
         self.assertIn("codex plugin marketplace add arm-pz/caffeinity-skills", text)
         (self.root / "dist/llms.txt").write_text(text + "stale\n", encoding="utf-8")
+        self.assertTrue(check_dist.check(self.root))
+
+    def test_llms_full_txt_must_match_the_manifest(self):
+        text = (self.root / "dist/llms-full.txt").read_text(encoding="utf-8")
+        self.assertIn("### alpha", text)
+        self.assertIn("- Install: `npx skills add arm-pz/alpha`", text)
+        self.assertEqual(check_dist.check(self.root), [])
+        (self.root / "dist/llms-full.txt").unlink()
         self.assertTrue(check_dist.check(self.root))
 
     def test_schemas_must_be_copied_and_valid_json(self):

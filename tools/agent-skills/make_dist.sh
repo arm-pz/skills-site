@@ -35,6 +35,7 @@ cp out/index.json dist/.well-known/agent-skills/index.json
 cp out/sitemap.xml dist/sitemap.xml
 cp out/_redirects dist/_redirects
 cp out/llms.txt dist/llms.txt
+cp out/llms-full.txt dist/llms-full.txt
 
 for name in $(cd tools/agent-skills && python -c "import skilllib; print(*skilllib.STATIC_PAGES)" | tr -d '\r'); do
   mkdir -p "dist/$name"
